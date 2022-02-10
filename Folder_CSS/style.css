@@ -1,0 +1,136 @@
+ /*                              _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+                                |#                                                       #|
+                                |                 Table of content:                       |
+                                |                                                         |
+                                |                    1) General                           |
+                                |                    2) Layout                            |
+                                |                    3) Typographie                       |
+                                |                    4) Buttons, Inputs, etc...           |
+                                |                    5) Animations                        |
+                                |                    6) Media Queries                     | 
+                                |                                                         |
+                                |#_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _#|
+*/
+
+:root{
+    /* Colour-Palette */
+--main-blue: hsl(201, 79%, 46%);
+--main-white: hsl(0, 0%, 100%);
+--main-black: hsl(0, 0%, 0%);
+--cornsilk: hsl(48, 100%, 93%);
+--top-header: hsl(39, 77%, 83%);
+--buttons-background: hsl(271, 76%, 53%);  
+
+/* This break words, especially usefull for mobile use  */
+overflow-wrap: break-word;
+word-wrap: break-word;
+}
+
+@font-face {
+    font-family: 'Fira Code';
+    src: url("../Folder_Fonts/Fira_Code_v6.2/woff2/FiraCode-Medium.woff2") format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+
+    background-color: var(--main-blue);
+    font-family: 'Fira Code', arial, sans-serif;
+    color: var(--top-header);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+header{
+ margin-bottom: 2rem;
+}
+
+.Class_MainWrapper{
+    display: flex;
+}
+
+footer{
+    margin-top: 4rem;
+}
+
+.Class_LeftSidebarWrapper{
+    min-width: 20%;
+}
+
+.Class_GameboardWrapper{
+    display: flex;
+    min-width: 60%;
+    min-height: 60vh;
+    border: solid .5rem red;
+    border-top: none;
+    margin: .5rem;
+}
+
+.Class_Columns{
+    width: calc(100% / 7);
+}
+
+.Class_Cells{
+    min-width: auto;
+    min-height: calc(100% / 7);
+    outline: solid 1px black;
+}
+
+.Class_RightSidebarWrapper{
+    width: 20%;
+    
+}
+
+/* Cells-Section */
+.Class_TopCells{
+    outline: none;
+    min-width: auto;
+    min-height: calc(100% / 7);
+    border-left: dashed .1rem var(--main-white);
+}
+.Class_ChoosingAnimation{
+    background-image: url("../Folder_Graphics/X_es/handle-x-svgrepo-com.svg");
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: top;
+    animation: choosingAni 1s infinite alternate;
+}
+@keyframes choosingAni {
+    from{
+        background-position: top;
+    }
+    
+    to{
+        background-position: top;
+    }
+}
+
+.Class_PlacingAnimation{
+    animation: placingAni 1s normal;
+    animation-fill-mode: forwards;
+}
+@keyframes placingAni {
+    from{
+        transform: translateY();
+    }
+    to{
+        transform: translateY(53vh);
+    }
+}
+
+
+/*####################################################################################################################################################################*\
+#                                                                                                                                                                      #
+#                                                                             Credits:                                                                                 #
+#                                                                                                                                                                      #
+#                                                        Special thanks to the "Odin Project"-Team who did a great job.                                                #
+#                                                    Greetings to the many, many programmers who take the time to write blogs,                                         #
+#                                      Of course also big thanks to all photographers and graphic designers who make their works available.                            #
+#                                                                                                                                                                      #
+#                                                                    CSS - what a wonderful language.                                                                  #
+#                                                                                                                                                                      #
+#                                                                                                                                                                      #
+\*####################################################################################################################################################################*/
+
