@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<svg
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:cc="http://web.resource.org/cc/"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:ns1="http://sozi.baierouge.fr"
+    id="&#x5716;&#x5C64;_2"
+    version="1.1"
+    xml:space="preserve"
+    viewBox="0 0 267.679 250.745"
+    enable-background="new 0 0 267.679 250.745"
+    y="0px"
+    x="0px"
+  >
+<polygon
+      stroke="#000"
+      points="93.892 68.589 156.95 86.237 212.17 84.081 228.64 62.352 195.38 35.414 133.63 17.918 75.719 20.74 60.772 42.11"
+      stroke-miterlimit="10"
+      fill="none"
+  />
+<polyline
+      stroke="#000"
+      points="75.719 20.74 51.272 39.053 37.507 51.986 21.595 86.861 19.17 77.726 37.507 51.986 51.272 39.053 60.772 42.11 59.543 74.1 59.543 74.1 67.083 114.67 53.996 112.22 45.421 100.78 33.076 96.131 21.595 86.861 106.02 232.35 236.52 138.37 208.92 144.54 184.79 108.04 188.28 140.2 184.61 149.24 106.02 232.35 42.454 111.22 45.421 100.78 59.446 74.109 33.076 96.131 26.754 90.882 21.595 86.861 59.495 73.896 93.892 68.589 150.16 138.37 127.9 139.22 108.62 127.16 85.921 126.91 86.546 127.16 67.083 114.67 156.95 86.237 223.5 138.37 236.52 138.37 242.47 126.91 248.53 124.79 242.47 126.91 229.71 91.496 245.52 105.02 229.71 91.496 212.17 84.081 150.16 138.37 150.16 138.32 169.12 144.46 188.28 140.2 208.92 144.54 223.5 138.37 229.71 91.496 228.64 62.352 237.96 77.52 246.73 109.45 248.53 124.79 236.52 138.37 220.53 146.46 140.81 195.5 148.42 147.79 106.02 191.14 67.083 125.02 53.996 112.22 42.454 111.22 33.076 96.131 27.77 97.502 27.77 97.502 77.439 178.12 67.083 125.02 67.083 124.79 85.898 126.99 106.02 138.32 127.9 139.22 148.42 147.79 169.12 144.47 184.61 149.24 208.9 144.39 220.53 146.46 168.83 187.12 106.02 232.35 106.02 138.32 108.62 127.16 118.05 98.547"
+      stroke-miterlimit="10"
+      fill="none"
+  />
+<metadata
+    ><rdf:RDF
+      ><cc:Work
+        ><dc:format
+          >image/svg+xml</dc:format
+        ><dc:type
+            rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+        /><cc:license
+            rdf:resource="http://creativecommons.org/licenses/publicdomain/"
+        /><dc:publisher
+          ><cc:Agent
+              rdf:about="http://openclipart.org/"
+            ><dc:title
+              >Openclipart</dc:title
+            ></cc:Agent
+          ></dc:publisher
+        ><dc:title
+          >diamond - line illustration</dc:title
+        ><dc:date
+          >2013-09-10T02:08:11</dc:date
+        ><dc:description
+          >A diamond</dc:description
+        ><dc:source
+          >https://openclipart.org/detail/183274/diamond---line-illustration-by-belier-183274</dc:source
+        ><dc:creator
+          ><cc:Agent
+            ><dc:title
+              >belier</dc:title
+            ></cc:Agent
+          ></dc:creator
+        ><dc:subject
+          ><rdf:Bag
+            ><rdf:li
+              >Gem</rdf:li
+            ><rdf:li
+              >Jewelry</rdf:li
+            ><rdf:li
+              >bijoux</rdf:li
+            ><rdf:li
+              >diamant</rdf:li
+            ><rdf:li
+              >diamond</rdf:li
+            ><rdf:li
+              >gemstones</rdf:li
+            ><rdf:li
+              >ligne illustration</rdf:li
+            ><rdf:li
+              >line illustration</rdf:li
+            ><rdf:li
+              >richesse</rdf:li
+            ></rdf:Bag
+          ></dc:subject
+        ></cc:Work
+      ><cc:License
+          rdf:about="http://creativecommons.org/licenses/publicdomain/"
+        ><cc:permits
+            rdf:resource="http://creativecommons.org/ns#Reproduction"
+        /><cc:permits
+            rdf:resource="http://creativecommons.org/ns#Distribution"
+        /><cc:permits
+            rdf:resource="http://creativecommons.org/ns#DerivativeWorks"
+        /></cc:License
+      ></rdf:RDF
+    ></metadata
+  ></svg
+>

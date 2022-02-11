@@ -7,10 +7,13 @@
                                 |                    3) Typographie                       |
                                 |                    4) Buttons, Inputs, etc...           |
                                 |                    5) Animations                        |
-                                |                    6) Media Queries                     | 
+                                |                    6) Media Queries                     |
+                                |                    7) Credits                           |
                                 |                                                         |
                                 |#_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _#|
-*/
+
+
+/*                                                       General                                                         */
 
 :root{
     /* Colour-Palette */
@@ -20,8 +23,6 @@
 --cornsilk: hsl(48, 100%, 93%);
 --top-header: hsl(39, 77%, 83%);
 --buttons-background: hsl(271, 76%, 53%);  
-
-/* This break words, especially usefull for mobile use  */
 overflow-wrap: break-word;
 word-wrap: break-word;
 }
@@ -32,6 +33,8 @@ word-wrap: break-word;
     font-weight: 400;
     font-style: normal;
 }
+
+/*                                                       Layout                                                          */
 
 body{
 
@@ -76,6 +79,22 @@ footer{
     min-width: auto;
     min-height: calc(100% / 7);
     outline: solid 1px black;
+    justify-content: center;
+    align-content: center;
+}
+
+.Class_PlacedCoin_1{
+    background-image: url("../Folder_Graphics/freescg_org/diamond_Blue.svg");
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.Class_PlacedCoin_2{
+    background-image: url("../Folder_Graphics/freescg_org/diamond_Violett.svg");
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .Class_RightSidebarWrapper{
@@ -90,40 +109,155 @@ footer{
     min-height: calc(100% / 7);
     border-left: dashed .1rem var(--main-white);
 }
-.Class_ChoosingAnimation{
-    background-image: url("../Folder_Graphics/X_es/handle-x-svgrepo-com.svg");
+
+/*                                                       Typographie                                                     */
+
+
+
+/*                                                       Buttons, Input, etc...                                          */
+
+
+
+
+
+
+
+
+/*                                                       Animations                                                      */
+
+
+/* Player choosing column Animation*/
+                                
+.Class_ChoosingAnimation_Coin_1{
+    background-image: url("../Folder_Graphics/freescg_org/diamond_Blue.svg");
     background-size: 30%;
     background-repeat: no-repeat;
     background-position: top;
-    animation: choosingAni 1s infinite alternate;
+    animation: choosing_Coin_1_Animation 1s infinite alternate;
 }
-@keyframes choosingAni {
+@keyframes choosing_Coin_1_Animation {
     from{
         background-position: top;
     }
     
     to{
-        background-position: top;
+        background-position: bottom;
     }
 }
 
-.Class_PlacingAnimation{
-    animation: placingAni 1s normal;
+.Class_ChoosingAnimation_Coin_2{
+    background-image: url("../Folder_Graphics/freescg_org/diamond_Violett.svg");
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: top;
+    animation: choosing_Coin_2_Animation 1s infinite alternate;
+}
+@keyframes choosing_Coin_2_Animation {
+    from{
+        background-position: top;
+    }
+    
+    to{
+        background-position: bottom;
+    }
+}
+
+/* Player placed coin Animations */
+
+
+.Class_PlacingAnimation_Cell_2{
+    animation: Placing_Coin_Animation_Cell_2 normal 1s;
     animation-fill-mode: forwards;
 }
-@keyframes placingAni {
+@keyframes Placing_Coin_Animation_Cell_2 {
     from{
-        transform: translateY();
+     
     }
     to{
-        transform: translateY(53vh);
+        transform: translateY(calc((54vh / 6) * 1));
     }
 }
+
+.Class_PlacingAnimation_Cell_3{
+    animation: Placing_Coin_Animation_Cell_3 normal 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes Placing_Coin_Animation_Cell_3 {
+    from{
+     
+    }
+    to{
+        transform: translateY(calc((54vh / 6) * 2));
+    }
+}
+
+.Class_PlacingAnimation_Cell_4{
+    animation: Placing_Coin_Animation_Cell_4 normal 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes Placing_Coin_Animation_Cell_4 {
+    from{
+     
+    }
+    to{
+        transform: translateY(calc((54vh / 6) * 3));
+    }
+}
+
+.Class_PlacingAnimation_Cell_5{
+    animation: Placing_Coin_Animation_Cell_5 normal 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes Placing_Coin_Animation_Cell_5 {
+    from{
+     
+    }
+    to{
+        transform: translateY(calc((54vh / 6) * 4));
+    }
+}
+
+.Class_PlacingAnimation_Cell_6{
+    animation: Placing_Coin_Animation_Cell_6 normal 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes Placing_Coin_Animation_Cell_6 {
+    from{
+     
+    }
+    to{
+        transform: translateY(calc((54vh / 6) * 5));
+    }
+}
+
+.Class_PlacingAnimation_Cell_7{
+    animation: Placing_Coin_Animation_Cell_7 normal 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes Placing_Coin_Animation_Cell_7 {
+    from{
+     
+    }
+    to{
+        transform: translateY(54vh);
+    }
+}
+
+
+/*                                                       Media Queries                                                   */
+
+
+
+
+
+
+
+
 
 
 /*####################################################################################################################################################################*\
 #                                                                                                                                                                      #
-#                                                                             Credits:                                                                                 #
+#                                                                     Credits & Special Thanks to:                                                                                 #
 #                                                                                                                                                                      #
 #                                                        Special thanks to the "Odin Project"-Team who did a great job.                                                #
 #                                                    Greetings to the many, many programmers who take the time to write blogs,                                         #
