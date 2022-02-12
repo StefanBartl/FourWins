@@ -108,6 +108,8 @@ footer{
     min-width: auto;
     min-height: calc(100% / 7);
     border-left: dashed .1rem var(--main-white);
+
+    
 }
 
 /*                                                       Typographie                                                     */
@@ -174,7 +176,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((54vh / 6) * 1));
+        transform: translateY(calc((52.5vh / 6) * 1));
     }
 }
 
@@ -187,7 +189,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((54vh / 6) * 2));
+        transform: translateY(calc((52.5vh / 6) * 2));
     }
 }
 
@@ -200,7 +202,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((54vh / 6) * 3));
+        transform: translateY(calc((52.5vh / 6) * 3));
     }
 }
 
@@ -213,7 +215,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((54vh / 6) * 4));
+        transform: translateY(calc((52.5vh / 6) * 4));
     }
 }
 
@@ -226,7 +228,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((54vh / 6) * 5));
+        transform: translateY(calc((52.5vh / 6) * 5));
     }
 }
 
@@ -239,7 +241,7 @@ footer{
      
     }
     to{
-        transform: translateY(54vh);
+        transform: translateY(52.5vh);
     }
 }
 
