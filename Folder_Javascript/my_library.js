@@ -1,4 +1,7 @@
 
+
+
+
 // Sum: Funktion um beliebig viele Variablen miteinander zu summieren
 function Sum (a, ...rest){
     // Returns the sum of all given values
@@ -11,15 +14,22 @@ function Sum (a, ...rest){
 
             // Allgemeine Funktionen für die Spieleentwicklung
 
+// Ein value per event aus einer beliebigen ID abfragen und mit einem key dem Local Storage übergeben
+// Zum Beispiel Namen aus einem input abfragen und per click event speicher: 
+// Push_to_LocalStorage("ID_SVG_Player_1","ID_Player_1_Name", "Player_One_Name", "click");
+
+function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event){
+document.getElementById(`${IDfromTrigger}`).addEventListener(`${event}`, ()=>{
+    localStorage.setItem(`${key}`, document.getElementById(`${IDfromValue}`).value);
+});};
+
 // Spielerwechsel. Benötigt: Variable playerIsOnTurn = left/right
 // !!! Vorsicht bei der Benutzung: Funkioniert nur auf sehr sehr schnellen CPUs reibungsfrei, 
 // da i.d.R. viel vom Game-Ablauf damit gesteuert wird. Besser lokal einbinden! 
 
 function Turning_PlayerIsOnTurn(){
-    playerIsOnTurn === "left" ?
-    playerIsOnTurn = "right" :
-    playerIsOnTurn = "left";
-}
+    playerIsOnTurn === "left" ? playerIsOnTurn = "right" : playerIsOnTurn = "left";
+};
 
 
 

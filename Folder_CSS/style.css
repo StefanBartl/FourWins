@@ -60,6 +60,8 @@ footer{
 
 .Class_LeftSidebarWrapper{
     min-width: 20%;
+
+    
 }
 
 .Class_GameboardWrapper{
@@ -108,19 +110,42 @@ footer{
     min-width: auto;
     min-height: calc(100% / 7);
     border-left: dashed .1rem var(--main-white);
+}
 
-    
+.Class_Invisible{
+    visibility: hidden;
 }
 
 /*                                                       Typographie                                                     */
 
+.Class_Players{
+
+}
 
 
 /*                                                       Buttons, Input, etc...                                          */
 
+.Class_Inputs{
+    width: 20ch;
+    max-width:80%;
+    height: 2rem;
+    text-align: center;
+}
 
+.Class_Player_Name_Buttons{
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
 
-
+.Class_Naming_Span{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+}
 
 
 
@@ -247,6 +272,23 @@ footer{
 
 
 /*                                                       Media Queries                                                   */
+
+@media (max-width: 767.98px) {
+    .Class_MainWrapper{
+        display: block;
+        justify-content: center;
+        align-items: center;   
+    }
+    .Class_LeftSidebarWrapper{
+        width: 100%;
+        margin-block: 2rem;
+    }
+    .Class_RightSidebarWrapper{
+        width: 100%;
+        margin-block: 2rem;
+    }
+
+}
 
 
 

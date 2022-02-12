@@ -1,0 +1,41 @@
+Optimale textlänge mit clamp:
+width: clamp(45ch, 50%, 75ch);
+
+Du kannst auch ch al Eineheit benutzen!
+
+
+
+
+Media Queries:
+
+Max-Width
+Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop, und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
+
+@media (max-width: 575.98px) { … }// Kleine Endgeräte (Smartphones, kleiner als 768px)
+
+@media (max-width: 767.98px) { … }
+
+// Kleine Endgeräte (Tablets, kleiner als 992px)
+
+@media (max-width: 991.98px) { … }
+
+// Große Endgeräte (Laptops, Bildschirme, kleiner als 1200px)
+
+@media (max-width: 1199.98px) { … }
+
+Min-Width
+Min-width ist intuitiver und besser lesbar.
+
+// Kleine Endgeräte (Smartphones, 576px und größer)@media (min-width: 576px) { … }
+
+// Mittlere Endgeräte (Tablets, 768px und größer)
+
+@media (min-width: 768px) { … }
+
+// Große Endgeräte (Laptops, Bildschirme, 992px und größer)
+
+@media (min-width: 992px) { … }
+
+// Sehr große Endgeräte (Große Bildschirme, iMac, 1200px und größer)
+
+@media (min-width: 1200px) { … }
