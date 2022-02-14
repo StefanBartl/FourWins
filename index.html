@@ -2,7 +2,7 @@
 <html lang='de'>
 
 <head>
-  <title>+++ Online Four-Wins / 4-Gewinnt +++</title>
+  <title id="ID_Head_Title"></title>
   <!-- Javascript und CSS Dateieinbindung -->
   <link rel='stylesheet' type='text/css' href='Folder_CSS/style.css'>
   <!-- Favicon & AppleTouch-->
@@ -10,8 +10,8 @@
   <link rel='apple-touch-icon' sizes='120x120' href='Folder_Graphics/Folder_Icons/pb_200x200.png' />
   <!-- Metadaten  -->
   <meta name='author' content='Stefan Bartl'>
-  <meta name='description'
-    content='Online-Version of the well knowed family Game "Four-Wins". Play it against friends or KI!'>
+  <meta name='description' content='Online-Version of the well knowed family Game "Four-Wins". Play it against friends or KI!'>
+  <meta name="keywords" content="Game, Browsergame, Spiel, Browserspiel, Four, Four Wins, 4, Vier, 4 Gewinnt">
   <meta charset='UTF-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
@@ -22,7 +22,7 @@
       <h1 class="Class_HeadlineTop" id="ID_Headline">
         </h3>
         <span class="Class_Settings"><img src="./Folder_Graphics/iconmonstr_com/cog-outline.svg" id="ID_Settings"
-            title="Einstellungen" alt="Clickable picture to get to the settings!"></span>
+            title="" alt="Clickable picture to get to the settings!"></span>
         <div class="Class_Settings_Menu" id="ID_Settings_Menu">
           <h2 id="ID_info"></h2>
           <h2 id="ID_starting"></h2>
@@ -39,8 +39,10 @@
     </span>
     <p id="ID_Header_p"></p>
   </header>
+
   <div class="Class_MainWrapper" id="ID_MainWrapper">
-    <div class="Class_LeftSidebarWrapper" id="ID_LeftSidebarWrapper">
+
+    <section class="Class_LeftSidebarWrapper" id="ID_LeftSidebarWrapper">
       <h3 class="Class_Players" id="ID_Player_1_Headline"></h3>
       <span class="Class_Naming_Span">
         <input type="text" max="15" class="Class_Inputs" id="ID_Player_1_Name" name="Player_1_ Name">
@@ -48,8 +50,9 @@
           class="Class_Player_Name_Buttons" for="Player_1_Name" title="Speichere den Namen für spätere Spiele!"
           alt="Ein Button, mit dem du den Namen für spätere Spiele speichern kannst.">
       </span>
-    </div>
-    <div class="Class_GameboardWrapper" id="ID_GameboardWrapper">
+    </section>
+    
+    <section class="Class_GameboardWrapper" id="ID_GameboardWrapper">
       <div id="ID_Column1" class="Class_Columns">
         <div id="ID_C1R1" class="Class_TopCells"></div>
         <div id="ID_C1R2" class="Class_Cells"></div>
@@ -112,9 +115,10 @@
         <div id="ID_C7R5" class="Class_Cells"></div>
         <div id="ID_C7R6" class="Class_Cells"></div>
         <div id="ID_C7R7" class="Class_Cells"></div>
-      </div>
-    </div>
-    <div class="Class_RightSidebarWrapper" id="ID_RightSidebarWrapper">
+      </div> 
+    </section>
+    
+    <section class="Class_RightSidebarWrapper" id="ID_RightSidebarWrapper">
       <h3 class="Class_Players" id="ID_Player_2_Headline"></h3>
       <span class="Class_Naming_Span">
         <img src="./Folder_Graphics/Folder_Icons/simpleicons_org/circleci _GESPIEGELTxcf.png" id="ID_SVG_Player_2"
@@ -124,9 +128,11 @@
       </span>
     </div>
   </div>
+
   <footer class="Class_FooterWrapper" id="ID_FooterWrapper">
     <button type="button" id="ID_Start_Button" class="Buttons"></button>
   </footer>
+
   <script type="text/javascript" src='Folder_Javascript/my_library.js'></script>
   <script type='text/javascript' src='Folder_Javascript/script.js'></script>
 </body>

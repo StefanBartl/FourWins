@@ -49,6 +49,7 @@ css background clip textcss background clip textcss background clip textcss back
 --main-white: hsl(0, 0%, 100%);
 --main-black: hsl(0, 0%, 0%);
 --main-red: hsl(0, 100%, 50%); 
+--prime-border: hsl(0, 0%, 100%);
 --gameboard-border: hsl(240, 100%, 49%);
 --cornsilk: hsl(48, 100%, 93%);
 --top-header: hsl(39, 77%, 83%);
@@ -58,12 +59,7 @@ word-wrap: break-word;
 
 }
 
-@font-face {
-    font-family: 'Fira Code';
-    src: url("../Folder_Fonts/Fira_Code_v6.2/woff2/FiraCode-Medium.woff2") format('woff2');
-    font-weight: 400;
-    font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap');
 
 /*#############################################################################################################################
                                                         Layout                                                          #
@@ -72,7 +68,7 @@ word-wrap: break-word;
 body{
     background-color: var(--main-blue);
     z-index: -3;
-    font-family: 'Fira Code', arial, sans-serif;
+    font-family: 'Titillium Web', sans-serif;
     color: var(--top-header);
     justify-content: center;
     align-items: center;
@@ -88,11 +84,6 @@ header{
     display: flex;
 }
 
-.Class_HeadlineTop{
-    min-width: 100%;
-    text-align: center;
-}
-
 .Class_MainWrapper{
     display: flex; 
     justify-content: center;
@@ -102,8 +93,8 @@ header{
 .Class_LeftSidebarWrapper{
     min-width: 30%;
     margin-bottom: 30vh;
-    border-top:  solid 1px white;
-    border-bottom:  solid 1px white;
+    border-top:  solid 1px var(--prime-border);
+    border-bottom:  solid 1px var(--prime-border);
 }
 
 .Class_GameboardWrapper{
@@ -122,8 +113,8 @@ header{
 .Class_RightSidebarWrapper{
     min-width: 30%;
     margin-bottom: 30vh;
-    border-top:  solid 1px white;
-    border-bottom:  solid 1px white;
+    border-top:  solid 1px var(--prime-border);
+    border-bottom:  solid 1px var(--prime-border);
 }
 
 footer{
@@ -202,6 +193,11 @@ footer{
                                                         Typohraphie                                                           #
 ###############################################################################################################################*/
 
+.Class_HeadlineTop{
+    min-width: 100%;
+    text-align: center;
+}
+
 
 /*              InGame Typo Classes             */ 
 
@@ -214,6 +210,7 @@ footer{
 /*#############################################################################################################################
                                                        Buttons. Inputs, etc...                                                           #
 ###############################################################################################################################*/
+
 
 .Class_Inputs{
     width: 28ch;
@@ -267,10 +264,10 @@ footer{
 .Class_Settings:hover{
     cursor: pointer;
     filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
-    animation: Button_Taller_Smaller_Animation 1s infinite alternate;
+    animation: Button_Up_Down_Animation 1s infinite alternate;
 }
 
-@keyframes Button_Taller_Smaller_Animation {
+@keyframes Button_Up_Down_Animation {
     from{
         transform: rotateZ(0deg);
     }
@@ -278,6 +275,7 @@ footer{
         transform: rotateZ(180deg);
     }
 }
+
 
 .Class_Settings_Menu{
     position: fixed;

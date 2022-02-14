@@ -36,9 +36,9 @@
 ========================================================================================================================================================================
  
                                     General Settings, Global Scoped Objects/Variables & DOM  
-
+win val bugs, gameend screnn, new  reusable helper fundtionsw /creators)
 ========================================================================================================================================================================*/
- 
+
                                                                                                                                                                         /*
             Jobs To-do:
 
@@ -49,13 +49,16 @@
 5) Start screen playing animation
 6) Stay Mobile & Responsive ! Do the Media queries.
 7) Nicerer Table of content
-8) Beim Start soll das gameboard mehr Platz einnehmen
+8) Add some Audio
+
                                                                                                                                                                             */
 
-
 //                      Important DOM-Elements
+const head_title = document.getElementById("ID_Head_Title");
 const headline_top = document.getElementById("ID_Headline");
 const headline_p = document.getElementById("ID_Header_p");
+const settings_svg = document.getElementById("ID_Settings");
+const settings_menu = document.getElementById("ID_Settings_Menu");
 const player_1_headline = document.getElementById("ID_Player_1_Headline");
 const player_1 = document.getElementById("ID_Player_1_Name");
 const player_2_headline = document.getElementById("ID_Player_2_Headline");
@@ -122,17 +125,17 @@ Swap_Two_Classes_by_Events("ID_SVG_Player_2", "mouseenter", "mouseleave", "Class
 
 //                      Set-up the Settings Menu
 // Remove Settings-Menu from Starting-Screen DOM
-document.getElementById("ID_Settings_Menu").style.display = "none";
+settings_menu.style.display = "none";
 // Show / Hide & Style Event-Listener
-document.getElementById("ID_Settings").addEventListener("mouseenter", ()=>{
-    if(!document.getElementById("ID_Settings_Menu").classList.contains("Class_Showing_Settings"))
-    {document.getElementById("ID_Settings_Menu").classList.add("Class_Showing_Settings");
-    document.getElementById("ID_Settings_Menu").style.display = "block";
-    document.getElementById("ID_Settings_Menu").classList.add("Class_Settings_Animation");
+settings_svg.addEventListener("click", ()=>{
+    if(!settings_menu.classList.contains("Class_Showing_Settings")){
+    settings_menu.classList.add("Class_Showing_Settings");
+    settings_menu.style.display = "block";
+    settings_menu.classList.add("Class_Settings_Animation");
 }   else {
-    document.getElementById("ID_Settings_Menu").classList.remove("Class_Showing_Settings");
-    document.getElementById("ID_Settings_Menu").classList.remove("Class_Settings_Animation");
-    document.getElementById("ID_Settings_Menu").style.display = "none";
+    settings_menu.classList.remove("Class_Showing_Settings");
+    settings_menu.classList.remove("Class_Settings_Animation");
+    settings_menu.style.display = "none";
 }});
 
 //                      Choose Language Event in the settings menu
@@ -260,10 +263,12 @@ if(playerIsOnTurn === "left"){
     document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_1");
     document.getElementById(`ID_C${columnNumber}R${row}`).style.backgroundColor = "yellow";
     document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
+
     //  Invoke Winning-Validation for Player 1
-    Row_Validator(1, row);
-    Column_Validator(1, columnNumber, row);
-    Diagonal_Validator(1, columnNumber, row);
+    let valid_row = Row_Validator(1, row);
+    let valid_column = Column_Validator(1, columnNumber, row);
+    let valid_diagonal = Diagonal_Validator(1, columnNumber, row);
+    if(valid_row === true || valid_column === true || valid_diagonal === true) return;
 
     // Next Player is on turn
     Turning_PlayerIsOnTurn();
@@ -273,9 +278,10 @@ if(playerIsOnTurn === "left"){
     document.getElementById(`ID_C${columnNumber}R${row}`).style.backgroundColor = "red";
     document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
     //  Invoke Winning-Validation for Player 2
-    Row_Validator(2, row);
-    Column_Validator(2);
-    Diagonal_Validator(2, columnNumber, row);
+    let valid_row = Row_Validator(2, row);
+    let valid_column =Column_Validator(2);
+    let valid_diagonal = Diagonal_Validator(2, columnNumber, row);
+    if(valid_row === true || valid_column === true || valid_diagonal === true) return;
 
     // Next Player is on turn
     Turning_PlayerIsOnTurn();     
@@ -286,51 +292,50 @@ if(playerIsOnTurn === "left"){
 };    // End Game-Flow-Function
 };   // End Main Game For-Loop
 };  // End Start Game Wrapper Function
-                                                                                                                                                                        /*
-========================================================================================================================================================================
+                                                                                                                                                                                         /*
+=======================================================================================================================================================================================================
                           
                                         Functions for Win-Validation            
 
-========================================================================================================================================================================*/
+=====================================================================================================================================================================================================================*/
 
 //                      Function to validate if there is a Diagonal-Triggered Win
 function Diagonal_Validator(player, columnNumber, row){
 
+let basis = document.getElementById(`ID_C${columnNumber}R${row}`);
 // Get the to validate Gameboard cell for diagonal validation in right-up and left-down direction (which are in this context the same) based the basis (the played) cell
-let basis_plus = document.getElementById(`ID_C${columnNumber}R${row}`);
 let second_plus = document.getElementById(`ID_C${columnNumber + 1}R${row + 1}`);
 let third_plus = document.getElementById(`ID_C${columnNumber + 2}R${row + 2}`);
 let fourth_plus = document.getElementById(`ID_C${columnNumber + 3}R${row + 3}`);
 
 // If there are 3 more cells for validation, check if they contain a players coin...
-if(basis_plus != null && second_plus != null && third_plus != null && fourth_plus != null){
-if(basis_plus.classList.contains(`Class_PlacedCoin_${player}`) && 
+if(basis != null && second_plus != null && third_plus != null && fourth_plus != null){
+if(basis.classList.contains(`Class_PlacedCoin_${player}`) && 
 second_plus.classList.contains(`Class_PlacedCoin_${player}`) &&
 third_plus.classList.contains(`Class_PlacedCoin_${player}`) &&
 fourth_plus.classList.contains(`Class_PlacedCoin_${player}`)){
 
 // .. if yes, invoke win"
-prompt("Player " + player + " Diagonal-PLus-Win! Nice"); return; 
-
+Game_End_Screen(player, "Diagonal");
+return; 
 };}
 
 // Now same as above but in the other two diaggonals
 // Get the to validate Gameboard cell for diagonal validation in left-up and right-down direction 
-let basis_minus = document.getElementById(`ID_C${columnNumber}R${row}`);
 let second_minus = document.getElementById(`ID_C${columnNumber - 1}R${row + 1}`);
 let third_minus = document.getElementById(`ID_C${columnNumber  - 2}R${row + 2}`);
 let fourth_minus= document.getElementById(`ID_C${columnNumber  - 3}R${row + 3}`);
 
 // If there are 3 more cells for validation, check if they contain a players coin...
-if(basis_minus!= null && second_minus != null && third_minus != null && fourth_minus != null){
-if(basis_minus.classList.contains(`Class_PlacedCoin_${player}`) && 
+if(basis != null && second_minus != null && third_minus != null && fourth_minus != null){
+if(basis.classList.contains(`Class_PlacedCoin_${player}`) && 
 second_minus.classList.contains(`Class_PlacedCoin_${player}`) &&
 third_minus.classList.contains(`Class_PlacedCoin_${player}`) &&
 fourth_minus.classList.contains(`Class_PlacedCoin_${player}`)){
 
 // .. if yes, invoke win"
-prompt("Player " + player + " Diagonal-PLus-Win! Nice"); return; 
-
+Game_End_Screen(player, "Diagonal");
+return true; 
 };}}; // Diagonal_Validator End
 
 //                      Function to validate if there is a Column-Triggered Win
@@ -353,9 +358,9 @@ for (let obj of validation_array){
     if(array[0] - array[1]  === 1 && array[1] - array[2] === 1 && array[2] - array[3] === 1){
         
         // Invoke a win
-        prompt("Player " + player + " Column-Win! Perfect!"); return; };
-
-};}; // Column_Validator End
+        Game_End_Screen(player, "Column"); 
+        return true;
+};};}; // Column_Validator End
 
 //                      Function to validate if the placement in a given row triggers a win
 function Row_Validator(player, column){
@@ -378,15 +383,33 @@ if(el.indexOf(column) != -1)countFor_Win++;
 if(el.indexOf(column) === -1 && countFor_Win != 0)countFor_Win--;
 // Invoke win if thera are 4 coins after another
 if(countFor_Win === 4) {
-    
-    prompt("Player " + player + " Row-Win! Wow"); return 
+ 
+    // Invoke a win
+    Game_End_Screen(player, "Row"); 
+    return true;
 };};}; // Row_Validator End
 
-                                                                                                                                                                        /*            
-========================================================================================================================================================================
-                                               
-                                    Helper-Functions                                        
-========================================================================================================================================================================*/
+
+//                                  Game-End Screen Function
+function Game_End_Screen(winning_player, winning_chain){
+document.getElementById("ID_MainWrapper").remove();
+const game_end_div = document.createElement("div");
+game_end_div.id = "ID_Game_End_Screen";
+const winning_headline = document.createElement("h3");
+winning_headline.innerText = "WIIIIN";
+game_end_div.appendChild(winning_headline);
+document.body.appendChild(game_end_div);
+
+const winning_head = Create_DOM_Element({ParentID: "ID_Game_End_Screen", Element: "h1", ID: "ID_New_H1", Class: "dv", Text: "Wenn das gehen würde, wäre es schon geil", Title: "dvc", Alt: "Headline of the Game-End/Winning ScreenS"});
+
+
+}
+                                                                                                                                                                                        /*            
+==============================================================================================================================================================================================
+                                          
+                                    Helper-Functions               
+
+==============================================================================================================================================================================================*/
 
 // Function to push the names from the input to the local storage
 
@@ -453,6 +476,8 @@ sound_h.innerText  = "Sound";
 
 // Set language to Deutsch
 function Deutsch(){
+head_title.innerText = "+++ 4-Gewinnt +++";
+settings_svg.title = "Einstellungen";
 headline_top.innerText = "Online 4-Gewinnt";
 headline_p.innerText  = "Spiele gegen deine Freunde oder gegen die KI!"; 
 player_1_headline.innerText  = "Wähle einen Namen";
@@ -469,6 +494,8 @@ contact_h.innerText  = "Kontakt";
 
 // Set language to English
 function English(){   
+head_title.innerText = "+++ 4-Wins +++";
+settings_svg.title = "Settings";
 headline_top.innerText  = "Four Wins";
 headline_p.innerText  = "Play against friends or KI!";
 player_1_headline.innerText  = "Choose Name";
@@ -482,6 +509,62 @@ colour_h.innerText  = "Choose your Colour";
 language_h.innerText  = "Language";
 contact_h.innerHTML  = "Contact";
 };
+
+
+//              "Creator-Function" - for creating DOM-Elements and push it to DOM
+
+function Create_DOM_Element(options, arrayOne, arrayTwo){
+
+// Define the possible Parameter-List with the associated variables declared
+const _parentID = options.ParentID, _element = options.Element, _type = options.Type, _id = options.ID, _class = options.Class, _text = options.Text, _for = options.For,
+_title = options.Title, _alt = options.Alt, _src = options.Src, _width = options.Width, _height  = options.Height, _aspectRatio = options.AspectRatio,
+_min = options.Min, _max = options.Max, _value = options.Value, _placeholder = options.Placeholder, _optionsArray = arrayOne, _valuesArray = arrayTwo;
+
+const element = document.createElement(_element);
+
+// Important properties for "simple" DOM-Elements
+if(_id != undefined) element.id = _id;
+if(_class !=  undefined) element.classList.add(_class);
+if(_text != undefined) element.innerText  = _text;
+if(_for != undefined) element.for  = _for;
+if(_title != undefined) element.title = _text;
+if(_alt != undefined) element.alt = _alt;
+
+// Important properties for Image-DOM-Elements
+if(_src != undefined) element.src = _src;
+if(_width != undefined) element.width = _width;
+if(_height != undefined) element.height = _height;
+if(_aspectRatio != undefined) element.aspectRatio = _aspectRatio;
+
+// Important properties for Input-DOM-Elements
+if(_min != undefined) element.min = _min;
+if(_max != undefined) element.max = _max;
+if(_value != undefined) element.min = _value;
+if(_placeholder != undefined) element.min = _placeholder;
+// Dropdown-Menu Generator
+// Proof if both needed Arrays were passed
+if(Array.isArray(_optionsArray) === true  && Array.isArray(_valuesArray) === true){
+let elementsPointer = 0;
+// For every value in ther first/option Array, create a dropdown option and set the correct value from the second/values Arrayfor it
+for(let el of _optionsArray){
+element.options.add( new Option(`${el}`, `${_valuesArray}`[elementsPointer]));
+elementsPointer++; };};
+
+// Finally, push the complete dynamically created, finished object to the DOM!
+document.getElementById(_parentID).appendChild(element);
+};
+/*                                Creator-Functions Infobox:
+All types of Elements possible which you can create 'the normal way' too!
+!Important: For correct functionality pass at least the ParentID (to defined where the element should appear in the DOM) & 
+the Element argument (tor define which kind of element it is)! 
+
+I recommend the following method for invoking:
+                                        Create_DOM_Element({ParentID: "anyId", Element: "div"});
+
+Possible arguments:
+parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width, Height, AspectRatio, Min, Max, Value, Placeholder, arrayOne, arrayTwo
+
+*/
 
                                                                                                                                                                         /*
 ========================================================================================================================================================================
@@ -508,6 +591,3 @@ contact_h.innerHTML  = "Contact";
 #                                                                                                                                                                      #
 #                                                                                                                                                                      #
 ########################################################################################################################################################################*/
-
-
-// Turn Naming
