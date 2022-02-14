@@ -46,10 +46,10 @@
 2) Choose which colour 
 3) KI 
 4) Styling 
-5) Do some nice animatons!
-6) Train CSS an get all out of it!
-7) Mobile & Responisve if possible
-                  
+5) Start screen playing animation
+6) Stay Mobile & Responsive ! Do the Media queries.
+7) Nicerer Table of content
+8) Beim Start soll das gameboard mehr Platz einnehmen
                                                                                                                                                                             */
 
 
@@ -103,7 +103,7 @@ let column_6_Counter = 8;
 let column_7_Counter = 8;
 
 //                      Setting variable to know who is on turn and the counter for the played rounds
-let playerIsOnTurn = "right";
+let playerIsOnTurn = "left";
 let roundCounter = 0;
 
 //                      Set starting page-language
@@ -161,28 +161,24 @@ function MainGame(){
 
 //                      DOM-Manipulation to get to the "Game-Screen"
 // Remove the start screen elements
-const startScreenElements_first = document.querySelectorAll(".Class_Players");
-for (let element of startScreenElements_first)element.remove();
-const startScreenElements_second = document.querySelectorAll(".Class_Naming_Span");
-for (let element of startScreenElements_second)element.remove();
+document.getElementById("ID_LeftSidebarWrapper").remove();
+document.getElementById("ID_RightSidebarWrapper").remove();
 document.getElementById("ID_Start_Button").remove();
 document.getElementById("ID_Header").remove();
-
+document.getElementById("ID_FooterWrapper").remove();
 // Use the new free space for the Gameboard
-document.getElementById("ID_GameboardWrapper").style.marginTop = "10%";
+document.getElementById("ID_GameboardWrapper").classList.add("Class_Gameboard_Wrapper_InGame");
+document.getElementById("ID_MainWrapper").classList.add("Class_Main_Wrapper_InGame");
 
-// Create DOM-Elements for switch which player is on turn                                
-let h3_left = document.createElement("h3");
-let h3_right = document.createElement("h3");
-h3_left.innerText = `Your turn, ${localStorage.getItem("Player_One_Name")}`;
-h3_right.innerText = `Your turn, ${localStorage.getItem("Player_Two_Name")}`;
-h3_right.classList.add("Class_Turn_Players");
-h3_left.classList.add("Class_Turn_Players");
-document.getElementById("ID_LeftSidebarWrapper").appendChild(h3_left);
-document.getElementById("ID_RightSidebarWrapper").appendChild(h3_right);
-
-// To beginn the left Player is on turn, hide the right headline
-h3_right.classList.add("Class_Invisible");
+// Create DOM-Elements for switch which player is on turn  
+let div_turnText = document.createElement("div"); 
+div_turnText.id = "ID_div_turnText";                             
+let h3_turnText = document.createElement("h3");
+h3_turnText.id = "ID_h3_turnText";
+h3_turnText.innerText = `Your turn, ${localStorage.getItem("Player_One_Name")}`;
+div_turnText.classList.add("Class_Turn_Players");
+document.getElementById("ID_MainWrapper").appendChild(div_turnText);
+div_turnText.appendChild(h3_turnText);
 
 //                      Adding choose & play algorhytmus
 // Get the Top Cells for looping trough to put the event listeners on them  so the players can make there placements there
@@ -217,20 +213,12 @@ let ID_topCell = topCell.id;
 //                      Here starts the logical function for jobs after one Player placed a coin
 
 function GameFlow (){
+    
 // Make sure, placement only is allowed if the animation from the placement before is finished
 if(topCell.firstChild) return;
 // Get the played top cell for getting the right column to play
 topCell = document.getElementById(ID_topCell);
-// Getting the correct "Your turn" text for each player and if there, remove the anomatio from the other
-if(playerIsOnTurn === "left"){
-    if(h3_left.classList.contains("Class_Invisible"))h3_left.classList.remove("Class_Invisible");
-    if(!h3_right.classList.contains("Class_Invisible"))h3_right.classList.add("Class_Invisible");
-    topCell.classList.remove("Class_ChoosingAnimation_Coin_1")
-} else{
-    if(h3_right.classList.contains("Class_Invisible"))h3_right.classList.remove("Class_Invisible");
-    if(!h3_left.classList.contains("Class_Invisible"))h3_left.classList.add("Class_Invisible");
-    topCell.classList.remove("Class_ChoosingAnimation_Coin_2")
-}
+
 // Increase round counter
 roundCounter++;
 
@@ -422,6 +410,7 @@ document.getElementById(`${element_ID}`).addEventListener(`${event_2}`, ()=>{
 // Helper function to change Player
 function Turning_PlayerIsOnTurn(){
     playerIsOnTurn === "left" ? playerIsOnTurn = "right" : playerIsOnTurn = "left";
+    playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_One_Name")}` : document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_Two_Name")}`;
 }
                                                                                                                                                                         /*
 ========================================================================================================================================================================
@@ -521,3 +510,4 @@ contact_h.innerHTML  = "Contact";
 ########################################################################################################################################################################*/
 
 
+// Turn Naming

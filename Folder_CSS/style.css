@@ -1,5 +1,5 @@
- /*    
-                                                Four-Wins-Online CSS-Stylsheet
+                                                                                                                                                                            /*    
+                                            Four-Wins-Online Main-CSS-Stylsheet
                                                         powered by
 
                                                        Stefan Bartl
@@ -29,6 +29,18 @@ css background clip textcss background clip textcss background clip textcss back
                                                         General                                                                    #
 ###############################################################################################################################*/
 
+
+                                                                                                                                                                        /*
+            Jobs To-do:
+
+1) Win div mit Ellypse positon absolute über win row
+2) Choose which colour 
+4) Styling 
+4) Start screen playing animation
+5) Stay Mobile & Responsive ! Do the Media queries.
+6) Buttons animation mit brightness oder saturation langsam hoch fahren
+                  
+                                                                                                                                                                            */
 
 
 :root{
@@ -140,10 +152,10 @@ footer{
 }
 
 .Class_Cells{
-    min-width: auto;
+    min-width: calc(90% / 7);
     min-height: calc(90% / 7);
     border: solid .2rem var(--gameboard-border);
-    border-radius: 3rem;
+    border-radius: 10rem;
     background-color: var(--main-white);
     opacity: .7;
     justify-content: center;
@@ -164,12 +176,39 @@ footer{
     background-position: center;
 }
 
+/*              InGame Layout Classes             */ 
+
+.Class_Main_Wrapper_InGame{
+ display: flex;
+ flex-wrap: wrap-reverse;
+}
+
+.Class_Gameboard_Wrapper_InGame{
+
+}
+
+.Class_Turn_Players{
+    display: flex;
+    min-width: 100%;
+    margin-bottom: 3%;
+    margin-top: 3%;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+}
+
+
 /*#############################################################################################################################
                                                         Typohraphie                                                           #
 ###############################################################################################################################*/
 
-.Class_Players{
 
+/*              InGame Typo Classes             */ 
+
+#ID_h3_turnText{
+    width: auto;
+    border: dashed .3rem var(--main-white);
+    padding: 1rem;
 }
 
 /*#############################################################################################################################
@@ -475,7 +514,8 @@ footer{
 
 @media (max-width: 767.98px) {
     .Class_MainWrapper{
-        display: block;
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;   
     }
@@ -486,13 +526,20 @@ footer{
     }
     
     .Class_HeadlineTop{
-        
         text-align: center;
     }
+
+    .Class_GameboardWrapper{
+        min-width: 100%;
+    }
     
+    .Class_Gameboard_Wrapper_InGame{
+        min-width: 100%;
+    }
+
     .Class_Settings{
-        position: fixed;
-        left: 90vw;
+        position: absolute;
+        right: 5vw;
         top: 2vh;
         filter: invert(1);
     }
@@ -508,6 +555,14 @@ footer{
         margin-block: 1rem;
     }
 
+    #ID_Player_1_Name{
+        min-width: 100%;
+    }
+
+    #ID_Player_2_Name{
+        min-width: 100%;
+    }
+
     .Class_LeftSidebarWrapper{
         width: 100%;
         margin-block: 2rem;
@@ -515,9 +570,28 @@ footer{
     .Class_RightSidebarWrapper{
         width: 100%;
         margin-block: 2rem;
+        margin-bottom: -1rem;
+    }
+
+    .Class_Turn_Players{
+        display: flex;
+        min-width: 100%;
+        margin-bottom: 5%;
+        margin-top: 3%;
+        text-align: center;
+        justify-content: center;
+        align-content: center;
+    }
+
+    #ID_Start_Button{
+        min-width: 30%;
+        margin-bottom: 2%;
     }
 
 }
+
+
+
 
 
 /*####################################################################################################################################################################*\
