@@ -1,30 +1,49 @@
- /*                              _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-                                |#                                                       #|
-                                |                 Table of content:                       |
+ /*    
+                                                Four-Wins-Online CSS-Stylsheet
+                                                        powered by
+
+                                                       Stefan Bartl
+                                                  (WKDSteVIE / WKDMinerva)
+ 
+                                                          2021
+                                  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+                                 #                                                       #
+                                |                  Table of content:                      |
                                 |                                                         |
                                 |                    1) General                           |
                                 |                    2) Layout                            |
-                                |                    3) Typographie                       |
-                                |                    4) Buttons, Inputs, etc...           |
-                                |                    5) Animations                        |
-                                |                    6) Media Queries                     |
-                                |                    7) Credits                           |
+                                |                    3) Gameboard                         |
+                                |                    4) Typographie                       |
+                                |                    5) Buttons, Inputs, etc...           |
+                                |                    6) Event-Triggered DOM-Effects       |
+                                |                    7) Animations                        |
+                                |                    8) Helpers                           |
+                                |                    7) Media Queries                     |
+                                |                    10) Credits                          |
                                 |                                                         |
-                                |#_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _#|
+                                 #_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _#
 
 
-/*                                                       General                                                         */
+css background clip textcss background clip textcss background clip textcss background clip text
+/*#############################################################################################################################
+                                                        General                                                                    #
+###############################################################################################################################*/
+
+
 
 :root{
     /* Colour-Palette */
 --main-blue: hsl(201, 79%, 46%);
 --main-white: hsl(0, 0%, 100%);
 --main-black: hsl(0, 0%, 0%);
+--main-red: hsl(0, 100%, 50%); 
+--gameboard-border: hsl(240, 100%, 49%);
 --cornsilk: hsl(48, 100%, 93%);
 --top-header: hsl(39, 77%, 83%);
---buttons-background: hsl(271, 76%, 53%);  
+
 overflow-wrap: break-word;
 word-wrap: break-word;
+
 }
 
 @font-face {
@@ -34,11 +53,13 @@ word-wrap: break-word;
     font-style: normal;
 }
 
-/*                                                       Layout                                                          */
+/*#############################################################################################################################
+                                                        Layout                                                          #
+###############################################################################################################################*/
 
 body{
-
     background-color: var(--main-blue);
+    z-index: -3;
     font-family: 'Fira Code', arial, sans-serif;
     color: var(--top-header);
     justify-content: center;
@@ -47,40 +68,84 @@ body{
 }
 
 header{
- margin-bottom: 2rem;
+    border-bottom: solid 1vh var(--main-white);
+    border-radius: 1rem;
 }
 
-.Class_MainWrapper{
+.Class_Headline{
     display: flex;
 }
 
-footer{
-    margin-top: 4rem;
+.Class_HeadlineTop{
+    min-width: 100%;
+    text-align: center;
+}
+
+.Class_MainWrapper{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
 }
 
 .Class_LeftSidebarWrapper{
-    min-width: 20%;
-
-    
+    min-width: 30%;
+    margin-bottom: 30vh;
+    border-top:  solid 1px white;
+    border-bottom:  solid 1px white;
 }
 
 .Class_GameboardWrapper{
     display: flex;
-    min-width: 60%;
-    min-height: 60vh;
-    border: solid .5rem red;
+    min-width: 38%;
+    min-height: 70vh;
+    background-color: var(--gameboard-border);
+    border: solid 1rem var(--gameboard-border);
+    border-top: dashed .1rem var(--gameboard-border);
+    border-radius: 2rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     border-top: none;
-    margin: .5rem;
 }
+
+.Class_RightSidebarWrapper{
+    min-width: 30%;
+    margin-bottom: 30vh;
+    border-top:  solid 1px white;
+    border-bottom:  solid 1px white;
+}
+
+footer{
+    margin-top: 1rem;
+}
+
+/*#############################################################################################################################
+                                                        Gameboard                                                                #
+###############################################################################################################################*/
 
 .Class_Columns{
     width: calc(100% / 7);
 }
 
+.Class_TopCells{
+    outline: none;
+    min-width: auto;
+    min-height: calc(95% / 7);
+    border-left: dashed .2rem var(--main-red);
+    background-color: var(--main-blue);
+    z-index: -1;
+}
+
+#ID_C1R1{
+    border-left: none;
+}
+
 .Class_Cells{
     min-width: auto;
-    min-height: calc(100% / 7);
-    outline: solid 1px black;
+    min-height: calc(90% / 7);
+    border: solid .2rem var(--gameboard-border);
+    border-radius: 3rem;
+    background-color: var(--main-white);
+    opacity: .7;
     justify-content: center;
     align-content: center;
 }
@@ -99,37 +164,24 @@ footer{
     background-position: center;
 }
 
-.Class_RightSidebarWrapper{
-    width: 20%;
-    
-}
-
-/* Cells-Section */
-.Class_TopCells{
-    outline: none;
-    min-width: auto;
-    min-height: calc(100% / 7);
-    border-left: dashed .1rem var(--main-white);
-}
-
-.Class_Invisible{
-    visibility: hidden;
-}
-
-/*                                                       Typographie                                                     */
+/*#############################################################################################################################
+                                                        Typohraphie                                                           #
+###############################################################################################################################*/
 
 .Class_Players{
 
 }
 
-
-/*                                                       Buttons, Input, etc...                                          */
+/*#############################################################################################################################
+                                                       Buttons. Inputs, etc...                                                           #
+###############################################################################################################################*/
 
 .Class_Inputs{
-    width: 20ch;
+    width: 28ch;
     max-width:80%;
     height: 2rem;
     text-align: center;
+    margin-bottom:  5vh;
 }
 
 .Class_Player_Name_Buttons{
@@ -137,6 +189,8 @@ footer{
     max-height: 1.5rem;
     margin-left: 1rem;
     margin-right: 1rem;
+    margin-bottom: 5vh;
+    filter: invert(1);
 }
 
 .Class_Naming_Span{
@@ -147,10 +201,79 @@ footer{
     align-items: center;
 }
 
+#ID_Start_Button{
+    cursor: pointer;
+    width: 12.5vw;
+    height: 7.5vh;
+    border-radius: 10rem;
+    margin-top: 1rem;
+}
+
+#ID_Start_Button:hover{
+    cursor: pointer;
+}
+
+/*#############################################################################################################################
+                                                    Event-Triggered DOM-Effects                                                          #
+###############################################################################################################################*/
+
+/* Settings SVG Button*/
+.Class_Settings{
+    position: absolute;
+    right:1vw;
+    top: 1.35vh;
+    filter: invert(1);
+}
+
+.Class_Settings:hover{
+    cursor: pointer;
+    filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+    animation: Button_Taller_Smaller_Animation 1s infinite alternate;
+}
+
+@keyframes Button_Taller_Smaller_Animation {
+    from{
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(180deg);
+    }
+}
+
+.Class_Settings_Menu{
+    position: fixed;
+    min-height: 100vh;
+    min-width: 20vw;
+    right: -15vw;
+    z-index: 1;
+    background-color: var(--main-white);
+    color: var(--main-black);
+}
+
+.Class_Settings_Animation{
+    animation: Show_Hide_Settings_Animation 2s ease-in;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
 
 
+@keyframes Show_Hide_Settings_Animation {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+        right: 3vw;
+      
+    }
+}
 
-/*                                                       Animations                                                      */
+/* Added by the Event-Listener click - needed ???*/
+.Class_Showing_Settings{}
+
+/*#############################################################################################################################
+                                                        Animations                                                            #
+###############################################################################################################################*/
 
 
 /* Player choosing column Animation*/
@@ -201,7 +324,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((52.5vh / 6) * 1));
+        transform: translateY(calc((62vh / 6) * 1));
     }
 }
 
@@ -214,7 +337,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((52.5vh / 6) * 2));
+        transform: translateY(calc((62vh / 6) * 2));
     }
 }
 
@@ -227,7 +350,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((52.5vh / 6) * 3));
+        transform: translateY(calc((62vh / 6) * 3));
     }
 }
 
@@ -240,7 +363,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((52.5vh / 6) * 4));
+        transform: translateY(calc((62vh / 6) * 4));
     }
 }
 
@@ -253,7 +376,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((52.5vh / 6) * 5));
+        transform: translateY(calc((62vh / 6) * 5));
     }
 }
 
@@ -266,12 +389,89 @@ footer{
      
     }
     to{
-        transform: translateY(52.5vh);
+        transform: translateY(62vh);
     }
 }
 
+/* Animation Player 1 Name Button */ 
 
-/*                                                       Media Queries                                                   */
+.Class_Buttons_Add_Hover_Animations_1{
+    cursor: pointer;
+    animation: Button_1_Add_Animation 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes Button_1_Add_Animation {
+    from{ 
+        filter: invert(1);
+        transform: rotate(0deg); 
+    }
+    to{ 
+        filter: brightness(0) saturate(100%) invert(91%) sepia(80%) saturate(5882%) hue-rotate(354deg) brightness(107%) contrast(104%);
+        transform: rotate(90deg); 
+    }
+}
+
+.Class_Buttons_Remove_Hover_Animations_1{
+    animation: Button_1_Remove_Animation 2s;
+    animation-fill-mode: forwards;
+}
+@keyframes Button_1_Remove_Animation {
+    from{ 
+        filter: brightness(0) saturate(100%) invert(91%) sepia(80%) saturate(5882%) hue-rotate(354deg) brightness(107%) contrast(104%);
+        transform: rotate(90deg);
+    }
+    to{ 
+        filter: invert(1);
+        transform: rotate(0deg); 
+    }
+}
+
+.Class_Buttons_Add_Hover_Animations_2{
+    cursor: pointer;
+    animation: Button_2_Add_Animation 2s;
+    animation-fill-mode: forwards;
+}
+
+/* Animation Player 2 Name Button */
+
+@keyframes Button_2_Add_Animation {
+    from{ 
+        filter: invert(1);
+        transform: rotate(0deg); 
+    }
+    to{ 
+        filter: brightness(0) saturate(100%) invert(17%) sepia(91%) saturate(7221%) hue-rotate(359deg) brightness(122%) contrast(119%);
+        transform: rotate(-90deg); 
+    }
+}
+
+.Class_Buttons_Remove_Hover_Animations_2{
+    animation: Button_2_Remove_Animation 2s;
+    animation-fill-mode: forwards;
+}
+@keyframes Button_2_Remove_Animation {
+    from{ 
+        filter: brightness(0) saturate(100%) invert(17%) sepia(91%) saturate(7221%) hue-rotate(359deg) brightness(122%) contrast(119%);
+        transform: rotate(-90deg);
+    }
+    to{ 
+        filter: invert(1);
+        transform: rotate(0deg); 
+    }
+}
+
+/*#############################################################################################################################
+                                                        Helpers                                                            #
+###############################################################################################################################*/
+
+.Class_Invisible{
+    visibility: hidden;
+}
+
+/*#############################################################################################################################
+                                                        Media Queries                                                           #
+###############################################################################################################################*/
 
 @media (max-width: 767.98px) {
     .Class_MainWrapper{
@@ -279,6 +479,35 @@ footer{
         justify-content: center;
         align-items: center;   
     }
+
+    .Class_Headline{
+      
+    
+    }
+    
+    .Class_HeadlineTop{
+        
+        text-align: center;
+    }
+    
+    .Class_Settings{
+        position: fixed;
+        left: 90vw;
+        top: 2vh;
+        filter: invert(1);
+    }
+    .Class_Naming_Span{
+        display:inline-block;
+        justify-content: center;
+        align-content: center;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .Class_Player_Name_Buttons{
+        margin-block: 1rem;
+    }
+
     .Class_LeftSidebarWrapper{
         width: 100%;
         margin-block: 2rem;
@@ -291,17 +520,9 @@ footer{
 }
 
 
-
-
-
-
-
-
-
-
 /*####################################################################################################################################################################*\
 #                                                                                                                                                                      #
-#                                                                     Credits & Special Thanks to:                                                                                 #
+#                                                                     Credits & Special Thanks to:                                                                     #
 #                                                                                                                                                                      #
 #                                                        Special thanks to the "Odin Project"-Team who did a great job.                                                #
 #                                                    Greetings to the many, many programmers who take the time to write blogs,                                         #

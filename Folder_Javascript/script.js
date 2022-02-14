@@ -1,23 +1,90 @@
+/*===========================================================================================================================
+ 
+                                ##########################################################
+                                #                                                        #
+                                #                 Table of content:                      #
+                                #                                                        #
+                                #                    1)                                  #
+                                #                    2)                                  #
+                                #                    3)                                  #
+                                #                    4)                                  #
+                                #                    5)                                  #
+                                #                    6)                                  #
+                                #                    7)                                  #
+                                #                                                        #
+                                ##########################################################
 
-/*                              _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-                                |#                                                       #|
-                                |                 Table of content:                       |
-                                |                                                         |
-                                |                    1)                            |
-                                |                    2)                           |
-                                |                    3)                        |
-                                |                    4)            |
-                                |                    5)                         |
-                                |                    6)                      |
-                                |                    7)                            |
-                                |                                                         |
-                                |#_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _#|
-
+===============================================================================================================================*/
 
 /*                                                       General                                                         */
+
+//                  Important DOM-Elements
+const headline_top = document.getElementById("ID_Headline");
+const headline_p = document.getElementById("ID_Header_p");
+const player_1_headline = document.getElementById("ID_Player_1_Headline");
+const player_1 = document.getElementById("ID_Player_1_Name");
+const player_2_headline = document.getElementById("ID_Player_2_Headline");
+const player_2 = document.getElementById("ID_Player_2_Name");
+const start_button = document.getElementById("ID_Start_Button");
+const info_h = document.getElementById("ID_info");
+const starting_h = document.getElementById("ID_starting");
+const colour_h = document.getElementById("ID_colour");
+const language_h = document.getElementById("ID_language");
+const select_deutsch = document.getElementById("ID_deutsch");
+const select_english = document.getElementById("ID_english");
+const contact_h = document.getElementById("ID_contact");
+const credits_h = document.getElementById("ID_credits");
+const sound_h = document.getElementById("ID_sound");
+
+//                  Set starting page-language
+// Detect Browser language, if it can't (i. g. restrictions) set English
+let browserLanguage = navigator.language || navigator.userLanguage || "English"; 
+// Invoke the translation with the getted language
+Translate_StartScreen(browserLanguage, "no");
+
+//                  Get correct names and style the section
 // Save names from input in local storage
 Push_to_LocalStorage("ID_SVG_Player_1","ID_Player_1_Name", "Player_One_Name", "click");
 Push_to_LocalStorage("ID_SVG_Player_2","ID_Player_2_Name", "Player_Two_Name", "click");
+// Hover animations for circles after Name-Inputs
+Swap_Two_Classes_by_Events("ID_SVG_Player_1", "mouseenter", "mouseleave", "Class_Buttons_Add_Hover_Animations_1", "Class_Buttons_Remove_Hover_Animations_1");
+Swap_Two_Classes_by_Events("ID_SVG_Player_2", "mouseenter", "mouseleave", "Class_Buttons_Add_Hover_Animations_2", "Class_Buttons_Remove_Hover_Animations_2");
+
+
+//                    Set-up the Settings Menu
+// Remove Settings-Menu from Starting-Screen DOM
+document.getElementById("ID_Settings_Menu").style.display = "none";
+// Show / Hide & Style function for the Settings-Menu
+document.getElementById("ID_Settings").addEventListener("mouseenter", ()=>{
+    if(!document.getElementById("ID_Settings_Menu").classList.contains("Class_Showing_Settings"))
+    {document.getElementById("ID_Settings_Menu").classList.add("Class_Showing_Settings");
+    document.getElementById("ID_Settings_Menu").style.display = "block";
+    document.getElementById("ID_Settings_Menu").classList.add("Class_Settings_Animation");
+}
+    else {
+    document.getElementById("ID_Settings_Menu").classList.remove("Class_Showing_Settings");
+    document.getElementById("ID_Settings_Menu").classList.remove("Class_Settings_Animation");
+    document.getElementById("ID_Settings_Menu").style.display = "none";
+}
+});
+
+// Choose Language Event (in settings menu)
+document.getElementById("ID_Language_Menu").addEventListener("change", ()=>{
+// Save language in Local Storage
+// Important: Because of only 2 Language supported, conditional statement is possible. With more languages, if/else if needed
+let languageCode;
+document.getElementById("ID_Language_Menu").value === "Deutsch" ? languageCode = "de" : languageCode  = "en";
+localStorage.setItem("Language", languageCode);
+// Make sure that a manually setted setted language is not overwritten by the default detected default browser language
+localStorage.setItem("LanguageSettedByUser", "yes");
+Translate_StartScreen(languageCode, "yes");
+});
+
+ 
+
+
+
+
 
 // Create an Game Settings Object
 const Game = {
@@ -60,25 +127,32 @@ document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
 // Main Game Function
 function MainGame(){
 
-/// Remove the start screen elements
+// Game starts with some DOM-Manipulation to get to the "Game-Screen"
+// Remove the start screen elements
 const startScreenElements_first = document.querySelectorAll(".Class_Players");
 for (let element of startScreenElements_first)element.remove();
 const startScreenElements_second = document.querySelectorAll(".Class_Naming_Span");
 for (let element of startScreenElements_second)element.remove();
+document.getElementById("ID_Start_Button").remove();
+document.getElementById("ID_Header").remove();
 
+// Use the new free space for the Gameboard
+document.getElementById("ID_GameboardWrapper").style.marginTop = "10%";
+
+// Create DOM-Elements for shwing which player is on turn                                
 let h3_left = document.createElement("h3");
-h3_left.innerText = `Your turn, ${localStorage.getItem("Player_One_Name")}`;
-document.getElementById("ID_LeftSidebarWrapper").appendChild(h3_left);
-
 let h3_right = document.createElement("h3");
+h3_left.innerText = `Your turn, ${localStorage.getItem("Player_One_Name")}`;
 h3_right.innerText = `Your turn, ${localStorage.getItem("Player_Two_Name")}`;
-h3_right.id = "h3_right";
-h3_right.classList.add("Class_Invisible");
+h3_right.classList.add("Class_Turn_Players");
+h3_left.classList.add("Class_Turn_Players");
+document.getElementById("ID_LeftSidebarWrapper").appendChild(h3_left);
 document.getElementById("ID_RightSidebarWrapper").appendChild(h3_right);
 
+// To beginn the left Player is on turn, hide the right headline
+h3_right.classList.add("Class_Invisible");
 
-
-
+// Now we put the event listeners to the top cells so the playersy can make there placements
 // Get the Top Cells for looping trough
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
 
@@ -109,7 +183,7 @@ setTimeout(()=>{topCellA.style = "pointer-events: auto"}, 1000);
 topCell.addEventListener("click", GameFlow);
 let ID_topCell = topCell.id;
 
-// Main function for the game
+// Here starts the main logical function for playing the game
 
 function GameFlow (){
 if(topCell.firstChild)return;
@@ -155,8 +229,6 @@ topCell.appendChild(coin);
 // Trigger the correct animation (animation length) & the coin
 coin.classList.add(`Class_PlacingAnimation_Cell_${row}`);
 
-
-
 // Remove the coin with the animation after the animation time and set the coin on correct position
 setTimeout(()=>{
 
@@ -166,6 +238,8 @@ topCell.firstChild.remove();
 
 if(playerIsOnTurn === "left"){
     document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_1");
+    document.getElementById(`ID_C${columnNumber}R${row}`).style.backgroundColor = "yellow";
+    document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
     // Winning_Validations Player_1;
     Row_Validator(1, row);
     Column_Validator(1, columnNumber, row);
@@ -173,10 +247,12 @@ if(playerIsOnTurn === "left"){
 
     // Next Player can place
     Turning_PlayerIsOnTurn();
-
     // console.log(Game.actualGameboardPlayer1);
+
 } else {
     document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_2");
+    document.getElementById(`ID_C${columnNumber}R${row}`).style.backgroundColor = "red";
+    document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
     // Winning_Validations Player 2;
     Row_Validator(2, row);
     Column_Validator(2);
@@ -184,10 +260,8 @@ if(playerIsOnTurn === "left"){
 
     // Next Player can place
     Turning_PlayerIsOnTurn();
-
     // console.log(Game.actualGameboardPlayer2);
-    
-    
+      
 }
 
 },
@@ -291,6 +365,17 @@ document.getElementById(`${IDfromTrigger}`).addEventListener(`${event}`, ()=>{
 });
 }
 
+// Function for swaping trough two classes on a element initiate by two events 
+function Swap_Two_Classes_by_Events(element_ID, event_1, event_2, first_Class, second_Class){
+document.getElementById(`${element_ID}`).addEventListener(`${event_1}`, ()=>{
+    document.getElementById(`${element_ID}`).classList.remove(`${second_Class}`);
+    document.getElementById(`${element_ID}`).classList.add(`${first_Class}`);
+})
+document.getElementById(`${element_ID}`).addEventListener(`${event_2}`, ()=>{
+    document.getElementById(`${element_ID}`).classList.remove(`${first_Class}`);
+    document.getElementById(`${element_ID}`).classList.add(`${second_Class}`);
+})};    
+
 // Helper function to change Player
 function Turning_PlayerIsOnTurn(){
     playerIsOnTurn === "left" ? playerIsOnTurn = "right" : playerIsOnTurn = "left";
@@ -298,10 +383,79 @@ function Turning_PlayerIsOnTurn(){
 
 
 
+/*                                      Translation-Manager & Page Library                                               
+                            for language translation of the starting screen and the Settings-Menu                              */
+                       
+            // Translation Manager
+function Translate_StartScreen(language, byUser){
+
+// Make sure browser triggered invokes are not executed if the language was setted manually anytime before
+if(byUser === "no" && localStorage.getItem("LanguageSettedByUser") === "yes"){
+if(localStorage.getItem("Language") === "de") Deutsch();
+else if(localStorage.getItem("Language") === "en") English();
+return
+}
+
+if (language === "de") { 
+Deutsch(); 
+localStorage.setItem("Language", "de")
+}
+else { 
+English(); 
+localStorage.setItem("Language", "en")
+}; 
+
+// Bonus: Make sure the dropdown menu is always selected with the actual languag
+if(localStorage.getItem("Language") === "de")document.getElementById("ID_Language_Menu").value === "Deutsch";
+else if(localStorage.getItem("Language") === "en")document.getElementById("ID_Language_Menu").value === "English";
+};
+
+            // Library
+    
+// Never changing text
+credits_h.innerText = "Credits";
+sound_h.innerText  = "Sound";
+
+// Set language to Deutsch
+function Deutsch(){
+headline_top.innerText = "Online 4-Gewinnt";
+headline_p.innerText  = "Spiele gegen deine Freunde oder gegen die KI!"; 
+player_1_headline.innerText  = "Wähle einen Namen";
+player_1.placeholder = "Spieler 1";
+player_2_headline.innerText  = "Wähle einen Namen";
+player_2.placeholder = "Spieler 2";
+start_button.innerText  = "Spiel Starten";
+info_h.innerText  = "Spielanleitung";
+starting_h.innerText = "Wer soll starten?";
+colour_h.innerText  = "Wähle deine Farbe";
+language_h.innerText  = "Spracheinstellung";
+contact_h.innerText  = "Kontakt";
+};
+
+// Set language to English
+function English(){   
+headline_top.innerText  = "Four Wins";
+headline_p.innerText  = "Play against friends or KI!";
+player_1_headline.innerText  = "Choose Name";
+player_1.placeholder = "Player 1";
+player_2_headline.innerText  = "Choose Name";
+player_2.placeholder = "Player 2";
+start_button.innerText  = "Start Game";
+info_h.innerText  = "Instructions";
+starting_h.innerText  = "Starter";
+colour_h.innerText  = "Choose your Colour";
+language_h.innerText  = "Language";
+contact_h.innerHTML  = "Contact";
+};
+
+
 // Jobs:
-// Win div mit Ellypse positon absolute über wim row
-// Write a function for Language Translation
+// Win div mit Ellypse positon absolute über win row
+// Choose which colour 
+// KI 
 // Styling 
+// Do some nice animatons!
+// Train CSS an get all out of it!
 // Code improvement
 // Mobile & Responisve if possible
 

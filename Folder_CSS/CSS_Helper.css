@@ -3,8 +3,10 @@ width: clamp(45ch, 50%, 75ch);
 
 Du kannst auch ch al Eineheit benutzen!
 
+scroll-behaviour : smoothS
+content-visibility auto
 
-
+.containrt {scroll-snap-type: y mandatory} .child (muat be saection) {scroll-snap-align: start} create a anker point for swipping like tionder
 
 Media Queries:
 

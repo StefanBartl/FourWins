@@ -1,5 +1,4 @@
-
-
+                                // Allgemeine Funktionen
 
 
 // Sum: Funktion um beliebig viele Variablen miteinander zu summieren
@@ -11,27 +10,49 @@ function Sum (a, ...rest){
     return  result
 };
 
+                                // Funktionen für die Spieleentwicklung
 
-            // Allgemeine Funktionen für die Spieleentwicklung
 
-// Ein value per event aus einer beliebigen ID abfragen und mit einem key dem Local Storage übergeben
-// Zum Beispiel Namen aus einem input abfragen und per click event speicher: 
-// Push_to_LocalStorage("ID_SVG_Player_1","ID_Player_1_Name", "Player_One_Name", "click");
+/*     _Ein value per event aus einer beliebigen ID abfragen und mit einem key dem Local Storage übergeben_
+Info: Zum Beispiel Namen aus einem input abfragen und per click event speicher: 
+Push_to_LocalStorage("ID_SVG_Player_1","ID_Player_1_Name", "Player_One_Name", "click");        */
 
 function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event){
 document.getElementById(`${IDfromTrigger}`).addEventListener(`${event}`, ()=>{
     localStorage.setItem(`${key}`, document.getElementById(`${IDfromValue}`).value);
 });};
 
-// Spielerwechsel. Benötigt: Variable playerIsOnTurn = left/right
-// !!! Vorsicht bei der Benutzung: Funkioniert nur auf sehr sehr schnellen CPUs reibungsfrei, 
-// da i.d.R. viel vom Game-Ablauf damit gesteuert wird. Besser lokal einbinden! 
+
+/*                      Spielerwechsel
+Info: Benötigt Variable playerIsOnTurn = left/right im Code!
+!!! Vorsicht bei der Benutzung: Funkioniert nur auf sehr sehr schnellen CPUs reibungsfrei, 
+  da i.d.R. viel vom Game-Ablauf damit gesteuert wird. Besser lokal einbinden!                 */
 
 function Turning_PlayerIsOnTurn(){
     playerIsOnTurn === "left" ? playerIsOnTurn = "right" : playerIsOnTurn = "left";
 };
 
 
+//          Add a class to a element by event and remove it by another event
+function Add_Remove_Class_by_Events(element_ID, event_1, event_2, _class){
+    document.getElementById(`${element_ID}`).addEventListener(`${event_1}`, ()=>{
+    document.getElementById(`${element_ID}`).classList.add(`${class_}`);
+})
+document.getElementById(`${element_ID}`).addEventListener(`${event_2}`, ()=>{
+    document.getElementById(`${element_ID}`).classList.remove(`${_class}`);
+})};
+
+
+//              Function for swaping trough two classes on a element initiate by two events 
+function Add_Remove_Classes_by_Event(element_ID, event_1, event_2, first_Class, second_Class){
+    document.getElementById(`${element_ID}`).addEventListener(`${event_1}`, ()=>{
+    document.getElementById(`${element_ID}`).classList.remove(`${second_Class}`);
+    document.getElementById(`${element_ID}`).classList.add(`${first_Class}`);
+})
+document.getElementById(`${element_ID}`).addEventListener(`${event_2}`, ()=>{
+    document.getElementById(`${element_ID}`).classList.remove(`${first_Class}`);
+    document.getElementById(`${element_ID}`).classList.add(`${second_Class}`);
+})};
 
 
 
@@ -70,5 +91,6 @@ ________________________________________________________________________________
 #
 #   "...rest"-Parameter sammelt alle werte ab diesem Parameter in einem gleichnamigen Array. Kann auch anders benannt werden! 
 #
-\___________________________________________________________________________________________________________________________________________________________________________
+#   Immediately invoked functions für richtigen scope!
+\_______________________ ___________________________________________________________________________________________________________________________________________________
                                                                                                                                                                             */
