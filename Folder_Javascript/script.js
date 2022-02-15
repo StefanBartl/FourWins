@@ -1,57 +1,56 @@
-                                                                                                                                                                        /*
-========================================================================================================================================================================
- 
-                                          Four-Wins-Online Main-Javascript-File
-                                                        powered by
-
-                                                        Stefan Bartl
+                                                                                                                                                                                                                                                                                /*
+                                                                                                                                                                                                                                                                                
+                                             Four-Wins-Online Main-Javascript-File                                                           
+                                                          powered by
+                                                                                                                                                                                                                                                                                
+                                                         Stefan Bartl
                                                    (WKDSteVIE / WKDMinerva)
-        
-                                                            2021
+    
+                                                             2021
 
-                                #################################################################
-                                #                    _____________________                      #
-                                #                       Table of content:                       #
-                                #                                                               #
-                                #            1) General Settings, Global Scoped & DOM           #
-                                #                                                               #
-                                #                    2) Main Game Functions                     #
-                                #                                                               #
-                                #                          3) KI                                #
-                                #                                                               #
-                                #                     4) Win-Validation                         #
-                                #                                                               #   
-                                #                    5) Helper-Functions                        #
-                                #                                                               #
-                                #           6) Translation Manager & Page Library               #
-                                #                                                               #
-                                #           7) Final Information and Comments                   #
-                                #                                                               #
-                                #                        8) Credits                             #
-                                #                                                               #  
-                                #################################################################
+                            _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+                            |                                                                      |
+                            |                           Table of content                           |
+                            |                       ________________________                       |
+                            |                                                                      |
+                            |                                                                      |
+                            |                 1) General Settings, Global Scoped & DOM             |
+                            |                                                                      |
+                            |                 2) Main Game Functions                               |
+                            |                                                                      |
+                            |                 3) KI                                                |
+                            |                                                                      |
+                            |                 4) Win-Validation                                    |
+                            |                                                                      | 
+                            |                 5) Helper-Functions                                  |
+                            |                                                                      |
+                            |                 6) Translation Manager & Page Library                |
+                            |                                                                      |
+                            |                 7) Final Information and Comments                    |
+                            |                                                                      |
+                            |                 8) Credits                                           |
+                            |                                                                      | 
+                            |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |
 
-========================================================================================================================================================================
-#######################################################################################################################################################################
-========================================================================================================================================================================
+
+
+===============================================================================================================================================================================================================================================================================
  
-                                    General Settings, Global Scoped Objects/Variables & DOM  
-win val bugs, gameend screnn, new  reusable helper fundtionsw /creators)
-========================================================================================================================================================================*/
+                                        General Settings, Global Scoped Objects/Variables & DOM  
 
-                                                                                                                                                                        /*
+==============================================================================================================================================================================================================================================================================*/
+                                                                                                                                                                            
+                                                                                                                                                                                                                                                                              /*
             Jobs To-do:
 
-1) Win div mit Ellypse positon absolute über win row
-2) Choose which colour 
-3) KI 
-4) Styling 
-5) Start screen playing animation
-6) Stay Mobile & Responsive ! Do the Media queries.
-7) Nicerer Table of content
-8) Add some Audio
-
-                                                                                                                                                                            */
+-) Win div mit Ellypse positon absolute über win row
+-) Choose which colour 
+-) KI 
+-) Styling 
+-) Start screen playing animation
+-) Add some Audio
+-) 3 Wins to 4 Wins
+                                                                                                                                                                                                                                                                              */
 
 //                      Important DOM-Elements
 const head_title = document.getElementById("ID_Head_Title");
@@ -127,16 +126,17 @@ Swap_Two_Classes_by_Events("ID_SVG_Player_2", "mouseenter", "mouseleave", "Class
 // Remove Settings-Menu from Starting-Screen DOM
 settings_menu.style.display = "none";
 // Show / Hide & Style Event-Listener
-settings_svg.addEventListener("click", ()=>{
+settings_svg.addEventListener("mouseenter", ()=>{
     if(!settings_menu.classList.contains("Class_Showing_Settings")){
-    settings_menu.classList.add("Class_Showing_Settings");
     settings_menu.style.display = "block";
-    settings_menu.classList.add("Class_Settings_Animation");
-}   else {
-    settings_menu.classList.remove("Class_Showing_Settings");
-    settings_menu.classList.remove("Class_Settings_Animation");
-    settings_menu.style.display = "none";
+    settings_menu.classList.add("Class_Showing_Settings");
+    settings_menu.classList.remove("Class_Hide_Settings");
 }});
+
+settings_menu.addEventListener("mouseleave", ()=>{
+    settings_menu.classList.remove("Class_Showing_Settings");
+    settings_menu.classList.add("Class_Hide_Settings");
+});
 
 //                      Choose Language Event in the settings menu
 document.getElementById("ID_Language_Menu").addEventListener("change", ()=>{
@@ -153,12 +153,12 @@ Translate_StartScreen(languageCode, "yes");
 //                      Setting the Event-Listener to start the Game Button
 document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
 
-                                                                                                                                                                        /*
-========================================================================================================================================================================
+                                                                                                                                                                                                                                                                               /*
+================================================================================================================================================================================================================================================================================
                                  
-                                    Main Game-Functions        
+                                        Main Game-Functions        
 
-========================================================================================================================================================================*/
+===============================================================================================================================================================================================================================================================================*/
 
 function MainGame(){
 
@@ -292,12 +292,12 @@ if(playerIsOnTurn === "left"){
 };    // End Game-Flow-Function
 };   // End Main Game For-Loop
 };  // End Start Game Wrapper Function
-                                                                                                                                                                                         /*
-=======================================================================================================================================================================================================
+                                                                                                                                                                                                                                                                                /*
+===============================================================================================================================================================================================================================================================================
                           
-                                        Functions for Win-Validation            
+                                            Functions for Win-Validation            
 
-=====================================================================================================================================================================================================================*/
+===============================================================================================================================================================================================================================================================================*/
 
 //                      Function to validate if there is a Diagonal-Triggered Win
 function Diagonal_Validator(player, columnNumber, row){
@@ -404,12 +404,12 @@ const winning_head = Create_DOM_Element({ParentID: "ID_Game_End_Screen", Element
 
 
 }
-                                                                                                                                                                                        /*            
-==============================================================================================================================================================================================
+                                                                                                                                                                                                                                                                               /*            
+================================================================================================================================================================================================================================================================================
                                           
-                                    Helper-Functions               
+                                        Helper-Functions               
 
-==============================================================================================================================================================================================*/
+==============================================================================================================================================================================================================================================================================*/
 
 // Function to push the names from the input to the local storage
 
@@ -433,15 +433,15 @@ document.getElementById(`${element_ID}`).addEventListener(`${event_2}`, ()=>{
 // Helper function to change Player
 function Turning_PlayerIsOnTurn(){
     playerIsOnTurn === "left" ? playerIsOnTurn = "right" : playerIsOnTurn = "left";
-    playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_One_Name")}` : document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_Two_Name")}`;
+    playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_One_Name")}`: 
+                                document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_Two_Name")}`;
 }
-                                                                                                                                                                        /*
-========================================================================================================================================================================
+                                                                                                                                                                                                                                                                               /*
+===============================================================================================================================================================================================================================================================================
                                             
-                                    Translation-Manager & Page Library      
-                     for language translation of the starting screen and the Settings-Menu      
+                                        Translation-Manager & Page Library           
 
-========================================================================================================================================================================*/
+===============================================================================================================================================================================================================================================================================*/
 
 //                      Translation Manager
 
@@ -553,7 +553,8 @@ elementsPointer++; };};
 // Finally, push the complete dynamically created, finished object to the DOM!
 document.getElementById(_parentID).appendChild(element);
 };
-/*                                Creator-Functions Infobox:
+                                                                                                                                                                                                                                                                                /*                                
+Creator-Functions Infobox:
 All types of Elements possible which you can create 'the normal way' too!
 !Important: For correct functionality pass at least the ParentID (to defined where the element should appear in the DOM) & 
 the Element argument (tor define which kind of element it is)! 
@@ -564,30 +565,27 @@ I recommend the following method for invoking:
 Possible arguments:
 parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width, Height, AspectRatio, Min, Max, Value, Placeholder, arrayOne, arrayTwo
 
-*/
+                                                                                                                                                                                                                                                                                */
 
-                                                                                                                                                                        /*
-========================================================================================================================================================================
+                                                                                                                                                                                                                                                                                /*
+================================================================================================================================================================================================================================================================================
                                             
-                                    Final information and Comments          
+                                        Final information and Comments          
 
-========================================================================================================================================================================*/
+================================================================================================================================================================================================================================================================================
 
-
-    
-
-
-
-/*
-########################################################################################################################################################################
-#                                                                                                                                                                      #
-#                                                                     Credits & Special Thanks to:                                                                     #
-#                                                                                                                                                                      #
-#                                                        Special thanks to the "Odin Project"-Team who did a great job.                                                #
-#                                                    Greetings to the many, many programmers who take the time to write blogs,                                         #
-#                                      Of course also big thanks to all photographers and graphic designers who make their works available.                            #
-#                                                                                                                                                                      #
-#                                                                    CSS - what a wonderful language.                                                                  #
-#                                                                                                                                                                      #
-#                                                                                                                                                                      #
-########################################################################################################################################################################*/
+                                                                                                                                                                                                                                                                                
+######################################################################################################################
+#                                                                                                                    #
+#                                       Credits & Special Thanks to:                                                 #
+#                                                                                                                    #
+#    Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    #
+#                                      https://www.theodinproject.com/                                               #
+#                                                                                                                    #
+#                   Greetings to the many, many programmers who take the time to write blogs,                        #
+#        Of course also big thanks to all photographers and graphic designers who make their works available.        #
+#                                                                                                                    #
+#                                      CSS - what a wonderful language.                                              #
+#                                                                                                                    #
+#                                                                                                                    #
+######################################################################################################################                                                                                                                                                               */
