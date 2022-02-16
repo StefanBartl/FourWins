@@ -109,7 +109,7 @@ header{
 }
 
 .Class_LeftSidebarWrapper{
-    min-width: 30%;
+    min-width: 30vw;
     margin-bottom: 30vh;
     border-top:  solid 1px var(--prime-border);
     border-bottom:  solid 1px var(--prime-border);
@@ -129,7 +129,7 @@ header{
 }
 
 .Class_RightSidebarWrapper{
-    min-width: 30%;
+    min-width: 30vw;
     margin-bottom: 30vh;
     border-top:  solid 1px var(--prime-border);
     border-bottom:  solid 1px var(--prime-border);
@@ -138,6 +138,44 @@ header{
 footer{
     margin-top: 1rem;
 }
+
+
+/* Move Gameboard to the right Animation */
+.Class_Gameboard_End{
+    position: absolute;
+    animation: Gameboard_End_Animation 4s ease-in ;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+
+}
+
+@keyframes Gameboard_End_Animation {
+    from{
+        bottom: 16.5vh;
+        right: 30vw;
+    }
+    to {
+        bottom: 0;
+        right: 0;
+        max-height: 10vh;
+        max-width: 8vw;
+    }
+}
+
+
+.Class_Game_End{
+    position: absolute;
+    left: 0;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.Class_End_Button{
+    min-width: 5rem;
+    min-height: 5rem;
+}
+
                                                                                                                                                                                                                                                                               /*
 ================================================================================================================================================================================================================================================================================
                                  
@@ -171,20 +209,6 @@ footer{
     opacity: .7;
     justify-content: center;
     align-content: center;
-}
-
-.Class_PlacedCoin_1{
-    background-image: url("../Folder_Graphics/freescg_org/diamond_Blue.svg");
-    background-size: 30%;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.Class_PlacedCoin_2{
-    background-image: url("../Folder_Graphics/freescg_org/diamond_Violett.svg");
-    background-size: 30%;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 /*              InGame Layout Classes             */ 
@@ -413,46 +437,85 @@ footer{
     }
 }
 
-/* Player choosing column Animation*/
-                                
+                                                /* Choosing and Placing Coin Animation*/
+
+.Class_Coin_Yellow{
+    background-image: url("../Folder_Graphics/gif/yellow.png"); 
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 5vw;
+    height: 10vh;
+    border-radius: 50%;
+    z-index: 0;
+}
+.Class_Coin_Red{
+    background-image: url("../Folder_Graphics/gif/redc.png"); 
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 5vw;
+    height: 10vh;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.Class_PlacedCoin_1{
+    background-image: url("../Folder_Graphics//gif/yellow.png");
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.Class_PlacedCoin_2{
+    background-image: url("../Folder_Graphics/gif/redc.png");
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+                 
 .Class_ChoosingAnimation_Coin_1{
-    background-image: url("../Folder_Graphics/freescg_org/diamond_Blue.svg");
-    background-size: 30%;
+    background-image: url("../Folder_Graphics/gif/yellow.png");
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: top;
     animation: choosing_Coin_1_Animation 1s infinite alternate;
 }
 @keyframes choosing_Coin_1_Animation {
     from{
-        background-position: top;
+        background-position: center;
+        background-size: 80%;
     }
     
     to{
-        background-position: bottom;
+        background-position: center;
+        background-size: 50%;
     }
 }
 
 .Class_ChoosingAnimation_Coin_2{
-    background-image: url("../Folder_Graphics/freescg_org/diamond_Violett.svg");
-    background-size: 30%;
+    background-image: url("../Folder_Graphics/gif/redc.png");
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: top;
     animation: choosing_Coin_2_Animation 1s infinite alternate;
 }
 @keyframes choosing_Coin_2_Animation {
     from{
-        background-position: top;
+        background-position: center;
+        background-size: 80%;
     }
     
     to{
-        background-position: bottom;
+        background-position: center;
+        background-size: 50%;
     }
 }
 
-/* Player placed coin Animations */
+                                                            /* Player placed coin Animations */
 
 
-.Class_PlacingAnimation_Cell_2{
+.Class_PlacingAnimation_to_Row_2{
     animation: Placing_Coin_Animation_Cell_2 normal 1s;
     animation-fill-mode: forwards;
 }
@@ -461,11 +524,11 @@ footer{
      
     }
     to{
-        transform: translateY(calc((62vh / 6) * 1));
+        transform: translateY(calc((60vh / 6) * 1));
     }
 }
 
-.Class_PlacingAnimation_Cell_3{
+.Class_PlacingAnimation_to_Row_3{
     animation: Placing_Coin_Animation_Cell_3 normal 1s;
     animation-fill-mode: forwards;
 }
@@ -474,11 +537,11 @@ footer{
      
     }
     to{
-        transform: translateY(calc((62vh / 6) * 2));
+        transform: translateY(calc((60vh / 6) * 2));
     }
 }
 
-.Class_PlacingAnimation_Cell_4{
+.Class_PlacingAnimation_to_Row_4{
     animation: Placing_Coin_Animation_Cell_4 normal 1s;
     animation-fill-mode: forwards;
 }
@@ -487,11 +550,11 @@ footer{
      
     }
     to{
-        transform: translateY(calc((62vh / 6) * 3));
+        transform: translateY(calc((60vh / 6) * 3));
     }
 }
 
-.Class_PlacingAnimation_Cell_5{
+.Class_PlacingAnimation_to_Row_5{
     animation: Placing_Coin_Animation_Cell_5 normal 1s;
     animation-fill-mode: forwards;
 }
@@ -500,11 +563,11 @@ footer{
      
     }
     to{
-        transform: translateY(calc((62vh / 6) * 4));
+        transform: translateY(calc((60vh / 6) * 4));
     }
 }
 
-.Class_PlacingAnimation_Cell_6{
+.Class_PlacingAnimation_to_Row_6{
     animation: Placing_Coin_Animation_Cell_6 normal 1s;
     animation-fill-mode: forwards;
 }
@@ -513,11 +576,11 @@ footer{
      
     }
     to{
-        transform: translateY(calc((62vh / 6) * 5));
+        transform: translateY(calc((60vh / 6) * 5));
     }
 }
 
-.Class_PlacingAnimation_Cell_7{
+.Class_PlacingAnimation_to_Row_7{
     animation: Placing_Coin_Animation_Cell_7 normal 1s;
     animation-fill-mode: forwards;
 }
@@ -526,7 +589,7 @@ footer{
      
     }
     to{
-        transform: translateY(62vh);
+        transform: translateY(60vh);
     }
 }
 

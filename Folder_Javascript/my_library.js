@@ -44,7 +44,7 @@ elementsPointer++; };};
 document.getElementById(_parentID).appendChild(element);
 };
 
-/*                                Creator-Functions Infobox:
+/*                                Creator-Function Information:
 All types of Elements possible which you can create 'the normal way' too!
 !Important: For correct functionality pass at least the ParentID (to defined where the element should appear in the DOM) & 
 the Element argument (tor define which kind of element it is)! 

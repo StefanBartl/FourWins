@@ -1,4 +1,4 @@
-/*
+                                                                                                                                                                                                                                                                                    /*
  
                                          Four-Wins-Online Main-Javascript-File                                                           
                                                        powered by
@@ -42,15 +42,21 @@
                                                                                                                                                                                                                                                                                 /*
                                                         Jobs To-do:
 
-                                        -) Coins machen
+                                        -) Nice Game End / Winning screen, maybe with possibility to start new game without go back to the start screen 
                                         -) Win div mit Ellypse positon absolute über win row
                                         -) KI 
+                                        -) Draw berücksichtigen
+                                        -) Counter wie oft man gegen KI - Schwierigkeitsgrad gewonnen hat  (mit local Storage)
+                                        -) Game won executation   
                                         -) Game Screen / Start screen 
                                         -) Styling 
                                         -) Start screen playing animation
-                                        -) Add some Audio
+                                        -) Add some Audio, Ingame and something in the Settings Menu
                                         -) 3 Wins to 4 Wins
                                         -) Freie Spielfeldgrößenwahl ? 
+
+                                                        Session progress:
+                                           
                                                                                                                                                                                                                                                                                                                        */
 
 //                      Important DOM-Elements
@@ -255,13 +261,13 @@ else if (columnNumber === 6) { column_6_Counter--; row = column_6_Counter; }
 else if (columnNumber === 7) { column_7_Counter--; row = column_7_Counter; };
 
 //                      Create the correct coin, set correct position and append it to the DOM
-let coin = document.createElement("img");
-coin.id = "ID_Coin";
-if (playerIsOnTurn === "left") { coin.src = "../Folder_Graphics/gif/yellow.png"; Game.actualGameboardPlayer1[`C${columnNumber}`].push(row) };
-if (playerIsOnTurn === "right") { coin.src = "../Folder_Graphics/gif/red.png"; Game.actualGameboardPlayer2[`C${columnNumber}`].push(row) };
+let coin = document.createElement("div");
+
+if (playerIsOnTurn === "left") {coin.classList.add("Class_Coin_Yellow"); Game.actualGameboardPlayer1[`C${columnNumber}`].push(row) };
+if (playerIsOnTurn === "right") {coin.classList.add("Class_Coin_Red"); Game.actualGameboardPlayer2[`C${columnNumber}`].push(row) };
 topCell.appendChild(coin);
 // Trigger the correct animation (animation length)
-coin.classList.add(`Class_PlacingAnimation_Cell_${row}`);
+coin.classList.add(`Class_PlacingAnimation_to_Row_${row}`);
 
 //                        After Animation, Win Validation and next turn
 // Remove the coin with the animation after the animation time ended and place the coin on correct position
@@ -275,12 +281,10 @@ if (playerIsOnTurn === "left") {
 if (player_Colour_Left === "yellow") {
 // Place the Coin as background image on the correct column (set by the decreased counter from before)
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_1");
-document.getElementById(`ID_C${columnNumber}R${row}`).style.backgroundColor = "yellow";
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
 
 } else {
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_2");
-document.getElementById(`ID_C${columnNumber}R${row}`).style.backgroundColor = "red";
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
 }
 //  Invoke Winning-Validation for Player 1
@@ -295,11 +299,9 @@ Turning_PlayerIsOnTurn();
 else {
 if (player_Colour_Left === "red") {
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_1");
-document.getElementById(`ID_C${columnNumber}R${row}`).style.backgroundColor = "yellow";
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
 } else {
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_2");
-document.getElementById(`ID_C${columnNumber}R${row}`).style.backgroundColor = "red";
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
 }
 //  Invoke Winning-Validation for Player 2
@@ -422,18 +424,55 @@ if (countFor_Win === 4) {
 
 //                                  Game-End Screen Function
 function Game_End_Screen(winning_player, winning_chain) {
-document.getElementById("ID_MainWrapper").remove();
-const game_end_div = document.createElement("div");
-game_end_div.id = "ID_Game_End_Screen";
-const winning_headline = document.createElement("h3");
-winning_headline.innerText = "WIIIIN";
-game_end_div.appendChild(winning_headline);
-document.body.appendChild(game_end_div);
 
-const winning_head = Create_DOM_Element({ ParentID: "ID_Game_End_Screen", Element: "h1", ID: "ID_New_H1", Class: "dv", Text: "Wenn das gehen würde, wäre es schon geil", Title: "dvc", Alt: "Headline of the Game-End/Winning ScreenS" });
+    // Automate this!
+Game.actualGameboardPlayer1.C1 = [];
+Game.actualGameboardPlayer1.C2 = [];
+Game.actualGameboardPlayer1.C3 = [];
+Game.actualGameboardPlayer1.C4 = [];
+Game.actualGameboardPlayer1.C5 = [];
+Game.actualGameboardPlayer1.C6 = [];
+Game.actualGameboardPlayer1.C7 = [];
+Game.actualGameboardPlayer2.C1 = [];
+Game.actualGameboardPlayer2.C2 = [];
+Game.actualGameboardPlayer2.C3 = [];
+Game.actualGameboardPlayer2.C4 = [];
+Game.actualGameboardPlayer2.C5 = [];
+Game.actualGameboardPlayer2.C6 = [];
+Game.actualGameboardPlayer2.C7 = [];
 
+// Assign correct names to the winner, loser or draw variables
+let winner, loser, drawOne, drawTwo;
+if(winning_player === 1){winner = localStorage.getItem("Player_One_Name"), loser = localStorage.getItem("Player_Two_Name")}
+else if (winning_player === 2){winner = localStorage.getItem("Player_Two_Name"), loser = localStorage.getItem("Player_One_Name")}
+else drawOne = localStorage.getItem("Player_Two_Name"), drawTwo = localStorage.getItem("Player_One_Name");
+
+document.getElementById("ID_Turn_Div").style = "display: none";
+gameboard.classList.add("Class_Gameboard_End");
+const game_end_div = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Game_End_Div", Class: "Class_Game_End"});
+
+// Deutsch
+const winning_head = Create_DOM_Element({ ParentID: "ID_Game_End_Div", Element: "h1", ID: "ID_End_H1",
+Text: `Gratulation, ${winner}!`, Alt: `${winner} hat das Spiel gewonnen`,});
+const winning_text = Create_DOM_Element({ParentID: "ID_Game_End_Div", Element: "p", Class: "Class_Game_End_Text", Text: `Du hast das Spiel gewonnen! Willst du es noch einmal probieren und gibts ${loser} noch eine Chance oder zurück zur Startseite?`, Alt: "Willst du noch einmal spielen? Klicke auf den Button"})
+const new_game_button = Create_DOM_Element({ ParentID: "ID_Game_End_Div", Element: "button", ID: "ID_NewGame_Button", Class: "Class_End_Buttons",  Text: "Neues Spiel", Alt:"Neues Spiel"});
+const back_button = Create_DOM_Element({ ParentID: "ID_Game_End_Div", Element: "button", ID: "ID_Back_Button", Class: "Class_End_Buttons", Text: "Zur Startseite", Alt: "Zur Startseite"});
+
+
+// English    ADD this in english!
+
+
+// ADD Back to Starting scrren button!
+
+// What should the New Game button do exactly ??? 
+document.getElementById("ID_NewGame_Button").addEventListener("click", ()=>{
+    console.log("Ich bin der Neues Spiel - Creator Button!");
+ 
+});
 
 }
+
+
 /*            
 ================================================================================================================================================================================================================================================================================
  
@@ -501,9 +540,6 @@ document.getElementById("ID_MainWrapper").classList.remove("Class_Main_Wrapper_I
 document.getElementById("ID_GameboardWrapper").classList.remove("Class_Gameboard_Wrapper_InGame");
 }
     
-
-
-
 //              "Creator-Function" - for creating DOM-Elements and push it to DOM
 
 function Create_DOM_Element(options, arrayOne, arrayTwo) {
@@ -615,7 +651,6 @@ function Deutsch() {
     start_button.innerText = "Spiel Starten";
     info_h.innerText = "Spielanleitung";
     starting_h.innerText = "Wer soll starten?";
-    colour_h.innerText = "Wähle deine Farbe";
     language_h.innerText = "Spracheinstellung";
     contact_h.innerText = "Kontakt";
 };
@@ -633,7 +668,6 @@ function English() {
     start_button.innerText = "Start Game";
     info_h.innerText = "Instructions";
     starting_h.innerText = "Starter";
-    colour_h.innerText = "Choose your Colour";
     language_h.innerText = "Language";
     contact_h.innerHTML = "Contact";
 };
