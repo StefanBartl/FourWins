@@ -1,51 +1,49 @@
-                                                                                                                                                                            /*    
-                                            Four-Wins-Online Main-CSS-Stylsheet
-                                                        powered by
+                                                                                                                                                                                                                                                                                /*    
+                                    Online-Four-Wins Main-CSS-Stylsheet
+                                                 powered by
 
-                                                       Stefan Bartl
-                                                  (WKDSteVIE / WKDMinerva)
- 
-                                                          2021
-                                 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-                                |                                                         |
-                                |                  Table of content                       |
-                                |              _______________________                    |
-                                |                                                         |
-                                |                                                         |
-                                |                     1) General                          |
-                                |                                                         |
-                                |                     2) Layout                           |
-                                |                                                         |
-                                |                     3) Gameboard                        |
-                                |                                                         |
-                                |                     4) Typographie                      |
-                                |                                                         |
-                                |                     5) Buttons, Inputs, etc...          |
-                                |                                                         |
-                                |                     6) Animations & Transitions         |
-                                |                                                         |
-                                |                     7) Animations                       |
-                                |                                                         |
-                                |                     8) Helpers                          |
-                                |                                                         |
-                                |                     7) Media Queries                    |
-                                |                                                         |
-                                |                     10) Final Information & Comments    |
-                                |                                                         |
-                                |                     10) Credits                         |
-                                |                                                         |
-                                |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
+                                               Stefan Bartl
+                                         (WKDSteVIE / WKDMinerva)
 
+                                                    2021
+                    ___________________________________________________________________________                                                                                                                                                                                                                                                    
+                    #                                                                         #                                                                                                                                                                                  
+                    #                           Table of content                              #
+                    #_________________________________________________________________________#                                                           
+                    |                                                                         |
+                    |                                                                         |
+                    |                             1) General                                  |
+                    |                                                                         |
+                    |                             2) Layout                                   |
+                    |                                                                         |
+                    |                             3) Gameboard                                |
+                    |                                                                         |
+                    |                             4) Typographie                              |
+                    |                                                                         |
+                    |                             5) Buttons, Inputs, etc...                  |
+                    |                                                                         |
+                    |                             6) Animations & Transitions                 |
+                    |                                                                         |
+                    |                             7) Animations                               |
+                    |                                                                         |
+                    |                             8) Helpers                                  |
+                    |                                                                         |
+                    |                             7) Media Queries                            |
+                    |                                                                         |
+                    |                            10) Final Information & Comments             |
+                    |                                                                         |
+                    |                            11) Credits                                  |
+                    |                                                                         |
+                    |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __ _ _ _ _ _ _ _ _ _ |
 
-css background clip textcss background clip textcss background clip textcss background clip text
-                                                                                                                                                                                                                                                                               /*
+                                                                                                                                                                                                                                                                              /*
 ================================================================================================================================================================================================================================================================================
                                  
-                                                        General       
+                                                    General       
 
 ===============================================================================================================================================================================================================================================================================*/
 
-                                                                                                                                                                                                              /*
+                                                                                                                                                                                                                                                                                /*
                                                     Jobs To-do:
 
                                         1) Win div mit Ellypse positon absolute über win row
@@ -54,6 +52,9 @@ css background clip textcss background clip textcss background clip textcss back
                                         4) Start screen playing animation
                                         5) Stay Mobile & Responsive ! Do the Media queries.
                                         6) Buttons animation mit brightness oder saturation langsam hoch fahren
+                                        7) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
+                                        8) ::after / ::before für Punkt -> Strich Animation
+                                        9) Font Styling
                   
                                                                                                                                                                                                              */
 
@@ -188,25 +189,35 @@ footer{
 
 /*              InGame Layout Classes             */ 
 
+
 .Class_Main_Wrapper_InGame{
- display: flex;
- flex-wrap: wrap-reverse;
+
 }
 
 .Class_Gameboard_Wrapper_InGame{
-
+    margin-top: 10vh;
 }
 
 .Class_Turn_Players{
-    display: flex;
     min-width: 100%;
+    min-height: 100%;
     margin-bottom: 3%;
     margin-top: 3%;
     text-align: center;
     justify-content: center;
     align-content: center;
 }
-                                                                                                                                                                                                                                                                              /*
+
+.Class_Left_Pos{
+    position: absolute;
+    left: 3%;
+
+}
+.Class_Right_Pos{
+    position: absolute;
+    right: 3%;
+}
+                                                                                                                                                                                                                                                                                /*
 ================================================================================================================================================================================================================================================================================
                                  
                                                        Typographie        
@@ -221,7 +232,7 @@ footer{
 /*              InGame Typo Classes             */ 
 
 #ID_h3_turnText{
-    width: auto;
+    width: 10rem;
     border: dashed .3rem var(--main-white);
     padding: 1rem;
 }
@@ -268,6 +279,63 @@ footer{
 #ID_Start_Button:hover{
     cursor: pointer;
 }
+
+
+/* CSS for the toggling in the Settings Menu*/
+
+.Class_Colour_Toggle label {
+    position: relative;
+    display: inline-block;              
+    width: 20em;
+    height: 3.5em;
+    font-weight: bold;
+  }
+  
+  .Class_Colour_Toggle input {
+    display: none;
+  }
+  
+  .Class_Colour_Toggle .Class_Colour_Slider {    /* Grundfläche */
+    position: absolute;
+    cursor: pointer;
+    top: 1.5em; 
+    left: 40%;
+    width: 4em;
+    height: 2em;
+    background-color: yellow; 
+    transition: all .3s ease-in-out;
+    border-radius: 1em;  
+  }
+  
+  .Class_Colour_Toggle .Class_Colour_Slider:before {  /* verschiebbarer Button */
+    position: absolute;
+    content: "";
+    height: 1.6em;
+    width: 1.6em;
+    right: 2.3em;
+    bottom: 0.2em;
+    background-color: white;
+    border-radius: 50%;
+    transition: all .3s ease-in-out;
+  }
+  
+  .Class_Colour_Toggle input:checked + .Class_Colour_Slider {
+    background-color: red; 
+  }
+  
+  .Class_Colour_Toggle input:focus + .Class_Colour_Slider {
+    background-color:pink;	
+    box-shadow: 0 0 1px #5a9900;
+  }
+  
+  .Class_Colour_Toggle  input:checked + .Class_Colour_Slider:before {
+    transform: translateX(1.9em);
+  }
+  
+
+  
+ 
+
                                                                                                                                                                                                                                                                               /*
 ================================================================================================================================================================================================================================================================================
                                  
@@ -569,6 +637,7 @@ footer{
     
     .Class_Gameboard_Wrapper_InGame{
         min-width: 100%;
+        margin-top: 0%;
     }
 
     .Class_Settings{
@@ -616,6 +685,15 @@ footer{
         justify-content: center;
         align-content: center;
     }
+    .Class_Left_Pos{
+      bottom: 0;
+
+    }
+    .Class_Right_Pos{
+      bottom: 0;
+    }
+
+
 
     #ID_Start_Button{
         min-width: 30%;
@@ -628,19 +706,20 @@ footer{
                                  
                                                         Final Information & Comments     
 
-===============================================================================================================================================================================================================================================================================*/
+===============================================================================================================================================================================================================================================================================
 
 
-/*####################################################################################################################################################################*\
-#                                                                                                                                                                      #
-#                                                                     Credits & Special Thanks to:                                                                     #
-#                                                                                                                                                                      #
-#                                                        Special thanks to the "Odin Project"-Team who did a great job.                                                #
-#                                                    Greetings to the many, many programmers who take the time to write blogs,                                         #
-#                                      Of course also big thanks to all photographers and graphic designers who make their works available.                            #
-#                                                                                                                                                                      #
-#                                                                    CSS - what a wonderful language.                                                                  #
-#                                                                                                                                                                      #
-#                                                                                                                                                                      #
-\*####################################################################################################################################################################*/
-
+                ######################################################################################################################
+                #                                                                                                                    #
+                #                                       Credits & Special Thanks to:                                                 #
+                #                                                                                                                    #
+                #    Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    #
+                #                                      https://www.theodinproject.com/                                               #
+                #                                                                                                                    #
+                #                   Greetings to the many, many programmers who take the time to write blogs,                        #
+                #        Of course also big thanks to all photographers and graphic designers who make their works available.        #
+                #                                                                                                                    #
+                #                                      CSS - what a wonderful language.                                              #
+                #                                                                                                                    #
+                #                                                                                                                    #
+                ######################################################################################################################                                                                                                                                                               */

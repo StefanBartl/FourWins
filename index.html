@@ -24,17 +24,32 @@
         <span class="Class_Settings"><img src="./Folder_Graphics/iconmonstr_com/cog-outline.svg" id="ID_Settings"
             title="" alt="Clickable picture to get to the settings!"></span>
         <div class="Class_Settings_Menu" id="ID_Settings_Menu">
-          <h2 id="ID_info"></h2>
-          <h2 id="ID_starting"></h2>
-          <h2 id="ID_colour"></h2>
-          <h2 id="ID_sound"></h2>
-          <h2 id="ID_language"></h2>
-          <select name="LanguageMenu" id="ID_Language_Menu">
-            <option value="Deutsch" id="ID_german" selected>Deutsch</option>
-            <option value="English" id="ID_english">Englisch</option>
+          <h2 id="ID_Info"></h2>
+          <h2 id="ID_Starting"></h2>
+
+          <div class="Class_Colour_Toggle">
+          <label id="Label_Colour">
+              Farbwahl / Colour choose Player 1
+            <input type="checkbox" id="ID_Colour_Checkbox">
+            <span class="Class_Colour_Slider"></span>
+          </label>
+        </div>
+
+
+          <h2 id="ID_Colour"></h2>
+          <select name="ColourMenu" id="ID_Colour_Menu">
+            <option value="Yellow" id="ID_Yellow" selected>Yellow</option>
+            <option value="Red" id="ID_Red">Red</option>
           </select>
-          <h2 id="ID_contact"></h2>
-          <h2 id="ID_credits"></h2>
+
+          <h2 id="ID_Sound"></h2>
+          <h2 id="ID_Language"></h2>
+          <select name="LanguageMenu" id="ID_Language_Menu">
+            <option value="Deutsch" id="ID_German" selected>Deutsch</option>
+            <option value="English" id="ID_English">Englisch</option>
+          </select>
+          <h2 id="ID_Contact"></h2>
+          <h2 id="ID_Credits"></h2>
         </div>
     </span>
     <p id="ID_Header_p"></p>
