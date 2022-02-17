@@ -20,6 +20,8 @@
                             |                 3) KI                                                |
                             |                                                                      |
                             |                 4) Win-Validation                                    |
+                            |                                                                      |
+                            |                 5) Game-End Screen                                   |
                             |                                                                      | 
                             |                 5) Helper-Functions                                  |
                             |                                                                      |
@@ -44,6 +46,8 @@
 
                                         -) Nice Game End / Winning screen, maybe with possibility to start new game without go back to the start screen 
                                         -) Win div mit Ellypse positon absolute über win row
+                                        -) Win Validator bug !!! Geht nicht ganz oben !
+                                        .) Nach Game End sollte kein Placement mehr möglich sein !
                                         -) KI 
                                         -) Draw berücksichtigen
                                         -) Counter wie oft man gegen KI - Schwierigkeitsgrad gewonnen hat  (mit local Storage)
@@ -56,7 +60,6 @@
                                         -) Freie Spielfeldgrößenwahl ? 
 
                                                         Session progress:
-                                           
                                                                                                                                                                                                                                                                                                                        */
 
 //                      Important DOM-Elements
@@ -92,29 +95,24 @@ const sound_h = document.getElementById("ID_Sound");
 
 //                      Create an Gameboard Settings Object
 const Game = {
+// Setting the Gameboard arrays to keep Coin placements
 actualGameboardPlayer1: {
-    C1: [],
-    C2: [],
-    C3: [],
-    C4: [],
-    C5: [],
-    C6: [],
-    C7: []
-},
+    C1: [],C2: [],C3: [],C4: [],C5: [],C6: [],C7: []},
 actualGameboardPlayer2: {
-    C1: [],
-    C2: [],
-    C3: [],
-    C4: [],
-    C5: [],
-    C6: [],
-    C7: []
-}
+    C1: [],C2: [],C3: [],C4: [],C5: [],C6: [],C7: []},
+// Setting variable to know who is on turn 
+playerIsOnTurn: "right",
+// Setting a counter for the played rounds
+roundCounter: 0,
 };
+
+let count_wins_player_one = 0;
+let count_wins_player_two = 0;
 
 //                      Global counters and variables          
 
-// Setting the Counters for knowing in wich row of each column the game currently is
+// Setting the Counters for let the Coin Placing Section know, 
+// in which row / column the Game currently is to calculate by placement the correct position
 let column_1_Counter = 8;
 let column_2_Counter = 8;
 let column_3_Counter = 8;
@@ -123,18 +121,16 @@ let column_5_Counter = 8;
 let column_6_Counter = 8;
 let column_7_Counter = 8;
 
-// Setting a counter for the played rounds
-let roundCounter = 0;
-// Setting variable to know who is on turn 
-let playerIsOnTurn = "right";
-// Variable to proof the correct colour of the playing stones
+// Variable to proof which colour of the playing stones was selected by the Players. Standard is: Left Yellow / Right Red
 let player_Colour_Left = "yellow";
+
 // Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted. (Checkbox don't uncheck by refresh)
 if(document.getElementById("ID_Colour_Checkbox").checked === true) player_Colour_Left = "red";
 
 //                      Set starting page-language
-// Detect Browser language, if it can't (i. g. restrictions) set English
+// Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
 let browserLanguage = navigator.language || navigator.userLanguage || "English";
+Game.Language = browserLanguage;
 // Invoke the translation with the getted language
 Translate_StartScreen(browserLanguage, "no");
 
@@ -165,11 +161,12 @@ settings_menu.classList.add("Class_Hide_Settings");
 
 //                      Choose Language Event in the settings menu
 document.getElementById("ID_Language_Menu").addEventListener("change", () => {
-// Save language in Local Storage
+// Save language in Local Storage and Game Object
 // Important: Because of only 2 Language supported, conditional statement is possible. With more languages, if/else if needed
 let languageCode;
 document.getElementById("ID_Language_Menu").value === "Deutsch" ? languageCode = "de" : languageCode = "en";
 localStorage.setItem("Language", languageCode);
+Game.Language = languageCode;
 // Make sure that a manually setted setted language is not overwritten by the default detected default browser language
 localStorage.setItem("LanguageSettedByUser", "yes");
 Translate_StartScreen(languageCode, "yes");
@@ -211,12 +208,12 @@ for (let topCell of topCellsArray) {
 
 // Adding & Removing the "Choose the Column" Animation by adding the correct CSS-Class via Event
 topCell.addEventListener("mouseover", () => {
-playerIsOnTurn === "left" ?
+Game.playerIsOnTurn === "left" ?
 topCell.classList.add("Class_ChoosingAnimation_Coin_1") :
 topCell.classList.add("Class_ChoosingAnimation_Coin_2")
 });
 topCell.addEventListener("mouseleave", () => {
-playerIsOnTurn === "left" ?
+Game.playerIsOnTurn === "left" ?
 topCell.classList.remove("Class_ChoosingAnimation_Coin_1") :
 topCell.classList.remove("Class_ChoosingAnimation_Coin_2")
 });
@@ -243,7 +240,7 @@ if (topCell.firstChild) return;
 topCell = document.getElementById(ID_topCell);
 
 // Increase round counter
-roundCounter++;
+Game.roundCounter++;
 
 //                      Get the correct played row
 // First get the column number via the id of the top cell
@@ -260,11 +257,12 @@ else if (columnNumber === 5) { column_5_Counter--; row = column_5_Counter; }
 else if (columnNumber === 6) { column_6_Counter--; row = column_6_Counter; }
 else if (columnNumber === 7) { column_7_Counter--; row = column_7_Counter; };
 
-//                      Create the correct coin, set correct position and append it to the DOM
+//                              Placing the Coin Section
+// Create the correct coin, set correct position and append it to the DOM
 let coin = document.createElement("div");
 
-if (playerIsOnTurn === "left") {coin.classList.add("Class_Coin_Yellow"); Game.actualGameboardPlayer1[`C${columnNumber}`].push(row) };
-if (playerIsOnTurn === "right") {coin.classList.add("Class_Coin_Red"); Game.actualGameboardPlayer2[`C${columnNumber}`].push(row) };
+if (Game.playerIsOnTurn === "left") {coin.classList.add("Class_Coin_Yellow"); Game.actualGameboardPlayer1[`C${columnNumber}`].push(row) };
+if (Game.playerIsOnTurn === "right") {coin.classList.add("Class_Coin_Red"); Game.actualGameboardPlayer2[`C${columnNumber}`].push(row) };
 topCell.appendChild(coin);
 // Trigger the correct animation (animation length)
 coin.classList.add(`Class_PlacingAnimation_to_Row_${row}`);
@@ -276,7 +274,7 @@ setTimeout(() => {
 // Remove the animated coin from DOM
 topCell.firstChild.remove();
 
-if (playerIsOnTurn === "left") {
+if (Game.playerIsOnTurn === "left") {
 // 2 IF Statements after another, first to check if placement was from left or right Player, second to check the choosed colour, which affects the correct placement
 if (player_Colour_Left === "yellow") {
 // Place the Coin as background image on the correct column (set by the decreased counter from before)
@@ -320,7 +318,7 @@ Turning_PlayerIsOnTurn();
 /*
 ===============================================================================================================================================================================================================================================================================
 
-                            Functions for Win-Validation            
+                            Functions for Win-Validation          
 
 ===============================================================================================================================================================================================================================================================================*/
 
@@ -422,24 +420,23 @@ if (countFor_Win === 4) {
 }; // Row_Validator End
 
 
+/*
+===============================================================================================================================================================================================================================================================================
+
+                            Game End Screen 
+
+===============================================================================================================================================================================================================================================================================*/
+
 //                                  Game-End Screen Function
 function Game_End_Screen(winning_player, winning_chain) {
 
-    // Automate this!
-Game.actualGameboardPlayer1.C1 = [];
-Game.actualGameboardPlayer1.C2 = [];
-Game.actualGameboardPlayer1.C3 = [];
-Game.actualGameboardPlayer1.C4 = [];
-Game.actualGameboardPlayer1.C5 = [];
-Game.actualGameboardPlayer1.C6 = [];
-Game.actualGameboardPlayer1.C7 = [];
-Game.actualGameboardPlayer2.C1 = [];
-Game.actualGameboardPlayer2.C2 = [];
-Game.actualGameboardPlayer2.C3 = [];
-Game.actualGameboardPlayer2.C4 = [];
-Game.actualGameboardPlayer2.C5 = [];
-Game.actualGameboardPlayer2.C6 = [];
-Game.actualGameboardPlayer2.C7 = [];
+// Loop tzrough TopCells to give them a better look in the black Game End Screen & Lock tzhe placement function
+const topCellsArray = document.getElementsByClassName("Class_TopCells");
+for (let topCell of topCellsArray) {
+    topCell.classList.add("Class_Top_End");
+    topCell.style = "pointer-events:none";
+};
+
 
 // Assign correct names to the winner, loser or draw variables
 let winner, loser, drawOne, drawTwo;
@@ -447,30 +444,108 @@ if(winning_player === 1){winner = localStorage.getItem("Player_One_Name"), loser
 else if (winning_player === 2){winner = localStorage.getItem("Player_Two_Name"), loser = localStorage.getItem("Player_One_Name")}
 else drawOne = localStorage.getItem("Player_Two_Name"), drawTwo = localStorage.getItem("Player_One_Name");
 
-document.getElementById("ID_Turn_Div").style = "display: none";
-gameboard.classList.add("Class_Gameboard_End");
-const game_end_div = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Game_End_Div", Class: "Class_Game_End"});
+// Canvas with fireworks layed in a div container, which is then pushed to the Main Wrapper, Now, everything which is pushed to the Main Wrapper
+// with a greater z-index is visible over the fireworks canvas
+const canvas_div = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Canvas_Div", Class: "Class_Game_End_Div"});
+const firework_canvas = Create_DOM_Element({ ParentID: "ID_Canvas_Div", Element: "canvas", ID: "ID_Firework", Class: "Class_Firework"});
+Fireworks("ID_Firework");
 
-// Deutsch
-const winning_head = Create_DOM_Element({ ParentID: "ID_Game_End_Div", Element: "h1", ID: "ID_End_H1",
+// DIV Container for the End Screen (Fireworks, Text, Buttons and the Gameboard Animation)
+const game_end_container = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Game_End_Container", Class: "Class_Game_End_Container"});
+
+// If Language is Deutsch, add this to Game End Screen 
+if(localStorage.getItem("Language" === "de")){
+const winning_head = Create_DOM_Element({ ParentID: "ID_Game_End_Container", Element: "h1", ID: "ID_End_H1", Class: "Class_Game_End",
 Text: `Gratulation, ${winner}!`, Alt: `${winner} hat das Spiel gewonnen`,});
-const winning_text = Create_DOM_Element({ParentID: "ID_Game_End_Div", Element: "p", Class: "Class_Game_End_Text", Text: `Du hast das Spiel gewonnen! Willst du es noch einmal probieren und gibts ${loser} noch eine Chance oder zurück zur Startseite?`, Alt: "Willst du noch einmal spielen? Klicke auf den Button"})
-const new_game_button = Create_DOM_Element({ ParentID: "ID_Game_End_Div", Element: "button", ID: "ID_NewGame_Button", Class: "Class_End_Buttons",  Text: "Neues Spiel", Alt:"Neues Spiel"});
-const back_button = Create_DOM_Element({ ParentID: "ID_Game_End_Div", Element: "button", ID: "ID_Back_Button", Class: "Class_End_Buttons", Text: "Zur Startseite", Alt: "Zur Startseite"});
+const winning_text = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "p", ID: "ID_End_Text", Class: "Class_Game_End", Text: `Du hast das Spiel gewonnen!\n Gibst du \n ${loser} eine Chance auf Revanche oder wollt ihr zurück zur Startseite?`, Alt: "Willst du noch einmal spielen? Klicke auf den Button"})
+const button_wrapper = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "div", ID: "ID_End_Button_Div"});
+const new_game_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_NewGame_Button", Class: "Class_Game_End",  Text: "Neues Spiel", Alt:"Neues Spiel - Button"});
+const back_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_Back_Button", Class: "Class_Game_End", Text: "Zur Startseite", Alt: "Zur Startseite - Button"});
+} // Else add English
+else {
+    const winning_head = Create_DOM_Element({ ParentID: "ID_Game_End_Container", Element: "h1", ID: "ID_End_H1", Class: "Class_Game_End",
+    Text: `Congratulations, ${winner}!`, Alt: `${winner} won the game.`,});
+    const winning_text = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "p", ID: "ID_End_Text", Class: "Class_Game_End", Text: `You have won the Game!\n Will you give \n ${loser} a chance to revanche or do you want back to Starting-Screen?`, Alt: "Another game or back to starting screen?"})
+    const button_wrapper = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "div", ID: "ID_End_Button_Div"});
+    const new_game_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_NewGame_Button", Class: "Class_Game_End",  Text: "New Game", Alt:"New Game Button"});
+    const back_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_Back_Button", Class: "Class_Game_End", Text: "Back to Start", Alt: "To Start-Screen"});
+}
 
-
-// English    ADD this in english!
-
-
-// ADD Back to Starting scrren button!
-
-// What should the New Game button do exactly ??? 
-document.getElementById("ID_NewGame_Button").addEventListener("click", ()=>{
-    console.log("Ich bin der Neues Spiel - Creator Button!");
- 
+// Back to the starting screen with page refresh
+document.getElementById("ID_Back_Button").addEventListener("click", ()=>{
+    document.location.reload();   
 });
 
-}
+// After Creating the End Screen Container and pushing text to it, remove the Gameboard from the MainWrapper Div to the End Screen Container and assign the class with the End Animation
+gameboard.classList.add("Class_Gameboard_End");
+main_wrapper.removeChild(gameboard);
+document.getElementById("ID_Game_End_Container").appendChild(gameboard);
+
+// New Game Event Listener with important function
+document.getElementById("ID_NewGame_Button").addEventListener("click", ()=>{
+// Next Player is on turn
+Turning_PlayerIsOnTurn();
+
+// Reset Game Object    
+for (let x = 1; x < 8; x++){
+    Game.actualGameboardPlayer1[`C${x}`].length = 0;
+    Game.actualGameboardPlayer2[`C${x}`].length = 0;
+};
+
+// Reset Gameboard
+for (let a = 1; a < 8; a++){
+    for ( let b = 2; b < 8; b++){
+        document.getElementById(`ID_C${a}R${b}`).classList.remove("Class_PlacedCoin_1");
+        document.getElementById(`ID_C${a}R${b}`).classList.remove("Class_PlacedCoin_2");
+        document.getElementById(`ID_C${a}R${b}`).style.opacity = 0.7;
+    };
+};
+
+// Reset round & column counters
+Game.roundCounter = 0; 
+column_1_Counter = 8;
+column_2_Counter = 8;
+column_3_Counter = 8;
+column_4_Counter = 8;
+column_5_Counter = 8;
+column_6_Counter = 8;
+column_7_Counter = 8;
+
+// Remove the Game End Screen
+document.getElementById("ID_Firework").remove();
+document.getElementById("ID_Canvas_Div").remove();
+document.getElementById("ID_Game_End_Container").remove();
+
+// Remove TopCell Style class during the End-Screen & unlock the placement function again
+const topCellsArray = document.getElementsByClassName("Class_TopCells");
+for (let topCell of topCellsArray) {
+    topCell.classList.remove("Class_Top_End");
+    topCell.style = "pointer-events:none";
+};
+
+// Back to the Ingame screen, pushing the Gameboard to the MainWrapper Div back
+gameboard.classList.remove("Class_Gameboard_End");
+main_wrapper.appendChild(gameboard);
+
+// Add won game notificiations
+if (!document.getElementById("ID_Win_Div_One")) win_div_one = Create_DOM_Element({ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Win_Div_One"});
+if (!document.getElementById("ID_Win_Div_Two")) win_div_two = Create_DOM_Element({ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Win_Div_Two"});
+// If Player 1 wins, increase player 1 win counter. If it is the first win, add the notification to screen, else update notification 
+if(winning_player === 1){
+    count_wins_player_one++;
+    if (count_wins_player_one === 1)document.getElementById("ID_Win_Div_One").innerText = `${count_wins_player_one} Win`;
+    if(count_wins_player_one >= 2)document.getElementById("ID_Win_Div_One").innerText = `${count_wins_player_one} Wins`;
+};
+// Same as above
+if(winning_player === 2){
+    count_wins_player_two++;
+    if (count_wins_player_two === 1)document.getElementById("ID_Win_Div_Two").innerText = `${count_wins_player_two} Win`;
+    if (count_wins_player_two >= 2)document.getElementById("ID_Win_Div_Two").innerText = `${count_wins_player_two} Wins`;
+};
+
+}); // Mew Game Event Listener End
+
+}; // Game End Screen End
 
 
 /*            
@@ -503,13 +578,13 @@ document.getElementById(`${element_ID}`).classList.add(`${second_Class}`);
 // Helper function to change Player
 function Turning_PlayerIsOnTurn() {
 // Change Player
-playerIsOnTurn === "left" ? playerIsOnTurn = "right" : playerIsOnTurn = "left";
+Game.playerIsOnTurn === "left" ? Game.playerIsOnTurn = "right" : Game.playerIsOnTurn = "left";
 // Assign text message to the correct Player
-playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_One_Name")}` :
+Game.playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_One_Name")}` :
 document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_Two_Name")}`;
 
 // Add correct positioning Class to div
-if (playerIsOnTurn === "left") {
+if (Game.playerIsOnTurn === "left") {
 document.getElementById("ID_Turn_Div").classList.remove("Class_Right_Pos");
 document.getElementById("ID_Turn_Div").classList.add("Class_Left_Pos");
 } else {
@@ -611,25 +686,25 @@ parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width
 
 function Translate_StartScreen(language, byUser) {
 
-    // Make sure browser triggered invokes are not executed if the language was setted manually anytime before
-    if (byUser === "no" && localStorage.getItem("LanguageSettedByUser") === "yes") {
-        if (localStorage.getItem("Language") === "de") Deutsch();
-        else if (localStorage.getItem("Language") === "en") English();
-        return
-    }
+// Make sure browser triggered invokes are not executed if the language was setted manually anytime before
+if (byUser === "no" && localStorage.getItem("LanguageSettedByUser") === "yes") {
+if (localStorage.getItem("Language") === "de") Deutsch();
+else if (localStorage.getItem("Language") === "en") English();
+return
+}
 
-    if (language === "de") {
-        Deutsch();
-        localStorage.setItem("Language", "de")
-    }
-    else {
-        English();
-        localStorage.setItem("Language", "en")
-    };
+if (language === "de") {
+Deutsch();
+localStorage.setItem("Language", "de")
+}
+else {
+English();
+localStorage.setItem("Language", "en")
+};
 
-    // Bonus: Make sure the dropdown menu is always selected with the actual languag
-    if (localStorage.getItem("Language") === "de") document.getElementById("ID_Language_Menu").value === "Deutsch";
-    else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value === "English";
+// Bonus: Make sure the dropdown menu is always selected with the actual languag
+if (localStorage.getItem("Language") === "de") document.getElementById("ID_Language_Menu").value === "Deutsch";
+else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value === "English";
 };
 
 //                      Library
@@ -671,6 +746,170 @@ function English() {
     language_h.innerText = "Language";
     contact_h.innerHTML = "Contact";
 };
+
+// Firework Function which is not from me, so special thanks goes to Adam, which published it at codepen! Link below!
+// Fireworks from Adam 
+// https://codepen.io/Adam12132/pen/gOGrwMR
+function Fireworks(canvasID){
+// Fireworks
+const canvas = document.getElementById(canvasID);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+var ctx = canvas.getContext("2d");
+function Firework(x,y,height,yVol,R,G,B){
+this.x = x;
+this.y = y;
+this.yVol = yVol;
+this.height = height;
+this.R = R;
+this.G = G;
+this.B = B;
+this.radius = 2;
+this.boom = false;
+var boomHeight = Math.floor(Math.random() * 200) + 50;
+this.draw = function(){
+
+ctx.fillStyle = "rgba(" + R + "," + G + "," + B + ")";
+ctx.strokeStyle = "rgba(" + R + "," + G + "," + B + ")";
+ctx.beginPath();
+//   ctx.arc(this.x,boomHeight,this.radius,Math.PI * 2,0,false);
+ctx.stroke();
+ctx.beginPath();
+ctx.arc(this.x,this.y,3,Math.PI * 2,0,false);
+ctx.fill();
+}
+this.update = function(){
+this.y -= this.yVol;
+if(this.radius < 20){
+    this.radius += 0.35;
+}
+if(this.y < boomHeight){
+    this.boom = true;
+    
+    for(var i = 0; i < 120; i++){
+    particleArray.push(new Particle(
+        this.x,
+        this.y,
+        // (Math.random() * 2) + 0.5//
+        (Math.random() * 2) + 1,
+        this.R,
+        this.G,
+        this.B,
+        1,
+    ))
+
+    }
+}
+this.draw();
+}
+this.update()
+}
+
+window.addEventListener("click", (e)=>{
+var x = e.clientX;
+var y = canvas.height;
+var R = Math.floor(Math.random() * 255)
+var G = Math.floor(Math.random() * 255)
+var B = Math.floor(Math.random() * 255)
+var height = (Math.floor(Math.random() * 20)) + 10;
+fireworkArray.push(new Firework(x,y,height,5,R,G,B))
+})
+
+function Particle(x,y,radius,R,G,B,A){
+this.x = x;
+this.y = y;
+this.radius = radius;
+this.R = R;
+this.G = G;
+this.B = B;
+this.A = A;
+this.timer = 0;
+this.fade = false;
+
+// Change random spread
+this.xVol = (Math.random() * 10) - 4
+this.yVol = (Math.random() * 10) - 4
+
+
+// console.log(this.xVol,this.yVol)
+this.draw = function(){
+//   ctx.globalCompositeOperation = "lighter"
+ctx.fillStyle = "rgba(" + R + "," + G + "," + B + "," + this.A + ")";
+ctx.save();
+ctx.beginPath(); 
+// ctx.fillStyle = "white"
+ctx.globalCompositeOperation = "screen"
+ctx.arc(this.x,this.y,this.radius,Math.PI * 2,0,false);
+ctx.fill();
+
+ctx.restore();
+}
+this.update = function(){
+this.x += this.xVol;
+this.y += this.yVol;
+
+// Comment out to stop gravity. 
+if(this.timer < 200){
+    this.yVol += 0.12;
+}
+this.A -= 0.02;
+if(this.A < 0){
+    this.fade = true;
+}
+this.draw();
+}
+this.update();
+}
+
+var fireworkArray = [];
+var particleArray = [];
+for(var i = 0; i < 6; i++){
+var x = Math.random() * canvas.width;
+var y = canvas.height;
+var R = Math.floor(Math.random() * 255)
+var G = Math.floor(Math.random() * 255)
+var B = Math.floor(Math.random() * 255)
+var height = (Math.floor(Math.random() * 20)) + 10;
+fireworkArray.push(new Firework(x,y,height,5,R,G,B))
+}
+
+
+function animate(){
+requestAnimationFrame(animate);
+// ctx.clearRect(0,0,canvas.width,canvas.height)
+ctx.fillStyle = "rgba(0,0,0,0.1)"
+ctx.fillRect(0,0,canvas.width,canvas.height);
+for(var i = 0; i < fireworkArray.length; i++){
+fireworkArray[i].update();
+}
+for(var j = 0; j < particleArray.length; j++){
+particleArray[j].update();
+}
+if(fireworkArray.length < 4){
+    var x = Math.random() * canvas.width;
+    var y = canvas.height;
+    var height = Math.floor(Math.random() * 20);
+    var yVol = 5;
+    var R = Math.floor(Math.random() * 255);
+    var G = Math.floor(Math.random() * 255);          
+    var B = Math.floor(Math.random() * 255);
+    fireworkArray.push(new Firework(x,y,height,yVol,R,G,B));
+}
+
+
+fireworkArray = fireworkArray.filter(obj => !obj.boom);
+particleArray = particleArray.filter(obj => !obj.fade);
+}
+animate();
+
+window.addEventListener("resize", (e) => {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+})
+};
+
+
+
 /*
 ================================================================================================================================================================================================================================================================================
  

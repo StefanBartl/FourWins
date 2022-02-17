@@ -6,6 +6,10 @@ Thanks to all of the people which made that or working there.
 
 Also credits to:
 
+To Adam for the Fireworks Vanilla-JS Animation! 
+https://codepen.io/Adam12132/pen/gOGrwMR
+To codepen, where it is published!
+
 A few words to the readers:
 The code is - as you can see - sufficiently commented. For some programmers this might seem strange, but for me and my way of coding it is extremely helpful. I like to use whitespace for formatting,  all classes start with Class_ and all id's with ID_  - and, i also describe the individual processes with comments in as much detail as possible so that I can get back to work reliably and quickly after a while. This makes working on projects for me a lot easier. I hope that this approach is also helpful for you.
 
