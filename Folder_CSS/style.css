@@ -38,7 +38,7 @@
                     |                                                                         |
                     |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __ _ _ _ _ _ _ _ _ _ |
 
-   margin-inline , background-clip background-text-clip                                                                                                                                                                                                                                                                         /*
+                                                                                                                                                                                                                                                                        /*
 ================================================================================================================================================================================================================================================================================
                                  
                                                     General       
@@ -49,7 +49,6 @@
                                                     Jobs To-do:
 
                                         1) Win div mit Ellypse positon absolute über win row
-                                        2) Choose which colour 
                                         4) Styling 
                                         4) Start screen playing animation
                                         5) Stay Mobile & Responsive ! Do the Media queries.
@@ -57,7 +56,7 @@
                                         7) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
                                         8) ::after / ::before für Punkt -> Strich Animation
                                         9) Font Styling
-                                        10) Game end screen an mobile anpassen (animation muss nach unten ablaufen)
+                                        10)  margin-inline , background-clip background-text-clip   
                   
                                                                                                                                                                                                              */
 
@@ -157,7 +156,7 @@ footer{
     outline: none;
     min-width: auto;
     min-height: calc(95% / 7);
-    border-left: dashed .2rem var(--main-red);
+    border-left: dashed .15rem var(--main-white);
     background-color: var(--main-blue);
     z-index: -1;
 }
@@ -625,7 +624,6 @@ footer{
     }
 }
 
-
                                                                                                                                                                                                                                                                                /*
 ================================================================================================================================================================================================================================================================================
                                  
@@ -669,23 +667,12 @@ footer{
 
 /* Move Gameboard to the right at the End of the Game Animation */
 .Class_Gameboard_End{
-    position: absolute;
-    animation: Gameboard_End_Animation 4s ease-in ;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
     z-index: 4;
+    min-width: 20vw;
+    min-height: 20vw;
 }
 
-@keyframes Gameboard_End_Animation {
-    from{
-        top: 0;
-    }
-    to {
-        bottom: 0;
-        min-height:35%;
-        min-width: 50vh;
-    }
-}
+
 
 .Class_Top_End{
     background-color: var(--main-white);
@@ -699,14 +686,13 @@ footer{
 }
 #ID_End_H1{
     min-width: 100%;
-    margin-top: 5%;
+    padding-top: 5%;
 }
 #ID_End_Text{
     min-width: 100%;
 }
 #ID_End_Button_Div{
     min-width: 100%;
-    margin-bottom: 30vh;
     justify-content: center;
     align-content: center;   
 }
@@ -716,7 +702,7 @@ footer{
     min-width: 12.5vw;
     min-height: 7.5vh;
     border-radius: 10rem;
-    margin-block: 1rem;
+
     margin-right: 1rem;          
 }
 #ID_Back_Button{
@@ -724,7 +710,6 @@ footer{
     min-width: 12.5vw;
     min-height: 7.5vh;
     border-radius: 10rem;
-    margin-block: 1rem;
     margin-left: 1rem;
 }
 
@@ -860,22 +845,17 @@ footer{
             /* Gaḿe End Screen Mobile*/
 /* Move Gameboard at the End of the Game Animation */
 .Class_Gameboard_End{
-    position: absolute;
-    animation: Gameboard_End_Animation 4s ease-in ;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    z-index: 4;
+    margin-top: 2rem;
+    aspect-ratio: 1/1;
+    border-bottom: none;
+    
+}
+.Class_Top_End{
+    display: none;
 }
 
-@keyframes Gameboard_End_Animation {
-    from{
-        bottom: 0;
-    }
-    to {
-        bottom: 0;
-        min-height:30%;
-        min-width: 40vh;   
-    }
+#ID_End_Button_Div{
+      margin-block: 2rem;  
 }
 
 /* Win Marks */
@@ -898,13 +878,6 @@ footer{
     display: flex;
     align-items: flex-end;
 }
-
-
-
-
-
-
-
 
 
 }

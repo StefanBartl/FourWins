@@ -44,23 +44,17 @@
                                                                                                                                                                                                                                                                                 /*
                                                         Jobs To-do:
 
-                                        -) Nice Game End / Winning screen, maybe with possibility to start new game without go back to the start screen 
-                                        -) Win div mit Ellypse positon absolute über win row
-                                        -) Win Validator bug !!! Geht nicht ganz oben !
-                                        .) Nach Game End sollte kein Placement mehr möglich sein !
                                         -) KI 
-                                        -) Draw berücksichtigen
+                                        -) Draw inn GameEnd Screen einbauen
                                         -) Counter wie oft man gegen KI - Schwierigkeitsgrad gewonnen hat  (mit local Storage)
-                                        -) Game won executation   
-                                        -) Game Screen / Start screen 
+                                        -) Game Screen / Start screen während Game?
                                         -) Styling 
                                         -) Start screen playing animation
                                         -) Add some Audio, Ingame and something in the Settings Menu
-                                        -) 3 Wins to 4 Wins
                                         -) Freie Spielfeldgrößenwahl ? 
 
                                                         Session progress:
-                                                                                                                                                                                                                                                                                                                       */
+                                                                                                                                                                                                                                                                                                                    */
 
 //                      Important DOM-Elements
 
@@ -290,6 +284,7 @@ let valid_row = Row_Validator(1, row);
 let valid_column = Column_Validator(1, columnNumber, row);
 let valid_diagonal = Diagonal_Validator(1, columnNumber, row);
 if (valid_row === true || valid_column === true || valid_diagonal === true) return;
+if (Game.roundCounter === 42){console.log("Draw")} 
 // Next Player is on turn
 Turning_PlayerIsOnTurn();
 }
@@ -307,6 +302,7 @@ let valid_row = Row_Validator(2, row);
 let valid_column = Column_Validator(2, columnNumber, row);
 let valid_diagonal = Diagonal_Validator(2, columnNumber, row);
 if (valid_row === true || valid_column === true || valid_diagonal === true) return;
+if (Game.roundCounter === 42){console.log("Draw")} 
 // Next Player is on turn
 Turning_PlayerIsOnTurn();
 }
@@ -367,7 +363,7 @@ return true;
 //                      Function to validate if there is a Column-Triggered Win
 function Column_Validator(player) {
 
-// Get the actual stat of the Gameboardgameboard
+// Get the actual state of the Gameboard 
 let Players_Gameboard;
 if (player === 1) Players_Gameboard = Game.actualGameboardPlayer1;
 if (player === 2) Players_Gameboard = Game.actualGameboardPlayer2;
@@ -376,12 +372,14 @@ if (player === 2) Players_Gameboard = Game.actualGameboardPlayer2;
 const validation_array = [];
 validation_array.push(Players_Gameboard.C1, Players_Gameboard.C2, Players_Gameboard.C3, Players_Gameboard.C4, Players_Gameboard.C5, Players_Gameboard.C6, Players_Gameboard.C7);
 
-// Now we have an iterable array an can loop trough
+// Now we have an iterable array and can loop trough
 for (let obj of validation_array) {
 // And we making an iterable array again which allows us to reduce()
 let array = Array.from(obj);
 // If every row number subtracted with the next row number is equal to 1, there are 4 coins upon each other.
-if (array[0] - array[1] === 1 && array[1] - array[2] === 1 && array[2] - array[3] === 1) {
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 && array[3] - array[4] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 && array[4] - array[5] === 1) {
 
 // Invoke a win
 Game_End_Screen(player, "Column");
@@ -392,7 +390,7 @@ return true;
 
 //                      Function to validate if the placement in a given row triggers a win
 function Row_Validator(player, column) {
-
+ 
 // Get the actual state of the Gameboard
 let Players_Gameboard;
 if (player === 1) Players_Gameboard = Game.actualGameboardPlayer1;
@@ -403,9 +401,9 @@ let countFor_Win = 0;
 const validation_array = [];
 validation_array.push(Players_Gameboard.C1, Players_Gameboard.C2, Players_Gameboard.C3, Players_Gameboard.C4, Players_Gameboard.C5, Players_Gameboard.C6, Players_Gameboard.C7);
 
-// Now we have an iterable array an can loop trough
+// Now we have an iterable array and can loop trough
 for (let el of validation_array) {
-// If the array element have given value inrease counter 
+// If the array element (f.e. Column 2) have given value (f.e. Row 5) inrease counter and  . So, if 4 ColumnArrays from the actual Gamebpoard have a coin from this player in the same row, its a
 if (el.indexOf(column) != -1) countFor_Win++;
 // Decrease the counter if there is an empty value in the column, but only do that if there was ab positive value before (this makes it possible to detect rows / 4 after another)
 if (el.indexOf(column) === -1 && countFor_Win != 0) countFor_Win--;
@@ -430,12 +428,14 @@ if (countFor_Win === 4) {
 //                                  Game-End Screen Function
 function Game_End_Screen(winning_player, winning_chain) {
 
-// Loop tzrough TopCells to give them a better look in the black Game End Screen & Lock tzhe placement function
+// Loop trough TopCells to give them a better look in the black Game End Screen & Lock the placement function
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
 for (let topCell of topCellsArray) {
     topCell.classList.add("Class_Top_End");
     topCell.style = "pointer-events:none";
 };
+
+// Highlight the winning chain
 
 
 // Assign correct names to the winner, loser or draw variables
@@ -481,8 +481,17 @@ gameboard.classList.add("Class_Gameboard_End");
 main_wrapper.removeChild(gameboard);
 document.getElementById("ID_Game_End_Container").appendChild(gameboard);
 
-// New Game Event Listener with important function
+
+                                    // New Game Event Listener with important function
 document.getElementById("ID_NewGame_Button").addEventListener("click", ()=>{
+
+// Remove TopCell Style class during the End-Screen & unlock the placement function again
+const topCellsArray = document.getElementsByClassName("Class_TopCells");
+for (let topCell of topCellsArray) {
+    topCell.classList.remove("Class_Top_End");
+    topCell.style = "pointer-events:auto";
+};
+
 // Next Player is on turn
 Turning_PlayerIsOnTurn();
 
@@ -515,13 +524,6 @@ column_7_Counter = 8;
 document.getElementById("ID_Firework").remove();
 document.getElementById("ID_Canvas_Div").remove();
 document.getElementById("ID_Game_End_Container").remove();
-
-// Remove TopCell Style class during the End-Screen & unlock the placement function again
-const topCellsArray = document.getElementsByClassName("Class_TopCells");
-for (let topCell of topCellsArray) {
-    topCell.classList.remove("Class_Top_End");
-    topCell.style = "pointer-events:none";
-};
 
 // Back to the Ingame screen, pushing the Gameboard to the MainWrapper Div back
 gameboard.classList.remove("Class_Gameboard_End");
