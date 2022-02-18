@@ -465,7 +465,7 @@ footer{
                                                 /* Choosing and Placing Coin Animation*/
 
 .Class_Coin_Yellow{
-    background-image: url("../Folder_Graphics/gif/yellow.png"); 
+    background-image: url("../Folder_Graphics/Coins/yellow.png"); 
     background-size: 80%;
     background-position: center;
     background-repeat: no-repeat;
@@ -475,7 +475,7 @@ footer{
     z-index: 0;
 }
 .Class_Coin_Red{
-    background-image: url("../Folder_Graphics/gif/redc.png"); 
+    background-image: url("../Folder_Graphics/Coins/red.png"); 
     background-size: 80%;
     background-position: center;
     background-repeat: no-repeat;
@@ -486,21 +486,21 @@ footer{
 }
 
 .Class_PlacedCoin_1{
-    background-image: url("../Folder_Graphics//gif/yellow.png");
+    background-image: url("../Folder_Graphics/Coins/yellow.png");
     background-size: 80%;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .Class_PlacedCoin_2{
-    background-image: url("../Folder_Graphics/gif/redc.png");
+    background-image: url("../Folder_Graphics/Coins/red.png");
     background-size: 80%;
     background-position: center;
     background-repeat: no-repeat;
 }
                  
 .Class_ChoosingAnimation_Coin_1{
-    background-image: url("../Folder_Graphics/gif/yellow.png");
+    background-image: url("../Folder_Graphics/Coins/yellow.png");
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: top;
@@ -519,7 +519,7 @@ footer{
 }
 
 .Class_ChoosingAnimation_Coin_2{
-    background-image: url("../Folder_Graphics/gif/redc.png");
+    background-image: url("../Folder_Graphics/Coins/red.png");
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: top;
@@ -549,7 +549,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((60vh / 6) * 1));
+        transform: translateY(calc((52vh / 6) * 1));
     }
 }
 
@@ -562,7 +562,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((60vh / 6) * 2));
+        transform: translateY(calc((52vh / 6) * 2));
     }
 }
 
@@ -575,7 +575,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((60vh / 6) * 3));
+        transform: translateY(calc((52vh / 6) * 3));
     }
 }
 
@@ -588,7 +588,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((60vh / 6) * 4));
+        transform: translateY(calc((52vh / 6) * 4));
     }
 }
 
@@ -601,7 +601,7 @@ footer{
      
     }
     to{
-        transform: translateY(calc((60vh / 6) * 5));
+        transform: translateY(calc((52vh / 6) * 5));
     }
 }
 
@@ -614,7 +614,7 @@ footer{
      
     }
     to{
-        transform: translateY(60vh);
+        transform: translateY(52vh);
     }
 }
 
