@@ -48,15 +48,16 @@
                                                                                                                                                                                                                                                                                 /*
                                                     Jobs To-do:
 
-                                        1) Win div mit Ellypse positon absolute über win row
-                                        4) Styling 
-                                        4) Start screen playing animation
-                                        5) Stay Mobile & Responsive ! Do the Media queries.
-                                        6) Buttons animation mit brightness oder saturation langsam hoch fahren
-                                        7) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
-                                        8) ::after / ::before für Punkt -> Strich Animation
-                                        9) Font Styling
-                                        10)  margin-inline , background-clip background-text-clip   
+                                        -) Win div mit Ellypse positon absolute über win row
+                                        -) Nameing buttons if clicked than they should response anyhow
+                                        -) Styling 
+                                        -) Start screen playing animation
+                                        -) Stay Mobile & Responsive ! Do the Media queries.
+                                        -) Buttons animation mit brightness oder saturation langsam hoch fahren
+                                        -) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
+                                        -) ::after / ::before für Punkt -> Strich Animation
+                                        -) Font Styling
+                                        -)  margin-inline , background-clip background-text-clip   
                   
                                                                                                                                                                                                              */
 
@@ -119,8 +120,8 @@ header{
 
 .Class_GameboardWrapper{
     display: flex;
-    min-width: 38%;
-    min-height: 70vh;
+    min-width: 33%;
+    min-height: 63vh;
     background-color: var(--gameboard-border);
     border: solid 1rem var(--gameboard-border);
     border-top: dashed .1rem var(--gameboard-border);
@@ -138,7 +139,8 @@ header{
 }
 
 footer{
-    margin-top: 1rem;
+    margin-top: 1vh;
+
 }
 
                                                                                                                                                                                                                                                                /*
@@ -212,10 +214,80 @@ footer{
                                                        Typographie        
 
 ===============================================================================================================================================================================================================================================================================*/
+/*  Settings menu     */ 
+
+.Class_Settings_Menu{
+    cursor: pointer;
+    position: fixed;
+    height: 100vh;
+    width: 20vw;
+    z-index: 1;
+    background-color: var(--main-white);
+    color: var(--main-black);
+}
+#ID_Setting_Span{
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100%;
+    min-width: 100%;
+    justify-content:center;
+    align-items:center;
+    text-align: center;
+}
+#ID_Info{
+    min-width: 100%;
+
+}
+#ID_Starting{
+        width: 100%;
+}
+.Class_Colour_Toggle{
+        width: 100%;
+
+}
+#ID_Sound{
+        width: 100%;
+}
+#ID_Language{
+        min-width: 100%;
+}
+#ID_Language_Menu{
+    min-width: 100%;
+        text-align: center;
+}
+
+#ID_Stats{
+        min-width: 100%;
+}
+#ID_Contacts{
+        min-width: 100%;
+
+}
+#ID_Credits{
+        width: 100%;
+}
+#ID_Delete_All{
+    height: 1.5rem;
+    width: 8rem;
+}
+.Class_Settings_Summarys{
+    min-width: 100%;
+}
+
+
+.Class_Headline{
+    line-height: .1rem;
+}
 
 .Class_HeadlineTop{
     min-width: 100%;
     text-align: center;
+}
+
+.Class_Settings_Summarys{
+    display: flex;
+    justify-content: center;
+    align-items:center
 }
 
 /*              InGame Typo Classes             */ 
@@ -263,7 +335,7 @@ footer{
     width: 12.5vw;
     height: 7.5vh;
     border-radius: 10rem;
-    margin-top: 1rem;
+    margin-bottom: 5vh;
 }
 
 
@@ -353,16 +425,6 @@ footer{
         transform: scale(1.5);
         opacity: 0;
     }
-}
-
-.Class_Settings_Menu{
-    cursor: pointer;
-    position: fixed;
-    min-height: 100vh;
-    min-width: 20vw;
-    z-index: 1;
-    background-color: var(--main-white);
-    color: var(--main-black);
 }
 
 .Class_Showing_Settings{
@@ -636,8 +698,8 @@ footer{
     position: absolute;
     left: 0;
     top: 0;
-    min-width: 100%;
-    min-height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 /* Container for Game End Text, Buttons and Gameboard Animation */ 
@@ -648,8 +710,8 @@ footer{
     flex-wrap: wrap;
     top: 0;
     left: 0;
-    min-width: 100%;
-    min-height: 100%;
+    width: 100vw;
+    height: 100vh;
     justify-content: center;
     text-align: center;
     animation: End_Animation 4s ease-in ;
@@ -668,8 +730,9 @@ footer{
 /* Move Gameboard to the right at the End of the Game Animation */
 .Class_Gameboard_End{
     z-index: 4;
-    min-width: 20vw;
-    min-height: 20vw;
+    min-width: 10vw;
+    min-height: 10vw;
+    margin-bottom: 5vw;
 }
 
 
@@ -686,7 +749,7 @@ footer{
 }
 #ID_End_H1{
     min-width: 100%;
-    padding-top: 5%;
+    padding-top: 1%;
 }
 #ID_End_Text{
     min-width: 100%;
@@ -702,8 +765,8 @@ footer{
     min-width: 12.5vw;
     min-height: 7.5vh;
     border-radius: 10rem;
-
-    margin-right: 1rem;          
+    margin-right: 1rem;  
+    margin-top: 10vh;        
 }
 #ID_Back_Button{
     cursor: pointer;
@@ -711,6 +774,8 @@ footer{
     min-height: 7.5vh;
     border-radius: 10rem;
     margin-left: 1rem;
+    margin-top: 10vh;        
+
 }
 
 
@@ -771,6 +836,15 @@ footer{
     
     .Class_HeadlineTop{
         text-align: center;
+        margin-top: 3rem;
+    }
+
+    .Class_Settings{
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 2;
+        filter: invert(1);
     }
 
     .Class_GameboardWrapper{
@@ -784,7 +858,7 @@ footer{
 
     .Class_Settings{
         position: absolute;
-        right: 5vw;
+        right: 46vw;
         top: 2vh;
         filter: invert(1);
     }
@@ -815,7 +889,7 @@ footer{
     .Class_RightSidebarWrapper{
         width: 100%;
         margin-block: 2rem;
-        margin-bottom: -1rem;
+        margin-bottom: 1rem;
     }
 
     .Class_Turn_Players{
@@ -836,10 +910,9 @@ footer{
     }
 
 
-
     #ID_Start_Button{
         min-width: 30%;
-        margin-bottom: 2%;
+        margin-bottom: 5%;
     }
 
             /* Gaḿe End Screen Mobile*/

@@ -45,15 +45,18 @@
                                                         Jobs To-do:
 
                                         -) KI
-                                        -) Game Screen / Start screen während Game?
-                                        -) Styling 
+                                        -) Firework is not fullscreen on large displays and it was scrollable
+                                        -) Code minimazing, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles?
+                                        -) Better Styling (find a real good one) 
+                                           Bonus Features:
+                                        -)  Due Firefox AuDIO is heavy, need more infos and maybe write to players prolemAdd some Audio, Ingame and something in the Settings Menu and also the functionality to control it
+                                        -) Free Gameboard-Size
                                         -) Start screen playing animation
-                                        -) Add some Audio, Ingame and something in the Settings Menu
-                                        -) Freie Spielfeldgrößenwahl ? 
-                                        -) Code minimazing, f.e. local storage needed or Game object ok?
+                                        -) Go Back from Game Screen to Start screen to change colours, sound or something 
 
                                                         Session progress:
-                                                                                                                                                                                                                                                                                                                 */
+                                                  Removed small Bug about no valid naming variables where available by first game and no names were choosen. Fixed Game_End_Screen Bug: Gameboard was way to big on large displays and made the screen scrollable. Removed scrolling from starting screen.
+                                                  Fixed positions on mobile,                                                                                                                                                                                                                                                             */
 
 //                      Important DOM-Elements
 
@@ -86,6 +89,16 @@ const contact_h = document.getElementById("ID_Contact");
 const credits_h = document.getElementById("ID_Credits");
 const sound_h = document.getElementById("ID_Sound");
 
+//                                              Audio 
+let warning_audio = new Audio("Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav"); // Confirm Audio Sample
+let lost_audio = new Audio("Folder_Audio/freesound_com/OneHits/loose.wav"); // Loose against KI Audio Sample
+let win_audio = new Audio("Folder_Audio/freesound_com/OneHits/scratchers__cheer.wav"); // Winning Cheer Audio Sample
+// Maybe can have a small audio player available (FM4 or something)- API ? -- give a try
+
+/*
+let placing_audio = new Audio("Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav");  Placement Ausio Sample
+placing_audio.play();     Dont konw why this sound does not work!         */ 
+
 //                      Create an Gameboard Settings Object
 const Game = {
 // Setting the Gameboard arrays to keep Coin placements
@@ -103,7 +116,7 @@ let count_wins_player_one = 0;
 let count_wins_player_two = 0;
 
 //                      Global counters and variables          
-
+let game_against_KI = false;
 /* Setting the Counters for let the Coin Placing Section know, 
    in which row / column the Game currently is to calculate by placement the correct position */
 let column_1_Counter = 8;
@@ -147,17 +160,21 @@ Swap_Two_Classes_by_Events("ID_SVG_Player_2", "mouseenter", "mouseleave", "Class
 // Remove Settings-Menu from Starting-Screen DOM
 settings_menu.style.display = "none";
 // Show / Hide & Style Event-Listener
-settings_svg.addEventListener("mouseenter", () => {
+settings_svg.addEventListener("click", () => {
 if (!settings_menu.classList.contains("Class_Showing_Settings")) {
+    if(settings_menu.classList.contains("Class_Showing_Settings")){
+        settings_menu.classList.remove("Class_Showing_Settings");
+        settings_menu.classList.add("Class_Hide_Settings");}
+
 settings_menu.style.display = "block";
 settings_menu.classList.add("Class_Showing_Settings");
 settings_menu.classList.remove("Class_Hide_Settings");
+
 }
 });
 
 settings_menu.addEventListener("mouseleave", () => {
-settings_menu.classList.remove("Class_Showing_Settings");
-settings_menu.classList.add("Class_Hide_Settings");
+
 });
 
 //                      Choose Language Event in the settings menu
@@ -185,8 +202,13 @@ document.getElementById("ID_Reset_Normal").addEventListener("click", ()=>{
 localStorage.KI_Normal_Wins = 0; localStorage.KI_Normal_CPUWins = 0; localStorage.KI_Normal_Draws = 0;
 });
 document.getElementById("ID_Delete_All").addEventListener("click", ()=>{
+// Play warning sound
+warning_audio.play();
+// Audio is delayed, so delay the confirm
+setTimeout(() => {
 let warning =  confirm(`${localStorage.getItem("Player_One_Name")}, do you really want do delete the saved language, the Player names and the stats from your local Storage? The data is stored in your Browser and cannot be restored again after deleting it.`)
 if(warning === true) localStorage.clear();
+}, 750);
 });
 
 
@@ -203,6 +225,10 @@ document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
 
 function MainGame() {
 
+// Make sure at Game start are valid name variables available 
+if(!localStorage.Player_One_Name) localStorage.Player_One_Name = document.getElementById("ID_Player_1_Name").value;
+if(!localStorage.Player_Two_Name) localStorage.Player_Two_Name = document.getElementById("ID_Player_2_Name").value;
+
 //                      DOM-Manipulation to get to the "Game-Screen"
 Game_Screen();
 
@@ -214,9 +240,9 @@ Create_DOM_Element({ ParentID: "ID_Turn_Div", Element: "h3", ID: "ID_h3_turnText
 Turning_PlayerIsOnTurn();
 
 //                      Adding choose & play algorhytmus
-// Get the Top Cells for looping trough to put the event listeners on them  so the players can make there placements there
+// Get the Top Cells for looping trough to put the event listeners on them so the players can make there placements
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
-
+// The whole placement and Game Flow is currently in this for loop
 for (let topCell of topCellsArray) {
 
 // Adding & Removing the "Choose the Column" Animation by adding the correct CSS-Class via Event
@@ -231,15 +257,15 @@ topCell.classList.remove("Class_ChoosingAnimation_Coin_1") :
 topCell.classList.remove("Class_ChoosingAnimation_Coin_2")
 });
 
-// Make the other top cells unclickable for 1s (animation duration) so it cannont get overlapped
 topCell.addEventListener("click", () => {
+// Make the other top cells unclickable for 1s (animation duration) so it cannont get overlapped
 for (let topCellA of topCellsArray) {
 topCellA.style = "pointer-events:none";
 setTimeout(() => { topCellA.style = "pointer-events: auto" }, 1000);
 }
 });
 
-// Add the Event listerner for the Game-flow function
+// Add the Event listener for the Game-flow function
 topCell.addEventListener("click", GameFlow);
 let ID_topCell = topCell.id;
 
@@ -280,7 +306,7 @@ topCell.appendChild(coin);
 // Trigger the correct animation (animation length)
 coin.classList.add(`Class_PlacingAnimation_to_Row_${row}`);
 
-//                        After Animation, Win Validation and next turn
+//                        After placing Coin Animation, Win Validation and next turn
 // Remove the coin with the animation after the animation time ended and place the coin on correct position
 setTimeout(() => {
 
@@ -477,6 +503,10 @@ Fireworks("ID_Firework");};
 // DIV Container for the End Screen (Fireworks, Text, Buttons and the Gameboard Animation)
 const game_end_container = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Game_End_Container", Class: "Class_Game_End_Container"});
 
+/*  AUDIO NOT WORKING ON FIREFOX
+win_audio.loop = true;
+win_audio.play(); */
+
 let setted_language = localStorage.Language;
 // If Language is Deutsch, add this to Game End Screen 
 if(setted_language === "de"){
@@ -647,6 +677,7 @@ document.getElementById("ID_FooterWrapper").style = "display: none";
 // Use the new free space for the Gameboard
 document.getElementById("ID_MainWrapper").classList.add("Class_Main_Wrapper_InGame");
 document.getElementById("ID_GameboardWrapper").classList.add("Class_Gameboard_Wrapper_InGame");
+if(document.getElementById("ID_h3_turnText")) document.getElementById("ID_h3_turnText").style = "display: block";
 }
 
 function Start_Screen(){
@@ -658,6 +689,7 @@ document.getElementById("ID_FooterWrapper").style = "display: block";
 
 document.getElementById("ID_MainWrapper").classList.remove("Class_Main_Wrapper_InGame");
 document.getElementById("ID_GameboardWrapper").classList.remove("Class_Gameboard_Wrapper_InGame");
+document.getElementById("ID_h3_turnText").style = "display: none";
 }
 
 // Keep the STats in the Settings Menu Up-to-Date via local Storage
