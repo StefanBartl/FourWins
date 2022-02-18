@@ -24,8 +24,8 @@
         <span class="Class_Settings"><img src="./Folder_Graphics/iconmonstr_com/cog-outline.svg" id="ID_Settings"
             title="" alt="Clickable picture to get to the settings!"></span>
         <div class="Class_Settings_Menu" id="ID_Settings_Menu">
-          <h2 id="ID_Info"></h2>
-          <h2 id="ID_Starting"></h2>
+          <h3 id="ID_Info"></h3>
+          <h3 id="ID_Starting"></h3>
 
           <div class="Class_Colour_Toggle">
           <label id="Label_Colour">
@@ -34,14 +34,27 @@
             <span class="Class_Colour_Slider"></span>
           </label>
         </div>
-          <h2 id="ID_Sound"></h2>
-          <h2 id="ID_Language"></h2>
+          <h3 id="ID_Sound"></h3>
+          <h3 id="ID_Language"></h3>
           <select name="LanguageMenu" id="ID_Language_Menu">
             <option value="Deutsch" id="ID_German" selected>Deutsch</option>
             <option value="English" id="ID_English">Englisch</option>
           </select>
-          <h2 id="ID_Contact"></h2>
-          <h2 id="ID_Credits"></h2>
+          <h3 id="Stats">Stats against CPU</h3>
+          <details>
+            <summary>Against KI Easy</summary>
+            <span class="Class_Settings_Summarys"><p id="ID_Easy_1">0</p> / <p id="ID_Easy_2">0</p> / <p id="ID_Easy_3">0</p></span>
+          <button id="ID_Reset_Easy" class="Class_Reset_Buttonsd">Reset Easy Stats</button>
+          </details>
+          <details>
+            <summary>Against KI Normal</summary>
+            <span class="Class_Settings_Summarys"><p id="ID_Normal_1">0</p> / <p id="ID_Normal_2">0</p> / <p id="ID_Normal_3">0</p></span>
+            <button id="ID_Reset_Normal" class="Class_Reset_Buttonsd">Reset Normal Stats</button>
+          </details>       
+           <h3 id="ID_Contact"></h3>
+          <h3 id="ID_Credits"></h3>
+          <button id="ID_Delete_All">Delete all Data</button>
+          <p>Stats, Language, Player Names</p>
         </div>
     </span>
     <p id="ID_Header_p"></p>

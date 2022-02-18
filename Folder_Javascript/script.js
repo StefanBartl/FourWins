@@ -44,17 +44,16 @@
                                                                                                                                                                                                                                                                                 /*
                                                         Jobs To-do:
 
-                                        -) KI 
-                                        -) Draw inn GameEnd Screen einbauen
-                                        -) Counter wie oft man gegen KI - Schwierigkeitsgrad gewonnen hat  (mit local Storage)
+                                        -) KI
                                         -) Game Screen / Start screen während Game?
                                         -) Styling 
                                         -) Start screen playing animation
                                         -) Add some Audio, Ingame and something in the Settings Menu
                                         -) Freie Spielfeldgrößenwahl ? 
+                                        -) Code minimazing, f.e. local storage needed or Game object ok?
 
                                                         Session progress:
-                                                                                                                                                                                                                                                                                                                    */
+                                                                                                                                                                                                                                                                                                                 */
 
 //                      Important DOM-Elements
 
@@ -105,8 +104,8 @@ let count_wins_player_two = 0;
 
 //                      Global counters and variables          
 
-// Setting the Counters for let the Coin Placing Section know, 
-// in which row / column the Game currently is to calculate by placement the correct position
+/* Setting the Counters for let the Coin Placing Section know, 
+   in which row / column the Game currently is to calculate by placement the correct position */
 let column_1_Counter = 8;
 let column_2_Counter = 8;
 let column_3_Counter = 8;
@@ -123,10 +122,18 @@ if(document.getElementById("ID_Colour_Checkbox").checked === true) player_Colour
 
 //                      Set starting page-language
 // Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
+let isSetted = localStorage.LanguageIsSetttedByUser;
+let lang = localStorage.Language;
+if (isSetted == "true"){Translate_StartScreen(lang, true)}
+else if (isSetted !== "true"){
 let browserLanguage = navigator.language || navigator.userLanguage || "English";
-Game.Language = browserLanguage;
+Game.Language = browserLanguage; Game.LanguageIsSetttedByUser = false;
 // Invoke the translation with the getted language
-Translate_StartScreen(browserLanguage, "no");
+Translate_StartScreen(browserLanguage, false);
+};
+
+// Get up-to-date stats for the settings menu
+Stats(); 
 
 //                      Get correct names and style this (naming) section
 // Save names from input in local storage
@@ -156,20 +163,32 @@ settings_menu.classList.add("Class_Hide_Settings");
 //                      Choose Language Event in the settings menu
 document.getElementById("ID_Language_Menu").addEventListener("change", () => {
 // Save language in Local Storage and Game Object
-// Important: Because of only 2 Language supported, conditional statement is possible. With more languages, if/else if needed
+// Important maybe for later: With more languages, if/else needed!
 let languageCode;
 document.getElementById("ID_Language_Menu").value === "Deutsch" ? languageCode = "de" : languageCode = "en";
-localStorage.setItem("Language", languageCode);
-Game.Language = languageCode;
+localStorage.Language = languageCode; localStorage.LanguageIsSetttedByUser = true;
+Game.Language = languageCode; Game.LanguageIsSetttedByUser = true;
 // Make sure that a manually setted setted language is not overwritten by the default detected default browser language
-localStorage.setItem("LanguageSettedByUser", "yes");
-Translate_StartScreen(languageCode, "yes");
+Translate_StartScreen(languageCode, true);
 });
 
 // Event-Listener to change the Colour of the playing stones in the Settings Menu
 document.getElementById("ID_Colour_Checkbox").addEventListener("click", () => {
 document.getElementById("ID_Colour_Checkbox").checked === true ? player_Colour_Left = "red" : player_Colour_Left = "yellow";
 });
+
+// Event listener to reset the stats against CPU
+document.getElementById("ID_Reset_Easy").addEventListener("click", ()=>{
+localStorage.KI_Easy_Wins = 0; localStorage.KI_Easy_CPUWins = 0; localStorage.KI_Easy_Draws = 0;
+});
+document.getElementById("ID_Reset_Normal").addEventListener("click", ()=>{
+localStorage.KI_Normal_Wins = 0; localStorage.KI_Normal_CPUWins = 0; localStorage.KI_Normal_Draws = 0;
+});
+document.getElementById("ID_Delete_All").addEventListener("click", ()=>{
+let warning =  confirm(`${localStorage.getItem("Player_One_Name")}, do you really want do delete the saved language, the Player names and the stats from your local Storage? The data is stored in your Browser and cannot be restored again after deleting it.`)
+if(warning === true) localStorage.clear();
+});
+
 
 //                      Setting the Event-Listener to start the Game Button
 document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
@@ -189,7 +208,7 @@ Game_Screen();
 
 // Create DOM-Elements for switch which player is on turn  
 Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", Class: "Class_Turn_PLayers", ID: "ID_Turn_Div" });
-Create_DOM_Element({ ParentID: "ID_Turn_Div", Element: "h3", ID: "ID_h3_turnText", Text: `Your turn. ${localStorage.getItem("Player_One_Name")}` });
+Create_DOM_Element({ ParentID: "ID_Turn_Div", Element: "h3", ID: "ID_h3_turnText", Text: `Dein Zug, ${localStorage.getItem("Player_One_Name")}`});
 
 // Show correct player is on turn message
 Turning_PlayerIsOnTurn();
@@ -284,7 +303,7 @@ let valid_row = Row_Validator(1, row);
 let valid_column = Column_Validator(1, columnNumber, row);
 let valid_diagonal = Diagonal_Validator(1, columnNumber, row);
 if (valid_row === true || valid_column === true || valid_diagonal === true) return;
-if (Game.roundCounter === 42){console.log("Draw")} 
+if (Game.roundCounter === 42){Game_End_Screen(3); return;}; 
 // Next Player is on turn
 Turning_PlayerIsOnTurn();
 }
@@ -302,7 +321,7 @@ let valid_row = Row_Validator(2, row);
 let valid_column = Column_Validator(2, columnNumber, row);
 let valid_diagonal = Diagonal_Validator(2, columnNumber, row);
 if (valid_row === true || valid_column === true || valid_diagonal === true) return;
-if (Game.roundCounter === 42){console.log("Draw")} 
+if (Game.roundCounter === 42){Game_End_Screen(3); return;}; 
 // Next Player is on turn
 Turning_PlayerIsOnTurn();
 }
@@ -427,6 +446,9 @@ if (countFor_Win === 4) {
 
 //                                  Game-End Screen Function
 function Game_End_Screen(winning_player, winning_chain) {
+// If the Game was against KI, update the stats in the local storage via invoking helper function
+if(game_against_KI === true )Update_Stats(winning_player);
+
 
 // Loop trough TopCells to give them a better look in the black Game End Screen & Lock the placement function
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -435,8 +457,8 @@ for (let topCell of topCellsArray) {
     topCell.style = "pointer-events:none";
 };
 
-// Highlight the winning chain
-
+// Hide the Player is on turn Infobox
+document.getElementById("ID_h3_turnText").classList.add("Class_Invisible");
 
 // Assign correct names to the winner, loser or draw variables
 let winner, loser, drawOne, drawTwo;
@@ -444,32 +466,46 @@ if(winning_player === 1){winner = localStorage.getItem("Player_One_Name"), loser
 else if (winning_player === 2){winner = localStorage.getItem("Player_Two_Name"), loser = localStorage.getItem("Player_One_Name")}
 else drawOne = localStorage.getItem("Player_Two_Name"), drawTwo = localStorage.getItem("Player_One_Name");
 
+// If it is not a draw, add the fireworks
+if(winning_player != 3){
 // Canvas with fireworks layed in a div container, which is then pushed to the Main Wrapper, Now, everything which is pushed to the Main Wrapper
 // with a greater z-index is visible over the fireworks canvas
 const canvas_div = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Canvas_Div", Class: "Class_Game_End_Div"});
 const firework_canvas = Create_DOM_Element({ ParentID: "ID_Canvas_Div", Element: "canvas", ID: "ID_Firework", Class: "Class_Firework"});
-Fireworks("ID_Firework");
+Fireworks("ID_Firework");};
 
 // DIV Container for the End Screen (Fireworks, Text, Buttons and the Gameboard Animation)
 const game_end_container = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Game_End_Container", Class: "Class_Game_End_Container"});
 
+let setted_language = localStorage.Language;
 // If Language is Deutsch, add this to Game End Screen 
-if(localStorage.getItem("Language" === "de")){
+if(setted_language === "de"){
+// Deutsch for Games with a wining player
 const winning_head = Create_DOM_Element({ ParentID: "ID_Game_End_Container", Element: "h1", ID: "ID_End_H1", Class: "Class_Game_End",
 Text: `Gratulation, ${winner}!`, Alt: `${winner} hat das Spiel gewonnen`,});
-const winning_text = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "p", ID: "ID_End_Text", Class: "Class_Game_End", Text: `Du hast das Spiel gewonnen!\n Gibst du \n ${loser} eine Chance auf Revanche oder wollt ihr zurück zur Startseite?`, Alt: "Willst du noch einmal spielen? Klicke auf den Button"})
+const winning_text = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "p", ID: "ID_End_Text", Class: "Class_Game_End", Text: `Du hast das Spiel gewonnen!\n Gibst du ${loser} eine Chance auf Revanche oder wollt ihr zurück zur Startseite?`, Alt: "Willst du noch einmal spielen? Klicke auf den Button"})
 const button_wrapper = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "div", ID: "ID_End_Button_Div"});
 const new_game_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_NewGame_Button", Class: "Class_Game_End",  Text: "Neues Spiel", Alt:"Neues Spiel - Button"});
 const back_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_Back_Button", Class: "Class_Game_End", Text: "Zur Startseite", Alt: "Zur Startseite - Button"});
-} // Else add English
+// ... for a Draw change created text and headline
+if(winning_player === 3){
+document.getElementById("ID_End_H1").innerText = "Unentschieden!";
+document.getElementById("ID_End_Text").innerText = `${drawOne} & ${drawTwo}, seid ihr etwa gleich stark in 4-Gewinnt?\nWollt ihr es noch einmal ausprobieren und euch messen oder zurück zum Startbildchschirm?`;
+};}
+// Else add English
 else {
-    const winning_head = Create_DOM_Element({ ParentID: "ID_Game_End_Container", Element: "h1", ID: "ID_End_H1", Class: "Class_Game_End",
-    Text: `Congratulations, ${winner}!`, Alt: `${winner} won the game.`,});
-    const winning_text = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "p", ID: "ID_End_Text", Class: "Class_Game_End", Text: `You have won the Game!\n Will you give \n ${loser} a chance to revanche or do you want back to Starting-Screen?`, Alt: "Another game or back to starting screen?"})
-    const button_wrapper = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "div", ID: "ID_End_Button_Div"});
-    const new_game_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_NewGame_Button", Class: "Class_Game_End",  Text: "New Game", Alt:"New Game Button"});
-    const back_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_Back_Button", Class: "Class_Game_End", Text: "Back to Start", Alt: "To Start-Screen"});
-}
+const winning_head = Create_DOM_Element({ ParentID: "ID_Game_End_Container", Element: "h1", ID: "ID_End_H1", Class: "Class_Game_End",
+Text: `Congratulations, ${winner}!`, Alt: `${winner} won the game.`,});
+const winning_text = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "p", ID: "ID_End_Text", Class: "Class_Game_End", Text: `You have won the Game!\n Will you give ${loser} a chance to revanche or do you want back to Starting-Screen?`, Alt: "Another game or back to starting screen?"})
+const button_wrapper = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "div", ID: "ID_End_Button_Div"});
+const new_game_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_NewGame_Button", Class: "Class_Game_End",  Text: "New Game", Alt:"New Game Button"});
+const back_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_Back_Button", Class: "Class_Game_End", Text: "Back to Start", Alt: "To Start-Screen"});
+// ... for a Draw
+if(winning_player === 3){
+document.getElementById("ID_End_H1").innerText = "Draw !";
+document.getElementById("ID_End_Text").innerText = `${drawOne} & ${drawTwo}, are you same smart in 4-Wins?\nDo you want to find this out or back to the starting screen?`;
+};
+};
 
 // Back to the starting screen with page refresh
 document.getElementById("ID_Back_Button").addEventListener("click", ()=>{
@@ -491,6 +527,9 @@ for (let topCell of topCellsArray) {
     topCell.classList.remove("Class_Top_End");
     topCell.style = "pointer-events:auto";
 };
+
+// Show the Player is on turn Infobox
+document.getElementById("ID_h3_turnText").classList.remove("Class_Invisible");
 
 // Next Player is on turn
 Turning_PlayerIsOnTurn();
@@ -581,10 +620,14 @@ document.getElementById(`${element_ID}`).classList.add(`${second_Class}`);
 function Turning_PlayerIsOnTurn() {
 // Change Player
 Game.playerIsOnTurn === "left" ? Game.playerIsOnTurn = "right" : Game.playerIsOnTurn = "left";
-// Assign text message to the correct Player
+// Assign text message to the correct Player and with the correct language
+if(localStorage.getItem("Language") === "de"){
+    Game.playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${localStorage.getItem("Player_One_Name")}` :
+    document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${localStorage.getItem("Player_Two_Name")}`;
+} else {
 Game.playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_One_Name")}` :
 document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_Two_Name")}`;
-
+};
 // Add correct positioning Class to div
 if (Game.playerIsOnTurn === "left") {
 document.getElementById("ID_Turn_Div").classList.remove("Class_Right_Pos");
@@ -592,8 +635,8 @@ document.getElementById("ID_Turn_Div").classList.add("Class_Left_Pos");
 } else {
 document.getElementById("ID_Turn_Div").classList.remove("Class_Left_Pos");
 document.getElementById("ID_Turn_Div").classList.add("Class_Right_Pos");
-}
-}
+};
+};
 
 function Game_Screen(){
 // Remove the start screen elements
@@ -616,7 +659,47 @@ document.getElementById("ID_FooterWrapper").style = "display: block";
 document.getElementById("ID_MainWrapper").classList.remove("Class_Main_Wrapper_InGame");
 document.getElementById("ID_GameboardWrapper").classList.remove("Class_Gameboard_Wrapper_InGame");
 }
-    
+
+// Keep the STats in the Settings Menu Up-to-Date via local Storage
+function Stats(){
+let value = localStorage.KI_Easy_Wins || 0; document.getElementById("ID_Easy_1").innerText = value;
+value = localStorage.KI_Easy_CPUWins || 0; document.getElementById("ID_Easy_3").innerText = value;
+value = localStorage.KI_Easy_Draws || 0; document.getElementById("ID_Easy_2").innerText = value;
+value = localStorage.KI_Normal_Wins || 0; document.getElementById("ID_Normal_1").innerText = value;
+value = localStorage.KI_Normal_CPUWins || 0; document.getElementById("ID_Normal_3").innerText = value;
+value = localStorage.KI_Normal_Draws || 0; document.getElementById("ID_Normal_2").innerText = value;
+}
+
+// Function for increasing the stats after a win
+function Update_Stats(winning_player){
+// Easy Stats
+//      Player wins                              Get value from storage or set to 0      increase            update storage
+if(winning_player === 1 && KI_Level === "Easy"){ let value = localStorage.KI_Easy_Wins || 0; value++; localStorage.KI_Easy_Wins = value;
+            // Set new value in Settings menu
+document.getElementById("ID_Easy_1").innerText = value;}
+// CPU Wins
+if(winning_player === 2 && KI_Level === "Easy"){ let value = localStorage.KI_Easy_CPUWins || 0; value++; localStorage.Easy_CPUWins = value;
+document.getElementById("ID_Easy_3").innerText = value;}
+// Draws
+if(winning_player === 3 && KI_Level === "Easy"){ let value = localStorage.KI_Easy_Draws || 0; value++; localStorage.Easy_Draws = value;
+    document.getElementById("ID_Easy_2").innerText = value;}
+
+// Normal Stats
+//      Player wins                              Get value from storage or set to 0      increase            update storage
+if(winning_player === 1 && KI_Level === "Normal"){ let value = localStorage.KI_Normal_Wins || 0; value++; localStorage.KI_Normal_Wins = value;
+    // Set new value in Settings menu
+document.getElementById("ID_Normal_1").innerText = value;}
+// CPU Wins
+if(winning_player === 2 && KI_Level === "Normal"){ let value = localStorage.KI_Normal_CPUWins || 0; value++; localStorage.Normal_CPUWins = value;
+document.getElementById("ID_Normal_3").innerText = value;}
+// Draws
+if(winning_player === 3 && KI_Level === "Normal"){ let value = localStorage.KI_Normal_Draws || 0; value++; localStorage.Normal_Draws = value;
+document.getElementById("ID_Normal_2").innerText = value;}
+
+// Enough space for a unbeatable level ??? :-)
+}; // Update Stats End
+
+
 //              "Creator-Function" - for creating DOM-Elements and push it to DOM
 
 function Create_DOM_Element(options, arrayOne, arrayTwo) {
@@ -687,26 +770,19 @@ parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width
 //                      Translation Manager
 
 function Translate_StartScreen(language, byUser) {
-
 // Make sure browser triggered invokes are not executed if the language was setted manually anytime before
-if (byUser === "no" && localStorage.getItem("LanguageSettedByUser") === "yes") {
-if (localStorage.getItem("Language") === "de") Deutsch();
-else if (localStorage.getItem("Language") === "en") English();
-return
-}
+let setted_language = localStorage.Language, settedByUserInStorage = localStorage.LanguageIsSetttedByUser;
 
-if (language === "de") {
-Deutsch();
-localStorage.setItem("Language", "de")
+if (byUser === true){
+    if(setted_language === "de") Deutsch(); else English();
 }
-else {
-English();
-localStorage.setItem("Language", "en")
-};
+else{ 
+    if(language === "de") Deutsch(); else English();
+}
 
 // Bonus: Make sure the dropdown menu is always selected with the actual languag
 if (localStorage.getItem("Language") === "de") document.getElementById("ID_Language_Menu").value === "Deutsch";
-else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value === "English";
+else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value === "English"; 
 };
 
 //                      Library
@@ -747,6 +823,7 @@ function English() {
     starting_h.innerText = "Starter";
     language_h.innerText = "Language";
     contact_h.innerHTML = "Contact";
+ 
 };
 
 // Firework Function which is not from me, so special thanks goes to Adam, which published it at codepen! Link below!
