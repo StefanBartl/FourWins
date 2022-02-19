@@ -15,11 +15,11 @@
                             |                                                                      |
                             |                 1) General Settings, Global Scoped & DOM             |
                             |                                                                      |
-                            |                 2) Main Game Functions                               |
+                            |                 2) Main Game                             |
                             |                                                                      |
                             |                 3) KI                                                |
                             |                                                                      |
-                            |                 4) Win-Validation                                    |
+                            |                 4) Validations                                       |
                             |                                                                      |
                             |                 5) Game-End Screen                                   |
                             |                                                                      | 
@@ -45,18 +45,21 @@
                                                         Jobs To-do:
 
                                         -) KI
-                                        -) Firework is not fullscreen on large displays and it was scrollable
-                                        -) Code minimazing, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles?
+                                        -) Stop placements in the top cell
+                                        -) Namming : Player is on turn should get the name from Game, and Game should get the name from the textfield value, if no  on eis thewre than from local storage / from the start there should be the name from local storqage and by start there should be the names stored in local from the textfield
+                                        -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? How much i can get in the Game object= row counter ... / Functions all return;
                                         -) Better Styling (find a real good one) 
                                            Bonus Features:
-                                        -)  Due Firefox AuDIO is heavy, need more infos and maybe write to players prolemAdd some Audio, Ingame and something in the Settings Menu and also the functionality to control it
+                                        -) Due Firefox Audio is so slow, need more infos / Add some Audio, Ingame and something in the Settings Menu and also the functionality to control it
                                         -) Free Gameboard-Size
                                         -) Start screen playing animation
                                         -) Go Back from Game Screen to Start screen to change colours, sound or something 
 
                                                         Session progress:
-                                                  Removed small Bug about no valid naming variables where available by first game and no names were choosen. Fixed Game_End_Screen Bug: Gameboard was way to big on large displays and made the screen scrollable. Removed scrolling from starting screen.
-                                                  Fixed positions on mobile,                                                                                                                                                                                                                                                             */
+                                        Improved Layout (Header and Gameboard Start Screen on mobile), Added a topCell-Validator to lock placements over the Gameboard, Added Select KI, KI Easy integration completed, Added function to proof for KI if placement in column is possible,
+
+
+                                                                                                                                                                                                                                                                                                   */
 
 //                      Important DOM-Elements
 
@@ -119,13 +122,13 @@ let count_wins_player_two = 0;
 let game_against_KI = false;
 /* Setting the Counters for let the Coin Placing Section know, 
    in which row / column the Game currently is to calculate by placement the correct position */
-let column_1_Counter = 8;
-let column_2_Counter = 8;
-let column_3_Counter = 8;
-let column_4_Counter = 8;
-let column_5_Counter = 8;
-let column_6_Counter = 8;
-let column_7_Counter = 8;
+let row_Counter_C1 = 8;
+let row_Counter_C2 = 8;
+let row_Counter_C3 = 8;
+let row_Counter_C4 = 8;
+let row_Counter_C5 = 8;
+let row_Counter_C6 = 8;
+let row_Counter_C7 = 8;
 
 // Variable to proof which colour of the playing stones was selected by the Players. Standard is: Left Yellow / Right Red
 let player_Colour_Left = "yellow";
@@ -194,6 +197,10 @@ document.getElementById("ID_Colour_Checkbox").addEventListener("click", () => {
 document.getElementById("ID_Colour_Checkbox").checked === true ? player_Colour_Left = "red" : player_Colour_Left = "yellow";
 });
 
+document.getElementById("ID_Choose_KI").addEventListener("change", ()=>{
+   document.getElementById("ID_Player_2_Name").value = document.getElementById("ID_Choose_KI").value;
+});
+
 // Event listener to reset the stats against CPU
 document.getElementById("ID_Reset_Easy").addEventListener("click", ()=>{
 localStorage.KI_Easy_Wins = 0; localStorage.KI_Easy_CPUWins = 0; localStorage.KI_Easy_Draws = 0;
@@ -204,11 +211,9 @@ localStorage.KI_Normal_Wins = 0; localStorage.KI_Normal_CPUWins = 0; localStorag
 document.getElementById("ID_Delete_All").addEventListener("click", ()=>{
 // Play warning sound
 warning_audio.play();
-// Audio is delayed, so delay the confirm
-setTimeout(() => {
+// Audio 
 let warning =  confirm(`${localStorage.getItem("Player_One_Name")}, do you really want do delete the saved language, the Player names and the stats from your local Storage? The data is stored in your Browser and cannot be restored again after deleting it.`)
 if(warning === true) localStorage.clear();
-}, 750);
 });
 
 
@@ -216,10 +221,10 @@ if(warning === true) localStorage.clear();
 document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
 
 
-/*
+                                                                                                                                                                                                                                                                                /*
 ================================================================================================================================================================================================================================================================================
  
-                                    Main Game-Functions        
+                                             Main Game
 
 ===============================================================================================================================================================================================================================================================================*/
 
@@ -229,7 +234,13 @@ function MainGame() {
 if(!localStorage.Player_One_Name) localStorage.Player_One_Name = document.getElementById("ID_Player_1_Name").value;
 if(!localStorage.Player_Two_Name) localStorage.Player_Two_Name = document.getElementById("ID_Player_2_Name").value;
 
-//                      DOM-Manipulation to get to the "Game-Screen"
+// Proof if Game is against KI
+if(document.getElementById("ID_Choose_KI").value === "No") game_against_KI = false 
+else if(document.getElementById("ID_Choose_KI").value != "No") game_against_KI = true;
+let ki_level = "";
+if(document.getElementById("ID_Choose_KI").value === "KI_Easy") ki_level = "easy"; else ki_level = "normal";
+
+// DOM-Manipulation to get to the "Game-Screen"
 Game_Screen();
 
 // Create DOM-Elements for switch which player is on turn  
@@ -288,13 +299,13 @@ let columnNumber = parseInt(ID_topCell[4]);
 // Decrease the row counter by the total columns played in this row before and setting a variable for 
 // the correct animations and the placement (to get the correct correct column)
 let row;
-if (columnNumber === 1) { column_1_Counter--; row = column_1_Counter; }
-else if (columnNumber === 2) { column_2_Counter--; row = column_2_Counter; }
-else if (columnNumber === 3) { column_3_Counter--; row = column_3_Counter; }
-else if (columnNumber === 4) { column_4_Counter--; row = column_4_Counter; }
-else if (columnNumber === 5) { column_5_Counter--; row = column_5_Counter; }
-else if (columnNumber === 6) { column_6_Counter--; row = column_6_Counter; }
-else if (columnNumber === 7) { column_7_Counter--; row = column_7_Counter; };
+if (columnNumber === 1) { row_Counter_C1--; row = row_Counter_C1; }
+else if (columnNumber === 2) { row_Counter_C2--; row = row_Counter_C2; }
+else if (columnNumber === 3) { row_Counter_C3--; row = row_Counter_C3; }
+else if (columnNumber === 4) { row_Counter_C4--; row = row_Counter_C4; }
+else if (columnNumber === 5) { row_Counter_C5--; row = row_Counter_C5; }
+else if (columnNumber === 6) { row_Counter_C6--; row = row_Counter_C6; }
+else if (columnNumber === 7) { row_Counter_C7--; row = row_Counter_C7; };
 
 //                              Placing the Coin Section
 // Create the correct coin, set correct position and append it to the DOM
@@ -330,8 +341,12 @@ let valid_column = Column_Validator(1, columnNumber, row);
 let valid_diagonal = Diagonal_Validator(1, columnNumber, row);
 if (valid_row === true || valid_column === true || valid_diagonal === true) return;
 if (Game.roundCounter === 42){Game_End_Screen(3); return;}; 
-// Next Player is on turn
+TopCell_Validation(columnNumber);
+//   If no win, next Player is on turn
 Turning_PlayerIsOnTurn();
+if(ki_level === "easy")KI_Easy();
+else if (ki_level === "normal") KI_Normal();
+
 }
 // Same for Player 2
 else {
@@ -348,6 +363,7 @@ let valid_column = Column_Validator(2, columnNumber, row);
 let valid_diagonal = Diagonal_Validator(2, columnNumber, row);
 if (valid_row === true || valid_column === true || valid_diagonal === true) return;
 if (Game.roundCounter === 42){Game_End_Screen(3); return;}; 
+TopCell_Validation(columnNumber);
 // Next Player is on turn
 Turning_PlayerIsOnTurn();
 }
@@ -356,12 +372,89 @@ Turning_PlayerIsOnTurn();
 };    // End Game-Flow-Function
 };   // End Main Game For-Loop
 };  // End Start Game Wrapper Function
+
+
+                                                                                                                                                                                                                                                                                    /*
+================================================================================================================================================================================================================================================================================
+ 
+                                    KI Easy / KI Normal       
+
+===============================================================================================================================================================================================================================================================================*/
+
+
+
+
+
+function KI_Easy(){
+    console.log("KI Easy starts to play....");
+    // Get a random number  
+    let random_number = getRandomInt(7);
+    // Proof if in this column a placement is possible
+    let number_proofing = TopCell_Validation(random_number, true);
+    // If it is invoke Placement wth valid number, if it isn't get a random number again and proof it as long as there is a valid number
+    if(number_proofing === true){
+           console.log(`TopCell ${valid_number} placement by KI Easy!`);
+           KI_Placement(random_number);
+    } else (KI_Easy());
+};
+
+function KI_Normal(){
+    console.log("KI Normal starts to play....");
+
+};
+
+function KI_Placement(valid_number){
+    //console.log("Random number for topCell is:  ", random_number);
+    const topCellsArray = document.getElementsByClassName("Class_TopCells");
+    topCellsArray[valid_number].click();
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 ===============================================================================================================================================================================================================================================================================
 
-                            Functions for Win-Validation          
+                            Functions for Validations         
 
 ===============================================================================================================================================================================================================================================================================*/
+
+
+//                      Validation for locking Columns after the 6 possible placements of each Column
+function TopCell_Validation(columnNumber, invokedByKi){
+
+let proof;
+if(columnNumber === 1) proof = row_Counter_C1;
+else if(columnNumber === 2) proof = row_Counter_C2;
+else if(columnNumber === 3) proof = row_Counter_C3;
+else if(columnNumber === 4) proof = row_Counter_C4;
+else if(columnNumber === 5) proof = row_Counter_C5;
+else if(columnNumber === 6) proof = row_Counter_C6;
+else if(columnNumber === 7) proof = row_Counter_C7;
+
+// Important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section! 
+// Proof if the columnNumber was the last possible cell to play in the column
+if (proof === 2){ // If it was lock it for further placements 
+        document.getElementById(`ID_C${columnNumber}R1`).style = "pointer-events:none"; return}; 
+
+// If the column is locked for placements, return false to KI Normal & KI Easy, so they know they cant make a placement there. Else return true so they hav a valid column number.
+if(invokedByKi === true){
+    if(proof === 1){return false} else return true;
+
+// If it passes the proofment, just return and do nothing
+return;
+};
+};
 
 //                      Function to validate if there is a Diagonal-Triggered Win
 function Diagonal_Validator(player, columnNumber, row) {
@@ -556,6 +649,7 @@ const topCellsArray = document.getElementsByClassName("Class_TopCells");
 for (let topCell of topCellsArray) {
     topCell.classList.remove("Class_Top_End");
     topCell.style = "pointer-events:auto";
+
 };
 
 // Show the Player is on turn Infobox
@@ -625,6 +719,12 @@ if(winning_player === 2){
                                     Helper-Functions               
 
 ==============================================================================================================================================================================================================================================================================*/
+
+
+// Returns a random number
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+    };
 
 // Function to push the names from the input to the local storage
 

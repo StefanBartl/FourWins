@@ -94,15 +94,22 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
+    
 }
 
 header{
     border-bottom: solid 1vh var(--main-white);
     border-radius: 1rem;
+    min-height: 15vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
-.Class_Headline{
+.Class_HeaderWrapper{
     display: flex;
+    align-content: center;
 }
 
 .Class_MainWrapper{
@@ -139,11 +146,23 @@ header{
 }
 
 footer{
+    min-height: 10vh;
     margin-top: 1vh;
-
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap: 2rem;
+    text-align:center;
+ 
+}
+#ID_Choose_KI_Div{
+line-height: 0;
+ position: relative;
+    top: -1rem;
 }
 
-                                                                                                                                                                                                                                                               /*
+
+/*
 ================================================================================================================================================================================================================================================================================
                                  
                                                         Gameboard     
@@ -161,6 +180,7 @@ footer{
     border-left: dashed .15rem var(--main-white);
     background-color: var(--main-blue);
     z-index: -1;
+    cursor: pointer;
 }
 
 #ID_C1R1{
@@ -279,11 +299,14 @@ footer{
     line-height: .1rem;
 }
 
-.Class_HeadlineTop{
+#ID_Headline{
     min-width: 100%;
     text-align: center;
 }
-
+#ID_Headline_p{
+    min-width: 100%;
+    text-align: center;
+}
 .Class_Settings_Summarys{
     display: flex;
     justify-content: center;
@@ -303,6 +326,19 @@ footer{
                                                         Buttons, Inputs,...        
 
 ===============================================================================================================================================================================================================================================================================*/
+
+select{
+    text-align-last: center;
+    text-align: center;
+    -ms-text-align-last: center;
+    -moz-text-align-last: center;
+}
+
+#ID_Choose_KI{
+     border: solid 1px var(--main-white);
+     border-radius: 10rem; 
+}
+
 
 .Class_Inputs{
     width: 28ch;
@@ -332,10 +368,9 @@ footer{
 
 #ID_Start_Button{
     cursor: pointer;
-    width: 12.5vw;
-    height: 7.5vh;
+    min-width: 12.5vw;
+    min-height: 7.5vh;
     border-radius: 10rem;
-    margin-bottom: 5vh;
 }
 
 
@@ -848,7 +883,8 @@ footer{
     }
 
     .Class_GameboardWrapper{
-        min-width: 100%;
+        min-width: 75vw;
+        min-height: 50vw;
     }
     
     .Class_Gameboard_Wrapper_InGame{
