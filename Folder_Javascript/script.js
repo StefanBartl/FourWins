@@ -15,7 +15,7 @@
                             |                                                                      |
                             |                 1) General Settings, Global Scoped & DOM             |
                             |                                                                      |
-                            |                 2) Main Game                             |
+                            |                 2) Main Game                                         |
                             |                                                                      |
                             |                 3) KI                                                |
                             |                                                                      |
@@ -44,10 +44,10 @@
                                                                                                                                                                                                                                                                                 /*
                                                         Jobs To-do:
 
-                                        -) KI
-                                        -) Stop placements in the top cell
-                                        -) Namming : Player is on turn should get the name from Game, and Game should get the name from the textfield value, if no  on eis thewre than from local storage / from the start there should be the name from local storqage and by start there should be the names stored in local from the textfield
-                                        -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? How much i can get in the Game object= row counter ... / Functions all return;
+                                        -) KI "thinking" animation? 
+                                        -) KI Normal integration
+                                        -) Settings menu
+                                        -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? How much i can get in the Game object= row counter ... / Functions all return; CHECK (and for) Helper mthods like psuh to local storage / Global variables for DOM Objects possible which are caled often?;
                                         -) Better Styling (find a real good one) 
                                            Bonus Features:
                                         -) Due Firefox Audio is so slow, need more infos / Add some Audio, Ingame and something in the Settings Menu and also the functionality to control it
@@ -56,8 +56,7 @@
                                         -) Go Back from Game Screen to Start screen to change colours, sound or something 
 
                                                         Session progress:
-                                        Improved Layout (Header and Gameboard Start Screen on mobile), Added a topCell-Validator to lock placements over the Gameboard, Added Select KI, KI Easy integration completed, Added function to proof for KI if placement in column is possible,
-
+                                        Removed Bug with User Names and maked sure there are names available at start, Player names nmow stored in Game object until usaer make the decision to stor it in local storage, Added confirm window in Deutsch,                                                                                                                                                                                                                                              
 
                                                                                                                                                                                                                                                                                                    */
 
@@ -77,9 +76,9 @@ const headline_p = document.getElementById("ID_Header_p");
 const settings_svg = document.getElementById("ID_Settings");
 const settings_menu = document.getElementById("ID_Settings_Menu");
 const player_1_headline = document.getElementById("ID_Player_1_Headline");
-const player_1 = document.getElementById("ID_Player_1_Name");
+const player_1_name = document.getElementById("ID_Player_1_Name");
 const player_2_headline = document.getElementById("ID_Player_2_Headline");
-const player_2 = document.getElementById("ID_Player_2_Name");
+const player_2_name = document.getElementById("ID_Player_2_Name");
 const start_button = document.getElementById("ID_Start_Button");
 const info_h = document.getElementById("ID_Info");
 const starting_h = document.getElementById("ID_Starting");
@@ -136,7 +135,7 @@ let player_Colour_Left = "yellow";
 // Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted. (Checkbox don't uncheck by refresh)
 if(document.getElementById("ID_Colour_Checkbox").checked === true) player_Colour_Left = "red";
 
-//                      Set starting page-language
+//                      Set Starting-Page language
 // Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
 let isSetted = localStorage.LanguageIsSetttedByUser;
 let lang = localStorage.Language;
@@ -151,7 +150,12 @@ Translate_StartScreen(browserLanguage, false);
 // Get up-to-date stats for the settings menu
 Stats(); 
 
-//                      Get correct names and style this (naming) section
+
+//          Set Names of Players to stored names if they are some
+if(localStorage.Player_One_Name) player_1_name.value = localStorage.Player_One_Name;
+if(localStorage.Player_Two_Name) player_2_name.value = localStorage.Player_Two_Name;
+
+//                          User storing names
 // Save names from input in local storage
 Push_to_LocalStorage("ID_SVG_Player_1", "ID_Player_1_Name", "Player_One_Name", "click");
 Push_to_LocalStorage("ID_SVG_Player_2", "ID_Player_2_Name", "Player_Two_Name", "click");
@@ -211,13 +215,18 @@ localStorage.KI_Normal_Wins = 0; localStorage.KI_Normal_CPUWins = 0; localStorag
 document.getElementById("ID_Delete_All").addEventListener("click", ()=>{
 // Play warning sound
 warning_audio.play();
-// Audio 
-let warning =  confirm(`${localStorage.getItem("Player_One_Name")}, do you really want do delete the saved language, the Player names and the stats from your local Storage? The data is stored in your Browser and cannot be restored again after deleting it.`)
-if(warning === true) localStorage.clear();
+// Confirm message
+let warning;
+if(Game.Language === "de"){
+    warning =  confirm(`${localStorage.getItem("Player_One_Name") || "Spieler"}, willst du wirklich die gespeicherte Sprache, die Spieler Namen und die Statistiken von deinem local-Storage löschen? Diese Daten sind nur in deinem Browser gespeichert und können nach einer Löschung nicht wiederhergestellt werden.`)
+} else warning =  confirm(`${localStorage.getItem("Player_One_Name") || "Player"}, do you really want do delete the saved language, saved Player names and the stats from your local Storage? The data is stored in your Browser and cannot be restored again after deleting it.`)
+// Clear local storage
+if(warning === true) {localStorage.clear();};
 });
 
 
 //                      Setting the Event-Listener to start the Game Button
+document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
 document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
 
 
@@ -231,8 +240,10 @@ document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
 function MainGame() {
 
 // Make sure at Game start are valid name variables available 
-if(!localStorage.Player_One_Name) localStorage.Player_One_Name = document.getElementById("ID_Player_1_Name").value;
-if(!localStorage.Player_Two_Name) localStorage.Player_Two_Name = document.getElementById("ID_Player_2_Name").value;
+if(player_1_name.value === "") player_1_name.value = player_1_name.placeholder;
+if(player_2_name.value === "") player_2_name.value = player_2_name.placeholder;
+Game.Player_One_Name = player_1_name.value;
+Game.Player_Two_Name = player_2_name.value;
 
 // Proof if Game is against KI
 if(document.getElementById("ID_Choose_KI").value === "No") game_against_KI = false 
@@ -381,10 +392,6 @@ Turning_PlayerIsOnTurn();
 
 ===============================================================================================================================================================================================================================================================================*/
 
-
-
-
-
 function KI_Easy(){
     console.log("KI Easy starts to play....");
     // Get a random number  
@@ -393,7 +400,7 @@ function KI_Easy(){
     let number_proofing = TopCell_Validation(random_number, true);
     // If it is invoke Placement wth valid number, if it isn't get a random number again and proof it as long as there is a valid number
     if(number_proofing === true){
-           console.log(`TopCell ${valid_number} placement by KI Easy!`);
+           console.log(`TopCell ${random_number} placement by KI Easy!`);
            KI_Placement(random_number);
     } else (KI_Easy());
 };
@@ -409,15 +416,6 @@ function KI_Placement(valid_number){
     topCellsArray[valid_number].click();
 
 };
-
-
-
-
-
-
-
-
-
 
 
 
@@ -444,16 +442,15 @@ else if(columnNumber === 7) proof = row_Counter_C7;
 
 // Important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section! 
 // Proof if the columnNumber was the last possible cell to play in the column
-if (proof === 2){ // If it was lock it for further placements 
+if (proof === 2 && invokedByKi === false){ // If it was lock it for further placements 
         document.getElementById(`ID_C${columnNumber}R1`).style = "pointer-events:none"; return}; 
 
 // If the column is locked for placements, return false to KI Normal & KI Easy, so they know they cant make a placement there. Else return true so they hav a valid column number.
 if(invokedByKi === true){
-    if(proof === 1){return false} else return true;
+    if(proof === 1){return false} else return true;}
 
 // If it passes the proofment, just return and do nothing
 return;
-};
 };
 
 //                      Function to validate if there is a Diagonal-Triggered Win
@@ -752,11 +749,11 @@ function Turning_PlayerIsOnTurn() {
 Game.playerIsOnTurn === "left" ? Game.playerIsOnTurn = "right" : Game.playerIsOnTurn = "left";
 // Assign text message to the correct Player and with the correct language
 if(localStorage.getItem("Language") === "de"){
-    Game.playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${localStorage.getItem("Player_One_Name")}` :
-    document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${localStorage.getItem("Player_Two_Name")}`;
+    Game.playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_One_Name}` :
+    document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_Two_Name}`;
 } else {
-Game.playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_One_Name")}` :
-document.getElementById("ID_h3_turnText").innerText = `Your turn, ${localStorage.getItem("Player_Two_Name")}`;
+Game.playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}` :
+document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_Two_Name}`;
 };
 // Add correct positioning Class to div
 if (Game.playerIsOnTurn === "left") {
@@ -930,9 +927,9 @@ function Deutsch() {
     headline_top.innerText = "Online 4-Gewinnt";
     headline_p.innerText = "Spiele gegen deine Freunde oder gegen die KI!";
     player_1_headline.innerText = "Wähle einen Namen";
-    player_1.placeholder = "Spieler 1";
+    player_1_name.placeholder = "Spieler 1";
     player_2_headline.innerText = "Wähle einen Namen";
-    player_2.placeholder = "Spieler 2";
+    player_2_name.placeholder = "Spieler 2";
     start_button.innerText = "Spiel Starten";
     info_h.innerText = "Spielanleitung";
     starting_h.innerText = "Wer soll starten?";
@@ -947,9 +944,9 @@ function English() {
     headline_top.innerText = "Four Wins";
     headline_p.innerText = "Play against friends or KI!";
     player_1_headline.innerText = "Choose Name";
-    player_1.placeholder = "Player 1";
+    player_1_name.placeholder = "Player 1";
     player_2_headline.innerText = "Choose Name";
-    player_2.placeholder = "Player 2";
+    player_2_name.placeholder = "Player 2";
     start_button.innerText = "Start Game";
     info_h.innerText = "Instructions";
     starting_h.innerText = "Starter";
