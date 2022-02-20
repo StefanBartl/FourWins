@@ -218,6 +218,10 @@ line-height: 0;
     justify-content: center;
     align-content: center;
 }
+.Class_Thinking{
+    text-align: center;
+    font-size: 3rem;
+}
 
 .Class_Left_Pos{
     position: absolute;

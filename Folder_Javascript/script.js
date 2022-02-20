@@ -47,6 +47,7 @@
                                         -) KI "thinking" animation? 
                                         -) KI Normal integration
                                         -) Settings menu
+                                        -) Test respnovines total
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? How much i can get in the Game object= row counter ... / Functions all return; CHECK (and for) Helper mthods like psuh to local storage / Global variables for DOM Objects possible which are caled often?;
                                         -) Better Styling (find a real good one) 
                                            Bonus Features:
@@ -56,7 +57,6 @@
                                         -) Go Back from Game Screen to Start screen to change colours, sound or something 
 
                                                         Session progress:
-                                        Removed Bug with User Names and maked sure there are names available at start, Player names nmow stored in Game object until usaer make the decision to stor it in local storage, Added confirm window in Deutsch,                                                                                                                                                                                                                                              
 
                                                                                                                                                                                                                                                                                                    */
 
@@ -83,6 +83,7 @@ const start_button = document.getElementById("ID_Start_Button");
 const info_h = document.getElementById("ID_Info");
 const starting_h = document.getElementById("ID_Starting");
 const colour_h = document.getElementById("ID_Colour");
+const play_against = document.getElementById("ID_Play_Against");
 // Settings menu
 const language_h = document.getElementById("ID_Language");
 const select_deutsch = document.getElementById("ID_Deutsch");
@@ -112,13 +113,14 @@ actualGameboardPlayer2: {
 playerIsOnTurn: "right",
 // Setting a counter for the played rounds
 roundCounter: 0,
+Game_against_KI: false,
+KI_Level: "none",
 };
 
 let count_wins_player_one = 0;
 let count_wins_player_two = 0;
 
 //                      Global counters and variables          
-let game_against_KI = false;
 /* Setting the Counters for let the Coin Placing Section know, 
    in which row / column the Game currently is to calculate by placement the correct position */
 let row_Counter_C1 = 8;
@@ -201,8 +203,12 @@ document.getElementById("ID_Colour_Checkbox").addEventListener("click", () => {
 document.getElementById("ID_Colour_Checkbox").checked === true ? player_Colour_Left = "red" : player_Colour_Left = "yellow";
 });
 
+// Set correct names after choosing "Play against"
 document.getElementById("ID_Choose_KI").addEventListener("change", ()=>{
-   document.getElementById("ID_Player_2_Name").value = document.getElementById("ID_Choose_KI").value;
+    // If "Play against CPU = No" is selected, make sure "No" isn't the name of Player Two
+    if(document.getElementById("ID_Choose_KI").value === "No") {document.getElementById("ID_Player_2_Name").value = localStorage.Player_Two_Name || document.getElementById("ID_Player_2_Name").placeholder;} 
+    else // If it is a game against CPU, set Player Two Name to KI Level
+    document.getElementById("ID_Player_2_Name").value = document.getElementById("ID_Choose_KI").value;
 });
 
 // Event listener to reset the stats against CPU
@@ -246,20 +252,23 @@ Game.Player_One_Name = player_1_name.value;
 Game.Player_Two_Name = player_2_name.value;
 
 // Proof if Game is against KI
-if(document.getElementById("ID_Choose_KI").value === "No") game_against_KI = false 
-else if(document.getElementById("ID_Choose_KI").value != "No") game_against_KI = true;
-let ki_level = "";
-if(document.getElementById("ID_Choose_KI").value === "KI_Easy") ki_level = "easy"; else ki_level = "normal";
+if(document.getElementById("ID_Choose_KI").value != "No") Game.Game_against_KI = true;
+// And if it is, set the KI Level
+if(Game.Game_against_KI === true){
+if(document.getElementById("ID_Choose_KI").value === "KI_Easy") Game.KI_Level = "Easy"; else Game.KI_Level = "Normal";}
 
 // DOM-Manipulation to get to the "Game-Screen"
 Game_Screen();
 
 // Create DOM-Elements for switch which player is on turn  
 Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", Class: "Class_Turn_PLayers", ID: "ID_Turn_Div" });
-Create_DOM_Element({ ParentID: "ID_Turn_Div", Element: "h3", ID: "ID_h3_turnText", Text: `Dein Zug, ${localStorage.getItem("Player_One_Name")}`});
+Create_DOM_Element({ ParentID: "ID_Turn_Div", Element: "h3", ID: "ID_h3_turnText"});
 
 // Show correct player is on turn message
 Turning_PlayerIsOnTurn();
+
+// After 8 seconds, smoothly remind the Player of time
+setTimeout(Thinking_Effect, 8000);
 
 //                      Adding choose & play algorhytmus
 // Get the Top Cells for looping trough to put the event listeners on them so the players can make there placements
@@ -355,8 +364,8 @@ if (Game.roundCounter === 42){Game_End_Screen(3); return;};
 TopCell_Validation(columnNumber);
 //   If no win, next Player is on turn
 Turning_PlayerIsOnTurn();
-if(ki_level === "easy")KI_Easy();
-else if (ki_level === "normal") KI_Normal();
+if (Game.KI_Level === "Easy")KI_Easy();
+else if (Game.KI_Level === "Normal") KI_Normal();
 
 }
 // Same for Player 2
@@ -398,10 +407,10 @@ function KI_Easy(){
     let random_number = getRandomInt(7);
     // Proof if in this column a placement is possible
     let number_proofing = TopCell_Validation(random_number, true);
-    // If it is invoke Placement wth valid number, if it isn't get a random number again and proof it as long as there is a valid number
+    // If it is possible, name it valid_number and invoke "KI_Thinking", if it isn't get a random number again and proof it as long as there is a valid number
     if(number_proofing === true){
-           console.log(`TopCell ${random_number} placement by KI Easy!`);
-           KI_Placement(random_number);
+           let valid_number = random_number;
+            Thinking_Effect(true, valid_number);
     } else (KI_Easy());
 };
 
@@ -410,14 +419,12 @@ function KI_Normal(){
 
 };
 
+// Function to let the CPU make a placement with a valid number
 function KI_Placement(valid_number){
     //console.log("Random number for topCell is:  ", random_number);
     const topCellsArray = document.getElementsByClassName("Class_TopCells");
     topCellsArray[valid_number].click();
-
 };
-
-
 
 
 /*
@@ -563,8 +570,7 @@ if (countFor_Win === 4) {
 //                                  Game-End Screen Function
 function Game_End_Screen(winning_player, winning_chain) {
 // If the Game was against KI, update the stats in the local storage via invoking helper function
-if(game_against_KI === true )Update_Stats(winning_player);
-
+if(Game.Game_against_KI === true )Update_Stats(winning_player);
 
 // Loop trough TopCells to give them a better look in the black Game End Screen & Lock the placement function
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -718,6 +724,54 @@ if(winning_player === 2){
 ==============================================================================================================================================================================================================================================================================*/
 
 
+function Thinking_Effect(invokerKI ,valid_number){
+
+// Create DOM ELement for the thinking dots in the turning DIV
+const thinker_div = document.createElement("div");
+thinker_div.classList.add("Class_Thinking");
+thinker_div.id = "ID_Thinking_Div";
+document.getElementById("ID_Turn_Div").appendChild(thinker_div);
+// Set a Intervall which change the dots in the DOM Element. The changing is realised with setTiemouts, which fakes an text animation effect. This happens all 2 seconds again.
+window.thinking = setInterval(()=>{
+    const dot1 = setTimeout(()=>{
+        thinker_div.innerText = ".";
+    }, 100);
+    const dot2 = setTimeout(()=>{
+        thinker_div.innerText = ". .";
+    }, 500);
+    const dot3 = setTimeout(()=>{
+        thinker_div.innerText = ". . .";
+    }, 1000);
+    const dot4 = setTimeout(()=>{
+        thinker_div.innerText = ".....";
+    }, 1500);
+}, 2000);
+
+// If the invoker is KI...
+if(invokerKI === true){
+// Get a random number
+const random_number = getRandomInt(7);
+// Multiplicy it with 1000 to get a correct time value
+let thinking_duration = random_number * 1000;
+// If the random time was under 2 (seconds), set it to 2 seconds
+if(thinking_duration < 2000) thinking_duration = 2000;
+// Invoke Placement with the given valid number and clear the setted interval after the "thinking" time. Also remove the "dots"-Div container from the turning Div and set new Thinking effect timer for Player
+setTimeout(()=>{
+KI_Placement(valid_number)
+clearInterval(thinking);
+thinker_div.remove();
+setTimeout(Thinking_Effect, 8000);
+}, thinking_duration);
+};
+
+
+};
+
+
+
+
+
+
 // Returns a random number
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -763,6 +817,20 @@ document.getElementById("ID_Turn_Div").classList.add("Class_Left_Pos");
 document.getElementById("ID_Turn_Div").classList.remove("Class_Left_Pos");
 document.getElementById("ID_Turn_Div").classList.add("Class_Right_Pos");
 };
+
+// If there was a "Player thinking animation", end it, remove the Div Container from DOM, trigger the same effect for the other player. (KI Thinking is invoked in the KI-Function because of shorter delay)
+if(Game.Game_against_KI === false){
+if(document.getElementById("ID_Thinking_Div")){
+document.getElementById("ID_Thinking_Div").remove();
+clearInterval(window.thinking);
+setTimeout(Thinking_Effect, 8000);
+};};
+// Nearly the same in Game against KI, until no new timer is setted, because this makes the KI after his placement.
+if(Game.Game_against_KI === true){
+if(document.getElementById("ID_Thinking_Div")){
+document.getElementById("ID_Thinking_Div").remove();
+clearInterval(window.thinking);
+};};
 };
 
 function Game_Screen(){
@@ -801,30 +869,30 @@ value = localStorage.KI_Normal_Draws || 0; document.getElementById("ID_Normal_2"
 
 // Function for increasing the stats after a win
 function Update_Stats(winning_player){
+// To reduce repetition only the KI Easy section is commented out. It's basically the same in KI Normal.
+let value;
 // Easy Stats
-//      Player wins                              Get value from storage or set to 0      increase            update storage
-if(winning_player === 1 && KI_Level === "Easy"){ let value = localStorage.KI_Easy_Wins || 0; value++; localStorage.KI_Easy_Wins = value;
-            // Set new value in Settings menu
-document.getElementById("ID_Easy_1").innerText = value;}
-// CPU Wins
-if(winning_player === 2 && KI_Level === "Easy"){ let value = localStorage.KI_Easy_CPUWins || 0; value++; localStorage.Easy_CPUWins = value;
-document.getElementById("ID_Easy_3").innerText = value;}
-// Draws
-if(winning_player === 3 && KI_Level === "Easy"){ let value = localStorage.KI_Easy_Draws || 0; value++; localStorage.Easy_Draws = value;
-    document.getElementById("ID_Easy_2").innerText = value;}
-
+if(Game.KI_Level === "Easy"){
+//   if Player wins           Get value from storage or set to 0; increase value;  update storage with increased value; .....
+if(winning_player === 1){ value = localStorage.KI_Easy_Wins || 0; value++; localStorage.KI_Easy_Wins = value;
+        // ...and set new value in Settings-Stats-Menu;
+document.getElementById("ID_Easy_1").innerText = value;};
+//     if CPU Wins...
+if(winning_player === 2){ value = localStorage.KI_Easy_CPUWins || 0; value++; localStorage.Easy_CPUWins = value;
+document.getElementById("ID_Easy_3").innerText = value;};
+//     if it is a draw...
+if(winning_player === 3){ value = localStorage.KI_Easy_Draws || 0; value++; localStorage.Easy_Draws = value;
+    document.getElementById("ID_Easy_2").innerText = value;};
+}
 // Normal Stats
-//      Player wins                              Get value from storage or set to 0      increase            update storage
-if(winning_player === 1 && KI_Level === "Normal"){ let value = localStorage.KI_Normal_Wins || 0; value++; localStorage.KI_Normal_Wins = value;
-    // Set new value in Settings menu
-document.getElementById("ID_Normal_1").innerText = value;}
-// CPU Wins
-if(winning_player === 2 && KI_Level === "Normal"){ let value = localStorage.KI_Normal_CPUWins || 0; value++; localStorage.Normal_CPUWins = value;
-document.getElementById("ID_Normal_3").innerText = value;}
-// Draws
-if(winning_player === 3 && KI_Level === "Normal"){ let value = localStorage.KI_Normal_Draws || 0; value++; localStorage.Normal_Draws = value;
-document.getElementById("ID_Normal_2").innerText = value;}
-
+else if (Game.KI_Level === "Normal"){
+if(winning_player === 1 && KI_Level === "Normal"){ value = localStorage.KI_Normal_Wins || 0; value++; localStorage.KI_Normal_Wins = value;
+document.getElementById("ID_Normal_1").innerText = value;};
+if(winning_player === 2 && KI_Level === "Normal"){ value = localStorage.KI_Normal_CPUWins || 0; value++; localStorage.Normal_CPUWins = value;
+document.getElementById("ID_Normal_3").innerText = value;};
+if(winning_player === 3 && KI_Level === "Normal"){ value = localStorage.KI_Normal_Draws || 0; value++; localStorage.Normal_Draws = value;
+document.getElementById("ID_Normal_2").innerText = value;};
+};
 // Enough space for a unbeatable level ??? :-)
 }; // Update Stats End
 
@@ -930,11 +998,15 @@ function Deutsch() {
     player_1_name.placeholder = "Spieler 1";
     player_2_headline.innerText = "Wähle einen Namen";
     player_2_name.placeholder = "Spieler 2";
+    play_against.innerText =  "Gegen den Computer spielen?"
     start_button.innerText = "Spiel Starten";
     info_h.innerText = "Spielanleitung";
     starting_h.innerText = "Wer soll starten?";
     language_h.innerText = "Spracheinstellung";
     contact_h.innerText = "Kontakt";
+    // Dropdown
+    document.getElementById("ID_No").innerText = "Nein";
+    document.getElementById("ID_Easy_Text").innerText = "KI Einfach";
 };
 
 // Set language to English
@@ -947,11 +1019,14 @@ function English() {
     player_1_name.placeholder = "Player 1";
     player_2_headline.innerText = "Choose Name";
     player_2_name.placeholder = "Player 2";
+    play_against.innerText =  "Play against the CPU?"
     start_button.innerText = "Start Game";
     info_h.innerText = "Instructions";
     starting_h.innerText = "Starter";
     language_h.innerText = "Language";
     contact_h.innerHTML = "Contact";
+    document.getElementById("ID_No").innerText = "No";
+    document.getElementById("ID_Easy_Text").innerText = "KI Easy";
  
 };
 
