@@ -44,10 +44,12 @@
                                                                                                                                                                                                                                                                                 /*
                                                         Jobs To-do:
 
-                                        -) KI "thinking" animation? 
+
                                         -) KI Normal integration
+                                        -) Lock placementss if KI is on turn
                                         -) Settings menu
-                                        -) Test respnovines total
+                                        -) Test and repair responsivnes total
+                                        -) Try to get the event listener outside and grouped
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? How much i can get in the Game object= row counter ... / Functions all return; CHECK (and for) Helper mthods like psuh to local storage / Global variables for DOM Objects possible which are caled often?;
                                         -) Better Styling (find a real good one) 
                                            Bonus Features:
@@ -277,23 +279,28 @@ const topCellsArray = document.getElementsByClassName("Class_TopCells");
 for (let topCell of topCellsArray) {
 
 // Adding & Removing the "Choose the Column" Animation by adding the correct CSS-Class via Event
-topCell.addEventListener("mouseover", () => {
-Game.playerIsOnTurn === "left" ?
-topCell.classList.add("Class_ChoosingAnimation_Coin_1") :
-topCell.classList.add("Class_ChoosingAnimation_Coin_2")
-});
-topCell.addEventListener("mouseleave", () => {
-Game.playerIsOnTurn === "left" ?
-topCell.classList.remove("Class_ChoosingAnimation_Coin_1") :
-topCell.classList.remove("Class_ChoosingAnimation_Coin_2")
-});
+topCell.addEventListener("mouseover", Add_Choosing_Ani);
+topCell.addEventListener("mouseleave", Remove_Choosing_Ani);
 
+function Add_Choosing_Ani(){
+    Game.playerIsOnTurn === "left" ?
+    topCell.classList.add("Class_ChoosingAnimation_Coin_1") :
+    topCell.classList.add("Class_ChoosingAnimation_Coin_2")
+    };
+
+function Remove_Choosing_Ani(){
+    Game.playerIsOnTurn === "left" ?
+    topCell.classList.remove("Class_ChoosingAnimation_Coin_1") :
+    topCell.classList.remove("Class_ChoosingAnimation_Coin_2")
+    }
+    
 topCell.addEventListener("click", () => {
 // Make the other top cells unclickable for 1s (animation duration) so it cannont get overlapped
 for (let topCellA of topCellsArray) {
 topCellA.style = "pointer-events:none";
 setTimeout(() => { topCellA.style = "pointer-events: auto" }, 1000);
 }
+
 });
 
 // Add the Event listener for the Game-flow function
@@ -364,9 +371,9 @@ if (Game.roundCounter === 42){Game_End_Screen(3); return;};
 TopCell_Validation(columnNumber);
 //   If no win, next Player is on turn
 Turning_PlayerIsOnTurn();
-if (Game.KI_Level === "Easy")KI_Easy();
-else if (Game.KI_Level === "Normal") KI_Normal();
-
+// If this is a KI, invoke correct KI
+if (Game.KI_Level === "Easy") {KI_Easy(); Lock_TopCells()}
+else if (Game.KI_Level === "Normal") {KI_Normal(); Lock_TopCells()};
 }
 // Same for Player 2
 else {
@@ -392,6 +399,7 @@ Turning_PlayerIsOnTurn();
 };    // End Game-Flow-Function
 };   // End Main Game For-Loop
 };  // End Start Game Wrapper Function
+
 
 
                                                                                                                                                                                                                                                                                     /*
@@ -579,64 +587,93 @@ for (let topCell of topCellsArray) {
     topCell.style = "pointer-events:none";
 };
 
-// Hide the Player is on turn Infobox
+// Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it
 document.getElementById("ID_h3_turnText").classList.add("Class_Invisible");
+if(document.getElementById("ID_Thinking_Div")){
+document.getElementById("ID_Thinking_Div").remove();
+clearInterval(window.thinking);
+};
 
 // Assign correct names to the winner, loser or draw variables
 let winner, loser, drawOne, drawTwo;
-if(winning_player === 1){winner = localStorage.getItem("Player_One_Name"), loser = localStorage.getItem("Player_Two_Name")}
-else if (winning_player === 2){winner = localStorage.getItem("Player_Two_Name"), loser = localStorage.getItem("Player_One_Name")}
-else drawOne = localStorage.getItem("Player_Two_Name"), drawTwo = localStorage.getItem("Player_One_Name");
+if(winning_player === 1){winner = Game.Player_One_Name; loser = Game.Player_Two_Name}
+else if (winning_player === 2){winner = Game.Player_Two_Name; loser = Game.Player_One_Name}
+else drawOne = Game.Player_One_Name; drawTwo = Game.Player_Two_Name;
 
-// If it is not a draw, add the fireworks
-if(winning_player != 3){
+// DIV Container for the End Screen (Fireworks, Text, Buttons and the Gameboard Animation)
+const game_end_container = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Game_End_Container", Class: "Class_Game_End_Container"});
+// Create the Containers for the texts
+const winning_head = Create_DOM_Element({ ParentID: "ID_Game_End_Container", Element: "h1", ID: "ID_End_H1", Class: "Class_Game_End"});
+const winning_text = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "p", ID: "ID_End_Text", Class: "Class_Game_End"});
+const button_wrapper = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "div", ID: "ID_End_Button_Div"});
+const new_game_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_NewGame_Button", Class: "Class_Game_End"});
+const back_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_Back_Button", Class: "Class_Game_End"});
+
+// If it is not a draw or a loose against KI, it is a win from a Human Playert, so add the fireworks
+if(winning_player === 1 || winning_player === 2 && Game.Game_against_KI === false){
 // Canvas with fireworks layed in a div container, which is then pushed to the Main Wrapper, Now, everything which is pushed to the Main Wrapper
 // with a greater z-index is visible over the fireworks canvas
 const canvas_div = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Canvas_Div", Class: "Class_Game_End_Div"});
 const firework_canvas = Create_DOM_Element({ ParentID: "ID_Canvas_Div", Element: "canvas", ID: "ID_Firework", Class: "Class_Firework"});
-Fireworks("ID_Firework");};
+Fireworks("ID_Firework");
+                                                                                            /*  AUDIO NOT WORKING ON FIREFOX
+                                                                                            win_audio.loop = true;
+                                                                                            win_audio.play(); */
 
-// DIV Container for the End Screen (Fireworks, Text, Buttons and the Gameboard Animation)
-const game_end_container = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Game_End_Container", Class: "Class_Game_End_Container"});
+// Add correct Language to Game End Screen 
+if(Game.Language === "de"){
+// Deutsch for Games with a wining Human Player
+document.getElementById("ID_End_H1").innerText = `Gratulation, ${winner}!`;
+document.getElementById("ID_End_H1").alt = `${winner} hat das Spiel gewonnen`;
+document.getElementById("ID_End_Text").innerText = `Du hast das Spiel gewonnen!\n Gibst du ${loser} eine Chance auf Revanche oder wollt ihr zurück zur Startseite?`;
+document.getElementById("ID_End_H1").alt = "Willst du noch einmal spielen? Klicke auf den Button";
+} else { // Else add English for Games with a winning Human Player
+document.getElementById("ID_End_H1").innerText = `Congratulations, ${winner}!`;
+document.getElementById("ID_End_H1").alt = `${winner} won the game.`;
+document.getElementById("ID_End_Text").innerText = `You have won the Game!\n Will you give ${loser} a chance to revanche or do you want back to Starting-Screen?`;
+document.getElementById("ID_End_H1").alt = "Another game or back to starting screen?";
+};};
 
-/*  AUDIO NOT WORKING ON FIREFOX
-win_audio.loop = true;
-win_audio.play(); */
+// If the KI won against Player (KI is always Player 2 and if Game against KI is true >>> CPU won), add the lose text and screen
+if(winning_player === 2 && Game.Game_against_KI === true){
+document.getElementById("ID_Game_End_Container").style.backgroundImage = "./Folder_Graphics/Folder_Icons/iconmonstr_com/tearsmiley.svg";
+if(Game.Language === "de"){
+document.getElementById("ID_End_H1").innerText = "Verloren!";
+document.getElementById("ID_End_Text").innerText = `${loser}, lass den Kopf nicht hängen. Dieses mal war der Computer sehr stark. Willst du eine Revanche?`;
+} else {
+document.getElementById("ID_End_H1").innerText = "Lost!";
+document.getElementById("ID_End_Text").innerText = `${loser}, keep your head held high. This time the computer was very strong. Do you want revenge?`;
+};
+};
 
-let setted_language = localStorage.Language;
-// If Language is Deutsch, add this to Game End Screen 
-if(setted_language === "de"){
-// Deutsch for Games with a wining player
-const winning_head = Create_DOM_Element({ ParentID: "ID_Game_End_Container", Element: "h1", ID: "ID_End_H1", Class: "Class_Game_End",
-Text: `Gratulation, ${winner}!`, Alt: `${winner} hat das Spiel gewonnen`,});
-const winning_text = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "p", ID: "ID_End_Text", Class: "Class_Game_End", Text: `Du hast das Spiel gewonnen!\n Gibst du ${loser} eine Chance auf Revanche oder wollt ihr zurück zur Startseite?`, Alt: "Willst du noch einmal spielen? Klicke auf den Button"})
-const button_wrapper = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "div", ID: "ID_End_Button_Div"});
-const new_game_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_NewGame_Button", Class: "Class_Game_End",  Text: "Neues Spiel", Alt:"Neues Spiel - Button"});
-const back_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_Back_Button", Class: "Class_Game_End", Text: "Zur Startseite", Alt: "Zur Startseite - Button"});
-// ... for a Draw change created text and headline
+
+// ... for a Draw use this text
 if(winning_player === 3){
+    if(Game.Language === "de"){
 document.getElementById("ID_End_H1").innerText = "Unentschieden!";
 document.getElementById("ID_End_Text").innerText = `${drawOne} & ${drawTwo}, seid ihr etwa gleich stark in 4-Gewinnt?\nWollt ihr es noch einmal ausprobieren und euch messen oder zurück zum Startbildchschirm?`;
-};}
-// Else add English
-else {
-const winning_head = Create_DOM_Element({ ParentID: "ID_Game_End_Container", Element: "h1", ID: "ID_End_H1", Class: "Class_Game_End",
-Text: `Congratulations, ${winner}!`, Alt: `${winner} won the game.`,});
-const winning_text = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "p", ID: "ID_End_Text", Class: "Class_Game_End", Text: `You have won the Game!\n Will you give ${loser} a chance to revanche or do you want back to Starting-Screen?`, Alt: "Another game or back to starting screen?"})
-const button_wrapper = Create_DOM_Element({ParentID: "ID_Game_End_Container", Element: "div", ID: "ID_End_Button_Div"});
-const new_game_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_NewGame_Button", Class: "Class_Game_End",  Text: "New Game", Alt:"New Game Button"});
-const back_button = Create_DOM_Element({ ParentID: "ID_End_Button_Div", Element: "button", ID: "ID_Back_Button", Class: "Class_Game_End", Text: "Back to Start", Alt: "To Start-Screen"});
-// ... for a Draw
-if(winning_player === 3){
+} else {
 document.getElementById("ID_End_H1").innerText = "Draw !";
 document.getElementById("ID_End_Text").innerText = `${drawOne} & ${drawTwo}, are you same smart in 4-Wins?\nDo you want to find this out or back to the starting screen?`;
-};
-};
+};};
 
 // Back to the starting screen with page refresh
 document.getElementById("ID_Back_Button").addEventListener("click", ()=>{
     document.location.reload();   
 });
+
+// Doesnt matter if Game won, Draw or loose against KI, this Elements hav to be the same (except of the language, ofc...)
+if(Game.Language === "de"){
+document.getElementById("ID_NewGame_Button").innerText = "Neues Spiel";
+document.getElementById("ID_NewGame_Button").alt = "Neues Spiel - Button";
+document.getElementById("ID_Back_Button").innerText = "Zur Startseite";
+document.getElementById("ID_Back_Button").alt = "Zur Startseite - Button";
+} else {
+document.getElementById("ID_NewGame_Button").innerText = "New Game";
+document.getElementById("ID_NewGame_Button").alt = "New Game - Button";
+document.getElementById("ID_Back_Button").innerText = "Starting Screen";
+document.getElementById("ID_Back_Button").alt = "To Starting-Screen - Button";
+};
 
 // After Creating the End Screen Container and pushing text to it, remove the Gameboard from the MainWrapper Div to the End Screen Container and assign the class with the End Animation
 gameboard.classList.add("Class_Gameboard_End");
@@ -660,6 +697,11 @@ document.getElementById("ID_h3_turnText").classList.remove("Class_Invisible");
 
 // Next Player is on turn
 Turning_PlayerIsOnTurn();
+// If the win was from Human Player 1, KI starts in next round
+if(winning_player === 1){
+if (Game.KI_Level === "Easy")KI_Easy();
+else if (Game.KI_Level === "Normal") KI_Normal();
+};
 
 // Reset Game Object    
 for (let x = 1; x < 8; x++){
@@ -687,8 +729,10 @@ column_6_Counter = 8;
 column_7_Counter = 8;
 
 // Remove the Game End Screen
+if(document.getElementById("ID_Firework")){
 document.getElementById("ID_Firework").remove();
 document.getElementById("ID_Canvas_Div").remove();
+};
 document.getElementById("ID_Game_End_Container").remove();
 
 // Back to the Ingame screen, pushing the Gameboard to the MainWrapper Div back
@@ -723,53 +767,58 @@ if(winning_player === 2){
 
 ==============================================================================================================================================================================================================================================================================*/
 
+// Lock the top cells in games against KI
+function Lock_TopCells(){
+const topCellsArray = document.getElementsByClassName("Class_TopCells");
+for (let topCell of topCellsArray){
+topCell.style.cursor = "none"; 
+topCell.style = "pointer-events:none"; 
+topCell.classList.remove("Class_ChoosingAnimation_Coin_1"); 
+topCell.classList.remove("Class_ChoosingAnimation_Coin_2");
+};};
 
+// Generate the "Thinking Effect" for KI and Humans
 function Thinking_Effect(invokerKI ,valid_number){
 
-// Create DOM ELement for the thinking dots in the turning DIV
+// First make sure there is no "Thinking" Div attached
+if (!document.getElementById("ID_Thinking_Div")){
+// If it isn't create DOM ELement for the thinking dots in the turning DIV
 const thinker_div = document.createElement("div");
 thinker_div.classList.add("Class_Thinking");
 thinker_div.id = "ID_Thinking_Div";
 document.getElementById("ID_Turn_Div").appendChild(thinker_div);
 // Set a Intervall which change the dots in the DOM Element. The changing is realised with setTiemouts, which fakes an text animation effect. This happens all 2 seconds again.
 window.thinking = setInterval(()=>{
-    const dot1 = setTimeout(()=>{
-        thinker_div.innerText = ".";
-    }, 100);
-    const dot2 = setTimeout(()=>{
-        thinker_div.innerText = ". .";
-    }, 500);
-    const dot3 = setTimeout(()=>{
-        thinker_div.innerText = ". . .";
-    }, 1000);
-    const dot4 = setTimeout(()=>{
-        thinker_div.innerText = ".....";
-    }, 1500);
+const dot1 = setTimeout(()=>{
+    thinker_div.innerText = ".";
+}, 100);
+const dot2 = setTimeout(()=>{
+    thinker_div.innerText = ". .";
+}, 500);
+const dot3 = setTimeout(()=>{
+    thinker_div.innerText = ". . .";
+}, 1000);
+const dot4 = setTimeout(()=>{
+    thinker_div.innerText = ".....";
+}, 1500);
 }, 2000);
-
-// If the invoker is KI...
+};
+// If the invoker is KI do additional tasks...
 if(invokerKI === true){
 // Get a random number
 const random_number = getRandomInt(7);
-// Multiplicy it with 1000 to get a correct time value
+// Multiplicy it with 1000 to get a correct time value to invoking setTimeout
 let thinking_duration = random_number * 1000;
-// If the random time was under 2 (seconds), set it to 2 seconds
+// If the random time was under 2 (seconds), set it to 2 seconds to make sure "thinking" is not "too fast"
 if(thinking_duration < 2000) thinking_duration = 2000;
-// Invoke Placement with the given valid number and clear the setted interval after the "thinking" time. Also remove the "dots"-Div container from the turning Div and set new Thinking effect timer for Player
+// Invoke Placement with the given valid number and clear the setted interval after the "thinking" time. 
 setTimeout(()=>{
 KI_Placement(valid_number)
 clearInterval(thinking);
+// Remove the "dots"-Div container from the turning Div 
 thinker_div.remove();
-setTimeout(Thinking_Effect, 8000);
 }, thinking_duration);
-};
-
-
-};
-
-
-
-
+};};
 
 
 // Returns a random number
