@@ -46,20 +46,21 @@
 
 
                                         -) KI Normal integration
-                                        -) Lock placementss if KI is on turn
+                                        -) Naming Button needs a "sign" for the user if it is saved
                                         -) Settings menu
-                                        -) Test and repair responsivnes total
-                                        -) Try to get the event listener outside and grouped
+                                        -) Test and repair responsivness
+                                        -) Try to get the event listener outside and grouped together
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? How much i can get in the Game object= row counter ... / Functions all return; CHECK (and for) Helper mthods like psuh to local storage / Global variables for DOM Objects possible which are caled often?;
-                                        -) Better Styling (find a real good one) 
+                                        -) Better Styling (find a real good one)
+                                        -) CSS-Code minimizing 
                                            Bonus Features:
-                                        -) Due Firefox Audio is so slow, need more infos / Add some Audio, Ingame and something in the Settings Menu and also the functionality to control it
-                                        -) Free Gameboard-Size
-                                        -) Start screen playing animation
-                                        -) Go Back from Game Screen to Start screen to change colours, sound or something 
+                                        -) Due Audio was so slow, get more infos to make it faster, than add some Audio, Ingame and something in the Settings Menu and also the functionality to control it
+                                        -) Free Gameboard-Size possile?
+                                        -) Start screen playing animation possible?
+                                        -) Possible to go back from Game-Screen to Start-Screen to change Colours, Sound etc...? Or is it easier to have the Settings-Menu Button Ingame?
 
                                                         Session progress:
-
+                                                        
                                                                                                                                                                                                                                                                                                    */
 
 //                      Important DOM-Elements
@@ -409,8 +410,16 @@ Turning_PlayerIsOnTurn();
 
 ===============================================================================================================================================================================================================================================================================*/
 
+// Function to let the CPU make a placement with a valid number
+function KI_Placement(valid_number){
+    //console.log("Random number for topCell is:  ", random_number);
+    const topCellsArray = document.getElementsByClassName("Class_TopCells");
+    topCellsArray[valid_number].click();
+};
+
+// Function to let KI Easy produce a random, but valid number for placement
 function KI_Easy(){
-    console.log("KI Easy starts to play....");
+    console.log("KI Easy starts to thinking....");
     // Get a random number  
     let random_number = getRandomInt(7);
     // Proof if in this column a placement is possible
@@ -423,16 +432,81 @@ function KI_Easy(){
 };
 
 function KI_Normal(){
-    console.log("KI Normal starts to play....");
+    console.log("KI Normal starts to thinking....");
+    // If it is the first KI Normal Placement, make a random placement
+    if (Game.roundCounter === 1 || Game.roundCounter === 2) KI_Easy(); 
+    else {
+    // If it is not the first placement, get possible placements
+    let valid_numbers_upwards = Get_Valid_Upwards_Placemement();
+
+
+    // Randomizer
+    let valid_number = valid_numbers_upwards[0];
+
+    Thinking_Effect(true, valid_number);
+    };
+
+
 
 };
 
-// Function to let the CPU make a placement with a valid number
-function KI_Placement(valid_number){
-    //console.log("Random number for topCell is:  ", random_number);
-    const topCellsArray = document.getElementsByClassName("Class_TopCells");
-    topCellsArray[valid_number].click();
+function Randomizer (arr1, arr2, arr3){
+    let randomizing_number, randomizing_array = [];
+    
+    for ( let i = 0; i < arr1.length; i++ ){
+        randomizing_array.push(arr1[i]);
+    };
+    
+    if  ( arr2 !== undefined ){
+    for ( let i = 0; i < arr2.length; i++ ){
+        randomizing_array.push(arr2[i]);
+    };};
+    
+    if  ( arr3 !== undefined ){
+    for ( let i = 0; i < arr3.length; i++ ){
+        randomizing_array.push(arr3[i]);
+    };};
+    
+    randomizing_number = getRandomInt(randomizing_array.length);
+    valid_number = randomizing_array[randomizing_number];
+    return valid_number;
 };
+
+
+//                      Placement near to an other
+function Get_Valid_Upwards_Placemement(){
+// Try to make placement on top of an other KI placement if there is enough space to can finish it
+let value, valid_number_array = [];
+// If in one Column is a KI Placement... (slice is not undefined)
+value = Game.actualGameboardPlayer2.C1.slice(-1)[0];
+if(value !== undefined){ value -= 1;   //...and in there is no higher placement from Player 2 in this column (slice value -1), push column value (Column x Minus 1 due to KI Placement array begin with 0 for C1, so push this number), else try next column
+    if(Game.actualGameboardPlayer1.C1.indexOf(value) === -1) valid_number_array.push(0)};
+value = Game.actualGameboardPlayer2.C2.slice(-1)[0];
+if(value !== undefined){ value -= 1;
+    if(Game.actualGameboardPlayer1.C2.indexOf(value) === -1) valid_number_array.push(1)}; 
+value = Game.actualGameboardPlayer2.C3.slice(-1)[0]
+if(value !== undefined){ value -= 1;
+    if(Game.actualGameboardPlayer1.C3.indexOf(value) === -1) valid_number_array.push(2)}; 
+value = Game.actualGameboardPlayer2.C4.slice(-1)[0]
+if(value !== undefined){ value -= 1;
+    if(Game.actualGameboardPlayer1.C4.indexOf(value) === -1) valid_number_array.push(3)};
+value = Game.actualGameboardPlayer2.C5.slice(-1)[0]
+    if(value !== undefined){ value -= 1;
+    if(Game.actualGameboardPlayer1.C5.indexOf(value) === -1) valid_number_array.push(4)};
+value = Game.actualGameboardPlayer2.C6.slice(-1)[0]
+    if(value !== undefined){ value -= 1;
+    if(Game.actualGameboardPlayer1.C6.indexOf(value) === -1) valid_number_array.push(5)};
+value = Game.actualGameboardPlayer2.C7.slice(-1)[0]
+    if(value !== undefined){ value -= 1;
+    if(Game.actualGameboardPlayer1.C7.indexOf(value) === -1) valid_number_array.push(6)};
+
+// If finished return all valid columns 
+return valid_number_array
+}; //End of Top_Placement
+
+
+
+
 
 
 /*
@@ -815,8 +889,8 @@ if(thinking_duration < 2000) thinking_duration = 2000;
 setTimeout(()=>{
 KI_Placement(valid_number)
 clearInterval(thinking);
-// Remove the "dots"-Div container from the turning Div 
-thinker_div.remove();
+// Remove the "dots"-Div container from the turning Div if it exists
+if(document.getElementById("ID_Thinking_Div")){document.getElementById("ID_Thinking_Div").remove();};
 }, thinking_duration);
 };};
 
