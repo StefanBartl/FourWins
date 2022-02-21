@@ -46,7 +46,6 @@
 
 
                                         -) KI Normal bug removing
-                                        -) Naming Button needs a "sign" for the user if it is saved
                                         -) Settings menu
                                         -) Test and repair responsivness
                                         -) Wrap as much in functions as its argueable
@@ -1796,6 +1795,15 @@ function English() {
 
 ================================================================================================================================================================================================================================================================================
 
+     Bonus Jobs to-do:
+
+-) Highlight the winning chain!
+
+                                                                                                                                                                                                                                                                                */
+//#endregion
+
+//#region Credits
+                                                                                                                                                                                                                                                                                /*
     
 ######################################################################################################################
 #                                                                                                                    #
