@@ -60,10 +60,10 @@
                                         -) Due Audio was so slow, get more infos to make it faster, than add some Audio, Ingame and something in the Settings Menu and also the functionality to control it
                                         -) Free Gameboard-Size possile?
                                         -) Start screen playing animation possible?
-                                        -) Possible to go back from Game-Screen to Start-Screen to change Colours, Sound etc...? Or is it easier to have the Settings-Menu Button Ingame?
+                                        -) Pos,000,0sible to go back from Game-Screen to Start-Screen to change Colours, Sound etc...? Or is it easier to have the Settings-Menu Button Ingame?
 
                                                         Session progress:
-                                                                                                                                                                                                                                                                                                   */
+                                                                                                                                                                                                                                                                                             */
 
 //                                  ________________________
 //                                   Important DOM Elements
@@ -197,6 +197,47 @@ document.getElementById("ID_Choose_KI").addEventListener("change", ()=>{
         else // If it is a game against CPU, set Player Two Name to KI Level
         document.getElementById("ID_Player_2_Name").value = document.getElementById("ID_Choose_KI").value;
 });
+//                                  ________________________________________________
+//                                   Event Listener for showing Player name is saved
+document.getElementById("ID_SVG_Player_1").addEventListener("click", ()=>{
+    //console.log("Player 1 name saved to local Storage.");
+    // Create notiification element
+    const notification = document.createElement("h3");
+    notification.innerText = "Name saved!"
+    notification.style.width = "100%";
+    notification.classList.add("Class_LeftNot");
+    // Push it to DOM
+    left_sidebar.appendChild(notification);
+    // Smooth showing
+    notification.classList.add("Class_Smooth_In");
+    // Smooth removing after 3 seconds
+    setTimeout(()=>{
+        notification.classList.remove("Class_Smooth_In");
+        notification.classList.add("Class_Smooth_Out");
+        }, 3000);
+    // Remove it from DOM 
+    setTimeout(()=>{notification.remove()}, 4000);
+});
+document.getElementById("ID_SVG_Player_2").addEventListener("click", ()=>{
+    //console.log("Player 2 name saved to local Storage.");
+    // Create notiification element
+    const notification = document.createElement("h3");
+    notification.innerText = "Name saved!"
+    notification.style.width = "100%";
+    notification.classList.add("Class_RightNot");
+    // Push it to DOM
+    right_sidebar.appendChild(notification);
+    // Smooth showing
+    notification.classList.add("Class_Smooth_In");
+    // Smooth removing after 3 seconds
+    setTimeout(()=>{
+        notification.classList.remove("Class_Smooth_In");
+        notification.classList.add("Class_Smooth_Out");
+        }, 3000);
+    // Remove it from DOM 
+    setTimeout(()=>{notification.remove()}, 4000);
+});
+
 //#endregion
 
 //                                  ________________________
@@ -1223,6 +1264,12 @@ if(winning_player === 2){
 
 ================================================================================================================================================================================================================================================================================*/
 
+//                                  __________________________________________
+//                                  Insert Element after Reference Node in DOM
+
+function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+};
 //                                  _______________________________________
 //                                  Add Choosing-Animation from Top-Cells
 
@@ -1233,7 +1280,6 @@ function Add_Choosing_Ani(column){
     topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1") :
     topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2")
 };
-
 //                                  __________________________________________
 //                                  Remove Choosing-Animation from Top-Cells
 
