@@ -32,9 +32,9 @@
                             |                 8) Credits                                           |
                             |                                                                      | 
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |
-
-
-
+                                                                                                                                                                                                                                                                               */                                                                                                                                               
+//#region General Settings, Global Scoped Objects/Variables & DOM
+                                                                                                                                                                                                                                                                              /*
 ===============================================================================================================================================================================================================================================================================
  
                                     General Settings, Global Scoped Objects/Variables & DOM  
@@ -144,7 +144,7 @@ if(document.getElementById("ID_Colour_Checkbox").checked === true) player_Colour
 
 // Get up-to-date stats for the settings menu
 Stats(); 
-                                    _________________________________
+//                                  _________________________________
 //                                   Section: Starting Page Language 
 
 // Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
@@ -157,23 +157,21 @@ Game.Language = browserLanguage; Game.LanguageIsSetttedByUser = false;
 // Invoke the translation with the getted language
 Translate_StartScreen(browserLanguage, false);
 };
-                                    _________________________________
+//                                  _________________________________
 //                                   Section: Naming / Correct Names 
 
-//                                      Set Names of Players to stored names if they are some
+//                                   Set Names of Players to stored names if they are some
 if(localStorage.Player_One_Name) player_1_name.value = localStorage.Player_One_Name;
 if(localStorage.Player_Two_Name) player_2_name.value = localStorage.Player_Two_Name;
 
-//                                      User storing names in localStorage
+//                                   User storing names in localStorage
 // Save names from input in local storage
 Push_to_LocalStorage("ID_SVG_Player_1", "ID_Player_1_Name", "Player_One_Name", "click");
 Push_to_LocalStorage("ID_SVG_Player_2", "ID_Player_2_Name", "Player_Two_Name", "click");
 // Hover animations for circles after Name-Inputs
 Swap_Two_Classes_by_Events("ID_SVG_Player_1", "mouseenter", "mouseleave", "Class_Buttons_Add_Hover_Animations_1", "Class_Buttons_Remove_Hover_Animations_1");
 Swap_Two_Classes_by_Events("ID_SVG_Player_2", "mouseenter", "mouseleave", "Class_Buttons_Add_Hover_Animations_2", "Class_Buttons_Remove_Hover_Animations_2");
-
-
-                                    _________________________________________
+//                                  _________________________________________
 //                                   Event Listener for setting correct names
 
 document.getElementById("ID_Choose_KI").addEventListener("change", ()=>{
@@ -183,7 +181,8 @@ document.getElementById("ID_Choose_KI").addEventListener("change", ()=>{
         else // If it is a game against CPU, set Player Two Name to KI Level
         document.getElementById("ID_Player_2_Name").value = document.getElementById("ID_Choose_KI").value;
 });
-                                    _______________________________
+
+//                                  _______________________________
 //                                   Section: Set up Settings-Menu
 
 // Remove Settings-Menu from Starting-Screen DOM
@@ -202,7 +201,7 @@ settings_menu.classList.remove("Class_Hide_Settings");
 });
 settings_menu.addEventListener("mouseleave", () => {
 });
-                                    _____________________________________________________________________________________________________________
+//                                  _____________________________________________________________________________________________________________
 //                                   Event Listeners for:  Choose Language (Menu), Choose Colour (Menu), Reset Stats (Menu)
 
 document.getElementById("ID_Language_Menu").addEventListener("change", () => {
@@ -235,9 +234,12 @@ if(Game.Language === "de"){
 // Clear local storage
 if(warning === true) {localStorage.clear();};
 });
-                                    ______________________________
+//                                  ______________________________
 //                                   Event Listener to start Game
 document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
+//#endregion
+
+//#region Main Game
                                                                                                                                                                                                                                                                                 /*
 ================================================================================================================================================================================================================================================================================
  
@@ -245,7 +247,7 @@ document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
 
 ===============================================================================================================================================================================================================================================================================*/
 
-                                    ____________________
+//                                  ____________________
 //                                   Main Game function
 
 function MainGame() {
@@ -265,6 +267,7 @@ if(document.getElementById("ID_Choose_KI").value === "KI_Easy") Game.KI_Level = 
 // DOM-Manipulation to get to the "Game-Screen"
 Game_Screen();
 
+
 // Create DOM-Elements for switch which player is on turn  
 Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", Class: "Class_Turn_PLayers", ID: "ID_Turn_Div" });
 Create_DOM_Element({ ParentID: "ID_Turn_Div", Element: "h3", ID: "ID_h3_turnText"});
@@ -281,36 +284,26 @@ const topCellsArray = document.getElementsByClassName("Class_TopCells");
 // The whole placement and Game Flow is currently in this for loop
 for (let topCell of topCellsArray) {
 
-// Adding & Removing the "Choose the Column" Animation by adding the correct CSS-Class via Event
-topCell.addEventListener("mouseover", Add_Choosing_Ani);
-topCell.addEventListener("mouseleave", Remove_Choosing_Ani);
-
-function Add_Choosing_Ani(){
-    Game.playerIsOnTurn === "left" ?
-    topCell.classList.add("Class_ChoosingAnimation_Coin_1") :
-    topCell.classList.add("Class_ChoosingAnimation_Coin_2")
-    };
-
-function Remove_Choosing_Ani(){
-    Game.playerIsOnTurn === "left" ?
-    topCell.classList.remove("Class_ChoosingAnimation_Coin_1") :
-    topCell.classList.remove("Class_ChoosingAnimation_Coin_2")
-    }
-    
+// Get the ID & Column of the TopCell 
+let ID_topCell = topCell.id;
+let topCellColumn = ID_topCell[4];
+//                                  __________________________________________________________
+//                                  Event-Listener to make Top-Cells unclickable if neccesary
 topCell.addEventListener("click", () => {
-// Make the other top cells unclickable for 1s (animation duration) so it cannont get overlapped
+//  Make the other top cells unclickable for 1s (animation duration) so it cannont get overlapped
 for (let topCellA of topCellsArray) {
 topCellA.style = "pointer-events:none";
 setTimeout(() => { topCellA.style = "pointer-events: auto" }, 1000);
 }
-
-});
-
-// Add the Event listener for the Game-flow function
+});                            
+//                                  __________________________________________
+//                                  Event-Listener for the Choosing-Animation
+topCell.addEventListener("mouseover", ()=>{Add_Choosing_Ani(topCellColumn)});
+topCell.addEventListener("mouseleave", ()=>{Remove_Choosing_Ani(topCellColumn)});
+//                                  ______________________________________________
+//                                  Event-Listener to start the Game-flow function
 topCell.addEventListener("click", GameFlow);
-let ID_topCell = topCell.id;
-
-                                   _______________________________________________
+//                                 _______________________________________________
 //                                  Placement function for Game and Human Players
 
 function GameFlow() {
@@ -405,16 +398,19 @@ Turning_PlayerIsOnTurn();
 },      // End of the anyonyme function of the setTimeout()
 1000); // End of the setTimeout(), next placement is possible!
 };    // End Game-Flow-Function
-};   // End Main Game For-Loop
+};   // End Main Game for-of Loop (topcell of topCellArray)
 };  // End Main Game Wrapper Function
+//#endregion
+
+//#region KI Easy / KI Normal / KI Heavy
                                                                                                                                                                                                                                                                                     /*
 ================================================================================================================================================================================================================================================================================
  
-                                    KI Easy / KI Normal       
+                                    KI Easy / KI Normal / KI Heavy      
 
 ===============================================================================================================================================================================================================================================================================*/
 
-                                    ___________________________
+//                                  ___________________________
 //                                   Placement function for KI
 
 function KI_Placement(valid_number){
@@ -422,7 +418,7 @@ function KI_Placement(valid_number){
     const topCellsArray = document.getElementsByClassName("Class_TopCells");
     topCellsArray[valid_number].click();
 };
-                                    _______________________________
+//                                  _______________________________
 //                                   Algorhytmus for KI Level Easy
 
 function KI_Easy(){
@@ -441,7 +437,7 @@ let valid_number = random_number;
 Thinking_Effect(true, valid_number);
 } else (KI_Easy());
 };
-                                    ___________________________________________
+//                                  ___________________________________________
 //                                   Algorhytmus for KI Level Normal (!Buggy!)
 
 function KI_Normal(){
@@ -482,7 +478,7 @@ if(proof_side === false){ Thinking_Effect(true, numbers_sideways[0]); return };
 KI_Easy(); return};
 
 };
-                                    ________________________________________________________________
+//                                  ________________________________________________________________
 //                                   Algorhytmus for KI Level Hard (!Placeholder. Not written yet.!)
 
 function KI_Hard(){
@@ -494,7 +490,7 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
 */
 // Code here... :-)
 }
-                                    ________________________________________
+//                                  ________________________________________
 //                                   Randomize values from different arrays
 
 function Randomizer (arr1, arr2){
@@ -515,7 +511,7 @@ function Randomizer (arr1, arr2){
     console.log("Randomizer has choosen: " + valid_number);
     return valid_number;
 };
-                                    _________________________________________________________________
+//                                  __________________________________________________________________________
 //                                   Detection of horizontal "3 Coin Chain" to avoid/force finishing (!Buggy!)
 
 function Detect_3_Coin_Chains_Upwards(){
@@ -613,11 +609,8 @@ if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
 return 6
 };
 
-
-
-
 };
-                                    _______________________________________________________________
+//                                  _________________________________________________________________________
 //                                   Detection of vertical "3 Coin Chain" to avoid/force finishing (!Buggy!)
 
 function Detect_3_Coin_Chains_Sideways(){
@@ -730,7 +723,7 @@ countFor_Win === 2 && document.getElementById(`ID_C7R${el + 1}`).getAttribute("d
 else if (countFor_Win === 2 && document.getElementById(`ID_C3R${el + 1}`).getAttribute("data-isPlayed") !== null) return 2; 
 };};
 };
-                                    ____________________________________________________
+//                                  ____________________________________________________
 //                                   Get a valid placement focused on column => upwards
 
 function Get_Valid_Upwards_Placemement(){
@@ -762,7 +755,7 @@ value = Game.actualGameboardPlayer2.C7.slice(-1)[0]
 // If finished return all valid columns 
 return valid_number_array
 };
-                                    __________________________________________________
+//                                  __________________________________________________
 //                                   Get a valid placement focused on row => sideways
 
 function Get_Valid_Sideways_Placement(){
@@ -859,6 +852,9 @@ let unique_valid_number_array = valid_number_array.filter(onlyUnique);
 //console.log("Sideways array after filter out: " + unique_valid_number_array);
 return unique_valid_number_array;
 };
+//#endregion
+
+//#region Validation
                                                                                                                                                                                                                                                                                /*
 ===============================================================================================================================================================================================================================================================================
 
@@ -866,7 +862,7 @@ return unique_valid_number_array;
 
 ===============================================================================================================================================================================================================================================================================*/
 
-                                    _______________________________________________
+//                                  _______________________________________________
 //                                   Validate if there is a Diagonal triggered win
 
 function Diagonal_Validator(player, columnNumber, row) {
@@ -909,7 +905,7 @@ return true;
 };
 }
 };
-                                    ____________________________________________________________
+//                                  ____________________________________________________________
 //                                   Validate if the placement in a given Column triggers a 
 
 function Column_Validator(player) {
@@ -938,7 +934,7 @@ return true;
 };
 };
 }; 
-                                    ________________________________________________________
+//                                  ________________________________________________________
 //                                   Validate if the placement in a given Row triggers a win
 
 function Row_Validator(player, column) {
@@ -968,7 +964,7 @@ if (countFor_Win === 4) {
 };
 };
 };
-                                    ___________________________________________
+//                                  ___________________________________________
 //                                   After 6 placements in one column, lock it
 
 function TopCell_Validation(columnNumber, invokedByKi){
@@ -994,6 +990,9 @@ if(invokedByKi === true){
 // If it passes the proofment, just return and do nothing
 return;
 };
+//#endregion
+
+//#region Game End Screen
                                                                                                                                                                                                                                                                                /*
 ===============================================================================================================================================================================================================================================================================
 
@@ -1001,7 +1000,7 @@ return;
 
 ===============================================================================================================================================================================================================================================================================*/
 
-                                    _________________________________
+//                                  _________________________________
 //                                   Creation of the Game-End-Screen
 
 function Game_End_Screen(winning_player, winning_chain) {
@@ -1186,6 +1185,9 @@ if(winning_player === 2){
 }); // Mew Game Event Listener End
 
 };
+//#endregion
+
+//#region Helper Functions
 
                                                                                                                                                                                                                                                                                 /*            
 ================================================================================================================================================================================================================================================================================
@@ -1194,8 +1196,29 @@ if(winning_player === 2){
 
 ================================================================================================================================================================================================================================================================================*/
 
-                                    _______________
-//                                   Lock topCells
+//                                  _______________________________________
+//                                  Add Choosing-Animation from Top-Cells
+
+function Add_Choosing_Ani(column){
+    column -= 1;
+    const topCellsArray = document.getElementsByClassName("Class_TopCells");
+    Game.playerIsOnTurn === "left" ?
+    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1") :
+    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2")
+};
+
+//                                  __________________________________________
+//                                  Remove Choosing-Animation from Top-Cells
+
+function Remove_Choosing_Ani(column){
+    column -= 1;
+    const topCellsArray = document.getElementsByClassName("Class_TopCells");
+Game.playerIsOnTurn === "left" ?
+topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1") :
+topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2")
+};
+//                                 _______________
+//                                  Lock topCells
 
 function Lock_TopCells(){
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -1206,7 +1229,7 @@ topCell.classList.remove("Class_ChoosingAnimation_Coin_1");
 topCell.classList.remove("Class_ChoosingAnimation_Coin_2");
 };
 };
-                                    ______________________________
+//                                  ______________________________
 //                                   Simulate a "Thinking"-Effect
 
 function Thinking_Effect(invokerKI, valid_number){
@@ -1251,20 +1274,20 @@ if(document.getElementById("ID_Thinking_Div")){document.getElementById("ID_Think
 }, thinking_duration);
 };
 };
-                                    ___________________________________
+//                                  ___________________________________
 //                                   Filter array to get unique values
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
     // var unique = array.filter(onlyUnique);
 };
-                                    __________________
+//                                  __________________
 //                                   Get a random Int
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 };
-                                    ______________________
+//                                  ______________________
 //                                   Push to localStorage
 
 function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event) {
@@ -1272,7 +1295,7 @@ document.getElementById(`${IDfromTrigger}`).addEventListener(`${event}`, () => {
 localStorage.setItem(`${key}`, document.getElementById(`${IDfromValue}`).value);
 });
 }
-                                    __________________________________________
+//                                  __________________________________________
 //                                   Swapping classes on element via 2 events
 
 function Swap_Two_Classes_by_Events(element_ID, event_1, event_2, first_Class, second_Class) {
@@ -1285,7 +1308,7 @@ document.getElementById(`${element_ID}`).classList.remove(`${first_Class}`);
 document.getElementById(`${element_ID}`).classList.add(`${second_Class}`);
 })
 };
-                                    ________________________________
+//                                  ________________________________
 //                                   Change which Player is on turn
 
 function Turning_PlayerIsOnTurn() {
@@ -1322,7 +1345,7 @@ document.getElementById("ID_Thinking_Div").remove();
 clearInterval(window.thinking);
 };};
 };
-                                    __________________
+//                                  __________________
 //                                   Show Game-Screen
 
 function Game_Screen(){
@@ -1336,7 +1359,7 @@ document.getElementById("ID_MainWrapper").classList.add("Class_Main_Wrapper_InGa
 document.getElementById("ID_GameboardWrapper").classList.add("Class_Gameboard_Wrapper_InGame");
 if(document.getElementById("ID_h3_turnText")) document.getElementById("ID_h3_turnText").style = "display: block";
 }
-                                    ___________________
+//                                  ___________________
 //                                   Show Start-Screen
 
 function Start_Screen(){
@@ -1350,7 +1373,7 @@ document.getElementById("ID_MainWrapper").classList.remove("Class_Main_Wrapper_I
 document.getElementById("ID_GameboardWrapper").classList.remove("Class_Gameboard_Wrapper_InGame");
 document.getElementById("ID_h3_turnText").style = "display: none";
 }
-                                    ________________________
+//                                  ________________________
 //                                   Keep stats up-to-date
 
 function Stats(){
@@ -1361,7 +1384,7 @@ value = localStorage.KI_Normal_Wins || 0; document.getElementById("ID_Normal_1")
 value = localStorage.KI_Normal_CPUWins || 0; document.getElementById("ID_Normal_3").innerText = value;
 value = localStorage.KI_Normal_Draws || 0; document.getElementById("ID_Normal_2").innerText = value;
 }
-                                    __________________________
+//                                  __________________________
 //                                   Increase Stats after Win
 
 function Update_Stats(winning_player){
@@ -1391,7 +1414,7 @@ document.getElementById("ID_Normal_2").innerText = value;};
 };
 // Enough space for a unbeatable level ??? :-)
 };
-                                    _____________________
+//                                  _____________________
 //                                   "Creator"-Function
 
 function Create_DOM_Element(options, arrayOne, arrayTwo) {
@@ -1452,7 +1475,7 @@ parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width
 */
 };
 
-                                    ____________________________
+//                                  ____________________________
 //                                   Fireworks Canvas-Animation                                
 
 function Fireworks(canvasID){
@@ -1613,6 +1636,9 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 })
 };
+//#endregion
+
+//#region Translation-Manager & Page Library
                                                                                                                                                                                                                                                                                 /*
 ===============================================================================================================================================================================================================================================================================
  
@@ -1620,7 +1646,7 @@ canvas.height = window.innerHeight;
 
 ===============================================================================================================================================================================================================================================================================*/
 
-                                   __________________________________
+//                                 __________________________________
 //                                   Translation Managing Function 
 
 function Translate_StartScreen(language, byUser) {
@@ -1642,7 +1668,7 @@ sound_h.innerText = "Sound";
 if (localStorage.getItem("Language") === "de") document.getElementById("ID_Language_Menu").value === "Deutsch";
 else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value === "English"; 
 };
-                                    ___________________
+//                                  ___________________
 //                                    Deutsch Library 
 
 function Deutsch() {
@@ -1664,7 +1690,7 @@ function Deutsch() {
     document.getElementById("ID_No").innerText = "Nein";
     document.getElementById("ID_Easy_Text").innerText = "KI Einfach";
 };
-                                    ___________________
+//                                   ___________________
 //                                    English Library 
 
 function English() {
@@ -1686,6 +1712,10 @@ function English() {
     document.getElementById("ID_Easy_Text").innerText = "KI Easy";
  
 };
+//#endregion
+
+//#region Final informations and Comments
+
                                                                                                                                                                                                                                                                                 /*
 ================================================================================================================================================================================================================================================================================
  
@@ -1708,3 +1738,5 @@ function English() {
 #                                                                                                                    #
 #                                                                                                                    #
 ######################################################################################################################                                                                                                                                                               */
+
+//#endregion
