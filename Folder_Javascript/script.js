@@ -45,7 +45,7 @@
                                                         Jobs To-do:
 
 
-                                        -) KI Normal integration
+                                        -) KI Normal bug removing
                                         -) Naming Button needs a "sign" for the user if it is saved
                                         -) Settings menu
                                         -) Test and repair responsivness
@@ -142,7 +142,11 @@ let player_Colour_Left = "yellow";
 // Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted. (Checkbox don't uncheck by refresh)
 if(document.getElementById("ID_Colour_Checkbox").checked === true) player_Colour_Left = "red";
 
-//                      Set Starting-Page language
+// Get up-to-date stats for the settings menu
+Stats(); 
+                                    _________________________________
+//                                   Section: Starting Page Language 
+
 // Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
 let isSetted = localStorage.LanguageIsSetttedByUser;
 let lang = localStorage.Language;
@@ -153,16 +157,14 @@ Game.Language = browserLanguage; Game.LanguageIsSetttedByUser = false;
 // Invoke the translation with the getted language
 Translate_StartScreen(browserLanguage, false);
 };
+                                    _________________________________
+//                                   Section: Naming / Correct Names 
 
-// Get up-to-date stats for the settings menu
-Stats(); 
-
-
-//          Set Names of Players to stored names if they are some
+//                                      Set Names of Players to stored names if they are some
 if(localStorage.Player_One_Name) player_1_name.value = localStorage.Player_One_Name;
 if(localStorage.Player_Two_Name) player_2_name.value = localStorage.Player_Two_Name;
 
-//                          User storing names
+//                                      User storing names in localStorage
 // Save names from input in local storage
 Push_to_LocalStorage("ID_SVG_Player_1", "ID_Player_1_Name", "Player_One_Name", "click");
 Push_to_LocalStorage("ID_SVG_Player_2", "ID_Player_2_Name", "Player_Two_Name", "click");
@@ -170,7 +172,20 @@ Push_to_LocalStorage("ID_SVG_Player_2", "ID_Player_2_Name", "Player_Two_Name", "
 Swap_Two_Classes_by_Events("ID_SVG_Player_1", "mouseenter", "mouseleave", "Class_Buttons_Add_Hover_Animations_1", "Class_Buttons_Remove_Hover_Animations_1");
 Swap_Two_Classes_by_Events("ID_SVG_Player_2", "mouseenter", "mouseleave", "Class_Buttons_Add_Hover_Animations_2", "Class_Buttons_Remove_Hover_Animations_2");
 
-//                      Set-up the Settings Menu
+
+                                    _________________________________________
+//                                   Event Listener for setting correct names
+
+document.getElementById("ID_Choose_KI").addEventListener("change", ()=>{
+    // Set correct names after choosing "Play against"
+        // If "Play against CPU = No" is selected, make sure "No" isn't the name of Player Two
+        if(document.getElementById("ID_Choose_KI").value === "No") {document.getElementById("ID_Player_2_Name").value = localStorage.Player_Two_Name || document.getElementById("ID_Player_2_Name").placeholder;} 
+        else // If it is a game against CPU, set Player Two Name to KI Level
+        document.getElementById("ID_Player_2_Name").value = document.getElementById("ID_Choose_KI").value;
+});
+                                    _______________________________
+//                                   Section: Set up Settings-Menu
+
 // Remove Settings-Menu from Starting-Screen DOM
 settings_menu.style.display = "none";
 // Show / Hide & Style Event-Listener
@@ -183,15 +198,13 @@ if (!settings_menu.classList.contains("Class_Showing_Settings")) {
 settings_menu.style.display = "block";
 settings_menu.classList.add("Class_Showing_Settings");
 settings_menu.classList.remove("Class_Hide_Settings");
-
 }
 });
-
 settings_menu.addEventListener("mouseleave", () => {
-
 });
+                                    _____________________________________________________________________________________________________________
+//                                   Event Listeners for:  Choose Language (Menu), Choose Colour (Menu), Reset Stats (Menu)
 
-//                      Choose Language Event in the settings menu
 document.getElementById("ID_Language_Menu").addEventListener("change", () => {
 // Save language in Local Storage and Game Object
 // Important maybe for later: With more languages, if/else needed!
@@ -202,21 +215,9 @@ Game.Language = languageCode; Game.LanguageIsSetttedByUser = true;
 // Make sure that a manually setted setted language is not overwritten by the default detected default browser language
 Translate_StartScreen(languageCode, true);
 });
-
-// Event-Listener to change the Colour of the playing stones in the Settings Menu
 document.getElementById("ID_Colour_Checkbox").addEventListener("click", () => {
 document.getElementById("ID_Colour_Checkbox").checked === true ? player_Colour_Left = "red" : player_Colour_Left = "yellow";
 });
-
-// Set correct names after choosing "Play against"
-document.getElementById("ID_Choose_KI").addEventListener("change", ()=>{
-    // If "Play against CPU = No" is selected, make sure "No" isn't the name of Player Two
-    if(document.getElementById("ID_Choose_KI").value === "No") {document.getElementById("ID_Player_2_Name").value = localStorage.Player_Two_Name || document.getElementById("ID_Player_2_Name").placeholder;} 
-    else // If it is a game against CPU, set Player Two Name to KI Level
-    document.getElementById("ID_Player_2_Name").value = document.getElementById("ID_Choose_KI").value;
-});
-
-// Event listener to reset the stats against CPU
 document.getElementById("ID_Reset_Easy").addEventListener("click", ()=>{
 localStorage.KI_Easy_Wins = 0; localStorage.KI_Easy_CPUWins = 0; localStorage.KI_Easy_Draws = 0;
 });
@@ -234,19 +235,18 @@ if(Game.Language === "de"){
 // Clear local storage
 if(warning === true) {localStorage.clear();};
 });
-
-
-//                      Setting the Event-Listener to start the Game Button
+                                    ______________________________
+//                                   Event Listener to start Game
 document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
-document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
-
-
                                                                                                                                                                                                                                                                                 /*
 ================================================================================================================================================================================================================================================================================
  
                                              Main Game
 
 ===============================================================================================================================================================================================================================================================================*/
+
+                                    ____________________
+//                                   Main Game function
 
 function MainGame() {
 
@@ -310,7 +310,8 @@ setTimeout(() => { topCellA.style = "pointer-events: auto" }, 1000);
 topCell.addEventListener("click", GameFlow);
 let ID_topCell = topCell.id;
 
-//                      Here starts the logical function for jobs after one Player placed a coin
+                                   _______________________________________________
+//                                  Placement function for Game and Human Players
 
 function GameFlow() {
 
@@ -405,10 +406,7 @@ Turning_PlayerIsOnTurn();
 1000); // End of the setTimeout(), next placement is possible!
 };    // End Game-Flow-Function
 };   // End Main Game For-Loop
-};  // End Start Game Wrapper Function
-
-
-
+};  // End Main Game Wrapper Function
                                                                                                                                                                                                                                                                                     /*
 ================================================================================================================================================================================================================================================================================
  
@@ -416,64 +414,88 @@ Turning_PlayerIsOnTurn();
 
 ===============================================================================================================================================================================================================================================================================*/
 
-// Function to let the CPU make a placement with a valid number
+                                    ___________________________
+//                                   Placement function for KI
+
 function KI_Placement(valid_number){
     //console.log("Random number for topCell is:  ", random_number);
     const topCellsArray = document.getElementsByClassName("Class_TopCells");
     topCellsArray[valid_number].click();
 };
+                                    _______________________________
+//                                   Algorhytmus for KI Level Easy
 
-// Function to let KI Easy produce a random, but valid number for placement
 function KI_Easy(){
-    console.log("KI Easy starts to thinking....");
-    // Get a random number  
-    let random_number = getRandomInt(7);
-    // Proof if in this column a placement is possible
-    let number_proofing = TopCell_Validation(random_number, true);
-    // If it is possible, name it valid_number and invoke "KI_Thinking", if it isn't get a random number again and proof it as long as there is a valid number
-    if(number_proofing === true){
-           let valid_number = random_number;
-            Thinking_Effect(true, valid_number);
-    } else (KI_Easy());
+/*
+                            Infobox
+Function to let KI Easy produce a random, but valid number for placement
+*/
+console.log("KI Easy starts to thinking....");
+// Get a random number  
+let random_number = getRandomInt(7);
+// Proof if in this column a placement is possible
+let number_proofing = TopCell_Validation(random_number, true);
+// If it is possible, name it valid_number and invoke "KI_Thinking", if it isn't get a random number again and proof it as long as there is a valid number
+if(number_proofing === true){
+let valid_number = random_number;
+Thinking_Effect(true, valid_number);
+} else (KI_Easy());
 };
+                                    ___________________________________________
+//                                   Algorhytmus for KI Level Normal (!Buggy!)
 
-// Function to let KI Normal make placements as near as its possible to other Coins from him, try to avoid upwards and sideways finishing moves from Human Player and try to make them self
 function KI_Normal(){
-    // If it is the first KI Normal Placement, make a random placement
-    if (Game.roundCounter === 1 || Game.roundCounter === 2) KI_Easy(); 
-    else {
-    
-    // Proof if KI have to make or avoid vertial finishing move
-    let upwards = Detect_3_Coin_Chains_Upwards();
-    if (upwards !== undefined){
-        // If there is a possibility, proof if placement on top is possible
-        let upwards_topVal = TopCell_Validation(upwards, true);
-        if(upwards_topVal === false){ Thinking_Effect(true, upwards); return };};
+/* 
+                                Infobox
+Function to let KI Normal make placements as near as its possible to other Coins from him,
+try to avoid upwards and sideways finishing moves from Human Player and try to make them self.
 
-    let sideways = Detect_3_Coin_Chains_Sideways();
-        console.log("sideway", sideways);
-    if (sideways !== undefined){ Thinking_Effect(true, sideways); return};
+Buggy because of the "3 Coin Chain" Functions (below) doesn't work as espected.I'm getting hands on soon.
+*/
 
-    // If not, get possible placements
-    let numbers_upwards = Get_Valid_Upwards_Placemement();
-    // Take the first one and proof it
-        let proof_up = TopCell_Validation(numbers_upwards[0],true);    
-        if(proof_up === false) { Thinking_Effect(true, numbers_upwards[0]); return };
-    
-    let numbers_sideways = Get_Valid_Sideways_Placement();
-        let proof_side = TopCell_Validation(numbers_sideways[0], true);
-        if(proof_side === false){ Thinking_Effect(true, numbers_sideways[0]); return };
-  
-    // If nothing is possible, make random placement
-        KI_Easy(); return};
+// If it is the first KI Normal Placement, make a random placement
+if (Game.roundCounter === 1 || Game.roundCounter === 2) KI_Easy(); 
+else {
+
+// Proof if KI have to make or avoid vertial finishing move
+let upwards = Detect_3_Coin_Chains_Upwards();
+if (upwards !== undefined){
+// If there is a possibility, proof if placement on top is possible
+let upwards_topVal = TopCell_Validation(upwards, true);
+if(upwards_topVal === false){ Thinking_Effect(true, upwards); return };};
+
+let sideways = Detect_3_Coin_Chains_Sideways();
+console.log("sideway", sideways);
+if (sideways !== undefined){ Thinking_Effect(true, sideways); return};
+
+// If not, get possible placements
+let numbers_upwards = Get_Valid_Upwards_Placemement();
+// Take the first one and proof it
+let proof_up = TopCell_Validation(numbers_upwards[0],true);    
+if(proof_up === false) { Thinking_Effect(true, numbers_upwards[0]); return };
+
+let numbers_sideways = Get_Valid_Sideways_Placement();
+let proof_side = TopCell_Validation(numbers_sideways[0], true);
+if(proof_side === false){ Thinking_Effect(true, numbers_sideways[0]); return };
+
+// If nothing is possible, make random placement
+KI_Easy(); return};
 
 };
+                                    ________________________________________________________________
+//                                   Algorhytmus for KI Level Hard (!Placeholder. Not written yet.!)
 
-
-// Function to let KI Normal make placements as near as its possible to other Coins from him, try to avoid upwards, sideways and diagonal finishing moves from Human Player and try to make them self. Also prefer make placements on a 2 Coin chain, also in all three directions.
 function KI_Hard(){
+/*
+                                Infobox / Ideas
+Function to let KI Normal make placements as near as its possible to other Coins from him,
+try to avoid upwards, sideways and diagonal finishing moves from Human Player and try to make them self.
+Also prefer make placements on a 2 Coin chain, also in all three directions.
+*/
 // Code here... :-)
 }
+                                    ________________________________________
+//                                   Randomize values from different arrays
 
 function Randomizer (arr1, arr2){
     console.log("Randomizer getted:", arr1,  arr2);
@@ -493,9 +515,12 @@ function Randomizer (arr1, arr2){
     console.log("Randomizer has choosen: " + valid_number);
     return valid_number;
 };
+                                    _________________________________________________________________
+//                                   Detection of horizontal "3 Coin Chain" to avoid/force finishing (!Buggy!)
 
-// Function to let KI know if there is a horizontal 3 Coin chain to avoid finishing moves from Human or make them self +++ Basically it depends hardly of the Column Validator from the Win-Validation section
 function Detect_3_Coin_Chains_Upwards(){
+// +++ Basically it depends hardly of the Column Validator from the Win-Validation section +++
+
 // Job: Is there any way to make that code smaller? So much repetition, but not possible to build a autmatism because of Game.actualGameboard is a Object, nnot an array an i fdind no way to iterate trough....
 
 // KI Finishing Upwards Section
@@ -592,10 +617,11 @@ return 6
 
 
 };
+                                    _______________________________________________________________
+//                                   Detection of vertical "3 Coin Chain" to avoid/force finishing (!Buggy!)
 
-// Function to let KI know if there is a vertical 3 Coin chain to avoid finishing moves from Human or make them self +++ Basically it depends hardly on the Row Validator from the Win-Validation Section 
 function Detect_3_Coin_Chains_Sideways(){
-
+// +++ Basically it depends hardly on the Row Validator from the Win-Validation Section +++
 // Detect possible finishing move  from KI
 let countFor_Win = 0;
 // For every made placement in the column
@@ -704,8 +730,9 @@ countFor_Win === 2 && document.getElementById(`ID_C7R${el + 1}`).getAttribute("d
 else if (countFor_Win === 2 && document.getElementById(`ID_C3R${el + 1}`).getAttribute("data-isPlayed") !== null) return 2; 
 };};
 };
+                                    ____________________________________________________
+//                                   Get a valid placement focused on column => upwards
 
-//                     Upwards Placement near to an other coin 
 function Get_Valid_Upwards_Placemement(){
 // Try to make placement on top of an other KI placement if there is enough space to can finish it
 let value, valid_number_array = [];
@@ -734,9 +761,10 @@ value = Game.actualGameboardPlayer2.C7.slice(-1)[0]
 
 // If finished return all valid columns 
 return valid_number_array
-}; //End of Top_Placement
+};
+                                    __________________________________________________
+//                                   Get a valid placement focused on row => sideways
 
-//                     Sideways Placement near to an other coin 
 function Get_Valid_Sideways_Placement(){
 let valid_number_array = [];
 
@@ -831,44 +859,16 @@ let unique_valid_number_array = valid_number_array.filter(onlyUnique);
 //console.log("Sideways array after filter out: " + unique_valid_number_array);
 return unique_valid_number_array;
 };
-
-
-
-
-/*
+                                                                                                                                                                                                                                                                               /*
 ===============================================================================================================================================================================================================================================================================
 
-                            Functions for Validations         
+                                    Functions for Validations         
 
 ===============================================================================================================================================================================================================================================================================*/
 
+                                    _______________________________________________
+//                                   Validate if there is a Diagonal triggered win
 
-//                      Validation for locking Columns after the 6 possible placements of each Column
-function TopCell_Validation(columnNumber, invokedByKi){
-
-let proof;
-if(columnNumber === 1) proof = row_Counter_C1;
-else if(columnNumber === 2) proof = row_Counter_C2;
-else if(columnNumber === 3) proof = row_Counter_C3;
-else if(columnNumber === 4) proof = row_Counter_C4;
-else if(columnNumber === 5) proof = row_Counter_C5;
-else if(columnNumber === 6) proof = row_Counter_C6;
-else if(columnNumber === 7) proof = row_Counter_C7;
-
-// Important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section! 
-// Proof if the columnNumber was the last possible cell to play in the column
-if (proof === 2 && invokedByKi === false){ // If it was lock it for further placements 
-        document.getElementById(`ID_C${columnNumber}R1`).style = "pointer-events:none"; return}; 
-
-// If the column is locked for placements, return false to KI Normal & KI Easy, so they know they cant make a placement there. Else return true so they hav a valid column number.
-if(invokedByKi === true){
-    if(proof === 2){return false} else return true;}
-
-// If it passes the proofment, just return and do nothing
-return;
-};
-
-//                      Function to validate if there is a Diagonal-Triggered Win
 function Diagonal_Validator(player, columnNumber, row) {
 
 let basis = document.getElementById(`ID_C${columnNumber}R${row}`);
@@ -908,9 +908,10 @@ Game_End_Screen(player, "Diagonal");
 return true;
 };
 }
-}; // Diagonal_Validator End
+};
+                                    ____________________________________________________________
+//                                   Validate if the placement in a given Column triggers a 
 
-//                      Function to validate if there is a Column-Triggered Win
 function Column_Validator(player) {
 
 // Get the actual state of the Gameboard 
@@ -936,9 +937,10 @@ Game_End_Screen(player, "Column");
 return true;
 };
 };
-}; // Column_Validator End
+}; 
+                                    ________________________________________________________
+//                                   Validate if the placement in a given Row triggers a win
 
-//                      Function to validate if the placement in a given row triggers a win
 function Row_Validator(player, column) {
  
 // Get the actual state of the Gameboard
@@ -965,17 +967,43 @@ if (countFor_Win === 4) {
     return true;
 };
 };
-}; // Row_Validator End
+};
+                                    ___________________________________________
+//                                   After 6 placements in one column, lock it
 
+function TopCell_Validation(columnNumber, invokedByKi){
 
-/*
+let proof;
+if(columnNumber === 1) proof = row_Counter_C1;
+else if(columnNumber === 2) proof = row_Counter_C2;
+else if(columnNumber === 3) proof = row_Counter_C3;
+else if(columnNumber === 4) proof = row_Counter_C4;
+else if(columnNumber === 5) proof = row_Counter_C5;
+else if(columnNumber === 6) proof = row_Counter_C6;
+else if(columnNumber === 7) proof = row_Counter_C7;
+
+// Important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section! 
+// Proof if the columnNumber was the last possible cell to play in the column
+if (proof === 2 && invokedByKi === false){ // If it was lock it for further placements 
+        document.getElementById(`ID_C${columnNumber}R1`).style = "pointer-events:none"; return}; 
+
+// If the column is locked for placements, return false to KI Normal & KI Easy, so they know they cant make a placement there. Else return true so they hav a valid column number.
+if(invokedByKi === true){
+    if(proof === 2){return false} else return true;}
+
+// If it passes the proofment, just return and do nothing
+return;
+};
+                                                                                                                                                                                                                                                                               /*
 ===============================================================================================================================================================================================================================================================================
 
-                            Game End Screen 
+                                    Game End Screen 
 
 ===============================================================================================================================================================================================================================================================================*/
 
-//                                  Game-End Screen Function
+                                    _________________________________
+//                                   Creation of the Game-End-Screen
+
 function Game_End_Screen(winning_player, winning_chain) {
 // If the Game was against KI, update the stats in the local storage via invoking helper function
 if(Game.Game_against_KI === true )Update_Stats(winning_player);
@@ -1157,17 +1185,18 @@ if(winning_player === 2){
 
 }); // Mew Game Event Listener End
 
-}; // Game End Screen End
+};
 
-
-/*            
+                                                                                                                                                                                                                                                                                /*            
 ================================================================================================================================================================================================================================================================================
  
                                     Helper-Functions               
 
-==============================================================================================================================================================================================================================================================================*/
+================================================================================================================================================================================================================================================================================*/
 
-// Lock the top cells in games against KI
+                                    _______________
+//                                   Lock topCells
+
 function Lock_TopCells(){
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
 for (let topCell of topCellsArray){
@@ -1175,10 +1204,12 @@ topCell.style.cursor = "none";
 topCell.style = "pointer-events:none"; 
 topCell.classList.remove("Class_ChoosingAnimation_Coin_1"); 
 topCell.classList.remove("Class_ChoosingAnimation_Coin_2");
-};};
+};
+};
+                                    ______________________________
+//                                   Simulate a "Thinking"-Effect
 
-// Generate the "Thinking Effect" for KI and Humans
-function Thinking_Effect(invokerKI ,valid_number){
+function Thinking_Effect(invokerKI, valid_number){
 
 // First make sure there is no "Thinking" Div attached
 if (!document.getElementById("ID_Thinking_Div")){
@@ -1218,30 +1249,32 @@ clearInterval(thinking);
 // Remove the "dots"-Div container from the turning Div if it exists
 if(document.getElementById("ID_Thinking_Div")){document.getElementById("ID_Thinking_Div").remove();};
 }, thinking_duration);
-};};
+};
+};
+                                    ___________________________________
+//                                   Filter array to get unique values
 
-
-// Get a array with unique values with the filter method
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
     // var unique = array.filter(onlyUnique);
-  }
-  
+};
+                                    __________________
+//                                   Get a random Int
 
-// Returns a random number
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
-    };
-
-// Function to push the names from the input to the local storage
+};
+                                    ______________________
+//                                   Push to localStorage
 
 function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event) {
 document.getElementById(`${IDfromTrigger}`).addEventListener(`${event}`, () => {
 localStorage.setItem(`${key}`, document.getElementById(`${IDfromValue}`).value);
 });
 }
+                                    __________________________________________
+//                                   Swapping classes on element via 2 events
 
-// Function for swaping trough two classes on a element initiate by two events 
 function Swap_Two_Classes_by_Events(element_ID, event_1, event_2, first_Class, second_Class) {
 document.getElementById(`${element_ID}`).addEventListener(`${event_1}`, () => {
 document.getElementById(`${element_ID}`).classList.remove(`${second_Class}`);
@@ -1252,8 +1285,9 @@ document.getElementById(`${element_ID}`).classList.remove(`${first_Class}`);
 document.getElementById(`${element_ID}`).classList.add(`${second_Class}`);
 })
 };
+                                    ________________________________
+//                                   Change which Player is on turn
 
-// Helper function to change Player
 function Turning_PlayerIsOnTurn() {
 // Change Player
 Game.playerIsOnTurn === "left" ? Game.playerIsOnTurn = "right" : Game.playerIsOnTurn = "left";
@@ -1288,6 +1322,8 @@ document.getElementById("ID_Thinking_Div").remove();
 clearInterval(window.thinking);
 };};
 };
+                                    __________________
+//                                   Show Game-Screen
 
 function Game_Screen(){
 // Remove the start screen elements
@@ -1300,6 +1336,8 @@ document.getElementById("ID_MainWrapper").classList.add("Class_Main_Wrapper_InGa
 document.getElementById("ID_GameboardWrapper").classList.add("Class_Gameboard_Wrapper_InGame");
 if(document.getElementById("ID_h3_turnText")) document.getElementById("ID_h3_turnText").style = "display: block";
 }
+                                    ___________________
+//                                   Show Start-Screen
 
 function Start_Screen(){
 // Add the start screen elements
@@ -1312,8 +1350,9 @@ document.getElementById("ID_MainWrapper").classList.remove("Class_Main_Wrapper_I
 document.getElementById("ID_GameboardWrapper").classList.remove("Class_Gameboard_Wrapper_InGame");
 document.getElementById("ID_h3_turnText").style = "display: none";
 }
+                                    ________________________
+//                                   Keep stats up-to-date
 
-// Keep the STats in the Settings Menu Up-to-Date via local Storage
 function Stats(){
 let value = localStorage.KI_Easy_Wins || 0; document.getElementById("ID_Easy_1").innerText = value;
 value = localStorage.KI_Easy_CPUWins || 0; document.getElementById("ID_Easy_3").innerText = value;
@@ -1322,8 +1361,9 @@ value = localStorage.KI_Normal_Wins || 0; document.getElementById("ID_Normal_1")
 value = localStorage.KI_Normal_CPUWins || 0; document.getElementById("ID_Normal_3").innerText = value;
 value = localStorage.KI_Normal_Draws || 0; document.getElementById("ID_Normal_2").innerText = value;
 }
+                                    __________________________
+//                                   Increase Stats after Win
 
-// Function for increasing the stats after a win
 function Update_Stats(winning_player){
 // To reduce repetition only the KI Easy section is commented out. It's basically the same in KI Normal.
 let value;
@@ -1350,10 +1390,9 @@ if(winning_player === 3 && KI_Level === "Normal"){ value = localStorage.KI_Norma
 document.getElementById("ID_Normal_2").innerText = value;};
 };
 // Enough space for a unbeatable level ??? :-)
-}; // Update Stats End
-
-
-//              "Creator-Function" - for creating DOM-Elements and push it to DOM
+};
+                                    _____________________
+//                                   "Creator"-Function
 
 function Create_DOM_Element(options, arrayOne, arrayTwo) {
 
@@ -1413,84 +1452,12 @@ parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width
 */
 };
 
-/*
-===============================================================================================================================================================================================================================================================================
- 
-                                    Translation-Manager & Page Library           
+                                    ____________________________
+//                                   Fireworks Canvas-Animation                                
 
-===============================================================================================================================================================================================================================================================================*/
-
-//                      Translation Manager
-
-function Translate_StartScreen(language, byUser) {
-// Make sure browser triggered invokes are not executed if the language was setted manually anytime before
-let setted_language = localStorage.Language, settedByUserInStorage = localStorage.LanguageIsSetttedByUser;
-
-if (byUser === true){
-    if(setted_language === "de") Deutsch(); else English();
-}
-else{ 
-    if(language === "de") Deutsch(); else English();
-}
-
-// Bonus: Make sure the dropdown menu is always selected with the actual languag
-if (localStorage.getItem("Language") === "de") document.getElementById("ID_Language_Menu").value === "Deutsch";
-else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value === "English"; 
-};
-
-//                      Library
-
-// Never changing text
-credits_h.innerText = "Credits";
-sound_h.innerText = "Sound";
-
-// Set language to Deutsch
-function Deutsch() {
-    head_title.innerText = "+++ 4-Gewinnt +++";
-    settings_svg.title = "Einstellungen";
-    headline_top.innerText = "Online 4-Gewinnt";
-    headline_p.innerText = "Spiele gegen deine Freunde oder gegen die KI!";
-    player_1_headline.innerText = "Wähle einen Namen";
-    player_1_name.placeholder = "Spieler 1";
-    player_2_headline.innerText = "Wähle einen Namen";
-    player_2_name.placeholder = "Spieler 2";
-    play_against.innerText =  "Gegen den Computer spielen?"
-    start_button.innerText = "Spiel Starten";
-    info_h.innerText = "Spielanleitung";
-    starting_h.innerText = "Wer soll starten?";
-    language_h.innerText = "Spracheinstellung";
-    contact_h.innerText = "Kontakt";
-    // Dropdown
-    document.getElementById("ID_No").innerText = "Nein";
-    document.getElementById("ID_Easy_Text").innerText = "KI Einfach";
-};
-
-// Set language to English
-function English() {
-    head_title.innerText = "+++ 4-Wins +++";
-    settings_svg.title = "Settings";
-    headline_top.innerText = "Four Wins";
-    headline_p.innerText = "Play against friends or KI!";
-    player_1_headline.innerText = "Choose Name";
-    player_1_name.placeholder = "Player 1";
-    player_2_headline.innerText = "Choose Name";
-    player_2_name.placeholder = "Player 2";
-    play_against.innerText =  "Play against the CPU?"
-    start_button.innerText = "Start Game";
-    info_h.innerText = "Instructions";
-    starting_h.innerText = "Starter";
-    language_h.innerText = "Language";
-    contact_h.innerHTML = "Contact";
-    document.getElementById("ID_No").innerText = "No";
-    document.getElementById("ID_Easy_Text").innerText = "KI Easy";
- 
-};
-
-// Firework Function which is not from me, so special thanks goes to Adam, which published it at codepen! Link below!
-// Fireworks from Adam 
-// https://codepen.io/Adam12132/pen/gOGrwMR
 function Fireworks(canvasID){
-// Fireworks
+// Firework Function not from me, so special thanks goes to Adam, which published it at codepen! Link below!
+// Fireworks from Adam: https://codepen.io/Adam12132/pen/gOGrwMR
 const canvas = document.getElementById(canvasID);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -1646,10 +1613,80 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 })
 };
+                                                                                                                                                                                                                                                                                /*
+===============================================================================================================================================================================================================================================================================
+ 
+                                    Translation-Manager & Page Library           
 
+===============================================================================================================================================================================================================================================================================*/
 
+                                   __________________________________
+//                                   Translation Managing Function 
 
-/*
+function Translate_StartScreen(language, byUser) {
+// Make sure browser triggered invokes are not executed if the language was setted manually anytime before
+let setted_language = localStorage.Language, settedByUserInStorage = localStorage.LanguageIsSetttedByUser;
+
+if (byUser === true){
+    if(setted_language === "de") Deutsch(); else English();
+}
+else{ 
+    if(language === "de") Deutsch(); else English();
+}
+
+// Never changing text
+credits_h.innerText = "Credits";
+sound_h.innerText = "Sound";
+
+// Make sure the dropdown menu is always selected with the actual languag
+if (localStorage.getItem("Language") === "de") document.getElementById("ID_Language_Menu").value === "Deutsch";
+else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value === "English"; 
+};
+                                    ___________________
+//                                    Deutsch Library 
+
+function Deutsch() {
+    head_title.innerText = "+++ 4-Gewinnt +++";
+    settings_svg.title = "Einstellungen";
+    headline_top.innerText = "Online 4-Gewinnt";
+    headline_p.innerText = "Spiele gegen deine Freunde oder gegen die KI!";
+    player_1_headline.innerText = "Wähle einen Namen";
+    player_1_name.placeholder = "Spieler 1";
+    player_2_headline.innerText = "Wähle einen Namen";
+    player_2_name.placeholder = "Spieler 2";
+    play_against.innerText =  "Gegen den Computer spielen?"
+    start_button.innerText = "Spiel Starten";
+    info_h.innerText = "Spielanleitung";
+    starting_h.innerText = "Wer soll starten?";
+    language_h.innerText = "Spracheinstellung";
+    contact_h.innerText = "Kontakt";
+    // Dropdown
+    document.getElementById("ID_No").innerText = "Nein";
+    document.getElementById("ID_Easy_Text").innerText = "KI Einfach";
+};
+                                    ___________________
+//                                    English Library 
+
+function English() {
+    head_title.innerText = "+++ 4-Wins +++";
+    settings_svg.title = "Settings";
+    headline_top.innerText = "Four Wins";
+    headline_p.innerText = "Play against friends or KI!";
+    player_1_headline.innerText = "Choose Name";
+    player_1_name.placeholder = "Player 1";
+    player_2_headline.innerText = "Choose Name";
+    player_2_name.placeholder = "Player 2";
+    play_against.innerText =  "Play against the CPU?"
+    start_button.innerText = "Start Game";
+    info_h.innerText = "Instructions";
+    starting_h.innerText = "Starter";
+    language_h.innerText = "Language";
+    contact_h.innerHTML = "Contact";
+    document.getElementById("ID_No").innerText = "No";
+    document.getElementById("ID_Easy_Text").innerText = "KI Easy";
+ 
+};
+                                                                                                                                                                                                                                                                                /*
 ================================================================================================================================================================================================================================================================================
  
                                     Final information and Comments          
