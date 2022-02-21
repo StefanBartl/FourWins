@@ -49,8 +49,11 @@
                                         -) Naming Button needs a "sign" for the user if it is saved
                                         -) Settings menu
                                         -) Test and repair responsivness
+                                        -) Wrap as much in functions as its argueable
+                                        -) Possible to make a placement section ? 
                                         -) Try to get the event listener outside and grouped together
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? How much i can get in the Game object= row counter ... / Functions all return; CHECK (and for) Helper mthods like psuh to local storage / Global variables for DOM Objects possible which are caled often?;
+                                        -) Close repetated code
                                         -) Better Styling (find a real good one)
                                         -) CSS-Code minimizing 
                                            Bonus Features:
@@ -60,7 +63,6 @@
                                         -) Possible to go back from Game-Screen to Start-Screen to change Colours, Sound etc...? Or is it easier to have the Settings-Menu Button Ingame?
 
                                                         Session progress:
-                                                        
                                                                                                                                                                                                                                                                                                    */
 
 //                      Important DOM-Elements
@@ -358,10 +360,12 @@ if (player_Colour_Left === "yellow") {
 // Place the Coin as background image on the correct column (set by the decreased counter from before)
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_1");
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
+document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlayed", "yes");
 
 } else {
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_2");
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
+document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlayed", "yes");
 }
 //  Invoke Winning-Validation for Player 1
 let valid_row = Row_Validator(1, row);
@@ -381,9 +385,11 @@ else {
 if (player_Colour_Left === "red") {
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_1");
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
+document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlayed", "yes");
 } else {
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_2");
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
+document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlayed", "yes");
 }
 //  Invoke Winning-Validation for Player 2
 let valid_row = Row_Validator(2, row);
@@ -431,26 +437,46 @@ function KI_Easy(){
     } else (KI_Easy());
 };
 
+// Function to let KI Normal make placements as near as its possible to other Coins from him, try to avoid upwards and sideways finishing moves from Human Player and try to make them self
 function KI_Normal(){
-    console.log("KI Normal starts to thinking....");
     // If it is the first KI Normal Placement, make a random placement
     if (Game.roundCounter === 1 || Game.roundCounter === 2) KI_Easy(); 
     else {
-    // If it is not the first placement, get possible placements
-    let valid_numbers_upwards = Get_Valid_Upwards_Placemement();
+    
+    // Proof if KI have to make or avoid vertial finishing move
+    let upwards = Detect_3_Coin_Chains_Upwards();
+    if (upwards !== undefined){
+        // If there is a possibility, proof if placement on top is possible
+        let upwards_topVal = TopCell_Validation(upwards, true);
+        if(upwards_topVal === false){ Thinking_Effect(true, upwards); return };};
 
+    let sideways = Detect_3_Coin_Chains_Sideways();
+        console.log("sideway", sideways);
+    if (sideways !== undefined){ Thinking_Effect(true, sideways); return};
 
-    // Randomizer
-    let valid_number = valid_numbers_upwards[0];
-
-    Thinking_Effect(true, valid_number);
-    };
-
-
+    // If not, get possible placements
+    let numbers_upwards = Get_Valid_Upwards_Placemement();
+    // Take the first one and proof it
+        let proof_up = TopCell_Validation(numbers_upwards[0],true);    
+        if(proof_up === false) { Thinking_Effect(true, numbers_upwards[0]); return };
+    
+    let numbers_sideways = Get_Valid_Sideways_Placement();
+        let proof_side = TopCell_Validation(numbers_sideways[0], true);
+        if(proof_side === false){ Thinking_Effect(true, numbers_sideways[0]); return };
+  
+    // If nothing is possible, make random placement
+        KI_Easy(); return};
 
 };
 
-function Randomizer (arr1, arr2, arr3){
+
+// Function to let KI Normal make placements as near as its possible to other Coins from him, try to avoid upwards, sideways and diagonal finishing moves from Human Player and try to make them self. Also prefer make placements on a 2 Coin chain, also in all three directions.
+function KI_Hard(){
+// Code here... :-)
+}
+
+function Randomizer (arr1, arr2){
+    console.log("Randomizer getted:", arr1,  arr2);
     let randomizing_number, randomizing_array = [];
     
     for ( let i = 0; i < arr1.length; i++ ){
@@ -460,20 +486,226 @@ function Randomizer (arr1, arr2, arr3){
     if  ( arr2 !== undefined ){
     for ( let i = 0; i < arr2.length; i++ ){
         randomizing_array.push(arr2[i]);
-    };};
-    
-    if  ( arr3 !== undefined ){
-    for ( let i = 0; i < arr3.length; i++ ){
-        randomizing_array.push(arr3[i]);
-    };};
+    };}; 
     
     randomizing_number = getRandomInt(randomizing_array.length);
     valid_number = randomizing_array[randomizing_number];
+    console.log("Randomizer has choosen: " + valid_number);
     return valid_number;
 };
 
+// Function to let KI know if there is a horizontal 3 Coin chain to avoid finishing moves from Human or make them self +++ Basically it depends hardly of the Column Validator from the Win-Validation section
+function Detect_3_Coin_Chains_Upwards(){
+// Job: Is there any way to make that code smaller? So much repetition, but not possible to build a autmatism because of Game.actualGameboard is a Object, nnot an array an i fdind no way to iterate trough....
 
-//                      Placement near to an other
+// KI Finishing Upwards Section
+let array = Game.actualGameboardPlayer2.C1;
+// If every row number subtracted with the next row number is equal to 1, there are 3 coins upon each other.
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+// Than make placement in this column (minus 1 due to topCell array starts with 0)
+return 0
+};
+array = Game.actualGameboardPlayer2.C2;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 1
+};
+array = Game.actualGameboardPlayer2.C3;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 2
+};
+array = Game.actualGameboardPlayer2.C4;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 3
+};
+array = Game.actualGameboardPlayer2.C5;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 4
+};
+array = Game.actualGameboardPlayer2.C6;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 5
+};
+array = Game.actualGameboardPlayer2.C7;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 6
+};
+
+// Avoid Human Player Upwards finishing moves section
+array = Game.actualGameboardPlayer1.C1;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 0
+};
+array = Game.actualGameboardPlayer1.C2;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 1
+};
+array = Game.actualGameboardPlayer1.C3;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 2
+};
+array = Game.actualGameboardPlayer1.C4;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 3
+};
+array = Game.actualGameboardPlayer1.C5;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 4
+};
+array = Game.actualGameboardPlayer1.C6;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 5
+};
+array = Game.actualGameboardPlayer1.C7;
+if (array[0] - array[1] === 1 && array[1] - array[2] === 1 ||
+    array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
+    array[2] - array[3] === 1 && array[3] - array[4] === 1 ){
+return 6
+};
+
+
+
+
+};
+
+// Function to let KI know if there is a vertical 3 Coin chain to avoid finishing moves from Human or make them self +++ Basically it depends hardly on the Row Validator from the Win-Validation Section 
+function Detect_3_Coin_Chains_Sideways(){
+
+// Detect possible finishing move  from KI
+let countFor_Win = 0;
+// For every made placement in the column
+for(let el of Game.actualGameboardPlayer2.C1){
+// If in the next column and the same row  there also a placement, increase counter
+if (Game.actualGameboardPlayer2.C2.indexOf(el) !== -1) countFor_Win++;
+// Same in the third column from the basis placement...
+if (Game.actualGameboardPlayer2.C3.indexOf(el) !== -1) countFor_Win++;
+// There are 3 Coins after another from the KI. If the next (4.) column is free, finish and win
+if(el === 7){ // If game is in row 7, finish
+if(countFor_Win === 2 && document.getElementById(`ID_C4R${el}`).getAttribute("data-isPlayed") === null) return 3;
+} else { // If game is above row 7, ccheck if a finish move is possible 
+if(countFor_Win === 2 && document.getElementById(`ID_C4R${el}`).getAttribute("data-isPlayed") === null &&
+document.getElementById(`ID_C4R${el - 1}`).getAttribute("data-isPlayed") !== null) return 3;
+};};
+
+countFor_Win = 0;
+for(let el of Game.actualGameboardPlayer2.C2){
+if (Game.actualGameboardPlayer2.C3.indexOf(el) !== -1) countFor_Win++;
+if (Game.actualGameboardPlayer2.C4.indexOf(el) !== -1) countFor_Win++;
+if(el === 7){
+if(countFor_Win === 2 && document.getElementById(`ID_C5R${el}`).getAttribute("data-isPlayed") === null) return 4
+// From Column 2 on maybe there is also a free valid slot before the 3 Coin  chain to finish
+else if (countFor_Win === 2 && document.getElementById(`ID_C1R${el}`).getAttribute("data-isPlayed") === null) return 0;
+} else {
+if(countFor_Win === 2 && document.getElementById(`ID_C5R${el}`).getAttribute("data-isPlayed") === null &&
+countFor_Win === 2 && document.getElementById(`ID_C5R${el +1}`).getAttribute("data-isPlayed") !== null ) return 4; 
+else if (countFor_Win === 2 && document.getElementById(`ID_C1R${el +1}`).getAttribute("data-isPlayed") !== null) return 0;   
+};};
+
+countFor_Win = 0;
+for(let el of Game.actualGameboardPlayer2.C3){
+if (Game.actualGameboardPlayer2.C4.indexOf(el) !== -1) countFor_Win++;
+if (Game.actualGameboardPlayer2.C5.indexOf(el) !== -1) countFor_Win++;
+if(el === 7){
+if(countFor_Win === 2 && document.getElementById(`ID_C6R${el}`).getAttribute("data-isPlayed") === null) return 5
+else if (countFor_Win === 2 && document.getElementById(`ID_C2R${el}`).getAttribute("data-isPlayed") === null) return 1;}
+else {
+if(countFor_Win === 2 && document.getElementById(`ID_C6R${el}`).getAttribute("data-isPlayed") === null &&
+countFor_Win === 2 && document.getElementById(`ID_C6R${el +1}`).getAttribute("data-isPlayed") !== null ) return 5; 
+else if (countFor_Win === 2 && document.getElementById(`ID_C2R${el +1}`).getAttribute("data-isPlayed") !== null) return 1; 
+};};
+
+countFor_Win = 0;
+for(let el of Game.actualGameboardPlayer2.C4){
+if (Game.actualGameboardPlayer2.C5.indexOf(el) !== -1) countFor_Win++;
+if (Game.actualGameboardPlayer2.C6.indexOf(el) !== -1) countFor_Win++;
+if(el === 7){
+if(countFor_Win === 2 && document.getElementById(`ID_C7R${el}`).getAttribute("data-isPlayed") === null) return 6
+else if (countFor_Win === 2 && document.getElementById(`ID_C3R${el}`).getAttribute("data-isPlayed") === null) return 2;}
+else {
+if(countFor_Win === 2 && document.getElementById(`ID_C7R${el}`).getAttribute("data-isPlayed") === null &&
+countFor_Win === 2 && document.getElementById(`ID_C7R${el + 1}`).getAttribute("data-isPlayed") !== null ) return 6; 
+else if (countFor_Win === 2 && document.getElementById(`ID_C3R${el + 1}`).getAttribute("data-isPlayed") !== null) return 2; 
+};};
+
+// Detect 3 Coin chains from Humans to avoid finishing moves 
+countFor_Win = 0;
+for(let el of Game.actualGameboardPlayer1.C1){
+if (Game.actualGameboardPlayer1.C2.indexOf(el) !== -1) countFor_Win++;
+if (Game.actualGameboardPlayer1.C3.indexOf(el) !== -1) countFor_Win++;
+if(el === 7){
+if(countFor_Win === 2 && document.getElementById(`ID_C4R${el}`).getAttribute("data-isPlayed") === null) return 3;
+} else {
+if(countFor_Win === 2 && document.getElementById(`ID_C4R${el}`).getAttribute("data-isPlayed") === null &&
+document.getElementById(`ID_C4R${el + 1}`).getAttribute("data-isPlayed") !== null) return 3;    
+};};
+
+
+countFor_Win = 0;
+for(let el of Game.actualGameboardPlayer1.C2){
+if (Game.actualGameboardPlayer1.C3.indexOf(el) !== -1) countFor_Win++;
+if (Game.actualGameboardPlayer1.C4.indexOf(el) !== -1) countFor_Win++;
+if(el === 7){
+if(countFor_Win === 2 && document.getElementById(`ID_C5R${el}`).getAttribute("data-isPlayed") === null) return 4
+else if (countFor_Win === 2 && document.getElementById(`ID_C1R${el}`).getAttribute("data-isPlayed") === null) return 0;
+} else {
+if(countFor_Win === 2 && document.getElementById(`ID_C5R${el}`).getAttribute("data-isPlayed") === null &&
+countFor_Win === 2 && document.getElementById(`ID_C5R${el +1}`).getAttribute("data-isPlayed") !== null ) return 4; 
+else if (countFor_Win === 2 && document.getElementById(`ID_C1R${el + 1}`).getAttribute("data-isPlayed") !== null) return 0;   
+};};
+
+countFor_Win = 0;
+for(let el of Game.actualGameboardPlayer1.C3){
+if (Game.actualGameboardPlayer1.C4.indexOf(el) !== -1) countFor_Win++;
+if (Game.actualGameboardPlayer1.C5.indexOf(el) !== -1) countFor_Win++;
+if(el === 7){
+if(countFor_Win === 2 && document.getElementById(`ID_C6R${el}`).getAttribute("data-isPlayed") === null) return 5
+else if (countFor_Win === 2 && document.getElementById(`ID_C2R${el}`).getAttribute("data-isPlayed") === null) return 1;}
+else {
+if(countFor_Win === 2 && document.getElementById(`ID_C6R${el}`).getAttribute("data-isPlayed") === null &&
+countFor_Win === 2 && document.getElementById(`ID_C6R${el + 1}`).getAttribute("data-isPlayed") !== null ) return 5; 
+else if (countFor_Win === 2 && document.getElementById(`ID_C2R${el + 1}`).getAttribute("data-isPlayed") !== null) return 1; 
+};};
+
+countFor_Win = 0;
+for(let el of Game.actualGameboardPlayer1.C4){
+if (Game.actualGameboardPlayer1.C5.indexOf(el) !== -1) countFor_Win++;
+if (Game.actualGameboardPlayer1.C6.indexOf(el) !== -1) countFor_Win++;
+if(el === 7){
+if(countFor_Win === 2 && document.getElementById(`ID_C7R${el}`).getAttribute("data-isPlayed") === null) return 6
+else if (countFor_Win === 2 && document.getElementById(`ID_C3R${el}`).getAttribute("data-isPlayed") === null) return 2;}
+else {
+if(countFor_Win === 2 && document.getElementById(`ID_C7R${el}`).getAttribute("data-isPlayed") === null &&
+countFor_Win === 2 && document.getElementById(`ID_C7R${el + 1}`).getAttribute("data-isPlayed") !== null ) return 6; 
+else if (countFor_Win === 2 && document.getElementById(`ID_C3R${el + 1}`).getAttribute("data-isPlayed") !== null) return 2; 
+};};
+};
+
+//                     Upwards Placement near to an other coin 
 function Get_Valid_Upwards_Placemement(){
 // Try to make placement on top of an other KI placement if there is enough space to can finish it
 let value, valid_number_array = [];
@@ -504,7 +736,101 @@ value = Game.actualGameboardPlayer2.C7.slice(-1)[0]
 return valid_number_array
 }; //End of Top_Placement
 
+//                     Sideways Placement near to an other coin 
+function Get_Valid_Sideways_Placement(){
+let valid_number_array = [];
 
+// Get all placements from KI in a column
+for (let a = 0; a < Game.actualGameboardPlayer2.C1.length; a++){
+    // Get 1 placement
+    let i = Game.actualGameboardPlayer2.C1[a];
+    // x is the row above, so i - 1
+    let x = i +1
+if( i === 7){
+// Also if the column next to the placement is free and its the bottom row,  make placement
+if(document.getElementById(`ID_C2R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(1);
+} else {
+// If the column next to the placement is free                                      and the column next to the placement and 1 row above is not free, so he can place on the row (coin needs a coin above), make placement
+if(document.getElementById(`ID_C2R${i}`).getAttribute("data-isPlayed") === null && document.getElementById(`ID_C2R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(1);
+};
+};
+
+for (let a = 0; a < Game.actualGameboardPlayer2.C2.length; a++){
+    let i = Game.actualGameboardPlayer2.C2[a];
+    let x = i +1
+if( i === 7){
+if(document.getElementById(`ID_C1R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(0);
+if(document.getElementById(`ID_C3R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(2);
+} else {
+if(document.getElementById(`ID_C1R${i}`).getAttribute("data-isPlayed") === null && document.getElementById(`ID_C1R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(0);
+if(document.getElementById(`ID_C3R${i}`).getAttribute("data-isPlayed") === null && document.getElementById(`ID_C3R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(2);
+};
+};
+
+for (let a = 0; a < Game.actualGameboardPlayer2.C3.length; a++){
+    let i = Game.actualGameboardPlayer2.C3[a];
+    let x = i +1
+if (i === 7){
+if(document.getElementById(`ID_C2R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(1);   
+if(document.getElementById(`ID_C4R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(3);
+} else {
+if(document.getElementById(`ID_C2R${i}`).getAttribute("data-isPlayed") === null && document.getElementById(`ID_C2R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(1);
+if(document.getElementById(`ID_C4R${i}`).getAttribute("data-isPlayed") === null && document.getElementById(`ID_C4R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(3);
+};
+};
+
+for (let a = 0; a < Game.actualGameboardPlayer2.C4.length; a++){
+    let i = Game.actualGameboardPlayer2.C4[a];
+    let x = i +1
+if (i === 7){
+if(document.getElementById(`ID_C3R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(2);   
+if(document.getElementById(`ID_C5R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(4);
+} else {
+if(document.getElementById(`ID_C3R${i}`).getAttribute("data-isPlayed") === null && document.getElementById(`ID_C3R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(2);
+if(document.getElementById(`ID_C5R${i}`).getAttribute("data-isPlayed") === null&& document.getElementById(`ID_C5R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(4);
+};
+};
+
+for (let a = 0; a < Game.actualGameboardPlayer2.C5.length; a++){
+    let i = Game.actualGameboardPlayer2.C5[a];
+    let x = i +1
+if (i === 7){
+if(document.getElementById(`ID_C4R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(3);   
+if(document.getElementById(`ID_C6R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(5);
+} else{
+if(document.getElementById(`ID_C4R${i}`).getAttribute("data-isPlayed") === null && document.getElementById(`ID_C4R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(3);
+if(document.getElementById(`ID_C6R${i}`).getAttribute("data-isPlayed") === null && document.getElementById(`ID_C6R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(5);
+};
+};
+
+for (let a = 0; a < Game.actualGameboardPlayer2.C6.length; a++){
+    let i = Game.actualGameboardPlayer2.C6[a];
+    let x = i +1
+if (i === 7){
+if(document.getElementById(`ID_C5R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(4);   
+if(document.getElementById(`ID_C7R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(6);
+} else {
+if(document.getElementById(`ID_C5R${i}`).getAttribute("data-isPlayed") === null && document.getElementById(`ID_C5R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(4);
+if(document.getElementById(`ID_C7R${i}`).getAttribute("data-isPlayed") === null && document.getElementById(`ID_C7R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(6);
+};
+};
+
+for (let a = 0; a < Game.actualGameboardPlayer2.C7.length; a++){
+    let i = Game.actualGameboardPlayer2.C7[a];
+    let x = i +1
+if (i === 7){
+if(document.getElementById(`ID_C6R${7}`).getAttribute("data-isPlayed") === null) valid_number_array.push(5);
+} else {
+if(document.getElementById(`ID_C6R${i}`).getAttribute("data-isPlayed") === null && !document.getElementById(`ID_C6R${x}`).getAttribute("data-isPlayed") !== null) valid_number_array.push(5);
+};
+
+
+};
+// console.log("Sideways array before filter out: " + valid_number_array);
+let unique_valid_number_array = valid_number_array.filter(onlyUnique);
+//console.log("Sideways array after filter out: " + unique_valid_number_array);
+return unique_valid_number_array;
+};
 
 
 
@@ -536,7 +862,7 @@ if (proof === 2 && invokedByKi === false){ // If it was lock it for further plac
 
 // If the column is locked for placements, return false to KI Normal & KI Easy, so they know they cant make a placement there. Else return true so they hav a valid column number.
 if(invokedByKi === true){
-    if(proof === 1){return false} else return true;}
+    if(proof === 2){return false} else return true;}
 
 // If it passes the proofment, just return and do nothing
 return;
@@ -895,6 +1221,13 @@ if(document.getElementById("ID_Thinking_Div")){document.getElementById("ID_Think
 };};
 
 
+// Get a array with unique values with the filter method
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+    // var unique = array.filter(onlyUnique);
+  }
+  
+
 // Returns a random number
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -1064,7 +1397,7 @@ elementsPointer++;
 
 // Finally, push the complete dynamically created, finished object to the DOM!
 document.getElementById(_parentID).appendChild(element);
-};
+
                                                                                                                                                                                                                                                                     /*
 Creator-Functions Informations:
 All types of Elements possible which you can create 'the normal way' too!
@@ -1078,7 +1411,7 @@ Possible arguments:
 parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width, Height, AspectRatio, Min, Max, Value, Placeholder, arrayOne, arrayTwo
 
 */
-
+};
 
 /*
 ===============================================================================================================================================================================================================================================================================

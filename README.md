@@ -6,6 +6,7 @@ Thanks to all of the people which made that or working there.
 
 Also credits to:
 
+stackoverflow.com
 To Adam for the Fireworks Vanilla-JS Animation! 
 https://codepen.io/Adam12132/pen/gOGrwMR
 To codepen, where it is published!
