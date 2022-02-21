@@ -53,7 +53,7 @@
                                         -) Possible to make a placement section ? 
                                         -) Try to get the event listener outside and grouped together
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? How much i can get in the Game object= row counter ... / Functions all return; CHECK (and for) Helper mthods like psuh to local storage / Global variables for DOM Objects possible which are caled often?;
-                                        -) Close repetated code
+                                        -) Close repatationing code
                                         -) Better Styling (find a real good one)
                                         -) CSS-Code minimizing 
                                            Bonus Features:
@@ -65,16 +65,17 @@
                                                         Session progress:
                                                                                                                                                                                                                                                                                                    */
 
-//                      Important DOM-Elements
-
-// Container & Wrapper Wirklich NOTWENDIG?
+//                                  ________________________
+//                                   Important DOM Elements
+//#region DOM-Elements
+//          Container & Wrapper
 const header = document.getElementById("ID_Header");
 const main_wrapper =  document.getElementById("ID_MainWrapper");
 const left_sidebar = document.getElementById("ID_LeftSidebarWrapper");
 const gameboard = document.getElementById("ID_GameboardWrapper");
 const right_sidebar = document.getElementById("ID_RightSidebarWrapper");
 const footer = document.getElementById("ID_FooterWrapper");
-// Text, Inputs, Images
+//          Text, Inputs, Images
 const head_title = document.getElementById("ID_Head_Title");
 const headline_top = document.getElementById("ID_Headline");
 const headline_p = document.getElementById("ID_Header_p");
@@ -89,15 +90,18 @@ const info_h = document.getElementById("ID_Info");
 const starting_h = document.getElementById("ID_Starting");
 const colour_h = document.getElementById("ID_Colour");
 const play_against = document.getElementById("ID_Play_Against");
-// Settings menu
+//            Settings menu
 const language_h = document.getElementById("ID_Language");
 const select_deutsch = document.getElementById("ID_Deutsch");
 const select_english = document.getElementById("ID_English");
 const contact_h = document.getElementById("ID_Contact");
 const credits_h = document.getElementById("ID_Credits");
 const sound_h = document.getElementById("ID_Sound");
+//#endregion
 
-//                                              Audio 
+//                                  _______
+//                                   Audio 
+//#region Audio
 let warning_audio = new Audio("Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav"); // Confirm Audio Sample
 let lost_audio = new Audio("Folder_Audio/freesound_com/OneHits/loose.wav"); // Loose against KI Audio Sample
 let win_audio = new Audio("Folder_Audio/freesound_com/OneHits/scratchers__cheer.wav"); // Winning Cheer Audio Sample
@@ -106,8 +110,10 @@ let win_audio = new Audio("Folder_Audio/freesound_com/OneHits/scratchers__cheer.
 /*
 let placing_audio = new Audio("Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav");  Placement Ausio Sample
 placing_audio.play();     Dont konw why this sound does not work!         */ 
+//#endregion
 
-//                      Create an Gameboard Settings Object
+//                                  ____________________
+//                                   Create Game-Object 
 const Game = {
 // Setting the Gameboard arrays to keep Coin placements
 actualGameboardPlayer1: {
@@ -122,10 +128,10 @@ Game_against_KI: false,
 KI_Level: "none",
 };
 
-let count_wins_player_one = 0;
-let count_wins_player_two = 0;
+//                                  _______________________________
+//                                   Global variables / counters 
 
-//                      Global counters and variables          
+//#region Row-Counters for Coin placement   
 /* Setting the Counters for let the Coin Placing Section know, 
    in which row / column the Game currently is to calculate by placement the correct position */
 let row_Counter_C1 = 8;
@@ -135,18 +141,26 @@ let row_Counter_C4 = 8;
 let row_Counter_C5 = 8;
 let row_Counter_C6 = 8;
 let row_Counter_C7 = 8;
+//#endregion
 
-// Variable to proof which colour of the playing stones was selected by the Players. Standard is: Left Yellow / Right Red
+//#region Counting wins on a row
+let count_wins_player_one = 0;
+let count_wins_player_two = 0;
+//#endregion
+
+//                                  ___________________________________________
+//                                   Proof which colour is choosen for Player 1
+//#region Choosing Colour
+// Standard is: Left Yellow / Right Red
 let player_Colour_Left = "yellow";
 
-// Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted. (Checkbox don't uncheck by refresh)
+// Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted
 if(document.getElementById("ID_Colour_Checkbox").checked === true) player_Colour_Left = "red";
+//#endregion
 
-// Get up-to-date stats for the settings menu
-Stats(); 
-//                                  _________________________________
-//                                   Section: Starting Page Language 
-
+//                                  ________________________
+//                                   Starting Page Language 
+//#region Language at Starting-Page
 // Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
 let isSetted = localStorage.LanguageIsSetttedByUser;
 let lang = localStorage.Language;
@@ -157,9 +171,11 @@ Game.Language = browserLanguage; Game.LanguageIsSetttedByUser = false;
 // Invoke the translation with the getted language
 Translate_StartScreen(browserLanguage, false);
 };
+//#endregion
+
 //                                  _________________________________
 //                                   Section: Naming / Correct Names 
-
+//#region  Naming
 //                                   Set Names of Players to stored names if they are some
 if(localStorage.Player_One_Name) player_1_name.value = localStorage.Player_One_Name;
 if(localStorage.Player_Two_Name) player_2_name.value = localStorage.Player_Two_Name;
@@ -181,10 +197,13 @@ document.getElementById("ID_Choose_KI").addEventListener("change", ()=>{
         else // If it is a game against CPU, set Player Two Name to KI Level
         document.getElementById("ID_Player_2_Name").value = document.getElementById("ID_Choose_KI").value;
 });
+//#endregion
 
+//                                  ________________________
+//                                   Section: Settings-Menu
 //                                  _______________________________
-//                                   Section: Set up Settings-Menu
-
+//                                   Set up Settings-Menu
+//#region Settings-Menu Set up
 // Remove Settings-Menu from Starting-Screen DOM
 settings_menu.style.display = "none";
 // Show / Hide & Style Event-Listener
@@ -201,9 +220,11 @@ settings_menu.classList.remove("Class_Hide_Settings");
 });
 settings_menu.addEventListener("mouseleave", () => {
 });
-//                                  _____________________________________________________________________________________________________________
-//                                   Event Listeners for:  Choose Language (Menu), Choose Colour (Menu), Reset Stats (Menu)
+//#endregion
 
+//                                  _____________________________________________________________________________________________________________
+//                                   Event Listeners for Settings-Menu:  Choose Language (Menu), Choose Colour (Menu), Reset Stats (Menu)
+//#region Event-Listeners Settings-Menu
 document.getElementById("ID_Language_Menu").addEventListener("change", () => {
 // Save language in Local Storage and Game Object
 // Important maybe for later: With more languages, if/else needed!
@@ -234,6 +255,12 @@ if(Game.Language === "de"){
 // Clear local storage
 if(warning === true) {localStorage.clear();};
 });
+//#endregion
+
+//                                  ___________________________________________
+//                                   Get up-tp-date stats for the Settings-Menu
+Stats(); 
+
 //                                  ______________________________
 //                                   Event Listener to start Game
 document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
