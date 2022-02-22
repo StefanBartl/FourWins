@@ -7,13 +7,13 @@
                                                   (WKDSteVIE / WKDMinerva)
                             
                                                           2021
-                            ________________________________________________________________________                                                                                                                                                                                                                                                    
-                            #                                                                      #                                                                                                                                                                                  
-                            #                           Table of content                           #
-                            #______________________________________________________________________# 
+                             ______________________________________________________________________                                                                                                                                                                                                                                                    
+                            {                   ________________________________                   }                                                                                                                                                                                  
+                            {                           Table of content                           }
+                            {______________________________________________________________________} 
                             |                                                                      |
                             |                                                                      |
-                            |                 1) General Settings, Global Scoped & DOM             |
+                            |                 1) DOM, Global Scoped & General Settings             |
                             |                                                                      |
                             |                 2) Main Game                                         |
                             |                                                                      |
@@ -29,43 +29,51 @@
                             |                                                                      |
                             |                 7) Final Information and Comments                    |
                             |                                                                      |
-                            |                 8) Credits                                           |
+                            |                 8) Credits                                           |   
                             |                                                                      | 
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |
                                                                                                                                                                                                                                                                                */                                                                                                                                               
-//#region General Settings, Global Scoped Objects/Variables & DOM
+//#region Open Jobs                                                                                                                                                                                                                                                                             
                                                                                                                                                                                                                                                                               /*
-===============================================================================================================================================================================================================================================================================
- 
-                                    General Settings, Global Scoped Objects/Variables & DOM  
-
-==============================================================================================================================================================================================================================================================================*/
-
-                                                                                                                                                                                                                                                                                /*
-                                                        Jobs To-do:
-
+                                                Jobs To-do:
 
                                         -) KI Normal bug removing
+                                        -) Bug with not showing new stats immidieatly
                                         -) Settings menu
                                         -) Test and repair responsivness
                                         -) Wrap as much in functions as its argueable
                                         -) Possible to make a placement section ? 
                                         -) Try to get the event listener outside and grouped together
-                                        -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? How much i can get in the Game object= row counter ... / Functions all return; CHECK (and for) Helper mthods like psuh to local storage / Global variables for DOM Objects possible which are caled often?;
+                                        -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
+                                           How much i can get in the Game object= row counter ... 
+                                           Functions all return; CHECK (and for) Helper mthods like psuh to local storage 
+                                           Global variables for DOM Objects possible which are caled often?;
                                         -) Close repatationing code
                                         -) Better Styling (find a real good one)
                                         -) CSS-Code minimizing 
                                            Bonus Features:
-                                        -) Due Audio was so slow, get more infos to make it faster, than add some Audio, Ingame and something in the Settings Menu and also the functionality to control it
+                                        -) Due Audio was so slow, get more infos to make it faster, than add some Audio, Ingame and
+                                           something in the Settings Menu and also the functionality to control it
                                         -) Free Gameboard-Size possile?
                                         -) Start screen playing animation possible?
-                                        -) Pos,000,0sible to go back from Game-Screen to Start-Screen to change Colours, Sound etc...? Or is it easier to have the Settings-Menu Button Ingame?
+                                        -) Possible to go back from Game-Screen to Start-Screen to change Colours, Sound etc...? 
+                                           Or is it easier to have the Settings-Menu Button Ingame?
 
                                                         Session progress:
-                                                                                                                                                                                                                                                                                             */
 
-//                                  ________________________
-//                                   Important DOM Elements
+                                                                                                                                                                                                                                                                                 */
+//#endregion
+
+//#region DOM, Global Scoped & General Settings  
+                                                                                                                                                                                                                                                                              /*
+===============================================================================================================================================================================================================================================================================
+ 
+                                    DOM, Global Scoped & General Settings   
+
+==============================================================================================================================================================================================================================================================================*/
+
+//                                  _______________________
+//                                   Section: DOM Elements
 //#region DOM-Elements
 //          Container & Wrapper
 const header = document.getElementById("ID_Header");
@@ -78,24 +86,30 @@ const footer = document.getElementById("ID_FooterWrapper");
 const head_title = document.getElementById("ID_Head_Title");
 const headline_top = document.getElementById("ID_Headline");
 const headline_p = document.getElementById("ID_Header_p");
-const settings_svg = document.getElementById("ID_Settings");
-const settings_menu = document.getElementById("ID_Settings_Menu");
 const player_1_headline = document.getElementById("ID_Player_1_Headline");
 const player_1_name = document.getElementById("ID_Player_1_Name");
 const player_2_headline = document.getElementById("ID_Player_2_Headline");
 const player_2_name = document.getElementById("ID_Player_2_Name");
 const start_button = document.getElementById("ID_Start_Button");
-const info_h = document.getElementById("ID_Info");
-const starting_h = document.getElementById("ID_Starting");
-const colour_h = document.getElementById("ID_Colour");
 const play_against = document.getElementById("ID_Play_Against");
 //            Settings menu
+const settings_svg = document.getElementById("ID_Settings");
+const settings_menu = document.getElementById("ID_Settings_Menu");
+const info_h = document.getElementById("ID_Info");
+const colour = document.querySelector(".Class_Colour_Toggle");
 const language_h = document.getElementById("ID_Language");
 const select_deutsch = document.getElementById("ID_Deutsch");
 const select_english = document.getElementById("ID_English");
 const contact_h = document.getElementById("ID_Contact");
 const credits_h = document.getElementById("ID_Credits");
 const sound_h = document.getElementById("ID_Sound");
+const stats = document.getElementById("ID_Stats");
+const stats_easy = document.getElementById("ID_Stats_Easy");
+const stats_normal = document.getElementById("ID_Stats_Normal");
+const stats_reset_easy = document.getElementById("ID_Reset_Easy");
+const stats_reset_normal = document.getElementById("ID_Reset_Normal");
+const delete_all = document.getElementById("ID_Delete_All");
+const label_colour = document.getElementById("ID_Label_Colour");
 //#endregion
 
 //                                  _______
@@ -127,8 +141,8 @@ Game_against_KI: false,
 KI_Level: "none",
 };
 
-//                                  _______________________________
-//                                   Global variables / counters 
+//                                  __________________________________
+//                                   Section: Global Scoped Variables 
 
 //#region Row-Counters for Coin placement   
 /* Setting the Counters for let the Coin Placing Section know, 
@@ -147,6 +161,8 @@ let count_wins_player_one = 0;
 let count_wins_player_two = 0;
 //#endregion
 
+//                                  __________________________
+//                                   Section: General Settings
 //                                  ___________________________________________
 //                                   Proof which colour is choosen for Player 1
 //#region Choosing Colour
@@ -173,7 +189,7 @@ Translate_StartScreen(browserLanguage, false);
 //#endregion
 
 //                                  _________________________________
-//                                   Section: Naming / Correct Names 
+//                                   Naming / Correct Names 
 //#region  Naming
 //                                   Set Names of Players to stored names if they are some
 if(localStorage.Player_One_Name) player_1_name.value = localStorage.Player_One_Name;
@@ -239,31 +255,30 @@ document.getElementById("ID_SVG_Player_2").addEventListener("click", ()=>{
 
 //#endregion
 
-//                                  ________________________
-//                                   Section: Settings-Menu
 //                                  _______________________________
 //                                   Set up Settings-Menu
 //#region Settings-Menu Set up
-// Remove Settings-Menu from Starting-Screen DOM
-settings_menu.style.display = "none";
+
 // Show / Hide & Style Event-Listener
-settings_svg.addEventListener("click", () => {
-if (!settings_menu.classList.contains("Class_Showing_Settings")) {
-    if(settings_menu.classList.contains("Class_Showing_Settings")){
-        settings_menu.classList.remove("Class_Showing_Settings");
-        settings_menu.classList.add("Class_Hide_Settings");}
+settings_svg.addEventListener("click", ()=>{
+    if(!settings_menu.classList.contains("Class_Showing_Settings")){
+    settings_menu.style.display = "block";
+    settings_menu.classList.add("Class_Showing_Settings");
+    settings_menu.classList.remove("Class_Hide_Settings");
+}});
 
-settings_menu.style.display = "block";
-settings_menu.classList.add("Class_Showing_Settings");
-settings_menu.classList.remove("Class_Hide_Settings");
-}
+settings_menu.addEventListener("", ()=>{
+    settings_menu.classList.remove("Class_Showing_Settings");
+    settings_menu.classList.add("Class_Hide_Settings");
 });
-settings_menu.addEventListener("mouseleave", () => {
-});
+
+
+// Get up-tp-date stats for the Settings-Menu
+Stats();
+
 //#endregion
-
-//                                  _____________________________________________________________________________________________________________
-//                                   Event Listeners for Settings-Menu:  Choose Language (Menu), Choose Colour (Menu), Reset Stats (Menu)
+//                                  ______________________________________________________________________________________________________
+//                                   Settings-Menu Event-Listener:  Choose Language (Menu), Choose Colour (Menu), Reset Stats (Menu)
 //#region Event-Listeners Settings-Menu
 document.getElementById("ID_Language_Menu").addEventListener("change", () => {
 // Save language in Local Storage and Game Object
@@ -296,10 +311,6 @@ if(Game.Language === "de"){
 if(warning === true) {localStorage.clear();};
 });
 //#endregion
-
-//                                  ___________________________________________
-//                                   Get up-tp-date stats for the Settings-Menu
-Stats(); 
 
 //                                  ______________________________
 //                                   Event Listener to start Game
@@ -1740,6 +1751,7 @@ sound_h.innerText = "Sound";
 if (localStorage.getItem("Language") === "de") document.getElementById("ID_Language_Menu").value === "Deutsch";
 else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value === "English"; 
 };
+
 //                                  ___________________
 //                                    Deutsch Library 
 
@@ -1755,12 +1767,15 @@ function Deutsch() {
     play_against.innerText =  "Gegen den Computer spielen?"
     start_button.innerText = "Spiel Starten";
     info_h.innerText = "Spielanleitung";
-    starting_h.innerText = "Wer soll starten?";
     language_h.innerText = "Spracheinstellung";
     contact_h.innerText = "Kontakt";
+    stats.innerText = "Statistiken gegen den CPU";
+    delete_all.innerText = "Alles löschen";
+    label_colour.innerText = "Farbwahl";
     // Dropdown
     document.getElementById("ID_No").innerText = "Nein";
     document.getElementById("ID_Easy_Text").innerText = "KI Einfach";
+    
 };
 //                                   ___________________
 //                                    English Library 
@@ -1777,9 +1792,11 @@ function English() {
     play_against.innerText =  "Play against the CPU?"
     start_button.innerText = "Start Game";
     info_h.innerText = "Instructions";
-    starting_h.innerText = "Starter";
     language_h.innerText = "Language";
     contact_h.innerHTML = "Contact";
+    stats.innerText = "Statistics against CPU";
+    delete_all.innerText = "Delete all";
+    label_colour.innerText = "Choose Colour";
     document.getElementById("ID_No").innerText = "No";
     document.getElementById("ID_Easy_Text").innerText = "KI Easy";
  
