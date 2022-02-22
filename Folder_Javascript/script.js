@@ -1,37 +1,36 @@
                                                                                                                                                                                                                                                                                     /*
- 
-                                         Four-Wins-Online Main-Javascript-File                                                           
-                                                       powered by
+                                             Four-Wins-Online Main-Javascript-File                                                           
+                                                           powered by
                             
-                                                      Stefan Bartl
-                                                  (WKDSteVIE / WKDMinerva)
+                                                          Stefan Bartl
+                                                     (WKDSteVIE / WKDMinerva)
                             
-                                                          2021
-                             ______________________________________________________________________                                                                                                                                                                                                                                                    
-                            {                   ________________________________                   }                                                                                                                                                                                  
-                            {                           Table of content                           }
-                            {______________________________________________________________________} 
-                            |                                                                      |
-                            |                                                                      |
-                            |                 1) DOM, Global Scoped & General Settings             |
-                            |                                                                      |
-                            |                 2) Main Game                                         |
-                            |                                                                      |
-                            |                 3) KI                                                |
-                            |                                                                      |
-                            |                 4) Validations                                       |
-                            |                                                                      |
-                            |                 5) Game-End Screen                                   |
-                            |                                                                      | 
-                            |                 5) Helper-Functions                                  |
-                            |                                                                      |
-                            |                 6) Translation Manager & Page Library                |
-                            |                                                                      |
-                            |                 7) Final Information and Comments                    |
-                            |                                                                      |
-                            |                 8) Credits                                           |   
-                            |                                                                      | 
-                            |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |
+                                                              2021
+                             _______________________________________________________________________                                                                                                                                                                                                                                                    
+                            {                   _________________________________                   }                                                                                                                                                                                  
+                            {                            Table of content                           }
+                            {_______________________________________________________________________} 
+                            |                                                                       |
+                            |                                                                       |
+                            |                  1) DOM, Global Scoped & General Settings             |
+                            |                                                                       |
+                            |                  2) Main Game                                         |
+                            |                                                                       |
+                            |                  3) KI                                                |
+                            |                                                                       |
+                            |                  4) Validations                                       |
+                            |                                                                       |
+                            |                  5) Game-End Screen                                   |
+                            |                                                                       | 
+                            |                  6) Helper-Functions                                  |
+                            |                                                                       |
+                            |                  7) Translation Manager & Page Library                |
+                            |                                                                       |
+                            |                  8) Final Information and Comments                    |
+                            |                                                                       |
+                            |                  9) Credits                                           |   
+                            |                                                                       | 
+                            |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */                                                                                                                                               
 //#region Open Jobs                                                                                                                                                                                                                                                                             
                                                                                                                                                                                                                                                                               /*
