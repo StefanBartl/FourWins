@@ -36,12 +36,13 @@
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
 
-                                        -) KI Normal bug removing
-                                        -) Bug with not showing new stats immidieatly
                                         -) Settings menu
+                                        -) Sound-An - of Schalter
+                                        -) KI Normal bug removing
+
                                         -) Test and repair responsivness
+
                                         -) Wrap as much in functions as its argueable
-                                        -) Possible to make a placement section ? 
                                         -) Try to get the event listener outside and grouped together
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
                                            How much i can get in the Game object= row counter ... 
@@ -50,17 +51,11 @@
                                         -) Close repatationing code
                                         -) Better Styling (find a real good one)
                                         -) CSS-Code minimizing 
-                                           Bonus Features:
-                                        -) Due Audio was so slow, get more infos to make it faster, than add some Audio, Ingame and
-                                           something in the Settings Menu and also the functionality to control it
-                                        -) Free Gameboard-Size possile?
-                                        -) Start screen playing animation possible?
-                                        -) Possible to go back from Game-Screen to Start-Screen to change Colours, Sound etc...? 
-                                           Or is it easier to have the Settings-Menu Button Ingame?
+
 
                                                         Session progress:
 
-                                                                                                                                                                                                                                                                                 */
+                                                                                                                                                                                                                                                                             */
 //#endregion
 
 //#region DOM, Global Scoped & General Settings  
@@ -111,19 +106,6 @@ const delete_all = document.getElementById("ID_Delete_All");
 const label_colour = document.getElementById("ID_Label_Colour");
 //#endregion
 
-//                                  _______
-//                                   Audio 
-//#region Audio
-let warning_audio = new Audio("Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav"); // Confirm Audio Sample
-let lost_audio = new Audio("Folder_Audio/freesound_com/OneHits/loose.wav"); // Loose against KI Audio Sample
-let win_audio = new Audio("Folder_Audio/freesound_com/OneHits/scratchers__cheer.wav"); // Winning Cheer Audio Sample
-// Maybe can have a small audio player available (FM4 or something)- API ? -- give a try
-
-/*
-let placing_audio = new Audio("Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav");  Placement Ausio Sample
-placing_audio.play();     Dont konw why this sound does not work!         */ 
-//#endregion
-
 //                                  ____________________
 //                                   Create Game-Object 
 const Game = {
@@ -138,7 +120,25 @@ playerIsOnTurn: "right",
 roundCounter: 0,
 Game_against_KI: false,
 KI_Level: "none",
+Sound: true
 };
+
+//                                  _______
+//                                   Audio 
+//#region Audio
+let warning_audio = new Audio("Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav"); // Confirm Audio Sample
+warning_audio.load();
+let lost_audio = new Audio("Folder_Audio/freesound_com/loose.wav"); // Loose against KI Audio Sample
+lost_audio.load();
+let win_audio = new Audio("Folder_Audio/freesound_com/klankbeeld__choir-sing-a-final-01.wav"); // Winning Cheer Audio Sample
+win_audio.load();
+let placing_audio = new Audio("Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav");  //Placement Audio Sample
+placing_audio.load();
+
+Game.Sound = localStorage.Sound || true;
+Correct_Sound_Setting();
+
+//#endregion
 
 //                                  __________________________________
 //                                   Section: Global Scoped Variables 
@@ -291,6 +291,17 @@ if(settings_menu.classList.contains("Class_Showing_Settings")){
 };}
 );
 
+// Sound Change Event-Listener
+document.getElementById("ID_Sound_Checkbox").addEventListener("change", ()=>{
+if(document.getElementById("ID_Sound_Checkbox").checked === true){
+    localStorage.Sound = true;
+    Game.Sound = true;
+} else {
+    localStorage.Sound = false;
+    Game_Sound = false;
+};
+});
+
 // Get up-tp-date stats for the Settings-Menu
 Stats();
 
@@ -313,9 +324,11 @@ document.getElementById("ID_Colour_Checkbox").checked === true ? player_Colour_L
 });
 document.getElementById("ID_Reset_Easy").addEventListener("click", ()=>{
 localStorage.KI_Easy_Wins = 0; localStorage.KI_Easy_CPUWins = 0; localStorage.KI_Easy_Draws = 0;
+Stats();
 });
 document.getElementById("ID_Reset_Normal").addEventListener("click", ()=>{
 localStorage.KI_Normal_Wins = 0; localStorage.KI_Normal_CPUWins = 0; localStorage.KI_Normal_Draws = 0;
+Stats();
 });
 document.getElementById("ID_Delete_All").addEventListener("click", ()=>{
 // Play warning sound
@@ -386,6 +399,8 @@ let topCellColumn = ID_topCell[4];
 //                                  __________________________________________________________
 //                                  Event-Listener to make Top-Cells unclickable if neccesary
 topCell.addEventListener("click", () => {
+if(Game.Sound === true){
+placing_audio.play();}
 //  Make the other top cells unclickable for 1s (animation duration) so it cannont get overlapped
 for (let topCellA of topCellsArray) {
 topCellA.style = "pointer-events:none";
@@ -1100,6 +1115,12 @@ return;
 //                                   Creation of the Game-End-Screen
 
 function Game_End_Screen(winning_player, winning_chain) {
+
+// Play correct Audio   
+if (Game.Sound === true){
+if(winning_player === 2 && Game.Game_against_KI === true){
+    lost_audio.play();} else {win_audio.play();};
+};
 // If the Game was against KI, update the stats in the local storage via invoking helper function
 if(Game.Game_against_KI === true )Update_Stats(winning_player);
 
@@ -1514,6 +1535,20 @@ if(winning_player === 3 && KI_Level === "Normal"){ value = localStorage.KI_Norma
 document.getElementById("ID_Normal_2").innerText = value;};
 };
 // Enough space for a unbeatable level ??? :-)
+};
+
+//                                  ________________________
+//                                   Sound in Settings-Menu
+
+function Correct_Sound_Setting() {
+// Make sure, User prefered Sound-Setting is also shown in the Settings-Menu after closed and reopened window 
+var elm = document.getElementById('ID_Sound_Checkbox');
+if (localStorage.Sound === "false" && elm.checked === true) {
+elm.click();
+};
+if (localStorage.Sound === "true" && elm.checked === false) {
+elm.click();
+};
 };
 //                                  _____________________
 //                                   "Creator"-Function
