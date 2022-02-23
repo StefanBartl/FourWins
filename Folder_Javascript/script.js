@@ -36,25 +36,25 @@
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
 
-                                        -) Settings menu
-                                        -) Sound-An - of Schalter
+                                        -) Windows liiitle Bug
+                                        -) Color CHoose Bug
                                         -) KI Normal bug removing
 
                                         -) Test and repair responsivness
 
                                         -) Wrap as much in functions as its argueable
+                                        -) Try to make the Window Function with Prmoises a "real" confirm Window
+                                        -) use more const
                                         -) Try to get the event listener outside and grouped together
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
                                            How much i can get in the Game object= row counter ... 
                                            Functions all return; CHECK (and for) Helper mthods like psuh to local storage 
                                            Global variables for DOM Objects possible which are caled often?;
                                         -) Close repatationing code
-                                        -) Better Styling (find a real good one)
-                                        -) CSS-Code minimizing 
 
 
                                                         Session progress:
-
+                                                        
                                                                                                                                                                                                                                                                              */
 //#endregion
 
@@ -123,6 +123,12 @@ KI_Level: "none",
 Sound: true
 };
 
+//                                  ____________________
+//                                  Windows-Object
+const Windows = {
+// Object for storing returned Values from own Alert / Confirm / Prompt Windows
+};
+
 //                                  _______
 //                                   Audio 
 //#region Audio
@@ -176,12 +182,13 @@ if(document.getElementById("ID_Colour_Checkbox").checked === true) player_Colour
 //                                   Starting Page Language 
 //#region Language at Starting-Page
 // Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
-let isSetted = localStorage.LanguageIsSetttedByUser;
-let lang = localStorage.Language;
-if (isSetted == "true"){Translate_StartScreen(lang, true)}
-else if (isSetted !== "true"){
+let LangauageIsSettedByUser = localStorage.LanguageIsSetttedByUser;
+let language = localStorage.Language;
+if (LangauageIsSettedByUser == "true"){Translate_StartScreen(language, true); Game.Language = language; Game.LangauageIsSettedByUser = true}
+else if (LangauageIsSettedByUser !== "true"){
 let browserLanguage = navigator.language || navigator.userLanguage || "English";
 Game.Language = browserLanguage; Game.LanguageIsSetttedByUser = false;
+
 // Invoke the translation with the getted language
 Translate_StartScreen(browserLanguage, false);
 };
@@ -291,24 +298,53 @@ if(settings_menu.classList.contains("Class_Showing_Settings")){
 };}
 );
 
-// Sound Change Event-Listener
-document.getElementById("ID_Sound_Checkbox").addEventListener("change", ()=>{
-if(document.getElementById("ID_Sound_Checkbox").checked === true){
-    localStorage.Sound = true;
-    Game.Sound = true;
-} else {
-    localStorage.Sound = false;
-    Game_Sound = false;
-};
-});
-
 // Get up-tp-date stats for the Settings-Menu
 Stats();
 
 //#endregion
 //                                  ______________________________________________________________________________________________________
-//                                   Settings-Menu Event-Listener for:  Choose Language (Menu), Choose Colour (Menu), Reset Stats (Menu)
-//#region Event-Listeners Settings-Menu
+//                                   Settings-Menu Event-Listener for: Info, Choose Language, Choose Colour, Sound On/Off, Reset Stats
+//#region Event-Listeners Settings-
+
+document.getElementById("ID_Info").addEventListener("click", ()=>{
+    if(Game.Language === "de"){
+    New_Window({ID: "ID_Info_Window", Name: document.getElementById("ID_Info").innerText, Alert: true, Text: 
+`Online-4-Gewinnt
+
+1) Das Ziel des Spiels ist es 4 Spielsteine (Coins) nebeneinander, übereinander oder diagonal legen zu können.
+Die/der erste SpielerIn, welche dies schafft hat die Runde gewonnen.
+2) Die darauffolgende Runde beginnt der/die Verlierer_in aus der Vorrunde. (Gleicht spielerische Vorteile aus)
+3) Ein Unentschieden tritt ein, wenn kein Stein mehr spielbar ist und nimmt gewonnen hat. In diesem Fall beginnt derjenige, der nicht den letzten Spielzug machte.
+
+Informationen & Einstellungs-Menü:
+Eine Farbwahl ist möglich. Grundeinstellung ist Gelb für den / die linke Spieler_in und Rot für das Gegenüber.
+Der Sound hat eine On/Off Funktion und es ist möglich zwischen Deutsch und English zu wöhlen.
+Bei Spielen gegen den Computer wird der Spielausgang in einer Statistik aufgezeichnet. Diesen findet man in den Spieleinstellungen unter "Statistiken gegen den CPU".
+Diese Statistiken kann man separat zurücksetzen.
+
+Die Einstellungen Sound, Sprache, Statistiken gegen den CPU sowie gespeicherte Spielernamen werden in Ihrem Browser gespeichert. So ist es möglich, dass Sie den Browser schließen
+und die Einstellungen trotzdem erhalten bleiben. Wollen Sie diese Einstellungen löschen, so können Sie dies im Einstellungs-Menü ganz unten mit Klick auf "Alles löschen" tun.
+`
+})} else{
+    New_Window({ID: "ID_Info_Window", Name: document.getElementById("ID_Info").innerText, Alert: true, Text: 
+`Online-4-Wins
+
+1) The aim of the game is to be able to place 4 tokens (coins) next to each other, on top of each other or diagonally.
+The first player to do this wins the round.
+2) The following round starts with the loser from the previous round. (Balances game advantages)
+3) A tie occurs when there is no more playable checker and has won. In this case, the player who did not make the last move begins.
+
+Information & Settings menu:
+A color choice is possible. The basic setting is yellow for the player on the left and red for the opponent.
+The sound has an on/off function and it is possible to choose between German and English.
+In games against the computer, the outcome of the game is recorded in a statistic. This can be found in the game settings under "Stats vs. CPU".
+These statistics can be reset separately.
+
+The settings sound, language, statistics against the CPU and saved player names are saved in your browser. So it is possible that you close the browser
+and the settings are retained. If you want to delete these settings, you can do this in the settings menu at the bottom by clicking on "Delete all".
+`
+})};
+});
 document.getElementById("ID_Language_Menu").addEventListener("change", () => {
 // Save language in Local Storage and Game Object
 // Important maybe for later: With more languages, if/else needed!
@@ -322,6 +358,15 @@ Translate_StartScreen(languageCode, true);
 document.getElementById("ID_Colour_Checkbox").addEventListener("click", () => {
 document.getElementById("ID_Colour_Checkbox").checked === true ? player_Colour_Left = "red" : player_Colour_Left = "yellow";
 });
+document.getElementById("ID_Sound_Checkbox").addEventListener("change", ()=>{
+    if(document.getElementById("ID_Sound_Checkbox").checked === true){
+        localStorage.Sound = true;
+        Game.Sound = true;
+    } else {
+        localStorage.Sound = false;
+        Game_Sound = false;
+    };
+});
 document.getElementById("ID_Reset_Easy").addEventListener("click", ()=>{
 localStorage.KI_Easy_Wins = 0; localStorage.KI_Easy_CPUWins = 0; localStorage.KI_Easy_Draws = 0;
 Stats();
@@ -329,6 +374,12 @@ Stats();
 document.getElementById("ID_Reset_Normal").addEventListener("click", ()=>{
 localStorage.KI_Normal_Wins = 0; localStorage.KI_Normal_CPUWins = 0; localStorage.KI_Normal_Draws = 0;
 Stats();
+});
+document.getElementById("ID_Contact").addEventListener("click", ()=>{
+    window.open("https://stefanbartl.github.io/StefanBartl_Portfolio/");
+});
+document.getElementById("ID_Credits").addEventListener("click", ()=>{
+    window.open("https://github.com/StefanBartl/FourWins/blob/main/README.md");
 });
 document.getElementById("ID_Delete_All").addEventListener("click", ()=>{
 // Play warning sound
@@ -1536,7 +1587,95 @@ document.getElementById("ID_Normal_2").innerText = value;};
 };
 // Enough space for a unbeatable level ??? :-)
 };
+//                                  ________________________________
+//                                   Alert / Confirm / Prompt Windows
 
+function New_Window(options){
+
+// Info: To know if User clicked "Confirm" or Cancel, you need a variable outside of the function which can be manipulated by the Event-Listeners. 
+// --> Create an empty Windows{} Object. You find the "returns" than in the Windows.[variable]. You also can change the Event-Listeners for your needs.
+
+// Set up parameter list
+const _id = options.ID, _name = options.Name, _text = options.Text, _alert = options.Alert, _confirm = options.Confirm, _prompt = options.Prompt, _variable = options.Variable; 
+
+// Create all base Elements
+const window = document.createElement("div");
+window.id = _id;
+window.classList.add("Class_Window");
+window.draggable = true;
+const notification = document.createElement("div");
+notification.classList.add("Class_Window_Notification");
+const notification_text = document.createElement("p");
+notification_text.innerText = "Notification Window";
+
+const inner_window = document.createElement("div");
+inner_window.classList.add("Class_Inner_Window");
+const headline = document.createElement("h3");
+headline.innerText = _name;
+
+const textfield = document.createElement("p");
+textfield.innerText = _text;
+
+// Create OK Button
+const button_div = document.createElement("div");
+button_div.classList.add("Class_Buttons_Div");
+const confirm_button = document.createElement("button");
+confirm_button.classList.add("Class_Window_Buttons");
+confirm_button.innerText = "OK";
+confirm_button.addEventListener("click", ()=>{
+    window.remove();
+    if(_prompt !== true)
+    Windows[_variable] = true;
+});
+
+// Append it
+notification.appendChild(notification_text);
+inner_window.appendChild(headline);
+inner_window.appendChild(textfield);
+inner_window.appendChild(button_div);
+
+// Create Cancel Button to make Confirm-Window
+if (_confirm === true || _prompt === true){
+    const cancel_button = document.createElement("button");
+    cancel_button.innerText = "Cancel";
+    cancel_button.addEventListener("click", ()=>{
+        window.remove();
+        Windows[_variable] = false;
+    })
+    button_div.appendChild(cancel_button);
+    };
+// Invoke-Example Confirm: New_Window({ID: "ID_Test_Window", Name: "Test Window", Text: "Test Test Test", Confirm: true, Variable: "Tester"}); Find Confirm Boolean: Windows.Tester
+
+button_div.appendChild(confirm_button);
+window.appendChild(notification);
+window.appendChild(inner_window);
+document.body.appendChild(window);
+
+// Create Input-Text and add it
+if (_prompt === true){
+const user_input = document.createElement("input");
+user_input.type = "text";
+inner_window.insertBefore(user_input, inner_window.children[2]);
+confirm_button.addEventListener("click", ()=>{
+    window.remove();
+    Windows[_variable] = user_input.value;
+    // Invoke Example Prompt: New_Window({ID: "ID_Test_Window", Name: "Test Window", Text: "Test Test Test", Prompt: true, Variable: "Tester"}); Find Input value: Windows.Tester
+})};
+//#region CSS for the Windows-Function:
+/*
+  CSS: 
+.Class_Window{ min-height: 40vh; width: 50%; position: absolute; top: 10%; left: 25%; display: grid; grid: 1rem auto / 1fr; justify-items:center; text-align: center;
+background-color: grey; border: solid 1px black; resize: both; }
+.Class_Window_Notification{ line-height: 0; min-width: 100%; font-size:x-small; color: white; display: flex; justify-content: center; align-items: center;
+.Class_Inner_Window{ width:  calc(100% - 2rem); height: calc(100% - 1rem); overflow: scroll; display: grid; grid: 2rem auto 5rem / 1fr; grid-auto-rows:max-content; gap: 6%; justify-items: center;
+align-items: center; background-color: white; color: black; border: solid 1px black;}
+.Class_Inner_Window p { align-self: center;}
+.Class_Inner_Window input{ height: 2rem; width: 60%; background-color: darkgray; text-align: center; border: solid 1px black;}
+.Class_Buttons_Div { display: flex; gap: 1rem; height: 2rem;}
+.Class_Inner_Window button{ width: 5rem; border: solid 1px black; }
+ */
+//#endregion
+};
 //                                  ________________________
 //                                   Sound in Settings-Menu
 
@@ -1550,7 +1689,7 @@ if (localStorage.Sound === "true" && elm.checked === false) {
 elm.click();
 };
 };
-//                                  _____________________
+//                                  ____________________
 //                                   "Creator"-Function
 
 function Create_DOM_Element(options, arrayOne, arrayTwo) {
@@ -1610,7 +1749,6 @@ parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width
 
 */
 };
-
 //                                  ____________________________
 //                                   Fireworks Canvas-Animation                                
 
