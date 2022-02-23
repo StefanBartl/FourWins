@@ -84,6 +84,8 @@
 overflow-wrap: break-word;
 word-wrap: break-word;
 
+overflow: hidden;
+   
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap');
@@ -112,12 +114,17 @@ header{
 border-bottom: solid 1vh var(--main-white);
 border-radius: 1rem;
 min-height: 15vh;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-items: center;
-line-height: 0;
 margin-top: 1rem;
+}
+
+#ID_Head_Text{
+   display: flex;
+   flex-wrap: wrap;
+   min-width: 100%;
+   min-height: 100%;
+   align-items: center;
+   text-align: center;
+   line-height: 0;
 }
 
 .Class_HeaderWrapper{
@@ -266,19 +273,16 @@ right: 3%;
 ===============================================================================================================================================================================================================================================================================*/
 
 /* Settings SVG Button */
-.Class_Settings{
+#ID_Settings{
+width: 2rem;
+height: 2rem;
 position: absolute;
-z-index: 3;
 right: 0;
 top: 1.35vh;
 filter: invert(1);
 }
 
-#ID_Settings:hover + .Class_HeaderWrapper::after{
-content: "Ojopj";
-color: red;
-width: 3rem;
-height: 1rem;
+#ID_Settings:hover {
 
 }
 
@@ -288,19 +292,19 @@ height: 1rem;
 position: absolute;
 top: 0;
 z-index: 2;
+opacity: 0;
 right: -25vw;
-min-height: 100vh;
+min-height: 98vh;
 width:clamp(300px, 20%, 25vw);    
 background-color: rgba(255, 255, 255, 1);
 box-shadow: inset .1rem .1rem 2rem black;
 color: var(--main-black);
 text-align: center;
-border-radius: 20%;
 }
 
 
 .Class_Showing_Settings{
-animation: Show_Settings_Animation 2s ease-in;
+animation: Show_Settings_Animation .1s ease-in;
 animation-fill-mode: forwards;
 animation-iteration-count: 1;
 }
@@ -318,7 +322,7 @@ to{
 }
 
 .Class_Hide_Settings{
-animation: Hide_Settings_Animation 2s ease-out;
+animation: Hide_Settings_Animation .1s ease-out;
 animation-fill-mode: forwards;
 animation-iteration-count: 1
 }
@@ -617,7 +621,7 @@ min-width: 100%;
 text-align: center;
 }
 
-#ID_Headline_p{
+#ID_Header_p{
 min-width: 100%;
 text-align: center;
 }

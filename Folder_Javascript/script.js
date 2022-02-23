@@ -258,26 +258,45 @@ document.getElementById("ID_SVG_Player_2").addEventListener("click", ()=>{
 //                                   Set up Settings-Menu
 //#region Settings-Menu Set up
 
-// Show / Hide & Style Event-Listener
-settings_svg.addEventListener("click", ()=>{
-    if(!settings_menu.classList.contains("Class_Showing_Settings")){
-    settings_menu.style.display = "block";
-    settings_menu.classList.add("Class_Showing_Settings");
-    settings_menu.classList.remove("Class_Hide_Settings");
-}});
+// Hide Settings Menu at start
+settings_menu.style.opacity = "0";
 
-settings_menu.addEventListener("", ()=>{
+// Show Settins-Menu Event-Listener
+settings_svg.addEventListener("mouseenter", ()=>{
+    //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
+    if(!settings_menu.classList.contains("Class_Showing_Settings")){
+    settings_menu.classList.remove("Class_Hide_Settings");;
+    settings_menu.classList.add("Class_Showing_Settings");
+    return
+};}
+);
+
+// Hide Settings-Menu Event-Listener I
+document.querySelector("#ID_MainWrapper").addEventListener("mouseenter", ()=>{
+       //If the settíngs menu is leaved to the main wrapper and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
+if(settings_menu.classList.contains("Class_Showing_Settings")){
     settings_menu.classList.remove("Class_Showing_Settings");
     settings_menu.classList.add("Class_Hide_Settings");
-});
+    return
+};}
+);
 
+// Hide Settings-Menu Event-Listener II
+document.querySelector("#ID_Head_Text").addEventListener("mousemove", ()=>{
+           //If the settíngs menu is leaved to the header and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
+if(settings_menu.classList.contains("Class_Showing_Settings")){
+    settings_menu.classList.remove("Class_Showing_Settings");
+    settings_menu.classList.add("Class_Hide_Settings");
+    return
+};}
+);
 
 // Get up-tp-date stats for the Settings-Menu
 Stats();
 
 //#endregion
 //                                  ______________________________________________________________________________________________________
-//                                   Settings-Menu Event-Listener:  Choose Language (Menu), Choose Colour (Menu), Reset Stats (Menu)
+//                                   Settings-Menu Event-Listener for:  Choose Language (Menu), Choose Colour (Menu), Reset Stats (Menu)
 //#region Event-Listeners Settings-Menu
 document.getElementById("ID_Language_Menu").addEventListener("change", () => {
 // Save language in Local Storage and Game Object
