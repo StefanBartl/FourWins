@@ -72,19 +72,28 @@
 
 :root{
     /* Colour-Palette */
---main-blue: hsl(201, 79%, 46%);
---main-white: hsl(0, 0%, 100%);
+    
+--prime-blueviolett: hsl(238, 56%, 19%);
+--prime-darkgrey: hsl(330, 2%, 17%);
+--prime-green: hsl(95, 63%, 36%);
+--prime-yellow: hsl(43, 100%, 50%);
+--prime-manner: hsl(10, 60%, 80%);
+--prime-lightgrey: hsl(71, 13%, 67%);
+
+--base-colour: hsl(201, 79%, 46%);;
 --main-black: hsl(0, 0%, 0%);
---main-red: hsl(0, 100%, 50%); 
---prime-border: hsl(0, 0%, 100%);
---gameboard-border: hsl(240, 100%, 49%);
+--main-red: hsl(0, 100%, 50%);
+
+--base-border: hsl(0, 0%, 100%);
+--gameboard: hsl(240, 100%, 49%);
 --cornsilk: hsl(48, 100%, 93%);
 --top-header: hsl(39, 77%, 83%);
 
 overflow-wrap: break-word;
 word-wrap: break-word;
 
-overflow: hidden;
+   overflow: hidden;
+
    
 }
 
@@ -101,7 +110,7 @@ overflow: hidden;
 ===============================================================================================================================================================================================================================================================================*/
 
 body{
-background-color: var(--main-blue);
+background-color: var(--base-colour);
 z-index: -3;
 font-family: 'Titillium Web', sans-serif;
 color: var(--top-header);
@@ -111,7 +120,7 @@ text-align: center;
 }
 
 header{
-border-bottom: solid 1vh var(--main-white);
+border-bottom: solid 1vh var(--base-border);
 border-radius: 1rem;
 min-height: 15vh;
 margin-top: 1rem;
@@ -141,8 +150,8 @@ align-items: center;
 .Class_LeftSidebarWrapper{
 min-width: 30%;
 margin-bottom: 30vh;
-border-top:  solid 1px var(--prime-border);
-border-bottom:  solid 1px var(--prime-border);
+border-top:  solid 1px var(--base-border);
+border-bottom:  solid 1px var(--base-border);
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
@@ -154,9 +163,9 @@ text-align: center;
 display: flex;
 min-width: 33%;
 min-height: 63vh;
-background-color: var(--gameboard-border);
-border: solid 1rem var(--gameboard-border);
-border-top: dashed .1rem var(--gameboard-border);
+background-color: var(--gameboard);
+border: solid 1rem var(--gameboard);
+border-top: dashed .1rem var(--gameboard);
 border-radius: 2rem;
 border-top-left-radius: 0;
 border-top-right-radius: 0;
@@ -166,8 +175,8 @@ border-top: none;
 .Class_RightSidebarWrapper{
 min-width: 30%;
 margin-bottom: 30vh;
-border-top:  solid 1px var(--prime-border);
-border-bottom:  solid 1px var(--prime-border);
+border-top:  solid 1px var(--base-border);
+border-bottom:  solid 1px var(--base-border);
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
@@ -208,8 +217,8 @@ width: calc(100% / 7);
 outline: none;
 min-width: auto;
 min-height: calc(95% / 7);
-border-left: dashed .15rem var(--main-white);
-background-color: var(--main-blue);
+border-left: dashed .15rem var(--base-border);
+background-color: var(--base-colour);
 z-index: -1;
 cursor: pointer;
 }
@@ -221,9 +230,9 @@ border-left: none;
 .Class_Cells{
 min-width: calc(90% / 7);
 min-height: calc(90% / 7);
-border: solid .2rem var(--gameboard-border);
+border: solid .2rem var(--gameboard);
 border-radius: 10rem;
-background-color: var(--main-white);
+background-color: var(--base-border);
 opacity: .7;
 justify-content: center;
 align-content: center;
@@ -294,12 +303,13 @@ top: 0;
 z-index: 2;
 opacity: 0;
 right: -25vw;
-min-height: 98vh;
+min-height: 100vh;
 width:clamp(300px, 20%, 25vw);    
-background-color: rgba(255, 255, 255, 1);
+background-color: var(--base-border);
 box-shadow: inset .1rem .1rem 2rem black;
 color: var(--main-black);
 text-align: center;
+line-height: 0;
 }
 
 
@@ -339,26 +349,30 @@ to{
 }
 
 #ID_Setting_Span{
-display: flex;
+display: grid;
+grid: repeat(8, 1fr) / 1fr;   
 flex-wrap: wrap;
 width: 100vw;
 height: 100vh;
 max-width:100%;
 justify-content:center;
 text-align: center;
+overflow:scroll
+
+   
 }
 
 
 #ID_Info_Container{
 min-width: 100%;
-border-bottom: dashed 2px var(--main-blue);
+border-bottom: dashed 2px var(--base-colour);
 display: flex;
 align-items: center;
 }
 
 #ID_Colour_Container{
 min-width: 100%;
-border-bottom: dashed 2px var(--main-blue);
+border-bottom: dashed 2px var(--base-colour);
 display: flex;
 flex-wrap: wrap;
 align-items: center;
@@ -366,7 +380,7 @@ align-items: center;
 
 #ID_Sound_Container{
 min-width: 100%;
-border-bottom: dashed 2px var(--main-blue);
+border-bottom: dashed 2px var(--base-colour);
 display: flex;
 flex-wrap: wrap;
 align-items: center;
@@ -375,7 +389,7 @@ justify-content: center;
 
 #ID_Language_Container{
 min-width: 100%;
-border-bottom: dashed 2px var(--main-blue);
+border-bottom: dashed 2px var(--base-colour);
 display: flex;
 flex-wrap: wrap;
 align-items: center;
@@ -384,7 +398,7 @@ justify-content: center;
 
 #ID_Stats_Container{
 min-width: 100%;
-border-bottom: dashed 2px var(--main-blue);
+border-bottom: dashed 2px var(--base-colour);
 display: flex;
 flex-wrap: wrap;
 align-items: center;
@@ -393,20 +407,21 @@ justify-content: center;
 
 #ID_Contacts_Container{
 min-width: 100%;
-border-bottom: dashed 2px var(--main-blue);
+border-bottom: dashed 2px var(--base-colour);
 display: flex;
 align-items: center;
 }
 
 #ID_Credits_Container{
 min-width: 100%;
-border-bottom: dashed 2px var(--main-blue);
+border-bottom: dashed 2px var(--base-colour);
 display: flex;
 align-items: center;
 }
 
 #ID_Delete_All_Container{
 min-width: 100%;
+min-height: 10vh;
 display: flex;
 align-items: center;
 justify-content: center;
@@ -498,7 +513,7 @@ color: var(--gameboard-border);
 
 
 .Class_Summary_Details:hover{
-color: red;
+color: var(--main-red);
 cursor: pointer;
 }
 
@@ -540,7 +555,7 @@ top: 1.5em;
 left: 40%;
 width: 4em;
 height: 2em;
-background-color: red; 
+background-color: yellow; 
 transition: all .3s ease-in-out;
 border-radius: 1em;  
 }
@@ -552,13 +567,13 @@ height: 1.6em;
 width: 1.6em;
 right: 2.3em;
 bottom: 0.2em;
-background-color: white;
+background-color: var(--base-border);
 border-radius: 50%;
 transition: all .3s ease-in-out;
 }
 
 .Class_Colour_Toggle input:checked + .Class_Colour_Slider {
-background-color: yellow; 
+background-color: red; 
 }
 
 .Class_Colour_Toggle input:focus + .Class_Colour_Slider {
@@ -593,8 +608,8 @@ width: 50%;
 border-radius: 10%;
 }
 #ID_Delete_All:hover{
-background-color: grey;
-color: white;
+background-color: var(--prime-darkgrey);
+color: var(--base-border);;
 }
 
 
@@ -630,7 +645,7 @@ text-align: center;
 
 #ID_h3_turnText{
 width: 10rem;
-border: dashed .3rem var(--main-white);
+border: dashed .3rem var(--base-border);
 padding: 1rem;
 }
 /* #endregion */  
@@ -651,7 +666,7 @@ text-align: center;
 }
 
 #ID_Choose_KI{
-border: solid 1px var(--main-white);
+border: solid 1px var(--base-border);
 border-radius: 10rem; 
 }
 
@@ -702,7 +717,7 @@ border-radius: 10rem;
 #ID_Language_Menu{
 min-width: 50%;
 border: none;
-background-color: lightgrey;
+background-color: var(--prime-lightgrey);
 border-radius: 5rem
 }
 
@@ -1001,7 +1016,7 @@ margin-bottom: 5vw;
 }
 
 .Class_Top_End{
-background-color: var(--main-white);
+background-color: var(--base-border);
 opacity: .7;
 }
 
