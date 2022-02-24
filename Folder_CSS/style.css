@@ -72,6 +72,38 @@
 ===============================================================================================================================================================================================================================================================================*/
 
 
+/* #region CSS-Trciks */
+
+/*
+
+      Scrollbar Firefox
+el{
+   scrollbar-color: dark;
+   scrollbar-width: .5rem;
+   scrollbar-gutter: both-edges ;
+}
+
+     Scrollbar Chrome, Safari,...
+
+el::-webkit-scrollbar{
+   width: .5rem;
+}
+
+el::-webkit-scrollbar-track-piece{
+   background-color: var(--gameboard);
+}
+
+el::-webkit-thumb:vertical{
+   height: 1rem;
+   background-color: var(--base-colour);
+}
+
+*/
+
+/* #endregion */
+
+
+
 :root{
     /* Colour-Palette */
     
@@ -96,7 +128,6 @@
 
    overflow: hidden;
 
-   
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap');
@@ -306,17 +337,11 @@ footer{
    position: absolute;
    z-index: 10;
    top: 5vh;
-   right: -26.5vw;
+   right: 0;
    height: 90vh;
-   width: 15vw;    
-   background-color: var(--base-border);
-   box-shadow: inset .1rem .1rem 2rem black;
-   border-left: solid 1px black;
-   color: var(--main-black);
-   text-align: center;
+   width: clamp(270px, 20%, 25vw);    
    line-height: 0;
 }
-
 
 .Class_Showing_Settings{
    animation: Show_Settings_Animation .1s ease-in;
@@ -326,11 +351,9 @@ footer{
 
 @keyframes Show_Settings_Animation {
 from{
-   opacity: 0;
-   right: -26.5vw;
+   right: -95%;
 }
 to{
-   opacity: 1;
    right: 0;
  
 }
@@ -344,37 +367,60 @@ to{
 @keyframes Hide_Settings_Animation {
 from{
    right: 0vw;
-   opacity: 1;
 }
 to{
-   opacity: 0;
-   right: -26.5vw;
+   right: -95%;
  
 }
 }
 
 #ID_Setting_Span{
+   position: relative;
+   top: 0;
+   right: -95%;
    display: grid;
-   grid: repeat(8, 1fr) / 1fr;   
-   flex-wrap: wrap;
+   grid: 2rem 1fr 1fr 1fr 1fr 3rem 3rem 3rem / 1fr;
+   gap: 1rem;
    width: 100vw;
    height: 90vh;
    max-width:100%;
    justify-content:center;
+   overflow:scroll;
+   background-color: var(--base-border);
+   box-shadow: inset .1rem .1rem 2rem black;
+   border-left: solid 1px black;
+   color: var(--main-black);
    text-align: center;
-   overflow:scroll
+   scrollbar-color: dark;
+   scrollbar-width: .5rem;
+   scrollbar-gutter: both-edges ;
+}
+
+#ID_Setting_Span::-webkit-scrollbar{
+   width: .5rem;
+}
+
+#ID_Setting_Span::-webkit-scrollbar-track-piece{
+   background-color: var(--gameboard);
+}
+
+#ID_Setting_Span::-webkit-thumb:vertical{
+   height: 1rem;
+   background-color: var(--base-colour);
+}
+
+#ID_Settings_Menu{
+
 }
 
 #ID_Info_Container{
    min-width: 100%;
-   border-bottom: dashed 2px var(--base-colour);
    display: flex;
    align-items: center;
 }
 
 #ID_Colour_Container{
    min-width: 100%;
-   border-bottom: dashed 2px var(--base-colour);
    display: flex;
    flex-wrap: wrap;
    align-items: center;
@@ -382,7 +428,6 @@ to{
 
 #ID_Sound_Container{
    min-width: 100%;
-   border-bottom: dashed 2px var(--base-colour);
    display: flex;
    flex-wrap: wrap;
    align-items: center;
@@ -391,7 +436,6 @@ to{
 
 #ID_Language_Container{
    min-width: 100%;
-   border-bottom: dashed 2px var(--base-colour);
    display: flex;
    flex-wrap: wrap;
    align-items: center;
@@ -400,23 +444,21 @@ to{
 
 #ID_Stats_Container{
    min-width: 100%;
-   border-bottom: dashed 2px var(--base-colour);
    display: flex;
    flex-wrap: wrap;
    align-items: center;
    justify-content: center;
+
 }
 
 #ID_Contacts_Container{
    min-width: 100%;
-   border-bottom: dashed 2px var(--base-colour);
    display: flex;
    align-items: center;
 }
 
 #ID_Credits_Container{
    min-width: 100%;
-   border-bottom: dashed 2px var(--base-colour);
    display: flex;
    align-items: center;
 }
