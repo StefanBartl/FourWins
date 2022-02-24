@@ -36,10 +36,9 @@
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
 
-                                        -) KI Normal bug removing
-
                                         -) Test and repair responsivness
 
+                                        -) settings Menu without wheel ?                                                                                                                                                                                                                                    
                                         -) Wrap as much in functions as its argueable
                                         -) Reduce document.getE with the DOM assigned variables
                                         -) Try to make the Window Function with Prmoises a "real" confirm Window
@@ -50,6 +49,9 @@
                                            Functions all return; CHECK (and for) Helper mthods like psuh to local storage 
                                            Global variables for DOM Objects possible which are caled often?;
                                         -) Close repatationing code
+
+                                        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+                                        -) Write a final Comment 
 
 
                                                    Session progress:
@@ -2341,7 +2343,11 @@ function English() {
      Bonus Jobs to-do:
 
 -) Highlight the winning chain!
-
+-) Improve KI Normal, especially the Diagonal Detection!
+-) Write a KI Heavy Algorhytmus!
+-) Make it possible to switch from Game Mode to the Starting Screen to change Settings, Names etc...
+-) Design a Starting Screen Animation to make it more interesting to play!  
+-) Think about a new Design for the Page and the Gameboard!
                                                                                                                                                                                                                                                                                 */
 //#endregion
 

@@ -61,7 +61,7 @@
 
                                                                                                                                                                                                                                                                               */
 
-/* #endregion */
+                                                                                                                                                                                                                                                               /* #endregion */  
 
 /* #region General */                                                                                                                                                                                                                                                                               
                                                                                                                                                                                                                                                                                /*
@@ -101,7 +101,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap');
 
-/* #endregion */  
+                                                                                                                                                                                                                                                               /* #endregion */  
 
 /* #region Layout */  
                                                                                                                                                                                                                                                                           /*
@@ -200,7 +200,7 @@ footer{
    top: -1rem;
 }
 
-/* #endregion */  
+                                                                                                                                                                                                                                                               /* #endregion */  
 
 /* #region Gameboard */  
                                                                                                                                                                                                                                                                        /*
@@ -274,7 +274,7 @@ footer{
    right: 3%;
 }
 
-/* #endregion */
+                                                                                                                                                                                                                                                               /* #endregion */  
 
 /* #region Settings Menu */                                                                                                                                                                                                                                                                               
                                                                                                                                                                                                                                                                           /*
@@ -607,7 +607,7 @@ to{
 }
 
 
-/* #endregion */
+                                                                                                                                                                                                                                                               /* #endregion */  
 
 /* #region Typographie */    
                                                                                                                                                                                                                                                                            /*
@@ -642,7 +642,7 @@ to{
    border: dashed .3rem var(--base-border);
    padding: 1rem;
 }
-/* #endregion */  
+                                                                                                                                                                                                                                                               /* #endregion */  
 
 /* #region Buttons, Inputs... */  
                                                                                                                                                                                                                                                                          /*
@@ -714,7 +714,7 @@ select{
    border-radius: 5rem
 }
 
-/* #endregion */
+                                                                                                                                                                                                                                                               /* #endregion */  
 
 /* #region Animations & Transitions */    
                                                                                                                                                                                                                                                                          /*
@@ -956,7 +956,7 @@ to{
    transform: rotate(0deg); 
 }
 }
-/* #endregion */  
+                                                                                                                                                                                                                                                               /* #endregion */  
 
 /* #region Game End Screen */  
                                                                                                                                                                                                                                                                           /*
@@ -1075,7 +1075,7 @@ justify-content: right;
 align-content: flex-end;
 text-align: center;
 }
-/* #endregion */  
+                                                                                                                                                                                                                                                               /* #endregion */  
 
 /* #region Helpers */  
                                                                                                                                                                                                                                                                          /*
@@ -1178,7 +1178,7 @@ to{
    height: 2rem;
    border: solid 1px black;
 }
-/* #endregion */ 
+                                                                                                                                                                                                                                                               /* #endregion */  
 
 /* #region Media Queries */  
                                                                                                                                                                                                                                                                          /*
@@ -1327,18 +1327,18 @@ align-items: flex-end;
 }
 
 }
-/* #endregion */  
+                                                                                                                                                                                                                                                               /* #endregion */  
 
 /* #region Final Informations & Comments */  
-                                                                                                                                                                                                                                                                         /*
-================================================================================================================================================================================================================================================================================
+                                                                                                                                                                                                                                                                              /*
+===============================================================================================================================================================================================================================================================================
                             
                                                    Final Information & Comments     
 
 ===============================================================================================================================================================================================================================================================================
 
-                                                                                                                                                                                                                                                                         */
-/* #endregion */ 
+                                                                                                                                                                                                                                                                             */
+                                                                                                                                                                                                                                                               /* #endregion */ 
 
 /* #region Credits */ 
                                                                                                                                                                                                                                                                          /*
@@ -1357,4 +1357,6 @@ align-items: flex-end;
            #                                                                                                                    #
            #                                                                                                                    #
            ######################################################################################################################                                                                                                                                            */
-/* #endregion */  
+
+
+                                                                                                                                                                                                                                                               /* #endregion */  
