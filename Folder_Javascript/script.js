@@ -37,8 +37,8 @@
                                                 Jobs To-do:
 
                                         -) Test and repair responsivness
-
-                                        -) settings Menu without wheel ?                                                                                                                                                                                                                                    
+ 
+                                        -) Try mylibrary using and update it                                                                                                                                                                                                                                 
                                         -) Wrap as much in functions as its argueable
                                         -) Reduce document.getE with the DOM assigned variables
                                         -) Try to make the Window Function with Prmoises a "real" confirm Window
@@ -52,6 +52,8 @@
 
                                         -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
                                         -) Write a final Comment 
+
+                                        -) Save Default Scripot Files with the new Scfript Layout for later Projects
 
 
                                                    Session progress:
@@ -90,8 +92,8 @@ const start_button = document.getElementById("ID_Start_Button");
 const play_against = document.getElementById("ID_Play_Against");
 const choose_ki = document.getElementById("ID_Choose_KI");
 //            Settings menu
-const settings_svg = document.getElementById("ID_Settings");
 const settings_menu = document.getElementById("ID_Settings_Menu");
+const settings_span = document.getElementById("ID_Setting_Span");
 const info_h = document.getElementById("ID_Info");
 const colour = document.querySelector(".Class_Colour_Toggle");
 const language_h = document.getElementById("ID_Language");
@@ -272,14 +274,23 @@ document.getElementById("ID_SVG_Player_2").addEventListener("click", ()=>{
 //#region Settings-Menu Set up
 
 // Hide Settings Menu at start
-settings_menu.style.opacity = "0";
+//settings_menu.style.opacity = "0";
 
 // Show Settins-Menu Event-Listener
-settings_svg.addEventListener("mouseenter", ()=>{
+settings_span.addEventListener("mouseenter", ()=>{
     //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
-    if(!settings_menu.classList.contains("Class_Showing_Settings")){
-    settings_menu.classList.remove("Class_Hide_Settings");;
-    settings_menu.classList.add("Class_Showing_Settings");
+    if(!settings_span.classList.contains("Class_Showing_Settings")){
+    settings_span.classList.remove("Class_Hide_Settings");;
+    settings_span.classList.add("Class_Showing_Settings");
+    return
+};}
+);
+
+settings_span.addEventListener("touchstart", ()=>{
+    //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
+    if(!settings_span.classList.contains("Class_Showing_Settings")){
+    settings_span.classList.remove("Class_Hide_Settings");;
+    settings_span.classList.add("Class_Showing_Settings");
     return
 };}
 );
@@ -287,19 +298,28 @@ settings_svg.addEventListener("mouseenter", ()=>{
 // Hide Settings-Menu Event-Listener I
 document.querySelector("#ID_MainWrapper").addEventListener("mouseenter", ()=>{
        //If the settíngs menu is leaved to the main wrapper and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
-if(settings_menu.classList.contains("Class_Showing_Settings")){
-    settings_menu.classList.remove("Class_Showing_Settings");
-    settings_menu.classList.add("Class_Hide_Settings");
+if(settings_span.classList.contains("Class_Showing_Settings")){
+    settings_span.classList.remove("Class_Showing_Settings");
+    settings_span.classList.add("Class_Hide_Settings");
     return
+};}
+);
+
+document.querySelector("#ID_MainWrapper").addEventListener("touchstart", ()=>{
+    //If the settíngs menu is leaved to the main wrapper and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
+if(settings_span.classList.contains("Class_Showing_Settings")){
+ settings_span.classList.remove("Class_Showing_Settings");
+ settings_span.classList.add("Class_Hide_Settings");
+ return
 };}
 );
 
 // Hide Settings-Menu Event-Listener II
 document.querySelector("#ID_Head_Text").addEventListener("mousemove", ()=>{
            //If the settíngs menu is leaved to the header and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
-if(settings_menu.classList.contains("Class_Showing_Settings")){
-    settings_menu.classList.remove("Class_Showing_Settings");
-    settings_menu.classList.add("Class_Hide_Settings");
+if(settings_span.classList.contains("Class_Showing_Settings")){
+    settings_span.classList.remove("Class_Showing_Settings");
+    settings_span.classList.add("Class_Hide_Settings");
     return
 };}
 );
@@ -2218,14 +2238,12 @@ sound_h.innerText = "Sound";
 if (localStorage.getItem("Language") === "de") document.getElementById("ID_Language_Menu").value === "Deutsch";
 else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value === "English"; 
 };
-
 //                                  ___________________
 //                                    Deutsch Library 
 
 function Deutsch() {
+    
     head_title.innerText = "+++ 4-Gewinnt +++";
-    settings_svg.title = "Einstellungen";
-    settings_svg.alt = "Einstellungen";
     headline_top.innerText = "Online 4-Gewinnt";
     headline_p.innerText = "Spiele gegen deine Freunde oder gegen die KI!";
     player_1_headline.innerText = "Wähle einen Namen";
@@ -2234,19 +2252,22 @@ function Deutsch() {
     player_1_name.alt = "Gib Spieler 1 Namen ein";
     player_1_svg.title = "Speichere den Namen für spätere Spiele!";
     player_1_svg.alt = "Button zum speichern des Namens.";
-    player_2_svg.title = "Speichere den Namen für spätere Spiele!";
-    player_2_svg.alt = "Button zum speichern des Namens.";
     player_2_headline.innerText = "Wähle einen Namen";
     player_2_name.placeholder = "Spieler 2";
     player_2_name.title = "Name Spieler 2";
     player_2_name.alt = "Gib Spieler 2 Namen ein";
+    player_2_svg.title = "Speichere den Namen für spätere Spiele!";
+    player_2_svg.alt = "Button zum speichern des Namens.";
     start_button.innerText = "Spiel Starten";
     start_button.title = "Spiel Starten";
     start_button.alt = "Spiel Starten Button";
+    settings_menu.title = "Einstellungen";
+    settings_menu.alt = "Einstellungen";
     info_h.innerText = "Spielanleitung";
     info_h.title = "Zur Spielanleitung";
-    colour.title = "Wähle eine Farbe für Spieler 1";
     info_h.alt = "Zur Spielanleitung";
+    label_colour.innerText = "Farbwahl";
+    colour.title = "Wähle eine Farbe für Spieler 1";
     colour.alt = "Wähle eine Farbe für Spieler 1";
     sound_checkbox.title = "Sound ON / OFF";
     sound_checkbox.alt = "Sound ON / OFF";
@@ -2255,19 +2276,17 @@ function Deutsch() {
     language_menu.alt = "Wähle deine Sprache";
     contact_h.innerText = "Kontakt";
     contact_h.title = "Zu den Kontaktmöglichkeiten";
-    credits_h.title = "Zu den Credits";
     contact_h.alt = "Zu den Kontaktmöglichkeiten";
+    credits_h.title = "Zu den Credits";
     credits_h.alt = "Zu den Credits";
     stats.innerText = "Statistiken gegen den CPU";
     stats_easy.title = "Statistik gegen KI Easy";
-    stats_normal.title = "Statistik gegen KI Normal";
-    delete_all.title = "Lösche alle Daten";
     stats_easy.alt = "Statistik gegen KI Easy";
+    stats_normal.title = "Statistik gegen KI Normal";
     stats_normal.alt = "Statistik gegen KI Normal";
+    delete_all.innerText = "Alle Daten löschen";
+    delete_all.title = "Lösche alle Daten";
     delete_all.alt = "Lösche alle Daten";
-    label_colour.innerText = "Farbwahl";
-
-    // Footer Dropdown
     choose_ki.title = "Wähle deinen Gegner!";
     choose_ki.alt = "Wähle deinen Gegner Auswahlmenü!";
     play_against.innerText =  "Gegen den Computer spielen?"
@@ -2279,8 +2298,6 @@ function Deutsch() {
 
 function English() {
     head_title.innerText = "+++ 4-Wins +++";
-    settings_svg.title = "Settings";
-    settings_svg.alt = "Settings";
     headline_top.innerText = "Four Wins";
     headline_p.innerText = "Play against friends or KI!";
     player_1_headline.innerText = "Choose Name";
@@ -2288,20 +2305,23 @@ function English() {
     player_1_name.title = "Player 1 Name";
     player_1_name.alt = "Write Player 1 Name";
     player_1_svg.title = "Save Name for later Games!";
-    player_2_svg.title = "Save Name for later Games!";
     player_1_svg.alt = "Save Name for later Games!";
     player_2_svg.alt = "Save Name for later Games!";
     player_2_headline.innerText = "Choose Name";
+    player_2_svg.title = "Save Name for later Games!";
     player_2_name.title = "Player 2 Name";
     player_2_name.alt = "Write Player 2 Name";
     player_2_name.placeholder = "Player 2";
     start_button.innerText = "Start Game";
     start_button.title = "Start Game!";
     start_button.alt = "Start Game Button";
+    settings_menu.title = "Settings";
+    settings_menu.alt = "Settings";
     info_h.innerText = "Instructions";
     info_h.title = "To Instructions";
     info_h.alt = "To Instructions";
     colour.title = "Choose Colour for Player 1";
+    label_colour.innerText = "Choose Colour";
     sound_checkbox.title = "Sound ON / OFF";
     sound_checkbox.alt = "Sound ON / OFF";
     language_h.innerText = "Language";
@@ -2309,20 +2329,17 @@ function English() {
     language_menu.alt = "Choose your Language";
     contact_h.innerHTML = "Contact";
     contact_h.title = "To Contact-Page";
-    credits_h.title = "To Credits";
     contact_h.alt = "To Contact-Page";
+    credits_h.title = "To Credits";
     credits_h.alt = "To Credits";
     stats.innerText = "Statistics against CPU";
     stats_easy.title = "Statistics against KI Easy";
-    stats_normal.title = "Statistics against KI Normal";
     stats_easy.alt = "Statistics against KI Easy";
+    stats_normal.title = "Statistics against KI Normal";
     stats_normal.alt = "Statistics against KI Normal";
-    delete_all.innerText = "Delete all";
+    delete_all.innerText = "Delete all Data";
     delete_all.title = "Delete all Data";
     delete_all.alt = "Delete all Data";
-    label_colour.innerText = "Choose Colour";
-
-    // Footer Dropdown 
     choose_ki.title = "Choose your enemy!";
     choose_ki.alt = "Choose your Enemy Dropdown-Menu";
     play_against.innerText =  "Play against the CPU?";
@@ -2347,11 +2364,11 @@ function English() {
 -) Write a KI Heavy Algorhytmus!
 -) Make it possible to switch from Game Mode to the Starting Screen to change Settings, Names etc...
 -) Design a Starting Screen Animation to make it more interesting to play!  
--) Think about a new Design for the Page and the Gameboard!
+-) Think about a other Design for the Page and the Gameboard!
                                                                                                                                                                                                                                                                                 */
 //#endregion
 
-//#region Credits
+//#region Credits                       
                                                                                                                                                                                                                                                                                 /*
     
 ######################################################################################################################

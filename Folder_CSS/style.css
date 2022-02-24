@@ -45,8 +45,8 @@
                                                     Jobs To-do:
 
                                         -) Win div mit Ellypse positon absolute über win row
-                                        -) Better Styling (find a real good one)
-                                        -) CSS-Code minimizing 
+                                        -) Better Styling (find a final, real good one), also in the Settings Menu
+                                        -) CSS-Code minimizing f.e. bind repetative Classes to one Class
                                         -) INGAME Section?
                                         -) Styling 
                                         -) Start screen playing animation
@@ -293,6 +293,7 @@ footer{
    top: 1.35vh;
    filter: invert(1);
    z-index: 11;
+   display: none;
 }
 
 #ID_Settings:hover {
@@ -303,14 +304,14 @@ footer{
 
 .Class_Settings_Menu{
    position: absolute;
-   top: 0;
-   z-index: 2;
-   opacity: 0;
-   right: -25vw;
-   min-height: 100vh;
-   width:clamp(300px, 20%, 25vw);    
+   z-index: 10;
+   top: 5vh;
+   right: -26.5vw;
+   height: 90vh;
+   width: 15vw;    
    background-color: var(--base-border);
    box-shadow: inset .1rem .1rem 2rem black;
+   border-left: solid 1px black;
    color: var(--main-black);
    text-align: center;
    line-height: 0;
@@ -326,7 +327,7 @@ footer{
 @keyframes Show_Settings_Animation {
 from{
    opacity: 0;
-   right: -25vw;
+   right: -26.5vw;
 }
 to{
    opacity: 1;
@@ -347,7 +348,7 @@ from{
 }
 to{
    opacity: 0;
-   right: -25vw;
+   right: -26.5vw;
  
 }
 }
@@ -357,7 +358,7 @@ to{
    grid: repeat(8, 1fr) / 1fr;   
    flex-wrap: wrap;
    width: 100vw;
-   height: 100vh;
+   height: 90vh;
    max-width:100%;
    justify-content:center;
    text-align: center;
