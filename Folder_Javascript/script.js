@@ -36,8 +36,6 @@
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
 
-                                        -) Windows liiitle Bug
-                                        -) Color CHoose Bug
                                         -) KI Normal bug removing
 
                                         -) Test and repair responsivness
@@ -53,12 +51,12 @@
                                         -) Close repatationing code
 
 
-                                                        Session progress:
-                                                        
+                                                   Session progress:
+                                                         
                                                                                                                                                                                                                                                                              */
 //#endregion
 
-//#region DOM, Global Scoped & General Settings  
+//#region DOM, Global Scoped & General Settings                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    #region DOM, Global Scoped & General Settings  
                                                                                                                                                                                                                                                                               /*
 ===============================================================================================================================================================================================================================================================================
  
@@ -120,6 +118,8 @@ playerIsOnTurn: "right",
 roundCounter: 0,
 Game_against_KI: false,
 KI_Level: "none",
+// Standard is: Left Yellow / Right Red
+player_Colour_Left: "yellow",
 Sound: true
 };
 
@@ -171,11 +171,10 @@ let count_wins_player_two = 0;
 //                                  ___________________________________________
 //                                   Proof which colour is choosen for Player 1
 //#region Choosing Colour
-// Standard is: Left Yellow / Right Red
-let player_Colour_Left = "yellow";
 
 // Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted
-if(document.getElementById("ID_Colour_Checkbox").checked === true) player_Colour_Left = "red";
+Game.player_Colour_Left = localStorage.Player_Colour_Left || "yellow";
+Correct_Colour_Setting();
 //#endregion
 
 //                                  ________________________
@@ -301,6 +300,10 @@ if(settings_menu.classList.contains("Class_Showing_Settings")){
 // Get up-tp-date stats for the Settings-Menu
 Stats();
 
+// Make sure Choose Colour toggle is correct 
+if ( localStorage.Player_Colour_Left === "yellow" || localStorage.Player_Colour_Left === undefined)document.getElementById("ID_Colour_Checkbox").checked = false; 
+else if (localStorage.Player_Colour_Left === "red") document.getElementById("ID_Colour_Checkbox").checked = true; 
+
 //#endregion
 //                                  ______________________________________________________________________________________________________
 //                                   Settings-Menu Event-Listener for: Info, Choose Language, Choose Colour, Sound On/Off, Reset Stats
@@ -308,7 +311,7 @@ Stats();
 
 document.getElementById("ID_Info").addEventListener("click", ()=>{
     if(Game.Language === "de"){
-    New_Window({ID: "ID_Info_Window", Name: document.getElementById("ID_Info").innerText, Alert: true, Text: 
+    New_Window({ID: "ID_Info_Window", Name: document.getElementById("ID_Info").innerText, Alert: true, Variable: "Game Info", Text: 
 `Online-4-Gewinnt
 
 1) Das Ziel des Spiels ist es 4 Spielsteine (Coins) nebeneinander, übereinander oder diagonal legen zu können.
@@ -325,7 +328,7 @@ Diese Statistiken kann man separat zurücksetzen.
 Die Einstellungen Sound, Sprache, Statistiken gegen den CPU sowie gespeicherte Spielernamen werden in Ihrem Browser gespeichert. So ist es möglich, dass Sie den Browser schließen
 und die Einstellungen trotzdem erhalten bleiben. Wollen Sie diese Einstellungen löschen, so können Sie dies im Einstellungs-Menü ganz unten mit Klick auf "Alles löschen" tun.
 `
-})} else{
+})} else {
     New_Window({ID: "ID_Info_Window", Name: document.getElementById("ID_Info").innerText, Alert: true, Text: 
 `Online-4-Wins
 
@@ -343,7 +346,7 @@ These statistics can be reset separately.
 The settings sound, language, statistics against the CPU and saved player names are saved in your browser. So it is possible that you close the browser
 and the settings are retained. If you want to delete these settings, you can do this in the settings menu at the bottom by clicking on "Delete all".
 `
-})};
+})}
 });
 document.getElementById("ID_Language_Menu").addEventListener("change", () => {
 // Save language in Local Storage and Game Object
@@ -355,8 +358,14 @@ Game.Language = languageCode; Game.LanguageIsSetttedByUser = true;
 // Make sure that a manually setted setted language is not overwritten by the default detected default browser language
 Translate_StartScreen(languageCode, true);
 });
-document.getElementById("ID_Colour_Checkbox").addEventListener("click", () => {
-document.getElementById("ID_Colour_Checkbox").checked === true ? player_Colour_Left = "red" : player_Colour_Left = "yellow";
+document.getElementById("ID_Colour_Checkbox").addEventListener("change", () => {
+    if(localStorage.Player_Colour_Left === "red"){
+        localStorage.Player_Colour_Left = "yellow";
+        Game.player_Colour_Left = "yellow";
+    } else {
+        localStorage.Player_Colour_Left = "red";
+        Game.player_Colour_Left = "red";
+    };
 });
 document.getElementById("ID_Sound_Checkbox").addEventListener("change", ()=>{
     if(document.getElementById("ID_Sound_Checkbox").checked === true){
@@ -396,7 +405,10 @@ if(warning === true) {localStorage.clear();};
 
 //                                  ______________________________
 //                                   Event Listener to start Game
+//#region Start Game
 document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
+//#endregion
+
 //#endregion
 
 //#region Main Game
@@ -497,9 +509,12 @@ else if (columnNumber === 7) { row_Counter_C7--; row = row_Counter_C7; };
 // Create the correct coin, set correct position and append it to the DOM
 let coin = document.createElement("div");
 
-if (Game.playerIsOnTurn === "left") {coin.classList.add("Class_Coin_Yellow"); Game.actualGameboardPlayer1[`C${columnNumber}`].push(row) };
-if (Game.playerIsOnTurn === "right") {coin.classList.add("Class_Coin_Red"); Game.actualGameboardPlayer2[`C${columnNumber}`].push(row) };
+if (Game.playerIsOnTurn === "left" && Game.player_Colour_Left === "yellow") {coin.classList.add("Class_Coin_Yellow"); Game.actualGameboardPlayer1[`C${columnNumber}`].push(row)}
+else if (Game.playerIsOnTurn === "left" && Game.player_Colour_Left === "red") {coin.classList.add("Class_Coin_Red"); Game.actualGameboardPlayer1[`C${columnNumber}`].push(row)};
+if (Game.playerIsOnTurn === "right" && Game.player_Colour_Left === "yellow") {coin.classList.add("Class_Coin_Red"); Game.actualGameboardPlayer2[`C${columnNumber}`].push(row)}
+else if (Game.playerIsOnTurn === "right" && Game.player_Colour_Left === "red") {coin.classList.add("Class_Coin_Yellow"); Game.actualGameboardPlayer2[`C${columnNumber}`].push(row)};
 topCell.appendChild(coin);
+
 // Trigger the correct animation (animation length)
 coin.classList.add(`Class_PlacingAnimation_to_Row_${row}`);
 
@@ -512,7 +527,7 @@ topCell.firstChild.remove();
 
 if (Game.playerIsOnTurn === "left") {
 // 2 IF Statements after another, first to check if placement was from left or right Player, second to check the choosed colour, which affects the correct placement
-if (player_Colour_Left === "yellow") {
+if (Game.player_Colour_Left === "yellow") {
 // Place the Coin as background image on the correct column (set by the decreased counter from before)
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_1");
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
@@ -538,7 +553,7 @@ else if (Game.KI_Level === "Normal") {KI_Normal(); Lock_TopCells()};
 }
 // Same for Player 2
 else {
-if (player_Colour_Left === "red") {
+if (Game.player_Colour_Left === "red") {
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_1");
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
 document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlayed", "yes");
@@ -1376,9 +1391,14 @@ function insertAfter(referenceNode, newNode) {
 function Add_Choosing_Ani(column){
     column -= 1;
     const topCellsArray = document.getElementsByClassName("Class_TopCells");
-    Game.playerIsOnTurn === "left" ?
-    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1") :
-    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2")
+    if(Game.playerIsOnTurn === "left"  && Game.player_Colour_Left === "yellow"){
+    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");}
+    else if (Game.playerIsOnTurn === "left"  && Game.player_Colour_Left === "red"){
+    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2");}
+    else if (Game.playerIsOnTurn === "right"  && Game.player_Colour_Left === "yellow"){
+    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2");
+    } else if(Game.playerIsOnTurn === "right"  && Game.player_Colour_Left === "red"){
+        topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");};
 };
 //                                  __________________________________________
 //                                  Remove Choosing-Animation from Top-Cells
@@ -1386,9 +1406,12 @@ function Add_Choosing_Ani(column){
 function Remove_Choosing_Ani(column){
     column -= 1;
     const topCellsArray = document.getElementsByClassName("Class_TopCells");
-Game.playerIsOnTurn === "left" ?
-topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1") :
-topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2")
+if(Game.playerIsOnTurn === "left"){
+    topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1");
+    topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2"); 
+}else {  
+topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1"); 
+topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2");}
 };
 //                                 _______________
 //                                  Lock topCells
@@ -1603,10 +1626,16 @@ const window = document.createElement("div");
 window.id = _id;
 window.classList.add("Class_Window");
 window.draggable = true;
-const notification = document.createElement("div");
-notification.classList.add("Class_Window_Notification");
-const notification_text = document.createElement("p");
-notification_text.innerText = "Notification Window";
+
+if(_alert === true){
+    window.innerText = "Alert Window";
+} else if (_confirm === true){
+    window.innerText = "Confirm Window";
+} else if (_prompt === true){
+    window.innerText = "Prompt Window";
+} else {
+window.innerText = "Notification Window";
+};
 
 const inner_window = document.createElement("div");
 inner_window.classList.add("Class_Inner_Window");
@@ -1624,12 +1653,17 @@ confirm_button.classList.add("Class_Window_Buttons");
 confirm_button.innerText = "OK";
 confirm_button.addEventListener("click", ()=>{
     window.remove();
-    if(_prompt !== true)
+    if(_confirm === true){
     Windows[_variable] = true;
+} else if (_alert === true){
+    Windows[_variable] === true;
+} else if (_prompt === true){
+    Windows[_variable] === true;
+};
+
 });
 
 // Append it
-notification.appendChild(notification_text);
 inner_window.appendChild(headline);
 inner_window.appendChild(textfield);
 inner_window.appendChild(button_div);
@@ -1640,14 +1674,17 @@ if (_confirm === true || _prompt === true){
     cancel_button.innerText = "Cancel";
     cancel_button.addEventListener("click", ()=>{
         window.remove();
-        Windows[_variable] = false;
+        if(_confirm === true){
+            Windows[_variable] = false;
+        } else if (_prompt === true){
+            Windows[_variable] === false;
+        };
     })
     button_div.appendChild(cancel_button);
     };
 // Invoke-Example Confirm: New_Window({ID: "ID_Test_Window", Name: "Test Window", Text: "Test Test Test", Confirm: true, Variable: "Tester"}); Find Confirm Boolean: Windows.Tester
 
 button_div.appendChild(confirm_button);
-window.appendChild(notification);
 window.appendChild(inner_window);
 document.body.appendChild(window);
 
@@ -1664,18 +1701,83 @@ confirm_button.addEventListener("click", ()=>{
 //#region CSS for the Windows-Function:
 /*
   CSS: 
-.Class_Window{ min-height: 40vh; width: 50%; position: absolute; top: 10%; left: 25%; display: grid; grid: 1rem auto / 1fr; justify-items:center; text-align: center;
-background-color: grey; border: solid 1px black; resize: both; }
-.Class_Window_Notification{ line-height: 0; min-width: 100%; font-size:x-small; color: white; display: flex; justify-content: center; align-items: center;
-.Class_Inner_Window{ width:  calc(100% - 2rem); height: calc(100% - 1rem); overflow: scroll; display: grid; grid: 2rem auto 5rem / 1fr; grid-auto-rows:max-content; gap: 6%; justify-items: center;
-align-items: center; background-color: white; color: black; border: solid 1px black;}
-.Class_Inner_Window p { align-self: center;}
-.Class_Inner_Window input{ height: 2rem; width: 60%; background-color: darkgray; text-align: center; border: solid 1px black;}
-.Class_Buttons_Div { display: flex; gap: 1rem; height: 2rem;}
-.Class_Inner_Window button{ width: 5rem; border: solid 1px black; }
+.
+.Class_Window{
+   min-height: 30vh;
+   max-height: 75vh;
+   width: 50%;
+   z-index: 10;
+   position: absolute;
+   top: 10%;
+   left: 25%;
+   display: grid;
+   grid: 1rem auto 1rem / 1fr;
+   justify-items:center;
+   text-align: center;
+   background-color: grey;
+   border: solid 1px black;
+   font-size:xx-small;
+   color: white;
+   text-align: center;
+   }
+
+.Class_Inner_Window{
+   width:  calc(100% - 2rem);
+   display: grid;
+   grid:  2rem auto 4rem / 1fr;
+   max-block-size: 65vh;
+   justify-items: center;
+   align-items: center;
+   background-color: white;
+   color: black;
+   border: solid 1px black;
+   font-size: small;
+}
+
+.Class_Inner_Window p {
+   align-self: center;
+   margin-top: 2rem;
+   height: 100%;
+   overflow: scroll;  
+   
+}
+
+.Class_Inner_Window input{
+   height: 2rem;
+   width: 60%;
+   background-color: darkgray;
+   text-align: center;
+   border: solid 1px black;
+}
+
+.Class_Buttons_Div {
+   display: flex;
+   gap: 1rem;
+   height: 2rem;
+}
+
+.Class_Inner_Window button{
+   width: 5rem;
+   height: 2rem;
+   border: solid 1px black;
+}
  */
 //#endregion
 };
+//                                  ________________________
+//                                   Sound in Settings-Menu
+
+function Correct_Colour_Setting() {
+    // Make sure, User prefered Colour-Setting is also shown in the Settings-Menu after closed and reopened window 
+    var elm = document.getElementById('ID_Colour_Checkbox');
+    if (localStorage.Player_Colour_Left === "red" && elm.checked === true) {
+    elm.click();
+    };
+    if (localStorage.Player_Colour_Left === "yellow" && elm.checked === false) {
+    elm.click();
+    };
+    };
+
 //                                  ________________________
 //                                   Sound in Settings-Menu
 
