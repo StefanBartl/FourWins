@@ -121,7 +121,7 @@ el{
    overflow-wrap: break-word;
    word-wrap: break-word;
 
-   overflow: hidden;
+   overflow-x: hidden;
 
 }
 
