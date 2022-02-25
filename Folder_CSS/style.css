@@ -248,7 +248,7 @@ footer{
    border-left: none;
 }
 
-.Class_Full_Cell{
+.Class_Full_Column{
    box-shadow: 0 -5px 0 var(--gameboard);
    display: flex;
    align-items:center;

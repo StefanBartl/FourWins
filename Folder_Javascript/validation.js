@@ -156,7 +156,8 @@ function TopCell_Validation(columnNumber, invokedForKiValidation) {
     if (proof === 2 && invokedForKiValidation === false) { // If it was lock it for further placements 
         // console.log("TopCell-Validator locked cell.");
         document.getElementById(`ID_C${columnNumber}R1`).innerText = "Full!";
-        document.getElementById(`ID_C${columnNumber}R1`).classList.add("Class_Full_Cell");
+        document.getElementById(`ID_C${columnNumber}R1`).classList.add("Class_Full_Column");
+        document.getElementById(`ID_C${columnNumber}R1`).style = "pointer-events: none";
         return
     };
 

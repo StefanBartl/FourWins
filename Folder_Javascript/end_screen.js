@@ -148,9 +148,16 @@ document.getElementById("ID_NewGame_Button").addEventListener("click", ()=>{
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
 for (let topCell of topCellsArray) {
     topCell.classList.remove("Class_Top_End");
+    topCell.innerText = "";
     topCell.style = "pointer-events:auto";
-    topCell.classList.remove("Class_Full_Cell");
+    topCell.classList.remove("Class_Full_Column");
 };
+
+const cellsArray = document.getElementsByClassName("Class_Cells");
+for (let cell of cellsArray) {
+    cell.setAttribute("isPlayed", "no");
+};
+
 
 // Show the Player is on turn Infobox
 document.getElementById("ID_h3_turnText").classList.remove("Class_Invisible");
@@ -180,13 +187,7 @@ for (let a = 1; a < 8; a++){
 
 // Reset round & column counters
 Game.roundCounter = 0; 
-column_1_Counter = 8;
-column_2_Counter = 8;
-column_3_Counter = 8;
-column_4_Counter = 8;
-column_5_Counter = 8;
-column_6_Counter = 8;
-column_7_Counter = 8;
+row_Counter_C1 = 8; row_Counter_C2 = 8; row_Counter_C3 = 8; row_Counter_C4 = 8; row_Counter_C5 = 8; row_Counter_C6 = 8; row_Counter_C7 = 8;
 
 // Remove the Game End Screen
 if(document.getElementById("ID_Firework")){

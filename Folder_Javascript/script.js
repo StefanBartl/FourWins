@@ -43,8 +43,8 @@
                                         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
                                                    Session progress
--) Added Closed Top Cell Design
--) Replaced let with const variables anyehe4re possible
+-) 
+-) 
                                                                                                                                                                                                                                                                              */
 //#endregion
 
@@ -155,13 +155,7 @@ Correct_Sound_Setting();
 //#region Row-Counters for Coin placement   
 /* Setting the Counters for let the Coin Placing Section know, 
    in which row & column the Game currently is to calculate by placement the correct position */
-let row_Counter_C1 = 8;
-let row_Counter_C2 = 8;
-let row_Counter_C3 = 8;
-let row_Counter_C4 = 8;
-let row_Counter_C5 = 8;
-let row_Counter_C6 = 8;
-let row_Counter_C7 = 8;
+let row_Counter_C1 = 8, row_Counter_C2 = 8, row_Counter_C3 = 8, row_Counter_C4 = 8, row_Counter_C5 = 8, row_Counter_C6 = 8, row_Counter_C7 = 8;
 //#endregion
 
 //#region Counting wins on a row
