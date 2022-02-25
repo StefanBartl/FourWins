@@ -33,13 +33,14 @@
 
 //                                 __________________________________
 //                                   Translation Managing Functions 
+
 function Set_Page_Language(){
 // Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
-let LangauageIsSettedByUser = localStorage.LanguageIsSetttedByUser;
-let language = localStorage.Language;
-if (LangauageIsSettedByUser == "true"){Translate_StartScreen(language, true); Game.Language = language; Game.LangauageIsSettedByUser = true}
-else if (LangauageIsSettedByUser !== "true"){
-let browserLanguage = navigator.language || navigator.userLanguage || "English";
+const LanguageIsSettedByUser = localStorage.LanguageIsSetttedByUser;
+const language = localStorage.Language;
+if (LanguageIsSettedByUser == "true"){Translate_StartScreen(language, true); Game.Language = language; Game.LanguageIsSettedByUser = true}
+else if (LanguageIsSettedByUser !== "true"){
+const browserLanguage = navigator.language || navigator.userLanguage || "English";
 Game.Language = browserLanguage; Game.LanguageIsSetttedByUser = false;
 // Invoke the translation with the getted language
 Translate_StartScreen(browserLanguage, false);
@@ -48,7 +49,7 @@ Translate_StartScreen(browserLanguage, false);
 
 function Translate_StartScreen(language, byUser) {
     // Make sure browser triggered invokes are not executed if the language was setted manually anytime before
-    let setted_language = localStorage.Language, settedByUserInStorage = localStorage.LanguageIsSetttedByUser;
+    const setted_language = localStorage.Language;
     
     if (byUser === true){
         if(setted_language === "de") Deutsch(); else English();
@@ -200,7 +201,6 @@ function English() {
     ki_level_dropdown_normal.alt = "Selection CPU Normal";
 };
 //#endregion
-
 
 //#region Final informations and Comments
 

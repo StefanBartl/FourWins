@@ -27,18 +27,15 @@
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
                                                                                       
-                                        -) Naimning page start CPU und auch noch als KI bennant
-                                        -) Column full deckel drauf ?
-                                        -) Wrap as much in functions as its argueable
-                                        -) Reduce document.getE with the DOM assigned variables
-                                        -) Try to make the Window Function with Prmoises a "real" confirm Window
-                                        -) use more const
+                                        -) Try to make the Window Function with Promises a "real" confirm Window
                                         -) Try to get the event listener outside and grouped together
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
                                            How much i can get in the Game object= row counter ... 
                                            Functions all return; CHECK (and for) Helper mthods like psuh to local storage 
                                            Global variables for DOM Objects possible which are caled often?;
                                         -) Close repatationing code
+                                        -) Fullfill Coding Guideline
+                                        -) Do this in all scripts!
 
                                         -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
                                         -) Write a final Comment 
@@ -46,7 +43,8 @@
                                         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
                                                    Session progress
-New Prepare Game Function, eliminated duplicated variable invoking; Removed Bug with correct Player 2 Naming / KI Naming
+-) Added Closed Top Cell Design
+-) Replaced let with const variables anyehe4re possible
                                                                                                                                                                                                                                                                              */
 //#endregion
 
@@ -138,13 +136,13 @@ const Windows = {
 //                                  _______
 //                                   Audio 
 //#region Audio
-let warning_audio = new Audio("Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav"); // Confirm Audio Sample
+const warning_audio = new Audio("Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav"); // Confirm Audio Sample
 warning_audio.load();
-let lost_audio = new Audio("Folder_Audio/freesound_com/loose.wav"); // Loose against KI Audio Sample
+const lost_audio = new Audio("Folder_Audio/freesound_com/loose.wav"); // Loose against KI Audio Sample
 lost_audio.load();
-let win_audio = new Audio("Folder_Audio/freesound_com/klankbeeld__choir-sing-a-final-01.wav"); // Winning Cheer Audio Sample
+const win_audio = new Audio("Folder_Audio/freesound_com/klankbeeld__choir-sing-a-final-01.wav"); // Winning Cheer Audio Sample
 win_audio.load();
-let placing_audio = new Audio("Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav");  //Placement Audio Sample
+const placing_audio = new Audio("Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav");  //Placement Audio Sample
 placing_audio.load();
 
 Game.Sound = localStorage.Sound || true;
@@ -167,8 +165,7 @@ let row_Counter_C7 = 8;
 //#endregion
 
 //#region Counting wins on a row
-let count_wins_player_one = 0;
-let count_wins_player_two = 0;
+let count_wins_player_one = 0; count_wins_player_two = 0;
 //#endregion
 
 //                                  __________________________
@@ -205,7 +202,8 @@ document.getElementById("ID_Toggle_Button").addEventListener("click", ()=>{
 //                                   Starting Page Language 
 //#region Language at Starting-Page
 // Detect Browser Language or local Storage setted Language and set it in Game Object
-    Set_Page_Language();
+Set_Page_Language();
+
 //#endregion
 
 //                                  _________________________________
@@ -492,8 +490,8 @@ const topCellsArray = document.getElementsByClassName("Class_TopCells");
 for (let topCell of topCellsArray) {
 
 // Get the ID & Column of the played TopCell 
-let ID_topCell = topCell.id;
-let topCellColumn = ID_topCell[4];
+const ID_topCell = topCell.id;
+const topCellColumn = ID_topCell[4];
 
 //                                  ____________________________________________________
 //                                  Event-Listener for actions if a Top Cell is clicked
@@ -535,7 +533,7 @@ Game.roundCounter++;
 
 //                      Get the correct played row
 // First get the column number via the id of the top cell
-let columnNumber = parseInt(ID_topCell[4]);
+const columnNumber = parseInt(ID_topCell[4]);
 
 // Decrease the row counter by the total columns played in this row before and setting a variable for 
 // the correct animations and the placement (to get the correct correct column)
@@ -550,7 +548,7 @@ else if (columnNumber === 7) { row_Counter_C7--; row = row_Counter_C7; };
 
 //                              Placing the Coin Section
 // Create the correct coin, set correct position and append it to the DOM
-let coin = document.createElement("div");
+const coin = document.createElement("div");
 
 if (Game.playerIsOnTurn === "left" && Game.player_Colour_Left === "yellow") {coin.classList.add("Class_Coin_Yellow"); Game.actualGameboardPlayer1[`C${columnNumber}`].push(row)}
 else if (Game.playerIsOnTurn === "left" && Game.player_Colour_Left === "red") {coin.classList.add("Class_Coin_Red"); Game.actualGameboardPlayer1[`C${columnNumber}`].push(row)};
@@ -584,9 +582,9 @@ document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
 document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlayed", "yes");
 }
 //  Invoke Winning-Validation for Player 1
-let valid_row = Row_Validator(1, row);
-let valid_column = Column_Validator(1, columnNumber, row);
-let valid_diagonal = Diagonal_Validator(1, columnNumber, row);
+const valid_row = Row_Validator(1, row);
+const valid_column = Column_Validator(1, columnNumber, row);
+const valid_diagonal = Diagonal_Validator(1, columnNumber, row);
 if (valid_row === true || valid_column === true || valid_diagonal === true) return;
 if (Game.roundCounter === 42){Game_End_Screen(3); return;}; 
 TopCell_Validation(columnNumber, false);
@@ -608,9 +606,9 @@ document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
 document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlayed", "yes");
 }
 //  Invoke Winning-Validation for Player 2
-let valid_row = Row_Validator(2, row);
-let valid_column = Column_Validator(2, columnNumber, row);
-let valid_diagonal = Diagonal_Validator(2, columnNumber, row);
+const valid_row = Row_Validator(2, row);
+const valid_column = Column_Validator(2, columnNumber, row);
+const valid_diagonal = Diagonal_Validator(2, columnNumber, row);
 if (valid_row === true || valid_column === true || valid_diagonal === true) return;
 if (Game.roundCounter === 42){Game_End_Screen(3); return;}; 
 TopCell_Validation(columnNumber, false);

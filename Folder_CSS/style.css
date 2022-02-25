@@ -248,6 +248,13 @@ footer{
    border-left: none;
 }
 
+.Class_Full_Cell{
+   box-shadow: 0 -5px 0 var(--gameboard);
+   display: flex;
+   align-items:center;
+   justify-content:center;
+}
+
 .Class_Cells{
    min-width: calc(90% / 7);
    min-height: calc(90% / 7);

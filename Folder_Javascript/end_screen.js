@@ -144,12 +144,12 @@ document.getElementById("ID_Game_End_Container").appendChild(gameboard);
                                     // New Game Event Listener with important function
 document.getElementById("ID_NewGame_Button").addEventListener("click", ()=>{
 
-// Remove TopCell Style class during the End-Screen & unlock the placement function again
+// Remove TopCell Style classes collected during the Game and End-Screen & unlock the placement function again
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
 for (let topCell of topCellsArray) {
     topCell.classList.remove("Class_Top_End");
     topCell.style = "pointer-events:auto";
-
+    topCell.classList.remove("Class_Full_Cell");
 };
 
 // Show the Player is on turn Infobox

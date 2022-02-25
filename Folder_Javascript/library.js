@@ -79,26 +79,26 @@ function insertAfter(referenceNode, newNode) {
 //                                  Add Choosing-Animation from Top-Cells
 
 function Add_Choosing_Ani(column){
-    column -= 1;
-    const topCellsArray = document.getElementsByClassName("Class_TopCells");
-    if(Game.playerIsOnTurn === "left"  && Game.player_Colour_Left === "yellow"){
-    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");}
-    else if (Game.playerIsOnTurn === "left"  && Game.player_Colour_Left === "red"){
-    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2");}
-    else if (Game.playerIsOnTurn === "right"  && Game.player_Colour_Left === "yellow"){
-    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2");
-    } else if(Game.playerIsOnTurn === "right"  && Game.player_Colour_Left === "red"){
-        topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");};
+column -= 1;
+const topCellsArray = document.getElementsByClassName("Class_TopCells");
+if(Game.playerIsOnTurn === "left"  && Game.player_Colour_Left === "yellow"){
+topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");}
+else if (Game.playerIsOnTurn === "left"  && Game.player_Colour_Left === "red"){
+topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2");}
+else if (Game.playerIsOnTurn === "right"  && Game.player_Colour_Left === "yellow"){
+topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2");
+} else if(Game.playerIsOnTurn === "right"  && Game.player_Colour_Left === "red"){
+topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");};
 };
 //                                  __________________________________________
 //                                  Remove Choosing-Animation from Top-Cells
 
 function Remove_Choosing_Ani(column){
-    column -= 1;
-    const topCellsArray = document.getElementsByClassName("Class_TopCells");
+column -= 1;
+const topCellsArray = document.getElementsByClassName("Class_TopCells");
 if(Game.playerIsOnTurn === "left"){
-    topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1");
-    topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2"); 
+topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1");
+topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2"); 
 }else {  
 topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1"); 
 topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2");}
@@ -210,14 +210,15 @@ function Turning_PlayerIsOnTurn() {
 Game.playerIsOnTurn === "left" ? Game.playerIsOnTurn = "right" : Game.playerIsOnTurn = "left";
 // Assign text message to the correct Player and with the correct language
 if(localStorage.getItem("Language") === "de"){
-    if(Game.playerIsOnTurn === "left") {document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_One_Name}`}
-    else if(Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_Two_Name}`}
-    else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name} am Zug`};
+    if(Game.playerIsOnTurn === "left") { document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_One_Name}`;}
+    else if(Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_Two_Name}`;}
+    else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name} am Zug`;};
 } else {
-if(Game.playerIsOnTurn === "left"){document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}`}
-else if (Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_Two_Name}`}
-else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name}'s turn`};
+if(Game.playerIsOnTurn === "left"){document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}`;}
+else if (Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_Two_Name}`;}
+else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name}'s turn`;};
 };
+
 // Add correct positioning Class to div
 if (Game.playerIsOnTurn === "left") {
 document.getElementById("ID_Turn_Div").classList.remove("Class_Right_Pos");
@@ -469,12 +470,12 @@ confirm_button.addEventListener("click", ()=>{
 
 function Correct_Sound_Setting() {
 // Make sure, User prefered Sound-Setting is also shown in the Settings-Menu after closed and reopened window 
-var elm = document.getElementById('ID_Sound_Checkbox');
-if (localStorage.Sound === "false" && elm.checked === true) {
-elm.click();
+const sound_checkbox = document.getElementById('ID_Sound_Checkbox');
+if (localStorage.Sound === "false" && sound_checkbox.checked === true) {
+sound_checkbox.click();
 };
-if (localStorage.Sound === "true" && elm.checked === false) {
-elm.click();
+if (localStorage.Sound === "true" && sound_checkbox.checked === false) {
+sound_checkbox.click();
 };
 };
 //                                  ____________________

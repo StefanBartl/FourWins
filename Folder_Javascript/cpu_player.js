@@ -56,7 +56,7 @@ const topCellsArray = document.getElementsByClassName("Class_TopCells");
 topCellsArray[valid_number].click();  
 
 // If it was the last Cell in the Column, lock it
-let columnNumber = valid_number + 1;
+const columnNumber = valid_number + 1;
 TopCell_Validation(columnNumber, false);    
 Unlock_TopCells();
 };
@@ -70,12 +70,12 @@ Function to let KI Easy produce a random, but valid number for placement
 */
 console.log("KI Easy starts to thinking....");
 // Get a random number  
-let random_number = getRandomInt(7);
+const random_number = getRandomInt(7);
 // Proof if in this column a placement is possible
-let number_proofing = TopCell_Validation(random_number, true);
+const number_proofing = TopCell_Validation(random_number, true);
 // If it is possible, name it valid_number and invoke "KI_Thinking", if it isn't get a random number again and proof it as long as there is a valid number
 if(number_proofing === true){
-let valid_number = random_number;
+const valid_number = random_number;
 console.log("KI Easy makes placement:", valid_number - 1);
 Thinking_Effect(true, valid_number);
 } else (KI_Easy());
@@ -97,45 +97,45 @@ if (Game.roundCounter === 1 || Game.roundCounter === 2) KI_Easy();
 else {
 
 // Proof if KI have to make or avoid diagonal finishing move
-let diagonal = Detect_3_Coin_Chains_Diagonal();
+const diagonal = Detect_3_Coin_Chains_Diagonal();
 if (diagonal !== undefined){
-console.log("Diagonal:", diagonal);
+console.log("Diagonal Chain Detected in column:", diagonal);
 // If there is a possibility, proof if placement on top is possible
-let diagonal_topVal = TopCell_Validation(diagonal, true);
-console.log("Diagonal Top Validation:", diagonal_topVal);
+const diagonal_topVal = TopCell_Validation(diagonal, true);
+console.log("Diagonal placement possible:", diagonal_topVal);
 if(diagonal_topVal === true){ Thinking_Effect(true, diagonal - 1); return };};
 
 // Proof if KI have to make or avoid vertial finishing move
-let upwards = Detect_3_Coin_Chains_Upwards();
+const upwards = Detect_3_Coin_Chains_Upwards();
 if (upwards !== undefined){
-console.log("Upwards:", upwards);
+console.log("Upwards Chain detected in column:", upwards);
 // If there is a possibility, proof if placement on top is possible
-let upwards_topVal = TopCell_Validation(upwards, true);
-console.log("Upwards Top Validation:", upwards_topVal);
+const upwards_topVal = TopCell_Validation(upwards, true);
+console.log("Upwards placement possible:", upwards_topVal);
 if(upwards_topVal === true){ Thinking_Effect(true, upwards - 1); return };};
 
-let sideways = Detect_3_Coin_Chains_Sideways();
-if (sideways !== undefined){ console.log("Sideway:", sideways); Thinking_Effect(true, sideways); return};
+const sideways = Detect_3_Coin_Chains_Sideways();
+if (sideways !== undefined){ console.log("Sideway chain detected in column:", sideways); Thinking_Effect(true, sideways); return};
 
 // If not, get possible placements
-let numbers_upwards = Get_Valid_Upwards_Placemement();
-console.log("Valid Upwards:", numbers_upwards);
+const numbers_upwards = Get_Valid_Upwards_Placemement();
+console.log("Upwards placements found in columns:", numbers_upwards);
 // Take the first one and proof it
 if(numbers_upwards !== undefined){
-let proof_up = TopCell_Validation(numbers_upwards[0],true);
-console.log("Valid Upwards TopCell Validation result:", proof_up);
+const proof_up = TopCell_Validation(numbers_upwards[0],true);
+console.log("Valid Upwards placement found:", proof_up);
 if(proof_up === true) { Thinking_Effect(true, numbers_upwards[0]); return };
 };
 
-let numbers_sideways = Get_Valid_Sideways_Placement();
-console.log("Valid Sideways:", numbers_sideways);
+const numbers_sideways = Get_Valid_Sideways_Placement();
+console.log("Sideways placements found in columns:", numbers_sideways);
 if(numbers_sideways !== undefined){
-let proof_side = TopCell_Validation(numbers_sideways[0], true);
-console.log("Valid Sideways Top Cell Validation result:", proof_side);
+const proof_side = TopCell_Validation(numbers_sideways[0], true);
+console.log("Valid Sideways placement found:", proof_side);
 if(proof_side === true){ Thinking_Effect(true, numbers_sideways[0]); return };
 };
 
-console.log("KI Normal does not have a valid placement. Let KI Easy try...");
+console.log("KI Normal does not have a valid placement. Submit this task to CPU Easy...");
 // If nothing is possible, make random placement
 KI_Easy(); return};
 
@@ -156,7 +156,7 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
 //                                   Randomize values from different arrays
 
 function Randomizer (arr1, arr2){
-console.log("Randomizer getted:", arr1,  arr2);
+console.log("Randomizer getted arrays:", arr1,  arr2);
 let randomizing_number, randomizing_array = [];
 
 for ( let i = 0; i < arr1.length; i++ ){
@@ -170,7 +170,7 @@ for ( let i = 0; i < arr2.length; i++ ){
 
 randomizing_number = getRandomInt(randomizing_array.length);
 valid_number = randomizing_array[randomizing_number];
-console.log("Randomizer has choosen: " + valid_number);
+console.log("Randomizer has choosen a column: " + valid_number);
 return valid_number;
 };
 //                                  _______________________________________________
@@ -646,7 +646,6 @@ let unique_valid_number_array = valid_number_array.filter(onlyUnique);
 if (unique_valid_number_array.length > 0) return unique_valid_number_array;
 };
 //#endregion
-
 
 //#region Final informations and Comments
 
