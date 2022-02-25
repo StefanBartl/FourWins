@@ -85,18 +85,13 @@ el{
 
      Scrollbar Chrome, Safari,...
 
-el::-webkit-scrollbar{
-   width: .5rem;
-}
-
-el::-webkit-scrollbar-track-piece{
-   background-color: var(--gameboard);
-}
-
-el::-webkit-thumb:vertical{
-   height: 1rem;
-   background-color: var(--base-colour);
-}
+::-webkit-scrollbar — the entire scrollbar.
+::-webkit-scrollbar-button — the buttons on the scrollbar (arrows pointing upwards and downwards that scroll one line at a time).
+::-webkit-scrollbar-thumb — the draggable scrolling handle.
+::-webkit-scrollbar-track — the track (progress bar) of the scrollbar, where there is a gray bar on top of a white bar.
+::-webkit-scrollbar-track-piece — the part of the track (progress bar) not covered by the handle.
+::-webkit-scrollbar-corner — the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet This is often the bottom-right corner of the browser window.
+::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some elements.
 
 */
 
@@ -315,21 +310,6 @@ footer{
 
 ===============================================================================================================================================================================================================================================================================*/
 
-                              /* Settings SVG Button */
-#ID_Settings{
-   width: 2rem;
-   height: 2rem;
-   position: absolute;
-   right: 0;
-   top: 1.35vh;
-   filter: invert(1);
-   z-index: 11;
-   display: none;
-}
-
-#ID_Settings:hover {
-
-}
 
                               /*  Settings menu     */ 
 
@@ -341,6 +321,10 @@ footer{
    height: 90vh;
    width: clamp(270px, 20%, 25vw);    
    line-height: 0;
+}
+
+#ID_Settings_Menu{
+
 }
 
 .Class_Showing_Settings{
@@ -379,7 +363,7 @@ to{
    top: 0;
    right: -95%;
    display: grid;
-   grid: 2rem 1fr 1fr 1fr 1fr 3rem 3rem 3rem / 1fr;
+   grid: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr / 1fr;
    gap: 1rem;
    width: 100vw;
    height: 90vh;
@@ -387,30 +371,22 @@ to{
    justify-content:center;
    overflow:scroll;
    background-color: var(--base-border);
-   box-shadow: inset .1rem .1rem 2rem black;
+   box-shadow: .1rem .1rem 2rem black;
    border-left: solid 1px black;
    color: var(--main-black);
    text-align: center;
+   font-size: small;
    scrollbar-color: dark;
-   scrollbar-width: .5rem;
    scrollbar-gutter: both-edges ;
 }
 
+
 #ID_Setting_Span::-webkit-scrollbar{
-   width: .5rem;
+   width: 1.rem;;
 }
 
-#ID_Setting_Span::-webkit-scrollbar-track-piece{
-   background-color: var(--gameboard);
-}
-
-#ID_Setting_Span::-webkit-thumb:vertical{
-   height: 1rem;
-   background-color: var(--base-colour);
-}
-
-#ID_Settings_Menu{
-
+#ID_Setting_Span::-webkit-scrollbar-corner{
+   background-color: var(--gameboard);    
 }
 
 #ID_Info_Container{
@@ -471,7 +447,7 @@ to{
    justify-content: center;
 }
 
-                              /*  Settings-Menu Typography Styling */
+                              /*  Settings-Menu Typography / Design styling */
 #ID_Info{
    cursor: pointer;
    min-width: 100%;
@@ -503,6 +479,39 @@ to{
    min-width: 100%;
 }
 
+.Class_Summary_Details:hover{
+   color: var(--main-red);
+   cursor: pointer;
+}
+
+.Class_Settings_Summarys{
+   display: flex;
+   justify-content: center;
+   align-items:center;
+   min-width: 100%;
+}
+
+.Class_StatsWrapper{
+   margin-inline: 1rem;
+}
+
+#ID_Stats_First_Wrapper:hover{ 
+   color: red;
+   
+}
+
+#ID_Stats_Second_Wrapper:hover{
+   color: red;
+}
+
+#ID_Reset_Easy{
+   min-width: 50%;
+}
+
+#ID_Reset_Normal{
+   min-width: 50%;
+}
+
 #ID_Contact{
    cursor: pointer;
    min-width: 100%;
@@ -517,140 +526,84 @@ to{
    cursor: pointer;
    height: 1.5rem;
    width: 8rem;
+   border-radius: 10%;
+}
+
+                              /* Hover Section  */ 
+
+#ID_Delete_All:hover{
+   background-color: var(--prime-darkgrey);
+   color: var(--base-border);
 }
 
 #ID_Info:hover{
-   color: var(--gameboard-border);
+   color: black;
 }
 #ID_Label_Colour:hover{
-   color: var(--gameboard-border);
+   color: red;
 }
 
 #ID_Sound:hover{
-   color: var(--gameboard-border);
+   color: red;
 }
 
 #ID_Language:hover{
-   color: var(--gameboard-border);
+     color: red;
 }
 
 #ID_Stats:hover{
-   color: var(--gameboard-border);
+   color: red;
 }
 
 #ID_Contact:hover{
-   color: var(--gameboard-border);
+     color: red;
 }
 
 #ID_Credits:hover{
-   color: var(--gameboard-border);
-}
-
-
-.Class_Summary_Details:hover{
-   color: var(--main-red);
-   cursor: pointer;
-}
-
-.Class_Settings_Summarys{
-   display: flex;
-   justify-content: center;
-   align-items:center;
-   min-width: 100%;
-}
-
-.Class_StatsWrapper{
-}
-
-#ID_Stats_First_Wrapper{ 
-}
-
-#ID_Stats_Second_Wrapper{
-}
-
-#ID_Reset_Easy{
-   min-width: 50%;
-}
-
-#ID_Reset_Normal{
-   min-width: 50%;
-}
-
-#ID_Delete_All{
-   height: 50%;
-   width: 50%;
-   border-radius: 10%;
-}
-#ID_Delete_All:hover{
-   background-color: var(--prime-darkgrey);
-   color: var(--base-border);;
+   color: red;
 }
 
                               /* Toggling in the Settings Menu*/
-
-.Class_Colour_Toggle{
-   width: 100%;
-}
 
 .Class_Colour_Toggle:hover{
    color: var(--gameboard-border);
 }                            
 
 .Class_Colour_Toggle{
-   min-height: 5rem;
    min-width: 100%;
    display: flex;
 }
 
-.Class_Colour_Toggle label {
+#ID_Toggle_Button{
    position: relative;
-   min-width: 100%;
-   height: 5em;
+   top: .3rem;
+   left: 10%;
+   background-color: white;
+   width: 1.5rem;
+   height: 1.5rem;
+   border-radius: 50%;
 }
 
-.Class_Colour_Toggle input {
-   display: none;
+#ID_Toggle_Button:hover{
+   background-color: var(--gameboard);
+}
+
+.Class_Colour_Red{
+ transform: translateX(1.8rem);
 }
 
 .Class_Colour_Toggle .Class_Colour_Slider {    /* Ground */
-   position: absolute;
+   position: relative;
    cursor: pointer;
-   top: 1.5em; 
-   left: 40%;
-   width: 4em;
-   height: 2em;
+   top: 0%;
+   left: 38.5%;
+   width: 4rem;
+   height: 2rem;
    background-color: yellow; 
    transition: all .3s ease-in-out;
    border-radius: 1em;  
 }
-
-.Class_Colour_Toggle .Class_Colour_Slider:before {  /* Toggle Button */
-   position: absolute;
-   content: "";
-   height: 1.6em;
-   width: 1.6em;
-   right: 2.3em;
-   bottom: 0.2em;
-   background-color: var(--base-border);
-   border-radius: 50%;
-   transition: all .3s ease-in-out;
-}
-
-.Class_Colour_Toggle input:checked + .Class_Colour_Slider {
-   background-color: red; 
-}
-
-.Class_Colour_Toggle input:focus + .Class_Colour_Slider {
-   background-color:pink;	
-   box-shadow: 0 0 1px #5a9900;
-}
-
-.Class_Colour_Toggle  input:checked + .Class_Colour_Slider:before {
-   transform: translateX(1.9em);
-}
-
-
-                                                                                                                                                                                                                                                               /* #endregion */  
+                                                                                                                                                                                                                                                          /* #endregion */  
 
 /* #region Typographie */    
                                                                                                                                                                                                                                                                            /*

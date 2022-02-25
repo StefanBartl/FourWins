@@ -36,7 +36,7 @@
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
 
-                                        -) Test and repair responsivness
+                                        -) Test and repair responsivness in all sizes
  
                                         -) Try mylibrary using and update it                                                                                                                                                                                                                                 
                                         -) Wrap as much in functions as its argueable
@@ -53,10 +53,9 @@
                                         -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
                                         -) Write a final Comment 
 
-                                        -) Save Default Scripot Files with the new Scfript Layout for later Projects
+                                        -) Save Default Scripot Files with the new Scfript Layout for later Projects. Also the index with the all new Toggle Slider"
 
-
-                                                   Session progress:
+                                                   Session progress
                                                                                                                                                                                                                                                                              */
 //#endregion
 
@@ -183,7 +182,15 @@ let count_wins_player_two = 0;
 
 // Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted
 Game.player_Colour_Left = localStorage.Player_Colour_Left || "yellow";
-Correct_Colour_Setting();
+if (Game.player_Colour_Left === "red") {document.getElementById("ID_Toggle_Button").classList.add("Class_Colour_Red"); document.getElementById("ID_Colour_Slider").style.backgroundColor = "red";} 
+else {document.getElementById("ID_Toggle_Button").classList.remove("Class_Colour_Red"); document.getElementById("ID_Colour_Slider").style.backgroundColor = "yellow";} 
+
+// Toggle Button in Colour Change Slider Event Listener
+document.getElementById("ID_Toggle_Button").addEventListener("click", ()=>{
+    console.log("Clicked");
+    if(localStorage.Player_Colour_Left === "yellow") {localStorage.Player_Colour_Left = "red"; Game.player_Colour_Left = "red"; document.getElementById("ID_Toggle_Button").classList.add("Class_Colour_Red"); document.getElementById("ID_Colour_Slider").style.backgroundColor = "red"; console.log("Changed Colour to red.")}
+    else if (localStorage.Player_Colour_Left === "red") {localStorage.Player_Colour_Left = "yellow"; Game.player_Colour_Left = "yellow"; document.getElementById("ID_Toggle_Button").classList.remove("Class_Colour_Red"); document.getElementById("ID_Colour_Slider").style.backgroundColor = "yellow";console.log("Changed Colour to yellow.")}
+});
 //#endregion
 
 //                                  ________________________
@@ -272,10 +279,8 @@ document.getElementById("ID_SVG_Player_2").addEventListener("click", ()=>{
 //                                  _______________________________
 //                                   Set up Settings-Menu
 //#region Settings-Menu Set up
-
-// Hide Settings Menu at start
-//settings_menu.style.opacity = "0";
-
+// Get up-tp-date stats for the Settings-Menu
+Stats();
 // Show Settins-Menu Event-Listener
 settings_span.addEventListener("mouseenter", ()=>{
     //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
@@ -323,14 +328,6 @@ if(settings_span.classList.contains("Class_Showing_Settings")){
     return
 };}
 );
-
-// Get up-tp-date stats for the Settings-Menu
-Stats();
-
-// Make sure Choose Colour toggle is correct 
-if ( localStorage.Player_Colour_Left === "yellow" || localStorage.Player_Colour_Left === undefined)document.getElementById("ID_Colour_Checkbox").checked = false; 
-else if (localStorage.Player_Colour_Left === "red") document.getElementById("ID_Colour_Checkbox").checked = true; 
-
 //#endregion
 //                                  ______________________________________________________________________________________________________
 //                                   Settings-Menu Event-Listener for: Info, Choose Language, Choose Colour, Sound On/Off, Reset Stats
@@ -384,15 +381,6 @@ localStorage.Language = languageCode; localStorage.LanguageIsSetttedByUser = tru
 Game.Language = languageCode; Game.LanguageIsSetttedByUser = true;
 // Make sure that a manually setted setted language is not overwritten by the default detected default browser language
 Translate_StartScreen(languageCode, true);
-});
-document.getElementById("ID_Colour_Checkbox").addEventListener("change", () => {
-    if(localStorage.Player_Colour_Left === "red"){
-        localStorage.Player_Colour_Left = "yellow";
-        Game.player_Colour_Left = "yellow";
-    } else {
-        localStorage.Player_Colour_Left = "red";
-        Game.player_Colour_Left = "red";
-    };
 });
 document.getElementById("ID_Sound_Checkbox").addEventListener("change", ()=>{
     if(document.getElementById("ID_Sound_Checkbox").checked === true){
@@ -1958,20 +1946,6 @@ confirm_button.addEventListener("click", ()=>{
  */
 //#endregion
 };
-//                                  ________________________
-//                                   Sound in Settings-Menu
-
-function Correct_Colour_Setting() {
-    // Make sure, User prefered Colour-Setting is also shown in the Settings-Menu after closed and reopened window 
-    var elm = document.getElementById('ID_Colour_Checkbox');
-    if (localStorage.Player_Colour_Left === "red" && elm.checked === true) {
-    elm.click();
-    };
-    if (localStorage.Player_Colour_Left === "yellow" && elm.checked === false) {
-    elm.click();
-    };
-    };
-
 //                                  ________________________
 //                                   Sound in Settings-Menu
 
