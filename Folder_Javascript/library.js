@@ -21,38 +21,40 @@
                             |                  3) Remove choosing Animation                         |
                             |                                                                       |
                             |                  4) Lock Top Cells                                    |
-                            |                                                                       | 
-                            |                  5) "Thinking"-Effect                                 |
                             |                                                                       |
-                            |                  6) Get only unique Values from Array                 |
+                            |                  5) Unlock Top Cells                                  |
+                            |                                                                       | 
+                            |                  6) "Thinking"-Effect                                 |
+                            |                                                                       |
+                            |                  7) Get only unique Values from Array                 |
                             |                                                                       |                                                                                                                                                                               
-                            |                  7) Get a random Int number                           |
+                            |                  8) Get a random Int number                           |
                             |                                                                       |
-                            |                  8) Push values to Local Storage                      |
+                            |                  9) Push values to Local Storage                      |
                             |                                                                       | 
-                            |                  9) Swap 2 Classes by 2 events on 1 Element           |
+                            |                 10) Swap 2 Classes by 2 events on 1 Element           |
                             |                                                                       |
-                            |                 10) Change which Player is on turn                    |
+                            |                 11) Change which Player is on turn                    |
                             |                                                                       |
-                            |                 11) Game Screen                                       |
+                            |                 12) Game Screen                                       |
                             |                                                                       |
-                            |                 12) Start Screen                                      |
+                            |                 13) Start Screen                                      |
                             |                                                                       |
-                            |                 13) Stats                                             |
+                            |                 14) Stats                                             |
                             |                                                                       | 
-                            |                 14) Update Stats                                      |
+                            |                 15) Update Stats                                      |
                             |                                                                       |
-                            |                 15) New Window                                        |
+                            |                 16) New Window                                        |
                             |                                                                       |                                                                                                                                                                               
-                            |                 16) Correct Sound Setting                             |
+                            |                 17) Correct Sound Setting                             |
                             |                                                                       |
-                            |                 17) Create new DOM Element                            |
+                            |                 18) Create new DOM Element                            |
                             |                                                                       | 
-                            |                 18) Fireworks                                         |
+                            |                 19) Fireworks                                         |
                             |                                                                       |
-                            |                 11) Final Information and Comments                    |
+                            |                 20) Final Information and Comments                    |
                             |                                                                       |                                                                                                                                                                                   
-                            |                 12) Coding Guidelines & Tipps                         |                                                                                                                                                                                                                                                            
+                            |                 21) Coding Guidelines & Tipps                         |                                                                                                                                                                                                                                                            
                             |                                                                       |                                                                                                                                                                                                               
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */      
@@ -109,9 +111,17 @@ const topCellsArray = document.getElementsByClassName("Class_TopCells");
 for (let topCell of topCellsArray){
 topCell.style.cursor = "none"; 
 topCell.style = "pointer-events:none"; 
-topCell.classList.remove("Class_ChoosingAnimation_Coin_1"); 
-topCell.classList.remove("Class_ChoosingAnimation_Coin_2");
 };
+};
+//                                 _______________
+//                                  Unlock topCells
+
+function Unlock_TopCells(){
+    const topCellsArray = document.getElementsByClassName("Class_TopCells");
+    for (let topCell of topCellsArray){
+    topCell.style.cursor = "pointer"; 
+    topCell.style = "pointer-events: all"; 
+    };
 };
 //                                  ______________________________
 //                                   Simulate a "Thinking"-Effect
@@ -200,11 +210,13 @@ function Turning_PlayerIsOnTurn() {
 Game.playerIsOnTurn === "left" ? Game.playerIsOnTurn = "right" : Game.playerIsOnTurn = "left";
 // Assign text message to the correct Player and with the correct language
 if(localStorage.getItem("Language") === "de"){
-    Game.playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_One_Name}` :
-    document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_Two_Name}`;
+    if(Game.playerIsOnTurn === "left") {document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_One_Name}`}
+    else if(Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_Two_Name}`}
+    else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name} am Zug`};
 } else {
-Game.playerIsOnTurn === "left" ? document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}` :
-document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_Two_Name}`;
+if(Game.playerIsOnTurn === "left"){document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}`}
+else if (Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_Two_Name}`}
+else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name}'s turn`};
 };
 // Add correct positioning Class to div
 if (Game.playerIsOnTurn === "left") {

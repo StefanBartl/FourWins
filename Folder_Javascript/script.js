@@ -14,7 +14,7 @@
                             |                                                                       |
                             |                  1) DOM, Global Scoped & General Settings             |
                             |                                                                       |
-                            |                  2) Main Game                                         |
+                            |                  2) Main Game functions                               |
                             |                                                                       |
                             |                  8) Final Information and Comments                    |
                             |                                                                       |
@@ -26,7 +26,9 @@
 //#region Open Jobs                                                                                                                                                                                                                                                                             
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
-                                                                                                                                                                                                                           
+                                                                                      
+                                        -) Naimning page start CPU und auch noch als KI bennant
+                                        -) Column full deckel drauf ?
                                         -) Wrap as much in functions as its argueable
                                         -) Reduce document.getE with the DOM assigned variables
                                         -) Try to make the Window Function with Prmoises a "real" confirm Window
@@ -44,6 +46,7 @@
                                         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
                                                    Session progress
+New Prepare Game Function, eliminated duplicated variable invoking; Removed Bug with correct Player 2 Naming / KI Naming
                                                                                                                                                                                                                                                                              */
 //#endregion
 
@@ -86,6 +89,8 @@ const settings_menu = document.getElementById("ID_Settings_Menu");
 const settings_span = document.getElementById("ID_Setting_Span");
 const info_h = document.getElementById("ID_Info");
 const colour = document.querySelector(".Class_Colour_Toggle");
+const toggle_colour_button = document.getElementById("ID_Toggle_Button");
+const toggle_colour_slider = document.getElementById("ID_Colour_Slider");
 const language_h = document.getElementById("ID_Language");
 const language_menu = document.getElementById("ID_Language_Menu");
 const select_deutsch = document.getElementById("ID_Deutsch");
@@ -106,6 +111,7 @@ const label_colour = document.getElementById("ID_Label_Colour");
 
 //                                  ____________________
 //                                   Create Game-Object 
+// Game Object for storing important values in variables. Collected access via Game.[variable]
 const Game = {
 // Setting the Gameboard arrays to keep Coin placements
 actualGameboardPlayer1: {
@@ -148,10 +154,9 @@ Correct_Sound_Setting();
 
 //                                  __________________________________
 //                                   Section: Global Scoped Variables 
-
 //#region Row-Counters for Coin placement   
 /* Setting the Counters for let the Coin Placing Section know, 
-   in which row / column the Game currently is to calculate by placement the correct position */
+   in which row & column the Game currently is to calculate by placement the correct position */
 let row_Counter_C1 = 8;
 let row_Counter_C2 = 8;
 let row_Counter_C3 = 8;
@@ -174,31 +179,33 @@ let count_wins_player_two = 0;
 
 // Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted
 Game.player_Colour_Left = localStorage.Player_Colour_Left || "yellow";
-if (Game.player_Colour_Left === "red") {document.getElementById("ID_Toggle_Button").classList.add("Class_Colour_Red"); document.getElementById("ID_Colour_Slider").style.backgroundColor = "red";} 
-else {document.getElementById("ID_Toggle_Button").classList.remove("Class_Colour_Red"); document.getElementById("ID_Colour_Slider").style.backgroundColor = "yellow";} 
+if (Game.player_Colour_Left === "red") {toggle_colour_button.classList.add("Class_Toggle"); toggle_colour_slider.style.backgroundColor = "red";} 
+else {toggle_colour_button.classList.remove("Class_Toggle"); toggle_colour_slider.style.backgroundColor = "yellow";} 
 
 // Toggle Button in Colour Change Slider Event Listener
 document.getElementById("ID_Toggle_Button").addEventListener("click", ()=>{
-    console.log("Clicked");
-    if(localStorage.Player_Colour_Left === "yellow") {localStorage.Player_Colour_Left = "red"; Game.player_Colour_Left = "red"; document.getElementById("ID_Toggle_Button").classList.add("Class_Colour_Red"); document.getElementById("ID_Colour_Slider").style.backgroundColor = "red"; console.log("Changed Colour to red.")}
-    else if (localStorage.Player_Colour_Left === "red") {localStorage.Player_Colour_Left = "yellow"; Game.player_Colour_Left = "yellow"; document.getElementById("ID_Toggle_Button").classList.remove("Class_Colour_Red"); document.getElementById("ID_Colour_Slider").style.backgroundColor = "yellow";console.log("Changed Colour to yellow.")}
+            // console.log("Colour toggle clicked");
+    if(localStorage.Player_Colour_Left === "yellow") {
+        localStorage.Player_Colour_Left = "red"; 
+        Game.player_Colour_Left = "red"; 
+        toggle_colour_button.classList.add("Class_Toggle"); 
+        toggle_colour_slider.style.backgroundColor = "red"; 
+            // console.log("Colour toggle changed colour to red.")
+    } else if (localStorage.Player_Colour_Left === "red") {
+        localStorage.Player_Colour_Left = "yellow"; 
+        Game.player_Colour_Left = "yellow"; 
+        toggle_colour_button.classList.remove("Class_Toggle"); 
+        toggle_colour_slider.style.backgroundColor = "yellow"; 
+            //console.log("Colour toggle changed colour to yellow.")
+};
 });
 //#endregion
 
 //                                  ________________________
 //                                   Starting Page Language 
 //#region Language at Starting-Page
-// Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
-let LangauageIsSettedByUser = localStorage.LanguageIsSetttedByUser;
-let language = localStorage.Language;
-if (LangauageIsSettedByUser == "true"){Translate_StartScreen(language, true); Game.Language = language; Game.LangauageIsSettedByUser = true}
-else if (LangauageIsSettedByUser !== "true"){
-let browserLanguage = navigator.language || navigator.userLanguage || "English";
-Game.Language = browserLanguage; Game.LanguageIsSetttedByUser = false;
-
-// Invoke the translation with the getted language
-Translate_StartScreen(browserLanguage, false);
-};
+// Detect Browser Language or local Storage setted Language and set it in Game Object
+    Set_Page_Language();
 //#endregion
 
 //                                  _________________________________
@@ -212,22 +219,26 @@ if(localStorage.Player_Two_Name) player_2_name.value = localStorage.Player_Two_N
 // Save names from input in local storage
 Push_to_LocalStorage("ID_SVG_Player_1", "ID_Player_1_Name", "Player_One_Name", "click");
 Push_to_LocalStorage("ID_SVG_Player_2", "ID_Player_2_Name", "Player_Two_Name", "click");
+
 // Hover animations for circles after Name-Inputs
 Swap_Two_Classes_by_Events("ID_SVG_Player_1", "mouseenter", "mouseleave", "Class_Buttons_Add_Hover_Animations_1", "Class_Buttons_Remove_Hover_Animations_1");
 Swap_Two_Classes_by_Events("ID_SVG_Player_2", "mouseenter", "mouseleave", "Class_Buttons_Add_Hover_Animations_2", "Class_Buttons_Remove_Hover_Animations_2");
+
 //                                  _________________________________________
 //                                   Event Listener for setting correct names
-
-document.getElementById("ID_Choose_KI").addEventListener("change", ()=>{
+choose_ki.addEventListener("change", ()=>{
     // Set correct names after choosing "Play against"
         // If "Play against CPU = No" is selected, make sure "No" isn't the name of Player Two
-        if(document.getElementById("ID_Choose_KI").value === "No") {document.getElementById("ID_Player_2_Name").value = localStorage.Player_Two_Name || document.getElementById("ID_Player_2_Name").placeholder;} 
-        else // If it is a game against CPU, set Player Two Name to KI Level
-        document.getElementById("ID_Player_2_Name").value = document.getElementById("ID_Choose_KI").value;
+        if(choose_ki.value === "No") {player_2_name.value = localStorage.Player_Two_Name || player_2_name.placeholder;} 
+        // If it is a game against CPU, set Player Two Name to KI Level
+        else if (Game.Language === "de" && choose_ki.value === "CPU Easy") document.getElementById("ID_Player_2_Name").value = "Einfacher CPU Gegner";
+        else if (Game.Language !== "de" && choose_ki.value === "CPU Easy") document.getElementById("ID_Player_2_Name").value = "Easy CPU Opponent";
+        else if (Game.Language === "de" && choose_ki.value === "CPU Normal") document.getElementById("ID_Player_2_Name").value = "Normaler CPU Gegner";
+        else if (Game.Language !== "de" && choose_ki.value === "CPU Normal") document.getElementById("ID_Player_2_Name").value = "Normal CPU Opponent";
 });
 //                                  ________________________________________________
 //                                   Event Listener for showing Player name is saved
-document.getElementById("ID_SVG_Player_1").addEventListener("click", ()=>{
+player_1_svg.addEventListener("click", ()=>{
     //console.log("Player 1 name saved to local Storage.");
     // Create notiification element
     const notification = document.createElement("h3");
@@ -246,7 +257,7 @@ document.getElementById("ID_SVG_Player_1").addEventListener("click", ()=>{
     // Remove it from DOM 
     setTimeout(()=>{notification.remove()}, 4000);
 });
-document.getElementById("ID_SVG_Player_2").addEventListener("click", ()=>{
+player_2_svg.addEventListener("click", ()=>{
     //console.log("Player 2 name saved to local Storage.");
     // Create notiification element
     const notification = document.createElement("h3");
@@ -267,45 +278,45 @@ document.getElementById("ID_SVG_Player_2").addEventListener("click", ()=>{
 });
 
 //#endregion
-
 //                                  _______________________________
 //                                   Set up Settings-Menu
 //#region Settings-Menu Set up
 // Get up-tp-date stats for the Settings-Menu
 Stats();
+
 // Show Settins-Menu Event-Listener
 settings_span.addEventListener("mouseenter", ()=>{
     //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
-    if(!settings_span.classList.contains("Class_Showing_Settings")){
+    if(!settings_span.classList.contains("Class_Show_Settings")){
     settings_span.classList.remove("Class_Hide_Settings");;
-    settings_span.classList.add("Class_Showing_Settings");
+    settings_span.classList.add("Class_Show_Settings");
     return
 };}
 );
 
 settings_span.addEventListener("touchstart", ()=>{
     //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
-    if(!settings_span.classList.contains("Class_Showing_Settings")){
+    if(!settings_span.classList.contains("Class_Show_Settings")){
     settings_span.classList.remove("Class_Hide_Settings");;
-    settings_span.classList.add("Class_Showing_Settings");
+    settings_span.classList.add("Class_Show_Settings");
     return
 };}
 );
 
 // Hide Settings-Menu Event-Listener I
-document.querySelector("#ID_MainWrapper").addEventListener("mouseenter", ()=>{
+main_wrapper.addEventListener("mouseenter", ()=>{
        //If the settíngs menu is leaved to the main wrapper and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
-if(settings_span.classList.contains("Class_Showing_Settings")){
-    settings_span.classList.remove("Class_Showing_Settings");
+if(settings_span.classList.contains("Class_Show_Settings")){
+    settings_span.classList.remove("Class_Show_Settings");
     settings_span.classList.add("Class_Hide_Settings");
     return
 };}
 );
 
-document.querySelector("#ID_MainWrapper").addEventListener("touchstart", ()=>{
+main_wrapper.addEventListener("touchstart", ()=>{
     //If the settíngs menu is leaved to the main wrapper and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
-if(settings_span.classList.contains("Class_Showing_Settings")){
- settings_span.classList.remove("Class_Showing_Settings");
+if(settings_span.classList.contains("Class_Show_Settings")){
+ settings_span.classList.remove("Class_Show_Settings");
  settings_span.classList.add("Class_Hide_Settings");
  return
 };}
@@ -314,20 +325,21 @@ if(settings_span.classList.contains("Class_Showing_Settings")){
 // Hide Settings-Menu Event-Listener II
 document.querySelector("#ID_Head_Text").addEventListener("mousemove", ()=>{
            //If the settíngs menu is leaved to the header and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
-if(settings_span.classList.contains("Class_Showing_Settings")){
-    settings_span.classList.remove("Class_Showing_Settings");
+if(settings_span.classList.contains("Class_Show_Settings")){
+    settings_span.classList.remove("Class_Show_Settings");
     settings_span.classList.add("Class_Hide_Settings");
     return
 };}
 );
 //#endregion
+
 //                                  ______________________________________________________________________________________________________
 //                                   Settings-Menu Event-Listener for: Info, Choose Language, Choose Colour, Sound On/Off, Reset Stats
 //#region Event-Listeners Settings-
 
-document.getElementById("ID_Info").addEventListener("click", ()=>{
+info_h.addEventListener("click", ()=>{
     if(Game.Language === "de"){
-    New_Window({ID: "ID_Info_Window", Name: document.getElementById("ID_Info").innerText, Alert: true, Variable: "Game Info", Text: 
+    New_Window({ID: "ID_Info_Window", Name: info_h.innerText, Alert: true, Variable: "Game Info", Text: 
 `Online-4-Gewinnt
 
 1) Das Ziel des Spiels ist es 4 Spielsteine (Coins) nebeneinander, übereinander oder diagonal legen zu können.
@@ -345,7 +357,7 @@ Die Einstellungen Sound, Sprache, Statistiken gegen den CPU sowie gespeicherte S
 und die Einstellungen trotzdem erhalten bleiben. Wollen Sie diese Einstellungen löschen, so können Sie dies im Einstellungs-Menü ganz unten mit Klick auf "Alles löschen" tun.
 `
 })} else {
-    New_Window({ID: "ID_Info_Window", Name: document.getElementById("ID_Info").innerText, Alert: true, Text: 
+    New_Window({ID: "ID_Info_Window", Name: info_h.innerText, Alert: true, Text: 
 `Online-4-Wins
 
 1) The aim of the game is to be able to place 4 tokens (coins) next to each other, on top of each other or diagonally.
@@ -364,18 +376,18 @@ and the settings are retained. If you want to delete these settings, you can do 
 `
 })}
 });
-document.getElementById("ID_Language_Menu").addEventListener("change", () => {
+language_menu.addEventListener("change", () => {
 // Save language in Local Storage and Game Object
 // Important maybe for later: With more languages, if/else needed!
 let languageCode;
-document.getElementById("ID_Language_Menu").value === "Deutsch" ? languageCode = "de" : languageCode = "en";
+language_menu.value === "Deutsch" ? languageCode = "de" : languageCode = "en";
 localStorage.Language = languageCode; localStorage.LanguageIsSetttedByUser = true;
 Game.Language = languageCode; Game.LanguageIsSetttedByUser = true;
 // Make sure that a manually setted setted language is not overwritten by the default detected default browser language
 Translate_StartScreen(languageCode, true);
 });
-document.getElementById("ID_Sound_Checkbox").addEventListener("change", ()=>{
-    if(document.getElementById("ID_Sound_Checkbox").checked === true){
+sound_checkbox.addEventListener("change", ()=>{
+    if(sound_checkbox.checked === true){
         localStorage.Sound = true;
         Game.Sound = true;
     } else {
@@ -383,21 +395,21 @@ document.getElementById("ID_Sound_Checkbox").addEventListener("change", ()=>{
         Game_Sound = false;
     };
 });
-document.getElementById("ID_Reset_Easy").addEventListener("click", ()=>{
+stats_reset_easy.addEventListener("click", ()=>{
 localStorage.KI_Easy_Wins = 0; localStorage.KI_Easy_CPUWins = 0; localStorage.KI_Easy_Draws = 0;
 Stats();
 });
-document.getElementById("ID_Reset_Normal").addEventListener("click", ()=>{
+stats_reset_normal.addEventListener("click", ()=>{
 localStorage.KI_Normal_Wins = 0; localStorage.KI_Normal_CPUWins = 0; localStorage.KI_Normal_Draws = 0;
 Stats();
 });
-document.getElementById("ID_Contact").addEventListener("click", ()=>{
+contact_h.addEventListener("click", ()=>{
     window.open("https://stefanbartl.github.io/StefanBartl_Portfolio/");
 });
-document.getElementById("ID_Credits").addEventListener("click", ()=>{
+credits_h.addEventListener("click", ()=>{
     window.open("https://github.com/StefanBartl/FourWins/blob/main/README.md");
 });
-document.getElementById("ID_Delete_All").addEventListener("click", ()=>{
+delete_all.addEventListener("click", ()=>{
 // Play warning sound
 warning_audio.play();
 // Confirm message
@@ -412,8 +424,8 @@ if(warning === true) {localStorage.clear();};
 
 //                                  ______________________________
 //                                   Event Listener to start Game
-//#region Start Game
-document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
+//#region Prepare Game Invoking
+start_button.addEventListener("click", PrepareGame);
 //#endregion
 
 //#endregion
@@ -422,14 +434,15 @@ document.getElementById("ID_Start_Button").addEventListener("click", MainGame);
                                                                                                                                                                                                                                                                                 /*
 ================================================================================================================================================================================================================================================================================
  
-                                             Main Game
+                                             Main Game functions
 
 ===============================================================================================================================================================================================================================================================================*/
 
-//                                  ____________________
-//                                   Main Game function
+//                                  _______________________
+//                                   Prepare Game function
 
-function MainGame() {
+function PrepareGame() {
+// Function to do all the preparations to start the Game
 
 // Make sure at Game start are valid name variables available 
 if(player_1_name.value === "") player_1_name.value = player_1_name.placeholder;
@@ -437,22 +450,23 @@ if(player_2_name.value === "") player_2_name.value = player_2_name.placeholder;
 Game.Player_One_Name = player_1_name.value;
 Game.Player_Two_Name = player_2_name.value;
 
+// Give all cells same attribute
 const cells_Array = document.getElementsByClassName("Class_Cells");
 for (let cell of cells_Array){
     cell.setAttribute("data-isPlayed", "no");
 };
 
 // Proof if Game is against KI
-if(document.getElementById("ID_Choose_KI").value != "No") Game.Game_against_KI = true;
+if(choose_ki.value != "No") Game.Game_against_KI = true;
 // And if it is, set the KI Level
 if(Game.Game_against_KI === true){
-if(document.getElementById("ID_Choose_KI").value === "KI Easy") Game.KI_Level = "Easy"; else Game.KI_Level = "Normal";}
-
+if(choose_ki.value === "CPU Easy") {Game.KI_Level = "Easy";}
+else {Game.KI_Level = "Normal";}
+};
 // DOM-Manipulation to get to the "Game-Screen"
 Game_Screen();
 
-
-// Create DOM-Elements for switch which player is on turn  
+// Create DOM-Elements for show the switching which player is on turn  
 Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", Class: "Class_Turn_PLayers", ID: "ID_Turn_Div" });
 Create_DOM_Element({ ParentID: "ID_Turn_Div", Element: "h3", ID: "ID_h3_turnText"});
 
@@ -462,41 +476,58 @@ Turning_PlayerIsOnTurn();
 // After 8 seconds, smoothly remind the Player of time
 setTimeout(Thinking_Effect, 8000);
 
-//                      Adding choose & play algorhytmus
-// Get the Top Cells for looping trough to put the event listeners on them so the players can make there placements
+// After preparations Start Game
+PlayGame();
+};
+
+//                                  ________________________
+//                                   Play the Game function
+
+function PlayGame(){
+// Get correct "Choosing Animation", Coin, Placement, CPU. 
+
+// Detect the correct the Top Cells for looping trough to put the event listeners on them so the players can make there placements
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
 // The whole placement and Game Flow is currently in this for loop
 for (let topCell of topCellsArray) {
 
-// Get the ID & Column of the TopCell 
+// Get the ID & Column of the played TopCell 
 let ID_topCell = topCell.id;
 let topCellColumn = ID_topCell[4];
-//                                  __________________________________________________________
-//                                  Event-Listener to make Top-Cells unclickable if neccesary
+
+//                                  ____________________________________________________
+//                                  Event-Listener for actions if a Top Cell is clicked
 topCell.addEventListener("click", () => {
+
+// Play placement sound if on
 if(Game.Sound === true){
-placing_audio.play();}
-//  Make the other top cells unclickable for 1s (animation duration) so it cannont get overlapped
+placing_audio.play();
+};
+
+//  Make the other top cells unclickable for 1s (animation duration) so it cannont get clicked again and trigger a overlapped animation
 for (let topCellA of topCellsArray) {
 topCellA.style = "pointer-events:none";
-setTimeout(() => { topCellA.style = "pointer-events: auto" }, 1000);
-}
-});                            
+setTimeout(() => { topCellA.style = "pointer-events: auto"; }, 1000);
+};}
+);      
+
 //                                  __________________________________________
 //                                  Event-Listener for the Choosing-Animation
-topCell.addEventListener("mouseover", ()=>{Add_Choosing_Ani(topCellColumn)});
-topCell.addEventListener("mouseleave", ()=>{Remove_Choosing_Ani(topCellColumn)});
+topCell.addEventListener("mouseover", ()=>{ Add_Choosing_Ani(topCellColumn); });
+topCell.addEventListener("mouseleave", ()=>{ Remove_Choosing_Ani(topCellColumn); });
+
 //                                  ______________________________________________
 //                                  Event-Listener to start the Game-flow function
-topCell.addEventListener("click", GameFlow);
+topCell.addEventListener("click", Placement);
+
 //                                 _______________________________________________
 //                                  Placement function for Game and Human Players
 
-function GameFlow() {
+function Placement() {
 
 // Make sure, placement only is allowed if the animation from the placement before is finished
 if (topCell.firstChild) return;
-// Get the played top cell for getting the right column to play
+// Get the played top cell for getting the right column
 topCell = document.getElementById(ID_topCell);
 
 // Increase round counter
@@ -537,6 +568,8 @@ setTimeout(() => {
 // Remove the animated coin from DOM
 topCell.firstChild.remove();
 
+// Win Validation & next turn
+
 if (Game.playerIsOnTurn === "left") {
 // 2 IF Statements after another, first to check if placement was from left or right Player, second to check the choosed colour, which affects the correct placement
 if (Game.player_Colour_Left === "yellow") {
@@ -560,7 +593,7 @@ TopCell_Validation(columnNumber, false);
 //   If no win, next Player is on turn
 Turning_PlayerIsOnTurn();
 // If this is a KI, invoke correct KI
-if (Game.KI_Level === "Easy") {KI_Easy(); Lock_TopCells()}
+if (Game.KI_Level === "Easy" || Game.KI_Level === "Einfach") {KI_Easy(); Lock_TopCells()}
 else if (Game.KI_Level === "Normal") {KI_Normal(); Lock_TopCells()};
 }
 // Same for Player 2

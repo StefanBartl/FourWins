@@ -46,7 +46,6 @@
                                                                                                                                                                                                                                                                                 /*
                                                     Jobs To-do:
 
-
                                         -) Better Styling (find a final, real good one), also in the Settings Menu
                                         -) Test and repair responsivness in all sizes
                                         -) CSS-Code minimizing f.e. bind repetative Classes to one Class
@@ -322,7 +321,7 @@ footer{
 
 }
 
-.Class_Showing_Settings{
+.Class_Show_Settings{
    animation: Show_Settings_Animation .1s ease-in;
    animation-fill-mode: forwards;
    animation-iteration-count: 1;
@@ -583,7 +582,7 @@ to{
    background-color: var(--gameboard);
 }
 
-.Class_Colour_Red{
+.Class_Toggle{
  transform: translateX(1.8rem);
 }
 
@@ -1357,7 +1356,6 @@ align-items: flex-end;
 
                                                                                                                                                                                                                                                                /* #endregion */  
 
-
 /* #region CSS Guideline & Tipps */                                                                                                                                                                                                                                                               /*
 ______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
                                                                                                                                                                                                                                                                /*
@@ -1375,6 +1373,53 @@ ________________________________________________________________________________
 #
 #        -) margin-inline , background-clip background-text-clip 
 #
-\_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________                                                                                                        */
-
-/* #endregion */                                                                                                                                                                                                                                                              
+#        -) Optimale textlänge mit clamp:    width: clamp(45ch, 50%, 75ch);
+#
+#        -) ch als Eineheit benutzen!
+#
+#        -) scroll-behaviour : smoothS
+#
+#        -) content-visibility auto
+#
+#        -) Swiping: .container {scroll-snap-type: y mandatory} .child (muat be saection) {scroll-snap-align: start} create a anker point for swipping like tinder
+#
+#
+#
+#                                                  Media Queries:
+#
+#                                                  Max-Width
+#    Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop, und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
+#
+#                 @media (max-width: 575.98px) { … }// Kleine Endgeräte (Smartphones, kleiner als 768px)
+#
+#                 @media (max-width: 767.98px) { … }
+#
+#            // Kleine Endgeräte (Tablets, kleiner als 992px)
+#
+#                 @media (max-width: 991.98px) { … }
+#
+#            // Große Endgeräte (Laptops, Bildschirme, kleiner als 1200px)
+#
+#                 @media (max-width: 1199.98px) { … }
+#
+#                                                     Min-Width
+#                                     Min-width ist intuitiver und besser lesbar.
+#
+#           // Kleine Endgeräte (Smartphones, 576px und größer)
+#
+#                 @media (min-width: 576px) { … }
+#
+#            // Mittlere Endgeräte (Tablets, 768px und größer)
+#
+#                 @media (min-width: 768px) { … }
+#
+#            // Große Endgeräte (Laptops, Bildschirme, 992px und größer)
+#
+#                 @media (min-width: 992px) { … }
+#
+#            // Sehr große Endgeräte (Große Bildschirme, iMac, 1200px und größer)
+#
+#                 @media (min-width: 1200px) { … }
+#
+#
+\_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________                                                                                                        */                                                                                                                                                                                                                                            
