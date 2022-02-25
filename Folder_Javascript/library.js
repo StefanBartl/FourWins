@@ -733,6 +733,15 @@ ________________________________________________________________________________
                 #
                 #   -) "...rest"-Parameter sammelt alle werte ab diesem Parameter in einem gleichnamigen Array. Kann auch anders benannt werden! 
                 #
+                #   -) Variablen zb.: so zuweisen: n = n + n + (options.number || 5) 
+                #    --Wichtig: wird hier für options.number 0 eingesetzt, ist es false (aufgrund OR) und es wird immer + 5 gerechnet. Außerdem bekommt man einen Error bei null, undefined bzw. false value wenn options.number gar nicht übergeben wird. Das muss alles mit if statements abgefangen werden"
+                #
+                #   -) Keine reduntatn if statements; if (n < 0){....} else if (n >= 0){...}  -> Zweites if ist nicht notwendig!
+                #
+                #   -) So wenig nesting wie möglich: Vermeide else if und returne nach jedem if 
+                #
+                #   -) Variablen in return: return `(${variable})`
+                #
                 \_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________                                                                                                        */
 
 //#endregion

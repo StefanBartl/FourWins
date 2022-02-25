@@ -26,8 +26,6 @@
 //#region Open Jobs                                                                                                                                                                                                                                                                             
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
-
-                                        -) Test and repair responsivness in all sizes
                                                                                                                                                                                                                            
                                         -) Wrap as much in functions as its argueable
                                         -) Reduce document.getE with the DOM assigned variables
@@ -43,7 +41,7 @@
                                         -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
                                         -) Write a final Comment 
 
-                                        -) Save Default Scripot Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
+                                        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
                                                    Session progress
                                                                                                                                                                                                                                                                              */

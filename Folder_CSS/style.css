@@ -36,6 +36,8 @@
                             |                  12) Final Information & Comments              |
                             |                                                                |
                             |                  13) Credits                                   |
+                            |                                                                |
+                            |                  14) CSS Guideline / Checklist                 |
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __ _ _ _ _ _ _ _|
 
                                                                                                                                                                                                                                                                                */
@@ -44,18 +46,11 @@
                                                                                                                                                                                                                                                                                 /*
                                                     Jobs To-do:
 
-                                        -) Win div mit Ellypse positon absolute über win row
+
                                         -) Better Styling (find a final, real good one), also in the Settings Menu
+                                        -) Test and repair responsivness in all sizes
                                         -) CSS-Code minimizing f.e. bind repetative Classes to one Class
-                                        -) INGAME Section?
-                                        -) Styling 
-                                        -) Start screen playing animation
-                                        -) Stay Mobile & Responsive ! Do the Media queries.
-                                        -) Buttons animation mit brightness oder saturation langsam hoch fahren
-                                        -) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
-                                        -) ::after / ::before für Punkt -> Strich Animation
-                                        -) Font Styling
-                                        -)  margin-inline , background-clip background-text-clip   
+                                        -) INGAME Section?  
                   
                                                   Session progress:
 
@@ -1361,3 +1356,25 @@ align-items: flex-end;
 
 
                                                                                                                                                                                                                                                                /* #endregion */  
+
+
+/* #region CSS Guideline & Tipps */                                                                                                                                                                                                                                                               /*
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+                                                                                                                                                                                                                                                               /*
+/##################################################################################################################################################################################################################################################################### 
+#
+#                                                  Checklist:
+#
+#        -) Buttons animation mit brightness oder saturation langsam hoch fahren
+#  
+#        -) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
+#
+#        -) ::after / ::before für Punkt -> Strich Animation
+#
+#        -) Font Styling
+#
+#        -) margin-inline , background-clip background-text-clip 
+#
+\_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________                                                                                                        */
+
+/* #endregion */                                                                                                                                                                                                                                                              
