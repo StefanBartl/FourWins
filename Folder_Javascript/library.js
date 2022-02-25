@@ -1,4 +1,6 @@
-                                                                                                                                                                                                                                                                                    /*
+
+//#region Table of Content
+                                                                                                                                                                                                                                                                                /*
                                              Four-Wins-Online Library-Javascript-File                                                           
                                                            powered by
                             
@@ -12,29 +14,50 @@
                             {_______________________________________________________________________} 
                             |                                                                       |
                             |                                                                       |
-                            |                  2) Main Game                                         |
+                            |                  1) Insert Element after Element                      |
                             |                                                                       |
-                            |                  3) KI                                                |
+                            |                  2) Add choosing Animation                            |
                             |                                                                       |
-                            |                  4) Validations                                       |
+                            |                  3) Remove choosing Animation                         |
                             |                                                                       |
-                            |                  5) Game-End Screen                                   |
+                            |                  4) Lock Top Cells                                    |
                             |                                                                       | 
-                            |                  6) Helper-Functions                                  |
+                            |                  5) "Thinking"-Effect                                 |
                             |                                                                       |
-                            |                  7) Translation Manager & Page Library                |
+                            |                  6) Get only unique Values from Array                 |
+                            |                                                                       |                                                                                                                                                                               
+                            |                  7) Get a random Int number                           |
                             |                                                                       |
-                            |                  8) Final Information and Comments                    |
-                            |                                                                       |                                                                                                                                                                                    
-                            |                  -) Coding Guideline & Tipps                          |
-                            |                                                                       |                            
+                            |                  8) Push values to Local Storage                      |
+                            |                                                                       | 
+                            |                  9) Swap 2 Classes by 2 events on 1 Element           |
+                            |                                                                       |
+                            |                 10) Change which Player is on turn                    |
+                            |                                                                       |
+                            |                 11) Game Screen                                       |
+                            |                                                                       |
+                            |                 12) Start Screen                                      |
+                            |                                                                       |
+                            |                 13) Stats                                             |
+                            |                                                                       | 
+                            |                 14) Update Stats                                      |
+                            |                                                                       |
+                            |                 15) New Window                                        |
+                            |                                                                       |                                                                                                                                                                               
+                            |                 16) Correct Sound Setting                             |
+                            |                                                                       |
+                            |                 17) Create new DOM Element                            |
+                            |                                                                       | 
+                            |                 18) Fireworks                                         |
+                            |                                                                       |
+                            |                 11) Final Information and Comments                    |
+                            |                                                                       |                                                                                                                                                                                   
+                            |                 12) Coding Guidelines & Tipps                         |                                                                                                                                                                                                                                                            
+                            |                                                                       |                                                                                                                                                                                                               
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */      
 
-
-
-
-
+//#endregion
 
 //#region Helper Functions
                                                                                                                                                                                                                                                                                 /*            
@@ -665,6 +688,20 @@ canvas.height = window.innerHeight;
 };
 //#endregion
 
+//#region Final informations and Comments
+
+                                                                                                                                                                                                                                                                                /*
+================================================================================================================================================================================================================================================================================
+ 
+                                    Final information and Comments          
+
+================================================================================================================================================================================================================================================================================
+
+     Bonus Jobs to-do:
+
+-) 
+                                                                                                                                                                                                                                                                                */
+//#endregion
 
 //#region Coding Guideline & Tipps
                                                                                                                                                                                                                                                                                     /*

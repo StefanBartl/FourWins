@@ -28,8 +28,7 @@
                                                 Jobs To-do:
 
                                         -) Test and repair responsivness in all sizes
- 
-                                        -) Try mylibrary using and update it                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                           
                                         -) Wrap as much in functions as its argueable
                                         -) Reduce document.getE with the DOM assigned variables
                                         -) Try to make the Window Function with Prmoises a "real" confirm Window

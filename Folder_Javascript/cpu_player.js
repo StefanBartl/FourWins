@@ -12,15 +12,27 @@
                             {_______________________________________________________________________} 
                             |                                                                       |
                             |                                                                       |
-                            |                  -) Validations                                       |
+                            |                  1) KI Placement                                      |
                             |                                                                       |
-                            |                  -) Game-End Screen                                   |
+                            |                  2) KI Easy                                           |
                             |                                                                       | 
-                            |                  -) Helper-Functions                                  |
+                            |                  3) KI Normal                                         |
                             |                                                                       |
-                            |                  -) Translation Manager & Page Library                |
+                            |                  4) KI Hard                                           |
                             |                                                                       |
-                            |                  -) Final Information and Comments                    |
+                            |                  5) Randomizer                                        |                                                                                                                                                                                      
+                            |                                                                       |
+                            |                  6) Detect 3 Coin Chains Diagonal                     |                                                                                                                                                                                                            
+                            |                                                                       |
+                            |                  7) Detect 3 Coin Chains Upwards                      |                                                                                                                                                                                                               
+                            |                                                                       |
+                            |                  8) Detect 3 Coin Chains Sideways                     |           
+                            |                                                                       |
+                            |                  9) Get Valid Upwards Placement                       |                                                                                                                                                                                                           
+                            |                                                                       |                                                                                                                                                                                
+                            |                 10) Get Valid Sideways Placement                      |                                                                                                                                                         
+                            |                                                                       |
+                            |                 11) Final Information and Comments                    |
                             |                                                                       |
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */                                                                                                                                               
@@ -37,15 +49,15 @@
 //                                   Placement function for KI
 
 function KI_Placement(valid_number){
-    // console.log("Random number for topCell is:  ", random_number);
+// console.log("Random number for topCell is:  ", random_number);
 
-    // Make the Placement
-    const topCellsArray = document.getElementsByClassName("Class_TopCells");
-    topCellsArray[valid_number].click();  
+// Make the Placement
+const topCellsArray = document.getElementsByClassName("Class_TopCells");
+topCellsArray[valid_number].click();  
 
-    // If it was the last Cell in the Column, lock it
-    let columnNumber = valid_number + 1;
-    TopCell_Validation(columnNumber, false);    
+// If it was the last Cell in the Column, lock it
+let columnNumber = valid_number + 1;
+TopCell_Validation(columnNumber, false);    
 };
 //                                  _______________________________
 //                                   Algorhytmus for KI Level Easy
@@ -143,22 +155,22 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
 //                                   Randomize values from different arrays
 
 function Randomizer (arr1, arr2){
-    console.log("Randomizer getted:", arr1,  arr2);
-    let randomizing_number, randomizing_array = [];
-    
-    for ( let i = 0; i < arr1.length; i++ ){
-        randomizing_array.push(arr1[i]);
-    };
-    
-    if  ( arr2 !== undefined ){
-    for ( let i = 0; i < arr2.length; i++ ){
-        randomizing_array.push(arr2[i]);
-    };}; 
-    
-    randomizing_number = getRandomInt(randomizing_array.length);
-    valid_number = randomizing_array[randomizing_number];
-    console.log("Randomizer has choosen: " + valid_number);
-    return valid_number;
+console.log("Randomizer getted:", arr1,  arr2);
+let randomizing_number, randomizing_array = [];
+
+for ( let i = 0; i < arr1.length; i++ ){
+    randomizing_array.push(arr1[i]);
+};
+
+if  ( arr2 !== undefined ){
+for ( let i = 0; i < arr2.length; i++ ){
+    randomizing_array.push(arr2[i]);
+};}; 
+
+randomizing_number = getRandomInt(randomizing_array.length);
+valid_number = randomizing_array[randomizing_number];
+console.log("Randomizer has choosen: " + valid_number);
+return valid_number;
 };
 //                                  _______________________________________________
 //                                   Validate if there is a Diagonal triggered winw
@@ -632,4 +644,20 @@ let unique_valid_number_array = valid_number_array.filter(onlyUnique);
 //console.log("Sideways array after filter out: " + unique_valid_number_array);
 if (unique_valid_number_array.length > 0) return unique_valid_number_array;
 };
+//#endregion
+
+
+//#region Final informations and Comments
+
+                                                                                                                                                                                                                                                                                /*
+================================================================================================================================================================================================================================================================================
+ 
+                                    Final information and Comments          
+
+================================================================================================================================================================================================================================================================================
+
+     Bonus Jobs to-do:
+
+-) 
+                                                                                                                                                                                                                                                                                */
 //#endregion
