@@ -26,8 +26,9 @@
 //#region Open Jobs                                                                                                                                                                                                                                                                             
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
-                                                                                      
-                                        -) Try to make the Window Function with Promises a "real" confirm Window
+                                                            
+                                         -) Bug while placing placing is possible       
+                                        -) Try replace setTimeouts with Promises on New Window, Placement...
                                         -) Try to get the event listener outside and grouped together
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
                                            How much i can get in the Game object= row counter ... 
@@ -43,7 +44,7 @@
                                         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
                                                    Session progress
--) 
+-) Reduced Main Game function 
 -) 
                                                                                                                                                                                                                                                                              */
 //#endregion
@@ -476,58 +477,63 @@ PlayGame();
 //                                   Play the Game function
 
 function PlayGame(){
-// Get correct "Choosing Animation", Coin, Placement, CPU. 
 
 // Detect the correct the Top Cells for looping trough to put the event listeners on them so the players can make there placements
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
-// The whole placement and Game Flow is currently in this for loop
 for (let topCell of topCellsArray) {
 
 // Get the ID & Column of the played TopCell 
-const ID_topCell = topCell.id;
-const topCellColumn = ID_topCell[4];
-
-//                                  ____________________________________________________
-//                                  Event-Listener for actions if a Top Cell is clicked
-topCell.addEventListener("click", () => {
-
-// Play placement sound if on
-if(Game.Sound === true){
-placing_audio.play();
-};
-
-//  Make the other top cells unclickable for 1s (animation duration) so it cannont get clicked again and trigger a overlapped animation
-for (let topCellA of topCellsArray) {
-topCellA.style = "pointer-events:none";
-setTimeout(() => { topCellA.style = "pointer-events: auto"; }, 1000);
-};}
-);      
-
+const ID_Top_Cell = topCell.id;
+const topCellColumn = ID_Top_Cell[4];
 //                                  __________________________________________
 //                                  Event-Listener for the Choosing-Animation
 topCell.addEventListener("mouseover", ()=>{ Add_Choosing_Ani(topCellColumn); });
 topCell.addEventListener("mouseleave", ()=>{ Remove_Choosing_Ani(topCellColumn); });
+//                                  ____________________________________________________
+//                                  Event-Listener for actions if a Top Cell is clicked
+topCell.addEventListener("click", () => {
 
-//                                  ______________________________________________
-//                                  Event-Listener to start the Game-flow function
-topCell.addEventListener("click", Placement);
-
+    // Play placement sound if on
+    if(Game.Sound === true){
+    placing_audio.play();
+    };
+    
+    //  Make the other top cells unclickable for 1s (animation duration) so it cannont get clicked again and trigger a overlapped animation
+    const topCellsArray = document.getElementsByClassName("Class_TopCells");
+    for (let topCell of topCellsArray) {
+    topCell.style = "pointer-events:none";
+    };
+    
+    // Start placement function
+    Placement(ID_Top_Cell);
+    
+});   
+};    
+};
 //                                 _______________________________________________
 //                                  Placement function for Game and Human Players
 
-function Placement() {
+function Placement(ID_Top_Cell) {
+
+// Make Top Cells unclickable
+const topCellsArray = document.getElementsByClassName("Class_TopCells");
+// Make topCell clickable again
+for (let topCell of topCellsArray) {
+    topCell.style = "pointer-events: none"; 
+};
+
+// Get the played top cell for getting the right column
+topCell = document.getElementById(`${ID_Top_Cell}`);
 
 // Make sure, placement only is allowed if the animation from the placement before is finished
 if (topCell.firstChild) return;
-// Get the played top cell for getting the right column
-topCell = document.getElementById(ID_topCell);
 
 // Increase round counter
 Game.roundCounter++;
 
 //                      Get the correct played row
 // First get the column number via the id of the top cell
-const columnNumber = parseInt(ID_topCell[4]);
+const columnNumber = parseInt(ID_Top_Cell[4]);
 
 // Decrease the row counter by the total columns played in this row before and setting a variable for 
 // the correct animations and the placement (to get the correct correct column)
@@ -584,6 +590,7 @@ if (Game.roundCounter === 42){Game_End_Screen(3); return;};
 TopCell_Validation(columnNumber, false);
 //   If no win, next Player is on turn
 Turning_PlayerIsOnTurn();
+if(Game.Game_against_KI === false) Unlock_TopCells();
 // If this is a KI, invoke correct KI
 if (Game.KI_Level === "Easy" || Game.KI_Level === "Einfach") {KI_Easy(); Lock_TopCells()}
 else if (Game.KI_Level === "Normal") {KI_Normal(); Lock_TopCells()};
@@ -607,13 +614,14 @@ if (valid_row === true || valid_column === true || valid_diagonal === true) retu
 if (Game.roundCounter === 42){Game_End_Screen(3); return;}; 
 TopCell_Validation(columnNumber, false);
 // Next Player is on turn
+if(Game.Game_against_KI === false) Unlock_TopCells();
 Turning_PlayerIsOnTurn();
 }
 },      // End of the anyonyme function of the setTimeout()
 1000); // End of the setTimeout(), next placement is possible!
-};    // End Game-Flow-Function
-};   // End Main Game for-of Loop (topcell of topCellArray)
-}; 
+
+};
+
 //#endregion
 
 //#region Final informations and Comments

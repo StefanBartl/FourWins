@@ -117,11 +117,11 @@ topCell.style = "pointer-events:none";
 //                                  Unlock topCells
 
 function Unlock_TopCells(){
-    const topCellsArray = document.getElementsByClassName("Class_TopCells");
-    for (let topCell of topCellsArray){
-    topCell.style.cursor = "pointer"; 
-    topCell.style = "pointer-events: all"; 
-    };
+const topCellsArray = document.getElementsByClassName("Class_TopCells");
+for (let topCell of topCellsArray){
+topCell.style.cursor = "pointer"; 
+topCell.style = "pointer-events: all"; 
+};
 };
 //                                  ______________________________
 //                                   Simulate a "Thinking"-Effect

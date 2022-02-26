@@ -58,7 +58,9 @@ topCellsArray[valid_number].click();
 // If it was the last Cell in the Column, lock it
 const columnNumber = valid_number + 1;
 TopCell_Validation(columnNumber, false);    
-Unlock_TopCells();
+setTimeout(()=>{
+    Unlock_TopCells();
+}, 1000);
 };
 //                                  _______________________________
 //                                   Algorhytmus for KI Level Easy
