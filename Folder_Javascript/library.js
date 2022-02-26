@@ -288,6 +288,7 @@ value = localStorage.KI_Normal_Draws || 0; document.getElementById("ID_Normal_2"
 //                                   Increase Stats after Win
 
 function Update_Stats(winning_player){
+// console.log("Updated Stats.");
 // To reduce repetition only the KI Easy section is commented out. It's basically the same in KI Normal.
 let value;
 // Easy Stats
@@ -318,9 +319,13 @@ document.getElementById("ID_Normal_2").innerText = value;};
 //                                   Alert / Confirm / Prompt Windows
 
 function New_Window(options){
+/*
+                                                Info: 
+ To know if User clicked "Confirm" or Cancel, you need a variable outside of the function which can be manipulated by the Event-Listeners. 
+ --> Create an empty Windows{} Object. You find the "returns" than in the Windows.[variable]. You also can change the Event-Listeners for your needs.
+*/
 
-// Info: To know if User clicked "Confirm" or Cancel, you need a variable outside of the function which can be manipulated by the Event-Listeners. 
-// --> Create an empty Windows{} Object. You find the "returns" than in the Windows.[variable]. You also can change the Event-Listeners for your needs.
+// console.log("Entered New Window function.");
 
 // Set up parameter list
 const _id = options.ID, _name = options.Name, _text = options.Text, _alert = options.Alert, _confirm = options.Confirm, _prompt = options.Prompt, _variable = options.Variable; 
@@ -467,6 +472,8 @@ confirm_button.addEventListener("click", ()=>{
 }
  */
 //#endregion
+
+// console.log("New Window created.");
 };
 //                                  ________________________
 //                                   Sound in Settings-Menu
@@ -485,6 +492,7 @@ sound_checkbox.click();
 //                                   "Creator"-Function
 
 function Create_DOM_Element(options, arrayOne, arrayTwo) {
+// console.log("Entered Creator function.");
 
 // Define the possible Parameter-List with the associated variables declared
 const _parentID = options.ParentID, _element = options.Element, _type = options.Type, _id = options.ID, _class = options.Class, _text = options.Text, _for = options.For,
@@ -527,7 +535,7 @@ elementsPointer++;
 // Finally, push the complete dynamically created, finished object to the DOM!
 document.getElementById(_parentID).appendChild(element);
 
-                                                                                                                                                                                                                                                                    /*
+                                                                                                                                                                                                                                                            /*
 Creator-Functions Informations:
 All types of Elements possible which you can create 'the normal way' too!
 !Important: For correct functionality pass at least the ParentID (to defined where the element should appear in the DOM) & 
@@ -540,6 +548,8 @@ Possible arguments:
 parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width, Height, AspectRatio, Min, Max, Value, Placeholder, arrayOne, arrayTwo
 
 */
+
+// console.log("New DOM-Element created.");
 };
 //                                  ____________________________
 //                                   Fireworks Canvas-Animation                                

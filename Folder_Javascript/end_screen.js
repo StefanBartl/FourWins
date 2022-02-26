@@ -29,8 +29,8 @@
 
 //                                  _________________________________
 //                                   Creation of the Game-End-Screen
-
 function Game_End_Screen(winning_player) {
+// console.log("Entered Game End Screen Function.");
 
 // Play correct Audio   
 if (Game.Sound === true){
@@ -143,6 +143,7 @@ document.getElementById("ID_Game_End_Container").appendChild(gameboard);
 
                                     // New Game Event Listener with important function
 document.getElementById("ID_NewGame_Button").addEventListener("click", ()=>{
+// console.log("New Game selected, preparations will be done...");
 
 // Remove TopCell Style classes collected during the Game and End-Screen & unlock the placement function again
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -219,6 +220,7 @@ if(winning_player === 2){
 }); // Mew Game Event Listener End
 
 };
+
 //#endregion
 
 //#region Final informations and Comments

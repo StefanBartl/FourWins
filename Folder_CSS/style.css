@@ -47,15 +47,18 @@
                                                     Jobs To-do:
 
                                         -) Better Styling (find a final, real good one), also in the Settings Menu
+                                        -) Win Games Counter Design
                                         -) Test and repair responsivness in all sizes
                                         -) CSS-Code minimizing f.e. bind repetative Classes to one Class
                                         -) INGAME Section?  
                   
                                                   Session progress:
-
+-)
+-)
                                                                                                                                                                                                                                                                               */
+                                                                                                                                                                                                                                                               /* #endregion */ 
 
-                                                                                                                                                                                                                                                               /* #endregion */  
+/* #region Content */
 
 /* #region General */                                                                                                                                                                                                                                                                               
                                                                                                                                                                                                                                                                                /*
@@ -1329,6 +1332,8 @@ align-items: flex-end;
 }
 
 }
+
+                                                                                                                                                                                                                                                               /* #endregion*/
                                                                                                                                                                                                                                                                /* #endregion */  
 
 /* #region Final Informations & Comments */  
@@ -1365,7 +1370,7 @@ align-items: flex-end;
 
 /* #region CSS Guideline & Tipps */                                                                                                                                                                                                                                                               /*
 ______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-                                                                                                                                                                                                                                                               /*
+                                                                                                                                                                                                                                                                                                   /*
 /##################################################################################################################################################################################################################################################################### 
 #
 #                                                  Checklist:

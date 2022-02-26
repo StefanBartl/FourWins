@@ -47,9 +47,8 @@
 
 //                                  ___________________________
 //                                   Placement function for KI
-
 function KI_Placement(valid_number){
-// console.log("Random number for topCell is:  ", random_number);
+// console.log("Entered KI Placement Function. Random number for topCell is:  ", random_number);
 
 // Make the Placement
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -62,15 +61,15 @@ setTimeout(()=>{
     Unlock_TopCells();
 }, 1000);
 };
+
 //                                  _______________________________
 //                                   Algorhytmus for KI Level Easy
-
 function KI_Easy(){
 /*
                             Infobox
 Function to let KI Easy produce a random, but valid number for placement
 */
-console.log("KI Easy starts to thinking....");
+// console.log("KI Easy starts to thinking....");
 // Get a random number  
 const random_number = getRandomInt(7);
 // Proof if in this column a placement is possible
@@ -78,13 +77,13 @@ const number_proofing = TopCell_Validation(random_number, true);
 // If it is possible, name it valid_number and invoke "KI_Thinking", if it isn't get a random number again and proof it as long as there is a valid number
 if(number_proofing === true){
 const valid_number = random_number;
-console.log("KI Easy makes placement:", valid_number - 1);
+// console.log("KI Easy makes placement:", valid_number - 1);
 Thinking_Effect(true, valid_number);
 } else (KI_Easy());
 };
+
 //                                  ___________________________________________
 //                                   Algorhytmus for KI Level Normal (!Buggy!)
-
 function KI_Normal(){
 /* 
                                 Infobox
@@ -93,6 +92,8 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
 
 Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as espected.I'm getting hands on soon.
 */
+
+// console.log("KI Normal startzs to thinking...");
 
 // If it is the first KI Normal Placement, make a random placement
 if (Game.roundCounter === 1 || Game.roundCounter === 2) KI_Easy(); 
@@ -139,12 +140,13 @@ if(proof_side === true){ Thinking_Effect(true, numbers_sideways[0]); return };
 
 console.log("KI Normal does not have a valid placement. Submit this task to CPU Easy...");
 // If nothing is possible, make random placement
+// console.log("Nothing possible. Ask KI Easy for valid placement...");
 KI_Easy(); return};
 
 };
+
 //                                  ________________________________________________________________
 //                                   Algorhytmus for KI Level Hard (!Placeholder. Not written yet.!)
-
 function KI_Hard(){
 /*
                                 Infobox / Ideas
@@ -153,10 +155,10 @@ try to avoid upwards, sideways and diagonal finishing moves from Human Player an
 Also prefer make placements on a 2 Coin chain, also in all three directions.
 */
 // Code here... :-)
-}
+};
+
 //                                  ________________________________________
 //                                   Randomize values from different arrays
-
 function Randomizer (arr1, arr2){
 console.log("Randomizer getted arrays:", arr1,  arr2);
 let randomizing_number, randomizing_array = [];
@@ -175,9 +177,9 @@ valid_number = randomizing_array[randomizing_number];
 console.log("Randomizer has choosen a column: " + valid_number);
 return valid_number;
 };
+
 //                                  _______________________________________________
 //                                   Validate if there is a Diagonal triggered winw
-
 function Detect_3_Coin_Chains_Diagonal() {
 
 //#region Detect KI Diagonal 3 Coin Chains
@@ -305,9 +307,9 @@ if(document.getElementById(`ID_C7R${cell - 2}`).getAttribute("isPlayed") === "ye
 //#endregion
 
 };
+
 //                                  __________________________________________________________________________
 //                                   Detection of horizontal "3 Coin Chain" to avoid/force finishing (!Buggy!)
-
 function Detect_3_Coin_Chains_Upwards(){
 // +++ Basically it depends hardly of the Column Validator from the Win-Validation section +++
 
@@ -404,9 +406,9 @@ return 7
 };
 
 };
+
 //                                  _________________________________________________________________________
 //                                   Detection of vertical "3 Coin Chain" to avoid/force finishing (!Buggy!)
-
 function Detect_3_Coin_Chains_Sideways(){
 // +++ Basically it depends hardly on the Row Validator from the Win-Validation Section +++
 // INFO: This algorithm does not take into account, for example, if two coins are next to each other, then one cell is free and then another coin, that this leads to a winning chain. This should be removed in KI Hard
@@ -518,9 +520,9 @@ countFor_Win === 2 && document.getElementById(`ID_C7R${el + 1}`).getAttribute("d
 else if (countFor_Win === 2 && document.getElementById(`ID_C3R${el + 1}`).getAttribute("data-isPlayed") !== "no") return 2; 
 };};
 };
+
 //                                  ____________________________________________________
 //                                   Get a valid placement focused on column => upwards
-
 function Get_Valid_Upwards_Placemement(){
 // Try to make placement on top of an other KI placement if there is enough space to can finish it
 let value, valid_number_array = [];
@@ -550,9 +552,9 @@ value = Game.actualGameboardPlayer2.C7.slice(-1)[0]
 // If finished return all valid columns 
 if(valid_number_array.length > 0) return valid_number_array
 };
+
 //                                  __________________________________________________
 //                                   Get a valid placement focused on row => sideways
-
 function Get_Valid_Sideways_Placement(){
 let valid_number_array = [];
 

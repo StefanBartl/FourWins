@@ -16,9 +16,9 @@
                             |                                                                       |
                             |                  2) Main Game functions                               |
                             |                                                                       |
-                            |                  8) Final Information and Comments                    |
+                            |                  3) Final Information and Comments                    |
                             |                                                                       |
-                            |                  9) Credits                                           |   
+                            |                  4) Credits                                           |   
                             |                                                                       | 
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */                                                                                                                                               
@@ -27,9 +27,7 @@
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
                                                             
-                                        -) Try replace setTimeouts with Promises on New Window, Placement...
-                                        -) console.log in all FDunctions and returns if possible
-                                        -) Try to get the event listener outside and grouped together
+                                        -) Look Game End screen
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
                                            How much i can get in the Game object= row counter ... 
                                            Functions all return; CHECK (and for) Helper mthods like psuh to local storage 
@@ -153,14 +151,14 @@ Correct_Sound_Setting();
 
 //                                  __________________________________
 //                                   Section: Global Scoped Variables 
-//#region Row-Counters for Coin placement   
+//#region Global Counters
+
 /* Setting the Counters for let the Coin Placing Section know, 
    in which row & column the Game currently is to calculate by placement the correct position */
 let row_Counter_C1 = 8, row_Counter_C2 = 8, row_Counter_C3 = 8, row_Counter_C4 = 8, row_Counter_C5 = 8, row_Counter_C6 = 8, row_Counter_C7 = 8;
-//#endregion
 
-//#region Counting wins on a row
-let count_wins_player_one = 0; count_wins_player_two = 0;
+// Counters to count wins if more Games are played  
+let count_wins_player_one = 0, count_wins_player_two = 0;
 //#endregion
 
 //                                  __________________________
@@ -418,7 +416,7 @@ if(warning === true) {localStorage.clear();};
 //                                  ______________________________
 //                                   Event Listener to start Game
 //#region Prepare Game Invoking
-start_button.addEventListener("click", PrepareGame);
+start_button.addEventListener("click", Game_Preparations);
 //#endregion
 
 //#endregion
@@ -433,15 +431,16 @@ start_button.addEventListener("click", PrepareGame);
 
 //                                  _______________________
 //                                   Prepare Game function
-
-function PrepareGame() {
+function Game_Preparations() {
 // Function to do all the preparations to start the Game
+// console.log("Entered Game Preparations");
 
 // Make sure at Game start are valid name variables available 
 if(player_1_name.value === "") player_1_name.value = player_1_name.placeholder;
 if(player_2_name.value === "") player_2_name.value = player_2_name.placeholder;
 Game.Player_One_Name = player_1_name.value;
 Game.Player_Two_Name = player_2_name.value;
+// console.log("Setted Names:", Game.Player_One_Name, Game.Player_Two_Name);
 
 // Give all cells same attribute
 const cells_Array = document.getElementsByClassName("Class_Cells");
@@ -456,6 +455,7 @@ if(Game.Game_against_KI === true){
 if(choose_ki.value === "CPU Easy") {Game.KI_Level = "Easy";}
 else {Game.KI_Level = "Normal";}
 };
+// console.log("Game against CPU:", Game.Game_against_ki, "KI Level:", Game.KI_Level);
 // DOM-Manipulation to get to the "Game-Screen"
 Game_Screen();
 
@@ -471,12 +471,14 @@ setTimeout(Thinking_Effect, 8000);
 
 // After preparations Start Game
 PlayGame();
+
+// console.log("Finished Game preparations.");
 };
 
 //                                  ________________________
 //                                   Play the Game function
-
 function PlayGame(){
+// console.log("Entered Play Game Function.");
 
 // Detect the correct the Top Cells for looping trough to put the event listeners on them so the players can make there placements
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -508,12 +510,14 @@ topCell.addEventListener("click", () => {
     Placement(ID_Top_Cell);
     
 });   
-};    
 };
+// console.log("Leaving Play Game Function.");    
+};
+
 //                                 _______________________________________________
 //                                  Placement function for Game and Human Players
-
 function Placement(ID_Top_Cell) {
+// console.log("Entered Function for new Placement.");
 
 // Make Top Cells unclickable
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -565,9 +569,11 @@ setTimeout(()=>{
 Placement_End(ID_Top_Cell, columnNumber, row);
 },      // End of the anyonyme function of the setTimeout()
 1000); // End of the setTimeout(), next placement is possible!
+// console.log("Placement done.");
 };
 
-
+//                        Place correct coin on his End-Position
+//
 function Placement_End(ID_Top_Cell, columnNumber, row){
 
 // First remove the coin from the Top Cell
@@ -600,6 +606,8 @@ document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlaye
 };};
 };
 
+//                        Win Validation and next turn actions
+//
 function Player_1_Placement_Finish(columnNumber, row){
 //  Invoke Winning-Validation for Player 1
 const valid_row = Row_Validator(1, row);
@@ -621,7 +629,8 @@ if (Game.KI_Level === "Easy" || Game.KI_Level === "Einfach") {KI_Easy(); Lock_To
 else if (Game.KI_Level === "Normal") {KI_Normal(); Lock_TopCells()};
 };
 
-
+//                        Win Validation and next turn actions
+//
 function Player_2_Placement_Finish(columnNumber, row){
 //  Invoke Winning-Validation for Player 2
 const valid_row = Row_Validator(2, row);
@@ -637,11 +646,6 @@ TopCell_Validation(columnNumber, false);
 if(Game.Game_against_KI === false) Unlock_TopCells();
 Turning_PlayerIsOnTurn();
 };
-
-
-
-
-
 //#endregion
 
 //#region Final informations and Comments
