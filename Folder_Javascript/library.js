@@ -209,14 +209,17 @@ function Turning_PlayerIsOnTurn() {
 // Change Player
 Game.playerIsOnTurn === "left" ? Game.playerIsOnTurn = "right" : Game.playerIsOnTurn = "left";
 // Assign text message to the correct Player and with the correct language
-if(localStorage.getItem("Language") === "de"){
-    if(Game.playerIsOnTurn === "left") { document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_One_Name}`;}
-    else if(Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_Two_Name}`;}
-    else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name} am Zug`;};
-} else {
-if(Game.playerIsOnTurn === "left"){document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}`;}
-else if (Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_Two_Name}`;}
-else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name}'s turn`;};
+if(Game.Language === "de"){ // Deutsch
+
+    if(Game.playerIsOnTurn === "left") { document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_One_Name}!`;}
+    else if(Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Du bist dran, ${Game.Player_Two_Name}!`;}
+    else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name} denkt nach...`;};
+
+} else { // English
+
+if(Game.playerIsOnTurn === "left"){document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}!`;}
+else if (Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Do you best, ${Game.Player_Two_Name}!`;}
+else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name}'s is thinking...`;};
 };
 
 // Add correct positioning Class to div

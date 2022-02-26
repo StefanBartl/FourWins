@@ -27,8 +27,8 @@
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
                                                             
-                                         -) Bug while placing placing is possible       
                                         -) Try replace setTimeouts with Promises on New Window, Placement...
+                                        -) console.log in all FDunctions and returns if possible
                                         -) Try to get the event listener outside and grouped together
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
                                            How much i can get in the Game object= row counter ... 
@@ -44,7 +44,7 @@
                                         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
                                                    Session progress
--) Reduced Main Game function 
+-) 
 -) 
                                                                                                                                                                                                                                                                              */
 //#endregion
@@ -561,42 +561,34 @@ coin.classList.add(`Class_PlacingAnimation_to_Row_${row}`);
 
 //                        After placing Coin Animation, Win Validation and next turn
 // Remove the coin with the animation after the animation time ended and place the coin on correct position
-setTimeout(() => {
+setTimeout(()=>{
+Placement_End(ID_Top_Cell, columnNumber, row);
+},      // End of the anyonyme function of the setTimeout()
+1000); // End of the setTimeout(), next placement is possible!
+};
 
-// Remove the animated coin from DOM
-topCell.firstChild.remove();
 
-// Win Validation & next turn
+function Placement_End(ID_Top_Cell, columnNumber, row){
 
+// First remove the coin from the Top Cell
+// console.log(ID_Top_Cell);
+document.getElementById(`${ID_Top_Cell}`).firstChild.remove();
+
+// Make the Placement
 if (Game.playerIsOnTurn === "left") {
-// 2 IF Statements after another, first to check if placement was from left or right Player, second to check the choosed colour, which affects the correct placement
+// Place the Coin as background image on the correct column (set by the decreased row counter)
 if (Game.player_Colour_Left === "yellow") {
-// Place the Coin as background image on the correct column (set by the decreased counter from before)
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_1");
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
-document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlayed", "yes");
-
+document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlayed", "yes");         
 } else {
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_2");
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
 document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlayed", "yes");
 }
-//  Invoke Winning-Validation for Player 1
-const valid_row = Row_Validator(1, row);
-const valid_column = Column_Validator(1, columnNumber, row);
-const valid_diagonal = Diagonal_Validator(1, columnNumber, row);
-if (valid_row === true || valid_column === true || valid_diagonal === true) return;
-if (Game.roundCounter === 42){Game_End_Screen(3); return;}; 
-TopCell_Validation(columnNumber, false);
-//   If no win, next Player is on turn
-Turning_PlayerIsOnTurn();
-if(Game.Game_against_KI === false) Unlock_TopCells();
-// If this is a KI, invoke correct KI
-if (Game.KI_Level === "Easy" || Game.KI_Level === "Einfach") {KI_Easy(); Lock_TopCells()}
-else if (Game.KI_Level === "Normal") {KI_Normal(); Lock_TopCells()};
-}
-// Same for Player 2
-else {
+Player_1_Placement_Finish(columnNumber, row);
+} else  {    // If Placement was from Human  Player 2
+Player_2_Placement_Finish(columnNumber, row);
 if (Game.player_Colour_Left === "red") {
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_1");
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
@@ -605,22 +597,50 @@ document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlaye
 document.getElementById(`ID_C${columnNumber}R${row}`).classList.add("Class_PlacedCoin_2");
 document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
 document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlayed", "yes");
-}
+};};
+};
+
+function Player_1_Placement_Finish(columnNumber, row){
+//  Invoke Winning-Validation for Player 1
+const valid_row = Row_Validator(1, row);
+const valid_column = Column_Validator(1, columnNumber, row);
+const valid_diagonal = Diagonal_Validator(1, columnNumber, row);
+
+if (valid_row === true || valid_column === true || valid_diagonal === true) return;
+if (Game.roundCounter === 42){Game_End_Screen(3); return;}; 
+
+TopCell_Validation(columnNumber, false);
+
+//   If no win, next Player is on turn
+Turning_PlayerIsOnTurn();
+
+if(Game.Game_against_KI === false) Unlock_TopCells();
+
+// If Game is against CPU invoke correct CPU
+if (Game.KI_Level === "Easy" || Game.KI_Level === "Einfach") {KI_Easy(); Lock_TopCells()}
+else if (Game.KI_Level === "Normal") {KI_Normal(); Lock_TopCells()};
+};
+
+
+function Player_2_Placement_Finish(columnNumber, row){
 //  Invoke Winning-Validation for Player 2
 const valid_row = Row_Validator(2, row);
 const valid_column = Column_Validator(2, columnNumber, row);
 const valid_diagonal = Diagonal_Validator(2, columnNumber, row);
+
 if (valid_row === true || valid_column === true || valid_diagonal === true) return;
 if (Game.roundCounter === 42){Game_End_Screen(3); return;}; 
+
 TopCell_Validation(columnNumber, false);
+
 // Next Player is on turn
 if(Game.Game_against_KI === false) Unlock_TopCells();
 Turning_PlayerIsOnTurn();
-}
-},      // End of the anyonyme function of the setTimeout()
-1000); // End of the setTimeout(), next placement is possible!
-
 };
+
+
+
+
 
 //#endregion
 
