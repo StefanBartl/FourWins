@@ -28,6 +28,7 @@
                                                 Jobs To-do:
                                                             
                                         -) Look Game End screen
+                                        -) Cannot type name Player 2!
                                         -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
                                            How much i can get in the Game object= row counter ... 
                                            Functions all return; CHECK (and for) Helper mthods like psuh to local storage 
@@ -42,8 +43,8 @@
                                         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
                                                    Session progress
--) 
--) 
+-)
+-)
                                                                                                                                                                                                                                                                              */
 //#endregion
 
@@ -174,19 +175,21 @@ else {toggle_colour_button.classList.remove("Class_Toggle"); toggle_colour_slide
 
 // Toggle Button in Colour Change Slider Event Listener
 document.getElementById("ID_Toggle_Button").addEventListener("click", ()=>{
-            // console.log("Colour toggle clicked");
-    if(localStorage.Player_Colour_Left === "yellow") {
+            //console.log("Colour toggle clicked");
+    if(localStorage.Player_Colour_Left === "yellow" || localStorage.Player_Colour_Left === undefined) {
+        //console.log("Set colour toggle to red.");
         localStorage.Player_Colour_Left = "red"; 
         Game.player_Colour_Left = "red"; 
         toggle_colour_button.classList.add("Class_Toggle"); 
         toggle_colour_slider.style.backgroundColor = "red"; 
-            // console.log("Colour toggle changed colour to red.")
+        // console.log("Colour toggle changed colour to red.")
     } else if (localStorage.Player_Colour_Left === "red") {
+        // console.log("Set colour toggle to yellow.")
         localStorage.Player_Colour_Left = "yellow"; 
         Game.player_Colour_Left = "yellow"; 
         toggle_colour_button.classList.remove("Class_Toggle"); 
         toggle_colour_slider.style.backgroundColor = "yellow"; 
-            //console.log("Colour toggle changed colour to yellow.")
+        // console.log("Colour toggle changed colour to yellow.")
 };
 });
 //#endregion

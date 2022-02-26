@@ -21,7 +21,7 @@
                             |                                                                |
                             |                  5) Typography                                 |
                             |                                                                |
-                            |                  6) Buttons, Inputs, etc...                    |
+                            |                  6) Inputs, Buttons, Dropdowns, etc...         |
                             |                                                                |
                             |                  7) Animations & Transitions                   |
                             |                                                                |
@@ -45,12 +45,13 @@
 /* #region Jobs To-Do */
                                                                                                                                                                                                                                                                                 /*
                                                     Jobs To-do:
-
+                                                    
                                         -) Better Styling (find a final, real good one), also in the Settings Menu
                                         -) Win Games Counter Design
                                         -) Test and repair responsivness in all sizes
                                         -) CSS-Code minimizing f.e. bind repetative Classes to one Class
-                                        -) INGAME Section?  
+                                        -) INGAME Section?
+                                        -) Find final Folder Layout for CSS-Stylesheets  
                   
                                                   Session progress:
 -)
@@ -67,34 +68,6 @@
                                                     General       
 
 ===============================================================================================================================================================================================================================================================================*/
-
-
-/* #region CSS-Trciks */
-
-/*
-
-      Scrollbar Firefox
-el{
-   scrollbar-color: dark;
-   scrollbar-width: .5rem;
-   scrollbar-gutter: both-edges ;
-}
-
-     Scrollbar Chrome, Safari,...
-
-::-webkit-scrollbar — the entire scrollbar.
-::-webkit-scrollbar-button — the buttons on the scrollbar (arrows pointing upwards and downwards that scroll one line at a time).
-::-webkit-scrollbar-thumb — the draggable scrolling handle.
-::-webkit-scrollbar-track — the track (progress bar) of the scrollbar, where there is a gray bar on top of a white bar.
-::-webkit-scrollbar-track-piece — the part of the track (progress bar) not covered by the handle.
-::-webkit-scrollbar-corner — the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet This is often the bottom-right corner of the browser window.
-::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some elements.
-
-*/
-
-/* #endregion */
-
-
 
 :root{
     /* Colour-Palette */
@@ -375,8 +348,10 @@ to{
    justify-content:center;
    overflow:scroll;
    background-color: var(--base-border);
-   box-shadow: .1rem .1rem 2rem black;
-   border-left: solid 1px black;
+   box-shadow: .1rem .1rem 1rem black;
+   border: solid 2px var(--base-colour);
+   border-top-left-radius: 10%;
+   border-bottom-left-radius: 10%;
    color: var(--main-black);
    text-align: center;
    font-size: small;
@@ -401,6 +376,7 @@ to{
 
 #ID_Colour_Container{
    min-width: 100%;
+   height: 3rem;
    display: flex;
    flex-wrap: wrap;
    align-items: center;
@@ -408,6 +384,7 @@ to{
 
 #ID_Sound_Container{
    min-width: 100%;
+   height: 3rem;
    display: flex;
    flex-wrap: wrap;
    align-items: center;
@@ -428,13 +405,13 @@ to{
    flex-wrap: wrap;
    align-items: center;
    justify-content: center;
-
 }
 
 #ID_Contacts_Container{
    min-width: 100%;
    display: flex;
-   align-items: center;
+   align-items:center;
+
 }
 
 #ID_Credits_Container{
@@ -445,7 +422,6 @@ to{
 
 #ID_Delete_All_Container{
    min-width: 100%;
-   min-height: 10vh;
    display: flex;
    align-items: center;
    justify-content: center;
@@ -464,7 +440,6 @@ to{
 }
 
 #ID_Sound{
-   cursor: pointer;
    min-width: 100%;
 }
 
@@ -473,25 +448,8 @@ to{
    min-width: 100%;
 }
 
-#ID_Language_Menu{
-   cursor: pointer;
-   min-width: 100%;
-}
-
 #ID_Stats{
    cursor: pointer;
-   min-width: 100%;
-}
-
-.Class_Summary_Details:hover{
-   color: var(--main-red);
-   cursor: pointer;
-}
-
-.Class_Settings_Summarys{
-   display: flex;
-   justify-content: center;
-   align-items:center;
    min-width: 100%;
 }
 
@@ -508,14 +466,6 @@ to{
    color: red;
 }
 
-#ID_Reset_Easy{
-   min-width: 50%;
-}
-
-#ID_Reset_Normal{
-   min-width: 50%;
-}
-
 #ID_Contact{
    cursor: pointer;
    min-width: 100%;
@@ -526,37 +476,11 @@ to{
    min-width: 100%;
 }
 
-#ID_Delete_All{
-   cursor: pointer;
-   height: 1.5rem;
-   width: 8rem;
-   border-radius: 10%;
-}
 
                               /* Hover Section  */ 
 
-#ID_Delete_All:hover{
-   background-color: var(--prime-darkgrey);
-   color: var(--base-border);
-}
-
 #ID_Info:hover{
    color: black;
-}
-#ID_Label_Colour:hover{
-   color: red;
-}
-
-#ID_Sound:hover{
-   color: red;
-}
-
-#ID_Language:hover{
-     color: red;
-}
-
-#ID_Stats:hover{
-   color: red;
 }
 
 #ID_Contact:hover{
@@ -566,48 +490,7 @@ to{
 #ID_Credits:hover{
    color: red;
 }
-
-                              /* Toggling in the Settings Menu*/
-
-.Class_Colour_Toggle:hover{
-   color: var(--gameboard-border);
-}                            
-
-.Class_Colour_Toggle{
-   min-width: 100%;
-   display: flex;
-}
-
-#ID_Toggle_Button{
-   position: relative;
-   top: .3rem;
-   left: 10%;
-   background-color: white;
-   width: 1.5rem;
-   height: 1.5rem;
-   border-radius: 50%;
-}
-
-#ID_Toggle_Button:hover{
-   background-color: var(--gameboard);
-}
-
-.Class_Toggle{
- transform: translateX(1.8rem);
-}
-
-.Class_Colour_Toggle .Class_Colour_Slider {    /* Ground */
-   position: relative;
-   cursor: pointer;
-   top: 0%;
-   left: 38.5%;
-   width: 4rem;
-   height: 2rem;
-   background-color: yellow; 
-   transition: all .3s ease-in-out;
-   border-radius: 1em;  
-}
-                                                                                                                                                                                                                                                          /* #endregion */  
+                                                                                                                                                                                                                                                        /* #endregion */  
 
 /* #region Typographie */    
                                                                                                                                                                                                                                                                            /*
@@ -648,29 +531,85 @@ to{
                                                                                                                                                                                                                                                                          /*
 ================================================================================================================================================================================================================================================================================
                             
-                                                   Buttons, Inputs,...        
+                                                   Inputs, Buttons, Dropdowns, etc...        
 
 ===============================================================================================================================================================================================================================================================================*/
 
-select{
-   text-align-last: center;
-   text-align: center;
-   -ms-text-align-last: center;
-   -moz-text-align-last: center;
-}
 
-#ID_Choose_KI{
-   border: solid 1px var(--base-border);
-   border-radius: 10rem; 
-}
+                                                   /* Text Inputs */
 
-.Class_Inputs{
+input {
    width: 28ch;
    max-width:80%;
    height: 2rem;
    text-align: center;
    margin-bottom:  5vh;
+   cursor: pointer;
+   border-radius: 10%;
+   box-shadow: 0 0 1rem black;
    border: none;
+}
+
+input:hover{
+   background-color: var(--prime-darkgrey);
+   color: var(--base-border);
+   box-shadow: inset 0 0 1rem white;
+}
+
+input:focus{
+   background-color: var(--prime-darkgrey);
+   color: var(--base-border);
+   box-shadow: inset 0 0 1rem white;
+}
+
+#ID_Player_1_Name{
+   
+}
+
+#ID_Player_2_Name{
+
+}
+
+                                                   /* Checkbox */
+
+#ID_Sound_Checkbox{
+   height: 1.5rem;
+   box-shadow: 0 0 1rem black;
+   border-radius: 20%:
+}
+
+#ID_Sound_Checkbox:hover{
+   box-shadow: none;
+}
+
+                                                   /* Buttons */
+
+button{
+   cursor: pointer;
+   border-radius: 10%;
+   box-shadow: 0 0 1rem black;
+   border: none;
+}
+
+button:hover{
+   background-color: var(--prime-darkgrey);
+    color: var(--base-border);
+    box-shadow: inset 0 0 1rem white;
+}
+
+
+#ID_Start_Button{
+   cursor: pointer;
+   min-width: 12.5vw;
+   min-height: 7.5vh;
+}
+
+.Class_Naming_Span{
+   display: flex;
+   justify-content: center;
+   align-content: center;
+   justify-items: center;
+   align-items: center;
 }
 
 .Class_Player_Name_Buttons{
@@ -682,36 +621,126 @@ select{
    filter: invert(1);
 }
 
-.Class_LeftNot{
-   position: absolute;
-   top: 5rem;
+#ID_Reset_Easy{
+   min-width: 50%;
 }
 
-.Class_RightNot{
-   position: absolute;
-   top: 5rem;
+#ID_Reset_Normal{
+   min-width: 50%;
 }
 
-.Class_Naming_Span{
-   display: flex;
-   justify-content: center;
-   align-content: center;
-   justify-items: center;
-   align-items: center;
-}
+#ID_Delete_All{
+   cursor: pointer;
+   height: 1.5rem;
+   width: 8rem;
+   border-radius: 10%;
+} 
 
-#ID_Start_Button{
+#ID_NewGame_Button{
    cursor: pointer;
    min-width: 12.5vw;
    min-height: 7.5vh;
    border-radius: 10rem;
+   margin-right: 1rem;  
+   margin-top: 10vh;        
+}
+   
+#ID_Back_Button{
+   cursor: pointer;
+   min-width: 12.5vw;
+   min-height: 7.5vh;
+   border-radius: 10rem;
+   margin-left: 1rem;
+   margin-top: 10vh;        
+}   
+
+                                                   /* Dropdwons */
+                                                   
+                                                   
+select{
+   text-align-last: center;
+   text-align: center;
+   -ms-text-align-last: center;
+   -moz-text-align-last: center;
+   cursor: pointer;
+   border-radius: 10%;
+   box-shadow: 0 0 1rem black;
+   border: none;
+}
+
+select:hover{
+   background-color: var(--prime-darkgrey);
+    color: var(--base-border);
+    box-shadow: inset 0 0 1rem white;
+}
+
+#ID_Choose_KI{
+   min-height: 1rem;
+   border-radius: 10rem; 
 }
 
 #ID_Language_Menu{
+   cursor: pointer;
    min-width: 50%;
    border: none;
-   background-color: var(--prime-lightgrey);
-   border-radius: 5rem
+}
+
+
+                                                   /* Toggle */
+
+.Class_Colour_Toggle{
+   min-width: 100%;
+   display: flex;
+}
+
+#ID_Toggle_Button{
+   position: relative;
+   top: 0;
+   left: 5%;
+   background-color: white;
+   width: 1rem;
+   height: 1rem;
+   border-radius: 50%;
+}
+
+#ID_Toggle_Button:hover{
+   background-color: var(--gameboard);
+}
+
+.Class_Toggle{
+   transform: translateX(1.8rem);
+}
+
+.Class_Colour_Slider { 
+   position: relative;
+   cursor: pointer;
+   top: 0%;
+   left: 41%;
+   width: 3rem;
+   height: 1rem;
+   background-color: yellow; 
+   transition: all .3s ease-in-out;
+   border-radius: 2rem;  
+   box-shadow: 0 0 1rem black;
+   border: none;
+}
+
+.Class_Colour_Slider:hover{
+    box-shadow: none;
+}
+
+                                                   /* Summarys */
+
+.Class_Summary_Details:hover{
+   color: var(--main-red);
+   cursor: pointer;
+}
+
+.Class_Settings_Summarys{
+   display: flex;
+   justify-content: center;
+   align-items:center;
+   min-width: 100%;
 }
 
                                                                                                                                                                                                                                                                /* #endregion */  
@@ -1034,25 +1063,6 @@ justify-content: center;
 align-content: center;   
 }
 
-#ID_NewGame_Button{
-cursor: pointer;
-min-width: 12.5vw;
-min-height: 7.5vh;
-border-radius: 10rem;
-margin-right: 1rem;  
-margin-top: 10vh;        
-}
-
-#ID_Back_Button{
-cursor: pointer;
-min-width: 12.5vw;
-min-height: 7.5vh;
-border-radius: 10rem;
-margin-left: 1rem;
-margin-top: 10vh;        
-
-}
-
 /* Win Marks */
 #ID_Win_Div_One{
 position: absolute;
@@ -1335,7 +1345,6 @@ align-items: flex-end;
 
                                                                                                                                                                                                                                                                /* #endregion*/
                                                                                                                                                                                                                                                                /* #endregion */  
-
 /* #region Final Informations & Comments */  
                                                                                                                                                                                                                                                                               /*
 ===============================================================================================================================================================================================================================================================================
@@ -1371,67 +1380,87 @@ align-items: flex-end;
 /* #region CSS Guideline & Tipps */                                                                                                                                                                                                                                                               /*
 ______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
                                                                                                                                                                                                                                                                                                    /*
-/##################################################################################################################################################################################################################################################################### 
-#
-#                                                  Checklist:
-#
-#        -) Buttons animation mit brightness oder saturation langsam hoch fahren
-#  
-#        -) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
-#
-#        -) ::after / ::before für Punkt -> Strich Animation
-#
-#        -) Font Styling
-#
-#        -) margin-inline , background-clip background-text-clip 
-#
-#        -) Optimale textlänge mit clamp:    width: clamp(45ch, 50%, 75ch);
-#
-#        -) ch als Eineheit benutzen!
-#
-#        -) scroll-behaviour : smoothS
-#
-#        -) content-visibility auto
-#
-#        -) Swiping: .container {scroll-snap-type: y mandatory} .child (muat be saection) {scroll-snap-align: start} create a anker point for swipping like tinder
-#
-#
-#
-#                                                  Media Queries:
-#
-#                                                  Max-Width
-#    Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop, und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
-#
-#                 @media (max-width: 575.98px) { … }// Kleine Endgeräte (Smartphones, kleiner als 768px)
-#
-#                 @media (max-width: 767.98px) { … }
-#
-#            // Kleine Endgeräte (Tablets, kleiner als 992px)
-#
-#                 @media (max-width: 991.98px) { … }
-#
-#            // Große Endgeräte (Laptops, Bildschirme, kleiner als 1200px)
-#
-#                 @media (max-width: 1199.98px) { … }
-#
-#                                                     Min-Width
-#                                     Min-width ist intuitiver und besser lesbar.
-#
-#           // Kleine Endgeräte (Smartphones, 576px und größer)
-#
-#                 @media (min-width: 576px) { … }
-#
-#            // Mittlere Endgeräte (Tablets, 768px und größer)
-#
-#                 @media (min-width: 768px) { … }
-#
-#            // Große Endgeräte (Laptops, Bildschirme, 992px und größer)
-#
-#                 @media (min-width: 992px) { … }
-#
-#            // Sehr große Endgeräte (Große Bildschirme, iMac, 1200px und größer)
-#
-#                 @media (min-width: 1200px) { … }
-#
-#
+###################################################################################################################################################################################################################################################################### 
+
+                                          Checklist:
+
+-) Buttons animation mit brightness oder saturation langsam hoch fahren
+
+-) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
+
+-) ::after / ::before für Punkt -> Strich Animation
+
+-) Font Styling
+
+-) margin-inline , background-clip background-text-clip 
+
+-) Optimale textlänge mit clamp:    width: clamp(45ch, 50%, 75ch);
+
+-) ch als Eineheit benutzen!
+
+-) scroll-behaviour : smoothS
+
+-) content-visibility auto
+
+-) Swiping: .container {scroll-snap-type: y mandatory} .child (muat be saection) {scroll-snap-align: start} create a anker point for swipping like tinder
+
+
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+                                          Media Queries:
+
+                                          Max-Width
+Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop, und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
+
+         @media (max-width: 575.98px) { … }// Kleine Endgeräte (Smartphones, kleiner als 768px)
+
+         @media (max-width: 767.98px) { … }
+
+    Kleine Endgeräte (Tablets, kleiner als 992px)
+
+         @media (max-width: 991.98px) { … }
+
+    Große Endgeräte (Laptops, Bildschirme, kleiner als 1200px)
+
+         @media (max-width: 1199.98px) { … }
+
+                                             Min-Width
+                              Min-width ist intuitiver und besser lesbar.
+
+    Kleine Endgeräte (Smartphones, 576px und größer)
+
+         @media (min-width: 576px) { … }
+
+    Mittlere Endgeräte (Tablets, 768px und größer)
+
+         @media (min-width: 768px) { … }
+
+    Große Endgeräte (Laptops, Bildschirme, 992px und größer)
+
+         @media (min-width: 992px) { … }
+
+    Sehr große Endgeräte (Große Bildschirme, iMac, 1200px und größer)
+
+         @media (min-width: 1200px) { … }
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+                                             Scrollbar Design:
+            Scrollbar Firefox
+      el{
+         scrollbar-color: dark;
+         scrollbar-width: .5rem;
+         scrollbar-gutter: both-edges ;
+      }
+
+         Scrollbar Chrome, Safari,...
+
+      ::-webkit-scrollbar — the entire scrollbar.
+      ::-webkit-scrollbar-button — the buttons on the scrollbar (arrows pointing upwards and downwards that scroll one line at a time).
+      ::-webkit-scrollbar-thumb — the draggable scrolling handle.
+      ::-webkit-scrollbar-track — the track (progress bar) of the scrollbar, where there is a gray bar on top of a white bar.
+      ::-webkit-scrollbar-track-piece — the part of the track (progress bar) not covered by the handle.
+      ::-webkit-scrollbar-corner — the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet This is often the bottom-right corner of the browser window.
+      ::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some elements.
+
+
+
+
 \_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________                                                                                                        */                                                                                                                                                                                                                                            
