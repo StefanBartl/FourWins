@@ -30,6 +30,7 @@
                                                             
                                         -) Settings Menu Ingame
                                         -) Thinker Effect show up in Game End Screen
+                                        -) Stating trough the functions and Global Scoped looping arrays?
                                         -) All Script s to the Page Library Layout
                                         .) Naming bug zu beginn CPU
                                         -) Code minimazing, layout and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
@@ -139,7 +140,8 @@ Player_2_wins: 0,
 Draws: 0,
 // Standard is: Left Yellow / Right Red
 player_Colour_Left: "yellow",
-Sound: true
+Sound: true,
+state: "startingScreen"
 };
 
 //                                 _____________________
@@ -208,16 +210,31 @@ document.getElementById("ID_Toggle_Button").addEventListener("click", ()=>{
         Game.player_Colour_Left = "red"; 
         toggle_colour_button.classList.add("Class_Toggle"); 
         toggle_colour_slider.style.backgroundColor = "red"; 
-        // console.log("Colour toggle changed colour to red.")
+        // console.log("Colour toggle changed colour for future coins to red.")
     } else if (localStorage.Player_Colour_Left === "red") {
         // console.log("Set colour toggle to yellow.")
         localStorage.Player_Colour_Left = "yellow"; 
         Game.player_Colour_Left = "yellow"; 
         toggle_colour_button.classList.remove("Class_Toggle"); 
         toggle_colour_slider.style.backgroundColor = "yellow"; 
-        // console.log("Colour toggle changed colour to yellow.")
+        // console.log("Colour toggle changed colour for future coins to yellow.")
 };
+
+// Changing colour of existing coins
+if(Game.state == "InGame"){
+    // Get all cells 
+    const cellsArray = document.getElementsByClassName("Class_Cells");
+    //Loops trough it
+    for(let cell of cellsArray){
+        // If one cell have tht Class with a red or yellow Coin Background attached, change it to the other colored background (PNG)
+       if(cell.classList.contains("Class_PlacedCoin_1")){cell.classList.remove("Class_PlacedCoin_1"); cell.classList.add("Class_PlacedCoin_2")}
+       else if(cell.classList.contains("Class_PlacedCoin_2")){cell.classList.remove("Class_PlacedCoin_2"); cell.classList.add("Class_PlacedCoin_1")};
+    // console.log("Existing coins changed colour.");
+    };
+};
+
 });
+
 //#endregion
 
 //                                  ________________________
@@ -373,7 +390,8 @@ Die/der erste SpielerIn, welche dies schafft hat die Runde gewonnen.
 3) Ein Unentschieden tritt ein, wenn kein Stein mehr spielbar ist und nimmt gewonnen hat. In diesem Fall beginnt derjenige, der nicht den letzten Spielzug machte.
 
 Informationen & Einstellungs-Menü:
-Eine Farbwahl ist möglich. Grundeinstellung ist Gelb für den / die linke Spieler_in und Rot für das Gegenüber.
+Eine Farbwahl der Spielsteine ist möglich - auch während des Spieles. 
+Grundeinstellung ist Gelb für den / die linke Spieler_in und Rot für das Gegenüber.
 Der Sound hat eine On/Off Funktion und es ist möglich zwischen Deutsch und English zu wöhlen.
 Bei Spielen gegen den Computer wird der Spielausgang in einer Statistik aufgezeichnet. Diesen findet man in den Spieleinstellungen unter "Statistiken gegen den CPU".
 Diese Statistiken kann man separat zurücksetzen.
@@ -391,7 +409,8 @@ The first player to do this wins the round.
 3) A tie occurs when there is no more playable checker and has won. In this case, the player who did not make the last move begins.
 
 Information & Settings menu:
-A color choice is possible. The basic setting is yellow for the player on the left and red for the opponent.
+A color choice of the "coins" is possible - also during the game. 
+The basic setting is yellow for the player on the left and red for the opponent.
 The sound has an on/off function and it is possible to choose between German and English.
 In games against the computer, the outcome of the game is recorded in a statistic. This can be found in the game settings under "Stats vs. CPU".
 These statistics can be reset separately.
@@ -460,6 +479,8 @@ function Game_Preparations() {
 // Function to do all the preparations to start the Game
 // console.log("Entered Game Preparations");
 
+Game.state = "Preparations";
+
 // Make sure at Game start are valid name variables available 
 if(player_1_name.value === "") player_1_name.value = player_1_name.placeholder;
 if(player_2_name.value === "") player_2_name.value = player_2_name.placeholder;
@@ -504,6 +525,8 @@ PlayGame();
 //                                   Play the Game function
 function PlayGame(){
 // console.log("Entered Play Game Function.");
+
+Game.state = "InGame";
 
 // Detect the correct the Top Cells for looping trough to put the event listeners on them so the players can make there placements
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
