@@ -18,7 +18,6 @@
 
 <body>
 
-
   <header class="Class_HeaderWrapper" id="ID_Header">
 
     <div id="ID_Head_Text">
@@ -27,59 +26,6 @@
         <p id="ID_Header_p"></p>
     </div>
 
-    <div class="Class_Settings_Menu" id="ID_Settings_Menu">
-      <span id="ID_Setting_Span">
-        <div id="ID_Info_Container">
-        <h3 id="ID_Info"></h3>
-      </div>
-      <div id="ID_Colour_Container">
-      <h3 id="ID_Label_Colour"></h3>
-      <div class="Class_Colour_Toggle">
-        <span class="Class_Colour_Slider" id="ID_Colour_Slider"><div id="ID_Toggle_Button"></div></span>
-    </div>
-  </div>
-    <div id="ID_Sound_Container">
-      <h3 id="ID_Sound"></h3>
-      <input type="checkbox" id="ID_Sound_Checkbox" checked>
-    </div>
-      <div id="ID_Language_Container">
-      <h3 id="ID_Language"></h3>
-      <select name="LanguageMenu" id="ID_Language_Menu">
-        <option value="Deutsch" id="ID_German" selected>Deutsch</option>
-        <option value="English" id="ID_English">English</option>
-      </select>
-    </div>
-      <div id="ID_Stats_Container">
-      <h4 id="ID_Stats"></h4>
-      <div class="Class_StatsWrapper" id="ID_Stats_First_Wrapper">
-      <h5 id="ID_Stats_Summary_Easy"></h5>
-      <details class="Class_Summary_Details">
-        <summary id="ID_Stats_Easy"></summary>
-        <span class="Class_Settings_Summarys"><p id="ID_Easy_1">0</p> / <p id="ID_Easy_2">0</p> / <p id="ID_Easy_3">0</p></span>
-      <button id="ID_Reset_Easy" class="Class_Reset_Buttons">Reset CPU Easy</button>
-      </details>
-      </div>
-      <div class="Class_StatsWrapper" id="ID_Stats_Second_Wrapper">
-      <h5>Normal</h5>
-      <details class="Class_Summary_Details">
-        <summary id="ID_Stats_Normal"></summary>
-        <span class="Class_Settings_Summarys"><p id="ID_Normal_1">0</p> / <p id="ID_Normal_2">0</p> / <p id="ID_Normal_3">0</p></span>
-        <button id="ID_Reset_Normal" class="Class_Reset_Buttons">Reset CPU Normal</button>
-      </details>       
-      </div>
-      </div>
-      <div id="ID_Contacts_Container">
-        <h3 id="ID_Contact"></h3>
-      </div>
-      <div id="ID_Credits_Container">
-      <h3 id="ID_Credits"></h3>
-    </div>
-    <div id="ID_Delete_All_Container">
-      <button id="ID_Delete_All"></button>
-    </div>
-    </span>
-    </div>
-    
   </header>
 
 
@@ -168,8 +114,8 @@
           <input type="text" max="15" id="ID_Player_2_Name" name="Player_2_ Name">
         </span>
       </section>
+    
   </div>
-
 
   <footer class="Class_FooterWrapper" id="ID_FooterWrapper">
     <div id="ID_Choose_KI_Div">
@@ -183,8 +129,61 @@
     <button type="button" id="ID_Start_Button" class="Buttons"></button>
   </footer>
 
+  <div class="Class_Settings_Menu" id="ID_Settings_Menu">
+    <span id="ID_Setting_Span">
+      <div id="ID_Info_Container">
+      <h3 id="ID_Info"></h3>
+    </div>
+    <div id="ID_Colour_Container">
+    <h3 id="ID_Label_Colour"></h3>
+    <div class="Class_Colour_Toggle">
+      <span class="Class_Colour_Slider" id="ID_Colour_Slider"><div id="ID_Toggle_Button"></div></span>
+  </div>
+</div>
+  <div id="ID_Sound_Container">
+    <h3 id="ID_Sound"></h3>
+    <input type="checkbox" id="ID_Sound_Checkbox">
+  </div>
+    <div id="ID_Language_Container">
+    <h3 id="ID_Language"></h3>
+    <select name="LanguageMenu" id="ID_Language_Menu">
+      <option value="Deutsch" id="ID_German" selected>Deutsch</option>
+      <option value="English" id="ID_English">English</option>
+    </select>
+  </div>
+    <div id="ID_Stats_Container">
+    <h4 id="ID_Stats"></h4>
+    <div class="Class_StatsWrapper" id="ID_Stats_First_Wrapper">
+    <h5 id="ID_Stats_Summary_Easy"></h5>
+    <details class="Class_Summary_Details">
+      <summary id="ID_Stats_Easy"></summary>
+      <span class="Class_Settings_Summarys"><p id="ID_Easy_1">0</p> / <p id="ID_Easy_2">0</p> / <p id="ID_Easy_3">0</p></span>
+    <button id="ID_Reset_Easy" class="Class_Reset_Buttons">Reset CPU Easy</button>
+    </details>
+    </div>
+    <div class="Class_StatsWrapper" id="ID_Stats_Second_Wrapper">
+    <h5>Normal</h5>
+    <details class="Class_Summary_Details">
+      <summary id="ID_Stats_Normal"></summary>
+      <span class="Class_Settings_Summarys"><p id="ID_Normal_1">0</p> / <p id="ID_Normal_2">0</p> / <p id="ID_Normal_3">0</p></span>
+      <button id="ID_Reset_Normal" class="Class_Reset_Buttons">Reset CPU Normal</button>
+    </details>       
+    </div>
+    </div>
+    <div id="ID_Contacts_Container">
+      <h3 id="ID_Contact"></h3>
+    </div>
+    <div id="ID_Credits_Container">
+    <h3 id="ID_Credits"></h3>
+  </div>
+  <div id="ID_Delete_All_Container">
+    <button id="ID_Delete_All"></button>
+  </div>
+  </span>
+  </div>
+
  <!-- #region Javascript-Files--> 
-  <script type="text/javascript" src='Folder_Javascript/end_screen.js'></script>
+  <script type="text/javascript" src='Folder_Javascript/screen_changes.js'></script>
   <script type="text/javascript" src='Folder_Javascript/validation.js'></script>
   <script type="text/javascript" src='Folder_Javascript/cpu_player.js'></script>
   <script type="text/javascript" src='Folder_Javascript/translation.js'></script>

@@ -208,18 +208,19 @@ document.getElementById(`${element_ID}`).classList.add(`${second_Class}`);
 function Turning_PlayerIsOnTurn() {
 // Change Player
 Game.playerIsOnTurn === "left" ? Game.playerIsOnTurn = "right" : Game.playerIsOnTurn = "left";
-// Assign text message to the correct Player and with the correct language
+
+// Assign text message to Player and with the correct language
 if(Game.Language === "de"){ // Deutsch
 
-    if(Game.playerIsOnTurn === "left") { document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_One_Name}!`;}
-    else if(Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Du bist dran, ${Game.Player_Two_Name}!`;}
+    if(Game.playerIsOnTurn === "left") { document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_One_Name}`;}
+    else if(Game.playerIsOnTurn === "right" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Du bist dran, ${Game.Player_Two_Name}`;}
     else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name} denkt nach...`;};
 
 } else { // English
 
-if(Game.playerIsOnTurn === "left"){document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}!`;}
-else if (Game.playerIsOnTurn === "left" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Do you best, ${Game.Player_Two_Name}!`;}
-else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name}'s is thinking...`;};
+    if(Game.playerIsOnTurn === "left"){document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}`;}
+    else if (Game.playerIsOnTurn === "right" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Do you best, ${Game.Player_Two_Name}`;}
+    else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name}'s is thinking...`;};
 };
 
 // Add correct positioning Class to div
@@ -483,9 +484,11 @@ function Correct_Sound_Setting() {
 const sound_checkbox = document.getElementById('ID_Sound_Checkbox');
 if (localStorage.Sound === "false" && sound_checkbox.checked === true) {
 sound_checkbox.click();
+Game.Sound = false;
 };
 if (localStorage.Sound === "true" && sound_checkbox.checked === false) {
 sound_checkbox.click();
+Game.Sound = true;
 };
 };
 //                                  ____________________

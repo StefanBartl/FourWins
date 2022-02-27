@@ -28,9 +28,11 @@
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
                                                             
-                                        -) Look Game End screen
-                                        -) Cannot type name Player 2!
-                                        -) Code minimazing and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
+                                        -) Settings Menu Ingame
+                                        -) Sound only is 1 times changeable
+                                        -) Thinker Effect show up in Game End Screen
+                                        .) Naming bug zu beginn CPU
+                                        -) Code minimazing, layout and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
                                            How much i can get in the Game object= row counter ... 
                                            Functions all return; CHECK (and for) Helper mthods like psuh to local storage 
                                            Global variables for DOM Objects possible which are caled often?;
@@ -45,6 +47,7 @@
 
                                                    Session progress
 -)
+
 -)
                                                                                                                                                                                                                                                                              */
 //#endregion
@@ -57,17 +60,20 @@
 
 ==============================================================================================================================================================================================================================================================================*/
 
-//                                  _______________________
-//                                   Section: DOM Elements
+//                                 _______________________
+//                                  Section: DOM Elements
 //#region DOM-Elements
-//          Container & Wrapper
+
+//#region Container & Wrapper
 const header = document.getElementById("ID_Header");
 const main_wrapper =  document.getElementById("ID_MainWrapper");
 const left_sidebar = document.getElementById("ID_LeftSidebarWrapper");
 const gameboard = document.getElementById("ID_GameboardWrapper");
 const right_sidebar = document.getElementById("ID_RightSidebarWrapper");
 const footer = document.getElementById("ID_FooterWrapper");
-//          Text, Inputs, Images
+                                                                                                                                                                                                                                                                    //#endregion
+
+//#region Text, Inputs, Images
 const head_title = document.getElementById("ID_Head_Title");
 const headline_top = document.getElementById("ID_Headline");
 const headline_p = document.getElementById("ID_Header_p");
@@ -83,7 +89,9 @@ const choose_ki = document.getElementById("ID_Choose_KI");
 const ki_level_dropdown_no = document.getElementById("ID_No");
 const ki_level_dropdown_easy = document.getElementById("ID_Easy_Text");
 const ki_level_dropdown_normal = document.getElementById("ID_Normal_Text");
-//            Settings menu
+                                                                                                                                                                                                                                                                    //#endregion
+
+//#region Settings menu
 const settings_menu = document.getElementById("ID_Settings_Menu");
 const settings_span = document.getElementById("ID_Setting_Span");
 const info_h = document.getElementById("ID_Info");
@@ -106,12 +114,13 @@ const stats_sum_easy = document.getElementById("ID_Stats_Summary_Easy");
 const stats_reset_normal = document.getElementById("ID_Reset_Normal");
 const delete_all = document.getElementById("ID_Delete_All");
 const label_colour = document.getElementById("ID_Label_Colour");
-//#endregion
+                                                                                                                                                                                                                                                                    //#endregion
+                                                                                                                                                                                                                                                                    //#endregion
 
-//                                  ____________________
-//                                   Create Game-Object 
-// Game Object for storing important values in variables. Collected access via Game.[variable]
+//                                 ____________________
+//                                  Create Game-Object 
 const Game = {
+// Game Object for storing important values in variables. Collected access via Game.[variable]
 // Setting the Gameboard arrays to keep Coin placements
 actualGameboardPlayer1: {
     C1: [],C2: [],C3: [],C4: [],C5: [],C6: [],C7: []},
@@ -121,14 +130,19 @@ actualGameboardPlayer2: {
 playerIsOnTurn: "right",
 // Setting a counter for the played rounds
 roundCounter: 0,
+// Hold if it is a game against CPU and the Level
 Game_against_KI: false,
 KI_Level: "none",
+//Count the wins in this session
+Player_1_wins: 0,
+Player_2_wins: 0,
+Draws: 0,
 // Standard is: Left Yellow / Right Red
 player_Colour_Left: "yellow",
 Sound: true
 };
 
-//                                  ____________________
+//                                 _____________________
 //                                  Windows-Object
 const Windows = {
 // Object for storing returned Values from own Alert / Confirm / Prompt Windows
@@ -146,7 +160,7 @@ win_audio.load();
 const placing_audio = new Audio("Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav");  //Placement Audio Sample
 placing_audio.load();
 
-Game.Sound = localStorage.Sound || true;
+Game.Sound = localStorage.Sound || false;
 Correct_Sound_Setting();
 
 //#endregion
@@ -165,6 +179,7 @@ let count_wins_player_one = 0, count_wins_player_two = 0;
 
 //                                  __________________________
 //                                   Section: General Settings
+
 //                                  ___________________________________________
 //                                   Proof which colour is choosen for Player 1
 //#region Choosing Colour
@@ -285,6 +300,7 @@ settings_span.addEventListener("mouseenter", ()=>{
     if(!settings_span.classList.contains("Class_Show_Settings")){
     settings_span.classList.remove("Class_Hide_Settings");;
     settings_span.classList.add("Class_Show_Settings");
+    settings_menu.style.zIndex  = "3";
     return
 };}
 );
@@ -292,8 +308,9 @@ settings_span.addEventListener("mouseenter", ()=>{
 settings_span.addEventListener("touchstart", ()=>{
     //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
     if(!settings_span.classList.contains("Class_Show_Settings")){
-    settings_span.classList.remove("Class_Hide_Settings");;
+    settings_span.classList.remove("Class_Hide_Settings");
     settings_span.classList.add("Class_Show_Settings");
+    settings_menu.style.zIndex  = "3";
     return
 };}
 );
@@ -304,6 +321,7 @@ main_wrapper.addEventListener("mouseenter", ()=>{
 if(settings_span.classList.contains("Class_Show_Settings")){
     settings_span.classList.remove("Class_Show_Settings");
     settings_span.classList.add("Class_Hide_Settings");
+    settings_menu.style.zIndex  = "0";
     return
 };}
 );
@@ -313,6 +331,7 @@ main_wrapper.addEventListener("touchstart", ()=>{
 if(settings_span.classList.contains("Class_Show_Settings")){
  settings_span.classList.remove("Class_Show_Settings");
  settings_span.classList.add("Class_Hide_Settings");
+ settings_menu.style.zIndex  = "0";
  return
 };}
 );
@@ -323,6 +342,7 @@ document.querySelector("#ID_Head_Text").addEventListener("mousemove", ()=>{
 if(settings_span.classList.contains("Class_Show_Settings")){
     settings_span.classList.remove("Class_Show_Settings");
     settings_span.classList.add("Class_Hide_Settings");
+    settings_menu.style.zIndex  = "0";
     return
 };}
 );

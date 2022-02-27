@@ -47,6 +47,7 @@
                                                     Jobs To-do:
                                                     
                                         -) Better Styling (find a final, real good one), also in the Settings Menu
+                                        -) focus all hovers
                                         -) Win Games Counter Design
                                         -) Test and repair responsivness in all sizes
                                         -) CSS-Code minimizing f.e. bind repetative Classes to one Class
@@ -92,6 +93,7 @@
    word-wrap: break-word;
 
    overflow-x: hidden;
+   overflow-y: hidden;
 
 }
 
@@ -178,6 +180,7 @@ header{
    flex-wrap: wrap;
    justify-content: center;
    align-items: center;
+   z-index: 1;
 }
 
 footer{
@@ -242,7 +245,9 @@ footer{
    align-content: center;
 }
 
-/* Game Screen Gameboard Classes */ 
+/* ===============================
+   Game Screen Gameboard Classes 
+   =============================== */ 
 
 .Class_Main_Wrapper_InGame{
 
@@ -292,7 +297,6 @@ footer{
 
 .Class_Settings_Menu{
    position: absolute;
-   z-index: 10;
    top: 5vh;
    right: 0;
    height: 90vh;
@@ -345,6 +349,7 @@ to{
    width: 100vw;
    height: 90vh;
    max-width:100%;
+   z-index: 3;
    justify-content:center;
    overflow:scroll;
    background-color: var(--base-border);
@@ -575,7 +580,7 @@ input:focus{
 #ID_Sound_Checkbox{
    height: 1.5rem;
    box-shadow: 0 0 1rem black;
-   border-radius: 20%:
+   border-radius: 20%;
 }
 
 #ID_Sound_Checkbox:hover{
@@ -1068,8 +1073,6 @@ align-content: center;
 position: absolute;
 top: 0;
 left: 0;
-min-width: 5rem;
-min-height: 3rem;
 justify-content: left;
 align-content: flex-start;
 text-align: center;
@@ -1077,13 +1080,17 @@ text-align: center;
 
 #ID_Win_Div_Two{
 position: absolute;
-top: 0;
+top: .5rem;
 right: 0;
-min-width: 5rem;
-min-height: 3rem;
 justify-content: right;
 align-content: flex-end;
 text-align: center;
+}
+
+#ID_Draw_Div{
+position: absolute;
+top: .5rem;
+right: 45%;
 }
                                                                                                                                                                                                                                                                /* #endregion */  
 
@@ -1384,7 +1391,15 @@ ________________________________________________________________________________
 
                                           Checklist:
 
--) Buttons animation mit brightness oder saturation langsam hoch fahren
+-) VS Studio Terminal hilft bei Tippfehler.
+
+-) Buttons animation mit brightness oder saturation langsam hoch fahren.
+
+-) Um alle Browser anzugleichen, bei Designgruppen outline wegnehmen und dann für alle einen hover & focus machen!
+
+-) Chrome Dev Tools den Element auswählen Button (links oben) nutzen um den Text Kontrast ablesen zu können !
+
+-) Wiederholenden Code gruppieren!
 
 -) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
 
