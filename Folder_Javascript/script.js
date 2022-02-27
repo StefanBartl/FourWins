@@ -43,19 +43,9 @@
                                         -) Write a final Comment 
 
                                         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
-
-                                                   Session progress
--)
                                                                                                                                                                                                                                                                              */
-//#endregion
-
-//#region DOM, Global Scoped & General Settings                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    #region DOM, Global Scoped & General Settings  
-                                                                                                                                                                                                                                                                              /*
-===============================================================================================================================================================================================================================================================================
- 
-                                    DOM, Global Scoped & General Settings   
-
-==============================================================================================================================================================================================================================================================================*/
+                                                                                                                                                                                                                                                                             //#endregion
+//#region DOM, Global Scoped & General Settings 
 
 //                                 _______________________
 //                                  Section: DOM Elements
@@ -235,11 +225,8 @@ if(Game.state == "InGame"){
 
 //                                  ________________________
 //                                   Starting Page Language 
-//#region Language at Starting-Page
 // Detect Browser Language or local Storage setted Language and set it in Game Object
 Set_Page_Language();
-
-//#endregion
 
 //                                  _________________________________
 //                                   Naming / Correct Names 
@@ -439,7 +426,8 @@ if(Game.Language === "de"){ // Deutsch
     if(Game.playerIsOnTurn === "left"){document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}`;}
     else if (Game.playerIsOnTurn === "right" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Do you best, ${Game.Player_Two_Name}`;}
     else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name}'s is thinking...`;};
-};};
+};
+};
 });
 stats_reset_easy.addEventListener("click", ()=>{
 localStorage.KI_Easy_Wins = 0; localStorage.KI_Easy_CPUWins = 0; localStorage.KI_Easy_Draws = 0;
@@ -466,23 +454,15 @@ if(Game.Language === "de"){
 // Clear local storage
 if(warning === true) {localStorage.clear();};
 });
-//#endregion
+                                                                                                                                                                                                                                                                                                                                        //#endregion
 
 //                                  ______________________________
 //                                   Event Listener to start Game
-//#region Prepare Game Invoking
 start_button.addEventListener("click", Game_Preparations);
-//#endregion
 
-//#endregion
+                                                                                                                                                                                                                                                                                                                                //#endregion
 
 //#region Main Game
-                                                                                                                                                                                                                                                                                /*
-================================================================================================================================================================================================================================================================================
- 
-                                             Main Game functions
-
-===============================================================================================================================================================================================================================================================================*/
 
 //                                  _______________________
 //                                   Prepare Game function
@@ -710,14 +690,9 @@ Turning_PlayerIsOnTurn();
 //#region Final informations and Comments
 
                                                                                                                                                                                                                                                                                 /*
-================================================================================================================================================================================================================================================================================
- 
-                                    Final information and Comments          
+                     Bonus Jobs to-do:
 
-================================================================================================================================================================================================================================================================================
-
-     Bonus Jobs to-do:
-
+-) Make the Gameboard CSS-Grid so you can offer changing Gameboard size!
 -) Highlight the winning chain!
 -) Improve KI Normal, especially the Diagonal Detection!
 -) Write a KI Heavy Algorhytmus!
@@ -730,19 +705,19 @@ Turning_PlayerIsOnTurn();
 //#region Credits                       
                                                                                                                                                                                                                                                                                 /*
     
-######################################################################################################################
-#                                                                                                                    #
-#                                       Credits & Special Thanks to:                                                 #
-#                                                                                                                    #
-#    Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    #
-#                                      https://www.theodinproject.com/                                               #
-#                                                                                                                    #
-#                   Greetings to the many, many programmers who take the time to write blogs,                        #
-#        Of course also big thanks to all photographers and graphic designers who make their works available.        #
-#                                                                                                                    #
-#                                      CSS - what a wonderful language.                                              #
-#                                                                                                                    #
-#                                                                                                                    #
-######################################################################################################################                                                                                                                                                               */
+====================================================================================================================
+                                                                                                                    
+                                       Credits & Special Thanks to:                                                 
+                                                                                                                    
+    Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    
+                                      https://www.theodinproject.com/                                               
+                                                                                                                    
+                   Greetings to the many, many programmers who take the time to put there knowledge online!         
+        Of course also big thanks to all photographers and graphic designers who make their works available.        
+                                                                                                                    
+                                  Javascript - what a wonderful language.                                              
+                                                                                                                    
+                                                                                                                    
+====================================================================================================================                                                                                                                                                               */
 
 //#endregion

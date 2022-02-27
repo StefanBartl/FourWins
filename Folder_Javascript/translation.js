@@ -212,8 +212,6 @@ ki_level_dropdown_normal.alt = "Selection CPU Normal";
 //#endregion
 
 //#region Final informations and Comments
-
-
                                                                                                                                                                                                                                                                                 /*
      Bonus Jobs to-do:
 

@@ -187,8 +187,6 @@ footer {
 
 
 footer{
-   min-height: 10vh;
-   margin-top: 1vh;
    gap: 2rem;
 }
 
