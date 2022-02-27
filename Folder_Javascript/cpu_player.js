@@ -42,8 +42,9 @@
 
 //#region 1) CPU Player Algrorhytm
                                                                                                                                                                                                                                                                                     
-//                                  ___________________________
-//                                   Placement function for KI
+    /* ==============
+         KI Placement 
+         ============= */
 function KI_Placement(valid_number){
 // console.log("Entered KI Placement Function. Random number for topCell is:  ", random_number);
 
@@ -59,8 +60,9 @@ setTimeout(()=>{
 }, 1000);
 };
 
-//                                  _______________________________
-//                                   Algorhytmus for KI Level Easy
+    /* ======================
+         Easy-CPU Algorhytmus 
+         ===================== */
 function KI_Easy(){
 /*
                             Infobox
@@ -79,8 +81,9 @@ Thinking_Effect(true, valid_number);
 } else (KI_Easy());
 };
 
-//                                  ___________________________________________
-//                                   Algorhytmus for KI Level Normal (!Buggy!)
+    /* ========================
+         Normal-CPU Algorhytmus 
+         ======================= */
 function KI_Normal(){
 /* 
                                 Infobox
@@ -142,8 +145,9 @@ KI_Easy(); return};
 
 };
 
-//                                  ________________________________________________________________
-//                                   Algorhytmus for KI Level Hard (!Placeholder. Not written yet.!)
+    /* ======================
+         Hard-CPU Algorhytmus 
+         ===================== */
 function KI_Hard(){
 /*
                                 Infobox / Ideas
@@ -154,8 +158,9 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
 // Code here... :-)
 };
 
-//                                  ________________________________________
-//                                   Randomize values from different arrays
+    /* ======================
+         Placement-Randomizer 
+         ===================== */
 function Randomizer (arr1, arr2){
 console.log("Randomizer getted arrays:", arr1,  arr2);
 let randomizing_number, randomizing_array = [];
@@ -175,8 +180,9 @@ console.log("Randomizer has choosen a column: " + valid_number);
 return valid_number;
 };
 
-//                                  _______________________________________________
-//                                   Validate if there is a Diagonal triggered winw
+    /* ===============================
+         Detect diagonal 3 Coin-Chains 
+         ============================== */
 function Detect_3_Coin_Chains_Diagonal() {
 
 //#region Detect KI Diagonal 3 Coin Chains
@@ -305,8 +311,9 @@ if(document.getElementById(`ID_C7R${cell - 2}`).getAttribute("isPlayed") === "ye
 
 };
 
-//                                  __________________________________________________________________________
-//                                   Detection of horizontal "3 Coin Chain" to avoid/force finishing (!Buggy!)
+    /* ===============================
+         Detect horizontal 3 Coin-Chains 
+         ============================== */
 function Detect_3_Coin_Chains_Upwards(){
 // +++ Basically it depends hardly of the Column Validator from the Win-Validation section +++
 
@@ -404,8 +411,9 @@ return 7
 
 };
 
-//                                  _________________________________________________________________________
-//                                   Detection of vertical "3 Coin Chain" to avoid/force finishing (!Buggy!)
+    /* ===============================
+         Detect vertival 3 Coin-Chains (!BUGGY!) 
+         ============================== */
 function Detect_3_Coin_Chains_Sideways(){
 // +++ Basically it depends hardly on the Row Validator from the Win-Validation Section +++
 // INFO: This algorithm does not take into account, for example, if two coins are next to each other, then one cell is free and then another coin, that this leads to a winning chain. This should be removed in KI Hard
@@ -518,8 +526,9 @@ else if (countFor_Win === 2 && document.getElementById(`ID_C3R${el + 1}`).getAtt
 };};
 };
 
-//                                  ____________________________________________________
-//                                   Get a valid placement focused on column => upwards
+    /* =============================
+         Upwards-Placement Detection 
+         ============================ */
 function Get_Valid_Upwards_Placemement(){
 // Try to make placement on top of an other KI placement if there is enough space to can finish it
 let value, valid_number_array = [];
@@ -550,8 +559,9 @@ value = Game.actualGameboardPlayer2.C7.slice(-1)[0]
 if(valid_number_array.length > 0) return valid_number_array
 };
 
-//                                  __________________________________________________
-//                                   Get a valid placement focused on row => sideways
+    /* ==============================
+         Sideways-Placement Detection 
+         ============================= */
 function Get_Valid_Sideways_Placement(){
 let valid_number_array = [];
 

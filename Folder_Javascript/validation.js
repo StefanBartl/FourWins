@@ -31,8 +31,9 @@
 
 //#region 1) Validatiors
 
-//                                  _______________________________________________
-//                                   Validate if there is a Diagonal triggered win
+    /* =========================
+         Diagonal Win-Validation 
+         ======================== */
 function Diagonal_Validator(player, columnNumber, row) {
 
     let basis = document.getElementById(`ID_C${columnNumber}R${row}`);
@@ -74,8 +75,9 @@ function Diagonal_Validator(player, columnNumber, row) {
     }
 };
 
-//                                  ____________________________________________________________
-//                                   Validate if the placement in a given Column triggers a 
+    /* =======================
+         Column Win-Validation 
+         ====================== */
 function Column_Validator(player) {
 
     // Get the actual state of the Gameboard 
@@ -103,8 +105,9 @@ function Column_Validator(player) {
     };
 };
 
-//                                  ________________________________________________________
-//                                   Validate if the placement in a given Row triggers a win
+    /* ====================
+         Row Win-Validation 
+         =================== */
 function Row_Validator(player, column) {
 
     // Get the actual state of the Gameboard
@@ -133,8 +136,9 @@ function Row_Validator(player, column) {
     };
 };
 
-//                                  ___________________________________________
-//                                   After 6 placements in one column, lock it
+    /* ==============================
+         Lock Top-Cell if full Column 
+         ============================= */
 function TopCell_Validation(columnNumber, invokedForKiValidation) {
 
     let proof;

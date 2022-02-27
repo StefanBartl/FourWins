@@ -31,8 +31,9 @@
 
 //#region 1) Translation-Manager & Page Library
 
-//                                 ___________________________________________
-//                                   Detection and Setting the Page Language
+    /* ============================
+         Detect Language and set it 
+         =========================== */
 function Set_Page_Language(){
 // Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
 // console.log("Setting Page Language...");
@@ -48,8 +49,9 @@ Translate_StartScreen(browserLanguage, false);
 };
 };
 
-//                                 ___________________________________________________
-//                                   Translation to Page Langauge
+    /* ===================================
+         Translate Page to setted Language 
+         ================================== */
 function Translate_StartScreen(language, byUser) {
 // console.log("Translate the Page to setted Language:", language, "Setted by User:", byUser);
 // Make sure browser triggered invokes are not executed if the language was setted manually anytime before
@@ -71,8 +73,9 @@ if (localStorage.getItem("Language") === "de") document.getElementById("ID_Langu
 else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value = "English"; 
 };
 
-//                                  ___________________
-//                                    Deutsch Library 
+    /* =================
+         Library Deutsch 
+         ================ */
 function Deutsch() {
 // console.log("Entered Deutsch library.");
 head_title.innerText = "+++ 4-Gewinnt +++";
@@ -141,8 +144,9 @@ ki_level_dropdown_normal.alt = "Auswahl CPU Normal";
 // console.log("Page translated.");
 };
 
-//                                   ___________________
-//                                    English Library 
+    /* ================
+         Library English 
+         =============== */
 function English() {
 // console.log("Entered English library");
 head_title.innerText = "+++ 4-Wins +++";
@@ -210,7 +214,7 @@ ki_level_dropdown_normal.alt = "Selection CPU Normal";
 // console.log("Page translated.");
 };
 
-//#endregion
+                                                                                                                                                                                                                                                                                                                                //#endregion
 
 //#region 2) Final informations and Comments
                                                                                                                                                                                                                                                                                 /*

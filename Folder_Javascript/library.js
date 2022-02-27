@@ -63,15 +63,15 @@
 
 //#region 1) Helper Functions
 
-//                                  __________________________________________
-//                                  Insert Element after Reference Node in DOM
-
+    /* =====================================
+         Insert Element after Reference Node
+         ==================================== */
 function insertAfter(referenceNode, newNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 };
-//                                  _______________________________________
-//                                  Add Choosing-Animation from Top-Cells
-
+    /* ===============================
+         Adding the Choosing-Animation 
+         ============================== */
 function Add_Choosing_Ani(column){
 column -= 1;
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -84,9 +84,9 @@ topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2");
 } else if(Game.playerIsOnTurn === "right"  && Game.player_Colour_Left === "red"){
 topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");};
 };
-//                                  __________________________________________
-//                                  Remove Choosing-Animation from Top-Cells
-
+    /* ===============================
+         Remove the Choosing-Animation 
+         ============================== */
 function Remove_Choosing_Ani(column){
 column -= 1;
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -97,9 +97,9 @@ topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2");
 topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1"); 
 topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2");}
 };
-//                                 _______________
-//                                  Lock topCells
-
+    /* ====================
+         Lock all Top-Cells 
+         =================== */
 function Lock_TopCells(){
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
 for (let topCell of topCellsArray){
@@ -107,9 +107,9 @@ topCell.style.cursor = "none";
 topCell.style = "pointer-events:none"; 
 };
 };
-//                                 _______________
-//                                  Unlock topCells
-
+    /* ======================
+         Unlock all Top-Cells 
+         ===================== */
 function Unlock_TopCells(){
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
 for (let topCell of topCellsArray){
@@ -117,9 +117,9 @@ topCell.style.cursor = "pointer";
 topCell.style = "pointer-events: all"; 
 };
 };
-//                                  ______________________________
-//                                   Simulate a "Thinking"-Effect
-
+    /* ==============================
+         Simulate a "Thinking-Effect" 
+         ============================= */
 function Thinking_Effect(invokerKI, valid_number){
 
 // First make sure there is no "Thinking" Div attached
@@ -164,30 +164,30 @@ clearInterval(window.thinking);
 }, thinking_duration);
 };
 };
-//                                  ___________________________________
-//                                   Filter array to get unique values
-
+    /* ==============================
+         Get unique values from Array
+         ============================= */
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
     // var unique = array.filter(onlyUnique);
 };
-//                                  __________________
-//                                   Get a random Int
-
+    /* =====================
+         Get a random Integer 
+         ===================== */
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 };
-//                                  ______________________
-//                                   Push to localStorage
-
+    /* ==============================
+         Push values to local Storage 
+         ============================= */
 function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event) {
 document.getElementById(`${IDfromTrigger}`).addEventListener(`${event}`, () => {
 localStorage.setItem(`${key}`, document.getElementById(`${IDfromValue}`).value);
 });
 }
-//                                  __________________________________________
-//                                   Swapping classes on element via 2 events
-
+    /* ==================================
+         Swap between 2 Classes by Events 
+         ================================= */
 function Swap_Two_Classes_by_Events(element_ID, event_1, event_2, first_Class, second_Class) {
 document.getElementById(`${element_ID}`).addEventListener(`${event_1}`, () => {
 document.getElementById(`${element_ID}`).classList.remove(`${second_Class}`);
@@ -198,9 +198,9 @@ document.getElementById(`${element_ID}`).classList.remove(`${first_Class}`);
 document.getElementById(`${element_ID}`).classList.add(`${second_Class}`);
 })
 };
-//                                  ________________________________
-//                                   Change which Player is on turn
-
+    /* =======================
+         Changing Players turn 
+         ====================== */
 function Turning_PlayerIsOnTurn() {
 // Change Player
 Game.playerIsOnTurn === "left" ? Game.playerIsOnTurn = "right" : Game.playerIsOnTurn = "left";
@@ -242,37 +242,9 @@ document.getElementById("ID_Thinking_Div").remove();
 clearInterval(window.thinking);
 };};
 };
-//                                  __________________
-//                                   Show Game-Screen
-
-function Game_Screen(){
-// Remove the start screen elements
-document.getElementById("ID_Header").style = "display: none";
-document.getElementById("ID_LeftSidebarWrapper").style = "display: none"; 
-document.getElementById("ID_RightSidebarWrapper").style = "display: none";
-document.getElementById("ID_FooterWrapper").style = "display: none";
-// Use the new free space for the Gameboard
-document.getElementById("ID_MainWrapper").classList.add("Class_Main_Wrapper_InGame");
-document.getElementById("ID_GameboardWrapper").classList.add("Class_Gameboard_Wrapper_InGame");
-if(document.getElementById("ID_h3_turnText")) document.getElementById("ID_h3_turnText").style = "display: block";
-}
-//                                  ___________________
-//                                   Show Start-Screen
-
-function Start_Screen(){
-// Add the start screen elements
-document.getElementById("ID_Header").style = "display: block";
-document.getElementById("ID_LeftSidebarWrapper").style = "display: block";
-document.getElementById("ID_RightSidebarWrapper").style = "display: block";
-document.getElementById("ID_FooterWrapper").style = "display: block";
-
-document.getElementById("ID_MainWrapper").classList.remove("Class_Main_Wrapper_InGame");
-document.getElementById("ID_GameboardWrapper").classList.remove("Class_Gameboard_Wrapper_InGame");
-document.getElementById("ID_h3_turnText").style = "display: none";
-}
-//                                  ________________________
-//                                   Keep stats up-to-date
-
+    /* =======================
+         Create Starting Stats 
+         ====================== */
 function Stats(){
 let value = localStorage.KI_Easy_Wins || 0; document.getElementById("ID_Easy_1").innerText = value;
 value = localStorage.KI_Easy_CPUWins || 0; document.getElementById("ID_Easy_3").innerText = value;
@@ -281,9 +253,9 @@ value = localStorage.KI_Normal_Wins || 0; document.getElementById("ID_Normal_1")
 value = localStorage.KI_Normal_CPUWins || 0; document.getElementById("ID_Normal_3").innerText = value;
 value = localStorage.KI_Normal_Draws || 0; document.getElementById("ID_Normal_2").innerText = value;
 }
-//                                  __________________________
-//                                   Increase Stats after Win
-
+    /* ==============
+         Update Stats
+         ============= */
 function Update_Stats(winning_player){
 // console.log("Updated Stats.");
 // To reduce repetition only the KI Easy section is commented out. It's basically the same in KI Normal.
@@ -312,9 +284,9 @@ document.getElementById("ID_Normal_2").innerText = value;};
 };
 // Enough space for a unbeatable level ??? :-)
 };
-//                                  ________________________________
-//                                   Alert / Confirm / Prompt Windows
-
+    /* ===============================================================
+         Create own Notification / Alert /  Prompt / Confirm - Windows 
+         ============================================================== */
 function New_Window(options){
 /*
                                                 Info: 
@@ -472,9 +444,9 @@ confirm_button.addEventListener("click", ()=>{
 
 // console.log("New Window created.");
 };
-//                                  ________________________
-//                                   Sound in Settings-Menu
-
+    /* ===========================
+         Sound Settings Validation 
+         ========================== */
 function Correct_Sound_Setting() {
 // Make sure, User prefered Sound-Setting is also shown in the Settings-Menu after closed and reopened window 
 const sound_checkbox = document.getElementById('ID_Sound_Checkbox');
@@ -487,9 +459,9 @@ sound_checkbox.click();
 Game.Sound = true;
 };
 };
-//                                  ____________________
-//                                   "Creator"-Function
-
+    /* ==================
+         Creator-Function
+         ================= */
 function Create_DOM_Element(options, arrayOne, arrayTwo) {
 // console.log("Entered Creator function.");
 
@@ -550,9 +522,9 @@ parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width
 
 // console.log("New DOM-Element created.");
 };
-//                                  ____________________________
-//                                   Fireworks Canvas-Animation                                
-
+    /* ============================
+         Fireworks-Canvas-Animation 
+         =========================== */
 function Fireworks(canvasID){
 // Firework Function not from me, so special thanks goes to Adam, which published it at codepen! Link below!
 // Fireworks from Adam: https://codepen.io/Adam12132/pen/gOGrwMR
@@ -711,7 +683,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 })
 };
-//#endregion
+                                                                                                                                                                                                                                                                        //#endregion
 
 //#region 2) Final informations and Comments
                                                                                                                                                                                                                                                                                 /*

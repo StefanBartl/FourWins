@@ -1,4 +1,5 @@
-                                                                                                                                                                                                                                                                                    /*
+//#region Table of Content
+                                                                                                                                                                                                                                                                            /*
 
                                              Four-Wins-Online Main-Javascript-File                                                           
                                                            powered by
@@ -13,7 +14,7 @@
                             {_______________________________________________________________________} 
                             |                                                                       |
                             |                                                                       |
-                            |                  1) DOM, Global Scoped & General Settings             |
+                            |                  1) General Settings & Set-Up Page                    |
                             |                                                                       |
                             |                  2) Main Game functions                               |
                             |                                                                       |
@@ -22,7 +23,8 @@
                             |                  4) Credits                                           |   
                             |                                                                       | 
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
-                                                                                                                                                                                                                                                                               */                                                                                                                                               
+                                                                                                                                                                                                                                                                               */ 
+                                                                                                                                                                                                                                                                              //#endregion                                                                                                                                              
 
 //#region Open Jobs                                                                                                                                                                                                                                                                             
                                                                                                                                                                                                                                                                               /*
@@ -47,11 +49,7 @@
                                                                                                                                                                                                                                                                              */
                                                                                                                                                                                                                                                                              //#endregion
 
-//#region 1) DOM, Global Scoped & General Settings 
-
-//                                 _______________________
-//                                  Section: DOM Elements
-//#region DOM-Elements
+//#region 1) General Settings & Set-Up Page
 
 //#region Container & Wrapper
 const header = document.getElementById("ID_Header");
@@ -104,10 +102,10 @@ const stats_reset_normal = document.getElementById("ID_Reset_Normal");
 const delete_all = document.getElementById("ID_Delete_All");
 const label_colour = document.getElementById("ID_Label_Colour");
                                                                                                                                                                                                                                                                     //#endregion
-                                                                                                                                                                                                                                                                    //#endregion
 
-//                                 ____________________
-//                                  Create Game-Object 
+    /* =============
+         Game Object 
+         ============ */ 
 const Game = {
 // Game Object for storing important values in variables. Collected access via Game.[variable]
 // Setting the Gameboard arrays to keep Coin placements
@@ -132,14 +130,18 @@ Sound: true,
 state: "startingScreen"
 };
 
-//                                 _____________________
-//                                  Windows-Object
+    /* ================
+         Windows Object 
+         =============== */
 const Windows = {
 // Object for storing returned Values from own Alert / Confirm / Prompt Windows
 };
 
-//                                  _______
-//                                   Audio 
+    /* ================
+         Page-Language 
+         =============== */
+Set_Page_Language();
+
 //#region Audio
 const warning_audio = new Audio("Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav"); // Confirm Audio Sample
 warning_audio.load();
@@ -165,8 +167,6 @@ sound_checkbox.addEventListener("click", ()=>{
 
 //#endregion
 
-//                                  __________________________________
-//                                   Section: Global Scoped Variables 
 //#region Global Counters
 
 /* Setting the Counters for let the Coin Placing Section know, 
@@ -177,12 +177,7 @@ let row_Counter_C1 = 8, row_Counter_C2 = 8, row_Counter_C3 = 8, row_Counter_C4 =
 let count_wins_player_one = 0, count_wins_player_two = 0;
 //#endregion
 
-//                                  __________________________
-//                                   Section: General Settings
-
-//                                  ___________________________________________
-//                                   Proof which colour is choosen for Player 1
-//#region Choosing Colour
+//#region Choosing Colour Left Player
 
 // Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted
 Game.player_Colour_Left = localStorage.Player_Colour_Left || "yellow";
@@ -225,14 +220,7 @@ if(Game.state == "InGame"){
 
 //#endregion
 
-//                                  ________________________
-//                                   Starting Page Language 
-// Detect Browser Language or local Storage setted Language and set it in Game Object
-Set_Page_Language();
-
-//                                  _________________________________
-//                                   Naming / Correct Names 
-//#region  Naming
+//#region Set correct Names
 //                                   Set Names of Players to stored names if they are some
 if(localStorage.Player_One_Name) player_1_name.value = localStorage.Player_One_Name;
 if(localStorage.Player_Two_Name) player_2_name.value = localStorage.Player_Two_Name;
@@ -300,9 +288,8 @@ player_2_svg.addEventListener("click", ()=>{
 });
 
 //#endregion
-//                                  _______________________________
-//                                   Set up Settings-Menu
-//#region Settings-Menu Set up
+
+//#region Settings-Menu Setup
 // Get up-tp-date stats for the Settings-Menu
 Stats();
 
@@ -360,8 +347,6 @@ if(settings_span.classList.contains("Class_Show_Settings")){
 );
 //#endregion
 
-//                                  ______________________________________________________________________________________________________
-//                                   Settings-Menu Event-Listener for: Info, Choose Language, Choose Colour, Sound On/Off, Reset Stats
 //#region Event-Listeners Settings-
 
 info_h.addEventListener("click", ()=>{
@@ -458,16 +443,17 @@ if(warning === true) {localStorage.clear();};
 });
                                                                                                                                                                                                                                                                                                                                         //#endregion
 
-//                                  ______________________________
-//                                   Event Listener to start Game
+    /* ==============
+         Start-Game 
+         ============= */
 start_button.addEventListener("click", Game_Preparations);
-
                                                                                                                                                                                                                                                                                                                                 //#endregion
 
 //#region 2) Main Game
 
-//                                  _______________________
-//                                   Prepare Game function
+    /* ===================
+         Preparing to Play 
+         ================== */ 
 function Game_Preparations() {
 // Function to do all the preparations to start the Game
 // console.log("Entered Game Preparations");
@@ -514,8 +500,9 @@ PlayGame();
 // console.log("Finished Game preparations.");
 };
 
-//                                  ________________________
-//                                   Play the Game function
+    /* ===========
+         Play Game 
+         ========== */
 function PlayGame(){
 // console.log("Entered Play Game Function.");
 
@@ -555,8 +542,9 @@ topCell.addEventListener("click", () => {
 // console.log("Leaving Play Game Function.");    
 };
 
-//                                 _______________________________________________
-//                                  Placement function for Game and Human Players
+    /* ================
+         Make Placement 
+         =============== */
 function Placement(ID_Top_Cell) {
 // console.log("Entered Function for new Placement.");
 
@@ -613,8 +601,9 @@ Placement_End(ID_Top_Cell, columnNumber, row);
 // console.log("Placement done.");
 };
 
-//                        Place correct coin on his End-Position
-//
+    /* ================
+         Placement Done 
+         =============== */
 function Placement_End(ID_Top_Cell, columnNumber, row){
 
 // First remove the coin from the Top Cell
@@ -647,8 +636,9 @@ document.getElementById(`ID_C${columnNumber}R${row}`).setAttribute("data-isPlaye
 };};
 };
 
-//                        Win Validation and next turn actions
-//
+    /* =============================
+         Get ready for next Placement 
+         ============================ */
 function Player_1_Placement_Finish(columnNumber, row){
 //  Invoke Winning-Validation for Player 1
 const valid_row = Row_Validator(1, row);
@@ -670,8 +660,9 @@ if (Game.KI_Level === "Easy" || Game.KI_Level === "Einfach") {KI_Easy(); Lock_To
 else if (Game.KI_Level === "Normal") {KI_Normal(); Lock_TopCells()};
 };
 
-//                        Win Validation and next turn actions
-//
+    /* ================
+         Win-Validation 
+         =============== */
 function Player_2_Placement_Finish(columnNumber, row){
 //  Invoke Winning-Validation for Player 2
 const valid_row = Row_Validator(2, row);
@@ -702,7 +693,7 @@ Turning_PlayerIsOnTurn();
 -) Design a Starting Screen Animation to make it more interesting to play!  
 -) Think about a other Design for the Page and the Gameboard!
                                                                                                                                                                                                                                                                                 */
-//#endregion
+                                                                                                                                                                                                                                                                                //#endregion
 
 //#region 4) Credits                       
                                                                                                                                                                                                                                                                                 /*

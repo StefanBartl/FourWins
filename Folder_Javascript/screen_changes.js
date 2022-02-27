@@ -23,8 +23,9 @@
                                                                                                                                                                                                                                                                               //#endregion
                                                                                                                                                                                                                                                                        
 //#region 1) Toggle between Start and Game Screen
-//                                  __________________
-//                                   Show Game-Screen
+    /* ======================
+         Show the Game-Screen 
+         ===================== */
 function Game_Screen(){
     // Remove the start screen elements
     document.getElementById("ID_Header").style = "display: none";
@@ -36,9 +37,9 @@ function Game_Screen(){
     document.getElementById("ID_GameboardWrapper").classList.add("Class_Gameboard_Wrapper_InGame");
     if(document.getElementById("ID_h3_turnText")) document.getElementById("ID_h3_turnText").style = "display: block";
 };
-
-//                                  ___________________
-//                                   Show Start-Screen
+    /* =======================
+         Show the Start-Screen 
+         ====================== */
 function Start_Screen(){
 // Add the start screen elements
 document.getElementById("ID_Header").style = "display: block";
@@ -54,8 +55,9 @@ document.getElementById("ID_h3_turnText").style = "display: none";
 
 //#region 2) Game End Screen
 
-//                                  ______________
-//                                   Preparations
+    /* ==================================
+         Preparations for Game-End-Screen 
+         ================================= */
 function Preparations(gameResult){
 
 // console.log("Entered Game End Screen preparations.");
@@ -98,8 +100,9 @@ return names_from_result
 
 };
 
-//                                  _________________________________
-//                                   Creation of the Game-End-Screen
+    /* =============================
+         Creation of Game-End-Screen 
+         ============================ */
 function Game_End_Screen(gameResult) {
 
 // console.log("Entered Game End Screen Function.");
