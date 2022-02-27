@@ -1,4 +1,5 @@
-                                                                                                                                                                                                                                                                                    /*
+//#region Table of Content
+                                                                                                                                                                                                                                                                                        /*
                                              Four-Wins-Online Translation-Javascript-File                                                           
                                                            powered by
                             
@@ -13,7 +14,6 @@
                             |                                                                       |
                             |                                                                       |
                             |                  1) Translation-Managing Functions & Page Library     |
-                            |                     with:                                             |
                             |                                                                       |
                             |                     -) Settin Page Language                           |
                             |                                                                       | 
@@ -27,8 +27,9 @@
                             |                                                                       |
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */                                                                                                                                               
+//#endregion
 
-//#region Translation-Manager & Page Library
+//#region 1) Translation-Manager & Page Library
 
 //                                 ___________________________________________
 //                                   Detection and Setting the Page Language
@@ -211,7 +212,7 @@ ki_level_dropdown_normal.alt = "Selection CPU Normal";
 
 //#endregion
 
-//#region Final informations and Comments
+//#region 2) Final informations and Comments
                                                                                                                                                                                                                                                                                 /*
      Bonus Jobs to-do:
 

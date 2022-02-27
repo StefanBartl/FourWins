@@ -1,4 +1,5 @@
-/*
+//#region Table of Content
+                                                                                                                                                                                                                                                                                    /*
                                              Four-Wins-Online Validation-Javascript-File                                                           
                                                            powered by
                             
@@ -12,20 +13,23 @@
                             {_______________________________________________________________________} 
                             |                                                                       |
                             |                                                                       |
-                            |                  1) Diagonal Validator                                |
+                            |                  1) Validators                                        |
                             |                                                                       |
-                            |                  2) Column Validator                                  |
-                            |                                                                       | 
-                            |                  3) Row Validator                                     |
+                            |                   - Diagonal Validator                                |
                             |                                                                       |
-                            |                  4) Top Cell Validator                                 |
+                            |                   - Column Validator                                  |
                             |                                                                       |
-                            |                  5) Final Information and Comments                    |
+                            |                   - Row Validator                                     |
+                            |                                                                       |
+                            |                   - Top-Cell Validator                                |
+                            |                                                                       |
+                            |                  2) Final Information and Comments                    |
                             |                                                                       |
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                              //#endregion
 
-//#region Validation
+//#region 1) Validatiors
 
 //                                  _______________________________________________
 //                                   Validate if there is a Diagonal triggered win
@@ -165,7 +169,7 @@ function TopCell_Validation(columnNumber, invokedForKiValidation) {
 
 //#endregion
 
-//#region Final informations and Comments
+//#region 2) Final informations and Comments
                                                                                                                                                                                                                                                                                 /*
 
          Bonus Jobs to-do:

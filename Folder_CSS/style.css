@@ -26,19 +26,17 @@
                             |                                                                |
                             |                  7) Animations & Transitions                   |
                             |                                                                |
-                            |                  8) Animations                                 |
+                            |                  8) Game End Screen                            |
                             |                                                                |
-                            |                  9) Game End Screen                            |
+                            |                  9) Helpers                                   |
                             |                                                                |
-                            |                  10) Helpers                                   |
+                            |                  10) Media Queries                             |
                             |                                                                |
-                            |                  11) Media Queries                             |
+                            |                  11) Final Information & Comments              |
                             |                                                                |
-                            |                  12) Final Information & Comments              |
+                            |                  12) Credits                                   |
                             |                                                                |
-                            |                  13) Credits                                   |
-                            |                                                                |
-                            |                  14) My CSS-Guideline / Checklist              |
+                            |               13-15) My CSS-Guideline                          |
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */
                                                                                                                                                                                                                                                                               /*#endregion*/ 
@@ -59,7 +57,7 @@
 -)                                                                                                                                                                                                                                                                      */
                                                                                                                                                                                                                                                                /* #endregion */ 
 
-/* #region General */                                                                                                                                                                                                                                                                               
+/* #region 1) General */                                                                                                                                                                                                                                                                               
 
 :root{
       /* ================
@@ -97,7 +95,7 @@
 
                                                                                                                                                                                                                                                                /* #endregion */  
 
-/* #region Layout */  
+/* #region 2) Layout */  
 
 body{
    background-color: var(--base-colour);
@@ -124,7 +122,9 @@ header{
 }
 
 #ID_Head_Text,
-.Class_HeaderWrapper,
+.Class_Header
+
+
 footer {
    display: flex;
    align-content: center;
@@ -198,7 +198,7 @@ footer{
 
                                                                                                                                                                                                                                                                /* #endregion */  
 
-/* #region Gameboard */  
+/* #region 3) Gameboard */  
 
 .Class_Columns{
    width: calc(100% / 7);
@@ -314,7 +314,7 @@ footer{
 }
                                                                                                                                                                                                                                                                /* #endregion */  
 
-/* #region Settings Menu */                                                                                                                                                                                                                                                                               
+/* #region 4) Settings Menu */                                                                                                                                                                                                                                                                               
 
     /* ========
          layout 
@@ -466,7 +466,7 @@ to{
 
                                                                                                                                                                                                                                                         /* #endregion */  
 
-/* #region Typographie */    
+/* #region 5) Typographie */    
 
 #ID_Player_1_Headline{
    width: 100%
@@ -493,7 +493,7 @@ to{
 }
                                                                                                                                                                                                                                                                /* #endregion */  
 
-/* #region Buttons, Inputs... */  
+/* #region 6) Inputs, Buttons, Dropdowns, etc...  */  
 
      /* ============
          inputs text
@@ -716,7 +716,7 @@ select:hover{
 
                                                                                                                                                                                                                                                                /* #endregion */  
 
-/* #region Animations & Transitions */    
+/* #region 7) Animations & Transitions */    
 
          
      /* =========================
@@ -919,7 +919,7 @@ to{
 }
                                                                                                                                                                                                                                                                /* #endregion */  
 
-/* #region Game End Screen */  
+/* #region 8) Game End Screen */  
 
      /* ==========================
          firework canvas container
@@ -1022,7 +1022,7 @@ right: 45%;
 }
                                                                                                                                                                                                                                                                /* #endregion */  
 
-/* #region Helpers */  
+/* #region 9) Helpers */  
 
 .Class_Invisible{
 visibility: hidden;
@@ -1124,7 +1124,7 @@ to{
 }
                                                                                                                                                                                                                                                                /* #endregion */  
 
-/* #region Media Queries */  
+/* #region 10) Media Queries */  
 
 @media (max-width: 767.98px) {
 
@@ -1271,31 +1271,29 @@ align-items: flex-end;
 
                                                                                                                                                                                                                                                                /* #endregion*/
   
-/* #region Final Informations & Comments */  
+/* #region 11) Final Informations & Comments */  
                                                                                                                                                                                                                                                                /* #endregion */ 
 
-/* #region Credits */ 
-                                                                                                                                                                                                                                                                         /*
+/* #region 12) Credits */ 
+                                                                                                                                                                                                                                                               /*
 
-           ######################################################################################################################
-           #                                                                                                                    #
-           #                                       Credits & Special Thanks to:                                                 #
-           #                                                                                                                    #
-           #    Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    #
-           #                                      https://www.theodinproject.com/                                               #
-           #                                                                                                                    #
-           #                   Greetings to the many, many programmers who take the time to write blogs,                        #
-           #        Of course also big thanks to all photographers and graphic designers who make their works available.        #
-           #                                                                                                                    #
-           #                                      CSS - what a wonderful language.                                              #
-           #                                                                                                                    #
-           #                                                                                                                    #
-           ######################################################################################################################                                                                                                                                            */
+            ============================================================================================================
+                                                                                                               
+                                                 Credits & Special Thanks to:                                                 
+                                                                                                               
+            Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    
+                                                 https://www.theodinproject.com/                                               
+                                                                                                               
+                        Greetings to the many, many programmers who take the time to put there knowledge online!         
+                  Of course also big thanks to all photographers and graphic designers who make their works available.        
+                                                                                                               
+                                                CSS - what a wonderful language.                                              
+                                                                                                                                                                                                    
+            ============================================================================================================                                                                                                                                                               */
 
+                                                                                                                                                                                                                                                                   /* #endregion */ 
 
-                                                                                                                                                                                                                                                               /* #endregion */  
-
-/* #region My CSS-Guideline & Checklist */                                                                                                                                                                                                                                                               /*
+/* #region 13) Checklist */                                                                                                                                                                                                                                                                         /*                                                                                                                                                                                                                                                                                                                           
 
 -) VS Studio Terminal hilft bei Tippfehler.
 
@@ -1338,7 +1336,14 @@ align-items: flex-end;
 -) Swiping: .container {scroll-snap-type: y mandatory} .child (muat be saection) {scroll-snap-align: start} 
             create a anker point for swipping like tinder
 
--) Media Queries:
+-) Trenner:
+     / =========================
+         choosing coin animations
+         ========================= /
+
+                                                                                                                                                                                                                                                                                          /*#endregion*/
+
+/* #region 14) Media Queries */                                                                                                                                                                                                                                                                                    /*
 
       Max-Width - Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop 
                   und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
@@ -1374,6 +1379,9 @@ align-items: flex-end;
 
                @media (min-width: 1200px) { … }
 
+                                                                                                                                                                                                                                                                                                   /*#endregion*//*
+
+/* #region 15) Scrollbar Design */                                                                                                                                                                                                                                                                                 /*                                                                                                                                                                                                                                                                                                                                 
 -) Scrollbar Design:
       Scrollbar Firefox
          el{
@@ -1392,11 +1400,5 @@ align-items: flex-end;
          ::-webkit-scrollbar-corner — the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet This is often the bottom-right corner of the browser window.
          ::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some element
 
--) Trenner:
-     / =========================
-         choosing coin animations
-         ========================= /
-
-
-\_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________                                                                                                        */
+                                                                                                                                                                                                                                 /*#endregion*/                                                                                                                                                                                                                                                                                                 
 

@@ -1,4 +1,5 @@
-                                                                                                                                                                                                                                                                                    /*
+//#region Table of Content
+                                                                                                                                                                                                                                                                            /*
                                              Four-Wins-Online Screen-Changes  Javascript-File                                                           
                                                            powered by
                             
@@ -18,8 +19,10 @@
                             |                  3) Final Information and Comments                    |
                             |                                                                       |
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
-                                                                                                                                                                                                                                                                               */                                                                                                                                               
-//#region Toggle between Start and Game Screen
+                                                                                                                                                                                                                                                                               */
+                                                                                                                                                                                                                                                                              //#endregion
+                                                                                                                                                                                                                                                                       
+//#region 1) Toggle between Start and Game Screen
 //                                  __________________
 //                                   Show Game-Screen
 function Game_Screen(){
@@ -49,7 +52,7 @@ document.getElementById("ID_h3_turnText").style = "display: none";
 };
                                                                                                                                                                                                                                                                         //#endregion                            
 
-//#region Game End Screen
+//#region 2) Game End Screen
 
 //                                  ______________
 //                                   Preparations
@@ -304,7 +307,7 @@ if(gameResult === 3){
 };                                                                                                                                                                                                                                                                             
                                                                                                                                                                                                                                                                                 //#endregion
                                                                                                                                                                                                                                                                                 
-//#region Final informations and Comments
+//#region 3) Final informations and Comments
                                                                                                                                                                                                                                                                                 /*
 
      Bonus Jobs to-do:

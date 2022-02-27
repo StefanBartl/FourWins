@@ -29,6 +29,7 @@
                                                 Jobs To-do:
                                                             
                                         -) Stating trough the functions and Global Scoped looping arrays?
+                                        -) Translation Script table of content
                                         -) Async / Await
                                         -) All Script s to the Page Library Layout
                                         -) Code minimazing, layout and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
@@ -45,7 +46,8 @@
                                         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
                                                                                                                                                                                                                                                                              */
                                                                                                                                                                                                                                                                              //#endregion
-//#region DOM, Global Scoped & General Settings 
+
+//#region 1) DOM, Global Scoped & General Settings 
 
 //                                 _______________________
 //                                  Section: DOM Elements
@@ -462,7 +464,7 @@ start_button.addEventListener("click", Game_Preparations);
 
                                                                                                                                                                                                                                                                                                                                 //#endregion
 
-//#region Main Game
+//#region 2) Main Game
 
 //                                  _______________________
 //                                   Prepare Game function
@@ -687,7 +689,7 @@ Turning_PlayerIsOnTurn();
 };
 //#endregion
 
-//#region Final informations and Comments
+//#region 3) Final informations and Comments
 
                                                                                                                                                                                                                                                                                 /*
                      Bonus Jobs to-do:
@@ -702,7 +704,7 @@ Turning_PlayerIsOnTurn();
                                                                                                                                                                                                                                                                                 */
 //#endregion
 
-//#region Credits                       
+//#region 4) Credits                       
                                                                                                                                                                                                                                                                                 /*
     
 ====================================================================================================================
@@ -720,4 +722,5 @@ Turning_PlayerIsOnTurn();
                                                                                                                     
 ====================================================================================================================                                                                                                                                                               */
 
-//#endregion
+                                                                                                                                                                                                                                                                                    //#endregion
+

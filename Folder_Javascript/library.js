@@ -1,4 +1,3 @@
-
 //#region Table of Content
                                                                                                                                                                                                                                                                                 /*
                                              Four-Wins-Online Library-Javascript-File                                                           
@@ -13,55 +12,56 @@
                             {                            Table of content                           }
                             {_______________________________________________________________________} 
                             |                                                                       |
+                            |                  1) Helper Functions                                  |
                             |                                                                       |
-                            |                  1) Insert Element after Element                      |
+                            |                   - Insert Element after Element                      |
                             |                                                                       |
-                            |                  2) Add choosing Animation                            |
+                            |                   - Add choosing Animation                            |
                             |                                                                       |
-                            |                  3) Remove choosing Animation                         |
+                            |                   - Remove choosing Animation                         |
                             |                                                                       |
-                            |                  4) Lock Top Cells                                    |
+                            |                   - Lock Top Cells                                    |
                             |                                                                       |
-                            |                  5) Unlock Top Cells                                  |
+                            |                   - Unlock Top Cells                                  |
                             |                                                                       | 
-                            |                  6) "Thinking"-Effect                                 |
+                            |                   - "Thinking"-Effect                                 |
                             |                                                                       |
-                            |                  7) Get only unique Values from Array                 |
+                            |                   - Get only unique Values from Array                 |
                             |                                                                       |                                                                                                                                                                               
-                            |                  8) Get a random Int number                           |
+                            |                   - Get a random Int number                           |
                             |                                                                       |
-                            |                  9) Push values to Local Storage                      |
+                            |                   - Push values to Local Storage                      |
                             |                                                                       | 
-                            |                 10) Swap 2 Classes by 2 events on 1 Element           |
+                            |                   - Swap 2 Classes by 2 events on 1 Element           |
                             |                                                                       |
-                            |                 11) Change which Player is on turn                    |
+                            |                   - Change which Player is on turn                    |
                             |                                                                       |
-                            |                 12) Game Screen                                       |
+                            |                   - Game Screen                                       |
                             |                                                                       |
-                            |                 13) Start Screen                                      |
+                            |                   - Start Screen                                      |
                             |                                                                       |
-                            |                 14) Stats                                             |
+                            |                   - Stats                                             |
                             |                                                                       | 
-                            |                 15) Update Stats                                      |
+                            |                   - Update Stats                                      |
                             |                                                                       |
-                            |                 16) New Window                                        |
+                            |                   - New Window                                        |
                             |                                                                       |                                                                                                                                                                               
-                            |                 17) Correct Sound Setting                             |
+                            |                   - Correct Sound Setting                             |
                             |                                                                       |
-                            |                 18) Create new DOM Element                            |
+                            |                   - Create new DOM Element                            |
                             |                                                                       | 
-                            |                 19) Fireworks                                         |
+                            |                   - Fireworks                                         |
                             |                                                                       |
-                            |                 20) Final Information and Comments                    |
+                            |                  2) Final Information and Comments                    |
                             |                                                                       |                                                                                                                                                                                   
-                            |                 21) Coding Guidelines & Tipps                         |                                                                                                                                                                                                                                                            
+                            |                  3) Coding Guidelines & Tipps                         |                                                                                                                                                                                                                                                            
                             |                                                                       |                                                                                                                                                                                                               
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */      
 
 //#endregion
 
-//#region Helper Functions
+//#region 1) Helper Functions
 
 //                                  __________________________________________
 //                                  Insert Element after Reference Node in DOM
@@ -713,7 +713,7 @@ canvas.height = window.innerHeight;
 };
 //#endregion
 
-//#region Final informations and Comments
+//#region 2) Final informations and Comments
                                                                                                                                                                                                                                                                                 /*
      Bonus Jobs to-do:
 
@@ -721,7 +721,7 @@ canvas.height = window.innerHeight;
                                                                                                                                                                                                                                                                                 */
 //#endregion
 
-//#region Coding Guideline & Tipps
+//#region 3) Coding Guideline & Tipps
                                                                                                                                                                                                                                                                                 /*
 ================================================================================================================================================================================================================================================================================ 
                                           Better Coding Checklist:

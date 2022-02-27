@@ -1,3 +1,4 @@
+//#region Table of content
                                                                                                                                                                                                                                                                                     /*
                                              Four-Wins-Online CPU Player-Javascript-File                                                           
                                                            powered by
@@ -11,33 +12,35 @@
                             {                            Table of content                           }
                             {_______________________________________________________________________} 
                             |                                                                       |
+                            |                  1) CPU Player Algorhytmus                            |  
                             |                                                                       |
-                            |                  1) KI Placement                                      |
+                            |                   - KI Placement                                      |
                             |                                                                       |
-                            |                  2) KI Easy                                           |
+                            |                   - KI Easy                                           |
                             |                                                                       | 
-                            |                  3) KI Normal                                         |
+                            |                   - KI Normal                                         |
                             |                                                                       |
-                            |                  4) KI Hard                                           |
+                            |                   - KI Hard                                           |
                             |                                                                       |
-                            |                  5) Randomizer                                        |                                                                                                                                                                                      
+                            |                   - Randomizer                                        |                                                                                                                                                                                      
                             |                                                                       |
-                            |                  6) Detect 3 Coin Chains Diagonal                     |                                                                                                                                                                                                            
+                            |                   - Detect 3 Coin Chains Diagonal                     |                                                                                                                                                                                                            
                             |                                                                       |
-                            |                  7) Detect 3 Coin Chains Upwards                      |                                                                                                                                                                                                               
+                            |                   - Detect 3 Coin Chains Upwards                      |                                                                                                                                                                                                               
                             |                                                                       |
-                            |                  8) Detect 3 Coin Chains Sideways                     |           
+                            |                   - Detect 3 Coin Chains Sideways                     |           
                             |                                                                       |
-                            |                  9) Get Valid Upwards Placement                       |                                                                                                                                                                                                           
+                            |                   - Get Valid Upwards Placement                       |                                                                                                                                                                                                           
                             |                                                                       |                                                                                                                                                                                
-                            |                 10) Get Valid Sideways Placement                      |                                                                                                                                                         
+                            |                   - Get Valid Sideways Placement                      |                                                                                                                                                         
                             |                                                                       |
-                            |                 11) Final Information and Comments                    |
+                            |                  2) Final Information and Comments                    |
                             |                                                                       |
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */                                                                                                                                               
+                                                                                                                                                                                                                                                                               //#endregion
 
-//#region KI Easy / KI Normal / KI Heavy
+//#region 1) CPU Player Algrorhytm
                                                                                                                                                                                                                                                                                     
 //                                  ___________________________
 //                                   Placement function for KI
@@ -645,7 +648,7 @@ if (unique_valid_number_array.length > 0) return unique_valid_number_array;
 };
 //#endregion
 
-//#region Final informations and Comments
+//#region 2) Final informations and Comments
                                                                                                                                                                                                                                                                               /*
 
      Bonus Jobs to-do:
