@@ -138,7 +138,10 @@ if(gameResult === 1 || gameResult === 2 && Game.Game_against_KI === false){
 
 // If the KI won against Player CPU is always Player 2 and if Game against KI is true >>> CPU won), add the lose text and screen
 if(gameResult === 2 && Game.Game_against_KI === true){
-    document.getElementById("ID_Game_End_Container").style.backgroundImage = "./Folder_Graphics/Folder_Icons/iconmonstr_com/tearsmiley.svg";
+    document.getElementById("ID_Game_End_Container").style.backgroundImage = "url('./Folder_Graphics/Folder_Icons/freesvg_com/SadSmileyWhite.svg')";
+    document.getElementById("ID_Game_End_Container").style.backgroundPosition = "center";
+    document.getElementById("ID_Game_End_Container").style.backgroundSize = "3%";
+    document.getElementById("ID_Game_End_Container").style.backgroundRepeat = "no-repeat";
     if(Game.Language === "de"){
         document.getElementById("ID_End_H1").innerText = "Verloren!";
         document.getElementById("ID_End_Text").innerText = `${result[1]}, lass den Kopf nicht hängen. Dieses mal war der Computer sehr stark. Willst du eine Revanche?`;
@@ -209,8 +212,8 @@ for (let cell of cellsArray) {
 };
 
 // Show the "Player ... is on turn"-Infobox and the "Thinking-Effectt" again
-if(document.getElementById("ID_h3_turnText").classList.contains("Class_Invisible")) document.getElementById("ID_h3_turnText").classList.remove("Class_Invisible");
-if(document.getElementById("ID_Thinking_Div").classList.contains("Class_Invisible")) document.getElementById("ID_Thinking_Div").classList.remove("Class_Invisible");
+if(document.getElementById("ID_h3_turnText") && document.getElementById("ID_h3_turnText").classList.contains("Class_Invisible")) document.getElementById("ID_h3_turnText").classList.remove("Class_Invisible");
+if(document.getElementById("ID_Thinking_Div") && document.getElementById("ID_Thinking_Div").classList.contains("Class_Invisible")) document.getElementById("ID_Thinking_Div").classList.remove("Class_Invisible");
 
 // Treigger next Player is on turn, so the loser of this reound starts the next round.
 Turning_PlayerIsOnTurn();
@@ -245,12 +248,12 @@ if(document.getElementById("ID_Firework")){
     document.getElementById("ID_Canvas_Div").remove();
 };
 
-// Remove the Game End Screen
-document.getElementById("ID_Game_End_Container").remove();
-
 // Back to the Ingame screen, remove the Gameboard End Screen Class and push it to the MainWrapper Div back
 gameboard.classList.remove("Class_Gameboard_End");
 main_wrapper.appendChild(gameboard);
+// Remove the Game End Screen
+document.getElementById("ID_Game_End_Container").remove();
+
 
 // Add Games won Notificiations-Container
 if (!document.getElementById("ID_Win_Div_One")) win_div_one = Create_DOM_Element({ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Win_Div_One"});

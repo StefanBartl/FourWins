@@ -30,8 +30,8 @@
 
 //#region Translation-Manager & Page Library
 
-//                                 ______________________________________________
-//                                   Detection and Setting of the Page Language
+//                                 ___________________________________________
+//                                   Detection and Setting the Page Language
 function Set_Page_Language(){
 // Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
 // console.log("Setting Page Language...");

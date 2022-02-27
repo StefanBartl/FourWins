@@ -28,11 +28,8 @@
                                                                                                                                                                                                                                                                               /*
                                                 Jobs To-do:
                                                             
-                                        -) Settings Menu Ingame
-                                        -) Thinker Effect show up in Game End Screen
                                         -) Stating trough the functions and Global Scoped looping arrays?
                                         -) All Script s to the Page Library Layout
-                                        .) Naming bug zu beginn CPU
                                         -) Code minimazing, layout and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
                                            How much i can get in the Game object= row counter ... 
                                            Functions all return; CHECK (and for) Helper mthods like psuh to local storage 
@@ -47,8 +44,6 @@
                                         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
                                                    Session progress
--) 
-
 -)
                                                                                                                                                                                                                                                                              */
 //#endregion
@@ -429,6 +424,21 @@ localStorage.Language = languageCode; localStorage.LanguageIsSetttedByUser = tru
 Game.Language = languageCode; Game.LanguageIsSetttedByUser = true;
 // Make sure that a manually setted setted language is not overwritten by the default detected default browser language
 Translate_StartScreen(languageCode, true);
+
+// Translate actual Turning Div
+if(Game.Language === "de"){ // Deutsch
+
+    if(Game.playerIsOnTurn === "left") { document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_One_Name}`;}
+    else if(Game.playerIsOnTurn === "right" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Du bist dran, ${Game.Player_Two_Name}`;}
+    else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name} denkt nach...`;};
+
+} else { // English
+
+    if(Game.playerIsOnTurn === "left"){document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}`;}
+    else if (Game.playerIsOnTurn === "right" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Do you best, ${Game.Player_Two_Name}`;}
+    else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name}'s is thinking...`;};
+};
+
 });
 stats_reset_easy.addEventListener("click", ()=>{
 localStorage.KI_Easy_Wins = 0; localStorage.KI_Easy_CPUWins = 0; localStorage.KI_Easy_Draws = 0;

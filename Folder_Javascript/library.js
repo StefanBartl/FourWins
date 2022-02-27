@@ -164,7 +164,9 @@ setTimeout(()=>{
 KI_Placement(valid_number)
 clearInterval(thinking);
 // Remove the "dots"-Div container from the turning Div if it exists
-if(document.getElementById("ID_Thinking_Div")){document.getElementById("ID_Thinking_Div").remove();};
+if(document.getElementById("ID_Thinking_Div")){document.getElementById("ID_Thinking_Div").remove();
+clearInterval(window.thinking);
+};
 }, thinking_duration);
 };
 };
@@ -736,41 +738,46 @@ canvas.height = window.innerHeight;
                                                                                                                                                                                                                                                                                     /*
 ______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
                                                                                                                                                                                                                                                                                     /*
-                /##################################################################################################################################################################################################################################################################### 
-                #
-                #                                          Better Coding Checklist:
-                #
-                #   -) Ternäre Operatoren nutzen ! --> x >10 ? "Wenn x größer ist als 10" : "Wenn nicht, dann mach dies"
-                #
-                #   -) Verwende "conditionales": const user = user_name || "Player 1"
-                #
-                #   -) String to number: let int = "14" --> neueZahl = +int / Number to string: const stringZahl = 5 + ""; in concentation --> double tilde ~~
-                #
-                #   -) Array alle "strings" zu "numbers" --> values = array.map(Number) /  Boolean: array.map(Boolean)
-                #
-                #   -) 2 << 3 = 16 ist gleich wie 2 ** 4 = 16 oder old style Math.pow(2, 3)
-                #
-                #   -) Konvertiere eine float zu Int mit "zahl | 0" => rundet auf wenn negativ und ab wenn positiv. Doppelt tilde ~~ macht das gleiche!
-                #
-                #   -) | 0 rundet ja eine positive float auf eine Int ab, also "1222 / 10 | 0" ist das gleiche wie "1220 / 10 ==> 122.0 | 0 ==> 122"
-                #
-                #   -) Object oder Array destructing: const {name, age, ...} = user --> und die variablen haben die Werte von den zugehörigen user-Objekt. Also statt name = this name...
-                #
-                #   -) Console.time("") ...... console.timeEnd("") misst die Dauer der Ausführung des Codes dazwischen und gibt ihn in der Konsole aus. Praktisch für zb.: Loops oder Funktionen!
-                #
-                #   -) slice() kann auch negative values haben und damit bekommt man die letzten values eines arrays
-                #
-                #   -) "...rest"-Parameter sammelt alle werte ab diesem Parameter in einem gleichnamigen Array. Kann auch anders benannt werden! 
-                #
-                #   -) Variablen zb.: so zuweisen: n = n + n + (options.number || 5) 
-                #    --Wichtig: wird hier für options.number 0 eingesetzt, ist es false (aufgrund OR) und es wird immer + 5 gerechnet. Außerdem bekommt man einen Error bei null, undefined bzw. false value wenn options.number gar nicht übergeben wird. Das muss alles mit if statements abgefangen werden"
-                #
-                #   -) Keine reduntatn if statements; if (n < 0){....} else if (n >= 0){...}  -> Zweites if ist nicht notwendig!
-                #
-                #   -) So wenig nesting wie möglich: Vermeide else if und returne nach jedem if 
-                #
-                #   -) Variablen in return: return `(${variable})`
-                #
-                \_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________                                                                                                        */
+##################################################################################################################################################################################################################################################################### 
+                                          Better Coding Checklist:
+
+-) Chrome Extension Visbug hilft beim Page designen!
+
+-) insomnia.rest hilft beimn api schreiben!
+
+-) bundlephobia.com zeigt dir die Package-Ladezeiten!
+
+-) Ternäre Operatoren nutzen ! --> x >10 ? "Wenn x größer ist als 10" : "Wenn nicht, dann mach dies"
+
+-) Verwende "conditionales": const user = user_name || "Player 1"
+
+-) String to number: let int = "14" --> neueZahl = +int / Number to string: const stringZahl = 5 + ""; in concentation --> double tilde ~~
+
+-) Array alle "strings" zu "numbers" --> values = array.map(Number) /  Boolean: array.map(Boolean)
+
+-) 2 << 3 = 16 ist gleich wie 2 ** 4 = 16 oder old style Math.pow(2, 3)
+
+-) Konvertiere eine float zu Int mit "zahl | 0" => rundet auf wenn negativ und ab wenn positiv. Doppelt tilde ~~ macht das gleiche!
+ 
+-) | 0 rundet ja eine positive float auf eine Int ab, also "1222 / 10 | 0" ist das gleiche wie "1220 / 10 ==> 122.0 | 0 ==> 122"
+ 
+-) Object oder Array destructing: const {name, age, ...} = user --> und die variablen haben die Werte von den zugehörigen user-Objekt. Also statt name = this name...
+ 
+-) Console.time("") ...... console.timeEnd("") misst die Dauer der Ausführung des Codes dazwischen und gibt ihn in der Konsole aus. Praktisch für zb.: Loops oder Funktionen!
+
+-) slice() kann auch negative values haben und damit bekommt man die letzten values eines arrays
+ 
+-) "...rest"-Parameter sammelt alle werte ab diesem Parameter in einem gleichnamigen Array. Kann auch anders benannt werden! 
+
+-) Variablen zb.: so zuweisen: n = n + n + (options.number || 5) 
+      Wichtig: wird hier für options.number 0 eingesetzt, ist es false (aufgrund OR) und es wird immer + 5 gerechnet. Außerdem bekommt man einen Error bei null, undefined bzw. false value wenn options.number gar nicht übergeben wird. Das muss alles mit if statements abgefangen werden"
+ 
+-) Keine reduntatn if statements; if (n < 0){....} else if (n >= 0){...}  -> Zweites if ist nicht notwendig!
+
+-) So wenig nesting wie möglich: Vermeide else if und returne nach jedem if 
+
+-) Variablen in return: return `(${variable})`
+
+_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________                                                                                                        */
 
 //#endregion

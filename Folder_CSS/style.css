@@ -92,8 +92,7 @@
    overflow-wrap: break-word;
    word-wrap: break-word;
 
-   overflow-x: hidden;
-   overflow-y: hidden;
+   overflow: hidden;
 
 }
 
@@ -351,7 +350,7 @@ to{
    max-width:100%;
    z-index: 3;
    justify-content:center;
-   overflow:scroll;
+   overflow: auto;
    background-color: var(--base-border);
    box-shadow: .1rem .1rem 1rem black;
    border: solid 2px var(--base-colour);
@@ -1209,6 +1208,8 @@ to{
 
 body {
    max-width: 100vw;
+   overflow-x: hidden;
+   overflow-y: auto;
 }   
 
 .Class_MainWrapper{
@@ -1228,14 +1229,6 @@ body {
    margin-top: 3rem;
 }
 
-.Class_Settings{
-   position: absolute;
-   right: 0;
-   top: 0;
-   z-index: 2;
-   filter: invert(1);
-}
-
 .Class_GameboardWrapper{
    min-width: 75vw;
    min-height: 50vw;
@@ -1246,7 +1239,7 @@ body {
    margin-top: 0%;
 }
 
-.Class_Settings{
+.Class_Settings_Menu{
    position: absolute;
    right: 46vw;
    top: 2vh;
@@ -1303,6 +1296,10 @@ body {
 #ID_Start_Button{
    min-width: 30%;
    margin-bottom: 5%;
+}
+
+#ID-Settings_Span{
+   overflow: hidden;
 }
 
        /* Gaḿe End Screen Mobile*/
@@ -1384,12 +1381,12 @@ align-items: flex-end;
 
                                                                                                                                                                                                                                                                /* #endregion */  
 
-/* #region CSS Guideline & Tipps */                                                                                                                                                                                                                                                               /*
+/* #region CSS Guideline & Checklist */                                                                                                                                                                                                                                                               /*
 ______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
                                                                                                                                                                                                                                                                                                    /*
 ###################################################################################################################################################################################################################################################################### 
 
-                                          Checklist:
+                                          VS Guideline & Checklist:
 
 -) VS Studio Terminal hilft bei Tippfehler.
 
@@ -1399,11 +1396,23 @@ ________________________________________________________________________________
 
 -) Chrome Dev Tools den Element auswählen Button (links oben) nutzen um den Text Kontrast ablesen zu können !
 
--) Wiederholenden Code gruppieren!
+-) Wiederholenden Code gruppieren! 
+   h1, h3, btn, .Class_X {...}
+
+-) :is() Pseudoklasse verwenden: 
+   header:is(h3, p, .Class_Button, ....){....} gute Möglichkeit zum gruppieren.
+   
+   :is() umgekehrt:   
+   :is(header, .Class_X, ...) p:hover{...} wendet auf alle p in header und Class_x das :hover an!
+   Wichtig: Das Element mit der höchsten Spezifität setzt die ganze Gruppe darauf -> zb.: Klasse ist höher als p
+
+-) Attribute nutzen! Alles was gesetzt wurde, kann verwendet werden, auch zb.: 
+   a[href="about.html"], a[class=""], a[class|="link"] selektiert alle Klassen die mit "link" beginnen, aber das ganze Wort.
+   a{^="http"] selektiert alle http und https, 
 
 -) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
 
--) ::after / ::before für Punkt -> Strich Animation
+-) ::after / ::before für zb.: Punkt -> Strich Animation, Icons über url, pdf files etc...
 
 -) Font Styling
 
