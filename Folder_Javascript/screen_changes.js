@@ -60,7 +60,7 @@ function Preparations(gameResult){
 // Play correct Audio   
 if(gameResult === 2 && Game.Game_against_KI === true && Game.Sound === true){
     lost_audio.play();
-} else if (gameResult !== 3 && WebGLShaderPrecisionFormat.Sound === true){ 
+} else if (gameResult !== 3 && Game.Sound === true) { 
         win_audio.play();
   };
         
@@ -210,6 +210,7 @@ for (let cell of cellsArray) {
 
 // Show the "Player ... is on turn"-Infobox and the "Thinking-Effectt" again
 if(document.getElementById("ID_h3_turnText").classList.contains("Class_Invisible")) document.getElementById("ID_h3_turnText").classList.remove("Class_Invisible");
+if(document.getElementById("ID_Thinking_Div").classList.contains("Class_Invisible")) document.getElementById("ID_Thinking_Div").classList.remove("Class_Invisible");
 
 // Treigger next Player is on turn, so the loser of this reound starts the next round.
 Turning_PlayerIsOnTurn();

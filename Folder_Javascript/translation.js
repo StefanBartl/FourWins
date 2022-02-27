@@ -12,27 +12,26 @@
                             {_______________________________________________________________________} 
                             |                                                                       |
                             |                                                                       |
-                            |                  1) Translation Managing Functions                    |
+                            |                  1) Translation-Managing Functions & Page Library     |
+                            |                     with:                                             |
                             |                                                                       |
-                            |                  2) Library Deutsch                                   |
+                            |                     -) Library Deutsch                                |
                             |                                                                       | 
-                            |                  3) Library English                                   |
+                            |                     -) Library English                                |
                             |                                                                       |
-                            |                  4) Final Information and Comments                    |
+                            |                     -) Library Deutsch                                |
+                            |                                                                       | 
+                            |                     -) Library English                                |
+                            |                                                                       |
+                            |                  2) Final Information and Comments                    |
                             |                                                                       |
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */                                                                                                                                               
 
 //#region Translation-Manager & Page Library
-                                                                                                                                                                                                                                                                                /*
-===============================================================================================================================================================================================================================================================================
- 
-                                    Translation-Manager & Page Library           
 
-===============================================================================================================================================================================================================================================================================*/
-
-//                                 __________________________________
-//                                   Translation Managing Functions 
+//                                 ______________________________________________
+//                                   Detection and Setting of the Page Language
 function Set_Page_Language(){
 // Detect Browser language, if it can't (i. g. restrictions) set English. Save information in Game Object
 // console.log("Setting Page Language...");
@@ -48,6 +47,8 @@ Translate_StartScreen(browserLanguage, false);
 };
 };
 
+//                                 ___________________________________________________
+//                                   Translation of the Start-Screen to Page Langauge
 function Translate_StartScreen(language, byUser) {
 // console.log("Translate the Page to setted Language:", language, "Setted by User:", byUser);
 // Make sure browser triggered invokes are not executed if the language was setted manually anytime before
@@ -83,7 +84,7 @@ player_1_name.alt = "Gib Spieler 1 Namen ein";
 player_1_svg.title = "Speichere den Namen für spätere Spiele!";
 player_1_svg.alt = "Button zum speichern des Namens.";
 player_2_headline.innerText = "Wähle einen Namen";
-player_2_name.placeholder = "Spieler 2";
+player_2_name.placeholder = "CPU Einfach";
 player_2_name.title = "Name Spieler 2";
 player_2_name.alt = "Gib Spieler 2 Namen ein";
 player_2_svg.title = "Speichere den Namen für spätere Spiele!";
@@ -157,7 +158,7 @@ player_2_headline.innerText = "Choose Name";
 player_2_svg.title = "Save Name for later Games!";
 player_2_name.title = "Player 2 Name";
 player_2_name.alt = "Write Player 2 Name";
-player_2_name.placeholder = "Player 2";
+player_2_name.placeholder = "CPU Easy";
 start_button.innerText = "Start Game";
 start_button.title = "Start Game!";
 start_button.alt = "Start Game Button";
@@ -212,15 +213,12 @@ ki_level_dropdown_normal.alt = "Selection CPU Normal";
 
 //#region Final informations and Comments
 
+
                                                                                                                                                                                                                                                                                 /*
-================================================================================================================================================================================================================================================================================
- 
-                                    Final information and Comments          
-
-================================================================================================================================================================================================================================================================================
-
      Bonus Jobs to-do:
 
--) 
+-)
+
                                                                                                                                                                                                                                                                                 */
+                                                                                                                                                                                                                                                                                
 //#endregion

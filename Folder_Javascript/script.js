@@ -29,8 +29,8 @@
                                                 Jobs To-do:
                                                             
                                         -) Settings Menu Ingame
-                                        -) Sound only is 1 times changeable
                                         -) Thinker Effect show up in Game End Screen
+                                        -) All Script s to the Page Library Layout
                                         .) Naming bug zu beginn CPU
                                         -) Code minimazing, layout and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
                                            How much i can get in the Game object= row counter ... 
@@ -46,7 +46,7 @@
                                         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
                                                    Session progress
--)
+-) 
 
 -)
                                                                                                                                                                                                                                                                              */
@@ -162,6 +162,16 @@ placing_audio.load();
 
 Game.Sound = localStorage.Sound || false;
 Correct_Sound_Setting();
+
+sound_checkbox.addEventListener("click", ()=>{
+    if(sound_checkbox.checked === true){
+        localStorage.Sound = true;
+        Game.Sound = true;
+    } else {
+        localStorage.Sound = false;
+        Game.Sound = false;
+    };
+});
 
 //#endregion
 
@@ -400,15 +410,6 @@ localStorage.Language = languageCode; localStorage.LanguageIsSetttedByUser = tru
 Game.Language = languageCode; Game.LanguageIsSetttedByUser = true;
 // Make sure that a manually setted setted language is not overwritten by the default detected default browser language
 Translate_StartScreen(languageCode, true);
-});
-sound_checkbox.addEventListener("change", ()=>{
-    if(sound_checkbox.checked === true){
-        localStorage.Sound = true;
-        Game.Sound = true;
-    } else {
-        localStorage.Sound = false;
-        Game_Sound = false;
-    };
 });
 stats_reset_easy.addEventListener("click", ()=>{
 localStorage.KI_Easy_Wins = 0; localStorage.KI_Easy_CPUWins = 0; localStorage.KI_Easy_Draws = 0;
