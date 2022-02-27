@@ -29,6 +29,7 @@
                                                 Jobs To-do:
                                                             
                                         -) Stating trough the functions and Global Scoped looping arrays?
+                                        -) Async / Await
                                         -) All Script s to the Page Library Layout
                                         -) Code minimazing, layout and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
                                            How much i can get in the Game object= row counter ... 
@@ -425,7 +426,8 @@ Game.Language = languageCode; Game.LanguageIsSetttedByUser = true;
 // Make sure that a manually setted setted language is not overwritten by the default detected default browser language
 Translate_StartScreen(languageCode, true);
 
-// Translate actual Turning Div
+// If exist yet, translate actual Turning Div
+if(document.getElementById("ID_h3_turnText")){
 if(Game.Language === "de"){ // Deutsch
 
     if(Game.playerIsOnTurn === "left") { document.getElementById("ID_h3_turnText").innerText = `Dein Zug, ${Game.Player_One_Name}`;}
@@ -437,8 +439,7 @@ if(Game.Language === "de"){ // Deutsch
     if(Game.playerIsOnTurn === "left"){document.getElementById("ID_h3_turnText").innerText = `Your turn, ${Game.Player_One_Name}`;}
     else if (Game.playerIsOnTurn === "right" && Game.Game_against_KI === false) {document.getElementById("ID_h3_turnText").innerText = `Do you best, ${Game.Player_Two_Name}`;}
     else {document.getElementById("ID_h3_turnText").innerText = `${Game.Player_Two_Name}'s is thinking...`;};
-};
-
+};};
 });
 stats_reset_easy.addEventListener("click", ()=>{
 localStorage.KI_Easy_Wins = 0; localStorage.KI_Easy_CPUWins = 0; localStorage.KI_Easy_Draws = 0;

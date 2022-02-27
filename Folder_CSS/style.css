@@ -1,4 +1,5 @@
-                                                                                                                                                                                                                                                                                /*    
+/* #region Table of Content */
+                                                                                                                                                                                                                        /*    
                                           Four-Wins-Online Main-CSS-Stylsheet
                                                       powered by
 
@@ -37,41 +38,33 @@
                             |                                                                |
                             |                  13) Credits                                   |
                             |                                                                |
-                            |                  14) CSS Guideline / Checklist                 |
+                            |                  14) My CSS-Guideline / Checklist              |
                             |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __ _ _ _ _ _ _ _|
-
                                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                              /*#endregion*/ 
 
 /* #region Jobs To-Do */
                                                                                                                                                                                                                                                                                 /*
                                                     Jobs To-do:
                                                     
-                                        -) Better Styling (find a final, real good one), also in the Settings Menu
-                                        -) focus all hovers
-                                        -) Win Games Counter Design
-                                        -) Test and repair responsivness in all sizes
-                                        -) CSS-Code minimizing f.e. bind repetative Classes to one Class
+                                        -) :focus on all :hovers for Cross-Browser-Support!
+                                        -) Test and repair responsivness in all sizes!
+                                        -) CSS-Code minimizing f.e. bind repetative Classes to one Class!
                                         -) INGAME Section?
-                                        -) Find final Folder Layout for CSS-Stylesheets  
+                                        -) Fonts!
+                                        -) Find a final, real good styling!                                        
+                                        -) Find final Folder Layout for CSS-Stylesheets!  
                   
                                                   Session progress:
--)
--)
-                                                                                                                                                                                                                                                                              */
+-)                                                                                                                                                                                                                                                                      */
                                                                                                                                                                                                                                                                /* #endregion */ 
 
-/* #region Content */
-
 /* #region General */                                                                                                                                                                                                                                                                               
-                                                                                                                                                                                                                                                                               /*
-================================================================================================================================================================================================================================================================================
-                                 
-                                                    General       
-
-===============================================================================================================================================================================================================================================================================*/
 
 :root{
-    /* Colour-Palette */
+      /* ================
+         colour pallete 
+         ================= */
     
    --prime-blueviolett: hsl(238, 56%, 19%);
    --prime-darkgrey: hsl(330, 2%, 17%);
@@ -96,17 +89,15 @@
 
 }
 
+     /* =======
+         fonts 
+         ======= */
+
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap');
 
                                                                                                                                                                                                                                                                /* #endregion */  
 
 /* #region Layout */  
-                                                                                                                                                                                                                                                                          /*
-================================================================================================================================================================================================================================================================================
-                            
-                                                   Layout        
-
-===============================================================================================================================================================================================================================================================================*/
 
 body{
    background-color: var(--base-colour);
@@ -125,39 +116,44 @@ header{
    margin-top: 1rem;
 }
 
-#ID_Head_Text{
-      display: flex;
-      flex-wrap: wrap;
-      min-width: 100%;
-      min-height: 100%;
-      align-items: center;
-      text-align: center;
-      line-height: 0;
+.Class_MainWrapper{
+   display: grid;
+   grid: repeat(1, 1fr) / 30% auto 30%;
+   grid-template-areas:
+"leftSide gameboard rightSide";
 }
 
-.Class_HeaderWrapper{
+#ID_Head_Text,
+.Class_HeaderWrapper,
+footer {
    display: flex;
    align-content: center;
-}
-
-.Class_MainWrapper{
-   display: flex; 
-   justify-content: center;
    align-items: center;
-}
-
-.Class_LeftSidebarWrapper{
-   min-width: 30%;
-   margin-bottom: 30vh;
-   border-top:  solid 1px var(--base-border);
-   border-bottom:  solid 1px var(--base-border);
-   display: flex;
-   flex-wrap: wrap;
    justify-content: center;
    text-align: center;
 }
 
+#ID_Head_Text{
+      flex-wrap: wrap;
+      min-width: 100%;
+      min-height: 100%;
+      line-height: 0;
+}
+
+.Class_LeftSidebarWrapper{
+   grid-area: leftSide;
+   display: grid;
+   grid: repeat(4, 1fr) / 1fr;
+   grid-template-areas: 
+      " . "
+      " sidebar "
+      " . "
+      " . "
+      ; 
+}
+
 .Class_GameboardWrapper{
+   grid-area: gameboard;
    display: flex;
    min-width: 33%;
    min-height: 63vh;
@@ -171,28 +167,32 @@ header{
 }
 
 .Class_RightSidebarWrapper{
-   min-width: 30%;
-   margin-bottom: 30vh;
+   grid-area: rightSide;
+   z-index: 1;
+   display: grid;
+   grid: repeat(4, 1fr) / 1fr;
+   grid-template-areas: 
+      " . "
+      " sidebar "
+      " . "
+      " . "
+      ; 
+}
+
+.Class_Sidebars{
    border-top:  solid 1px var(--base-border);
    border-bottom:  solid 1px var(--base-border);
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   align-items: center;
-   z-index: 1;
+   grid-area: sidebar;
 }
+
 
 footer{
    min-height: 10vh;
    margin-top: 1vh;
-   display: flex;
-   justify-content: center;
-   align-items:center;
    gap: 2rem;
-   text-align:center;
 }
 
-   #ID_Choose_KI_Div{
+#ID_Choose_KI_Div{
    line-height: 0;
    position: relative;
    top: -1rem;
@@ -201,12 +201,6 @@ footer{
                                                                                                                                                                                                                                                                /* #endregion */  
 
 /* #region Gameboard */  
-                                                                                                                                                                                                                                                                       /*
-================================================================================================================================================================================================================================================================================
-                            
-                                                   Gameboard     
-
-===============================================================================================================================================================================================================================================================================*/
 
 .Class_Columns{
    width: calc(100% / 7);
@@ -244,9 +238,9 @@ footer{
    align-content: center;
 }
 
-/* ===============================
-   Game Screen Gameboard Classes 
-   =============================== */ 
+      /* ===============================
+         Game Screen Gameboard Classes 
+         =============================== */ 
 
 .Class_Main_Wrapper_InGame{
 
@@ -281,18 +275,52 @@ footer{
    right: 3%;
 }
 
+      /* ==============
+         placing coins
+            ============= */
+
+.Class_Coin_Yellow{
+   background-image: url("../Folder_Graphics/Coins/yellow.png"); 
+   background-size: 80%;
+   background-position: center;
+   background-repeat: no-repeat;
+   width: 5vw;
+   height: 10vh;
+   border-radius: 50%;
+   z-index: 0;
+}
+
+.Class_Coin_Red{
+   background-image: url("../Folder_Graphics/Coins/red.png"); 
+   background-size: 80%;
+   background-position: center;
+   background-repeat: no-repeat;
+   width: 5vw;
+   height: 10vh;
+   border-radius: 50%;
+   z-index: 0;
+}
+
+.Class_PlacedCoin_1{
+   background-image: url("../Folder_Graphics/Coins/yellow.png");
+   background-size: 80%;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.Class_PlacedCoin_2{
+   background-image: url("../Folder_Graphics/Coins/red.png");
+   background-size: 80%;
+   background-position: center;
+   background-repeat: no-repeat;
+}
                                                                                                                                                                                                                                                                /* #endregion */  
 
 /* #region Settings Menu */                                                                                                                                                                                                                                                                               
-                                                                                                                                                                                                                                                                          /*
-================================================================================================================================================================================================================================================================================
-                            
-                                               Settings Menu       
 
-===============================================================================================================================================================================================================================================================================*/
-
-
-                              /*  Settings menu     */ 
+    /* ========
+         layout 
+         ======= */
 
 .Class_Settings_Menu{
    position: absolute;
@@ -372,137 +400,75 @@ to{
    background-color: var(--gameboard);    
 }
 
-#ID_Info_Container{
+#ID_Info_Container,
+#ID_Colour_Container,
+#ID_Sound_Container,
+#ID_Language_Container,
+#ID_Stats_Container,
+#ID_Contacts_Container,
+#ID_Credits_Container,
+#ID_Delete_All_Container {
    min-width: 100%;
    display: flex;
+   flex-wrap: wrap;
    align-items: center;
+   justify-content: center;
 }
 
-#ID_Colour_Container{
-   min-width: 100%;
+#ID_Colour_Container,
+#ID_Sound_Container {
    height: 3rem;
-   display: flex;
-   flex-wrap: wrap;
-   align-items: center;
 }
 
-#ID_Sound_Container{
+    /* ============
+         typography 
+         =========== */
+
+#ID_Info,
+#ID_Sound,
+#ID_Label_Colour,
+#ID_Language,
+#ID_Stats,
+#ID_Contact,
+#ID_Credits{
    min-width: 100%;
-   height: 3rem;
-   display: flex;
-   flex-wrap: wrap;
-   align-items: center;
-   justify-content: center;
 }
 
-#ID_Language_Container{
-   min-width: 100%;
-   display: flex;
-   flex-wrap: wrap;
-   align-items: center;
-   justify-content: center;
+#ID_Info,
+#ID_Language,
+#ID_Stats,
+#ID_Contact,
+#ID_Credits{
+   cursor: pointer;
 }
 
-#ID_Stats_Container{
-   min-width: 100%;
-   display: flex;
-   flex-wrap: wrap;
-   align-items: center;
-   justify-content: center;
-}
-
-#ID_Contacts_Container{
-   min-width: 100%;
-   display: flex;
-   align-items:center;
-
-}
-
-#ID_Credits_Container{
-   min-width: 100%;
-   display: flex;
-   align-items: center;
-}
-
-#ID_Delete_All_Container{
-   min-width: 100%;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-}
-
-                              /*  Settings-Menu Typography / Design styling */
 #ID_Info{
-   cursor: pointer;
-   min-width: 100%;
    color: var(--main-red);
-}
-
-#ID_Label_Colour{
-   cursor: pointer;
-   min-width: 100%;
-}
-
-#ID_Sound{
-   min-width: 100%;
-}
-
-#ID_Language{
-   cursor: pointer;
-   min-width: 100%;
-}
-
-#ID_Stats{
-   cursor: pointer;
-   min-width: 100%;
 }
 
 .Class_StatsWrapper{
    margin-inline: 1rem;
 }
 
-#ID_Stats_First_Wrapper:hover{ 
-   color: red;
-   
-}
-
-#ID_Stats_Second_Wrapper:hover{
-   color: red;
-}
-
-#ID_Contact{
-   cursor: pointer;
-   min-width: 100%;
-}
-
-#ID_Credits{
-   cursor: pointer;
-   min-width: 100%;
-}
-
-
-                              /* Hover Section  */ 
+    /* =======
+         hover 
+         ====== */ 
 
 #ID_Info:hover{
    color: black;
 }
 
-#ID_Contact:hover{
-     color: red;
-}
-
-#ID_Credits:hover{
+#ID_Stats_First_Wrapper :hover,
+#ID_Stats_Second_Wrapper :hover,
+#ID_Contact:hover,
+#ID_Credits:hover { 
    color: red;
 }
+
+
                                                                                                                                                                                                                                                         /* #endregion */  
 
 /* #region Typographie */    
-                                                                                                                                                                                                                                                                           /*
-================================================================================================================================================================================================================================================================================
-                            
-                                                  Typography
-
-===============================================================================================================================================================================================================================================================================*/
 
 #ID_Player_1_Headline{
    width: 100%
@@ -522,8 +488,6 @@ to{
    text-align: center;
 }
 
-/* Game Screen Typography  */ 
-
 #ID_h3_turnText{
    width: 10rem;
    border: dashed .3rem var(--base-border);
@@ -532,15 +496,10 @@ to{
                                                                                                                                                                                                                                                                /* #endregion */  
 
 /* #region Buttons, Inputs... */  
-                                                                                                                                                                                                                                                                         /*
-================================================================================================================================================================================================================================================================================
-                            
-                                                   Inputs, Buttons, Dropdowns, etc...        
 
-===============================================================================================================================================================================================================================================================================*/
-
-
-                                                   /* Text Inputs */
+     /* ============
+         inputs text
+         ============ */
 
 input {
    width: 28ch;
@@ -574,7 +533,9 @@ input:focus{
 
 }
 
-                                                   /* Checkbox */
+    /* ============
+         checkboxes 
+         =========== */
 
 #ID_Sound_Checkbox{
    height: 1.5rem;
@@ -586,7 +547,9 @@ input:focus{
    box-shadow: none;
 }
 
-                                                   /* Buttons */
+    /* =========
+         buttons 
+         ======== */
 
 button{
    cursor: pointer;
@@ -658,7 +621,9 @@ button:hover{
    margin-top: 10vh;        
 }   
 
-                                                   /* Dropdwons */
+    /* ===========
+         dropdowns 
+         ========== */
                                                    
                                                    
 select{
@@ -690,7 +655,9 @@ select:hover{
 }
 
 
-                                                   /* Toggle */
+    /* ========
+         toggle 
+         ======= */
 
 .Class_Colour_Toggle{
    min-width: 100%;
@@ -733,7 +700,9 @@ select:hover{
     box-shadow: none;
 }
 
-                                                   /* Summarys */
+    /* ==========
+         summarys 
+         ========= */
 
 .Class_Summary_Details:hover{
    color: var(--main-red);
@@ -750,58 +719,18 @@ select:hover{
                                                                                                                                                                                                                                                                /* #endregion */  
 
 /* #region Animations & Transitions */    
-                                                                                                                                                                                                                                                                         /*
-================================================================================================================================================================================================================================================================================
-                            
-                                                   Animations & Transitions      
 
-===============================================================================================================================================================================================================================================================================*/
+         
+     /* =========================
+         choosing coin animations
+         ========================= */
 
-
-                                           /* Choosing and Placing Coin Animation*/
-
-.Class_Coin_Yellow{
-background-image: url("../Folder_Graphics/Coins/yellow.png"); 
-background-size: 80%;
-background-position: center;
-background-repeat: no-repeat;
-width: 5vw;
-height: 10vh;
-border-radius: 50%;
-z-index: 0;
-}
-
-.Class_Coin_Red{
-background-image: url("../Folder_Graphics/Coins/red.png"); 
-background-size: 80%;
-background-position: center;
-background-repeat: no-repeat;
-width: 5vw;
-height: 10vh;
-border-radius: 50%;
-z-index: 0;
-}
-
-.Class_PlacedCoin_1{
-background-image: url("../Folder_Graphics/Coins/yellow.png");
-background-size: 80%;
-background-position: center;
-background-repeat: no-repeat;
-}
-
-.Class_PlacedCoin_2{
-background-image: url("../Folder_Graphics/Coins/red.png");
-background-size: 80%;
-background-position: center;
-background-repeat: no-repeat;
-}
-            
 .Class_ChoosingAnimation_Coin_1{
-background-image: url("../Folder_Graphics/Coins/yellow.png");
-background-size: 100%;
-background-repeat: no-repeat;
-background-position: top;
-animation: choosing_Coin_1_Animation 1s infinite alternate;
+   background-image: url("../Folder_Graphics/Coins/yellow.png");
+   background-size: 100%;
+   background-repeat: no-repeat;
+   background-position: top;
+   animation: choosing_Coin_1_Animation 1s infinite alternate;
 }
 
 @keyframes choosing_Coin_1_Animation {
@@ -835,9 +764,9 @@ to{
    background-size: 50%;
 }
 }
-
-                                                       /* Player placed coin Animations */
-
+     /* =========================
+         placing coin animations
+         ========================= */
 
 .Class_PlacingAnimation_to_Row_2{
 animation: Placing_Coin_Animation_Cell_2 normal 1s;
@@ -922,7 +851,10 @@ to{
 }
 }
 
-/* Animation Player 1 Name Button */ 
+     /* ============================
+         player save name animations
+         ============================ */
+ 
 
 .Class_Buttons_Add_Hover_Animations_1{
 cursor: pointer;
@@ -962,8 +894,6 @@ animation: Button_2_Add_Animation 2s;
 animation-fill-mode: forwards;
 }
 
-/* Animation Player 2 Name Button */
-
 @keyframes Button_2_Add_Animation {
 from{ 
    filter: invert(1);
@@ -992,14 +922,11 @@ to{
                                                                                                                                                                                                                                                                /* #endregion */  
 
 /* #region Game End Screen */  
-                                                                                                                                                                                                                                                                          /*
-================================================================================================================================================================================================================================================================================
-                            
-                                                   Game End Screen        
 
-===============================================================================================================================================================================================================================================================================*/
+     /* ==========================
+         firework canvas container
+         ========================== */
 
-/* Container for Fireworks-Canvas*/
 .Class_Game_End_Div{
 position: absolute;
 left: 0;
@@ -1008,7 +935,10 @@ width: 100vw;
 height: 100vh;
 }
 
-/* Container for Game End Text, Buttons and Gameboard Animation */ 
+     /* ===========================
+         game end content container
+         =========================== */
+
 .Class_Game_End_Container{
 z-index: 4;
 position: absolute;
@@ -1033,7 +963,6 @@ to {
 }
 }
 
-/* Move Gameboard to the right at the End of the Game Animation */
 .Class_Gameboard_End{
 z-index: 4;
 min-width: 15vw;
@@ -1048,7 +977,6 @@ background-color: var(--base-border);
 opacity: .7;
 }
 
-/* Class for the Text & Buttons */
 .Class_Game_End{
 
 }
@@ -1067,7 +995,10 @@ justify-content: center;
 align-content: center;   
 }
 
-/* Win Marks */
+     /* ============
+         win counter
+         ============ */
+
 #ID_Win_Div_One{
 position: absolute;
 top: 0;
@@ -1094,12 +1025,6 @@ right: 45%;
                                                                                                                                                                                                                                                                /* #endregion */  
 
 /* #region Helpers */  
-                                                                                                                                                                                                                                                                         /*
-================================================================================================================================================================================================================================================================================
-                            
-                                                   Helpers        
-
-===============================================================================================================================================================================================================================================================================*/
 
 .Class_Invisible{
 visibility: hidden;
@@ -1110,6 +1035,7 @@ animation: SmoothInAnimation 2s ease-in;
 animation-fill-mode: forwards;
 animation-iteration-count: 1
 }
+
 @keyframes SmoothInAnimation {
 from{
    transform: scale(0);
@@ -1124,6 +1050,7 @@ animation: SmoothOutAnimation 2s ease-out;
 animation-fill-mode: forwards;
 animation-iteration-count: 1
 }
+
 @keyframes SmoothOutAnimation {
 from{
    transform: scale(1);
@@ -1133,7 +1060,10 @@ to{
 }
 }
 
-                              /*    Windows    */
+     /* ============
+         new windows
+         ============ */
+
 
 .Class_Window{
    min-height: 30vh;
@@ -1197,12 +1127,6 @@ to{
                                                                                                                                                                                                                                                                /* #endregion */  
 
 /* #region Media Queries */  
-                                                                                                                                                                                                                                                                         /*
-================================================================================================================================================================================================================================================================================
-                            
-                                                   Media Queries        
-
-===============================================================================================================================================================================================================================================================================*/
 
 @media (max-width: 767.98px) {
 
@@ -1348,16 +1272,8 @@ align-items: flex-end;
 }
 
                                                                                                                                                                                                                                                                /* #endregion*/
-                                                                                                                                                                                                                                                               /* #endregion */  
+  
 /* #region Final Informations & Comments */  
-                                                                                                                                                                                                                                                                              /*
-===============================================================================================================================================================================================================================================================================
-                            
-                                                   Final Information & Comments     
-
-===============================================================================================================================================================================================================================================================================
-
-                                                                                                                                                                                                                                                                             */
                                                                                                                                                                                                                                                                /* #endregion */ 
 
 /* #region Credits */ 
@@ -1381,12 +1297,7 @@ align-items: flex-end;
 
                                                                                                                                                                                                                                                                /* #endregion */  
 
-/* #region CSS Guideline & Checklist */                                                                                                                                                                                                                                                               /*
-______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-                                                                                                                                                                                                                                                                                                   /*
-###################################################################################################################################################################################################################################################################### 
-
-                                          VS Guideline & Checklist:
+/* #region My CSS-Guideline & Checklist */                                                                                                                                                                                                                                                               /*
 
 -) VS Studio Terminal hilft bei Tippfehler.
 
@@ -1426,65 +1337,68 @@ ________________________________________________________________________________
 
 -) content-visibility auto
 
--) Swiping: .container {scroll-snap-type: y mandatory} .child (muat be saection) {scroll-snap-align: start} create a anker point for swipping like tinder
+-) Swiping: .container {scroll-snap-type: y mandatory} .child (muat be saection) {scroll-snap-align: start} 
+            create a anker point for swipping like tinder
+
+-) Media Queries:
+
+      Max-Width - Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop 
+                  und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
+
+         Kleine Endgeräte (Smartphones, kleiner als 768px):
+               @media (max-width: 575.98px) { … }
+
+               @media (max-width: 767.98px) { … }
+
+         Kleine Endgeräte (Tablets, kleiner als 992px):
+
+               @media (max-width: 991.98px) { … }
+
+         Große Endgeräte (Laptops, Bildschirme, kleiner als 1200px):
+
+               @media (max-width: 1199.98px) { … }
+
+      Min-Widt - ist intuitiver und besser lesbar.
+
+         Kleine Endgeräte (Smartphones, 576px und größer):
+
+               @media (min-width: 576px) { … }
+
+         Mittlere Endgeräte (Tablets, 768px und größer):
+
+               @media (min-width: 768px) { … }
+
+         Große Endgeräte (Laptops, Bildschirme, 992px und größer):
+
+               @media (min-width: 992px) { … }
+
+         Sehr große Endgeräte (Große Bildschirme, iMac, 1200px und größer):
+
+               @media (min-width: 1200px) { … }
+
+-) Scrollbar Design:
+      Scrollbar Firefox
+         el{
+            scrollbar-color: dark;
+            scrollbar-width: .5rem;
+            scrollbar-gutter: both-edges ;
+         }
+
+       Scrollbar Chrome, Safari,...
+
+         ::-webkit-scrollbar — the entire scrollbar.
+         ::-webkit-scrollbar-button — the buttons on the scrollbar (arrows pointing upwards and downwards that scroll one line at a time).
+         ::-webkit-scrollbar-thumb — the draggable scrolling handle.
+         ::-webkit-scrollbar-track — the track (progress bar) of the scrollbar, where there is a gray bar on top of a white bar.
+         ::-webkit-scrollbar-track-piece — the part of the track (progress bar) not covered by the handle.
+         ::-webkit-scrollbar-corner — the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet This is often the bottom-right corner of the browser window.
+         ::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some element
+
+-) Trenner:
+     / =========================
+         choosing coin animations
+         ========================= /
 
 
-______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-                                          Media Queries:
+\_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________                                                                                                        */
 
-                                          Max-Width
-Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop, und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
-
-         @media (max-width: 575.98px) { … }// Kleine Endgeräte (Smartphones, kleiner als 768px)
-
-         @media (max-width: 767.98px) { … }
-
-    Kleine Endgeräte (Tablets, kleiner als 992px)
-
-         @media (max-width: 991.98px) { … }
-
-    Große Endgeräte (Laptops, Bildschirme, kleiner als 1200px)
-
-         @media (max-width: 1199.98px) { … }
-
-                                             Min-Width
-                              Min-width ist intuitiver und besser lesbar.
-
-    Kleine Endgeräte (Smartphones, 576px und größer)
-
-         @media (min-width: 576px) { … }
-
-    Mittlere Endgeräte (Tablets, 768px und größer)
-
-         @media (min-width: 768px) { … }
-
-    Große Endgeräte (Laptops, Bildschirme, 992px und größer)
-
-         @media (min-width: 992px) { … }
-
-    Sehr große Endgeräte (Große Bildschirme, iMac, 1200px und größer)
-
-         @media (min-width: 1200px) { … }
-_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-                                             Scrollbar Design:
-            Scrollbar Firefox
-      el{
-         scrollbar-color: dark;
-         scrollbar-width: .5rem;
-         scrollbar-gutter: both-edges ;
-      }
-
-         Scrollbar Chrome, Safari,...
-
-      ::-webkit-scrollbar — the entire scrollbar.
-      ::-webkit-scrollbar-button — the buttons on the scrollbar (arrows pointing upwards and downwards that scroll one line at a time).
-      ::-webkit-scrollbar-thumb — the draggable scrolling handle.
-      ::-webkit-scrollbar-track — the track (progress bar) of the scrollbar, where there is a gray bar on top of a white bar.
-      ::-webkit-scrollbar-track-piece — the part of the track (progress bar) not covered by the handle.
-      ::-webkit-scrollbar-corner — the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet This is often the bottom-right corner of the browser window.
-      ::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some elements.
-
-
-
-
-\_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________                                                                                                        */                                                                                                                                                                                                                                            

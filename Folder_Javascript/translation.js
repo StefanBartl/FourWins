@@ -15,9 +15,9 @@
                             |                  1) Translation-Managing Functions & Page Library     |
                             |                     with:                                             |
                             |                                                                       |
-                            |                     -) Library Deutsch                                |
+                            |                     -) Settin Page Language                           |
                             |                                                                       | 
-                            |                     -) Library English                                |
+                            |                     -) Translation                                    |
                             |                                                                       |
                             |                     -) Library Deutsch                                |
                             |                                                                       | 
@@ -48,7 +48,7 @@ Translate_StartScreen(browserLanguage, false);
 };
 
 //                                 ___________________________________________________
-//                                   Translation of the Start-Screen to Page Langauge
+//                                   Translation to Page Langauge
 function Translate_StartScreen(language, byUser) {
 // console.log("Translate the Page to setted Language:", language, "Setted by User:", byUser);
 // Make sure browser triggered invokes are not executed if the language was setted manually anytime before
@@ -65,9 +65,9 @@ else{
 credits_h.innerText = "Credits";
 sound_h.innerText = "Sound";
 
-// Make sure the dropdown menu is always selected with the actual languag
-if (localStorage.getItem("Language") === "de") document.getElementById("ID_Language_Menu").value === "Deutsch";
-else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value === "English"; 
+// Make sure the dropdown menu is always selected with the actual language
+if (localStorage.getItem("Language") === "de") document.getElementById("ID_Language_Menu").value ="Deutsch";
+else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value = "English"; 
 };
 
 //                                  ___________________
