@@ -32,21 +32,25 @@ document
 
     insertAfter(left_sidebar, new_gameboard_wrapper);
 
-    let size1 = parseInt(document.getElementById("ID_Gameboard_Size_1").value);
-    let size2 = parseInt(document.getElementById("ID_Gameboard_Size_2").value);
+    let size = parseInt(document.getElementById("ID_Gameboard_Size").value);
 
-    for (let x = 1; x <= size1; x++) {
+    for (let x = 1; x <= size; x++) {
+      let column = document.createElement("div");
+      column.classList.add("Class_Columns");
+      column.id = `ID_Column${x}`;
+      document.getElementById("ID_GameboardWrapper").appendChild(column);
+
       let topcell = document.createElement("div");
       topcell.classList.add("Class_TopCells");
       topcell.id = `ID_C${x}R1`;
-      document.getElementById("ID_GameboardWrapper").appendChild(topcell);
+      document.getElementById(`ID_Column${x}`).appendChild(topcell);
 
       let columncounter = x;
-      for (let row = 2; row <= size2; row++) {
+      for (let row = 2; row <= size - 1; row++) {
         let cell = document.createElement("div");
         cell.classList.add("Class_Cells");
         cell.id = `ID_C${columncounter}R${row}`;
-        document.getElementById(`ID_C${columncounter}R1`).appendChild(cell);
+        document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
       }
     }
   });

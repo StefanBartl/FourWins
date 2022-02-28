@@ -211,13 +211,14 @@ footer {
 /* #region 3) Gameboard */
 
 .Class_Columns {
-  width: calc(100% / 7);
+  width: 100% ;
+  height:max-content ;
 }
 
 .Class_TopCells {
   outline: none;
   min-width: auto;
-  min-height: calc(95% / 7);
+  min-height: 3rem;
   border-left: dashed 0.15rem var(--base-border);
   background-color: var(--base-colour);
   z-index: -1;
@@ -233,8 +234,8 @@ footer {
 }
 
 .Class_Cells {
-  min-width: calc(90% / 7);
-  min-height: calc(90% / 7);
+  width: auto;
+  aspect-ratio: 1 / 1;
   border: solid 0.2rem var(--gameboard);
   border-radius: 10rem;
   background-color: var(--base-border);
