@@ -23,15 +23,10 @@
 /*
 !                                                           Jobs To-do:
                                          
-todo        -) Stating trough the functions and Global Scoped looping arrays?
-todo        -) Top Cell Bug
-todo        -) Game End Screen and Firwworks need attention!
+todo        -) Game End Screen and Fireworks need attention!
 todo        -) Detect arrays kleiner machen --> cpu_player.js hard workover
-todo        -) Thinking div
 todo        -) Column & Row Val changing for winChain!
 todo        -) Async / Await
-todo        -) New Library table of content
-todo        -)  All Script s to the Page Library Layout
 todo        -) Code minimazing, layout and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
 todo            How much i can get in the Game object= row counter ... 
 todo            Functions all return; CHECK (and for) Helper mthods like psuh to local storage 

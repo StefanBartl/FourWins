@@ -8,7 +8,7 @@
                                               ________________________________________                                                                                                                                                                                                  
 !                                                           Table of content              
 
-                                                        1) Helper Functions                                  
+                                                       1) Helper Functions                                  
                                                                                                             
                                                         - Insert Element after Element                      
                                                                                                             
@@ -50,11 +50,9 @@
                                                                                                             
                                                         - Set attributes for Elements                       
                                                                                                                 
-                                                        - Fireworks                                         
-                                                                                                            
-                                                        2) Final Information and Comments                    
+                                                        - Fireworks                                                                                                                                                                    
                                                                                                                                                                                                                                                                                                 
-                                                        3) Coding Guidelines & Tipps                                                                                                                                                                                                                                                                                    
+                                                2) Coding Guidelines & Tipps                                                                                                                                                                                                                                                                                    
                                                                                                                                                                                                                                                                                                          
                                                                                                                                                                                                                                                                               */
 
@@ -62,9 +60,9 @@
 
 //#region 1) Helper Functions
 
-/* =====================================
+/*       =======================
  !        Insert Element after Reference Node
-         ==================================== */
+            ======================== */
 function insertAfter(referenceNode, newNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
@@ -94,7 +92,7 @@ function Add_Choosing_Ani(column) {
   }
 }
 /* ===============================
-         Remove the Choosing-Animation 
+!        Remove the Choosing-Animation 
          ============================== */
 function Remove_Choosing_Ani(column) {
   column -= 1;
@@ -108,7 +106,7 @@ function Remove_Choosing_Ani(column) {
   }
 }
 /* ====================
-         Lock all Top-Cells 
+!        Lock all Top-Cells 
          =================== */
 function Lock_TopCells() {
   for (let topCell of topCellsArray) {
@@ -117,7 +115,7 @@ function Lock_TopCells() {
   }
 }
 /* ======================
-         Unlock all Top-Cells 
+!        Unlock all Top-Cells 
          ===================== */
 function Unlock_TopCells() {
   for (let topCell of topCellsArray) {
@@ -126,7 +124,7 @@ function Unlock_TopCells() {
   }
 }
 /* ==============================
-         Simulate a "Thinking-Effect" 
+!        Simulate a "Thinking-Effect" 
          ============================= */
 function Thinking_Effect(invokerKI, valid_number) {
   // First make sure there is no "Thinking" Div attached
@@ -173,20 +171,20 @@ function Thinking_Effect(invokerKI, valid_number) {
   }
 }
 /* ==============================
-         Get unique values from Array
+!        Get unique values from Array
          ============================= */
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
   // var unique = array.filter(onlyUnique);
 }
 /* =====================
-         Get a random Integer 
+!        Get a random Integer 
          ===================== */
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 /* ==============================
-         Push values to local Storage 
+!       Push values to local Storage 
          ============================= */
 function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event) {
   document
@@ -199,7 +197,7 @@ function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event) {
     });
 }
 /* ==================================
-         Swap between 2 Classes by Events 
+!        Swap between 2 Classes by Events 
          ================================= */
 function Swap_Two_Classes_by_Events(
   element_ID,
@@ -226,7 +224,7 @@ function Swap_Two_Classes_by_Events(
     });
 }
 /* =======================
-         Changing Players turn 
+!        Changing Players turn 
          ====================== */
 function Turning_PlayerIsOnTurn() {
   // Change Player
@@ -302,7 +300,7 @@ function Turning_PlayerIsOnTurn() {
 }
 
 /* =======================
-         Create Starting Stats 
+!        Create Starting Stats 
          ====================== */
 function Stats() {
   let value = localStorage.KI_Easy_Wins || 0;
@@ -319,7 +317,7 @@ function Stats() {
   document.getElementById("ID_Normal_2").innerText = value;
 }
 /* ==============
-         Update Stats
+!        Update Stats
          ============= */
 function Update_Stats(winning_player) {
   // console.log("Updated Stats.");
@@ -374,7 +372,7 @@ function Update_Stats(winning_player) {
   // Enough space for a unbeatable level ??? :-)
 }
 /* ===============================================================
-         Create own Notification / Alert /  Prompt / Confirm - Windows 
+!        Create own Notification / Alert /  Prompt / Confirm - Windows 
          ============================================================== */
 function New_Window(options) {
   // console.log("Entered New Window function.");
@@ -542,7 +540,7 @@ function New_Window(options) {
   // console.log("New Window created.");
 }
 /* ===========================
-         Sound Settings Validation 
+!        Sound Settings Validation 
          ========================== */
 function Correct_Sound_Setting() {
   // Make sure, User prefered Sound-Setting is also shown in the Settings-Menu after closed and reopened window
@@ -557,7 +555,7 @@ function Correct_Sound_Setting() {
   }
 }
 /* ==================
-         Creator-Function
+!        Creator-Function
          ================= */
 function Create_DOM_Element(options, arrayOne, arrayTwo) {
   // console.log("Entered Creator function.");
@@ -642,7 +640,7 @@ parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width
 }
 
 /* ======================================
-         Set multiple Attrubutes on 1 Element
+!        Set multiple Attrubutes on 1 Element
          ===================================== */
 function setAttributes(el, attrs) {
   for (var key in attrs) {
@@ -652,7 +650,7 @@ function setAttributes(el, attrs) {
 }
 
 /* ==============================================
-         Set multiple Attrubutes on multiple Elements
+!        Set multiple Attrubutes on multiple Elements
          ============================================= */
 function setAttributesArr(arr, attrs) {
   for (let el of arr) {
@@ -664,7 +662,7 @@ function setAttributesArr(arr, attrs) {
 }
 
 /* ============================
-         Fireworks-Canvas-Animation 
+!        Fireworks-Canvas-Animation 
          =========================== */
 function Fireworks(canvasID) {
   // Firework Function not from me, so special thanks goes to Adam, which published it at codepen! Link below!
@@ -821,14 +819,6 @@ function Fireworks(canvasID) {
     canvas.height = window.innerHeight;
   });
 }
-//#endregion
-
-//#region 2) Final informations and Comments
-/*
-     Bonus Jobs to-do:
-
--) 
-                                                                                                                                                                                                                                                                                */
 //#endregion
 
 //#region 3) Coding Guideline & Tipps

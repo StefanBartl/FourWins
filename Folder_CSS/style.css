@@ -1002,6 +1002,10 @@ select:hover {
   visibility: hidden;
 }
 
+.Class_Full_Column {
+  pointer-events: none;
+}
+
 .Class_Smooth_In {
   animation: SmoothInAnimation 2s ease-in;
   animation-fill-mode: forwards;

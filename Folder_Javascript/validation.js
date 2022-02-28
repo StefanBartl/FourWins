@@ -17,12 +17,11 @@
                                                                 - Row Validator                                     
                                                                                                                     
                                                                 - Top-Cell Validator                                
-                                                                                                                
-                                                            2) Final Information and Comments                                                    
+                                                                                                                                                             
                                                                                                                                                                                                                                                                                */
 //#endregion
 
-//#region 1) Validatiors
+//#region 1) Validators
 
 /*     =================
 !        Diagonal Win-Validation 
@@ -195,8 +194,6 @@ function TopCell_Validation(columnNumber, invokedForKiValidation) {
     document
       .getElementById(`ID_C${columnNumber}R1`)
       .classList.add("Class_Full_Column");
-    document.getElementById(`ID_C${columnNumber}R1`).style =
-      "pointer-events: none";
     return;
   }
 
@@ -211,13 +208,4 @@ function TopCell_Validation(columnNumber, invokedForKiValidation) {
   return;
 }
 
-//#endregion
-
-//#region 2) Final informations and Comments
-/*
-
-         Bonus Jobs to-do:
-    
-    -) 
-                                                                                                                                                                                                                                                                                */
 //#endregion

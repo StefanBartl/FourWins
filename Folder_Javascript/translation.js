@@ -9,16 +9,15 @@
 !                                                           Table of content              
  
                                     1) Translation-Managing Functions & Page Library     
-                                                                                        
-                                                    -) Setting Page Language                           
-                                                                                                    
-                                                    -) Translation                                    
-                                                                                                    
-                                                    -) Library Deutsch                                
-                                                                                                    
-                                                    -) Library English                                
-                                                                                        
-                                    2) Final Information and Comments                    
+                                                                                          
+                                                      -) Setting Page Language                           
+                                                                                                      
+                                                      -) Translation                                    
+                                                                                                      
+                                                      -) Library Deutsch                                
+                                                                                                      
+                                                      -) Library English                                
+                                                                                                             
                                                                                                                                                                                                                                                                                */
 //#endregion
 
@@ -211,15 +210,5 @@ function English() {
 
   // console.log("Page translated to english.");
 } //#endregion
-
-//#endregion
-
-//#region 2) Final informations and Comments
-/*
-     Bonus Jobs to-do:
-
--)
-
-                                                                                                                                                                                                                                                                                */
 
 //#endregion

@@ -29,9 +29,7 @@
                                                     - Get Valid Upwards Placement                                                                                                                                                                                                                                  
                                                                                                                                                                                                                                                                                         
                                                     - Get Valid Sideways Placement                                                                                                                                                                               
-                                                                                                   
-                                              2) Final Information and Comments                        
-                                                                                                                                                                                                                                                                               */
+                                                                                                                                                                                                                                                                                                                                                                                  */
 //#endregion
 
 //#region 1) CPU Player Algrorhytm
@@ -1223,14 +1221,4 @@ function Get_Valid_Sideways_Placement() {
   //console.log("Sideways array after filter out: " + unique_valid_number_array);
   if (unique_valid_number_array.length > 0) return unique_valid_number_array;
 }
-//#endregion
-
-//#region 2) Final informations and Comments
-/*
-
-     Bonus Jobs to-do:
-
--) 
-                                                                                                                                                                                                                                                                              */
-
 //#endregion

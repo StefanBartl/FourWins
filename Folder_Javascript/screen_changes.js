@@ -11,8 +11,7 @@
                                              1) Toggle Start / Game Screen                        
                                                                                                   
                                              2) Game-End Screen Functions                         
-                                                                                                  
-                                              3) Final Information and Comments                                                                                                                                                                                                                                                                                                                         */
+                                                                                                                                                                                                                                                                                                                                                                                                                           */
 //#endregion
 
 //#region 1) Toggle between Start and Game Screen
@@ -62,6 +61,8 @@ function Start_Screen() {
          ======================= */
 function Preparations(gameResult) {
   // console.log("Entered Game End Screen preparations.");
+
+  Game.state = "Prepare Game-End";
 
   // Play correct Audio
   if (
@@ -117,6 +118,8 @@ function Preparations(gameResult) {
           ==================== */
 function Game_End_Screen(gameResult) {
   // console.log("Entered Game End Screen Function.");
+
+  Game.state = "Game End";
 
   const result = Preparations(gameResult);
 
@@ -451,13 +454,4 @@ function Game_End_Screen(gameResult) {
   });
   //#endregion
 }
-//#endregion
-
-//#region 3) Final informations and Comments
-/*
-
-     Bonus Jobs to-do:
-
--) 
-                                                                                                                                                                                                                                                                                */
 //#endregion
