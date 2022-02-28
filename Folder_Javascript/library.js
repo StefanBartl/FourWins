@@ -819,6 +819,22 @@ function Fireworks(canvasID) {
     canvas.height = window.innerHeight;
   });
 }
+
+/* ============================
+!        Await with Promises
+         =========================== */
+const testAwait = function AwaitPromise() {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Inside test await");
+    }, 2000);
+  });
+  return promise;
+};
+/*
+testAwait().then((data) => {console.log(data);});
+*/
+
 //#endregion
 
 //#region 3) Coding Guideline & Tipps

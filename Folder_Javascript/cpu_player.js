@@ -59,7 +59,7 @@ function KI_Easy() {
                             Infobox
 Function to let KI Easy produce a random, but valid number for placement
 */
-  // console.log("KI Easy starts to thinking....");
+  console.log("KI Easy starts to thinking....");
   // Get a random number
   const random_number = getRandomInt(7);
   // Proof if in this column a placement is possible
@@ -198,335 +198,121 @@ function Randomizer(arr1, arr2) {
          ============================== */
 function Detect_3_Coin_Chains_Diagonal() {
   //#region Detect KI Diagonal 3 Coin Chains
-  // Detect KI Diagonal 3 Coin Chains to right-up
+  //console.log("Entered Diagonal 3 Coin Chains Detection");
+  // Maybe Buggy - hard to test....
 
-  for (cell of Game.actualGameboardPlayer2.C1) {
-    if (Game.actualGameboardPlayer2.C2.indexOf(cell - 1) !== -1) {
-      if (Game.actualGameboardPlayer2.C3.indexOf(cell - 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C4R${cell - 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C4R${cell - 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 4;
-          }
-        }
+  for (let columnNumber = 1; columnNumber < 5; columnNumber++) {
+    for (let rowNumber = 2; rowNumber < 5; rowNumber++) {
+      let basis = document.getElementById(`ID_C${columnNumber}R${rowNumber}`),
+        second_plus = document.getElementById(
+          `ID_C${columnNumber + 1}R${rowNumber + 1}`
+        ),
+        third_plus = document.getElementById(
+          `ID_C${columnNumber + 2}R${rowNumber + 2}`
+        );
+      free_fourth = document.getElementById(
+        `ID_C${columnNumber + 3}R${rowNumber + 3}`
+      );
+      ground_fourth = document.getElementById(
+        `ID_C${columnNumber + 3}R${rowNumber + 2}`
+      );
+      if (
+        basis.classList.contains(".Class_PlacedCoin_2 ") &&
+        second_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        third_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        free_fourth.getAttribute("data-isPlayed") !== "yes" &&
+        ground_fourth.getAttribute("data-isPlayed") === "yes"
+      ) {
+        console.log("Diagonal Right-Bottom");
+        return columnNumber + 3;
       }
     }
   }
 
-  for (cell of Game.actualGameboardPlayer2.C2) {
-    if (Game.actualGameboardPlayer2.C3.indexOf(cell - 1) !== -1) {
-      if (Game.actualGameboardPlayer2.C4.indexOf(cell - 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C5R${cell - 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C5R${cell - 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 5;
-          }
-        }
+  for (let columnNumber = 7; columnNumber > 3; columnNumber--) {
+    for (let rowNumber = 2; rowNumber < 5; rowNumber++) {
+      let basis = document.getElementById(`ID_C${columnNumber}R${rowNumber}`),
+        second_plus = document.getElementById(
+          `ID_C${columnNumber - 1}R${rowNumber + 1}`
+        ),
+        third_plus = document.getElementById(
+          `ID_C${columnNumber - 2}R${rowNumber + 2}`
+        );
+      free_fourth = document.getElementById(
+        `ID_C${columnNumber - 3}R${rowNumber + 3}`
+      );
+      ground_fourth = document.getElementById(
+        `ID_C${columnNumber - 3}R${rowNumber + 2}`
+      );
+      if (
+        basis.classList.contains(".Class_PlacedCoin_2 ") &&
+        second_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        third_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        free_fourth.getAttribute("data-isPlayed") !== "yes" &&
+        ground_fourth.getAttribute("data-isPlayed") === "yes"
+      ) {
+        console.log("Diagonal Left-Bottom");
+        return columnNumber + 3;
       }
     }
   }
 
-  for (cell of Game.actualGameboardPlayer2.C3) {
-    if (Game.actualGameboardPlayer2.C4.indexOf(cell - 1) !== -1) {
-      if (Game.actualGameboardPlayer2.C5.indexOf(cell - 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C6R${cell - 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C6R${cell - 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 6;
-          }
-        }
+  for (let columnNumber = 1; columnNumber < 5; columnNumber++) {
+    for (let rowNumber = 7; rowNumber > 5; rowNumber--) {
+      let basis = document.getElementById(`ID_C${columnNumber}R${rowNumber}`),
+        second_plus = document.getElementById(
+          `ID_C${columnNumber + 1}R${rowNumber - 1}`
+        ),
+        third_plus = document.getElementById(
+          `ID_C${columnNumber + 2}R${rowNumber - 2}`
+        );
+      free_fourth = document.getElementById(
+        `ID_C${columnNumber + 3}R${rowNumber - 3}`
+      );
+      ground_fourth = document.getElementById(
+        `ID_C${columnNumber + 3}R${rowNumber - 2}`
+      );
+      if (
+        basis.classList.contains(".Class_PlacedCoin_2 ") &&
+        second_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        third_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        free_fourth.getAttribute("data-isPlayed") !== "yes" &&
+        ground_fourth.getAttribute("data-isPlayed") === "yes"
+      ) {
+        console.log("Diagonal Right-Top detected");
+        return columnNumber + 3;
       }
     }
   }
 
-  for (cell of Game.actualGameboardPlayer2.C4) {
-    if (Game.actualGameboardPlayer2.C5.indexOf(cell - 1) !== -1) {
-      if (Game.actualGameboardPlayer2.C6.indexOf(cell - 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C7R${cell - 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C7R${cell - 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 7;
-          }
-        }
+  for (let columnNumber = 7; columnNumber > 3; columnNumber--) {
+    for (let rowNumber = 2; rowNumber > 5; rowNumber++) {
+      let basis = document.getElementById(`ID_C${columnNumber}R${rowNumber}`),
+        second_plus = document.getElementById(
+          `ID_C${columnNumber - 1}R${rowNumber + 1}`
+        ),
+        third_plus = document.getElementById(
+          `ID_C${columnNumber - 2}R${rowNumber + 2}`
+        );
+      free_fourth = document.getElementById(
+        `ID_C${columnNumber - 3}R${rowNumber + 3}`
+      );
+      ground_fourth = document.getElementById(
+        `ID_C${columnNumber - 3}R${rowNumber + 2}`
+      );
+      if (
+        basis.classList.contains(".Class_PlacedCoin_2 ") &&
+        second_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        third_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        free_fourth.getAttribute("data-isPlayed") !== "yes" &&
+        ground_fourth.getAttribute("data-isPlayed") === "yes"
+      ) {
+        console.log("Diagonal Right-Bottom detected");
+        return columnNumber + 3;
       }
     }
   }
 
-  // Detect KI Diagonal 3 Coin Chains to right-down
-
-  for (cell of Game.actualGameboardPlayer2.C1) {
-    if (Game.actualGameboardPlayer2.C2.indexOf(cell + 1) !== -1) {
-      if (Game.actualGameboardPlayer2.C3.indexOf(cell + 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C4R${cell - 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C4R${cell + 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 4;
-          }
-        }
-      }
-    }
-  }
-
-  for (cell of Game.actualGameboardPlayer2.C2) {
-    if (Game.actualGameboardPlayer2.C3.indexOf(cell + 1) !== -1) {
-      if (Game.actualGameboardPlayer2.C4.indexOf(cell + 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C5R${cell + 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C5R${cell + 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 5;
-          }
-        }
-      }
-    }
-  }
-
-  for (cell of Game.actualGameboardPlayer2.C3) {
-    if (Game.actualGameboardPlayer2.C4.indexOf(cell + 1) !== -1) {
-      if (Game.actualGameboardPlayer2.C5.indexOf(cell + 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C6R${cell + 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C6R${cell + 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 6;
-          }
-        }
-      }
-    }
-  }
-
-  for (cell of Game.actualGameboardPlayer2.C4) {
-    if (Game.actualGameboardPlayer2.C5.indexOf(cell + 1) !== -1) {
-      if (Game.actualGameboardPlayer2.C6.indexOf(cell + 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C7R${cell + 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C7R${cell + 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 7;
-          }
-        }
-      }
-    }
-  }
-  //#endregion
-
-  //#region Detect Human Player Diagonal 3 Coin Chains
-  // Detect Human Player Diagonal 3 Coin Chains to right-down
-
-  for (cell of Game.actualGameboardPlayer1.C1) {
-    if (Game.actualGameboardPlayer1.C2.indexOf(cell + 1) !== -1) {
-      if (Game.actualGameboardPlayer1.C3.indexOf(cell + 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C4R${cell - 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C4R${cell + 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 4;
-          }
-        }
-      }
-    }
-  }
-
-  for (cell of Game.actualGameboardPlayer2.C2) {
-    if (Game.actualGameboardPlayer1.C3.indexOf(cell + 1) !== -1) {
-      if (Game.actualGameboardPlayer1.C4.indexOf(cell + 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C5R${cell + 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C5R${cell + 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 5;
-          }
-        }
-      }
-    }
-  }
-
-  for (cell of Game.actualGameboardPlayer1.C3) {
-    if (Game.actualGameboardPlayer1.C4.indexOf(cell + 1) !== -1) {
-      if (Game.actualGameboardPlayer1.C5.indexOf(cell + 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C6R${cell + 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C6R${cell + 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 6;
-          }
-        }
-      }
-    }
-  }
-
-  for (cell of Game.actualGameboardPlayer1.C4) {
-    if (Game.actualGameboardPlayer1.C5.indexOf(cell + 1) !== -1) {
-      if (Game.actualGameboardPlayer1.C6.indexOf(cell + 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C7R${cell + 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C7R${cell + 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 7;
-          }
-        }
-      }
-    }
-  }
-
-  // Detect Human Player Diagonal 3 Coin Chains to right-up
-
-  for (cell of Game.actualGameboardPlayer1.C1) {
-    if (Game.actualGameboardPlayer1.C2.indexOf(cell - 1) !== -1) {
-      if (Game.actualGameboardPlayer1.C3.indexOf(cell - 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C4R${cell - 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C4R${cell - 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 4;
-          }
-        }
-      }
-    }
-  }
-
-  for (cell of Game.actualGameboardPlayer1.C2) {
-    if (Game.actualGameboardPlayer1.C3.indexOf(cell - 1) !== -1) {
-      if (Game.actualGameboardPlayer1.C4.indexOf(cell - 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C5R${cell - 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C5R${cell - 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 5;
-          }
-        }
-      }
-    }
-  }
-
-  for (cell of Game.actualGameboardPlayer1.C3) {
-    if (Game.actualGameboardPlayer1.C4.indexOf(cell - 1) !== -1) {
-      if (Game.actualGameboardPlayer1.C5.indexOf(cell - 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C6R${cell - 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C6R${cell - 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 6;
-          }
-        }
-      }
-    }
-  }
-
-  for (cell of Game.actualGameboardPlayer1.C4) {
-    if (Game.actualGameboardPlayer1.C5.indexOf(cell - 1) !== -1) {
-      if (Game.actualGameboardPlayer1.C6.indexOf(cell - 2) !== -1) {
-        if (
-          document
-            .getElementById(`ID_C7R${cell - 3}`)
-            .getAttribute("isPlayed") === "no"
-        ) {
-          if (
-            document
-              .getElementById(`ID_C7R${cell - 2}`)
-              .getAttribute("isPlayed") === "yes"
-          ) {
-            return 7;
-          }
-        }
-      }
-    }
-  }
   //#endregion
 }
 

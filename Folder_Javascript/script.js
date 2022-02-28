@@ -26,14 +26,7 @@
 todo        -) Game End Screen and Fireworks need attention!
 todo        -) Detect arrays kleiner machen --> cpu_player.js hard workover
 todo        -) Column & Row Val changing for winChain!
-todo        -) Async / Await
-todo        -) Code minimazing, layout and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
-todo            How much i can get in the Game object= row counter ... 
-todo            Functions all return; CHECK (and for) Helper mthods like psuh to local storage 
-todo            Global variables for DOM Objects possible which are caled often?;
-todo         -) Close repatationing code
-todo         -) Fullfill Coding Guideline
-todo         -) Do this in all scripts!
+todo        -) Upwards Placement Problem -> place all time
 
 todo         -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo         -) Write a final Comment 
