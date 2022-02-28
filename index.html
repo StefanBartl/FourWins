@@ -1,42 +1,66 @@
-<!doctype html>
-<html lang='de'>
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <title id="ID_Head_Title"></title>
+    <!-- Javascript und CSS Dateieinbindung -->
+    <link rel="stylesheet" type="text/css" href="Folder_CSS/style.css" />
+    <!-- Favicon & AppleTouch-->
+    <link
+      rel="icon"
+      sizes="16x16"
+      href="Folder_Graphics/Folder_Icons/pb_200x200.ico"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="Folder_Graphics/Folder_Icons/pb_200x200.png"
+    />
+    <!-- Metadaten  -->
+    <meta name="author" content="Stefan Bartl" />
+    <meta
+      name="description"
+      content='Online-Version of the well knowed family Game "Four-Wins". Play it against friends or KI!'
+    />
+    <meta
+      name="keywords"
+      content="Game, Browsergame, Spiel, Browserspiel, Four, Four Wins, 4, Vier, 4 Gewinnt"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
 
-<head>
-  <title id="ID_Head_Title"></title>
-  <!-- Javascript und CSS Dateieinbindung -->
-  <link rel='stylesheet' type='text/css' href='Folder_CSS/style.css'>
-  <!-- Favicon & AppleTouch-->
-  <link rel='icon' sizes='16x16' href='Folder_Graphics/Folder_Icons/pb_200x200.ico'>
-  <link rel='apple-touch-icon' sizes='120x120' href='Folder_Graphics/Folder_Icons/pb_200x200.png' />
-  <!-- Metadaten  -->
-  <meta name='author' content='Stefan Bartl'>
-  <meta name='description' content='Online-Version of the well knowed family Game "Four-Wins". Play it against friends or KI!'>
-  <meta name="keywords" content="Game, Browsergame, Spiel, Browserspiel, Four, Four Wins, 4, Vier, 4 Gewinnt">
-  <meta charset='UTF-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-</head>
-
-<body>
-
-  <header class="Class_HeaderWrapper" id="ID_Header">
+  <body>
+    <header class="Class_HeaderWrapper" id="ID_Header">
       <h1 class="Class_HeadlineTop" id="ID_Headline"></h1>
-        <p id="ID_Header_p"></p>
-  </header>
+      <p id="ID_Header_p"></p>
+    </header>
 
-  <div class="Class_MainWrapper" id="ID_MainWrapper">
-
+    <div class="Class_MainWrapper" id="ID_MainWrapper">
       <section class="Class_LeftSidebarWrapper" id="ID_LeftSidebarWrapper">
         <div class="Class_Sidebars">
-        <h3 class="Class_Players" id="ID_Player_1_Headline"></h3>
-        <span class="Class_Naming_Span">
-          <input type="text" max="15" id="ID_Player_1_Name" name="Player_1_ Name">
-          <img src="./Folder_Graphics/Folder_Icons/simpleicons_org/circleci.svg" id="ID_SVG_Player_1"
-            class="Class_Player_Name_Buttons" for="Player_1_Name">
-        </span>
-      </div>
+          <h3 class="Class_Players" id="ID_Player_1_Headline"></h3>
+          <span class="Class_Naming_Span">
+            <input
+              type="text"
+              max="15"
+              id="ID_Player_1_Name"
+              name="Player_1_ Name"
+            />
+            <img
+              src="./Folder_Graphics/Folder_Icons/simpleicons_org/circleci.svg"
+              id="ID_SVG_Player_1"
+              class="Class_Player_Name_Buttons"
+              for="Player_1_Name"
+            />
+          </span>
+        </div>
       </section>
-      
-      <section class="Class_GameboardWrapper" id="ID_GameboardWrapper" data-inGame="no">
+
+      <section
+        class="Class_GameboardWrapper"
+        id="ID_GameboardWrapper"
+        data-inGame="no"
+      >
         <div id="ID_Column1" class="Class_Columns">
           <div id="ID_C1R1" class="Class_TopCells"></div>
           <div id="ID_C1R2" class="Class_Cells"></div>
@@ -99,97 +123,141 @@
           <div id="ID_C7R5" class="Class_Cells"></div>
           <div id="ID_C7R6" class="Class_Cells"></div>
           <div id="ID_C7R7" class="Class_Cells"></div>
-        </div> 
+        </div>
       </section>
-      
+
       <section class="Class_RightSidebarWrapper" id="ID_RightSidebarWrapper">
         <div class="Class_Sidebars">
-        <h3 class="Class_Players" id="ID_Player_2_Headline"></h3>
-        <span class="Class_Naming_Span">
-          <img src="./Folder_Graphics/Folder_Icons/simpleicons_org/circleci _GESPIEGELTxcf.png" id="ID_SVG_Player_2"
-            class="Class_Player_Name_Buttons" for="Player_2_Name">
-          <input type="text" max="15" id="ID_Player_2_Name" name="Player_2_ Name">
-        </span>
-      </div>
+          <h3 class="Class_Players" id="ID_Player_2_Headline"></h3>
+          <span class="Class_Naming_Span">
+            <img
+              src="./Folder_Graphics/Folder_Icons/simpleicons_org/circleci _GESPIEGELTxcf.png"
+              id="ID_SVG_Player_2"
+              class="Class_Player_Name_Buttons"
+              for="Player_2_Name"
+            />
+            <input
+              type="text"
+              max="15"
+              id="ID_Player_2_Name"
+              name="Player_2_ Name"
+            />
+          </span>
+        </div>
       </section>
-    
-  </div>
+    </div>
 
-  <footer class="Class_FooterWrapper" id="ID_FooterWrapper">
-    <div id="ID_Choose_KI_Div">
-      <h6 id="ID_Play_Against"></h6>
-      <select name="Choose_KI" id="ID_Choose_KI">
-        <option value="No" id="ID_No"></option>
-        <option value="CPU Easy" id="ID_Easy_Text" selected></option>
-        <option value="CPU Normal" id="ID_Normal_Text"></option>
-    </select>
-    </div>
-    <button type="button" id="ID_Start_Button" class="Buttons"></button>
-  </footer>
+    <footer class="Class_FooterWrapper" id="ID_FooterWrapper">
+      <div id="ID_Choose_KI_Div">
+        <h6 id="ID_Play_Against"></h6>
+        <select name="Choose_KI" id="ID_Choose_KI">
+          <option value="No" id="ID_No"></option>
+          <option value="CPU Easy" id="ID_Easy_Text" selected></option>
+          <option value="CPU Normal" id="ID_Normal_Text"></option>
+        </select>
+      </div>
+      <button type="button" id="ID_Start_Button" class="Buttons"></button>
+    </footer>
 
-  <div class="Class_Settings_Menu" id="ID_Settings_Menu">
-    <span id="ID_Setting_Span">
-      <div id="ID_Info_Container">
-      <h3 id="ID_Info"></h3>
+    <div class="Class_Settings_Menu" id="ID_Settings_Menu">
+      <span id="ID_Setting_Span">
+        <div id="ID_Gameboard_Size">
+          <input type="number" name="gameboard_size1" id="ID_GameboardSize1" />
+          <input type="number" name="gameboard_size2" id="ID_GameboardSize2" />
+          <button id="ID_Gameboard_Size_Button">Size</button>
+        </div>
+        <div id="ID_Info_Container">
+          <h3 id="ID_Info"></h3>
+        </div>
+        <div id="ID_Colour_Container">
+          <h3 id="ID_Label_Colour"></h3>
+          <div class="Class_Colour_Toggle">
+            <span class="Class_Colour_Slider" id="ID_Colour_Slider"
+              ><div id="ID_Toggle_Button"></div
+            ></span>
+          </div>
+        </div>
+        <div id="ID_Sound_Container">
+          <h3 id="ID_Sound"></h3>
+          <input type="checkbox" id="ID_Sound_Checkbox" />
+        </div>
+        <div id="ID_Language_Container">
+          <h3 id="ID_Language"></h3>
+          <select name="LanguageMenu" id="ID_Language_Menu">
+            <option value="Deutsch" id="ID_German" selected>Deutsch</option>
+            <option value="English" id="ID_English">English</option>
+          </select>
+        </div>
+        <div id="ID_Stats_Container">
+          <h4 id="ID_Stats"></h4>
+          <div class="Class_StatsWrapper" id="ID_Stats_First_Wrapper">
+            <h5 id="ID_Stats_Summary_Easy"></h5>
+            <details class="Class_Summary_Details">
+              <summary id="ID_Stats_Easy"></summary>
+              <span class="Class_Settings_Summarys"
+                ><p id="ID_Easy_1">0</p>
+                /
+                <p id="ID_Easy_2">0</p>
+                /
+                <p id="ID_Easy_3">0</p></span
+              >
+              <button id="ID_Reset_Easy" class="Class_Reset_Buttons">
+                Reset CPU Easy
+              </button>
+            </details>
+          </div>
+          <div class="Class_StatsWrapper" id="ID_Stats_Second_Wrapper">
+            <h5>Normal</h5>
+            <details class="Class_Summary_Details">
+              <summary id="ID_Stats_Normal"></summary>
+              <span class="Class_Settings_Summarys"
+                ><p id="ID_Normal_1">0</p>
+                /
+                <p id="ID_Normal_2">0</p>
+                /
+                <p id="ID_Normal_3">0</p></span
+              >
+              <button id="ID_Reset_Normal" class="Class_Reset_Buttons">
+                Reset CPU Normal
+              </button>
+            </details>
+          </div>
+        </div>
+        <div id="ID_Contacts_Container">
+          <h3 id="ID_Contact"></h3>
+        </div>
+        <div id="ID_Credits_Container">
+          <h3 id="ID_Credits"></h3>
+        </div>
+        <div id="ID_Delete_All_Container">
+          <button id="ID_Delete_All"></button>
+        </div>
+      </span>
     </div>
-    <div id="ID_Colour_Container">
-    <h3 id="ID_Label_Colour"></h3>
-    <div class="Class_Colour_Toggle">
-      <span class="Class_Colour_Slider" id="ID_Colour_Slider"><div id="ID_Toggle_Button"></div></span>
-  </div>
-</div>
-  <div id="ID_Sound_Container">
-    <h3 id="ID_Sound"></h3>
-    <input type="checkbox" id="ID_Sound_Checkbox">
-  </div>
-    <div id="ID_Language_Container">
-    <h3 id="ID_Language"></h3>
-    <select name="LanguageMenu" id="ID_Language_Menu">
-      <option value="Deutsch" id="ID_German" selected>Deutsch</option>
-      <option value="English" id="ID_English">English</option>
-    </select>
-  </div>
-    <div id="ID_Stats_Container">
-    <h4 id="ID_Stats"></h4>
-    <div class="Class_StatsWrapper" id="ID_Stats_First_Wrapper">
-    <h5 id="ID_Stats_Summary_Easy"></h5>
-    <details class="Class_Summary_Details">
-      <summary id="ID_Stats_Easy"></summary>
-      <span class="Class_Settings_Summarys"><p id="ID_Easy_1">0</p> / <p id="ID_Easy_2">0</p> / <p id="ID_Easy_3">0</p></span>
-    <button id="ID_Reset_Easy" class="Class_Reset_Buttons">Reset CPU Easy</button>
-    </details>
-    </div>
-    <div class="Class_StatsWrapper" id="ID_Stats_Second_Wrapper">
-    <h5>Normal</h5>
-    <details class="Class_Summary_Details">
-      <summary id="ID_Stats_Normal"></summary>
-      <span class="Class_Settings_Summarys"><p id="ID_Normal_1">0</p> / <p id="ID_Normal_2">0</p> / <p id="ID_Normal_3">0</p></span>
-      <button id="ID_Reset_Normal" class="Class_Reset_Buttons">Reset CPU Normal</button>
-    </details>       
-    </div>
-    </div>
-    <div id="ID_Contacts_Container">
-      <h3 id="ID_Contact"></h3>
-    </div>
-    <div id="ID_Credits_Container">
-    <h3 id="ID_Credits"></h3>
-  </div>
-  <div id="ID_Delete_All_Container">
-    <button id="ID_Delete_All"></button>
-  </div>
-  </span>
-  </div>
 
- <!-- #region Javascript-Files--> 
-  <script type="text/javascript" src='Folder_Javascript/domElements.js'></script>
-  <script type="text/javascript" src='Folder_Javascript/library.js'></script>
-  <script type="text/javascript" src='Folder_Javascript/screen_changes.js'></script>
-  <script type="text/javascript" src='Folder_Javascript/validation.js'></script>
-  <script type="text/javascript" src='Folder_Javascript/cpu_player.js'></script>
-  <script type="text/javascript" src='Folder_Javascript/translation.js'></script>
-  <script type='text/javascript' src='Folder_Javascript/script.js'></script>
-<!-- #endregion -->
-
-</body>
-
+    <!-- #region Javascript-Files-->
+    <script
+      type="text/javascript"
+      src="Folder_Javascript/domElements.js"
+    ></script>
+    <script type="text/javascript" src="Folder_Javascript/library.js"></script>
+    <script
+      type="text/javascript"
+      src="Folder_Javascript/screen_changes.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="Folder_Javascript/validation.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="Folder_Javascript/cpu_player.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="Folder_Javascript/translation.js"
+    ></script>
+    <script type="text/javascript" src="Folder_Javascript/script.js"></script>
+    <!-- #endregion -->
+  </body>
 </html>

@@ -118,7 +118,7 @@ header {
 
 .Class_MainWrapper {
   display: grid;
-  grid: auto / 30% auto 30%;
+  grid: auto / 30vw auto 30vw;
   grid-template-areas: "leftSide gameboard rightSide";
 }
 

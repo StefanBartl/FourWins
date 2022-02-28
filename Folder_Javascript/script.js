@@ -1,11 +1,11 @@
 //#region Table of Content
 /*
 !                                             Four-Wins-Online Main-CSS-Stylsheet
-                                                               powered by
+?                                                               powered by
 !                                                                Stefan Bartl
 !                                                     (WKDSteVIE / WKDMinerva)
-                                                                     2021                                                                                                                                                                        
-                                              ________________________________________                                                                                                                                                                                                  
+?                                                                     2021                                                                                                                                                                        
+?                                     ________________________________________                                                                                                                                                                                                  
 !                                                           Table of content              
 
                                                     1) General  Settings & Page Set-Up                                
@@ -19,15 +19,40 @@
                                                                                                                                                                                                                                                                                */
 //#endregion
 
+document
+  .getElementById("ID_Gameboard_Size_Button")
+  .addEventListener("click", () => {
+    for (topCell of topCellsArray) {
+      topCell.remove();
+    }
+    for (cell of cellsArray) {
+      cells.remove();
+    }
+
+    let size1 = document.getElementById("ID_GameboardSize1");
+    let size2 = document.getElementById("ID_GameboardSize2");
+    let cellcounter = 1;
+    for (let x = 0; x < size1; x++) {
+      let topcell = document.createElement("div");
+      topcell.classList.add("Class_TopCells");
+      topcell.id = `ID_C${x}R1`;
+      document.getElementById("ID_GameboardWrapper").appendChild(topcell);
+      for (let y = 0; y < size2; y++) {
+        let cell = document.createElement("div");
+        cell.classList.add("Class_Cells");
+        cell.id = `ID_C${cellcounter}R${y}`;
+        document.getElementById(`ID_C${cellcounter}R1`).appendChild(cell);
+      }
+    }
+  });
+
 //#region Open Jobs
 /*
-!                                                           Jobs To-do:
+?                               Jobs To-do:
                                          
-todo        -) Game End Screen and Fireworks need attention!
-todo        -) Detect arrays kleiner machen --> cpu_player.js hard workover
+todo        -) Game End Screen
+todo        -) KI Normal!
 todo        -) Column & Row Val changing for winChain!
-todo        -) Upwards Placement Problem -> place all time
-
 todo         -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo         -) Write a final Comment 
 todo         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
@@ -36,7 +61,6 @@ todo         -) Save Default Script Files with the new Script Layout for later P
 
 //#region 1) General Settings & Set-Up Page
 
-//! Game Object
 const Game = {
   // Game Object for storing important values in variables. Collected access via Game.[variable]
   // Setting the Gameboard arrays to keep Coin placements
@@ -75,12 +99,10 @@ const Game = {
   state: "startingScreen",
 };
 
-// Windows Object
 const Windows = {
   // Object for storing returned Values from own Alert / Confirm / Prompt Windows
 };
 
-// Set Page-Language
 Set_Page_Language();
 
 //#region Audio
@@ -488,7 +510,7 @@ delete_all.addEventListener("click", () => {
 //#endregion
 
 /* ========================== 
-!        Start-Game Event-Listener
+?        Start-Game Event-Listener
        ========================== */
 start_button.addEventListener("click", Game_Preparations);
 
