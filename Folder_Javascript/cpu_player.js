@@ -164,7 +164,8 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
 function Randomizer (arr1, arr2){
 // console.log("Randomizer getted arrays:", arr1,  arr2);
 
-const randomizing_number, randomizing_array = [];
+let randomizing_number; 
+const randomizing_array = [];
 
 for ( let i = 0; i < arr1.length; i++ ){
     randomizing_array.push(arr1[i]);
