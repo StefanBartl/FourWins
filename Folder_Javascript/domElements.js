@@ -1,16 +1,15 @@
-
-    /* ===============================================
-         DOM-Elements for accesing in Javascript-Files 
-         ============================================== */
+/* ==============================
+!         DOM-Elements for accesing in Javascript-Files 
+        =============================== */
 
 //#region Container & Wrapper
 const header = document.getElementById("ID_Header");
-const main_wrapper =  document.getElementById("ID_MainWrapper");
+const main_wrapper = document.getElementById("ID_MainWrapper");
 const left_sidebar = document.getElementById("ID_LeftSidebarWrapper");
 const gameboard = document.getElementById("ID_GameboardWrapper");
 const right_sidebar = document.getElementById("ID_RightSidebarWrapper");
 const footer = document.getElementById("ID_FooterWrapper");
-                                                                                                                                                                                                                                                                    //#endregion
+//#endregion
 
 //#region Text, Inputs, Images
 const head_title = document.getElementById("ID_Head_Title");
@@ -30,7 +29,7 @@ const ki_level_dropdown_easy = document.getElementById("ID_Easy_Text");
 const ki_level_dropdown_normal = document.getElementById("ID_Normal_Text");
 const turn_text = document.getElementById("ID_h3_turnText");
 const thinking_div = document.getElementById("ID_Thinking_Div");
-                                                                                                                                                                                                                                                                    //#endregion
+//#endregion
 
 //#region Settings menu
 const settings_menu = document.getElementById("ID_Settings_Menu");
@@ -55,23 +54,28 @@ const stats_sum_easy = document.getElementById("ID_Stats_Summary_Easy");
 const stats_reset_normal = document.getElementById("ID_Reset_Normal");
 const delete_all = document.getElementById("ID_Delete_All");
 const label_colour = document.getElementById("ID_Label_Colour");
-                                                                                                                                                                                                                                                                    //#endregion
+//#endregion
 
 //#region Global Counters & Arrays
 
 /* Setting the Counters for let the Coin Placing Section know, 
    in which row & column the Game currently is to calculate by placement the correct position */
-   let row_Counter_C1 = 8, row_Counter_C2 = 8, row_Counter_C3 = 8, row_Counter_C4 = 8, row_Counter_C5 = 8, row_Counter_C6 = 8, row_Counter_C7 = 8;
+let row_Counter_C1 = 8,
+  row_Counter_C2 = 8,
+  row_Counter_C3 = 8,
+  row_Counter_C4 = 8,
+  row_Counter_C5 = 8,
+  row_Counter_C6 = 8,
+  row_Counter_C7 = 8;
 
-   // Counters to count wins if more Games are played  
-   let count_wins_player_one = 0, count_wins_player_two = 0;
-   
-   // Get all Top-Cells 
-   const topCellsArray = document.getElementsByClassName("Class_TopCells");
-   
-   // Get all Cells 
-   const cellsArray = document.getElementsByClassName("Class_Cells");
-   
-   //#endregion
-   
-                                                                                                                                                                                                                                                                
+// Counters to count wins if more Games are played
+let count_wins_player_one = 0,
+  count_wins_player_two = 0;
+
+// Get all Top-Cells
+const topCellsArray = document.getElementsByClassName("Class_TopCells");
+
+// Get all Cells
+const cellsArray = document.getElementsByClassName("Class_Cells");
+
+//#endregion

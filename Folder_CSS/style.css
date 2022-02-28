@@ -1,50 +1,44 @@
-
 /* #region Table of Content */
-                                                                                                                                                                                                                        /*    
-                                          Four-Wins-Online Main-CSS-Stylsheet
-                                                      powered by
+/*    
+!                                             Four-Wins-Online Main-CSS-Stylsheet
+                                                               powered by
+!                                                                Stefan Bartl
+!                                                     (WKDSteVIE / WKDMinerva)
+                                                                     2021                                                                                                                                                                        
+                                              ________________________________________                                                                                                                                                                                                  
+!                                                           Table of content              
 
-                                                     Stefan Bartl
-                                               (WKDSteVIE / WKDMinerva)
+                                                               1) General                                  
+                                                                                                            
+                                                               2) Layout                                   
+                                                                                                            
+                                                               3) Gameboard                                
+                                                                                                            
+                                                               4) Settings Menu                                                                           
+                                                                                                            
+                                                               5) Typography                               
+                                                                                                            
+                                                               6) Inputs, Buttons, Dropdowns, etc...       
+                                                                                                         
+                                                               7) Animations & Transitions                
+                                                                                                            
+                                                               8) Game End Screen                           
 
-                                                        2021
-                             ________________________________________________________________                                                                                                                                                                                                                                                    
-                            {             ____________________________________               }                                                                                                                                                                                  
-                            {                       Table of content                         }
-                            {________________________________________________________________}                                                       
-                            |                                                                |
-                            |                  1) General                                    |
-                            |                                                                |
-                            |                  2) Layout                                     |
-                            |                                                                |
-                            |                  3) Gameboard                                  |
-                            |                                                                |
-                            |                  4) Settings Menu                              |                                               
-                            |                                                                |
-                            |                  5) Typography                                 |
-                            |                                                                |
-                            |                  6) Inputs, Buttons, Dropdowns, etc...         |
-                            |                                                                |
-                            |                  7) Animations & Transitions                   |
-                            |                                                                |
-                            |                  8) Game End Screen                            |
-                            |                                                                |
-                            |                  9) Helpers                                    |
-                            |                                                                |
-                            |                  10) Media Queries                             |
-                            |                                                                |
-                            |                  11) Final Information & Comments              |
-                            |                                                                |
-                            |                  12) Credits                                   |
-                            |                                                                |
-                            |               13-15) My CSS-Guideline                          |
-                            |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __ _ _ _ _ _ _ _|
-                                                                                                                                                                                                                                                                               */
-                                                                                                                                                                                                                                                                              /*#endregion*/ 
+                                                               9) Helpers                                   
+                                                                                                            
+                                                               10) Media Queries                            
+                                                                                                            
+                                                               11) Final Information & Comments             
+                                                                                                            
+                                                               12) Credits                                 
+                                                                                                            
+                                                               13-15) My CSS-Guideline                          
+                                                                                                                                                                                                                                                                             */
+/*#endregion*/
 
 /* #region Jobs To-Do */
-                                                                                                                                                                                                                                                                                /*
-                                                    Jobs To-do:
+/*
+!                                                          Jobs To-Do: 
                                                     
                                         -) :focus on all :hovers for Cross-Browser-Support!
                                         -) Test and repair responsivness in all sizes!
@@ -55,358 +49,349 @@
                                         -) Find final Folder Layout for CSS-Stylesheets!  
                   
                                                   Session progress:
--)                                                                                                                                                                                                                                                                      */
-                                                                                                                                                                                                                                                               /* #endregion */ 
+-) 
+                                                                                                                                                                                                                                                                                       */
+/* #endregion */
 
-/* #region 1) General */                                                                                                                                                                                                                                                                               
+/* #region 1) General */
 
-:root{
-      /* ===============
-         colour pallete 
+:root {
+  /* ===============
+ !        colour pallete 
           ================ */
-    
-   --prime-blueviolett: hsl(238, 56%, 19%);
-   --prime-darkgrey: hsl(330, 2%, 17%);
-   --prime-green: hsl(95, 63%, 36%);
-   --prime-yellow: hsl(43, 100%, 50%);
-   --prime-manner: hsl(10, 60%, 80%);
-   --prime-lightgrey: hsl(71, 13%, 67%);
 
-   --base-colour: hsl(201, 79%, 46%);;
-   --main-black: hsl(0, 0%, 0%);
-   --main-red: hsl(0, 100%, 50%);
+  --prime-blueviolett: hsl(238, 56%, 19%);
+  --prime-darkgrey: hsl(330, 2%, 17%);
+  --prime-green: hsl(95, 63%, 36%);
+  --prime-yellow: hsl(43, 100%, 50%);
+  --prime-manner: hsl(10, 60%, 80%);
+  --prime-lightgrey: hsl(71, 13%, 67%);
 
-   --base-border: hsl(0, 0%, 100%);
-   --gameboard: hsl(240, 100%, 49%);
-   --cornsilk: hsl(48, 100%, 93%);
-   --top-header: hsl(39, 77%, 83%);
+  --base-colour: hsl(201, 79%, 46%);
+  --main-black: hsl(0, 0%, 0%);
+  --main-red: hsl(0, 100%, 50%);
 
-   overflow-wrap: break-word;
-   word-wrap: break-word;
+  --base-border: hsl(0, 0%, 100%);
+  --gameboard: hsl(240, 100%, 49%);
+  --cornsilk: hsl(48, 100%, 93%);
+  --top-header: hsl(39, 77%, 83%);
 
-   /*overflow: hidden;*/
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 
+  /*overflow: hidden;*/
 }
 
-     /* =======
-         fonts 
+/* =======
+!         fonts 
          ======= */
 
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap");
 
-                                                                                                                                                                                                                                                               /* #endregion */  
+/* #endregion */
 
-/* #region 2) Layout */  
+/* #region 2) Layout */
 
-body{
-   background-color: var(--base-colour);
-   z-index: -3;
-   font-family: 'Titillium Web', sans-serif;
-   color: var(--top-header);
-   justify-content: center;
-   align-items: center;
-   text-align: center;
-   display: grid;
-   grid: 15vh auto 15vh / 1fr;
+body {
+  background-color: var(--base-colour);
+  z-index: -3;
+  font-family: "Titillium Web", sans-serif;
+  color: var(--top-header);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: grid;
+  grid: 15vh auto 15vh / 1fr;
 }
 
-      /* =============
-         1. Grid Layer 
-          ============== */ 
+/* =============
+ !        1. Grid Layer 
+          ============== */
 
-
-header{
-   border-bottom: solid 1vh var(--base-border);
-   border-radius: 1rem;
-   line-height: 0;
-   display: grid;
-   grid: 1fr 1fr / 1fr;
+header {
+  border-bottom: solid 1vh var(--base-border);
+  border-radius: 1rem;
+  line-height: 0;
+  display: grid;
+  grid: 1fr 1fr / 1fr;
 }
 
-.Class_MainWrapper{
-   display: grid;
-   grid: auto / 30% auto 30%;
-   grid-template-areas:
-"leftSide gameboard rightSide";
+.Class_MainWrapper {
+  display: grid;
+  grid: auto / 30% auto 30%;
+  grid-template-areas: "leftSide gameboard rightSide";
 }
 
 footer {
-   display: grid;
-   grid: 1fr / 1fr 1fr;
-   align-content: center;
-   align-items: center;
-   justify-content: center;
-   text-align: center;
-   
+  display: grid;
+  grid: 1fr / 1fr 1fr;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-      /* ===================
-         Sidebars Grid Layer 
-          ==================== */ 
+/* ===================
+!        Sidebars Grid Layer 
+          ==================== */
 
-.Class_LeftSidebarWrapper{
-   grid-area: leftSide;
-   display: grid;
-   grid: repeat(4, 1fr) / 1fr;
-   grid-template-areas: 
-      " . "
-      " sidebar "
-      " . "
-      " . "
-      ; 
+.Class_LeftSidebarWrapper {
+  grid-area: leftSide;
+  display: grid;
+  grid: repeat(4, 1fr) / 1fr;
+  grid-template-areas:
+    " . "
+    " sidebar "
+    " . "
+    " . ";
 }
 
-.Class_RightSidebarWrapper{
-   grid-area: rightSide;
-   z-index: 1;
-   display: grid;
-   grid: repeat(4, 1fr) / 1fr;
-   grid-template-areas: 
-      " . "
-      " sidebar "
-      " . "
-      " . "
-      ; 
+.Class_RightSidebarWrapper {
+  grid-area: rightSide;
+  z-index: 1;
+  display: grid;
+  grid: repeat(4, 1fr) / 1fr;
+  grid-template-areas:
+    " . "
+    " sidebar "
+    " . "
+    " . ";
 }
 
-.Class_Sidebars{
-   border-top:  solid 1px var(--base-border);
-   border-bottom:  solid 1px var(--base-border);
-   grid-area: sidebar;
+.Class_Sidebars {
+  border-top: solid 1px var(--base-border);
+  border-bottom: solid 1px var(--base-border);
+  grid-area: sidebar;
 }
 
-      /* ===================
+/* ===================
          Gameboard (Grid?) 
-          ==================== */ 
+          ==================== */
 
-.Class_GameboardWrapper{
-   grid-area: gameboard;
-   display: flex;
-   background-color: var(--gameboard);
-   border: solid 1rem var(--gameboard);
-   border-top: dashed .1rem var(--gameboard);
-   border-radius: 2rem;
-   border-top-left-radius: 0;
-   border-top-right-radius: 0;
-   border-top: none;
+.Class_GameboardWrapper {
+  grid-area: gameboard;
+  display: flex;
+  background-color: var(--gameboard);
+  border: solid 1rem var(--gameboard);
+  border-top: dashed 0.1rem var(--gameboard);
+  border-radius: 2rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
 }
 
-.Class_GameboardWrapper[data-inGame="yes"]{
-   position: absolute;
-   bottom: 0;
-   left: 50%;
-   transform: translateX(-50%);
-   aspect-ratio: 1/1;
-   min-height: 70vh;
+.Class_GameboardWrapper[data-inGame="yes"] {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  aspect-ratio: 1/1;
+  min-height: 70vh;
 }
 
-footer{
-   display: grid;
-   grid: 1fr / repeat(8, 1fr);
-   grid-gap: 2rem;
-   
+footer {
+  display: grid;
+  grid: 1fr / repeat(8, 1fr);
+  grid-gap: 2rem;
 }
 
-#ID_Choose_KI_Div{
-   grid-column-start:4;
-   grid-column-end: 5;
-   margin-bottom: 2rem;
+#ID_Choose_KI_Div {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  margin-bottom: 2rem;
 }
 
-#ID_Start_Button{
-   grid-column-start:5;
-   grid-column-end: 6;
+#ID_Start_Button {
+  grid-column-start: 5;
+  grid-column-end: 6;
 }
 
-                                                                                                                                                                                                                                                               /* #endregion */  
+/* #endregion */
 
-/* #region 3) Gameboard */  
+/* #region 3) Gameboard */
 
-.Class_Columns{
-   width: calc(100% / 7);
+.Class_Columns {
+  width: calc(100% / 7);
 }
 
-.Class_TopCells{
-   outline: none;
-   min-width: auto;
-   min-height: calc(95% / 7);
-   border-left: dashed .15rem var(--base-border);
-   background-color: var(--base-colour);
-   z-index: -1;
-   cursor: pointer;
+.Class_TopCells {
+  outline: none;
+  min-width: auto;
+  min-height: calc(95% / 7);
+  border-left: dashed 0.15rem var(--base-border);
+  background-color: var(--base-colour);
+  z-index: -1;
+  cursor: pointer;
 }
 
-#ID_C1R1{
-   border-left: none;
+#ID_C1R1 {
+  border-left: none;
 }
 
-.Class_Full_Column{
-   box-shadow: 0 -5px 0 var(--gameboard);
+.Class_Full_Column {
+  box-shadow: 0 -5px 0 var(--gameboard);
 }
 
-.Class_Cells{
-   min-width: calc(90% / 7);
-   min-height: calc(90% / 7);
-   border: solid .2rem var(--gameboard);
-   border-radius: 10rem;
-   background-color: var(--base-border);
-   opacity: .7;
-   justify-content: center;
-   align-content: center;
+.Class_Cells {
+  min-width: calc(90% / 7);
+  min-height: calc(90% / 7);
+  border: solid 0.2rem var(--gameboard);
+  border-radius: 10rem;
+  background-color: var(--base-border);
+  opacity: 0.7;
+  justify-content: center;
+  align-content: center;
 }
 
-      /* ===============================
-         Game Screen Gameboard Classes 
-         =============================== */ 
+/* ===============================
+ !        Game Screen Gameboard Classes 
+         =============================== */
 
-.Class_Gameboard_Wrapper_InGame{
-   margin-top: 10vh;
+.Class_Gameboard_Wrapper_InGame {
+  margin-top: 10vh;
 }
 
-.Class_Turn_Players{
-   min-width: 100%;
-   min-height: 100%;
-   margin-bottom: 3%;
-   margin-top: 3%;
-   text-align: center;
-   justify-content: center;
-   align-content: center;
+.Class_Turn_Players {
+  min-width: 100%;
+  min-height: 100%;
+  margin-bottom: 3%;
+  margin-top: 3%;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
 }
 
-.Class_Thinking{
-   text-align: center;
-   font-size: 3rem;
+.Class_Thinking {
+  text-align: center;
+  font-size: 3rem;
 }
 
-.Class_Left_Pos{
-   position: absolute;
-   left: 3%;
+.Class_Left_Pos {
+  position: absolute;
+  left: 3%;
 }
 
-.Class_Right_Pos{
-   position: absolute;
-   right: 3%;
+.Class_Right_Pos {
+  position: absolute;
+  right: 3%;
 }
 
-      /* ==============
+/* ==============
          placing coins
             ============= */
 
-.Class_Coin_Yellow{
-   background-image: url("../Folder_Graphics/Coins/yellow.png"); 
-   background-size: 80%;
-   background-position: center;
-   background-repeat: no-repeat;
-   width: 5vw;
-   height: 10vh;
-   border-radius: 50%;
-   z-index: 0;
+.Class_Coin_Yellow {
+  background-image: url("../Folder_Graphics/Coins/yellow.png");
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 5vw;
+  height: 10vh;
+  border-radius: 50%;
+  z-index: 0;
 }
 
-.Class_Coin_Red{
-   background-image: url("../Folder_Graphics/Coins/red.png"); 
-   background-size: 80%;
-   background-position: center;
-   background-repeat: no-repeat;
-   width: 5vw;
-   height: 10vh;
-   border-radius: 50%;
-   z-index: 0;
+.Class_Coin_Red {
+  background-image: url("../Folder_Graphics/Coins/red.png");
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 5vw;
+  height: 10vh;
+  border-radius: 50%;
+  z-index: 0;
 }
 
-.Class_PlacedCoin_1{
-   background-image: url("../Folder_Graphics/Coins/yellow.png");
-   background-size: 80%;
-   background-position: center;
-   background-repeat: no-repeat;
+.Class_PlacedCoin_1 {
+  background-image: url("../Folder_Graphics/Coins/yellow.png");
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.Class_PlacedCoin_2{
-   background-image: url("../Folder_Graphics/Coins/red.png");
-   background-size: 80%;
-   background-position: center;
-   background-repeat: no-repeat;
+.Class_PlacedCoin_2 {
+  background-image: url("../Folder_Graphics/Coins/red.png");
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-                                                                                                                                                                                                                                                               /* #endregion */  
+/* #endregion */
 
-/* #region 4) Settings Menu */                                                                                                                                                                                                                                                                               
+/* #region 4) Settings Menu */
 
-    /* ========
+/* ========
          layout 
          ======= */
 
-.Class_Settings_Menu{
-   position: absolute;
-   top: 5vh;
-   right: 0;
-   height: 90vh;
-   width: clamp(270px, 20%, 25vw);    
-   line-height: 0;
+.Class_Settings_Menu {
+  position: absolute;
+  top: 5vh;
+  right: 0;
+  height: 90vh;
+  width: clamp(270px, 20%, 25vw);
+  line-height: 0;
 }
 
-.Class_Show_Settings{
-   animation: Show_Settings_Animation .1s ease-in;
-   animation-fill-mode: forwards;
-   animation-iteration-count: 1;
+.Class_Show_Settings {
+  animation: Show_Settings_Animation 0.1s ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
 }
 
 @keyframes Show_Settings_Animation {
-from{
-   right: -95%;
-}
-to{
-   right: 0;
- 
-}
+  from {
+    right: -95%;
+  }
+  to {
+    right: 0;
+  }
 }
 
-.Class_Hide_Settings{
-   animation: Hide_Settings_Animation .1s ease-out;
-   animation-fill-mode: forwards;
-   animation-iteration-count: 1
+.Class_Hide_Settings {
+  animation: Hide_Settings_Animation 0.1s ease-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
 }
 @keyframes Hide_Settings_Animation {
-from{
-   right: 0vw;
-}
-to{
-   right: -95%;
- 
-}
-}
-
-#ID_Setting_Span{
-   position: relative;
-   top: 0;
-   right: -95%;
-   display: grid;
-   grid: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr / 1fr;
-   gap: 1rem;
-   width: 100vw;
-   height: 90vh;
-   max-width:100%;
-   z-index: 3;
-   justify-content:center;
-   overflow: auto;
-   background-color: var(--base-border);
-   box-shadow: .1rem .1rem 1rem black;
-   border: solid 2px var(--base-colour);
-   border-top-left-radius: 10%;
-   border-bottom-left-radius: 10%;
-   color: var(--main-black);
-   text-align: center;
-   font-size: small;
-   scrollbar-color: dark;
-   scrollbar-gutter: both-edges ;
+  from {
+    right: 0vw;
+  }
+  to {
+    right: -95%;
+  }
 }
 
-
-#ID_Setting_Span::-webkit-scrollbar{
-   width: 1.rem;;
+#ID_Setting_Span {
+  position: relative;
+  top: 0;
+  right: -95%;
+  display: grid;
+  grid: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr / 1fr;
+  gap: 1rem;
+  width: 100vw;
+  height: 90vh;
+  max-width: 100%;
+  z-index: 3;
+  justify-content: center;
+  overflow: auto;
+  background-color: var(--base-border);
+  box-shadow: 0.1rem 0.1rem 1rem black;
+  border: solid 2px var(--base-colour);
+  border-top-left-radius: 10%;
+  border-bottom-left-radius: 10%;
+  color: var(--main-black);
+  text-align: center;
+  font-size: small;
+  scrollbar-color: dark;
+  scrollbar-gutter: both-edges;
 }
 
-#ID_Setting_Span::-webkit-scrollbar-corner{
-   background-color: var(--gameboard);    
+#ID_Setting_Span::-webkit-scrollbar {
+  width: 1rem;
+}
+
+#ID_Setting_Span::-webkit-scrollbar-corner {
+  background-color: var(--gameboard);
 }
 
 #ID_Info_Container,
@@ -417,20 +402,20 @@ to{
 #ID_Contacts_Container,
 #ID_Credits_Container,
 #ID_Delete_All_Container {
-   min-width: 100%;
-   display: flex;
-   flex-wrap: wrap;
-   align-items: center;
-   justify-content: center;
+  min-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 #ID_Colour_Container,
 #ID_Sound_Container {
-   height: 3rem;
+  height: 3rem;
 }
 
-    /* ============
-         typography 
+/* ============
+  !       typography 
          =========== */
 
 #ID_Info,
@@ -439,837 +424,821 @@ to{
 #ID_Language,
 #ID_Stats,
 #ID_Contact,
-#ID_Credits{
-   min-width: 100%;
+#ID_Credits {
+  min-width: 100%;
 }
 
 #ID_Info,
 #ID_Language,
 #ID_Stats,
 #ID_Contact,
-#ID_Credits{
-   cursor: pointer;
+#ID_Credits {
+  cursor: pointer;
 }
 
-#ID_Info{
-   color: var(--main-red);
+#ID_Info {
+  color: var(--main-red);
 }
 
-.Class_StatsWrapper{
-   margin-inline: 1rem;
+.Class_StatsWrapper {
+  margin-inline: 1rem;
 }
 
-    /* =======
+/* =======
          hover 
-         ====== */ 
+         ====== */
 
-#ID_Info:hover{
-   color: black;
+#ID_Info:hover {
+  color: black;
 }
 
 #ID_Stats_First_Wrapper :hover,
 #ID_Stats_Second_Wrapper :hover,
 #ID_Contact:hover,
-#ID_Credits:hover { 
-   color: red;
+#ID_Credits:hover {
+  color: red;
 }
 
+/* #endregion */
 
-                                                                                                                                                                                                                                                        /* #endregion */  
+/* #region 5) Typographie */
 
-/* #region 5) Typographie */    
-
-
-#ID_Headline{
-   text-align: center;
+#ID_Headline {
+  text-align: center;
 }
 
-#ID_Header_p{
+#ID_Header_p {
 }
 
-
-#ID_Player_1_Headline{
-   width: 100%
+#ID_Player_1_Headline {
+  width: 100%;
 }
 
-#ID_Player_2_Headline{
-   width: 100%
+#ID_Player_2_Headline {
+  width: 100%;
 }
 
-#ID_h3_turnText{
-   width: 10rem;
-   border: dashed .3rem var(--base-border);
-   padding: 1rem;
+#ID_h3_turnText {
+  width: 10rem;
+  border: dashed 0.3rem var(--base-border);
+  padding: 1rem;
 }
-                                                                                                                                                                                                                                                               /* #endregion */  
+/* #endregion */
 
-/* #region 6) Inputs, Buttons, Dropdowns, etc...  */  
+/* #region 6) Inputs, Buttons, Dropdowns, etc...  */
 
-     /* ============
+/* ============
          inputs text
          ============ */
 
 input {
-   width: 28ch;
-   max-width:80%;
-   height: 2rem;
-   text-align: center;
-   margin-bottom:  5vh;
-   cursor: pointer;
-   border-radius: 10%;
-   box-shadow: 0 0 1rem black;
-   border: none;
+  width: 28ch;
+  max-width: 80%;
+  height: 2rem;
+  text-align: center;
+  margin-bottom: 5vh;
+  cursor: pointer;
+  border-radius: 10%;
+  box-shadow: 0 0 1rem black;
+  border: none;
 }
 
-input:hover{
-   background-color: var(--prime-darkgrey);
-   color: var(--base-border);
-   box-shadow: inset 0 0 1rem white;
+input:hover {
+  background-color: var(--prime-darkgrey);
+  color: var(--base-border);
+  box-shadow: inset 0 0 1rem white;
 }
 
-input:focus{
-   background-color: var(--prime-darkgrey);
-   color: var(--base-border);
-   box-shadow: inset 0 0 1rem white;
+input:focus {
+  background-color: var(--prime-darkgrey);
+  color: var(--base-border);
+  box-shadow: inset 0 0 1rem white;
 }
 
-    /* ============
+/* ============
          checkboxes 
          =========== */
 
-#ID_Sound_Checkbox{
-   height: 1.5rem;
-   box-shadow: 0 0 1rem black;
-   border-radius: 20%;
+#ID_Sound_Checkbox {
+  height: 1.5rem;
+  box-shadow: 0 0 1rem black;
+  border-radius: 20%;
 }
 
-#ID_Sound_Checkbox:hover{
-   box-shadow: none;
+#ID_Sound_Checkbox:hover {
+  box-shadow: none;
 }
 
-    /* =========
+/* =========
          buttons 
          ======== */
 
-button{
-   cursor: pointer;
-   border-radius: 10%;
-   box-shadow: 0 0 1rem black;
-   border: none;
+button {
+  cursor: pointer;
+  border-radius: 10%;
+  box-shadow: 0 0 1rem black;
+  border: none;
 }
 
-button:hover{
-   background-color: var(--prime-darkgrey);
-    color: var(--base-border);
-    box-shadow: inset 0 0 1rem white;
+button:hover {
+  background-color: var(--prime-darkgrey);
+  color: var(--base-border);
+  box-shadow: inset 0 0 1rem white;
 }
 
-
-#ID_Start_Button{
-   cursor: pointer;
-   min-width: 12.5vw;
-   min-height: 7.5vh;
+#ID_Start_Button {
+  cursor: pointer;
+  min-width: 12.5vw;
+  min-height: 7.5vh;
 }
 
-.Class_Naming_Span{
-   display: flex;
-   justify-content: center;
-   align-content: center;
-   justify-items: center;
-   align-items: center;
+.Class_Naming_Span {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
 }
 
-.Class_Player_Name_Buttons{
-   max-width: 1.5rem;
-   max-height: 1.5rem;
-   margin-left: 1rem;
-   margin-right: 1rem;
-   margin-bottom: 5vh;
-   filter: invert(1);
+.Class_Player_Name_Buttons {
+  max-width: 1.5rem;
+  max-height: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 5vh;
+  filter: invert(1);
 }
 
-#ID_Reset_Easy{
-   min-width: 50%;
+#ID_Reset_Easy {
+  min-width: 50%;
 }
 
-#ID_Reset_Normal{
-   min-width: 50%;
+#ID_Reset_Normal {
+  min-width: 50%;
 }
 
-#ID_Delete_All{
-   cursor: pointer;
-   height: 1.5rem;
-   width: 8rem;
-   border-radius: 10%;
-} 
-
-#ID_NewGame_Button{
-   cursor: pointer;
-   min-width: 12.5vw;
-   min-height: 7.5vh;
-   border-radius: 10rem;
-   margin-right: 1rem;  
-   margin-top: 10vh;        
+#ID_Delete_All {
+  cursor: pointer;
+  height: 1.5rem;
+  width: 8rem;
+  border-radius: 10%;
 }
-   
-#ID_Back_Button{
-   cursor: pointer;
-   min-width: 12.5vw;
-   min-height: 7.5vh;
-   border-radius: 10rem;
-   margin-left: 1rem;
-   margin-top: 10vh;        
-}   
 
-    /* ===========
+#ID_NewGame_Button {
+  cursor: pointer;
+  min-width: 12.5vw;
+  min-height: 7.5vh;
+  border-radius: 10rem;
+  margin-right: 1rem;
+  margin-top: 10vh;
+}
+
+#ID_Back_Button {
+  cursor: pointer;
+  min-width: 12.5vw;
+  min-height: 7.5vh;
+  border-radius: 10rem;
+  margin-left: 1rem;
+  margin-top: 10vh;
+}
+
+/* ===========
          dropdowns 
          ========== */
-                                                   
-                                                   
-select{
-   text-align-last: center;
-   text-align: center;
-   -ms-text-align-last: center;
-   -moz-text-align-last: center;
-   cursor: pointer;
-   border-radius: 10%;
-   box-shadow: 0 0 1rem black;
-   border: none;
+
+select {
+  text-align-last: center;
+  text-align: center;
+  -ms-text-align-last: center;
+  -moz-text-align-last: center;
+  cursor: pointer;
+  border-radius: 10%;
+  box-shadow: 0 0 1rem black;
+  border: none;
 }
 
-select:hover{
-   background-color: var(--prime-darkgrey);
-    color: var(--base-border);
-    box-shadow: inset 0 0 1rem white;
+select:hover {
+  background-color: var(--prime-darkgrey);
+  color: var(--base-border);
+  box-shadow: inset 0 0 1rem white;
 }
 
-#ID_Choose_KI{
-   min-height: 1rem;
-   border-radius: 10rem; 
+#ID_Choose_KI {
+  min-height: 1rem;
+  border-radius: 10rem;
 }
 
-#ID_Language_Menu{
-   cursor: pointer;
-   min-width: 50%;
-   border: none;
+#ID_Language_Menu {
+  cursor: pointer;
+  min-width: 50%;
+  border: none;
 }
 
-
-    /* ========
+/* ========
          toggle 
          ======= */
 
-.Class_Colour_Toggle{
-   min-width: 100%;
-   display: flex;
+.Class_Colour_Toggle {
+  min-width: 100%;
+  display: flex;
 }
 
-#ID_Toggle_Button{
-   position: relative;
-   top: 0;
-   left: 5%;
-   background-color: white;
-   width: 1rem;
-   height: 1rem;
-   border-radius: 50%;
+#ID_Toggle_Button {
+  position: relative;
+  top: 0;
+  left: 5%;
+  background-color: white;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
 }
 
-#ID_Toggle_Button:hover{
-   background-color: var(--gameboard);
+#ID_Toggle_Button:hover {
+  background-color: var(--gameboard);
 }
 
-.Class_Toggle{
-   transform: translateX(1.8rem);
+.Class_Toggle {
+  transform: translateX(1.8rem);
 }
 
-.Class_Colour_Slider { 
-   position: relative;
-   cursor: pointer;
-   top: 0%;
-   left: 41%;
-   width: 3rem;
-   height: 1rem;
-   background-color: yellow; 
-   transition: all .3s ease-in-out;
-   border-radius: 2rem;  
-   box-shadow: 0 0 1rem black;
-   border: none;
+.Class_Colour_Slider {
+  position: relative;
+  cursor: pointer;
+  top: 0%;
+  left: 41%;
+  width: 3rem;
+  height: 1rem;
+  background-color: yellow;
+  transition: all 0.3s ease-in-out;
+  border-radius: 2rem;
+  box-shadow: 0 0 1rem black;
+  border: none;
 }
 
-.Class_Colour_Slider:hover{
-    box-shadow: none;
+.Class_Colour_Slider:hover {
+  box-shadow: none;
 }
 
-    /* ==========
+/* ==========
          summarys 
          ========= */
 
-.Class_Summary_Details:hover{
-   color: var(--main-red);
-   cursor: pointer;
+.Class_Summary_Details:hover {
+  color: var(--main-red);
+  cursor: pointer;
 }
 
-.Class_Settings_Summarys{
-   display: flex;
-   justify-content: center;
-   align-items:center;
-   min-width: 100%;
+.Class_Settings_Summarys {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
 }
 
-                                                                                                                                                                                                                                                               /* #endregion */  
+/* #endregion */
 
-/* #region 7) Animations & Transitions */    
+/* #region 7) Animations & Transitions */
 
-         
-     /* =========================
+/* =========================
          choosing coin animations
          ========================= */
 
-.Class_ChoosingAnimation_Coin_1{
-   background-image: url("../Folder_Graphics/Coins/yellow.png");
-   background-size: 100%;
-   background-repeat: no-repeat;
-   background-position: top;
-   animation: choosing_Coin_1_Animation 1s infinite alternate;
+.Class_ChoosingAnimation_Coin_1 {
+  background-image: url("../Folder_Graphics/Coins/yellow.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: top;
+  animation: choosing_Coin_1_Animation 1s infinite alternate;
 }
 
 @keyframes choosing_Coin_1_Animation {
-from{
-   background-position: center;
-   background-size: 80%;
+  from {
+    background-position: center;
+    background-size: 80%;
+  }
+
+  to {
+    background-position: center;
+    background-size: 50%;
+  }
 }
 
-to{
-   background-position: center;
-   background-size: 50%;
-}
-}
-
-.Class_ChoosingAnimation_Coin_2{
-background-image: url("../Folder_Graphics/Coins/red.png");
-background-size: 100%;
-background-repeat: no-repeat;
-background-position: top;
-animation: choosing_Coin_2_Animation 1s infinite alternate;
+.Class_ChoosingAnimation_Coin_2 {
+  background-image: url("../Folder_Graphics/Coins/red.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: top;
+  animation: choosing_Coin_2_Animation 1s infinite alternate;
 }
 
 @keyframes choosing_Coin_2_Animation {
-from{
-   background-position: center;
-   background-size: 80%;
-}
+  from {
+    background-position: center;
+    background-size: 80%;
+  }
 
-to{
-   background-position: center;
-   background-size: 50%;
+  to {
+    background-position: center;
+    background-size: 50%;
+  }
 }
-}
-     /* =========================
+/* =========================
          placing coin animations
          ========================= */
 
-.Class_PlacingAnimation_to_Row_2{
-animation: Placing_Coin_Animation_Cell_2 normal 1s;
-animation-fill-mode: forwards;
+.Class_PlacingAnimation_to_Row_2 {
+  animation: Placing_Coin_Animation_Cell_2 normal 1s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes Placing_Coin_Animation_Cell_2 {
-from{
+  from {
+  }
+  to {
+    transform: translateY(calc((52vh / 6) * 1));
+  }
+}
 
-}
-to{
-   transform: translateY(calc((52vh / 6) * 1));
-}
-}
-
-.Class_PlacingAnimation_to_Row_3{
-animation: Placing_Coin_Animation_Cell_3 normal 1s;
-animation-fill-mode: forwards;
+.Class_PlacingAnimation_to_Row_3 {
+  animation: Placing_Coin_Animation_Cell_3 normal 1s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes Placing_Coin_Animation_Cell_3 {
-from{
+  from {
+  }
+  to {
+    transform: translateY(calc((52vh / 6) * 2));
+  }
+}
 
-}
-to{
-   transform: translateY(calc((52vh / 6) * 2));
-}
-}
-
-.Class_PlacingAnimation_to_Row_4{
-animation: Placing_Coin_Animation_Cell_4 normal 1s;
-animation-fill-mode: forwards;
+.Class_PlacingAnimation_to_Row_4 {
+  animation: Placing_Coin_Animation_Cell_4 normal 1s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes Placing_Coin_Animation_Cell_4 {
-from{
+  from {
+  }
+  to {
+    transform: translateY(calc((52vh / 6) * 3));
+  }
+}
 
-}
-to{
-   transform: translateY(calc((52vh / 6) * 3));
-}
-}
-
-.Class_PlacingAnimation_to_Row_5{
-animation: Placing_Coin_Animation_Cell_5 normal 1s;
-animation-fill-mode: forwards;
+.Class_PlacingAnimation_to_Row_5 {
+  animation: Placing_Coin_Animation_Cell_5 normal 1s;
+  animation-fill-mode: forwards;
 }
 @keyframes Placing_Coin_Animation_Cell_5 {
-from{
+  from {
+  }
+  to {
+    transform: translateY(calc((52vh / 6) * 4));
+  }
+}
 
-}
-to{
-   transform: translateY(calc((52vh / 6) * 4));
-}
-}
-
-.Class_PlacingAnimation_to_Row_6{
-animation: Placing_Coin_Animation_Cell_6 normal 1s;
-animation-fill-mode: forwards;
+.Class_PlacingAnimation_to_Row_6 {
+  animation: Placing_Coin_Animation_Cell_6 normal 1s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes Placing_Coin_Animation_Cell_6 {
-from{
+  from {
+  }
+  to {
+    transform: translateY(calc((52vh / 6) * 5));
+  }
+}
 
-}
-to{
-   transform: translateY(calc((52vh / 6) * 5));
-}
-}
-
-.Class_PlacingAnimation_to_Row_7{
-animation: Placing_Coin_Animation_Cell_7 normal 1s;
-animation-fill-mode: forwards;
+.Class_PlacingAnimation_to_Row_7 {
+  animation: Placing_Coin_Animation_Cell_7 normal 1s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes Placing_Coin_Animation_Cell_7 {
-from{
+  from {
+  }
+  to {
+    transform: translateY(52vh);
+  }
+}
 
-}
-to{
-   transform: translateY(52vh);
-}
-}
-
-     /* ============================
+/* ============================
          player save name animations
          ============================ */
- 
 
-.Class_Buttons_Add_Hover_Animations_1{
-cursor: pointer;
-animation: Button_1_Add_Animation 2s;
-animation-fill-mode: forwards;
+.Class_Buttons_Add_Hover_Animations_1 {
+  cursor: pointer;
+  animation: Button_1_Add_Animation 2s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes Button_1_Add_Animation {
-from{ 
-   filter: invert(1);
-   transform: rotate(0deg); 
-}
-to{ 
-   filter: brightness(0) saturate(100%) invert(91%) sepia(80%) saturate(5882%) hue-rotate(354deg) brightness(107%) contrast(104%);
-   transform: rotate(90deg); 
-}
+  from {
+    filter: invert(1);
+    transform: rotate(0deg);
+  }
+  to {
+    filter: brightness(0) saturate(100%) invert(91%) sepia(80%) saturate(5882%)
+      hue-rotate(354deg) brightness(107%) contrast(104%);
+    transform: rotate(90deg);
+  }
 }
 
-.Class_Buttons_Remove_Hover_Animations_1{
-animation: Button_1_Remove_Animation 2s;
-animation-fill-mode: forwards;
+.Class_Buttons_Remove_Hover_Animations_1 {
+  animation: Button_1_Remove_Animation 2s;
+  animation-fill-mode: forwards;
 }
 @keyframes Button_1_Remove_Animation {
-from{ 
-   filter: brightness(0) saturate(100%) invert(91%) sepia(80%) saturate(5882%) hue-rotate(354deg) brightness(107%) contrast(104%);
-   transform: rotate(90deg);
-}
-to{ 
-   filter: invert(1);
-   transform: rotate(0deg); 
-}
+  from {
+    filter: brightness(0) saturate(100%) invert(91%) sepia(80%) saturate(5882%)
+      hue-rotate(354deg) brightness(107%) contrast(104%);
+    transform: rotate(90deg);
+  }
+  to {
+    filter: invert(1);
+    transform: rotate(0deg);
+  }
 }
 
-.Class_Buttons_Add_Hover_Animations_2{
-cursor: pointer;
-animation: Button_2_Add_Animation 2s;
-animation-fill-mode: forwards;
+.Class_Buttons_Add_Hover_Animations_2 {
+  cursor: pointer;
+  animation: Button_2_Add_Animation 2s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes Button_2_Add_Animation {
-from{ 
-   filter: invert(1);
-   transform: rotate(0deg); 
-}
-to{ 
-   filter: brightness(0) saturate(100%) invert(17%) sepia(91%) saturate(7221%) hue-rotate(359deg) brightness(122%) contrast(119%);
-   transform: rotate(-90deg); 
-}
+  from {
+    filter: invert(1);
+    transform: rotate(0deg);
+  }
+  to {
+    filter: brightness(0) saturate(100%) invert(17%) sepia(91%) saturate(7221%)
+      hue-rotate(359deg) brightness(122%) contrast(119%);
+    transform: rotate(-90deg);
+  }
 }
 
-.Class_Buttons_Remove_Hover_Animations_2{
-animation: Button_2_Remove_Animation 2s;
-animation-fill-mode: forwards;
+.Class_Buttons_Remove_Hover_Animations_2 {
+  animation: Button_2_Remove_Animation 2s;
+  animation-fill-mode: forwards;
 }
 @keyframes Button_2_Remove_Animation {
-from{ 
-   filter: brightness(0) saturate(100%) invert(17%) sepia(91%) saturate(7221%) hue-rotate(359deg) brightness(122%) contrast(119%);
-   transform: rotate(-90deg);
+  from {
+    filter: brightness(0) saturate(100%) invert(17%) sepia(91%) saturate(7221%)
+      hue-rotate(359deg) brightness(122%) contrast(119%);
+    transform: rotate(-90deg);
+  }
+  to {
+    filter: invert(1);
+    transform: rotate(0deg);
+  }
 }
-to{ 
-   filter: invert(1);
-   transform: rotate(0deg); 
-}
-}
-                                                                                                                                                                                                                                                               /* #endregion */  
+/* #endregion */
 
-/* #region 8) Game End Screen */  
+/* #region 8) Game End Screen */
 
-     /* ==========================
+/* ==========================
          firework canvas container
          ========================== */
 
-.Class_Game_End_Div{
-position: absolute;
-left: 0;
-top: 0;
-width: 100vw;
-height: 100vh;
+.Class_Game_End_Div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
-     /* ===========================
+/* ===========================
          game end content container
          =========================== */
 
-.Class_Game_End_Container{
-z-index: 4;
-position: absolute;
-display: flex;
-flex-wrap: wrap;
-top: 0;
-left: 0;
-width: 100vw;
-height: 100vh;
-justify-content: center;
-text-align: center;
-animation: End_Animation 4s ease-in ;
-animation-fill-mode: forwards;
-animation-iteration-count: 1;
+.Class_Game_End_Container {
+  z-index: 4;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  text-align: center;
+  animation: End_Animation 4s ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
 }
 @keyframes End_Animation {
-from{
-   transform: scale(0);
-}
-to {
-   transform: scale(1);
-}
-}
-
-.Class_Gameboard_End{
-z-index: 4;
-min-width: 15vw;
-min-height: 15vw;
-aspect-ratio: 1/1;
-margin-bottom: 5vw;
-border-radius: 0rem;
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
-.Class_Top_End{
-background-color: var(--base-border);
-opacity: .7;
+.Class_Gameboard_End {
+  z-index: 4;
+  min-width: 15vw;
+  min-height: 15vw;
+  aspect-ratio: 1/1;
+  margin-bottom: 5vw;
+  border-radius: 0rem;
 }
 
-#ID_End_H1{
-min-width: 100%;
-padding-top: 1%;
+.Class_Top_End {
+  background-color: var(--base-border);
+  opacity: 0.7;
 }
 
-#ID_End_Text{
-min-width: 100%;
+#ID_End_H1 {
+  min-width: 100%;
+  padding-top: 1%;
 }
 
-#ID_End_Button_Div{
-min-width: 100%;
-justify-content: center;
-align-content: center;   
+#ID_End_Text {
+  min-width: 100%;
 }
 
-     /* ============
+#ID_End_Button_Div {
+  min-width: 100%;
+  justify-content: center;
+  align-content: center;
+}
+
+/* ============
          win counter
          ============ */
 
-#ID_Win_Div_One{
-position: absolute;
-top: 0;
-left: 0;
-justify-content: left;
-align-content: flex-start;
-text-align: center;
+#ID_Win_Div_One {
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: left;
+  align-content: flex-start;
+  text-align: center;
 }
 
-#ID_Win_Div_Two{
-position: absolute;
-top: .5rem;
-right: 0;
-justify-content: right;
-align-content: flex-end;
-text-align: center;
+#ID_Win_Div_Two {
+  position: absolute;
+  top: 0.5rem;
+  right: 0;
+  justify-content: right;
+  align-content: flex-end;
+  text-align: center;
 }
 
-#ID_Draw_Div{
-position: absolute;
-top: .5rem;
-right: 45%;
+#ID_Draw_Div {
+  position: absolute;
+  top: 0.5rem;
+  right: 45%;
 }
-                                                                                                                                                                                                                                                               /* #endregion */  
+/* #endregion */
 
-/* #region 9) Helpers */  
+/* #region 9) Helpers */
 
-.Class_Invisible{
-visibility: hidden;
+.Class_Invisible {
+  visibility: hidden;
 }
 
-.Class_Smooth_In{
-animation: SmoothInAnimation 2s ease-in;
-animation-fill-mode: forwards;
-animation-iteration-count: 1
+.Class_Smooth_In {
+  animation: SmoothInAnimation 2s ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
 }
 
 @keyframes SmoothInAnimation {
-from{
-   transform: scale(0);
-}
-to{
-   transform: scale(1);
-}
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
-.Class_Smooth_Out{
-animation: SmoothOutAnimation 2s ease-out;
-animation-fill-mode: forwards;
-animation-iteration-count: 1
+.Class_Smooth_Out {
+  animation: SmoothOutAnimation 2s ease-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
 }
 
 @keyframes SmoothOutAnimation {
-from{
-   transform: scale(1);
-}
-to{
-   transform: scale(0);
-}
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
 }
 
-     /* ============
+/* ============
          new windows
          ============ */
 
+.Class_Window {
+  min-height: 30vh;
+  max-height: 75vh;
+  width: 50%;
+  z-index: 10;
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  display: grid;
+  grid: 1rem auto 1rem / 1fr;
+  justify-items: center;
+  text-align: center;
+  background-color: grey;
+  border: solid 1px black;
+  font-size: xx-small;
+  color: white;
+  text-align: center;
+}
 
-.Class_Window{
-   min-height: 30vh;
-   max-height: 75vh;
-   width: 50%;
-   z-index: 10;
-   position: absolute;
-   top: 10%;
-   left: 25%;
-   display: grid;
-   grid: 1rem auto 1rem / 1fr;
-   justify-items:center;
-   text-align: center;
-   background-color: grey;
-   border: solid 1px black;
-   font-size:xx-small;
-   color: white;
-   text-align: center;
-   }
-
-.Class_Inner_Window{
-   width:  calc(100% - 2rem);
-   display: grid;
-   grid:  2rem auto 4rem / 1fr;
-   max-block-size: 65vh;
-   justify-items: center;
-   align-items: center;
-   background-color: white;
-   color: black;
-   border: solid 1px black;
-   font-size: small;
+.Class_Inner_Window {
+  width: calc(100% - 2rem);
+  display: grid;
+  grid: 2rem auto 4rem / 1fr;
+  max-block-size: 65vh;
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+  color: black;
+  border: solid 1px black;
+  font-size: small;
 }
 
 .Class_Inner_Window p {
-   align-self: center;
-   margin-top: 2rem;
-   height: 100%;
-   overflow: scroll;  
-   
+  align-self: center;
+  margin-top: 2rem;
+  height: 100%;
+  overflow: scroll;
 }
 
-.Class_Inner_Window input{
-   height: 2rem;
-   width: 60%;
-   background-color: darkgray;
-   text-align: center;
-   border: solid 1px black;
+.Class_Inner_Window input {
+  height: 2rem;
+  width: 60%;
+  background-color: darkgray;
+  text-align: center;
+  border: solid 1px black;
 }
 
 .Class_Buttons_Div {
-   display: flex;
-   gap: 1rem;
-   height: 2rem;
+  display: flex;
+  gap: 1rem;
+  height: 2rem;
 }
 
-.Class_Inner_Window button{
-   width: 5rem;
-   height: 2rem;
-   border: solid 1px black;
+.Class_Inner_Window button {
+  width: 5rem;
+  height: 2rem;
+  border: solid 1px black;
 }
-                                                                                                                                                                                                                                                               /* #endregion */  
+/* #endregion */
 
-/* #region 10) Media Queries */  
+/* #region 10) Media Queries */
 
 @media (max-width: 767.98px) {
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 
-body {
-   max-width: 100vw;
-   overflow-x: hidden;
-   overflow-y: auto;
-}   
+  .Class_MainWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
 
-.Class_MainWrapper{
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   align-items: center;   
-}
+  .Class_HeadlineTop {
+    text-align: center;
+    margin-top: 3rem;
+  }
 
-.Class_HeadlineTop{
-   text-align: center;
-   margin-top: 3rem;
-}
+  .Class_GameboardWrapper {
+    min-width: 75vw;
+    min-height: 50vw;
+  }
 
-.Class_GameboardWrapper{
-   min-width: 75vw;
-   min-height: 50vw;
-}
+  .Class_Gameboard_Wrapper_InGame {
+    min-width: 100%;
+    margin-top: 0%;
+  }
 
-.Class_Gameboard_Wrapper_InGame{
-   min-width: 100%;
-   margin-top: 0%;
-}
+  .Class_Settings_Menu {
+    position: absolute;
+    right: 46vw;
+    top: 2vh;
+    filter: invert(1);
+  }
+  .Class_Naming_Span {
+    display: inline-block;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+  }
 
-.Class_Settings_Menu{
-   position: absolute;
-   right: 46vw;
-   top: 2vh;
-   filter: invert(1);
-}
-.Class_Naming_Span{
-   display:inline-block;
-   justify-content: center;
-   align-content: center;
-   justify-items: center;
-   align-items: center;
-}
+  .Class_Player_Name_Buttons {
+    margin-block: 1rem;
+  }
 
-.Class_Player_Name_Buttons{
-   margin-block: 1rem;
-}
+  #ID_Player_1_Name {
+    min-width: 100%;
+  }
 
-#ID_Player_1_Name{
-   min-width: 100%;
-}
+  #ID_Player_2_Name {
+    min-width: 100%;
+  }
 
-#ID_Player_2_Name{
-   min-width: 100%;
-}
+  .Class_LeftSidebarWrapper {
+    width: 100%;
+    margin-block: 2rem;
+  }
+  .Class_RightSidebarWrapper {
+    width: 100%;
+    margin-block: 2rem;
+    margin-bottom: 1rem;
+  }
 
-.Class_LeftSidebarWrapper{
-   width: 100%;
-   margin-block: 2rem;
-}
-.Class_RightSidebarWrapper{
-   width: 100%;
-   margin-block: 2rem;
-   margin-bottom: 1rem;
-}
+  .Class_Turn_Players {
+    display: flex;
+    min-width: 100%;
+    margin-bottom: 5%;
+    margin-top: 3%;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+  }
+  .Class_Left_Pos {
+    bottom: 0;
+  }
+  .Class_Right_Pos {
+    bottom: 0;
+  }
 
-.Class_Turn_Players{
-   display: flex;
-   min-width: 100%;
-   margin-bottom: 5%;
-   margin-top: 3%;
-   text-align: center;
-   justify-content: center;
-   align-content: center;
-}
-.Class_Left_Pos{
- bottom: 0;
+  #ID_Start_Button {
+    min-width: 30%;
+    margin-bottom: 5%;
+  }
 
-}
-.Class_Right_Pos{
- bottom: 0;
-}
+  #ID-Settings_Span {
+    overflow: hidden;
+  }
 
+  /* Gaḿe End Screen Mobile*/
+  /* Move Gameboard at the End of the Game Animation */
+  .Class_Gameboard_End {
+    transform: scale(0.5);
+  }
 
-#ID_Start_Button{
-   min-width: 30%;
-   margin-bottom: 5%;
-}
+  .Class_Top_End {
+    display: none;
+  }
 
-#ID-Settings_Span{
-   overflow: hidden;
-}
+  #ID_NewGame_Button {
+    min-width: 40%;
+  }
 
-       /* Gaḿe End Screen Mobile*/
-/* Move Gameboard at the End of the Game Animation */
-.Class_Gameboard_End{
-   transform: scale(0.5);
-}
-   
-.Class_Top_End{
-display: none;
-}
-   
-#ID_NewGame_Button{
-min-width: 40%;      
-}
+  #ID_Back_Button {
+    min-width: 40%;
+  }
 
-#ID_Back_Button{
-      min-width: 40%;
-}
+  #ID_End_Button_Div {
+    margin-block: 2rem;
+  }
 
-#ID_End_Button_Div{
- margin-block: 2rem;  
-}
+  /* Win Marks */
+  #ID_Win_Div_One {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    min-width: 3rem;
+    min-height: 2rem;
+    display: flex;
+    align-items: flex-end;
+  }
 
-/* Win Marks */
-#ID_Win_Div_One{
-position: absolute;
-bottom: 0;
-left: 0;
-min-width: 3rem;
-min-height: 2rem;
-display: flex;
-align-items: flex-end;
-}
-
-#ID_Win_Div_Two{
-position: absolute;
-bottom: 0;
-right: 0;
-min-width: 3rem;
-min-height: 2rem;
-display: flex;
-align-items: flex-end;
+  #ID_Win_Div_Two {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    min-width: 3rem;
+    min-height: 2rem;
+    display: flex;
+    align-items: flex-end;
+  }
 }
 
-}
+/* #endregion*/
 
-                                                                                                                                                                                                                                                               /* #endregion*/
-  
-/* #region 11) Final Informations & Comments */  
-                                                                                                                                                                                                                                                               /* #endregion */ 
+/* #region 11) Final Informations & Comments */
+/* #endregion */
 
-/* #region 12) Credits */ 
-                                                                                                                                                                                                                                                               /*
+/* #region 12) Credits */
+/*
 
             ============================================================================================================
                                                                                                                
@@ -1285,9 +1254,9 @@ align-items: flex-end;
                                                                                                                                                                                                     
             ============================================================================================================                                                                                                                                                               */
 
-                                                                                                                                                                                                                                                                   /* #endregion */ 
+/* #endregion */
 
-/* #region 13) Checklist */                                                                                                                                                                                                                                                                         /*                                                                                                                                                                                                                                                                                                                           
+/* #region 13) Checklist */ /*                                                                                                                                                                                                                                                                                                                           
 
 -) VS Studio Terminal hilft bei Tippfehler.
 
@@ -1337,7 +1306,7 @@ align-items: flex-end;
 
                                                                                                                                                                                                                                                                                           /*#endregion*/
 
-/* #region 14) Media Queries */                                                                                                                                                                                                                                                                                    /*
+/* #region 14) Media Queries */ /*
 
       Max-Width - Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop 
                   und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
@@ -1373,9 +1342,9 @@ align-items: flex-end;
 
                @media (min-width: 1200px) { … }
 
-                                                                                                                                                                                                                                                                                                   /*#endregion*//*
+                                                                                                                                                                                                                                                                                                   /*#endregion*/ /*
 
-/* #region 15) Scrollbar Design */                                                                                                                                                                                                                                                                                 /*                                                                                                                                                                                                                                                                                                                                 
+/* #region 15) Scrollbar Design */ /*                                                                                                                                                                                                                                                                                                                                 
 -) Scrollbar Design:
       Scrollbar Firefox
          el{
@@ -1394,5 +1363,4 @@ align-items: flex-end;
          ::-webkit-scrollbar-corner — the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet This is often the bottom-right corner of the browser window.
          ::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some element
 
-                                                                                                                                                                                                                                 /*#endregion*/                                                                                                                                                                                                                                                                                                 
-
+                                                                                                                                                                                                                                 /*#endregion*/
