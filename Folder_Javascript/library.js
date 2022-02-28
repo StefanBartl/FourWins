@@ -239,20 +239,14 @@ if(document.getElementById("ID_Thinking_Div")){
 document.getElementById("ID_Thinking_Div").remove();
 clearInterval(window.thinking);
 setTimeout(Thinking_Effect, 8000);
-}   else {
-        document.getElementById("ID_Thinking_Div").remove();
-        clearInterval(window.thinking);
-    };
+};
 };
 // Nearly the same in Game against KI, until no new timer is setted, because this makes the KI after his placement.
 if(Game.Game_against_KI === true){
 if(document.getElementById("ID_Thinking_Div")){
 document.getElementById("ID_Thinking_Div").remove();
 clearInterval(window.thinking);
-}   else {
-        document.getElementById("ID_Thinking_Div").remove();
-        clearInterval(window.thinking);
-    };
+};
 };
 
 };

@@ -29,29 +29,30 @@
 
 //#region Open Jobs                                                                                                                                                                                                                                                                             
                                                                                                                                                                                                                                                                               /*
-                                                Jobs To-do:
-                                                            
-                                        -) Stating trough the functions and Global Scoped looping arrays?
-                                        -) Top Cell Bug
-                                        -) Game End Screen and Firwworks need attention!
-                                        .) Detect arrays kleiner machen --> cpu_player.js hard workover
-                                        -) Thinking div
-                                        -) Column & Row Val changing for winChain!
-                                        -) Async / Await
-                                        -) All Script s to the Page Library Layout
-                                        -) Code minimazing, layout and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
-                                           How much i can get in the Game object= row counter ... 
-                                           Functions all return; CHECK (and for) Helper mthods like psuh to local storage 
-                                           Global variables for DOM Objects possible which are caled often?;
-                                        -) Close repatationing code
-                                        -) Fullfill Coding Guideline
-                                        -) Do this in all scripts!
+                                Jobs To-do:
+                                            
+                        -) Stating trough the functions and Global Scoped looping arrays?
+                        -) Top Cell Bug
+                        -) Game End Screen and Firwworks need attention!
+                        .) Detect arrays kleiner machen --> cpu_player.js hard workover
+                        -) Thinking div
+                        -) Column & Row Val changing for winChain!
+                        -) Async / Await
+                        -) New Library table of content
+                        -) All Script s to the Page Library Layout
+                        -) Code minimazing, layout and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
+                            How much i can get in the Game object= row counter ... 
+                            Functions all return; CHECK (and for) Helper mthods like psuh to local storage 
+                            Global variables for DOM Objects possible which are caled often?;
+                        -) Close repatationing code
+                        -) Fullfill Coding Guideline
+                        -) Do this in all scripts!
 
-                                        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-                                        -) Write a final Comment 
+                        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+                        -) Write a final Comment 
 
-                                        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
-                                                                                                                                                                                                                                                                             */
+                        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
+                                                                                                                                                                                                                                                                */
                                                                                                                                                                                                                                                                              //#endregion
 
 //#region 1) General Settings & Set-Up Page
