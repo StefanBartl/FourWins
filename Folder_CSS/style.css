@@ -366,7 +366,7 @@ footer {
   top: 0;
   right: -95%;
   display: grid;
-  grid: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr / 1fr;
+  grid: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr / 1fr;
   gap: 1rem;
   width: 100vw;
   height: 90vh;
@@ -392,6 +392,31 @@ footer {
 
 #ID_Setting_Span::-webkit-scrollbar-corner {
   background-color: var(--gameboard);
+}
+
+#ID_Gameboard_Span{
+
+}
+
+#ID_Gameboard_Size_Container {
+  display: grid;
+  grid: 1fr / 3rem 2rem 3rem 1fr;
+  margin-left: 20%;
+  margin-top: 5%;
+  gap: 5%;
+}
+#ID_Gameboard_Size_Container input {
+  width: 6ch;
+  height: 1.5rem;
+}
+
+#ID_Gameboard_Span p {
+  
+}
+
+#ID_Gameboard_Size_Container button {
+  width: 3rem;
+  height: 1.5rem;
 }
 
 #ID_Info_Container,

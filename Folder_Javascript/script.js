@@ -22,26 +22,31 @@
 document
   .getElementById("ID_Gameboard_Size_Button")
   .addEventListener("click", () => {
-    for (topCell of topCellsArray) {
-      topCell.remove();
-    }
-    for (cell of cellsArray) {
-      cells.remove();
-    }
+    document.getElementById("ID_GameboardWrapper").remove();
+    const new_gameboard_wrapper = document.createElement("div");
+    new_gameboard_wrapper.classList.add("Class_GameboardWrapper");
+    new_gameboard_wrapper.id = "ID_GameboardWrapper";
+    Game.state !== "InGame"
+      ? new_gameboard_wrapper.setAttribute("data-ingame", "no")
+      : new_gameboard_wrapper.setAttribute("data-ingame", "yes");
 
-    let size1 = document.getElementById("ID_GameboardSize1");
-    let size2 = document.getElementById("ID_GameboardSize2");
-    let cellcounter = 1;
-    for (let x = 0; x < size1; x++) {
+    insertAfter(left_sidebar, new_gameboard_wrapper);
+
+    let size1 = parseInt(document.getElementById("ID_Gameboard_Size_1").value);
+    let size2 = parseInt(document.getElementById("ID_Gameboard_Size_2").value);
+
+    for (let x = 1; x <= size1; x++) {
       let topcell = document.createElement("div");
       topcell.classList.add("Class_TopCells");
       topcell.id = `ID_C${x}R1`;
       document.getElementById("ID_GameboardWrapper").appendChild(topcell);
-      for (let y = 0; y < size2; y++) {
+
+      let columncounter = x;
+      for (let row = 2; row <= size2; row++) {
         let cell = document.createElement("div");
         cell.classList.add("Class_Cells");
-        cell.id = `ID_C${cellcounter}R${y}`;
-        document.getElementById(`ID_C${cellcounter}R1`).appendChild(cell);
+        cell.id = `ID_C${columncounter}R${row}`;
+        document.getElementById(`ID_C${columncounter}R1`).appendChild(cell);
       }
     }
   });
