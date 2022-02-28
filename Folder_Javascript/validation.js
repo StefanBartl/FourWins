@@ -1,3 +1,4 @@
+
 //#region Table of Content
                                                                                                                                                                                                                                                                                     /*
                                              Four-Wins-Online Validation-Javascript-File                                                           
@@ -35,12 +36,13 @@
          Diagonal Win-Validation 
          ======================== */
 function Diagonal_Validator(player, columnNumber, row) {
+    // console.log("Diagonal Validation started.")
 
-    let basis = document.getElementById(`ID_C${columnNumber}R${row}`);
+    const basis = document.getElementById(`ID_C${columnNumber}R${row}`),
     // Get the to validate Gameboard cell for diagonal validation in right-up and left-down direction (which are in this context the same) based the basis (the played) cell
-    let second_plus = document.getElementById(`ID_C${columnNumber + 1}R${row + 1}`);
-    let third_plus = document.getElementById(`ID_C${columnNumber + 2}R${row + 2}`);
-    let fourth_plus = document.getElementById(`ID_C${columnNumber + 3}R${row + 3}`);
+          second_plus = document.getElementById(`ID_C${columnNumber + 1}R${row + 1}`),
+          third_plus = document.getElementById(`ID_C${columnNumber + 2}R${row + 2}`),
+          fourth_plus = document.getElementById(`ID_C${columnNumber + 3}R${row + 3}`);
 
     // If there are 3 more cells for validation, check if they contain a players coin...
     if (basis != null && second_plus != null && third_plus != null && fourth_plus != null) {
@@ -49,7 +51,10 @@ function Diagonal_Validator(player, columnNumber, row) {
             third_plus.classList.contains(`Class_PlacedCoin_${player}`) &&
             fourth_plus.classList.contains(`Class_PlacedCoin_${player}`)) {
 
-            // .. if yes, invoke win"
+            // .. if yes, mark winning chain and invoke win"
+            const arr = [basis, second_plus, third_plus, fourth_minus];
+            setAttributesArr(arr, {"data-winChain": "yes"});
+
             Game_End_Screen(player, "Diagonal");
             return;
         };
@@ -57,9 +62,9 @@ function Diagonal_Validator(player, columnNumber, row) {
 
     // Now same as above but in the other two diaggonals
     // Get the to validate Gameboard cell for diagonal validation in left-up and right-down direction 
-    let second_minus = document.getElementById(`ID_C${columnNumber - 1}R${row + 1}`);
-    let third_minus = document.getElementById(`ID_C${columnNumber - 2}R${row + 2}`);
-    let fourth_minus = document.getElementById(`ID_C${columnNumber - 3}R${row + 3}`);
+    const second_minus = document.getElementById(`ID_C${columnNumber - 1}R${row + 1}`),
+          third_minus = document.getElementById(`ID_C${columnNumber - 2}R${row + 2}`),
+          fourth_minus = document.getElementById(`ID_C${columnNumber - 3}R${row + 3}`);
 
     // If there are 3 more cells for validation, check if they contain a players coin...
     if (basis != null && second_minus != null && third_minus != null && fourth_minus != null) {
@@ -68,7 +73,9 @@ function Diagonal_Validator(player, columnNumber, row) {
             third_minus.classList.contains(`Class_PlacedCoin_${player}`) &&
             fourth_minus.classList.contains(`Class_PlacedCoin_${player}`)) {
 
-            // .. if yes, invoke win"
+            // .. if yes, invoke win as above....
+            const arr = [basis, second_minus, third_minus, fourth_minus];
+            setAttributesArr(arr, {"data-winChain": "yes"});
             Game_End_Screen(player, "Diagonal");
             return true;
         };
@@ -86,13 +93,12 @@ function Column_Validator(player) {
     if (player === 2) Players_Gameboard = Game.actualGameboardPlayer2;
 
     // Helper array with the pushed values from the Gameboard 
-    const validation_array = [];
-    validation_array.push(Players_Gameboard.C1, Players_Gameboard.C2, Players_Gameboard.C3, Players_Gameboard.C4, Players_Gameboard.C5, Players_Gameboard.C6, Players_Gameboard.C7);
+    const validation_array = [Players_Gameboard.C1, Players_Gameboard.C2, Players_Gameboard.C3, Players_Gameboard.C4, Players_Gameboard.C5, Players_Gameboard.C6, Players_Gameboard.C7];
 
     // Now we have an iterable array and can loop trough
     for (let obj of validation_array) {
         // And we making an iterable array again which allows us to reduce()
-        let array = Array.from(obj);
+        const array = Array.from(obj);
         // If every row number subtracted with the next row number is equal to 1, there are 4 coins upon each other.
         if (array[0] - array[1] === 1 && array[1] - array[2] === 1 && array[2] - array[3] === 1 ||
             array[1] - array[2] === 1 && array[2] - array[3] === 1 && array[3] - array[4] === 1 ||
@@ -103,6 +109,7 @@ function Column_Validator(player) {
             return true;
         };
     };
+//(Under construction for winChain!)
 };
 
     /* ====================
@@ -117,8 +124,7 @@ function Row_Validator(player, column) {
 
     // Set a counting Variable & a helper array with the pushed values from the Gameboard 
     let countFor_Win = 0;
-    const validation_array = [];
-    validation_array.push(Players_Gameboard.C1, Players_Gameboard.C2, Players_Gameboard.C3, Players_Gameboard.C4, Players_Gameboard.C5, Players_Gameboard.C6, Players_Gameboard.C7);
+    const validation_array = [Players_Gameboard.C1, Players_Gameboard.C2, Players_Gameboard.C3, Players_Gameboard.C4, Players_Gameboard.C5, Players_Gameboard.C6, Players_Gameboard.C7];
 
     // Now we have an iterable array and can loop trough
     for (let el of validation_array) {
@@ -134,6 +140,7 @@ function Row_Validator(player, column) {
             return true;
         };
     };
+//(Under construction for winChain!)
 };
 
     /* ==============================
@@ -142,7 +149,7 @@ function Row_Validator(player, column) {
 function TopCell_Validation(columnNumber, invokedForKiValidation) {
 
     let proof;
-    if (columnNumber === 1) proof = row_Counter_C1;
+         if (columnNumber === 1) proof = row_Counter_C1;
     else if (columnNumber === 2) proof = row_Counter_C2;
     else if (columnNumber === 3) proof = row_Counter_C3;
     else if (columnNumber === 4) proof = row_Counter_C4;

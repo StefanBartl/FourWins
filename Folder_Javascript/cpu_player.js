@@ -1,3 +1,4 @@
+
 //#region Table of content
                                                                                                                                                                                                                                                                                     /*
                                              Four-Wins-Online CPU Player-Javascript-File                                                           
@@ -49,7 +50,6 @@ function KI_Placement(valid_number){
 // console.log("Entered KI Placement Function. Random number for topCell is:  ", random_number);
 
 // Make the Placement
-const topCellsArray = document.getElementsByClassName("Class_TopCells");
 topCellsArray[valid_number].click();  
 
 // If it was the last Cell in the Column, lock it
@@ -138,7 +138,7 @@ console.log("Valid Sideways placement found:", proof_side);
 if(proof_side === true){ Thinking_Effect(true, numbers_sideways[0]); return };
 };
 
-console.log("KI Normal does not have a valid placement. Submit this task to CPU Easy...");
+// console.log("KI Normal does not have a valid placement. Submit this task to CPU Easy...");
 // If nothing is possible, make random placement
 // console.log("Nothing possible. Ask KI Easy for valid placement...");
 KI_Easy(); return};
@@ -162,8 +162,9 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
          Placement-Randomizer 
          ===================== */
 function Randomizer (arr1, arr2){
-console.log("Randomizer getted arrays:", arr1,  arr2);
-let randomizing_number, randomizing_array = [];
+// console.log("Randomizer getted arrays:", arr1,  arr2);
+
+const randomizing_number, randomizing_array = [];
 
 for ( let i = 0; i < arr1.length; i++ ){
     randomizing_array.push(arr1[i]);
@@ -176,7 +177,8 @@ for ( let i = 0; i < arr2.length; i++ ){
 
 randomizing_number = getRandomInt(randomizing_array.length);
 valid_number = randomizing_array[randomizing_number];
-console.log("Randomizer has choosen a column: " + valid_number);
+
+//console.log("Randomizer has choosen a column: " + valid_number);
 return valid_number;
 };
 
@@ -318,6 +320,8 @@ function Detect_3_Coin_Chains_Upwards(){
 // +++ Basically it depends hardly of the Column Validator from the Win-Validation section +++
 
 // Job: Is there any way to make that code smaller? So much repetition, but not possible to build a autmatism because of Game.actualGameboard is a Object, nnot an array an i fdind no way to iterate trough....
+
+// !! Array so: array = [Game.actualPlayer.C1, C2,...] und dann iteriere!!!!!!!!!!
 
 // KI Finishing Upwards Section
 let array = Game.actualGameboardPlayer2.C1;

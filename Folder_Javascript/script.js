@@ -1,3 +1,4 @@
+
 //#region Table of Content
                                                                                                                                                                                                                                                                             /*
 
@@ -31,7 +32,11 @@
                                                 Jobs To-do:
                                                             
                                         -) Stating trough the functions and Global Scoped looping arrays?
-                                        -) Translation Script table of content
+                                        -) Top Cell Bug
+                                        -) Game End Screen and Firwworks need attention!
+                                        .) Detect arrays kleiner machen --> cpu_player.js hard workover
+                                        -) Thinking div
+                                        -) Column & Row Val changing for winChain!
                                         -) Async / Await
                                         -) All Script s to the Page Library Layout
                                         -) Code minimazing, layout and fasten it, f.e. local storage needed or Game object ok? What make sense to do in a function? PRO Styles? 
@@ -51,61 +56,7 @@
 
 //#region 1) General Settings & Set-Up Page
 
-//#region Container & Wrapper
-const header = document.getElementById("ID_Header");
-const main_wrapper =  document.getElementById("ID_MainWrapper");
-const left_sidebar = document.getElementById("ID_LeftSidebarWrapper");
-const gameboard = document.getElementById("ID_GameboardWrapper");
-const right_sidebar = document.getElementById("ID_RightSidebarWrapper");
-const footer = document.getElementById("ID_FooterWrapper");
-                                                                                                                                                                                                                                                                    //#endregion
-
-//#region Text, Inputs, Images
-const head_title = document.getElementById("ID_Head_Title");
-const headline_top = document.getElementById("ID_Headline");
-const headline_p = document.getElementById("ID_Header_p");
-const player_1_headline = document.getElementById("ID_Player_1_Headline");
-const player_1_name = document.getElementById("ID_Player_1_Name");
-const player_1_svg = document.getElementById("ID_SVG_Player_1");
-const player_2_headline = document.getElementById("ID_Player_2_Headline");
-const player_2_name = document.getElementById("ID_Player_2_Name");
-const player_2_svg = document.getElementById("ID_SVG_Player_2");
-const start_button = document.getElementById("ID_Start_Button");
-const play_against = document.getElementById("ID_Play_Against");
-const choose_ki = document.getElementById("ID_Choose_KI");
-const ki_level_dropdown_no = document.getElementById("ID_No");
-const ki_level_dropdown_easy = document.getElementById("ID_Easy_Text");
-const ki_level_dropdown_normal = document.getElementById("ID_Normal_Text");
-                                                                                                                                                                                                                                                                    //#endregion
-
-//#region Settings menu
-const settings_menu = document.getElementById("ID_Settings_Menu");
-const settings_span = document.getElementById("ID_Setting_Span");
-const info_h = document.getElementById("ID_Info");
-const colour = document.querySelector(".Class_Colour_Toggle");
-const toggle_colour_button = document.getElementById("ID_Toggle_Button");
-const toggle_colour_slider = document.getElementById("ID_Colour_Slider");
-const language_h = document.getElementById("ID_Language");
-const language_menu = document.getElementById("ID_Language_Menu");
-const select_deutsch = document.getElementById("ID_Deutsch");
-const select_english = document.getElementById("ID_English");
-const contact_h = document.getElementById("ID_Contact");
-const credits_h = document.getElementById("ID_Credits");
-const sound_h = document.getElementById("ID_Sound");
-const sound_checkbox = document.getElementById("ID_Sound_Checkbox");
-const stats = document.getElementById("ID_Stats");
-const stats_easy = document.getElementById("ID_Stats_Easy");
-const stats_normal = document.getElementById("ID_Stats_Normal");
-const stats_reset_easy = document.getElementById("ID_Reset_Easy");
-const stats_sum_easy = document.getElementById("ID_Stats_Summary_Easy");
-const stats_reset_normal = document.getElementById("ID_Reset_Normal");
-const delete_all = document.getElementById("ID_Delete_All");
-const label_colour = document.getElementById("ID_Label_Colour");
-                                                                                                                                                                                                                                                                    //#endregion
-
-    /* =============
-         Game Object 
-         ============ */ 
+// Game Object
 const Game = {
 // Game Object for storing important values in variables. Collected access via Game.[variable]
 // Setting the Gameboard arrays to keep Coin placements
@@ -130,16 +81,12 @@ Sound: true,
 state: "startingScreen"
 };
 
-    /* ================
-         Windows Object 
-         =============== */
+// Windows Object
 const Windows = {
 // Object for storing returned Values from own Alert / Confirm / Prompt Windows
 };
 
-    /* ================
-         Page-Language 
-         =============== */
+// Set Page-Language
 Set_Page_Language();
 
 //#region Audio
@@ -167,16 +114,6 @@ sound_checkbox.addEventListener("click", ()=>{
 
 //#endregion
 
-//#region Global Counters
-
-/* Setting the Counters for let the Coin Placing Section know, 
-   in which row & column the Game currently is to calculate by placement the correct position */
-let row_Counter_C1 = 8, row_Counter_C2 = 8, row_Counter_C3 = 8, row_Counter_C4 = 8, row_Counter_C5 = 8, row_Counter_C6 = 8, row_Counter_C7 = 8;
-
-// Counters to count wins if more Games are played  
-let count_wins_player_one = 0, count_wins_player_two = 0;
-//#endregion
-
 //#region Choosing Colour Left Player
 
 // Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted
@@ -184,7 +121,9 @@ Game.player_Colour_Left = localStorage.Player_Colour_Left || "yellow";
 if (Game.player_Colour_Left === "red") {toggle_colour_button.classList.add("Class_Toggle"); toggle_colour_slider.style.backgroundColor = "red";} 
 else {toggle_colour_button.classList.remove("Class_Toggle"); toggle_colour_slider.style.backgroundColor = "yellow";} 
 
-// Toggle Button in Colour Change Slider Event Listener
+    /* =============================
+         Colour-Change Event-Listener 
+         ============================= */
 document.getElementById("ID_Toggle_Button").addEventListener("click", ()=>{
             //console.log("Colour toggle clicked");
     if(localStorage.Player_Colour_Left === "yellow" || localStorage.Player_Colour_Left === undefined) {
@@ -205,9 +144,8 @@ document.getElementById("ID_Toggle_Button").addEventListener("click", ()=>{
 
 // Changing colour of existing coins
 if(Game.state == "InGame"){
-    // Get all cells 
-    const cellsArray = document.getElementsByClassName("Class_Cells");
-    //Loops trough it
+
+    //Loops trough cellssArray
     for(let cell of cellsArray){
         // If one cell have tht Class with a red or yellow Coin Background attached, change it to the other colored background (PNG)
        if(cell.classList.contains("Class_PlacedCoin_1")){cell.classList.remove("Class_PlacedCoin_1"); cell.classList.add("Class_PlacedCoin_2")}
@@ -215,6 +153,7 @@ if(Game.state == "InGame"){
     // console.log("Existing coins changed colour.");
     };
 };
+
 
 });
 
@@ -234,8 +173,9 @@ Push_to_LocalStorage("ID_SVG_Player_2", "ID_Player_2_Name", "Player_Two_Name", "
 Swap_Two_Classes_by_Events("ID_SVG_Player_1", "mouseenter", "mouseleave", "Class_Buttons_Add_Hover_Animations_1", "Class_Buttons_Remove_Hover_Animations_1");
 Swap_Two_Classes_by_Events("ID_SVG_Player_2", "mouseenter", "mouseleave", "Class_Buttons_Add_Hover_Animations_2", "Class_Buttons_Remove_Hover_Animations_2");
 
-//                                  _________________________________________
-//                                   Event Listener for setting correct names
+    /* ==================================
+         Set correct Names Event-Listener 
+         ================================= */
 choose_ki.addEventListener("change", ()=>{
     // Set correct names after choosing "Play against"
         // If "Play against CPU = No" is selected, make sure "No" isn't the name of Player Two
@@ -246,8 +186,9 @@ choose_ki.addEventListener("change", ()=>{
         else if (Game.Language === "de" && choose_ki.value === "CPU Normal") document.getElementById("ID_Player_2_Name").value = "Normaler CPU Gegner";
         else if (Game.Language !== "de" && choose_ki.value === "CPU Normal") document.getElementById("ID_Player_2_Name").value = "Normal CPU Opponent";
 });
-//                                  ________________________________________________
-//                                   Event Listener for showing Player name is saved
+    /* =======================================
+         Showing Name is saved Event-Listeners 
+         ====================================== */
 player_1_svg.addEventListener("click", ()=>{
     //console.log("Player 1 name saved to local Storage.");
     // Create notiification element
@@ -293,7 +234,9 @@ player_2_svg.addEventListener("click", ()=>{
 // Get up-tp-date stats for the Settings-Menu
 Stats();
 
-// Show Settins-Menu Event-Listener
+    /* ====================================
+         Show Settings-Menu Event-Listeners 
+         =================================== */
 settings_span.addEventListener("mouseenter", ()=>{
     //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
     if(!settings_span.classList.contains("Class_Show_Settings")){
@@ -314,7 +257,9 @@ settings_span.addEventListener("touchstart", ()=>{
 };}
 );
 
-// Hide Settings-Menu Event-Listener I
+    /* ====================================
+         Hide Settings-Menu Event-Listeners 
+         =================================== */
 main_wrapper.addEventListener("mouseenter", ()=>{
        //If the settíngs menu is leaved to the main wrapper and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
 if(settings_span.classList.contains("Class_Show_Settings")){
@@ -335,8 +280,7 @@ if(settings_span.classList.contains("Class_Show_Settings")){
 };}
 );
 
-// Hide Settings-Menu Event-Listener II
-document.querySelector("#ID_Head_Text").addEventListener("mousemove", ()=>{
+document.querySelector("#ID_Header").addEventListener("mousemove", ()=>{
            //If the settíngs menu is leaved to the header and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
 if(settings_span.classList.contains("Class_Show_Settings")){
     settings_span.classList.remove("Class_Show_Settings");
@@ -443,10 +387,11 @@ if(warning === true) {localStorage.clear();};
 });
                                                                                                                                                                                                                                                                                                                                         //#endregion
 
-    /* ==============
-         Start-Game 
-         ============= */
+    /* ==========================
+         Start-Game Event-Listener
+         ========================== */
 start_button.addEventListener("click", Game_Preparations);
+
                                                                                                                                                                                                                                                                                                                                 //#endregion
 
 //#region 2) Main Game
@@ -468,8 +413,7 @@ Game.Player_Two_Name = player_2_name.value;
 // console.log("Setted Names:", Game.Player_One_Name, Game.Player_Two_Name);
 
 // Give all cells same attribute
-const cells_Array = document.getElementsByClassName("Class_Cells");
-for (let cell of cells_Array){
+for (let cell of cellsArray){
     cell.setAttribute("data-isPlayed", "no");
 };
 
@@ -506,10 +450,11 @@ PlayGame();
 function PlayGame(){
 // console.log("Entered Play Game Function.");
 
+// Let Game Objects know we are in Game know
 Game.state = "InGame";
+gameboard.setAttribute("data-inGame", "yes");
 
 // Detect the correct the Top Cells for looping trough to put the event listeners on them so the players can make there placements
-const topCellsArray = document.getElementsByClassName("Class_TopCells");
 for (let topCell of topCellsArray) {
 
 // Get the ID & Column of the played TopCell 
@@ -529,7 +474,6 @@ topCell.addEventListener("click", () => {
     };
     
     //  Make the other top cells unclickable for 1s (animation duration) so it cannont get clicked again and trigger a overlapped animation
-    const topCellsArray = document.getElementsByClassName("Class_TopCells");
     for (let topCell of topCellsArray) {
     topCell.style = "pointer-events:none";
     };
@@ -548,9 +492,7 @@ topCell.addEventListener("click", () => {
 function Placement(ID_Top_Cell) {
 // console.log("Entered Function for new Placement.");
 
-// Make Top Cells unclickable
-const topCellsArray = document.getElementsByClassName("Class_TopCells");
-// Make topCell clickable again
+// Make topCell unclickable
 for (let topCell of topCellsArray) {
     topCell.style = "pointer-events: none"; 
 };
@@ -714,4 +656,4 @@ Turning_PlayerIsOnTurn();
 ====================================================================================================================                                                                                                                                                               */
 
                                                                                                                                                                                                                                                                                     //#endregion
-
+                            

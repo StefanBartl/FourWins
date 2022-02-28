@@ -19,13 +19,8 @@
 <body>
 
   <header class="Class_HeaderWrapper" id="ID_Header">
-
-    <div id="ID_Head_Text">
-      <h1 class="Class_HeadlineTop" id="ID_Headline">
-        </h1>
+      <h1 class="Class_HeadlineTop" id="ID_Headline"></h1>
         <p id="ID_Header_p"></p>
-    </div>
-
   </header>
 
 
@@ -42,7 +37,7 @@
       </div>
       </section>
       
-      <section class="Class_GameboardWrapper" id="ID_GameboardWrapper">
+      <section class="Class_GameboardWrapper" id="ID_GameboardWrapper" data-inGame="no">
         <div id="ID_Column1" class="Class_Columns">
           <div id="ID_C1R1" class="Class_TopCells"></div>
           <div id="ID_C1R2" class="Class_Cells"></div>
@@ -187,6 +182,7 @@
   </div>
 
  <!-- #region Javascript-Files--> 
+  <script type="text/javascript" src='Folder_Javascript/domElements.js'></script>
   <script type="text/javascript" src='Folder_Javascript/screen_changes.js'></script>
   <script type="text/javascript" src='Folder_Javascript/validation.js'></script>
   <script type="text/javascript" src='Folder_Javascript/cpu_player.js'></script>
@@ -196,4 +192,5 @@
 <!-- #endregion -->
 
 </body>
+
 </html>

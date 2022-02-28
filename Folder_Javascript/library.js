@@ -1,62 +1,67 @@
+
 //#region Table of Content
                                                                                                                                                                                                                                                                                 /*
-                                             Four-Wins-Online Library-Javascript-File                                                           
-                                                           powered by
-                            
-                                                          Stefan Bartl
-                                                     (WKDSteVIE / WKDMinerva)
-                            
-                                                              2021
-                             _______________________________________________________________________                                                                                                                                                                                                                                                    
-                            {                   _________________________________                   }                                                                                                                                                                                  
-                            {                            Table of content                           }
-                            {_______________________________________________________________________} 
-                            |                                                                       |
-                            |                  1) Helper Functions                                  |
-                            |                                                                       |
-                            |                   - Insert Element after Element                      |
-                            |                                                                       |
-                            |                   - Add choosing Animation                            |
-                            |                                                                       |
-                            |                   - Remove choosing Animation                         |
-                            |                                                                       |
-                            |                   - Lock Top Cells                                    |
-                            |                                                                       |
-                            |                   - Unlock Top Cells                                  |
-                            |                                                                       | 
-                            |                   - "Thinking"-Effect                                 |
-                            |                                                                       |
-                            |                   - Get only unique Values from Array                 |
-                            |                                                                       |                                                                                                                                                                               
-                            |                   - Get a random Int number                           |
-                            |                                                                       |
-                            |                   - Push values to Local Storage                      |
-                            |                                                                       | 
-                            |                   - Swap 2 Classes by 2 events on 1 Element           |
-                            |                                                                       |
-                            |                   - Change which Player is on turn                    |
-                            |                                                                       |
-                            |                   - Game Screen                                       |
-                            |                                                                       |
-                            |                   - Start Screen                                      |
-                            |                                                                       |
-                            |                   - Stats                                             |
-                            |                                                                       | 
-                            |                   - Update Stats                                      |
-                            |                                                                       |
-                            |                   - New Window                                        |
-                            |                                                                       |                                                                                                                                                                               
-                            |                   - Correct Sound Setting                             |
-                            |                                                                       |
-                            |                   - Create new DOM Element                            |
-                            |                                                                       | 
-                            |                   - Fireworks                                         |
-                            |                                                                       |
-                            |                  2) Final Information and Comments                    |
-                            |                                                                       |                                                                                                                                                                                   
-                            |                  3) Coding Guidelines & Tipps                         |                                                                                                                                                                                                                                                            
-                            |                                                                       |                                                                                                                                                                                                               
-                            |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
+                                    Four-Wins-Online Library-Javascript-File                                                           
+                                                powered by
+                
+                                                Stefan Bartl
+                                            (WKDSteVIE / WKDMinerva)
+                
+                                                    2021
+                     _______________________________________________________________________                                                                                                                                                                                                                                                    
+                    {                   _________________________________                   }                                                                                                                                                                                  
+                    {                            Table of content                           }
+                    {_______________________________________________________________________} 
+                    |                                                                       |
+                    |                  1) Helper Functions                                  |
+                    |                                                                       |
+                    |                   - Insert Element after Element                      |
+                    |                                                                       |
+                    |                   - Add choosing Animation                            |
+                    |                                                                       |
+                    |                   - Remove choosing Animation                         |
+                    |                                                                       |
+                    |                   - Lock Top Cells                                    |
+                    |                                                                       |
+                    |                   - Unlock Top Cells                                  |
+                    |                                                                       | 
+                    |                   - "Thinking"-Effect                                 |
+                    |                                                                       |
+                    |                   - Get only unique Values from Array                 |
+                    |                                                                       |                                                                                                                                                                               
+                    |                   - Get a random Int number                           |
+                    |                                                                       |
+                    |                   - Push values to Local Storage                      |
+                    |                                                                       | 
+                    |                   - Swap 2 Classes by 2 events on 1 Element           |
+                    |                                                                       |
+                    |                   - Change which Player is on turn                    |
+                    |                                                                       |
+                    |                   - Game Screen                                       |
+                    |                                                                       |
+                    |                   - Start Screen                                      |
+                    |                                                                       |
+                    |                   - Stats                                             |
+                    |                                                                       | 
+                    |                   - Update Stats                                      |
+                    |                                                                       |
+                    |                   - New Window                                        |
+                    |                                                                       |                                                                                                                                                                               
+                    |                   - Correct Sound Setting                             |
+                    |                                                                       |
+                    |                   - Create new DOM Element                            |
+                    |                                                                       |
+                    |                   - Set attributes for Element                        |
+                    |                                                                       |
+                    |                   - Set attributes for Elements                       |
+                    |                                                                       | 
+                    |                   - Fireworks                                         |
+                    |                                                                       |
+                    |                  2) Final Information and Comments                    |
+                    |                                                                       |                                                                                                                                                                                   
+                    |                  3) Coding Guidelines & Tipps                         |                                                                                                                                                                                                                                                            
+                    |                                                                       |                                                                                                                                                                                                               
+                    |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
                                                                                                                                                                                                                                                                                */      
 
 //#endregion
@@ -74,7 +79,7 @@ function insertAfter(referenceNode, newNode) {
          ============================== */
 function Add_Choosing_Ani(column){
 column -= 1;
-const topCellsArray = document.getElementsByClassName("Class_TopCells");
+
 if(Game.playerIsOnTurn === "left"  && Game.player_Colour_Left === "yellow"){
 topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");}
 else if (Game.playerIsOnTurn === "left"  && Game.player_Colour_Left === "red"){
@@ -89,7 +94,7 @@ topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");};
          ============================== */
 function Remove_Choosing_Ani(column){
 column -= 1;
-const topCellsArray = document.getElementsByClassName("Class_TopCells");
+
 if(Game.playerIsOnTurn === "left"){
 topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1");
 topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2"); 
@@ -101,8 +106,8 @@ topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2");}
          Lock all Top-Cells 
          =================== */
 function Lock_TopCells(){
-const topCellsArray = document.getElementsByClassName("Class_TopCells");
-for (let topCell of topCellsArray){
+
+    for (let topCell of topCellsArray){
 topCell.style.cursor = "none"; 
 topCell.style = "pointer-events:none"; 
 };
@@ -111,7 +116,7 @@ topCell.style = "pointer-events:none";
          Unlock all Top-Cells 
          ===================== */
 function Unlock_TopCells(){
-const topCellsArray = document.getElementsByClassName("Class_TopCells");
+
 for (let topCell of topCellsArray){
 topCell.style.cursor = "pointer"; 
 topCell.style = "pointer-events: all"; 
@@ -184,7 +189,7 @@ function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event) {
 document.getElementById(`${IDfromTrigger}`).addEventListener(`${event}`, () => {
 localStorage.setItem(`${key}`, document.getElementById(`${IDfromValue}`).value);
 });
-}
+};
     /* ==================================
          Swap between 2 Classes by Events 
          ================================= */
@@ -234,14 +239,24 @@ if(document.getElementById("ID_Thinking_Div")){
 document.getElementById("ID_Thinking_Div").remove();
 clearInterval(window.thinking);
 setTimeout(Thinking_Effect, 8000);
-};};
+}   else {
+        document.getElementById("ID_Thinking_Div").remove();
+        clearInterval(window.thinking);
+    };
+};
 // Nearly the same in Game against KI, until no new timer is setted, because this makes the KI after his placement.
 if(Game.Game_against_KI === true){
 if(document.getElementById("ID_Thinking_Div")){
 document.getElementById("ID_Thinking_Div").remove();
 clearInterval(window.thinking);
-};};
+}   else {
+        document.getElementById("ID_Thinking_Div").remove();
+        clearInterval(window.thinking);
+    };
 };
+
+};
+
     /* =======================
          Create Starting Stats 
          ====================== */
@@ -288,11 +303,6 @@ document.getElementById("ID_Normal_2").innerText = value;};
          Create own Notification / Alert /  Prompt / Confirm - Windows 
          ============================================================== */
 function New_Window(options){
-/*
-                                                Info: 
- To know if User clicked "Confirm" or Cancel, you need a variable outside of the function which can be manipulated by the Event-Listeners. 
- --> Create an empty Windows{} Object. You find the "returns" than in the Windows.[variable]. You also can change the Event-Listeners for your needs.
-*/
 
 // console.log("Entered New Window function.");
 
@@ -376,6 +386,14 @@ confirm_button.addEventListener("click", ()=>{
     Windows[_variable] = user_input.value;
     // Invoke Example Prompt: New_Window({ID: "ID_Test_Window", Name: "Test Window", Text: "Test Test Test", Prompt: true, Variable: "Tester"}); Find Input value: Windows.Tester
 })};
+
+/*
+                                                Info: 
+ To know if User clicked "Confirm" or Cancel, you need a variable outside of the function which can be manipulated by the Event-Listeners. 
+ --> Create an empty Windows{} Object. You find the "returns" than in the Windows.[variable]. You also can change the Event-Listeners for your needs.
+
+ */
+
 //#region CSS for the Windows-Function:
 /*
   CSS: 
@@ -522,6 +540,29 @@ parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width
 
 // console.log("New DOM-Element created.");
 };
+
+    /* ======================================
+         Set multiple Attrubutes on 1 Element
+         ===================================== */
+function setAttributes(el, attrs) {
+    for(var key in attrs) {
+      el.setAttribute(key, attrs[key]);
+    }
+// Call: setAttributes(elem, {"src": "http://example.com/something.jpeg", "height": "100%", ...});
+};
+
+    /* ==============================================
+         Set multiple Attrubutes on multiple Elements
+         ============================================= */
+function setAttributesArr(arr, attrs) {
+    for(let el of arr){
+        for(var key in attrs) {
+            el.setAttribute(key, attrs[key]);
+          }
+}
+// Call: setAttributesArr(arr with (DOM-Objects!), {"src": "http://example.com/something.jpeg", "height": "100%", ...});
+};
+
     /* ============================
          Fireworks-Canvas-Animation 
          =========================== */
@@ -738,3 +779,4 @@ canvas.height = window.innerHeight;
 ==============================================================================================================================================================================================================================================================================================*/
 
 //#endregion
+

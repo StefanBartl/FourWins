@@ -1,3 +1,4 @@
+
 //#region Table of Content
                                                                                                                                                                                                                                                                             /*
                                              Four-Wins-Online Screen-Changes  Javascript-File                                                           
@@ -140,7 +141,7 @@ if(gameResult === 1 || gameResult === 2 && Game.Game_against_KI === false){
             document.getElementById("ID_End_Text").innerText = `You have won the Game!\n Will you give ${result[1]} a chance to revanche or do you want back to Starting-Screen?`;
             document.getElementById("ID_End_H1").alt = "Another game or back to starting screen?";
             };
-        };
+    };
 
 // If the KI won against Player CPU is always Player 2 and if Game against KI is true >>> CPU won), add the lose text and screen
 if(gameResult === 2 && Game.Game_against_KI === true){
@@ -201,9 +202,6 @@ document.getElementById("ID_Back_Button").addEventListener("click", ()=>{
 document.getElementById("ID_NewGame_Button").addEventListener("click", ()=>{
 // console.log("New Game selected, preparations will be done...");
 
-const topCellsArray = document.getElementsByClassName("Class_TopCells");
-const cellsArray = document.getElementsByClassName("Class_Cells");
-
 // Remove TopCell Style classes collected during the Game and End-Screen & unlock the placement function again
 for (let topCell of topCellsArray) {
     topCell.classList.remove("Class_Top_End");
@@ -212,22 +210,26 @@ for (let topCell of topCellsArray) {
     topCell.classList.remove("Class_Full_Column");
 };
 
-// Set the "isPlayed"-Attribute to "no"
+// Set the collected sttributes to "no"
 for (let cell of cellsArray) {
     cell.setAttribute("isPlayed", "no");
+    cell.setAttribute("winChain", "no");
 };
 
 // Show the "Player ... is on turn"-Infobox and the "Thinking-Effectt" again
-if(document.getElementById("ID_h3_turnText") && document.getElementById("ID_h3_turnText").classList.contains("Class_Invisible")) document.getElementById("ID_h3_turnText").classList.remove("Class_Invisible");
+if(turn_text && turn_text.classList.contains("Class_Invisible")) turn_text.classList.remove("Class_Invisible");
 if(document.getElementById("ID_Thinking_Div") && document.getElementById("ID_Thinking_Div").classList.contains("Class_Invisible")) document.getElementById("ID_Thinking_Div").classList.remove("Class_Invisible");
 
-// Treigger next Player is on turn, so the loser of this reound starts the next round.
+// Trigger next Player is on turn, so the loser of this reound starts the next round.
 Turning_PlayerIsOnTurn();
+
+for (topCell of topCellsArray){
+    topCell.classList.remove("Class_Full_Column");
+};
 
 // If the win was from Human Player 1 and it is a game against the CPU, start next round
 if(gameResult === 1 && Game.Game_against_KI === true){
-    if (Game.KI_Level === "Easy")KI_Easy();
-    else if (Game.KI_Level === "Normal") KI_Normal();
+    Game.KI_Level === "Easy" ? KI_Easy() : KI_Normal();
 };
 
 // Reset the Gameboard in Game Object    
@@ -237,12 +239,10 @@ for (let x = 1; x < 8; x++){
 };
 
 // Reset Gameboard on screen
-for (let a = 1; a < 8; a++){
-    for ( let b = 2; b < 8; b++){
-        document.getElementById(`ID_C${a}R${b}`).classList.remove("Class_PlacedCoin_1");
-        document.getElementById(`ID_C${a}R${b}`).classList.remove("Class_PlacedCoin_2");
-        document.getElementById(`ID_C${a}R${b}`).style.opacity = 0.7;
-    };
+for (let cell of cellsArray){
+    if(cell.classList.contains("Class_PlacedCoin_1")) cell.classList.remove("Class_PlacedCoin_1");
+    if(cell.classList.contains("Class_PlacedCoin_2")) cell.classList.remove("Class_PlacedCoin_2");
+    cell.style.opacity = 0.7;
 };
 
 // Reset round & column counters

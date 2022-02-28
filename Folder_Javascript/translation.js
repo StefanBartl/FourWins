@@ -1,3 +1,4 @@
+
 //#region Table of Content
                                                                                                                                                                                                                                                                                         /*
                                              Four-Wins-Online Translation-Javascript-File                                                           
@@ -15,7 +16,7 @@
                             |                                                                       |
                             |                  1) Translation-Managing Functions & Page Library     |
                             |                                                                       |
-                            |                     -) Settin Page Language                           |
+                            |                     -) Setting Page Language                           |
                             |                                                                       | 
                             |                     -) Translation                                    |
                             |                                                                       |
@@ -58,10 +59,10 @@ function Translate_StartScreen(language, byUser) {
 const setted_language = localStorage.Language;
 
 if (byUser === true){
-    if(setted_language === "de") Deutsch(); else English();
+    setted_language === "de" ? Deutsch() : English();
 }
 else{ 
-    if(language === "de") Deutsch(); else English();
+    language === "de" ? Deutsch() : English();
 }
 
 // Never changing text
@@ -69,8 +70,7 @@ credits_h.innerText = "Credits";
 sound_h.innerText = "Sound";
 
 // Make sure the dropdown menu is always selected with the actual language
-if (localStorage.getItem("Language") === "de") document.getElementById("ID_Language_Menu").value ="Deutsch";
-else if (localStorage.getItem("Language") === "en") document.getElementById("ID_Language_Menu").value = "English"; 
+localStorage.getItem("Language") === "de" ? document.getElementById("ID_Language_Menu").value ="Deutsch" : document.getElementById("ID_Language_Menu").value = "English"; 
 };
 
     /* =================
@@ -141,7 +141,7 @@ ki_level_dropdown_easy.alt = "Auswahl CPU Einfach";
 ki_level_dropdown_normal.innerHTML = "CPU Normal";
 ki_level_dropdown_normal.alt = "Auswahl CPU Normal";
 
-// console.log("Page translated.");
+// console.log("Page translated to Deutsch.");
 };
 
     /* ================
@@ -211,10 +211,10 @@ ki_level_dropdown_easy.alt = "Selection Easy";
 ki_level_dropdown_normal.innerHTML = "CPU Normal";
 ki_level_dropdown_normal.alt = "Selection CPU Normal";
 
-// console.log("Page translated.");
-};
+// console.log("Page translated to english.");
+};                                                                                                                                                                                                                                                                                                                         //#endregion
 
-                                                                                                                                                                                                                                                                                                                                //#endregion
+//#endregion
 
 //#region 2) Final informations and Comments
                                                                                                                                                                                                                                                                                 /*
