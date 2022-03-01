@@ -173,21 +173,12 @@ function Row_Validator(player, column) {
 /*       ==================
 !          Lock Top-Cell if full Column 
             =================== */
-function TopCell_Validation(columnNumber, invokedForKiValidation) {
-  let proof;
-  if (columnNumber === 1) proof = row_Counter_C1;
-  else if (columnNumber === 2) proof = row_Counter_C2;
-  else if (columnNumber === 3) proof = row_Counter_C3;
-  else if (columnNumber === 4) proof = row_Counter_C4;
-  else if (columnNumber === 5) proof = row_Counter_C5;
-  else if (columnNumber === 6) proof = row_Counter_C6;
-  else if (columnNumber === 7) proof = row_Counter_C7;
-  // console.log(columnNumber);
-  // console.log(proof);
+function TopCell_Validation(columnNumber, row, invokedForKiValidation) {
+  // console.log("Entered Top-Cell Validation.");
 
   // Important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section!
   // Proof if the columnNumber was the last possible cell to play in the column
-  if (proof === 2 && invokedForKiValidation === false) {
+  if (row === 2 && invokedForKiValidation === false) {
     // If it was lock it for further placements
     // console.log("TopCell-Validator locked cell.");
     document.getElementById(`ID_C${columnNumber}R1`).innerText = "Full!";
@@ -199,7 +190,7 @@ function TopCell_Validation(columnNumber, invokedForKiValidation) {
 
   // If the column is locked for placements, return false to KI Normal & KI Easy, so they know they cant make a placement there. Else return true so they hav a valid column number.
   if (invokedForKiValidation === true) {
-    if (proof < 3) {
+    if (row < 3) {
       return false;
     } else return true;
   }

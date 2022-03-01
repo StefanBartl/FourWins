@@ -18,53 +18,24 @@
 
                                                                                                                                                                                                                                                                                */
 //#endregion
-
-document
-  .getElementById("ID_Gameboard_Size_Button")
-  .addEventListener("click", () => {
-    document.getElementById("ID_GameboardWrapper").remove();
-    const new_gameboard_wrapper = document.createElement("div");
-    new_gameboard_wrapper.classList.add("Class_GameboardWrapper");
-    new_gameboard_wrapper.id = "ID_GameboardWrapper";
-    Game.state !== "InGame"
-      ? new_gameboard_wrapper.setAttribute("data-ingame", "no")
-      : new_gameboard_wrapper.setAttribute("data-ingame", "yes");
-
-    insertAfter(left_sidebar, new_gameboard_wrapper);
-
-    let size = parseInt(document.getElementById("ID_Gameboard_Size").value);
-
-    for (let x = 1; x <= size; x++) {
-      let column = document.createElement("div");
-      column.classList.add("Class_Columns");
-      column.id = `ID_Column${x}`;
-      document.getElementById("ID_GameboardWrapper").appendChild(column);
-
-      let topcell = document.createElement("div");
-      topcell.classList.add("Class_TopCells");
-      topcell.id = `ID_C${x}R1`;
-      document.getElementById(`ID_Column${x}`).appendChild(topcell);
-
-      let columncounter = x;
-      for (let row = 2; row <= size - 1; row++) {
-        let cell = document.createElement("div");
-        cell.classList.add("Class_Cells");
-        cell.id = `ID_C${columncounter}R${row}`;
-        document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
-      }
-    }
-  });
-
 //#region Open Jobs
 /*
 ?                               Jobs To-do:
                                          
 todo        -) Game End Screen
+todo        -) Finish Gameboard
+todo        -) Storing actual placement in Game object
 todo        -) KI Normal!
 todo        -) Column & Row Val changing for winChain!
 todo         -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo         -) Write a final Comment 
 todo         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
+
+!                             Session progress
+?-) 
+?-) 
+?-) 
+
                                                                                                                                                                                                                                                                 */
 //#endregion
 
@@ -419,6 +390,49 @@ and the settings are retained. If you want to delete these settings, you can do 
     });
   }
 });
+
+gameboard_size_button.addEventListener("click", () => {
+  // Remove the old Gameboard
+  document.getElementById("ID_GameboardWrapper").remove();
+
+  //Create a new one
+  const new_gameboard_wrapper = document.createElement("div");
+  new_gameboard_wrapper.classList.add("Class_GameboardWrapper");
+  new_gameboard_wrapper.id = "ID_GameboardWrapper";
+  Game.state !== "InGame"
+    ? new_gameboard_wrapper.setAttribute("data-ingame", "no")
+    : new_gameboard_wrapper.setAttribute("data-ingame", "yes");
+
+  insertAfter(left_sidebar, new_gameboard_wrapper);
+
+  //Get size from user
+  let size = parseInt(document.getElementById("ID_Gameboard_Size").value);
+  Game.gameboard_size = size;
+
+  for (let x = 1; x <= size; x++) {
+    // Create the Column Wrapper
+    let column = document.createElement("div");
+    column.classList.add("Class_Columns");
+    column.id = `ID_Column${x}`;
+    document.getElementById("ID_GameboardWrapper").appendChild(column);
+
+    // Create the Top Cells
+    let topcell = document.createElement("div");
+    topcell.classList.add("Class_TopCells");
+    topcell.id = `ID_C${x}R1`;
+    document.getElementById(`ID_Column${x}`).appendChild(topcell);
+
+    // Create the cells
+    let columncounter = x;
+    for (let row = 2; row <= size - 1; row++) {
+      let cell = document.createElement("div");
+      cell.classList.add("Class_Cells");
+      cell.id = `ID_C${columncounter}R${row}`;
+      document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
+    }
+  }
+});
+
 language_menu.addEventListener("change", () => {
   // Save language in Local Storage and Game Object
   // Important maybe for later: With more languages, if/else needed!
@@ -658,30 +672,39 @@ function Placement(ID_Top_Cell) {
 
   // Decrease the row counter by the total columns played in this row before and setting a variable for
   // the correct animations and the placement (to get the correct correct column)
-  let row;
-  if (columnNumber === 1) {
-    row_Counter_C1--;
-    row = row_Counter_C1;
-  } else if (columnNumber === 2) {
-    row_Counter_C2--;
-    row = row_Counter_C2;
-  } else if (columnNumber === 3) {
-    row_Counter_C3--;
-    row = row_Counter_C3;
-  } else if (columnNumber === 4) {
-    row_Counter_C4--;
-    row = row_Counter_C4;
-  } else if (columnNumber === 5) {
-    row_Counter_C5--;
-    row = row_Counter_C5;
-  } else if (columnNumber === 6) {
-    row_Counter_C6--;
-    row = row_Counter_C6;
-  } else if (columnNumber === 7) {
-    row_Counter_C7--;
-    row = row_Counter_C7;
+
+  function Get_Coin_Placement(columnNumber) {
+    console.log("Entered Get Coin Placement");
+    console.log("Column number:", columnNumber);
+    const arr = [];
+    arr.push(Game.actualGameboardPlayer1[`C${columnNumber}`].pop());
+    arr.push(Game.actualGameboardPlayer2[`C${columnNumber}`].pop());
+    console.log(arr);
+    let smallest;
+    if (arr[0] === undefined && arr[1] === undefined) {
+      smallest = 8;
+    }
+
+    if (arr[0] !== undefined && arr[1] !== undefined) {
+      arr[0] < arr[1] ? (smallest = arr[0]) : (smallest = arr[1]);
+    }
+
+    if (arr[0] === undefined && arr[1] !== undefined) {
+      smallest == arr[1];
+    }
+    if (arr[1] === undefined && arr[0] !== undefined) {
+      smallest == arr[0];
+    }
+    const valid_row = smallest - 1;
+
+    return {
+      coin_placement_id: [`ID_C${columnNumber}R${valid_row}`],
+      row: valid_row,
+    };
   }
 
+  const { coin_placement_id, row } = Get_Coin_Placement(columnNumber);
+  console.log("coin placement id:", coin_placement_id, "row:", row);
   //                              Placing the Coin Section
   // Create the correct coin, set correct position and append it to the DOM
   const coin = document.createElement("div");
@@ -715,7 +738,7 @@ function Placement(ID_Top_Cell) {
   // Remove the coin with the animation after the animation time ended and place the coin on correct position
   setTimeout(
     () => {
-      Placement_End(ID_Top_Cell, columnNumber, row);
+      Placement_End(ID_Top_Cell, columnNumber, row, coin_placement_id);
     }, // End of the anyonyme function of the setTimeout()
     1000
   ); // End of the setTimeout(), next placement is possible!
@@ -725,51 +748,37 @@ function Placement(ID_Top_Cell) {
 /* ================
          Placement Done 
          =============== */
-function Placement_End(ID_Top_Cell, columnNumber, row) {
+function Placement_End(ID_Top_Cell, columnNumber, row, coin_id) {
   // First remove the coin from the Top Cell
-  // console.log(ID_Top_Cell);
+  // console.log("Entered End of Placement");
   document.getElementById(`${ID_Top_Cell}`).firstChild.remove();
+
+  coin_destination = document.getElementById(coin_id);
 
   // Make the Placement
   if (Game.playerIsOnTurn === "left") {
     // Place the Coin as background image on the correct column (set by the decreased row counter)
     if (Game.player_Colour_Left === "yellow") {
-      document
-        .getElementById(`ID_C${columnNumber}R${row}`)
-        .classList.add("Class_PlacedCoin_1");
-      document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
-      document
-        .getElementById(`ID_C${columnNumber}R${row}`)
-        .setAttribute("data-isPlayed", "yes");
+      coin_destination.classList.add("Class_PlacedCoin_1");
+      coin_destination.style.opacity = "1";
+      coin_destination.setAttribute("data-isPlayed", "yes");
     } else {
-      document
-        .getElementById(`ID_C${columnNumber}R${row}`)
-        .classList.add("Class_PlacedCoin_2");
-      document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
-      document
-        .getElementById(`ID_C${columnNumber}R${row}`)
-        .setAttribute("data-isPlayed", "yes");
+      coin_destination.classList.add("Class_PlacedCoin_2");
+      coin_destination.style.opacity = "1";
+      coin_destination.setAttribute("data-isPlayed", "yes");
     }
-    Player_1_Placement_Finish(columnNumber, row);
+    Player_1_Placement_Finish(columnNumber, row, coin_id);
   } else {
     // If Placement was from Human  Player 2
-    Player_2_Placement_Finish(columnNumber, row);
+    Player_2_Placement_Finish(columnNumber, row, coin_placement_id);
     if (Game.player_Colour_Left === "red") {
-      document
-        .getElementById(`ID_C${columnNumber}R${row}`)
-        .classList.add("Class_PlacedCoin_1");
-      document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
-      document
-        .getElementById(`ID_C${columnNumber}R${row}`)
-        .setAttribute("data-isPlayed", "yes");
+      coin_destination.classList.add("Class_PlacedCoin_1");
+      coin_destination.style.opacity = "1";
+      coin_destination.setAttribute("data-isPlayed", "yes");
     } else {
-      document
-        .getElementById(`ID_C${columnNumber}R${row}`)
-        .classList.add("Class_PlacedCoin_2");
-      document.getElementById(`ID_C${columnNumber}R${row}`).style.opacity = "1";
-      document
-        .getElementById(`ID_C${columnNumber}R${row}`)
-        .setAttribute("data-isPlayed", "yes");
+      coin_destination.classList.add("Class_PlacedCoin_2");
+      coin_destination.style.opacity = "1";
+      coin_destination.setAttribute("data-isPlayed", "yes");
     }
   }
 }
@@ -777,7 +786,7 @@ function Placement_End(ID_Top_Cell, columnNumber, row) {
 /* =============================
          Get ready for next Placement 
          ============================ */
-function Player_1_Placement_Finish(columnNumber, row) {
+function Player_1_Placement_Finish(columnNumber, row, coin_placement_id) {
   //  Invoke Winning-Validation for Player 1
   const valid_row = Row_Validator(1, row);
   const valid_column = Column_Validator(1, columnNumber, row);
@@ -790,7 +799,7 @@ function Player_1_Placement_Finish(columnNumber, row) {
     return;
   }
 
-  TopCell_Validation(columnNumber, false);
+  TopCell_Validation(columnNumber, row, false);
 
   //   If no win, next Player is on turn
   Turning_PlayerIsOnTurn();

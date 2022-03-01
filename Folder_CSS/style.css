@@ -78,8 +78,10 @@
 
   overflow-wrap: break-word;
   word-wrap: break-word;
-
-  /*overflow: hidden;*/
+  
+  overflow-x: hidden;
+  overflow-y: auto;
+  
 }
 
 /* =======
@@ -87,6 +89,7 @@
          ======= */
 
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 /* #endregion */
 
@@ -102,6 +105,7 @@ body {
   text-align: center;
   display: grid;
   grid: 15vh auto 15vh / 1fr;
+  font-family: 'Bebas Neue', cursive;
 }
 
 /* =============
@@ -211,8 +215,8 @@ footer {
 /* #region 3) Gameboard */
 
 .Class_Columns {
-  width: 100% ;
-  height:max-content ;
+  width: 100%;
+  height: max-content;
 }
 
 .Class_TopCells {
@@ -395,8 +399,7 @@ footer {
   background-color: var(--gameboard);
 }
 
-#ID_Gameboard_Span{
-
+#ID_Gameboard_Span {
 }
 
 #ID_Gameboard_Size_Container {
@@ -412,7 +415,6 @@ footer {
 }
 
 #ID_Gameboard_Span p {
-  
 }
 
 #ID_Gameboard_Size_Container button {
@@ -485,6 +487,36 @@ footer {
   color: red;
 }
 
+
+#ID_Info_Container, #ID_Contacts_Container, #ID_Credits{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 250ms ease;
+  position: relative;
+}
+
+#ID_Info:after, #ID_Contact:after, #ID_Credits:after{
+    transition: all 250ms ease;
+    content: "";
+    display: block;
+    position: absolute;
+    left: 32%;
+    bottom: 0;
+    width: 1rem;
+    height: .1rem;
+    background-color: black;
+}
+
+
+
+#ID_Info:hover:after,  #ID_Contact:hover:after, #ID_Credits:hover:after{
+  width: 36%;
+}
+
+
+
 /* #endregion */
 
 /* #region 5) Typographie */
@@ -527,6 +559,7 @@ input {
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
+  font-family: 'Bebas Neue', cursive;
 }
 
 input:hover {
@@ -564,6 +597,7 @@ button {
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
+  font-family: 'Bebas Neue', cursive;
 }
 
 button:hover {
@@ -641,6 +675,7 @@ select {
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
+  font-family: 'Bebas Neue', cursive;
 }
 
 select:hover {
@@ -1098,11 +1133,16 @@ select:hover {
   font-size: small;
 }
 
+.Class_Inner_Window h3{
+  color: red;
+}
+
 .Class_Inner_Window p {
   align-self: center;
   margin-top: 2rem;
   height: 100%;
-  overflow: scroll;
+  overflow-y: auto;
+  
 }
 
 .Class_Inner_Window input {
@@ -1394,3 +1434,50 @@ select:hover {
          ::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some element
 
                                                                                                                                                                                                                                  /*#endregion*/
+
+/*#region 16) CSS-Templates */
+
+/*#region Box-Hover-Line  */
+
+.element {
+  width: 25rem;
+  height: 15rem;
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  transition: all 250ms ease;
+  position: relative;
+}
+
+.element:after {
+  transition: all 250ms ease;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1rem;
+  height: 1rem;
+  background-color: pink;
+}
+
+.element::after + :hover {
+  width: 5rem;
+}
+
+.element:hover:after {
+  width: 100%;
+}
+
+/*
+HTML:
+<div class="element">Element</div>
+*/
+
+/*#endregion*/
+
+/*#endregion*/

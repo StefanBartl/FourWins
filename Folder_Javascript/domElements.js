@@ -35,6 +35,9 @@ const thinking_div = document.getElementById("ID_Thinking_Div");
 const settings_menu = document.getElementById("ID_Settings_Menu");
 const settings_span = document.getElementById("ID_Setting_Span");
 const info_h = document.getElementById("ID_Info");
+const gameboard_size_button = document.getElementById(
+  "ID_Gameboard_Size_Button"
+);
 const colour = document.querySelector(".Class_Colour_Toggle");
 const toggle_colour_button = document.getElementById("ID_Toggle_Button");
 const toggle_colour_slider = document.getElementById("ID_Colour_Slider");
@@ -57,17 +60,6 @@ const label_colour = document.getElementById("ID_Label_Colour");
 //#endregion
 
 //#region Global Counters & Arrays
-
-/* Setting the Counters for let the Coin Placing Section know, 
-   in which row & column the Game currently is to calculate by placement the correct position */
-let row_Counter_C1 = 8,
-  row_Counter_C2 = 8,
-  row_Counter_C3 = 8,
-  row_Counter_C4 = 8,
-  row_Counter_C5 = 8,
-  row_Counter_C6 = 8,
-  row_Counter_C7 = 8;
-
 // Counters to count wins if more Games are played
 let count_wins_player_one = 0,
   count_wins_player_two = 0;

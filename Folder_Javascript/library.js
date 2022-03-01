@@ -62,7 +62,7 @@
 
 /*       =======================
  !        Insert Element after Reference Node
-            ======================== */
+            ======================== 7*/
 function insertAfter(referenceNode, newNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }

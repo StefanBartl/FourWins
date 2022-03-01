@@ -30,7 +30,7 @@ function Game_Screen() {
     .classList.add("Class_Main_Wrapper_InGame");
   document
     .getElementById("ID_GameboardWrapper")
-    .classList.add("Class_Gameboard_Wrapper_InGame");
+    .setAttribute("data-ingame", "yes");
   if (document.getElementById("ID_h3_turnText"))
     document.getElementById("ID_h3_turnText").style = "display: block";
 }
@@ -272,15 +272,15 @@ function Game_End_Screen(gameResult) {
   //#endregion
 
   //#region Event-Listeners
-  //                                  _____________________________
-  //                                   Back to Starting Page Button
-  // Back to the starting screen with page refresh
+
   document.getElementById("ID_Back_Button").addEventListener("click", () => {
+    // Back to the starting screen with page refresh
     document.location.reload();
   });
 
-  //                                  ___________________
-  //                                   Play another Game
+  /*    ================== 
+?        New Game Event-Listener
+            ==================== */
   document.getElementById("ID_NewGame_Button").addEventListener("click", () => {
     // console.log("New Game selected, preparations will be done...");
 
