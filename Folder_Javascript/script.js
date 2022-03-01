@@ -23,6 +23,7 @@
 ?                               Jobs To-do:
                                          
 todo        -) Game End Screen
+todo        -) Check  Grid how you can remove Columnn Class
 todo        -) Finish Gameboard
 todo        -) Storing actual placement in Game object
 todo        -) KI Normal!
