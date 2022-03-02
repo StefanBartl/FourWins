@@ -48,7 +48,7 @@ function KI_Placement(valid_number) {
 
   // If it was the last Cell in the Column, lock it
   const columnNumber = valid_number + 1;
-  TopCell_Validation(columnNumber, false);
+  TopCell_Validation(columnNumber, "no", false);
   setTimeout(() => {
     Unlock_TopCells();
   }, 1000);
@@ -66,7 +66,9 @@ Function to let KI Easy produce a random, but valid number for placement
   // Get a random number
   const random_number = getRandomInt(7);
   // Proof if in this column a placement is possible
-  const number_proofing = TopCell_Validation(random_number, true);
+  const number_proofing = TopCell_Validation(random_number, "no", true);
+  // console.log("Number to proof is valid:", number_proofing);
+
   // If it is possible, name it valid_number and invoke "KI_Thinking", if it isn't get a random number again and proof it as long as there is a valid number
   if (number_proofing === true) {
     const valid_number = random_number;
