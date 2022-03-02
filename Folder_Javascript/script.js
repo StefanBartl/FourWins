@@ -862,7 +862,7 @@ function Placement_End() {
 /* =============================
 !         Get ready for next Placement 
          ============================ */
-function Player_1_Placement_Finish(columnNumber, row) {
+function Player_1_Placement_Finish() {
   //  Invoke Winning-Validation for Player 1
   const valid_row = Row_Validator(1, Game.coin_placement_row);
   const valid_column = Column_Validator(
@@ -903,11 +903,11 @@ function Player_1_Placement_Finish(columnNumber, row) {
 /* ================
 !         Win-Validation?!?!?! 
          =============== */
-function Player_2_Placement_Finish(columnNumber, row) {
+function Player_2_Placement_Finish() {
   //  Invoke Winning-Validation for Player 2
-  const valid_row = Row_Validator(2, row);
-  const valid_column = Column_Validator(2, columnNumber, row);
-  const valid_diagonal = Diagonal_Validator(2, columnNumber, row);
+  const valid_row = Row_Validator(2, Game.coin_placement_row);
+  const valid_column = Column_Validator(2,  Game.clicked_column, Game.coin_placement_row);
+  const valid_diagonal = Diagonal_Validator(2, Game.clicked_column, Game.coin_placement_row);
 
   if (valid_row === true || valid_column === true || valid_diagonal === true)
     return;
@@ -916,7 +916,7 @@ function Player_2_Placement_Finish(columnNumber, row) {
     return;
   }
 
-  TopCell_Validation(columnNumber, false);
+  TopCell_Validation(Game.clicked_column, false);
 
   // Next Player is on turn
   if (Game.Game_against_KI === false) Unlock_TopCells();
