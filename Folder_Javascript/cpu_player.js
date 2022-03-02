@@ -40,6 +40,9 @@
 function KI_Placement(valid_number) {
   // console.log("Entered KI Placement Function. Random number for topCell is:  ", random_number);
 
+  // Get all Top-Cells
+  const topCellsArray = document.getElementsByClassName("Class_TopCells");
+
   // Make the Placement
   topCellsArray[valid_number].click();
 

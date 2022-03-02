@@ -1275,6 +1275,12 @@ select:hover {
 
 -) Font Styling
 
+-) Use padding on text! like: padding: 2rem 0;
+
+-) Try get "this is 1 block to read, this is anothe rone,...."
+
+-) No text-align on large texts
+
 -) margin-inline , background-clip background-text-clip 
 
 -) Optimale textlänge mit clamp:    width: clamp(45ch, 50%, 75ch);

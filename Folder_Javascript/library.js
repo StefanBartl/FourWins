@@ -72,6 +72,9 @@ function insertAfter(referenceNode, newNode) {
  !        Adding the Choosing-Animation 
          ============================== */
 function Add_Choosing_Ani(column) {
+  // Get all Top-Cells
+  const topCellsArray = document.getElementsByClassName("Class_TopCells");
+
   column -= 1;
 
   if (Game.playerIsOnTurn === "left" && Game.player_Colour_Left === "yellow") {
@@ -97,6 +100,9 @@ function Add_Choosing_Ani(column) {
 !        Remove the Choosing-Animation 
          ============================== */
 function Remove_Choosing_Ani(column) {
+  // Get all Top-Cells
+  const topCellsArray = document.getElementsByClassName("Class_TopCells");
+
   column -= 1;
 
   if (Game.playerIsOnTurn === "left") {
@@ -111,6 +117,9 @@ function Remove_Choosing_Ani(column) {
 !        Lock all Top-Cells 
          =================== */
 function Lock_TopCells() {
+  // Get all Top-Cells
+  const topCellsArray = document.getElementsByClassName("Class_TopCells");
+
   for (let topCell of topCellsArray) {
     topCell.style.cursor = "none";
     topCell.style = "pointer-events:none";
@@ -120,6 +129,9 @@ function Lock_TopCells() {
 !        Unlock all Top-Cells 
          ===================== */
 function Unlock_TopCells() {
+  // Get all Top-Cells
+  const topCellsArray = document.getElementsByClassName("Class_TopCells");
+
   for (let topCell of topCellsArray) {
     topCell.style.cursor = "pointer";
     topCell.style = "pointer-events: all";

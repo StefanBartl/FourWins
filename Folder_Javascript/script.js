@@ -37,11 +37,10 @@ todo         -) Write a final Comment
 todo         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
 !                             Session progress
-?-)   Implemented new placement validation strucuture via Game Object -> arrays
-?-)   New placement structUre: Basis is working 
-?-)   New animation fpor placement is finished without CSS
+?-)  Corrected choosing animation 
+?-)
 
-                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                                                                              */
 //#endregion
 
 //#region 1) General Settings & Set-Up Page
@@ -225,8 +224,7 @@ choose_ki.addEventListener("change", () => {
   // Set correct names after choosing "Play against"
   // If "Play against CPU = No" is selected, make sure "No" isn't the name of Player Two
   if (choose_ki.value === "No") {
-    player_2_name.value =
-      localStorage.Player_Two_Name || player_2_name.placeholder;
+    player_2_name.value = localStorage.Player_Two_Name || "Player 2";
   }
   // If it is a game against CPU, set Player Two Name to KI Level
   else if (Game.Language === "de" && choose_ki.value === "CPU Easy")
@@ -347,7 +345,7 @@ document.querySelector("#ID_Header").addEventListener("mousemove", () => {
 });
 //#endregion
 
-//#region Event-Listeners Settings-
+//#region Settings Menu Event-Listeners
 
 info_h.addEventListener("click", () => {
   if (Game.Language === "de") {
@@ -551,7 +549,7 @@ start_button.addEventListener("click", Game_Preparations);
 //#region 2) Main Game
 
 /* ===============
-?         Preparing to Play 
+!         Preparing to Play 
          =============== */
 function Game_Preparations() {
   // Function to do all the preparations to start the Game
@@ -567,6 +565,9 @@ function Game_Preparations() {
   Game.Player_One_Name = player_1_name.value;
   Game.Player_Two_Name = player_2_name.value;
   // console.log("Setted Names:", Game.Player_One_Name, Game.Player_Two_Name);
+
+  // Get all Cells
+  const cellsArray = document.getElementsByClassName("Class_Cells");
 
   // Give all cells same attribute
   for (let cell of cellsArray) {
@@ -611,7 +612,6 @@ function Game_Preparations() {
 
   // console.log("Finished Game preparations.");
 }
-
 /* ===========
 !         Play Game 
          ========== */
@@ -630,16 +630,29 @@ function PlayGame() {
   }
 
   // Detect the correct the Top Cells for looping trough to put the event listeners on them so the players can make there placements
+
+  // Get all Top-Cells
+  const topCellsArray = document.getElementsByClassName("Class_TopCells");
   for (let topCell of topCellsArray) {
-    let topCellColumn = topCell.id[4];
+
+    let topCellColumn;
+    // If the Column is over 9, the Column number have 1 more number
+    topCell.id.length === 7
+    ? topCellColumn = topCell.id[4]
+    : topCellColumn =
+        topCell.id[4] + topCell.id[5];
+
     //                                  __________________________________________
     //                                  Event-Listener for the Choosing-Animation
     topCell.addEventListener("mouseover", () => {
       Add_Choosing_Ani(topCellColumn);
+     // console.log(`Triggered choosing animation in top cell ${topCellColumn}`);
     });
     topCell.addEventListener("mouseleave", () => {
       Remove_Choosing_Ani(topCellColumn);
     });
+
+
     //                                  ____________________________________________________
     //                                  Event-Listener for actions if a Top Cell is clicked
     topCell.addEventListener("click", () => {
@@ -651,9 +664,8 @@ function PlayGame() {
       Game.clicked_TopCell_ID = topCell.id;
       Game.clicked_column = parseInt(Game.clicked_TopCell_ID[4]);
       //!  Make the other top cells unclickable for 1s (animation duration) so it cannont get clicked again and trigger a overlapped animation
-      for (let topCell of topCellsArray) {
-        topCell.style = "pointer-events:none";
-      }
+
+      topCell.style = "pointer-events:none";
 
       // Start placement function
       Prepare_Placement();
@@ -663,10 +675,13 @@ function PlayGame() {
 }
 
 /* ================
-!         Prepare Placement 
+!         Prepare Placement >>>
          ================ */
 function Prepare_Placement() {
   // console.log("Entered Function for preparing new Placement.");
+
+  // Get all Top-Cells
+  const topCellsArray = document.getElementsByClassName("Class_TopCells");
 
   // !Make topCell unclickable
   for (let topCell of topCellsArray) {
@@ -769,7 +784,7 @@ function Make_Placement() {
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
   }
 
-  // Get the played top cell for getting the right column and append ehe coin
+  // Get the played top cell for getting the right column and append the coin
   topCell = document.getElementById(`${Game.clicked_TopCell_ID}`);
   topCell.appendChild(coin);
 
@@ -800,94 +815,13 @@ function Make_Placement() {
   // console.log("Placement done.");
 }
 
-/* =========================
- ?        placing coin animations
-         ========================= */
-/*
-         .Class_PlacingAnimation_to_Row_2 {
-          animation: Placing_Coin_Animation_Cell_2 normal 1s;
-          animation-fill-mode: forwards;
-        }
-        
-        @keyframes Placing_Coin_Animation_Cell_2 {
-          from {
-          }
-          to {
-            transform: translateY(calc((52vh / 6) * 1));
-          }
-        }
-        
-        .Class_PlacingAnimation_to_Row_3 {
-          animation: Placing_Coin_Animation_Cell_3 normal 1s;
-          animation-fill-mode: forwards;
-        }
-        
-        @keyframes Placing_Coin_Animation_Cell_3 {
-          from {
-          }
-          to {
-            transform: translateY(calc((52vh / 6) * 2));
-          }
-        }
-        
-        .Class_PlacingAnimation_to_Row_4 {
-          animation: Placing_Coin_Animation_Cell_4 normal 1s;
-          animation-fill-mode: forwards;
-        }
-        
-        @keyframes Placing_Coin_Animation_Cell_4 {
-          from {
-          }
-          to {
-            transform: translateY(calc((52vh / 6) * 3));
-          }
-        }
-        
-        .Class_PlacingAnimation_to_Row_5 {
-          animation: Placing_Coin_Animation_Cell_5 normal 1s;
-          animation-fill-mode: forwards;
-        }
-        @keyframes Placing_Coin_Animation_Cell_5 {
-          from {
-          }
-          to {
-            transform: translateY(calc((52vh / 6) * 4));
-          }
-        }
-        
-        .Class_PlacingAnimation_to_Row_6 {
-          animation: Placing_Coin_Animation_Cell_6 normal 1s;
-          animation-fill-mode: forwards;
-        }
-        
-        @keyframes Placing_Coin_Animation_Cell_6 {
-          from {
-          }
-          to {
-            transform: translateY(calc((52vh / 6) * 5));
-          }
-        }
-        
-        .Class_PlacingAnimation_to_Row_7 {
-          animation: Placing_Coin_Animation_Cell_7 normal 1s;
-          animation-fill-mode: forwards;
-        }
-        
-        @keyframes Placing_Coin_Animation_Cell_7 {
-          from {
-          }
-          to {
-            transform: translateY(52vh);
-          }
-        }
-*/
-
 /* ================
-         Placement Done 
+!         Placement Done 
          =============== */
 function Placement_End() {
-  // First remove the coin from the Top Cell
-  console.log("Entered End of Placement");
+ // console.log("Entered End of Placement");
+
+   // First remove the coin from the Top Cell
   document.getElementById(`${Game.clicked_TopCell_ID}`).firstChild.remove();
 
   coin_destination = document.getElementById(Game.coin_placement_id);
@@ -923,7 +857,7 @@ function Placement_End() {
 }
 
 /* =============================
-         Get ready for next Placement 
+!         Get ready for next Placement 
          ============================ */
 function Player_1_Placement_Finish(columnNumber, row) {
   //  Invoke Winning-Validation for Player 1
@@ -964,7 +898,7 @@ function Player_1_Placement_Finish(columnNumber, row) {
 }
 
 /* ================
-         Win-Validation 
+!         Win-Validation?!?!?! 
          =============== */
 function Player_2_Placement_Finish(columnNumber, row) {
   //  Invoke Winning-Validation for Player 2
