@@ -184,7 +184,8 @@ function Thinking_Effect(invokerKI, valid_number) {
       }
     }, thinking_duration);
   }
-}
+};
+
 /* ==============================
 !        Get unique values from Array
          ============================= */

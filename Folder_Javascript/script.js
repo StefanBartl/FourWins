@@ -399,7 +399,7 @@ gameboard_size_button.addEventListener("click", () => {
   insertAfter(left_sidebar, new_gameboard_wrapper);
 
   //Get size from user
-  let size = parseInt(document.getElementById("ID_Gameboard_Size").value);
+  let size = document.getElementById("ID_Gameboard_Size").value;
   Game.gameboard_size = size;
 
   for (let x = 1; x <= size; x++) {
@@ -413,11 +413,15 @@ gameboard_size_button.addEventListener("click", () => {
     let topcell = document.createElement("div");
     topcell.classList.add("Class_TopCells");
     topcell.id = `ID_C${x}R1`;
+    topcell.setAttribute("data-column", x);
+
     document.getElementById(`ID_Column${x}`).appendChild(topcell);
 
+    
+    
     // Create the cells
     let columncounter = x;
-    for (let row = 2; row <= size - 1; row++) {
+    for (let row = 2; row <= size ; row++) {
       let cell = document.createElement("div");
       cell.classList.add("Class_Cells");
       cell.id = `ID_C${columncounter}R${row}`;
@@ -584,7 +588,7 @@ function Game_Preparations() {
     Game.actualGameboardPlayer1[`C${i}`] = [];
     Game.actualGameboardPlayer2[`C${i}`] = [];
     // Create row counter for easy calculation of the correct row for  placement
-    Game.rowCounter[`C${i}`] = Game.gameboard_size + 1;
+    Game.rowCounter[`C${i}`] = `${Game.gameboard_size}`;
   };
 
   // console.log("Game against CPU:", Game.Game_against_ki, "KI Level:", Game.KI_Level);
@@ -631,13 +635,7 @@ function PlayGame() {
   const topCellsArray = document.getElementsByClassName("Class_TopCells");
   for (let topCell of topCellsArray) {
 
-    let topCellColumn;
-    // If the Column is over 9, the Column number have 1 more number
-    topCell.id.length === 7
-    ? topCellColumn = topCell.id[4]
-    : topCellColumn =
-        topCell.id[4] + topCell.id[5];
-
+    let topCellColumn = parseInt(topCell.getAttribute("data-column"));
     //                                  __________________________________________
     //                                  Event-Listener for the Choosing-Animation
     topCell.addEventListener("mouseover", () => {
@@ -658,8 +656,10 @@ function PlayGame() {
       }
       // Get the ID & Column of the played TopCell:
       Game.clicked_TopCell_ID = topCell.id;
-      // Get the correct columnc of the clicked Top Cell:
-      topCell.id.length === 7 ? Game.clicked_column = Game.clicked_TopCell_ID[4] :  Game.clicked_column = Cell.id[4] + topCell.id[5];
+
+      let clicked_column = parseInt(topCell.getAttribute("data-column"));
+      // Get the correct column of the clicked Top Cell:
+      Game.clicked_column  = clicked_column;
       topCell.style = "pointer-events:none";
 
       // Start placement function
@@ -687,20 +687,12 @@ function Prepare_Placement() {
   // Increase round counter
   Game.roundCounter++;
 
-  Get_Coin_Placement();
-};
-
-/* ====================
-!         Get the Coin Destination 
-         ===================== */
-function Get_Coin_Placement() {
-  //console.log("Entered Get Coin Placement");
-
   // Proof if the Gameboard  size was changed by the user - if so, subtract 1 from 
- Game.coin_placement_row =   Game.rowCounter[`C${Game.clicked_column}`]  - 1;
- Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row}` ;
-
-  Make_Placement();
+  Game.user_changed_gameboard ?  Game.coin_placement_row =  parseInt(Game.rowCounter[`C${Game.clicked_column}`] ) + 1 : Game.coin_placement_row =  parseInt(Game.rowCounter[`C${Game.clicked_column}`] ) 
+  
+  Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row}` ;
+ 
+   Make_Placement();
 };
 
 /* ================
@@ -807,8 +799,11 @@ function Placement_End() {
 
    // First remove the coin from the Top Cell
   document.getElementById(`${Game.clicked_TopCell_ID}`).firstChild.remove();
-  
-  coin_destination = document.getElementById(Game.coin_placement_id);
+
+  // Proof is user changed Gameboard size. If true, adjust ID_Variable
+  Game.user_changed_gameboard ===  false 
+  ? coin_destination = document.getElementById(`ID_C${Game.clicked_column}R${Game.coin_placement_row}`) 
+  :  coin_destination = document.getElementById(`ID_C${Game.clicked_column}R${Game.coin_placement_row  - 1}`);
 
   // Make the Placement
   if (Game.playerIsOnTurn === "left") {
@@ -860,7 +855,7 @@ function Player_1_Placement_Finish() {
   );
 
   if (valid_row === true || valid_column === true || valid_diagonal === true) return;
-  
+
   if (Game.roundCounter === 42) {
     Game_End_Screen(3);
     return;

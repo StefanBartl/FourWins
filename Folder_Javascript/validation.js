@@ -201,9 +201,10 @@ function TopCell_Validation(invokedForKiValidation) {
   };
 
     // If it passes the proofment, just give the TopCell free again and return
-  document
-  .getElementById(`ID_C${Game.clicked_column}R1`).style = "pointer-events: all";
-
+  const topCellsArray = document.getElementsByClassName("Class_TopCells");
+  for(let topCell of topCellsArray){
+  topCell.style = "pointer-events: all";
+  };
     console.log("Top-Cell is free again.");
   return;
 };
