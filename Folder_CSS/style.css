@@ -221,7 +221,7 @@ footer {
 .Class_TopCells {
   outline: none;
   min-width: auto;
-  min-height: 3rem;
+  aspect-ratio: 1/1;
   border-left: dashed 0.15rem var(--base-border);
   background-color: var(--base-colour);
   z-index: -1;
@@ -235,6 +235,7 @@ footer {
 .Class_Full_Column {
   box-shadow: 0 -5px 0 var(--gameboard);
 }
+
 
 .Class_Cells {
   width: auto;
@@ -289,8 +290,8 @@ footer {
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
-  width: 5vw;
-  height: 10vh;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   z-index: 0;
 }
@@ -300,8 +301,8 @@ footer {
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
-  width: 5vw;
-  height: 10vh;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   z-index: 0;
 }
@@ -760,6 +761,7 @@ select:hover {
 
 /* #region 7) Animations & Transitions */
 
+/*#region  Choosing Coin Animations */
 /* =========================
          choosing coin animations
          ========================= */
@@ -803,6 +805,9 @@ select:hover {
     background-size: 50%;
   }
 }
+/*#endregion */
+
+/*#region Save Name Animations */
 
 /* ============================
          player save name animations
@@ -875,6 +880,8 @@ select:hover {
     transform: rotate(0deg);
   }
 }
+/*#endregion*/
+
 /* #endregion */
 
 /* #region 8) Game End Screen */

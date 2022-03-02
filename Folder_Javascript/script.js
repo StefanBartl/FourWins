@@ -22,22 +22,20 @@
 /*
 ?                               Jobs To-do:
     
-todo        -) Check  Grid how you can remove Columnn Class
-todo        -) IIF
-todo        -) Windows Object vs Promises
 todo        -) Finish Gameboard
 todo        -) Placement Animations?
+todo        -) Get rid of animations in CSS if repeatedly
 todo        -) winning chain
 todo        -) Game End Screen
 todo        -) KI Normal!
-todo        -) Column & Row Val changing for winChain!
-todo         -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo         -) Final formatation
-todo         -) Write a final Comment 
-todo         -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
+todo        -) Check  Grid how you can remove Columnn Class (Just if it s needed somehow)
+todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo        -) Final formatation
+todo        -) Write a final Comment 
+todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
 !                             Session progress
-?-)  Corrected choosing animation 
+?-)  
 ?-)
 
                                                                                                                                                                                                                                                                                                                               */
@@ -623,7 +621,7 @@ function PlayGame() {
   gameboard.setAttribute("data-inGame", "yes");
 
   // Create the Arrays in Game Object to validate placements
-  for (let i = 1; i <= Game.gameboard_size; i++) {
+  for (let i = 0; i <= Game.gameboard_size; i++) {
     let i = [];
     Game.player1_coins.push(i);
     Game.player2_coins.push(i);
@@ -703,8 +701,8 @@ function Prepare_Placement() {
 function Get_Coin_Placement() {
   //console.log("Entered Get Coin Placement");
   const arr = [];
-  arr.push(Game.player1_coins[`${Game.clicked_column}`].pop());
-  arr.push(Game.player2_coins[`${Game.clicked_column}`].pop());
+  arr.push(Game.player1_coins[`${Game.clicked_column }`].pop());
+  arr.push(Game.player2_coins[`${Game.clicked_column }`].pop());
   let smallest;
   if (arr[0] === undefined && arr[1] === undefined) {
     smallest = 8;
@@ -751,7 +749,9 @@ function Make_Placement() {
     Game.player1_coins[`${Game.clicked_column}`].push(Game.coin_placement_row);
     // Collect all placements in one array
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
-  } else if (
+  };
+
+  if (
     Game.playerIsOnTurn === "left" &&
     Game.player_Colour_Left === "red"
   ) {
@@ -762,7 +762,8 @@ function Make_Placement() {
     // to try:
     Game.player1_coins[`${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
-  }
+  };
+  
   if (Game.playerIsOnTurn === "right" && Game.player_Colour_Left === "yellow") {
     coin.classList.add("Class_Coin_Red");
     Game.actualGameboardPlayer2[`C${Game.clicked_column}`].push(
@@ -771,7 +772,9 @@ function Make_Placement() {
     // to try:
     Game.player2_coins[`${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
-  } else if (
+  }; 
+
+  if (
     Game.playerIsOnTurn === "right" &&
     Game.player_Colour_Left === "red"
   ) {
@@ -782,7 +785,7 @@ function Make_Placement() {
     // to try:
     Game.player2_coins[`${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
-  }
+  };
 
   // Get the played top cell for getting the right column and append the coin
   topCell = document.getElementById(`${Game.clicked_TopCell_ID}`);
@@ -880,7 +883,7 @@ function Player_1_Placement_Finish(columnNumber, row) {
     return;
   }
 
-  TopCell_Validation(columnNumber, row, false);
+  TopCell_Validation(Game.clicked_column, Game.coin_placement_row, false);
 
   //   If no win, next Player is on turn
   Turning_PlayerIsOnTurn();

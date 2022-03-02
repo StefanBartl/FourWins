@@ -59,12 +59,11 @@ const delete_all = document.getElementById("ID_Delete_All");
 const label_colour = document.getElementById("ID_Label_Colour");
 //#endregion
 
-//#region Global Counter
+//#region Global
 // Counters to count wins if more Games are played
 let count_wins_player_one = 0,
   count_wins_player_two = 0;
 
 let player1_coins = [],
   player2_coins = [];
-
 //#endregion
