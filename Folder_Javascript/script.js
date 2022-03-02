@@ -22,19 +22,17 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) weird looking topcell 1
-todo        -) KI Normal
-todo        -) Finish Gameboard-Sizing
-todo        -) Check  Grid how you can remove Columnn Class (Just if it s needed somehow)
+todo        -) Update whole CPU Player and then --> Finish Gameboard-Sizing! PS: Add infotext and thgink abput ingame size change --> must copy maked placements in new array!
+todo        -) Update Function Headlines and find a way for infoboxes with description and additional infos!
 todo        -) Check somehow the Firework-Animation!
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo        -) Final formatation
+todo        -) Final formatation (especially script & library sections/functions), comments:  ,
 todo        -) Write a final Comment 
 todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
 !                             Session progress
 ?-) Ingame &  Game End Screen repaired
-?-)
+?-) Repaired getting Coin Destination
 
                                                                                                                                                                                                                                                                                                                               */
 //#endregion
@@ -44,29 +42,19 @@ todo        -) Save Default Script Files with the new Script Layout for later Pr
 const Game = {
   // Game Object for storing important values in variables. Collected access via Game.[variable]
   // Setting the Gameboard arrays to keep Coin placements
-  actualGameboardPlayer1: {
-    C1: [],
-    C2: [],
-    C3: [],
-    C4: [],
-    C5: [],
-    C6: [],
-    C7: [],
-  },
-  actualGameboardPlayer2: {
-    C1: [],
-    C2: [],
-    C3: [],
-    C4: [],
-    C5: [],
-    C6: [],
-    C7: [],
-  },
   gameboard_size: 7,
   user_changed_gameboard: false,
+  actualGameboardPlayer1: {
+
+  },
+  actualGameboardPlayer2: {
+  },
   player1_coins: [],
   player2_coins: [],
-  all_coins: [],
+ all_coins: [],
+rowCounter: [],
+clicked_column: undefined,
+clicked_TopCell_ID: "",
   // Setting variable to know who is on turn
   playerIsOnTurn: "right",
   // Setting a counter for the played rounds
@@ -567,9 +555,9 @@ function Game_Preparations() {
   // Get all Cells
   const cellsArray = document.getElementsByClassName("Class_Cells");
 
-  // Give all cells same attribute
+  // Give all cells samedata-isplayed attribute
   for (let cell of cellsArray) {
-    cell.setAttribute("data-isPlayed", "no");
+    cell.setAttribute("data-isplayed", "no");
   }
 
   // Proof if Game is against KI
@@ -578,10 +566,26 @@ function Game_Preparations() {
   if (Game.Game_against_KI === true) {
     if (choose_ki.value === "CPU Easy") {
       Game.KI_Level = "Easy";
-    } else {
+    } 
+    if (choose_ki.value === "CPU Normal") {
       Game.KI_Level = "Normal";
-    }
-  }
+    } 
+    if (choose_ki.value === "CPU Hard") {
+      Game.KI_Level = "Hard";
+    } 
+  };
+
+  for (let i = 1; i <= Game.gameboard_size; i++) {
+    // Create the Arrays to validate placements
+    let arr = [];
+    Game.player1_coins[`C${i}`] = [];
+    Game.player2_coins[`C${i}`] = [];
+    Game.actualGameboardPlayer1[`C${i}`] = [];
+    Game.actualGameboardPlayer2[`C${i}`] = [];
+    // Create row counter for easy calculation of the correct row for  placement
+    Game.rowCounter[`C${i}`] = Game.gameboard_size + 1;
+  };
+
   // console.log("Game against CPU:", Game.Game_against_ki, "KI Level:", Game.KI_Level);
   // DOM-Manipulation to get to the "Game-Screen"
   Game_Screen();
@@ -620,13 +624,6 @@ function PlayGame() {
   Game.state = "InGame";
   gameboard.setAttribute("data-inGame", "yes");
 
-  // Create the Arrays in Game Object to validate placements
-  for (let i = 0; i <= Game.gameboard_size; i++) {
-    let i = [];
-    Game.player1_coins.push(i);
-    Game.player2_coins.push(i);
-  }
-
   // Detect the correct the Top Cells for looping trough to put the event listeners on them so the players can make there placements
 
   // Get all Top-Cells
@@ -654,15 +651,14 @@ function PlayGame() {
     //                                  ____________________________________________________
     //                                  Event-Listener for actions if a Top Cell is clicked
     topCell.addEventListener("click", () => {
-      // Play placement sound if on
+      // Play placement sound if on:
       if (Game.Sound === true) {
         placing_audio.play();
       }
-      // Get the ID & Column of the played TopCell
+      // Get the ID & Column of the played TopCell:
       Game.clicked_TopCell_ID = topCell.id;
-      Game.clicked_column = parseInt(Game.clicked_TopCell_ID[4]);
-      //!  Make the other top cells unclickable for 1s (animation duration) so it cannont get clicked again and trigger a overlapped animation
-
+      // Get the correct columnc of the clicked Top Cell:
+      topCell.id.length === 7 ? Game.clicked_column = Game.clicked_TopCell_ID[4] :  Game.clicked_column = Cell.id[4] + topCell.id[5];
       topCell.style = "pointer-events:none";
 
       // Start placement function
@@ -670,7 +666,7 @@ function PlayGame() {
     });
   }
   // console.log("Leaving Play Game Function.");
-}
+};
 
 /* ================
 !         Prepare Placement >>>
@@ -680,11 +676,6 @@ function Prepare_Placement() {
 
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName("Class_TopCells");
-
-  // !?!?!?!Make topCell unclickable
-  for (let topCell of topCellsArray) {
-    topCell.style = "pointer-events: none";
-  }
 
   // Get the played top cell for getting the right column
   topCell = document.getElementById(`${Game.clicked_TopCell_ID}`);
@@ -696,40 +687,26 @@ function Prepare_Placement() {
   Game.roundCounter++;
 
   Get_Coin_Placement();
-}
+};
 
+/* ====================
+!         Get the Coin Destination 
+         ===================== */
 function Get_Coin_Placement() {
   //console.log("Entered Get Coin Placement");
-  const arr = [];
-  // Push the lowest row number in arr[]
-  arr.push(Game.player1_coins[`${Game.clicked_column }`].pop());
-  arr.push(Game.player2_coins[`${Game.clicked_column }`].pop());
-  let smallest;
-  // Get the lowest row -> 1 less ist the row where placement is to be done
-  if (arr[0] === undefined && arr[1] === undefined) {
-    smallest = Game.gameboard_size + 1;
-  }
 
-  if (arr[0] !== undefined && arr[1] !== undefined) {
-    arr[0] < arr[1] ? (smallest = arr[0]) : (smallest = arr[1]);
-  }
-
-  if (arr[0] === undefined && arr[1] !== undefined) {
-    smallest = arr[1];
-  }
-  if (arr[1] === undefined && arr[0] !== undefined) {
-    smallest = arr[0];
-  }
-// Now values for the coin are calculated, assign ROW and ID of targeted cell  to variables:
-  Game.coin_placement_row = smallest -1;
-  // Proof if the Gameboard  size was changed by the user - if so, subtract 1 from row 
-  Game.user_changed_gameboard === false ?   Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row}` :  Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row - 1}` ;
+  // Proof if the Gameboard  size was changed by the user - if so, subtract 1 from 
+ Game.coin_placement_row =   Game.rowCounter[`C${Game.clicked_column}`]  - 1;
+ Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row}` ;
 
   Make_Placement();
-}
+};
 
+/* ================
+!         do the Placement 
+         =============== */
 function Make_Placement() {
-  /* console.log(
+  /*                 console.log(
     "Make placement on coin placement id:",
     Game.coin_placement_id,
     "in row:",
@@ -749,7 +726,7 @@ function Make_Placement() {
     );
     // to try:
     // Push row placement in a newly player array to get rid auf the actual Gameboard Objec
-    Game.player1_coins[`${Game.clicked_column}`].push(Game.coin_placement_row);
+    Game.player1_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
     // Collect all placements in one array
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
   };
@@ -763,7 +740,7 @@ function Make_Placement() {
       Game.coin_placement_row
     );
     // to try:
-    Game.player1_coins[`${Game.clicked_column}`].push(Game.coin_placement_row);
+    Game.player1_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
   };
   
@@ -773,7 +750,7 @@ function Make_Placement() {
       Game.coin_placement_row
     );
     // to try:
-    Game.player2_coins[`${Game.clicked_column}`].push(Game.coin_placement_row);
+    Game.player2_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
   }; 
 
@@ -786,7 +763,7 @@ function Make_Placement() {
       Game.coin_placement_row
     );
     // to try:
-    Game.player2_coins[`${Game.clicked_column}`].push(Game.coin_placement_row);
+    Game.player2_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
   };
 
@@ -857,6 +834,8 @@ function Placement_End() {
       coin_destination.setAttribute("data-isPlayed", "yes");
     }
   }
+  Game.rowCounter[`C${Game.clicked_column}`]--;
+
   Game.playerIsOnTurn === "left"
     ? Player_1_Placement_Finish()
     : Player_2_Placement_Finish();
@@ -886,7 +865,7 @@ function Player_1_Placement_Finish() {
     return;
   }
 
-  TopCell_Validation(Game.clicked_column, Game.coin_placement_row, false);
+  TopCell_Validation(false);
 
   //   If no win, next Player is on turn
   Turning_PlayerIsOnTurn();
@@ -904,7 +883,7 @@ function Player_1_Placement_Finish() {
 }
 
 /* ================
-!         Win-Validation?!?!?! 
+!         Win-Validation
          =============== */
 function Player_2_Placement_Finish() {
   //  Invoke Winning-Validation for Player 2
@@ -919,7 +898,7 @@ function Player_2_Placement_Finish() {
     return;
   }
 
-  TopCell_Validation(Game.clicked_column, false);
+  TopCell_Validation( false);
 
   // Next Player is on turn
   if (Game.Game_against_KI === false) Unlock_TopCells();

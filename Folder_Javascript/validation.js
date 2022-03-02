@@ -173,34 +173,35 @@ function Row_Validator(player, column) {
 /*       ==================
 !          Lock Top-Cell if full Column 
             =================== */
-function TopCell_Validation(columnNumber, row, invokedForKiValidation) {
+function TopCell_Validation(invokedForKiValidation) {
   // console.log("Entered Top-Cell Validation.");
-a = row;
- if (a === "no"){
-     a = Game.player1_coins[columnNumber].pop();
- }
 
   // Important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section!
   // Proof if the columnNumber was the last possible cell to play in the column
-  if (a === 2 && invokedForKiValidation === false) {
+  if ( Game.rowCounter[`C${Game.clicked_column}`] === 2 && invokedForKiValidation === false) {
     // If it was lock it for further placements
     // console.log("TopCell-Validator locked cell.");
-    document.getElementById(`ID_C${columnNumber}R1`).innerText = "Full!";
+    document.getElementById(`ID_C${Game.clicked_column}R1`).innerText = "Full!";
     document
-      .getElementById(`ID_C${columnNumber}R1`)
-      .classList.add("Class_Full_Column");
+      .getElementById(`ID_C${Game.clicked_column}R1`)
+      .style = "pointer-events: none";
     return;
-  }
+  };
 
   // If the column is locked for placements, return false to KI Normal & KI Easy, so they know they cant make a placement there. Else return true so they hav a valid column number.
   if (invokedForKiValidation === true) {
-    if (a < 3) {
+    if ( Game.rowCounter[`C${Game.clicked_column}`] < 3) {
       return false;
-    } else return true;
-  }
+    } else {
+      document
+      .getElementById(`ID_C${Game.clicked_column}R1`).style = "pointer-events: all";
+      return true};
+  };
 
-  // If it passes the proofment, just return and do nothing
+    // If it passes the proofment, just give the TopCell free again and return
+  document
+  .getElementById(`ID_C${Game.clicked_column}R1`).style = "pointer-events: all";
   return;
-}
+};
 
 //#endregion

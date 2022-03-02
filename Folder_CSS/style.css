@@ -375,11 +375,10 @@ footer {
   position: relative;
   top: 0;
   right: -95%;
-  display: grid;
-  grid: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr / 1fr;
-  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  height: 80vh;
   width: 100vw;
-  height: 90vh;
   max-width: 100%;
   z-index: 3;
   justify-content: center;
@@ -404,30 +403,8 @@ footer {
   background-color: var(--gameboard);
 }
 
-#ID_Gameboard_Span {
-}
-
-#ID_Gameboard_Size_Container {
-  display: grid;
-  grid: 1fr / 3rem 2rem 3rem 1fr;
-  margin-left: 20%;
-  margin-top: 5%;
-  gap: 5%;
-}
-#ID_Gameboard_Size_Container input {
-  width: 6ch;
-  height: 1.5rem;
-}
-
-#ID_Gameboard_Span p {
-}
-
-#ID_Gameboard_Size_Container button {
-  width: 3rem;
-  height: 1.5rem;
-}
-
 #ID_Info_Container,
+#ID_Gameboard_Span,
 #ID_Colour_Container,
 #ID_Sound_Container,
 #ID_Language_Container,
@@ -436,10 +413,33 @@ footer {
 #ID_Credits_Container,
 #ID_Delete_All_Container {
   min-width: 100%;
+  min-height: 5rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  outline: dashed 2px var(--base-colour);
+  
+}
+
+#ID_Gameboard_Span {
+}
+
+#ID_Gameboard_Size_Container {
+  display: grid;
+  grid: 1fr / 1fr 1fr;
+  justify-items:center ;
+  align-items:baseline ;
+  margin-bottom: 1rem;
+}
+#ID_Gameboard_Size_Container input {
+  width: 80%;
+  height: 100%
+}
+
+#ID_Gameboard_Size_Container button {
+  width: 80%;
+  height: 100%;
 }
 
 #ID_Colour_Container,
@@ -459,6 +459,7 @@ footer {
 #ID_Contact,
 #ID_Credits {
   min-width: 100%;
+  
 }
 
 #ID_Info,
@@ -493,8 +494,13 @@ footer {
 }
 
 #ID_Info_Container,
+#ID_Gameboard_Size_Container button,
+#ID_Reset_Easy,
+#ID_Reset_Normal,
 #ID_Contacts_Container,
-#ID_Credits {
+#ID_Credits_Container,
+#ID_Delete_All
+{
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -512,15 +518,44 @@ footer {
   position: absolute;
   left: 32%;
   bottom: 0;
-  width: 1rem;
-  height: 0.1rem;
-  background-color: black;
+  width: 0%;
+  height: 0.3rem;
+  background-color: var(--gameboard);
 }
 
 #ID_Info:hover:after,
 #ID_Contact:hover:after,
 #ID_Credits:hover:after {
   width: 36%;
+}
+
+#ID_Gameboard_Size_Container button:after,
+#ID_Reset_Easy:after,
+#ID_Reset_Normal:after,
+#ID_Delete_All:after
+{
+  transition: all 250ms ease;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 0.3rem;
+  background-color: var(--gameboard);
+}
+
+#ID_Gameboard_Size_Container button:hover:after,
+#ID_Reset_Easy:hover:after,
+#ID_Reset_Normal:hover:after,
+#ID_Delete_All:hover:after
+{
+  width: 100%;
+}
+
+#ID_Reset_Easy:hover,
+#ID_Reset_Normal:hover{
+  color: white;
 }
 
 /* #endregion */
@@ -645,7 +680,7 @@ button:hover {
 
 #ID_Delete_All {
   cursor: pointer;
-  height: 1.5rem;
+  height: 2rem;
   width: 8rem;
   border-radius: 10%;
 }
@@ -751,7 +786,6 @@ select:hover {
          ========= */
 
 .Class_Summary_Details:hover {
-  color: var(--main-red);
   cursor: pointer;
 }
 

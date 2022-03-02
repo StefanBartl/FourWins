@@ -48,7 +48,7 @@ function KI_Placement(valid_number) {
 
   // If it was the last Cell in the Column, lock it
   const columnNumber = valid_number + 1;
-  TopCell_Validation(columnNumber, "no", false);
+  TopCell_Validation(false);
   setTimeout(() => {
     Unlock_TopCells();
   }, 1000);

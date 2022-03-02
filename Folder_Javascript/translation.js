@@ -98,6 +98,9 @@ function Deutsch() {
   info_h.innerText = "Spielanleitung";
   info_h.title = "Zur Spielanleitung";
   info_h.alt = "Zur Spielanleitung";
+  gameboard_size_button.innerText = "Größe ändern";
+  gameboard_size_button.title = "Spielfeldgröße ändern!";
+  gameboard_size_button.alt = "Button zum ändern der Spielfeldgröße.";
   label_colour.innerText = "Farbwahl";
   colour.title = "Wähle eine Farbe für Spieler 1!";
   colour.alt = "Wähle eine Farbe für Spieler 1";
@@ -169,6 +172,9 @@ function English() {
   info_h.innerText = "Instructions";
   info_h.title = "To Instructions";
   info_h.alt = "To Instructions";
+  gameboard_size_button.innerText = "Change size";
+  gameboard_size_button.title = "Change the size of the Gamebopard!";
+  gameboard_size_button.alt = "Button to change the size of the Gameboard.";
   colour.title = "Choose Colour for Player 1!";
   label_colour.innerText = "Choose Colour";
   sound_checkbox.title = "Sound ON / OFF";
