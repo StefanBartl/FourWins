@@ -78,10 +78,9 @@
 
   overflow-wrap: break-word;
   word-wrap: break-word;
-  
+
   overflow-x: hidden;
   overflow-y: auto;
-  
 }
 
 /* =======
@@ -89,7 +88,7 @@
          ======= */
 
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
 /* #endregion */
 
@@ -105,7 +104,7 @@ body {
   text-align: center;
   display: grid;
   grid: 15vh auto 15vh / 1fr;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
 }
 
 /* =============
@@ -487,8 +486,9 @@ footer {
   color: red;
 }
 
-
-#ID_Info_Container, #ID_Contacts_Container, #ID_Credits{
+#ID_Info_Container,
+#ID_Contacts_Container,
+#ID_Credits {
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -497,25 +497,25 @@ footer {
   position: relative;
 }
 
-#ID_Info:after, #ID_Contact:after, #ID_Credits:after{
-    transition: all 250ms ease;
-    content: "";
-    display: block;
-    position: absolute;
-    left: 32%;
-    bottom: 0;
-    width: 1rem;
-    height: .1rem;
-    background-color: black;
+#ID_Info:after,
+#ID_Contact:after,
+#ID_Credits:after {
+  transition: all 250ms ease;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 32%;
+  bottom: 0;
+  width: 1rem;
+  height: 0.1rem;
+  background-color: black;
 }
 
-
-
-#ID_Info:hover:after,  #ID_Contact:hover:after, #ID_Credits:hover:after{
+#ID_Info:hover:after,
+#ID_Contact:hover:after,
+#ID_Credits:hover:after {
   width: 36%;
 }
-
-
 
 /* #endregion */
 
@@ -559,7 +559,7 @@ input {
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
 }
 
 input:hover {
@@ -597,7 +597,7 @@ button {
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
 }
 
 button:hover {
@@ -675,7 +675,7 @@ select {
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
 }
 
 select:hover {
@@ -801,86 +801,6 @@ select:hover {
   to {
     background-position: center;
     background-size: 50%;
-  }
-}
-/* =========================
-         placing coin animations
-         ========================= */
-
-.Class_PlacingAnimation_to_Row_2 {
-  animation: Placing_Coin_Animation_Cell_2 normal 1s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes Placing_Coin_Animation_Cell_2 {
-  from {
-  }
-  to {
-    transform: translateY(calc((52vh / 6) * 1));
-  }
-}
-
-.Class_PlacingAnimation_to_Row_3 {
-  animation: Placing_Coin_Animation_Cell_3 normal 1s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes Placing_Coin_Animation_Cell_3 {
-  from {
-  }
-  to {
-    transform: translateY(calc((52vh / 6) * 2));
-  }
-}
-
-.Class_PlacingAnimation_to_Row_4 {
-  animation: Placing_Coin_Animation_Cell_4 normal 1s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes Placing_Coin_Animation_Cell_4 {
-  from {
-  }
-  to {
-    transform: translateY(calc((52vh / 6) * 3));
-  }
-}
-
-.Class_PlacingAnimation_to_Row_5 {
-  animation: Placing_Coin_Animation_Cell_5 normal 1s;
-  animation-fill-mode: forwards;
-}
-@keyframes Placing_Coin_Animation_Cell_5 {
-  from {
-  }
-  to {
-    transform: translateY(calc((52vh / 6) * 4));
-  }
-}
-
-.Class_PlacingAnimation_to_Row_6 {
-  animation: Placing_Coin_Animation_Cell_6 normal 1s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes Placing_Coin_Animation_Cell_6 {
-  from {
-  }
-  to {
-    transform: translateY(calc((52vh / 6) * 5));
-  }
-}
-
-.Class_PlacingAnimation_to_Row_7 {
-  animation: Placing_Coin_Animation_Cell_7 normal 1s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes Placing_Coin_Animation_Cell_7 {
-  from {
-  }
-  to {
-    transform: translateY(52vh);
   }
 }
 
@@ -1133,7 +1053,7 @@ select:hover {
   font-size: small;
 }
 
-.Class_Inner_Window h3{
+.Class_Inner_Window h3 {
   color: red;
 }
 
@@ -1142,7 +1062,6 @@ select:hover {
   margin-top: 2rem;
   height: 100%;
   overflow-y: auto;
-  
 }
 
 .Class_Inner_Window input {

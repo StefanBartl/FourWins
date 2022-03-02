@@ -64,6 +64,9 @@ const label_colour = document.getElementById("ID_Label_Colour");
 let count_wins_player_one = 0,
   count_wins_player_two = 0;
 
+let player1_coins = [],
+  player2_coins = [];
+
 // Get all Top-Cells
 const topCellsArray = document.getElementsByClassName("Class_TopCells");
 
