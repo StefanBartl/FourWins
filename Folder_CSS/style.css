@@ -227,6 +227,9 @@ footer {
   outline: none;
   min-width: auto;
   aspect-ratio: 1/1;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
   border-left: dashed 0.15rem var(--base-border);
   background-color: var(--base-colour);
   z-index: -1;
@@ -234,7 +237,7 @@ footer {
 }
 
 #ID_C1R1 {
- border-left: solid 1px var(--gameboard);
+ border-left: none;
 }
 
 /*
@@ -257,10 +260,6 @@ footer {
 /* ===============================
  !        Game Screen Gameboard Classes 
          =============================== */
-
-.Class_Gameboard_Wrapper_InGame {
-  margin-top: 10vh;
-}
 
 .Class_Turn_Players {
   min-width: 100%;
