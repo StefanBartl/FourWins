@@ -22,11 +22,12 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) Update whole CPU Player and then --> Finish Gameboard-Sizing! PS: Add infotext and thgink abput ingame size change --> must copy maked placements in new array!
+todo        -) Update whole PU Player and then --> Finish Gameboard-Sizing! PS: Add infotext and thgink abput ingame size change --> must copy maked placements in new array!
 todo        -) Update Function Headlines and find a way for infoboxes with description and additional infos!
 todo        -) Check somehow the Firework-Animation!
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo        -) Final formatation (especially script & library sections/functions), comments:  ,
+todo        -) Make sure all important is commented
 todo        -) Write a final Comment 
 todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
@@ -858,12 +859,12 @@ function Player_1_Placement_Finish() {
     Game.coin_placement_row
   );
 
-  if (valid_row === true || valid_column === true || valid_diagonal === true)
-    return;
+  if (valid_row === true || valid_column === true || valid_diagonal === true) return;
+  
   if (Game.roundCounter === 42) {
     Game_End_Screen(3);
     return;
-  }
+  };
 
   TopCell_Validation(false);
 
@@ -879,7 +880,10 @@ function Player_1_Placement_Finish() {
   } else if (Game.KI_Level === "Normal") {
     KI_Normal();
     Lock_TopCells();
-  }
+  } else if  (Game.KI_Level === "Hard" || Game.KI_Level === "Schwer")  {
+    KI_Hard();
+    Lock_TopCells();
+  };
 }
 
 /* ================

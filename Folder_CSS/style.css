@@ -422,9 +422,6 @@ footer {
   
 }
 
-#ID_Gameboard_Span {
-}
-
 #ID_Gameboard_Size_Container {
   display: grid;
   grid: 1fr / 1fr 1fr;
@@ -564,9 +561,6 @@ footer {
 
 #ID_Headline {
   text-align: center;
-}
-
-#ID_Header_p {
 }
 
 #ID_Player_1_Headline {

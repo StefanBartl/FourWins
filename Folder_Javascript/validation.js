@@ -174,7 +174,7 @@ function Row_Validator(player, column) {
 !          Lock Top-Cell if full Column 
             =================== */
 function TopCell_Validation(invokedForKiValidation) {
-  // console.log("Entered Top-Cell Validation.");
+  console.log("Entered Top-Cell Validation.");
 
   // Important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section!
   // Proof if the columnNumber was the last possible cell to play in the column
@@ -185,22 +185,26 @@ function TopCell_Validation(invokedForKiValidation) {
     document
       .getElementById(`ID_C${Game.clicked_column}R1`)
       .style = "pointer-events: none";
-    return;
+    return
   };
 
   // If the column is locked for placements, return false to KI Normal & KI Easy, so they know they cant make a placement there. Else return true so they hav a valid column number.
   if (invokedForKiValidation === true) {
     if ( Game.rowCounter[`C${Game.clicked_column}`] < 3) {
+      document
+      .getElementById(`ID_C${Game.clicked_column}R1`).style = "pointer-events: none";
+      console.log("Top-Cell is locked now / was locked for placements.");
       return false;
     } else {
-      document
-      .getElementById(`ID_C${Game.clicked_column}R1`).style = "pointer-events: all";
+      console.log("CPU Placement possible.)");
       return true};
   };
 
     // If it passes the proofment, just give the TopCell free again and return
   document
   .getElementById(`ID_C${Game.clicked_column}R1`).style = "pointer-events: all";
+
+    console.log("Top-Cell is free again.");
   return;
 };
 

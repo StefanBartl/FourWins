@@ -164,6 +164,7 @@ function Thinking_Effect(invokerKI, valid_number) {
       }, 1500);
     }, 2000);
   }
+  
   // If the invoker is KI do additional tasks...
   if (invokerKI === true) {
     // Get a random number
