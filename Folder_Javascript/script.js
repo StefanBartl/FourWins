@@ -21,21 +21,19 @@
 //#region Open Jobs
 /*
 ?                               Jobs To-do:
-    
-todo        -) Finish Gameboard
-todo        -) Placement Animations?
-todo        -) Get rid of animations in CSS if repeatedly
-todo        -) winning chain
-todo        -) Game End Screen
-todo        -) KI Normal!
+
+todo        -) weird looking topcell 1
+todo        -) KI Normal
+todo        -) Finish Gameboard-Sizing
 todo        -) Check  Grid how you can remove Columnn Class (Just if it s needed somehow)
+todo        -) Check somehow the Firework-Animation!
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo        -) Final formatation
 todo        -) Write a final Comment 
 todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
 
 !                             Session progress
-?-)  
+?-) Ingame &  Game End Screen repaired
 ?-)
 
                                                                                                                                                                                                                                                                                                                               */
@@ -65,6 +63,7 @@ const Game = {
     C7: [],
   },
   gameboard_size: 7,
+  user_changed_gameboard: false,
   player1_coins: [],
   player2_coins: [],
   all_coins: [],
@@ -436,6 +435,7 @@ gameboard_size_button.addEventListener("click", () => {
       document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
     }
   }
+  Game.user_changed_gameboard = true;
 });
 
 language_menu.addEventListener("change", () => {
@@ -681,7 +681,7 @@ function Prepare_Placement() {
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName("Class_TopCells");
 
-  // !Make topCell unclickable
+  // !?!?!?!Make topCell unclickable
   for (let topCell of topCellsArray) {
     topCell.style = "pointer-events: none";
   }
@@ -701,11 +701,13 @@ function Prepare_Placement() {
 function Get_Coin_Placement() {
   //console.log("Entered Get Coin Placement");
   const arr = [];
+  // Push the lowest row number in arr[]
   arr.push(Game.player1_coins[`${Game.clicked_column }`].pop());
   arr.push(Game.player2_coins[`${Game.clicked_column }`].pop());
   let smallest;
+  // Get the lowest row -> 1 less ist the row where placement is to be done
   if (arr[0] === undefined && arr[1] === undefined) {
-    smallest = 8;
+    smallest = Game.gameboard_size + 1;
   }
 
   if (arr[0] !== undefined && arr[1] !== undefined) {
@@ -718,9 +720,10 @@ function Get_Coin_Placement() {
   if (arr[1] === undefined && arr[0] !== undefined) {
     smallest = arr[0];
   }
-
-  Game.coin_placement_row = smallest - 1;
-  Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row}`;
+// Now values for the coin are calculated, assign ROW and ID of targeted cell  to variables:
+  Game.coin_placement_row = smallest -1;
+  // Proof if the Gameboard  size was changed by the user - if so, subtract 1 from row 
+  Game.user_changed_gameboard === false ?   Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row}` :  Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row - 1}` ;
 
   Make_Placement();
 }
@@ -826,7 +829,7 @@ function Placement_End() {
 
    // First remove the coin from the Top Cell
   document.getElementById(`${Game.clicked_TopCell_ID}`).firstChild.remove();
-
+  
   coin_destination = document.getElementById(Game.coin_placement_id);
 
   // Make the Placement
@@ -927,7 +930,7 @@ function Player_2_Placement_Finish() {
 //#region 3) Final informations and Comments
 
 /*
-                     Bonus Jobs to-do:
+?                     Bonus Jobs to-do:
 
 -) Make the Gameboard CSS-Grid so you can offer changing Gameboard size!
 -) Highlight the winning chain!

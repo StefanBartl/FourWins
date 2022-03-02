@@ -79,6 +79,7 @@
   overflow-wrap: break-word;
   word-wrap: break-word;
 
+  scroll-behavior: smooth;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -184,12 +185,16 @@ footer {
 }
 
 .Class_GameboardWrapper[data-inGame="yes"] {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  aspect-ratio: 1/1;
-  min-height: 70vh;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-height: 70vh;
+    aspect-ratio: 1/1;
+}
+
+.Class_GameboardWrapper[data-inGame="gameend"] {
+    margin-block: 2rem;
 }
 
 footer {
@@ -229,13 +234,14 @@ footer {
 }
 
 #ID_C1R1 {
-  border-left: none;
+ border-left: solid 1px var(--gameboard);
 }
 
+/*
 .Class_Full_Column {
   box-shadow: 0 -5px 0 var(--gameboard);
 }
-
+*/
 
 .Class_Cells {
   width: auto;
@@ -1294,7 +1300,9 @@ select:hover {
 
 -) ch als Eineheit benutzen!
 
--) scroll-behaviour : smoothS
+-) inset ist wie padding/margin! Zb.: el{ inset: 3rem 3rem 3rem 3rem }
+
+-) scroll-behaviour : smooth
 
 -) content-visibility auto
 

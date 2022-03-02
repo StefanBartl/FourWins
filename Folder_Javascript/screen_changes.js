@@ -86,12 +86,8 @@ function Preparations(gameResult) {
   }
 
   // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it
-  document.getElementById("ID_h3_turnText").classList.add("Class_Invisible");
-  if (document.getElementById("ID_Thinking_Div")) {
-    document.getElementById("ID_Thinking_Div").classList.add("Class_Invisible");
-    clearInterval(window.thinking);
-  }
-
+  document.getElementById("ID_Turn_Div").classList.add("Class_Invisible");
+  
   // Assign correct names to the winner, loser or draw variables and return it
   let winner, loser;
   const names_from_result = [];
@@ -120,7 +116,7 @@ function Game_End_Screen(gameResult) {
   // console.log("Entered Game End Screen Function.");
 
   Game.state = "Game End";
-
+  document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "gameend");
   const result = Preparations(gameResult);
 
   //#region Creation of End-Screen
@@ -165,23 +161,12 @@ function Game_End_Screen(gameResult) {
 
   // If it is not a draw or a loose against CPU, it is a win from a Human Playert, so add the fireworks
   if (
-    gameResult === 1 ||
-    (gameResult === 2 && Game.Game_against_KI === false)
+    gameResult === 1 || (gameResult === 2 && Game.Game_against_KI === false)
   ) {
     // Canvas with fireworks layed in a div container, which is then pushed to the Main Wrapper, Now, everything which is pushed to the Main Wrapper
     // with a greater z-index is visible over the fireworks canvas
-    const canvas_div = Create_DOM_Element({
-      ParentID: "ID_MainWrapper",
-      Element: "div",
-      ID: "ID_Canvas_Div",
-      Class: "Class_Game_End_Div",
-    });
-    const firework_canvas = Create_DOM_Element({
-      ParentID: "ID_Canvas_Div",
-      Element: "canvas",
-      ID: "ID_Firework",
-      Class: "Class_Firework",
-    });
+    const canvas_div = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Canvas_Div", Class: "Class_Game_End_Div" });
+    const firework_canvas = Create_DOM_Element({ ParentID: "ID_Canvas_Div",  Element: "canvas", ID: "ID_Firework", Class: "Class_Firework" });
     Fireworks("ID_Firework");
 
     // Add correct Language to Game End Screen
@@ -284,6 +269,9 @@ function Game_End_Screen(gameResult) {
   document.getElementById("ID_NewGame_Button").addEventListener("click", () => {
     // console.log("New Game selected, preparations will be done...");
 
+    //#region Reset Game
+    const topCellsArray = document.getElementsByClassName("Class_TopCells");
+    const cellsArray = document.getElementsByClassName("Class_Cells");
     // Remove TopCell Style classes collected during the Game and End-Screen & unlock the placement function again
     for (let topCell of topCellsArray) {
       topCell.classList.remove("Class_Top_End");
@@ -314,10 +302,12 @@ function Game_End_Screen(gameResult) {
     // Trigger next Player is on turn, so the loser of this reound starts the next round.
     Turning_PlayerIsOnTurn();
 
+    /*
+      !Needed????
     for (topCell of topCellsArray) {
       topCell.classList.remove("Class_Full_Column");
     }
-
+    */
     // If the win was from Human Player 1 and it is a game against the CPU, start next round
     if (gameResult === 1 && Game.Game_against_KI === true) {
       Game.KI_Level === "Easy" ? KI_Easy() : KI_Normal();
@@ -338,17 +328,11 @@ function Game_End_Screen(gameResult) {
       cell.style.opacity = 0.7;
     }
 
-    // Reset round & column counters
+    // Reset round
     Game.roundCounter = 0;
-    row_Counter_C1 = 8;
-    row_Counter_C2 = 8;
-    row_Counter_C3 = 8;
-    row_Counter_C4 = 8;
-    row_Counter_C5 = 8;
-    row_Counter_C6 = 8;
-    row_Counter_C7 = 8;
+    //#endregion
 
-    // If there was firwork, remove it
+    // If there was firework, remove it
     if (document.getElementById("ID_Firework")) {
       document.getElementById("ID_Firework").remove();
       document.getElementById("ID_Canvas_Div").remove();
@@ -451,6 +435,8 @@ function Game_End_Screen(gameResult) {
           ).innerText = `${Game.Draws} draw games.`;
       }
     }
+    document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "yes");
+    document.getElementById("ID_Turn_Div").classList.remove("Class_Invisible");
   });
   //#endregion
 }
