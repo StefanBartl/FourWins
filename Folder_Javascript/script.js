@@ -26,10 +26,11 @@ todo        -) Update whole PU Player and then --> Finish Gameboard-Sizing! PS: 
 todo        -) Update Function Headlines and find a way for infoboxes with description and additional infos!
 todo        -) Check somehow the Firework-Animation!
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo        -) Final formatation (especially script & library sections/functions), comments:  ,
-todo        -) Make sure all important is commented
-todo        -) Write a final Comment 
-todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS.
+todo        -) Final formatation (especially script & library sections/functions), comments:
+todo        -) Use heavyChrome DEV Tools !
+todo        -) Make sure all important is commented !
+todo        -) Write a final Comment !
+todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
 
 !                             Session progress
 ?-) Ingame &  Game End Screen repaired
@@ -910,9 +911,10 @@ function Player_2_Placement_Finish() {
 /*
 ?                     Bonus Jobs to-do:
 
--) Make the Gameboard CSS-Grid so you can offer changing Gameboard size!
 -) Highlight the winning chain!
--I Save Game function!
+-) Make the Coin Images a variable _> User could choice between coin appearance!
+-) Implement Classic and Personal style!
+-) Save Game function!
 -) Improve KI Normal, especially the Diagonal Detection!
 -) Write a KI Heavy Algorhytmus!
 -) Make it possible to switch from Game Mode to the Starting Screen to change Settings, Names etc...
