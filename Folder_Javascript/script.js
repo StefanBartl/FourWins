@@ -14,7 +14,9 @@
                                                                                                 
                                                     3) Final Information & Comments                             
                                                                                                 
-                                                    4) Credits                                                            
+                                                    4) Credits  
+                                                    
+                                                    5) Coding Guideline
 
                                                                                                                                                                                                                                                                                */
 //#endregion

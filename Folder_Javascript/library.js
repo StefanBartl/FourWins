@@ -54,8 +54,8 @@
                                                                                                    
                                                 2) Callback, Promises, Async / Awair        
 
-                                                2) Coding Guidelines & Tipps                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                         
+                                                2) My Javascript-Coding-Guideline                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                       
                                                                                                                                                                                                                                                                               */
 
 //#endregion
@@ -985,7 +985,7 @@ testAwait().then((data) => {console.log(data);});
 
 //#endregion
 
-//#region Create CSS-Class amd apply it to Element
+//#region Create CSS-Class and apply it to Element
 function createClass(name,rules){
   var style = document.createElement('style');
   style.type = 'text/css';
@@ -1009,7 +1009,7 @@ function applyClass(name,element,doRemove){
 }
 //#endregion
 
-//#region 3) Coding Guideline & Tipps
+//#region  My Javascript-Coding-Guideline
 /*
 ================================================================================================================================================================================================================================================================================ 
                                           Better Coding Checklist:
@@ -1018,7 +1018,7 @@ function applyClass(name,element,doRemove){
 
 -) insomnia.rest hilft beimn api schreiben!
 
--) bundlephobia.com zeigt dir die Package-Ladezeiten!
+-) bundlephobia.com zeigt dir die Package-Ladezeiten
 
 -) Ternäre Operatoren nutzen ! --> x >10 ? "Wenn x größer ist als 10" : "Wenn nicht, dann mach dies"
 

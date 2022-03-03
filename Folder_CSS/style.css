@@ -32,7 +32,7 @@
                                                                                                             
                                                                12) Credits                                 
                                                                                                             
-                                                         13-15) My CSS-Guideline                          
+                                                               13-15) My CSS-Guideline                          
                                                                                                                                                                                                                                                                              */
 /*#endregion*/
 
@@ -1285,17 +1285,68 @@ select:hover {
 
 /* #endregion */
 
-/* #region 13) Checklist */ /*                
+/*?             13) My CSS-Styling-Guideline            */
 
--) Chrome - Element - Layout - Styles to change CS properties, toggle states, analyze animations etc!
+/* #region CSS-Check/Infolist */ /*                -
 
--) VS Studio Terminal hilft bei Tippfehler.
+?         Umgebung
 
--) Buttons animation mit brightness oder saturation langsam hoch fahren.
+-) VS Studio Terminal hilft bei Tippfehler!
 
--) Um alle Browser anzugleichen, bei Designgruppen outline wegnehmen und dann für alle einen hover & focus machen!
+-) Chrome / Firefox Dev Browsers installieren -> Element - Layout - Styles to change CS properties, toggle states, analyze animations etc...
+    Tools nutzen!
+https://www.mozilla.org/de/firefox/developer/
+https://developer.chrome.com/docs/devtools/
 
--) Chrome Dev Tools den Element auswählen Button (links oben) nutzen um den Text Kontrast ablesen zu können !
+-) Wichtig: Um alle Browser anzugleichen, bei Designgruppen outline wegnehmen und dann für alle einen hover & focus machen!
+
+-) Chrome Dev Tools das Element auswählen, Button (links oben) nutzen um zb.: Text Kontrast ablesen zu können !
+
+?         CSS-Grid
+
+-) grid-template-columns
+
+  grid-template-columns: repeat(auto-fill / auto-fit, minmax(250px, 1fr)); => Row darf höchsten 1fr hoch sein und wenn es 250px wird macht Grid eine neue Row auf!
+https://www.youtube.com/watch?v=qII5BueXWD4
+
+?         CSS-Flexbox
+
+
+
+?         
+
+-) height
+
+   height: 100%;  Der Prozentwert bezieht sich auf das parent-Element. Wenn parent body{} ist und sonst kein Element angehängt ist, ist der Container (body) klein!
+   height: auto; Ist der Defaultwert und aus responsiven Gründen immer vorzuziehen wenn es geht. Ansonsten min-height - height: px; nur dann, wenn es sein muss!
+https://www.youtube.com/watch?v=SjYYfd7obug&t=272s
+
+-) border
+    border: 0; entfernt die border width.
+
+-) margin
+
+    margin-left: auto; --> nimmt den Platz rechts und halbiert ihn.
+    margin: auto; interresant für nav-Listen ul li:nth-of-type(5) selektiert das 5te li-Element inder Liste. Ist es das letzte li, kannst du es mit margin-left: auto; ganz nach rechts schieben! Ein zusätzliches  margin-rihgt: aut; centert es daann
+https://www.youtube.com/watch?v=3LlLkapKw6Q
+
+-) Buttons 
+    Animation mit brightness oder saturation langsam hoch fahren.
+
+    Hat ein Button einen border, kannst du dem anderen einen Border in der Farbe seines Hintergrundes geben damit die width/height ausgeglichen wird.
+    
+  ?         6 Outline-Button-Hover Effekte 
+  !                    by Kevin Powell   
+    https://www.youtube.com/watch?v=3LlLkapKw6Q
+    outline + padding erzeugt gerahmten Text, wenn dann :hover, focus {outline-offset: 2px}gesetzt wird erzuegt man einen "wird größer"-Effekt.
+              Das kann man auch mit transition unterstützen: zb.: 250ms ease ! 
+              Doppelter Rahmen Effekt nach außen: border: 2px; outline: 2px outline-offset: -2px for dem hover/focus, outline-offset: 2px in diesem.
+              Doppelter Rahmen Effekt nach innen: Dazu muss im focus/hover outline-offset: -6px gesetzt werden.
+              + wenn jetzt die Outline eine andere Farbe hat als Hintergrund+Border ergibt sich ein neues Effektbild. 
+              "Zoom"-Effekt.
+              Zweiliniger Rahmen, der nach hover ausgefüllt und verdoppelt wird.
+              
+-) Wiederholende values mit custom properties kaschieren.
 
 -) Wiederholenden Code gruppieren! 
    h1, h3, btn, .Class_X {...}
@@ -1311,9 +1362,7 @@ select:hover {
    a[href="about.html"], a[class=""], a[class|="link"] selektiert alle Klassen die mit "link" beginnen, aber das ganze Wort.
    a{^="http"] selektiert alle http und https, 
 
-
--) width: auto; versucht 100% zu werden - height: auto; nicht ! Es ist nur so groß wie es sein muss! Wenn es geht height nicht setzen, wenn doch dann wenn geht min-height versuchen. 
-    -) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
+-) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
 
 -) ::after / ::before für zb.: Punkt -> Strich Animation, Icons über url, pdf files etc...
 
@@ -1341,13 +1390,16 @@ select:hover {
             create a anker point for swipping like tinder
 
 -) Trenner:
-     / =========================
-         choosing coin animations
-         ========================= /
+     / =======  
+!        Functions
+           ======== /
 
+     / =======  
+?        Headlines
+           ======== /
                                                                                                                                                                                                                                                                                           /*#endregion*/
 
-/* #region 14) Media Queries */ /*
+/* #region Media Queries */ /*
 
       Max-Width - Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop 
                   und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
@@ -1385,7 +1437,7 @@ select:hover {
 
                                                                                                                                                                                                                                                                                                    /*#endregion*/ /*
 
-/* #region 15) Scrollbar Design */ /*                                                                                                                                                                                                                                                                                                                                 
+/* #region Scrollbar Design */ /*                                                                                                                                                                                                                                                                                                                                 
 -) Scrollbar Design:
       Scrollbar Firefox
          el{
@@ -1406,7 +1458,7 @@ select:hover {
 
                                                                                                                                                                                                                                  /*#endregion*/
 
-/*#region 16) CSS-Templates */
+/*#region CSS-Templates */
 
 /*#region Box-Hover-Line  */
 
