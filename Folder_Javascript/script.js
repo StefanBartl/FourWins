@@ -22,12 +22,14 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) Update whole PU Player and then --> Finish Gameboard-Sizing! PS: Add infotext and thgink abput ingame size change --> must copy maked placements in new array!
+todo        -) Update whole CPU Player!
+todo        -) Finish Gameboard-Sizing! Ingame?  PS: Add infotext and think abput ingame size change --> must copy maked placements in new array!
 todo        -) Update Function Headlines and find a way for infoboxes with description and additional infos!
 todo        -) Check somehow the Firework-Animation!
+todo        -) Font working on all Browser correctly?
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo        -) Final formatation (especially script & library sections/functions), comments:
-todo        -) Use heavyChrome DEV Tools !
+todo        -) Use heavy Chrome DEV Tools !
 todo        -) Make sure all important is commented !
 todo        -) Write a final Comment !
 todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
@@ -77,6 +79,8 @@ clicked_TopCell_ID: "",
 const Windows = {
   // Object for storing returned Values from own Alert / Confirm / Prompt Windows
 };
+
+Create_Gameboard(7);
 
 Set_Page_Language();
 
@@ -272,6 +276,7 @@ player_2_svg.addEventListener("click", () => {
 //#endregion
 
 //#region Settings-Menu Setup
+
 // Get up-tp-date stats for the Settings-Menu
 Stats();
 
@@ -385,9 +390,10 @@ and the settings are retained. If you want to delete these settings, you can do 
   }
 });
 
-gameboard_size_button.addEventListener("click", () => {
+function Create_Gameboard(size){
+
   // Remove the old Gameboard
-  document.getElementById("ID_GameboardWrapper").remove();
+ if(document.getElementById("ID_GameboardWrapper"))   document.getElementById("ID_GameboardWrapper").remove(); 
 
   //Create a new one
   const new_gameboard_wrapper = document.createElement("div");
@@ -399,8 +405,6 @@ gameboard_size_button.addEventListener("click", () => {
 
   insertAfter(left_sidebar, new_gameboard_wrapper);
 
-  //Get size from user
-  let size = document.getElementById("ID_Gameboard_Size").value;
   Game.gameboard_size = size;
 
   for (let x = 1; x <= size; x++) {
@@ -429,7 +433,15 @@ gameboard_size_button.addEventListener("click", () => {
       document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
     }
   }
-  Game.user_changed_gameboard = true;
+};
+
+gameboard_size_button.addEventListener("click", () => {
+
+  //Get size from user
+  let size = document.getElementById("ID_Gameboard_Size").value;
+Create_Gameboard(size);  
+Game.user_changed_gameboard = true;
+
 });
 
 language_menu.addEventListener("change", () => {
@@ -628,7 +640,7 @@ function PlayGame() {
 
   // Let Game Objects know we are in Game know
   Game.state = "InGame";
-  gameboard.setAttribute("data-inGame", "yes");
+  document.getElementById("ID_GameboardWrapper").setAttribute("data-inGame", "yes");
 
   // Detect the correct the Top Cells for looping trough to put the event listeners on them so the players can make there placements
 

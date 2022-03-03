@@ -199,6 +199,17 @@ function onlyUnique(value, index, self) {
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
+
+/* =====================
+!        Get a random Integer 
+         ===================== */
+  function getRandomIntNoZero(max) {
+    const random_int = Math.floor(Math.random() * max);
+    if(random_int === 0)getRandomIntNoZero(max)
+        else
+        return random_int
+  };
+
 /* ==============================
 !       Push values to local Storage 
          ============================= */
@@ -570,6 +581,56 @@ function Correct_Sound_Setting() {
     Game.Sound = true;
   }
 }
+
+
+/* ===================
+!        Create new Gameboard
+         =================== */
+function Create_Gameboard(size){
+
+  // Remove the old Gameboard
+ if(document.getElementById("ID_GameboardWrapper"))   document.getElementById("ID_GameboardWrapper").remove(); 
+
+  //Create a new one
+  const new_gameboard_wrapper = document.createElement("div");
+  new_gameboard_wrapper.classList.add("Class_GameboardWrapper");
+  new_gameboard_wrapper.id = "ID_GameboardWrapper";
+  Game.state !== "InGame"
+    ? new_gameboard_wrapper.setAttribute("data-ingame", "no")
+    : new_gameboard_wrapper.setAttribute("data-ingame", "yes");
+
+  insertAfter(left_sidebar, new_gameboard_wrapper);
+
+  Game.gameboard_size = size;
+
+  for (let x = 1; x <= size; x++) {
+    // Create the Column Wrapper
+    let column = document.createElement("div");
+    column.classList.add("Class_Columns");
+    column.id = `ID_Column${x}`;
+    document.getElementById("ID_GameboardWrapper").appendChild(column);
+
+    // Create the Top Cells
+    let topcell = document.createElement("div");
+    topcell.classList.add("Class_TopCells");
+    topcell.id = `ID_C${x}R1`;
+    topcell.setAttribute("data-column", x);
+
+    document.getElementById(`ID_Column${x}`).appendChild(topcell);
+
+    
+    
+    // Create the cells
+    let columncounter = x;
+    for (let row = 2; row <= size ; row++) {
+      let cell = document.createElement("div");
+      cell.classList.add("Class_Cells");
+      cell.id = `ID_C${columncounter}R${row}`;
+      document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
+    }
+  }
+};
+
 /* ==================
 !        Creator-Function
          ================= */

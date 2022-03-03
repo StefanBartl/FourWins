@@ -32,7 +32,7 @@
                                                                                                             
                                                                12) Credits                                 
                                                                                                             
-                                                               13-15) My CSS-Guideline                          
+                                                         13-15) My CSS-Guideline                          
                                                                                                                                                                                                                                                                              */
 /*#endregion*/
 
@@ -1311,7 +1311,9 @@ select:hover {
    a[href="about.html"], a[class=""], a[class|="link"] selektiert alle Klassen die mit "link" beginnen, aber das ganze Wort.
    a{^="http"] selektiert alle http und https, 
 
--) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
+
+-) width: auto; versucht 100% zu werden - height: auto; nicht ! Es ist nur so groß wie es sein muss! Wenn es geht height nicht setzen, wenn doch dann wenn geht min-height versuchen. 
+    -) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
 
 -) ::after / ::before für zb.: Punkt -> Strich Animation, Icons über url, pdf files etc...
 
