@@ -1315,22 +1315,22 @@ https://www.youtube.com/watch?v=qII5BueXWD4
 
 ?         
 
--) height
+todo    height
 
    height: 100%;  Der Prozentwert bezieht sich auf das parent-Element. Wenn parent body{} ist und sonst kein Element angehängt ist, ist der Container (body) klein!
    height: auto; Ist der Defaultwert und aus responsiven Gründen immer vorzuziehen wenn es geht. Ansonsten min-height - height: px; nur dann, wenn es sein muss!
 https://www.youtube.com/watch?v=SjYYfd7obug&t=272s
 
--) border
+todo     border
     border: 0; entfernt die border width.
 
--) margin
+todo     margin
 
     margin-left: auto; --> nimmt den Platz rechts und halbiert ihn.
     margin: auto; interresant für nav-Listen ul li:nth-of-type(5) selektiert das 5te li-Element inder Liste. Ist es das letzte li, kannst du es mit margin-left: auto; ganz nach rechts schieben! Ein zusätzliches  margin-rihgt: aut; centert es daann
 https://www.youtube.com/watch?v=3LlLkapKw6Q
 
--) Buttons 
+todo     Buttons 
     Animation mit brightness oder saturation langsam hoch fahren.
 
     Hat ein Button einen border, kannst du dem anderen einen Border in der Farbe seines Hintergrundes geben damit die width/height ausgeglichen wird.

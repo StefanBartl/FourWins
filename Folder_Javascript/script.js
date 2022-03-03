@@ -37,8 +37,7 @@ todo        -) Write a final Comment !
 todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
 
 !                             Session progress
-?-) Ingame &  Game End Screen repaired
-?-) Repaired getting Coin Destination
+?-) 
 
                                                                                                                                                                                                                                                                                                                               */
 //#endregion
@@ -925,6 +924,7 @@ function Player_2_Placement_Finish() {
 /*
 ?                     Bonus Jobs to-do:
 
+-) Gameboard as CSS-Grid possible ? Maybe without the columns?
 -) Highlight the winning chain!
 -) Make the Coin Images a variable _> User could choice between coin appearance!
 -) Implement Classic and Personal style!
