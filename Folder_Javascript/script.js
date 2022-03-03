@@ -24,20 +24,20 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) Update whole CPU Player!
-todo        -) Finish Gameboard-Sizing! Ingame?  PS: Add infotext and think abput ingame size change --> must copy maked placements in new array!
-todo        -) Update Function Headlines and find a way for infoboxes with description and additional infos!
-todo        -) Check somehow the Firework-Animation!
-todo        -) Font working on all Browser correctly?
-todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo        -) Final formatation (especially script & library sections/functions), comments:
-todo        -) Use heavy Chrome DEV Tools !
-todo        -) Make sure all important is commented !
-todo        -) Write a final Comment !
-todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
+todo    -) Update whole CPU Player!
+todo    -) Finish Gameboard-Sizing! Ingame?  PS: Add infotext and think abput ingame size change --> must copy maked placements in new array!
+todo    -) Update Function Headlines and find a way for infoboxes with description and additional infos!
+todo    -) Check somehow the Firework-Animation!
+todo    -) Font working on all Browser correctly?
+todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo    -) Final formatation (especially script & library sections/functions), comments:
+todo    -) Make sure all important is commented !
+todo    -) Write a final Comment !
+todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
 
 !                             Session progress
-?-) 
+? -) 
+? -)
 
                                                                                                                                                                                                                                                                                                                               */
 //#endregion
@@ -922,18 +922,18 @@ function Player_2_Placement_Finish() {
 //#region 3) Final informations and Comments
 
 /*
-?                     Bonus Jobs to-do:
+?                     Javascript Bonus Jobs:
 
--) Gameboard as CSS-Grid possible ? Maybe without the columns?
--) Highlight the winning chain!
--) Make the Coin Images a variable _> User could choice between coin appearance!
--) Implement Classic and Personal style!
--) Save Game function!
--) Improve KI Normal, especially the Diagonal Detection!
--) Write a KI Heavy Algorhytmus!
--) Make it possible to switch from Game Mode to the Starting Screen to change Settings, Names etc...
--) Design a Starting Screen Animation to make it more interesting to play!  
--) Think about a other Design for the Page and the Gameboard!
+todo Gameboard as CSS-Grid possible ? Maybe without the columns?
+todo Highlight the winning chain!
+todo Make the Coin Images a variable => User could choice between coin appearance!
+todo Implement Classic and Personal style!
+todo Save Game function!
+todo Improve KI Normal, especially the Diagonal Detection!
+todo Write a KI Heavy Algorhytmus!
+todo Make it possible to switch from Game Mode to the Starting Screen to change Settings, Names etc...
+todo Design a Starting Screen Animation to make it more interesting to play!  
+todo Think about a other Design for the Page and the Gameboard!
                                                                                                                                                                                                                                                                                 */
 //#endregion
 

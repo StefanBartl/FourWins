@@ -38,18 +38,28 @@
 
 /* #region Jobs To-Do */
 /*
-!                                                          Jobs To-Do: 
+!                                    Jobs To-Do: 
                                                     
-                                        -) :focus on all :hovers for Cross-Browser-Support!
-                                        -) Test and repair responsivness in all sizes!
-                                        -) CSS-Code minimizing f.e. bind repetative Classes to one Class!
-                                        -) INGAME Section?
-                                        -) Fonts!
-                                        -) Find a final, real good styling!                                        
-                                        -) Find final Folder Layout for CSS-Stylesheets!  
+todo    -) Scrollbar rechts am starting Bildschirm muss weg, sonst funktioniert das Menu ästhetisch nicht mehr.
+todo    -) :focus on all :hovers for Cross-Browser-Support!
+todo    -) Test and repair responsivness in all sizes! -> Menu muss von der Seite weg!
+todo    -) CSS-Code minimizing f.e. bind repetative Classes to one Class!
+todo    -) INGAME Section?
+todo    -) Fonts!
+todo    -) Font working on all Browser correctly?
+todo    -) Find a final, real good styling!                                        
+
+todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo    -) Final formatation (especially script & library sections/functions), comments:
+todo    -) Make sure all important is commented !
+todo    -) Write a final Comment !
+todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
+
                   
-                                                  Session progress:                                                
--) 
+?                                 Session progress:                                                
+? -)
+? -) 
+
                                                                                                                                                                                                                                                                                        */
 /* #endregion */
 
@@ -225,7 +235,6 @@ footer {
 
 .Class_TopCells {
   outline: none;
-  min-width: auto;
   aspect-ratio: 1/1;
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -247,7 +256,6 @@ footer {
 */
 
 .Class_Cells {
-  width: auto;
   aspect-ratio: 1 / 1;
   border: solid 0.2rem var(--gameboard);
   border-radius: 10rem;
@@ -404,7 +412,6 @@ footer {
 }
 
 #ID_Info_Container,
-#ID_Gameboard_Span,
 #ID_Colour_Container,
 #ID_Sound_Container,
 #ID_Language_Container,
@@ -422,6 +429,13 @@ footer {
   
 }
 
+#ID_Gameboard_Span{
+  display:grid;
+  grid: 2rem auto  / 1fr;
+
+}
+
+
 #ID_Gameboard_Size_Container {
   display: grid;
   grid: 1fr / 1fr 1fr;
@@ -430,8 +444,8 @@ footer {
   margin-bottom: 1rem;
 }
 #ID_Gameboard_Size_Container input {
-  width: 80%;
-  height: 100%
+    width: 80%;
+    margin-block: auto;  
 }
 
 #ID_Gameboard_Size_Container button {
@@ -441,7 +455,7 @@ footer {
 
 #ID_Colour_Container,
 #ID_Sound_Container {
-  height: 3rem;
+     display: flex;
 }
 
 /* ============
@@ -1264,6 +1278,18 @@ select:hover {
 /* #endregion*/
 
 /* #region 11) Final Informations & Comments */
+
+/*
+?                         CSS Bonus Jobs
+
+todo
+todo
+todo
+
+*/
+
+
+
 /* #endregion */
 
 /* #region 12) Credits */
