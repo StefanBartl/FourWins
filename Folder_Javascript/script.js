@@ -23,17 +23,22 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) Update whole CPU Player!
+todo        -) Color changer not working and button not perfect
+todo        -) Size change during game? 
 todo        -) Finish Gameboard-Sizing! Ingame?  PS: Add infotext and think abput ingame size change --> must copy maked placements in new array!
-todo        -) Update Function Headlines and find a way for infoboxes with description and additional infos!
 todo        -) Check somehow the Firework-Animation!
-todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo        -) Final formatation (especially script & library sections/functions), comments:
-todo        -) Make sure all important is commented !
-todo        -) Write a final Comment !
+
+?                               Finish
+
+todo        -) Update Function Headlines and find a way for infoboxes with description and additional infos!
+todo        -) Final formatation.
+todo        -) Make sure all important is commented.
+todo        -) Write a final Comment.
 todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
+todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 
 !                             Session progress
+?-) Choosing Animation locking repaired
 ?-) 
 
                                                                                                                                                                                                                                                                                                                               */
@@ -128,7 +133,7 @@ if (Game.player_Colour_Left === "red") {
 /* =============================
          Colour-Change Event-Listener 
          ============================= */
-document.getElementById("ID_Toggle_Button").addEventListener("click", () => {
+document.querySelector(".Class_Colour_Toggle").addEventListener("click", () => {
   //console.log("Colour toggle clicked");
   if (
     localStorage.Player_Colour_Left === "yellow" ||
@@ -151,7 +156,8 @@ document.getElementById("ID_Toggle_Button").addEventListener("click", () => {
 
   // Changing colour of existing coins
   if (Game.state == "InGame") {
-    //Loops trough cellssArray
+    const cellsArray = document.getElementsByClassName("Class_Cells");
+    //Loops trough cellsArray
     for (let cell of cellsArray) {
       // If one cell have tht Class with a red or yellow Coin Background attached, change it to the other colored background (PNG)
       if (cell.classList.contains("Class_PlacedCoin_1")) {
@@ -387,7 +393,6 @@ and the settings are retained. If you want to delete these settings, you can do 
     });
   }
 });
-
 language_menu.addEventListener("change", () => {
   // Save language in Local Storage and Game Object
   // Important maybe for later: With more languages, if/else needed!
@@ -617,8 +622,10 @@ function PlayGame() {
       let clicked_column = parseInt(topCell.getAttribute("data-column"));
       // Get the correct column of the clicked Top Cell:
       Game.clicked_column  = clicked_column;
-      topCell.style = "pointer-events:none";
 
+      for (let topCell of topCellsArray) {
+      topCell.style = "pointer-events:none";
+      };
       // Start placement function
       Prepare_Placement();
     });
