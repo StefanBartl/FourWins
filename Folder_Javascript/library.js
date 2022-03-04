@@ -7,7 +7,7 @@
                                                                      2021                                                                                                                                                                        
                                               ________________________________________                                                                                                                                                                                                  
 !                                                           Table of content              
-
+        open jobs
                                                        1) Helper Functions                                  
                                                                                                             
                                                         - Insert Element after Element                      
@@ -20,12 +20,12 @@
                                                                                                             
                                                         - Unlock Top Cells                                  
                                                                                                                 
-                                                        - "Thinking"-Effect                                 
-                                                                                                            
+                                                        - "Thinking"-Effect           
+
                                                         - Get only unique Values from Array                 
                                                                                                                                                                                                                                                                                             
-                                                        - Get a random Int number                           
-                                                                                                            
+                                                        - Get a random Int number               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
                                                         - Push values to Local Storage                      
                                                                                                                 
                                                         - Swap 2 Classes by 2 events on 1 Element           
@@ -60,17 +60,36 @@
 
 //#endregion
 
+//#region Open Jobs
+/*
+?                               Jobs To-do:
+
+todo        
+
+?                               Finish
+todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo        -) Final formatation.
+todo        -) Make sure all important is commented.
+todo        -) Write a final Comment.
+
+!                             Session progress
+?-) 
+
+                                                                                                                                                                                                                                                                                                                              */
+//#endregion
+
 //#region 1) Helper Functions
 
-/*       =======================
- !        Insert Element after Reference Node
-            ======================== 7*/
+/* ============================
+ !     Insert Element after Reference Node
+         ============================ */
 function insertAfter(referenceNode, newNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-}
-/* ===============================
- !        Adding the Choosing-Animation 
-         ============================== */
+};
+
+/* ========================
+ !    Adding the Choosing-Animation 
+        ========================= */
 function Add_Choosing_Ani(column) {
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -95,10 +114,11 @@ function Add_Choosing_Ani(column) {
   ) {
     topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");
   }
-}
-/* ===============================
-!        Remove the Choosing-Animation 
-         ============================== */
+};
+
+/* =========================
+!     Remove the Choosing-Animation 
+        ========================== */
 function Remove_Choosing_Ani(column) {
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -112,10 +132,11 @@ function Remove_Choosing_Ani(column) {
     topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1");
     topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2");
   }
-}
-/* ====================
-!        Lock all Top-Cells 
-         =================== */
+};
+
+/* ===============
+!      Lock all Top-Cells 
+         =============== */
 function Lock_TopCells() {
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -124,10 +145,11 @@ function Lock_TopCells() {
     topCell.style.cursor = "none";
     topCell.style = "pointer-events:none";
   }
-}
-/* ======================
-!        Unlock all Top-Cells 
-         ===================== */
+};
+
+/* ================
+!      Unlock all Top-Cells 
+         ================ */
 function Unlock_TopCells() {
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -136,10 +158,11 @@ function Unlock_TopCells() {
     topCell.style.cursor = "pointer";
     if (Game.rowCounter[`${Game.clicked_column}`] >= 3) topCell.style = "pointer-events: all";
   }
-}
-/* ==============================
-!        Simulate a "Thinking-Effect" 
-         ============================= */
+};
+
+/* ======================
+!      Simulate a "Thinking-Effect" 
+         ====================== */
 function Thinking_Effect(invokerKI, valid_number) {
   // First make sure there is no "Thinking" Div attached
   if (!document.getElementById("ID_Thinking_Div")) {
@@ -186,33 +209,31 @@ function Thinking_Effect(invokerKI, valid_number) {
   }
 };
 
-/* ==============================
-!        Get unique values from Array
-         ============================= */
+/* ======================
+!     Get unique values from Array
+        ======================= */
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
   // var unique = array.filter(onlyUnique);
-}
-/* =====================
-!        Get a random Integer 
-         ===================== */
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
+};
 
-/* =====================
-!        Get a random Integer 
-         ===================== */
-  function getRandomIntNoZero(max) {
-    const random_int = Math.floor(Math.random() * max);
-    if(random_int === 0)getRandomIntNoZero(max)
-        else
-        return random_int
+/* ============================
+!       Get a random Integer exklusive value
+          ============================ */
+function getRandomInt(max) {
+return Math.floor(Math.random() * max);
+};
+        
+/* ============================
+!     Get a random Integer within 2 values
+        ============================= */
+function getRandomIntNoZero(minvalue, maxvalue) {
+    return minvalue + Math.floor(Math.random() * (maxvalue - minvalue + 1));
   };
 
-/* ==============================
-!       Push values to local Storage 
-         ============================= */
+/* =====================
+!     Push values to local Storage 
+        ====================== */
 function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event) {
   document
     .getElementById(`${IDfromTrigger}`)
@@ -222,10 +243,11 @@ function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event) {
         document.getElementById(`${IDfromValue}`).value
       );
     });
-}
-/* ==================================
-!        Swap between 2 Classes by Events 
-         ================================= */
+};
+
+/* ==========================
+!     Swap between 2 Classes by Events 
+        =========================== */
 function Swap_Two_Classes_by_Events(
   element_ID,
   event_1,
@@ -249,10 +271,11 @@ function Swap_Two_Classes_by_Events(
         .classList.remove(`${first_Class}`);
       document.getElementById(`${element_ID}`).classList.add(`${second_Class}`);
     });
-}
-/* =======================
-!        Changing Players turn 
-         ====================== */
+};
+
+/* =================
+!     Changing Players turn 
+        ================== */
 function Turning_PlayerIsOnTurn() {
   // Change Player
   Game.playerIsOnTurn === "left"
@@ -326,9 +349,9 @@ function Turning_PlayerIsOnTurn() {
   }
 }
 
-/* =======================
-!        Create Starting Stats 
-         ====================== */
+/* ================
+!     Create Starting Stats 
+        ================= */
 function Stats() {
   let value = localStorage.KI_Easy_Wins || 0;
   document.getElementById("ID_Easy_1").innerText = value;
@@ -343,9 +366,10 @@ function Stats() {
   value = localStorage.KI_Normal_Draws || 0;
   document.getElementById("ID_Normal_2").innerText = value;
 }
-/* ==============
-!        Update Stats
-         ============= */
+
+/* ==========
+!     Update Stats
+        =========== */
 function Update_Stats(winning_player) {
   // console.log("Updated Stats.");
   // To reduce repetition only the KI Easy section is commented out. It's basically the same in KI Normal.
@@ -398,9 +422,10 @@ function Update_Stats(winning_player) {
   }
   // Enough space for a unbeatable level ??? :-)
 }
-/* ===============================================================
-!        Create own Notification / Alert /  Prompt / Confirm - Windows 
-         ============================================================== */
+
+/* ==============================================
+!     Create own Notification / Alert /  Prompt / Confirm - Windows 
+        =============================================== */
 function New_Window(options) {
   // console.log("Entered New Window function.");
 
@@ -566,9 +591,10 @@ function New_Window(options) {
 
   // console.log("New Window created.");
 }
-/* ===========================
-!        Sound Settings Validation 
-         ========================== */
+
+/* ====================
+!     Sound Settings Validation 
+        ===================== */
 function Correct_Sound_Setting() {
   // Make sure, User prefered Sound-Setting is also shown in the Settings-Menu after closed and reopened window
   const sound_checkbox = document.getElementById("ID_Sound_Checkbox");
@@ -582,10 +608,9 @@ function Correct_Sound_Setting() {
   }
 }
 
-
-/* ===================
-!        Create new Gameboard
-         =================== */
+/* ==================
+!     Create new Gameboard
+        ================== */
 function Create_Gameboard(size){
 
   // Remove the old Gameboard
@@ -631,9 +656,9 @@ function Create_Gameboard(size){
   }
 };
 
-/* ==================
-!        Creator-Function
-         ================= */
+/* =============
+!     Creator-Function
+        ============== */
 function Create_DOM_Element(options, arrayOne, arrayTwo) {
   // console.log("Entered Creator function.");
 
@@ -716,9 +741,9 @@ parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width
   // console.log("New DOM-Element created.");
 }
 
-/* ======================================
-!        Set multiple Attrubutes on 1 Element
-         ===================================== */
+/* ============================
+!     Set multiple Attrubutes on 1 Element
+        ============================= */
 function setAttributes(el, attrs) {
   for (var key in attrs) {
     el.setAttribute(key, attrs[key]);
@@ -726,9 +751,9 @@ function setAttributes(el, attrs) {
   // Call: setAttributes(elem, {"src": "http://example.com/something.jpeg", "height": "100%", ...});
 }
 
-/* ==============================================
-!        Set multiple Attrubutes on multiple Elements
-         ============================================= */
+/* =================================
+!     Set multiple Attrubutes on multiple Elements
+        ================================== */
 function setAttributesArr(arr, attrs) {
   for (let el of arr) {
     for (var key in attrs) {
@@ -738,9 +763,9 @@ function setAttributesArr(arr, attrs) {
   // Call: setAttributesArr(arr with (DOM-Objects!), {"src": "http://example.com/something.jpeg", "height": "100%", ...});
 }
 
-/* ============================
-!        Fireworks-Canvas-Animation 
-         =========================== */
+/* =======================
+!     Fireworks-Canvas-Animation 
+        ======================= */
 function Fireworks(canvasID) {
   // Firework Function not from me, so special thanks goes to Adam, which published it at codepen! Link below!
   // Fireworks from Adam: https://codepen.io/Adam12132/pen/gOGrwMR
@@ -900,9 +925,9 @@ function Fireworks(canvasID) {
 
 //#region 2) Callback, Promises, Async/Await
 
-/* ======
-!    Callback
-      =======*/
+/* =======
+!     Callback
+        =======*/
 
 // Standard Callback function
 function myCallback(name, callback) {
@@ -917,9 +942,9 @@ function myCallback(name, callback) {
 // console.log(username);
 //});
 
-/* ======
-!    Promise
-    =======*/
+/* =======
+!     Promise
+        =======*/
 // Standard Promise
 const myPromise = new Promise((resolve, reject) => {
   setTimeout(() => {
@@ -940,9 +965,9 @@ const myPromise2 = new Promise((resolve, reject) => {
 //Promise.all([myPromise, myPromise2])
 //  .then(result => {console.log(result)});
 
-/* ==========
-!    Async / Await
-    ==========*/
+/* ===========
+!     Async / Await
+        ===========*/
 // Get functions which return a promise
 function firstPromise() {
   return new Promise((resolve, reject) => {
@@ -968,9 +993,9 @@ async function result() {
 }
 //result();
 
-/* ============================
-!        Await with Promises
-         =========================== */
+/* ================
+!     Await with Promises
+        ================= */
 const testAwait = function AwaitPromise() {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -1009,10 +1034,15 @@ function applyClass(name,element,doRemove){
 }
 //#endregion
 
+                                                                                                  /* ========================
+                                                                                                  ?     My Javascript-Coding Guideline
+                                                                                                          =========================*/
+
 //#region  My Javascript-Coding-Guideline
 /*
 ================================================================================================================================================================================================================================================================================ 
-                                          Better Coding Checklist:
+
+?                                          Better Coding Checklist:
 
 -) Chrome Extension Visbug hilft beim Page designen!
 

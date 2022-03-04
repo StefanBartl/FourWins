@@ -1,6 +1,41 @@
-/* ==============================
-!         DOM-Elements for accesing in Javascript-Files 
-        =============================== */
+//#region Table of Content
+/*
+!                                        Four-Wins-Online DOM-Elements-JS-File
+?                                                               powered by
+!                                                                Stefan Bartl
+!                                                     (WKDSteVIE / WKDMinerva)
+?                                                                     2021             
+?                                     ________________________________________                                                                                                                                                                                                  
+!                                                           Table of content              
+
+                                                    1)                                
+                                                                                                
+                                                    2)      
+                                                                                                
+                                                    3) Final Information & Comments                             
+                                                                                                
+                                                    4) Credits                                                            
+
+                                                                                                                                                                                                                                                                               */
+//#endregion
+
+//#region Open Jobs
+/*
+?                               Jobs To-do:
+
+todo        
+
+?                               Finish
+todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo        -) Final formatation.
+todo        -) Make sure all important is commented.
+todo        -) Write a final Comment.
+
+!                             Session progress
+?-) 
+
+                                                                                                                                                                                                                                                                                                                              */
+//#endregion
 
 //#region Container & Wrapper
 const header = document.getElementById("ID_Header");

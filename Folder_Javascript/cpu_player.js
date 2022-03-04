@@ -32,6 +32,24 @@
                                                                                                                                                                                                                                                                                                                                                                                   */
 //#endregion
 
+//#region Open Jobs
+/*
+?                               Jobs To-do:
+
+todo        -) Update whole CPU Player!
+
+?                               Finish
+todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo        -) Final formatation.
+todo        -) Make sure all important is commented.
+todo        -) Write a final Comment.
+
+!                             Session progress
+?-) 
+
+                                                                                                                                                                                                                                                                                                                              */
+//#endregion
+
 //#region 1) CPU Player Algrorhytm
 
 /* ==============

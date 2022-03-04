@@ -1,43 +1,40 @@
 //#region Table of Content
 /*
-!                                             Four-Wins-Online Main-CSS-Stylsheet
+!                                           Four-Wins-Online Main-Javascript-File
 ?                                                               powered by
 !                                                                Stefan Bartl
 !                                                     (WKDSteVIE / WKDMinerva)
-?                                                                     2021                                                                                                                                                                        
+?                                                                     2021             
 ?                                     ________________________________________                                                                                                                                                                                                  
 !                                                           Table of content              
 
                                                     1) General  Settings & Page Set-Up                                
                                                                                                 
-                                                    2)) Main Game functions          
+                                                    2) Main Game functions          
                                                                                                 
                                                     3) Final Information & Comments                             
                                                                                                 
-                                                    4) Credits  
-                                                    
-                                                    5) Coding Guideline
+                                                    4) Credits                                                            
 
                                                                                                                                                                                                                                                                                */
 //#endregion
+
 //#region Open Jobs
 /*
 ?                               Jobs To-do:
 
-todo    -) Update whole CPU Player!
-todo    -) Finish Gameboard-Sizing! Ingame?  PS: Add infotext and think abput ingame size change --> must copy maked placements in new array!
-todo    -) Update Function Headlines and find a way for infoboxes with description and additional infos!
-todo    -) Check somehow the Firework-Animation!
-todo    -) Font working on all Browser correctly?
-todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo    -) Final formatation (especially script & library sections/functions), comments:
-todo    -) Make sure all important is commented !
-todo    -) Write a final Comment !
-todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
+todo        -) Update whole CPU Player!
+todo        -) Finish Gameboard-Sizing! Ingame?  PS: Add infotext and think abput ingame size change --> must copy maked placements in new array!
+todo        -) Update Function Headlines and find a way for infoboxes with description and additional infos!
+todo        -) Check somehow the Firework-Animation!
+todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo        -) Final formatation (especially script & library sections/functions), comments:
+todo        -) Make sure all important is commented !
+todo        -) Write a final Comment !
+todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
 
 !                             Session progress
-? -) 
-? -)
+?-) 
 
                                                                                                                                                                                                                                                                                                                               */
 //#endregion
@@ -389,60 +386,6 @@ and the settings are retained. If you want to delete these settings, you can do 
 `,
     });
   }
-});
-
-function Create_Gameboard(size){
-
-  // Remove the old Gameboard
- if(document.getElementById("ID_GameboardWrapper"))   document.getElementById("ID_GameboardWrapper").remove(); 
-
-  //Create a new one
-  const new_gameboard_wrapper = document.createElement("div");
-  new_gameboard_wrapper.classList.add("Class_GameboardWrapper");
-  new_gameboard_wrapper.id = "ID_GameboardWrapper";
-  Game.state !== "InGame"
-    ? new_gameboard_wrapper.setAttribute("data-ingame", "no")
-    : new_gameboard_wrapper.setAttribute("data-ingame", "yes");
-
-  insertAfter(left_sidebar, new_gameboard_wrapper);
-
-  Game.gameboard_size = size;
-
-  for (let x = 1; x <= size; x++) {
-    // Create the Column Wrapper
-    let column = document.createElement("div");
-    column.classList.add("Class_Columns");
-    column.id = `ID_Column${x}`;
-    document.getElementById("ID_GameboardWrapper").appendChild(column);
-
-    // Create the Top Cells
-    let topcell = document.createElement("div");
-    topcell.classList.add("Class_TopCells");
-    topcell.id = `ID_C${x}R1`;
-    topcell.setAttribute("data-column", x);
-
-    document.getElementById(`ID_Column${x}`).appendChild(topcell);
-
-    
-    
-    // Create the cells
-    let columncounter = x;
-    for (let row = 2; row <= size ; row++) {
-      let cell = document.createElement("div");
-      cell.classList.add("Class_Cells");
-      cell.id = `ID_C${columncounter}R${row}`;
-      document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
-    }
-  }
-};
-
-gameboard_size_button.addEventListener("click", () => {
-
-  //Get size from user
-  let size = document.getElementById("ID_Gameboard_Size").value;
-Create_Gameboard(size);  
-Game.user_changed_gameboard = true;
-
 });
 
 language_menu.addEventListener("change", () => {
@@ -922,18 +865,17 @@ function Player_2_Placement_Finish() {
 //#region 3) Final informations and Comments
 
 /*
-?                     Javascript Bonus Jobs:
+?                     Bonus Jobs to-do:
 
-todo Gameboard as CSS-Grid possible ? Maybe without the columns?
-todo Highlight the winning chain!
-todo Make the Coin Images a variable => User could choice between coin appearance!
-todo Implement Classic and Personal style!
-todo Save Game function!
-todo Improve KI Normal, especially the Diagonal Detection!
-todo Write a KI Heavy Algorhytmus!
-todo Make it possible to switch from Game Mode to the Starting Screen to change Settings, Names etc...
-todo Design a Starting Screen Animation to make it more interesting to play!  
-todo Think about a other Design for the Page and the Gameboard!
+-) Highlight the winning chain!
+-) Make the Coin Images a variable _> User could choice between coin appearance!
+-) Implement Classic and Personal style!
+-) Save Game function!
+-) Improve KI Normal, especially the Diagonal Detection!
+-) Write a KI Heavy Algorhytmus!
+-) Make it possible to switch from Game Mode to the Starting Screen to change Settings, Names etc...
+-) Design a Starting Screen Animation to make it more interesting to play!  
+-) Think about a other Design for the Page and the Gameboard!
                                                                                                                                                                                                                                                                                 */
 //#endregion
 

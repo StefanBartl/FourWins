@@ -7,11 +7,28 @@
                                                                      2021                                                                                                                                                                        
                                               ________________________________________                                                                                                                                                                                                  
 !                                                           Table of content              
-
+open jobs
                                              1) Toggle Start / Game Screen                        
                                                                                                   
                                              2) Game-End Screen Functions                         
                                                                                                                                                                                                                                                                                                                                                                                                                            */
+//#endregion
+
+//#region Open Jobs
+/*
+?                               Jobs To-do:
+
+
+?                               Finish
+todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo        -) Final formatation.
+todo        -) Make sure all important is commented.
+todo        -) Write a final Comment.
+
+!                             Session progress
+?-) 
+
+                                                                                                                                                                                                                                                                                                                              */
 //#endregion
 
 //#region 1) Toggle between Start and Game Screen
