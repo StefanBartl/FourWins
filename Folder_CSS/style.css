@@ -1344,6 +1344,8 @@ todo
 
 -) VS Studio Terminal hilft bei Tippfehler!
 
+-) Auskommentieren CTRL + K + C
+
 -) Chrome / Firefox Dev Browsers installieren -> Element - Layout - Styles to change CS properties, toggle states, analyze animations etc...
     Tools nutzen!
 https://www.mozilla.org/de/firefox/developer/
@@ -1352,6 +1354,40 @@ https://developer.chrome.com/docs/devtools/
 -) Wichtig: Um alle Browser anzugleichen, bei Designgruppen outline wegnehmen und dann für alle einen hover & focus machen!
 
 -) Chrome Dev Tools das Element auswählen, Button (links oben) nutzen um zb.: Text Kontrast ablesen zu können !
+
+
+?         CSS
+
+todo box-sizing 
+        *, *::before, *::after  {box-sizing: border-box} nimmt alle width-heights von den bordern weg - agieren wie outline, aber in den Richtungen steuerbar.
+
+
+todo div
+        Default kein margin.
+
+todo    height
+   height: 100%;  Der Prozentwert bezieht sich auf das parent-Element. Wenn parent body{} ist und sonst kein Element angehängt ist, ist der Container (body) klein!
+   height: auto; Ist der Defaultwert und aus responsiven Gründen immer vorzuziehen wenn es geht. Ansonsten min-height - height: px; nur dann, wenn es sein muss!
+https://www.youtube.com/watch?v=SjYYfd7obug&t=272s
+
+todo     border
+    border: 0; entfernt die border width.
+
+todo     margin
+    margin-left: auto; --> nimmt den Platz rechts und halbiert ihn.
+    margin: auto; interresant für nav-Listen ul li:nth-of-type(5) selektiert das 5te li-Element inder Liste. Ist es das letzte li, kannst du es mit margin-left: auto; ganz nach rechts schieben! Ein zusätzliches  margin-rihgt: aut; centert es daann
+https://www.youtube.com/watch?v=3LlLkapKw6Q
+
+todo     Buttons
+    Animation mit brightness oder saturation langsam hoch fahren
+    Hat ein Button einen border, kannst du dem anderen einen Border in der Farbe seines Hintergrundes geben damit die width/height ausgeglichen wird.
+    
+
+?         Flexbox & Grid
+
+todo    margin-collapse
+      Sobald flex oder grid attached collapsen die block-margins nicht mehr. Das bedeutet zb.: wenn mehrerer columns nebeneinander sind und dann der screen kleiner wird verdoppeln sich die Abstände!
+      Besser: Margins ganz weglassen und mit Gap arbeiten. Alle flex-items verhalten sich so, auch h, p, usw... haben bei Block margins und verdoppeln sich. 
 
 ?         CSS-Grid
 
@@ -1362,30 +1398,10 @@ https://www.youtube.com/watch?v=qII5BueXWD4
 
 ?         CSS-Flexbox
 
+todo    flex-basis
+    Ist die ideale Größe für Container. In Verbindung mit flex-wrap kann man container (text) overflow verhindern.
 
 
-?         
-
-todo    height
-
-   height: 100%;  Der Prozentwert bezieht sich auf das parent-Element. Wenn parent body{} ist und sonst kein Element angehängt ist, ist der Container (body) klein!
-   height: auto; Ist der Defaultwert und aus responsiven Gründen immer vorzuziehen wenn es geht. Ansonsten min-height - height: px; nur dann, wenn es sein muss!
-https://www.youtube.com/watch?v=SjYYfd7obug&t=272s
-
-todo     border
-    border: 0; entfernt die border width.
-
-todo     margin
-
-    margin-left: auto; --> nimmt den Platz rechts und halbiert ihn.
-    margin: auto; interresant für nav-Listen ul li:nth-of-type(5) selektiert das 5te li-Element inder Liste. Ist es das letzte li, kannst du es mit margin-left: auto; ganz nach rechts schieben! Ein zusätzliches  margin-rihgt: aut; centert es daann
-https://www.youtube.com/watch?v=3LlLkapKw6Q
-
-todo     Buttons 
-    Animation mit brightness oder saturation langsam hoch fahren.
-
-    Hat ein Button einen border, kannst du dem anderen einen Border in der Farbe seines Hintergrundes geben damit die width/height ausgeglichen wird.
-    
   ?         6 Outline-Button-Hover Effekte 
   !                    by Kevin Powell   
     https://www.youtube.com/watch?v=3LlLkapKw6Q
@@ -1476,6 +1492,8 @@ The following selector matches <h1> elements only if they have a <p> element dir
 h1:has(+ p)
 */
 
+/*
+
 -) Trenner:
      / =======  
 !        Functions
@@ -1483,9 +1501,9 @@ h1:has(+ p)
 
      / =======  
 ?        Headlines
-           ======== /
-                                                                                                                                                                                                                                                                                          /*#endregion*/
-
+           ======== /     
+ */
+                              
 /* #region Media Queries */ /*
 
       Max-Width - Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop 
@@ -1593,4 +1611,4 @@ HTML:
 
 /*#endregion*/
 
-/*#endregion*/
+/*#endregion*/ {display: none;}
