@@ -38,6 +38,7 @@ todo        -) Write a final Comment.
          ===================== */
 function Game_Screen() {
 //console.log("Entering Game-Screen.");
+Game.state = "InGame";
 
 if(Game.state === "Game End"){
   document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "yes");
@@ -128,7 +129,9 @@ function Preparations(gameResult) {
   }
 
   // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it
+  if(document.getElementById("ID_Turn_Div").classList.contains("Class_Invisible"))
   document.getElementById("ID_Turn_Div").classList.add("Class_Invisible");
+  
   
  // Make Settings Menu visible during End-Screen
  document.getElementById("ID_Setting_Span").setAttribute("data-endscreen",  "yes");
@@ -162,10 +165,12 @@ function Preparations(gameResult) {
 function Game_End_Screen(gameResult) {
   // console.log("Entered Game End Screen Function.");
 
-  Game.state = "Game End";
-  document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "gameend");
   const result = Preparations(gameResult);
 
+  Game.state = "Game End";
+  document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "no");
+  document.getElementById("ID_GameboardWrapper").setAttribute("data-gameend", "yes");
+  
   //#region Creation of End-Screen
   // DIV Container for the End Screen (Fireworks, Text, Buttons and the Gameboard Animation)
   const game_end_container = Create_DOM_Element({
@@ -327,6 +332,8 @@ function Game_End_Screen(gameResult) {
      // Disable special settings for Settings Menu during End-Screen
      document.getElementById("ID_Setting_Span").setAttribute("data-endscreen",  "no");
 
+    Game.state = "InGame";
+
     //#region Reset Game
     const topCellsArray = document.getElementsByClassName("Class_TopCells");
     const cellsArray = document.getElementsByClassName("Class_Cells");
@@ -486,9 +493,7 @@ function Game_End_Screen(gameResult) {
             "ID_Draw_Div"
           ).innerText = `${Game.Draws} draw games.`;
       }
-    }
-
-    Game_Screen();
+    };
 
   });
   //#endregion

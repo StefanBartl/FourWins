@@ -615,33 +615,15 @@ function Create_Gameboard(size){
   //console.log("Given" + size + "from DEV to create a gamebord.");
 
 
-  // Remove the old Gameboard
- if(document.getElementById("ID_GameboardWrapper"))   document.getElementById("ID_GameboardWrapper").remove(); 
+  // Remove the old Gameboard cells if existing
+ if(document.getElementById("ID_GameboardWrapper")){
 
-  //Create a new one
-  const new_gameboard_wrapper = document.createElement("div");
-  new_gameboard_wrapper.classList.add("Class_GameboardWrapper");
-  new_gameboard_wrapper.id = "ID_GameboardWrapper";
-  Game.state !== "InGame"
-    ? new_gameboard_wrapper.setAttribute("data-ingame", "no")
-    : new_gameboard_wrapper.setAttribute("data-ingame", "yes");
-    new_gameboard_wrapper.setAttribute("data-", "no")
-
-
-
-  if(Game.state === "Game End"){
-    new_gameboard_wrapper.getElementById("ID_Game_End_Container").appendChild(new_gameboard_wrapper);
-  new_gameboard_wrapper.getElementById("ID_GameboardWrapper").classList.add("Class_Gameboard_End");
-  new_gameboard_wrapper.setAttribute("data-gameend", "yes");
- // console.log("Appended to Game End Container!");
-  } else  
-  {
-    insertAfter(left_sidebar, new_gameboard_wrapper); 
-   // console.log("Appended to left sidebar");
-  new_gameboard_wrapper.setAttribute("data-ingame", "no");
-};
-
- 
+const columnsArray = document.querySelectorAll(".Class_Columns");
+const topCellsArray = document.querySelectorAll("Class_TopCells");
+const cellsArray = document.querySelectorAll("Class_Cells");
+for(column of  columnsArray) column.remove();
+for(topCell of topCellsArray) topCell.remove();
+for(cells of cellsArray) cells.remove();
 
   for (let x = 1; x <= size; x++) {
     // Create the Column Wrapper
@@ -658,8 +640,55 @@ function Create_Gameboard(size){
 
     document.getElementById(`ID_Column${x}`).appendChild(topcell);
 
-    
-    
+    // Create the cells
+    let columncounter = x;
+    for (let row = 2; row <= size ; row++) {
+      let cell = document.createElement("div");
+      cell.classList.add("Class_Cells");
+      cell.id = `ID_C${columncounter}R${row}`;
+      document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
+    };
+  };
+  Game.gameboard_size = size;
+return
+};
+
+
+  //Create a new one
+  const new_gameboard_wrapper = document.createElement("div");
+  new_gameboard_wrapper.classList.add("Class_GameboardWrapper");
+  new_gameboard_wrapper.id = "ID_GameboardWrapper";
+  Game.state !== "InGame"
+    ? new_gameboard_wrapper.setAttribute("data-ingame", "no")
+    : new_gameboard_wrapper.setAttribute("data-ingame", "yes");
+
+  if(Game.state === "Game End"){
+document.getElementById("ID_Game_End_Container").appendChild(document.getElementById("ID_GameboardWrapper"));
+document.getElementById("ID_GameboardWrapper").classList.add("Class_Gameboard_End");
+document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "no");
+ // console.log("Appended to Game End Container!");
+  } else  
+  {
+    insertAfter(left_sidebar, new_gameboard_wrapper); 
+   // console.log("Appended to left sidebar");
+
+};
+
+  for (let x = 1; x <= size; x++) {
+    // Create the Column Wrapper
+    let column = document.createElement("div");
+    column.classList.add("Class_Columns");
+    column.id = `ID_Column${x}`;
+    document.getElementById("ID_GameboardWrapper").appendChild(column);
+
+    // Create the Top Cells
+    let topcell = document.createElement("div");
+    topcell.classList.add("Class_TopCells");
+    topcell.id = `ID_C${x}R1`;
+    topcell.setAttribute("data-column", x);
+
+    document.getElementById(`ID_Column${x}`).appendChild(topcell);
+
     // Create the cells
     let columncounter = x;
     for (let row = 2; row <= size ; row++) {

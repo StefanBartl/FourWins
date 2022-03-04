@@ -989,7 +989,7 @@ select:hover {
 }
 
 #ID_GameboardWrapper[data-gameend="yes"]{
-
+     margin-block: 2rem;
 }
 
 
