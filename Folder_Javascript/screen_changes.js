@@ -50,6 +50,9 @@ function Game_Screen() {
     .setAttribute("data-ingame", "yes");
   if (document.getElementById("ID_h3_turnText"))
     document.getElementById("ID_h3_turnText").style = "display: block";
+
+  // Disable Gameboard-Size changing
+document.getElementById("ID_Gameboard_Span").setAttribute("data-ingame",  "yes");
 }
 /* =======================
 !         Show the Start-Screen 
@@ -68,7 +71,11 @@ function Start_Screen() {
     .getElementById("ID_GameboardWrapper")
     .classList.remove("Class_Gameboard_Wrapper_InGame");
   document.getElementById("ID_h3_turnText").style = "display: none";
-}
+
+    // Enable Gameboard-Size changing
+    document.getElementById("ID_Gameboard_Span").setAttribute("data-ingame",  "no");
+
+};
 //#endregion
 
 //#region 2) Game End Screen
@@ -271,6 +278,9 @@ function Game_End_Screen(gameResult) {
   main_wrapper.removeChild(gameboard);
   document.getElementById("ID_Game_End_Container").appendChild(gameboard);
 
+    // Enable Gameboard-Size changing
+    document.getElementById("ID_Gameboard_Span").setAttribute("data-ingame",  "no");
+
   //#endregion
 
   //#region Event-Listeners
@@ -454,6 +464,10 @@ function Game_End_Screen(gameResult) {
     }
     document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "yes");
     document.getElementById("ID_Turn_Div").classList.remove("Class_Invisible");
+
+     // Disable Gameboard-Size changing
+     document.getElementById("ID_Gameboard_Span").setAttribute("data-ingame",  "yes");
+
   });
   //#endregion
 }

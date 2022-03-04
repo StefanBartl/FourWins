@@ -40,6 +40,7 @@
 /*
 !                                    Jobs To-Do: 
                                                     
+todo    -) data-x Attribute verwenden wo es Sinn macht.
 todo    -) Scrollbar rechts am starting Bildschirm muss weg, sonst funktioniert das Menu ästhetisch nicht mehr.
 todo    -) :focus on all :hovers for Cross-Browser-Support!
 todo    -) Test and repair responsivness in all sizes! -> Menu muss von der Seite weg!
@@ -227,6 +228,8 @@ footer {
 /* #endregion */
 
 /* #region 3) Gameboard */
+
+
 
 .Class_Columns {
   width: 100%;
@@ -566,8 +569,28 @@ footer {
 
 #ID_Reset_Easy:hover,
 #ID_Reset_Normal:hover{
-  color: white;
+  color: white;             
 }
+
+
+#ID_Gameboard_Span[data-ingame='yes'] button, input, #ID_Gameboard_Span {
+    pointer-events: none;
+    color: lightgrey;
+    background-color: lightgrey;
+  opacity: .3;
+ 
+}
+
+#ID_Gameboard_Span[data-ingame='yes'] h3:after {
+    content: "Not allowed!";
+    color: red;
+    position: relative;
+    left: 0;
+    top: 0;
+    display: block;
+  
+}
+
 
 /* #endregion */
 
@@ -1232,7 +1255,7 @@ select:hover {
   }
 
   /* Gaḿe End Screen Mobile*/
-  /* Move Gameboard at the End of the Game Animation */
+               /* Move Gameboard at the End of the Game Animation */
   .Class_Gameboard_End {
     transform: scale(0.5);
   }
@@ -1398,6 +1421,7 @@ todo     Buttons
 
 -) Use padding on text! like: padding: 2rem 0;
 
+/*
 -) Try get "this is 1 block to read, this is anothe rone,...."
 
 -) No text-align on large texts
@@ -1416,6 +1440,41 @@ todo     Buttons
 
 -) Swiping: .container {scroll-snap-type: y mandatory} .child (muat be saection) {scroll-snap-align: start} 
             create a anker point for swipping like tinder
+*/
+
+/*
+-) if / else
+
+vollwertiges if
+Wenn am Gameboard_Span das data-ingame attribute "yes" ist, dann soll Button, Input, #ID-xy,,... rot sein!
+#ID_Gameboard_Span[data-ingame='yes'] button, input, #ID_xy, .Class_yx {
+    background-color: red;
+
+Tuascht den h3 Text aus und stellt #ID_Info um
+#ID_Gameboard_Span[data-ingame='yes'] h3:after, #ID_Info {
+    content: "Not allowed!";
+    color: black;
+    position: relative;
+    left: 0;
+    top: 0;
+    display: block;
+  
+}
+
+
+:checked { if  }
+:not(:checked) { else  }
+
+[data-attr="true"] {  if   }
+[data-attr="false"] {  elseif  }
+:not([data-attr]) {  else }
+
+The following selector matches only <a> elements that directly contain an <img> child:
+a:has(> img)
+
+The following selector matches <h1> elements only if they have a <p> element directly following them:
+h1:has(+ p)
+*/
 
 -) Trenner:
      / =======  
@@ -1490,6 +1549,7 @@ todo     Buttons
 
 /*#region Box-Hover-Line  */
 
+/*
 .element {
   width: 25rem;
   height: 15rem;
@@ -1523,6 +1583,8 @@ todo     Buttons
 .element:hover:after {
   width: 100%;
 }
+
+*/
 
 /*
 HTML:

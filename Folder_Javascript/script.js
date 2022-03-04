@@ -23,8 +23,7 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) Color changer not working and button not perfect
-todo        -) Size change during game? 
+ todo        -) Size change during game? 
 todo        -) Finish Gameboard-Sizing! Ingame?  PS: Add infotext and think abput ingame size change --> must copy maked placements in new array!
 todo        -) Check somehow the Firework-Animation!
 
@@ -38,7 +37,7 @@ todo        -) Save Default Script Files with the new Script Layout for later Pr
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 
 !                             Session progress
-?-) Choosing Animation locking repaired
+?-) Choosing Animation locking repaired and improved useability
 ?-) 
 
                                                                                                                                                                                                                                                                                                                               */
@@ -510,6 +509,9 @@ function Game_Preparations() {
 
   Game.state = "Preparations";
 
+  // Disable Gameboard-Size changing
+  document.getElementById("ID_Gameboard_Span").setAttribute("data-ingame",  "yes");
+  
   // Make sure at Game start are valid name variables available
   if (player_1_name.value === "")
     player_1_name.value = player_1_name.placeholder;

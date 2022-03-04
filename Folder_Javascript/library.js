@@ -654,6 +654,7 @@ function Create_Gameboard(size){
       document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
     }
   }
+
 };
 
 /* =============
