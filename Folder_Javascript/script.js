@@ -23,9 +23,7 @@
 /*
 ?                               Jobs To-do:
 
- todo        -) Size change during game? 
-todo        -) Finish Gameboard-Sizing! Ingame?  PS: Add infotext and think abput ingame size change --> must copy maked placements in new array!
-todo        -) Check somehow the Firework-Animation!
+todo        -) Finish Gameboard-Sizing! 
 
 ?                               Finish
 
@@ -357,6 +355,7 @@ Die/der erste SpielerIn, welche dies schafft hat die Runde gewonnen.
 3) Ein Unentschieden tritt ein, wenn kein Stein mehr spielbar ist und nimmt gewonnen hat. In diesem Fall beginnt derjenige, der nicht den letzten Spielzug machte.
 
 Informationen & Einstellungs-Menü:
+Es ist nur vor dem Spiel möglich die Größe des Gameboards zu verändern. Andererseits würde es die Möglichkeit eröffnen sich unfaire Vorteile zu verschaffen!
 Eine Farbwahl der Spielsteine ist möglich - auch während des Spieles. 
 Grundeinstellung ist Gelb für den / die linke Spieler_in und Rot für das Gegenüber.
 Der Sound hat eine On/Off Funktion und es ist möglich zwischen Deutsch und English zu wöhlen.
@@ -380,6 +379,7 @@ The first player to do this wins the round.
 3) A tie occurs when there is no more playable checker and has won. In this case, the player who did not make the last move begins.
 
 Information & Settings menu:
+It is only possible to change the size of the gameboard before the game. On the other hand, it would open up the possibility of gaining unfair advantages!
 A color choice of the "coins" is possible - also during the game. 
 The basic setting is yellow for the player on the left and red for the opponent.
 The sound has an on/off function and it is possible to choose between German and English.
@@ -488,6 +488,11 @@ delete_all.addEventListener("click", () => {
   if (warning === true) {
     localStorage.clear();
   }
+});
+
+document.getElementById("ID_Gameboard_Size_Button").addEventListener("click", ()=>{
+    let size = document.getElementById("ID_Gameboard_Size").value;
+    Create_Gameboard(size);
 });
 //#endregion
 

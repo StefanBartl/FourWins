@@ -612,6 +612,8 @@ function Correct_Sound_Setting() {
 !     Create new Gameboard
         ================== */
 function Create_Gameboard(size){
+  //console.log("Given" + size + "from DEV to create a gamebord.");
+
 
   // Remove the old Gameboard
  if(document.getElementById("ID_GameboardWrapper"))   document.getElementById("ID_GameboardWrapper").remove(); 
@@ -623,10 +625,23 @@ function Create_Gameboard(size){
   Game.state !== "InGame"
     ? new_gameboard_wrapper.setAttribute("data-ingame", "no")
     : new_gameboard_wrapper.setAttribute("data-ingame", "yes");
+    new_gameboard_wrapper.setAttribute("data-", "no")
 
-  insertAfter(left_sidebar, new_gameboard_wrapper);
 
-  Game.gameboard_size = size;
+
+  if(Game.state === "Game End"){
+    new_gameboard_wrapper.getElementById("ID_Game_End_Container").appendChild(new_gameboard_wrapper);
+  new_gameboard_wrapper.getElementById("ID_GameboardWrapper").classList.add("Class_Gameboard_End");
+  new_gameboard_wrapper.setAttribute("data-gameend", "yes");
+ // console.log("Appended to Game End Container!");
+  } else  
+  {
+    insertAfter(left_sidebar, new_gameboard_wrapper); 
+   // console.log("Appended to left sidebar");
+  new_gameboard_wrapper.setAttribute("data-ingame", "no");
+};
+
+ 
 
   for (let x = 1; x <= size; x++) {
     // Create the Column Wrapper
@@ -652,9 +667,10 @@ function Create_Gameboard(size){
       cell.classList.add("Class_Cells");
       cell.id = `ID_C${columncounter}R${row}`;
       document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
-    }
-  }
-
+    };
+  };
+  Game.gameboard_size = size;
+ // console.log("New Gameboard with", size, "created");
 };
 
 /* =============

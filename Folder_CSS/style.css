@@ -7,7 +7,6 @@
                                                                      2021                                                                                                                                                                        
                                               ________________________________________                                                                                                                                                                                                  
 !                                                           Table of content              
-
                                                                1) General                                  
                                                                                                             
                                                                2) Layout                                   
@@ -23,7 +22,6 @@
                                                                7) Animations & Transitions                
                                                                                                             
                                                                8) Game End Screen                           
-
                                                                9) Helpers                                   
                                                                                                             
                                                                10) Media Queries                            
@@ -49,18 +47,15 @@ todo    -) INGAME Section?
 todo    -) Fonts!
 todo    -) Font working on all Browser correctly?
 todo    -) Find a final, real good styling!                                        
-
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo    -) Final formatation (especially script & library sections/functions), comments:
 todo    -) Make sure all important is commented !
 todo    -) Write a final Comment !
 todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
-
                   
 ?                                 Session progress:                                                
 ? -)
 ? -) 
-
                                                                                                                                                                                                                                                                                        */
 /* #endregion */
 
@@ -573,24 +568,12 @@ footer {
 }
 
 
-#ID_Gameboard_Span[data-ingame='yes'] button, input, #ID_Gameboard_Span {
-    pointer-events: none;
-    color: lightgrey;
-    background-color: lightgrey;
+#ID_Gameboard_Span[data-ingame='yes']  {
+  pointer-events: none;
+  color: black;
+  background-color: lightgrey;
   opacity: .3;
- 
 }
-
-#ID_Gameboard_Span[data-ingame='yes'] h3:after {
-    content: "Not allowed!";
-    color: red;
-    position: relative;
-    left: 0;
-    top: 0;
-    display: block;
-  
-}
-
 
 /* #endregion */
 
@@ -1005,6 +988,12 @@ select:hover {
   border-radius: 0rem;
 }
 
+#ID_GameboardWrapper[data-gameend="yes"]{
+
+}
+
+
+
 .Class_Top_End {
   background-color: var(--base-border);
   opacity: 0.7;
@@ -1304,11 +1293,9 @@ select:hover {
 
 /*
 ?                         CSS Bonus Jobs
-
 todo
 todo
 todo
-
 */
 
 
@@ -1317,7 +1304,6 @@ todo
 
 /* #region 12) Credits */
 /*
-
             ============================================================================================================
                                                                                                                
                                                  Credits & Special Thanks to:                                                 
@@ -1339,69 +1325,47 @@ todo
                                                                                                           =====================*/
 
 /* #region CSS-Check & Infolist */ /*                -
-
 ?         Umgebung
-
 -) VS Studio Terminal hilft bei Tippfehler!
-
 -) Auskommentieren CTRL + K + C
-
 -) Chrome / Firefox Dev Browsers installieren -> Element - Layout - Styles to change CS properties, toggle states, analyze animations etc...
     Tools nutzen!
 https://www.mozilla.org/de/firefox/developer/
 https://developer.chrome.com/docs/devtools/
-
+-) In Konsole: document.designMode = "on"
 -) Wichtig: Um alle Browser anzugleichen, bei Designgruppen outline wegnehmen und dann für alle einen hover & focus machen!
-
 -) Chrome Dev Tools das Element auswählen, Button (links oben) nutzen um zb.: Text Kontrast ablesen zu können !
-
-
+-) Visbug nutzen!
 ?         CSS
-
 todo box-sizing 
         *, *::before, *::after  {box-sizing: border-box} nimmt alle width-heights von den bordern weg - agieren wie outline, aber in den Richtungen steuerbar.
-
-
 todo div
         Default kein margin.
-
 todo    height
    height: 100%;  Der Prozentwert bezieht sich auf das parent-Element. Wenn parent body{} ist und sonst kein Element angehängt ist, ist der Container (body) klein!
    height: auto; Ist der Defaultwert und aus responsiven Gründen immer vorzuziehen wenn es geht. Ansonsten min-height - height: px; nur dann, wenn es sein muss!
 https://www.youtube.com/watch?v=SjYYfd7obug&t=272s
-
 todo     border
     border: 0; entfernt die border width.
-
 todo     margin
     margin-left: auto; --> nimmt den Platz rechts und halbiert ihn.
     margin: auto; interresant für nav-Listen ul li:nth-of-type(5) selektiert das 5te li-Element inder Liste. Ist es das letzte li, kannst du es mit margin-left: auto; ganz nach rechts schieben! Ein zusätzliches  margin-rihgt: aut; centert es daann
 https://www.youtube.com/watch?v=3LlLkapKw6Q
-
 todo     Buttons
     Animation mit brightness oder saturation langsam hoch fahren
     Hat ein Button einen border, kannst du dem anderen einen Border in der Farbe seines Hintergrundes geben damit die width/height ausgeglichen wird.
     
-
 ?         Flexbox & Grid
-
 todo    margin-collapse
       Sobald flex oder grid attached collapsen die block-margins nicht mehr. Das bedeutet zb.: wenn mehrerer columns nebeneinander sind und dann der screen kleiner wird verdoppeln sich die Abstände!
       Besser: Margins ganz weglassen und mit Gap arbeiten. Alle flex-items verhalten sich so, auch h, p, usw... haben bei Block margins und verdoppeln sich. 
-
 ?         CSS-Grid
-
 -) grid-template-columns
-
   grid-template-columns: repeat(auto-fill / auto-fit, minmax(250px, 1fr)); => Row darf höchsten 1fr hoch sein und wenn es 250px wird macht Grid eine neue Row auf!
 https://www.youtube.com/watch?v=qII5BueXWD4
-
 ?         CSS-Flexbox
-
 todo    flex-basis
     Ist die ideale Größe für Container. In Verbindung mit flex-wrap kann man container (text) overflow verhindern.
-
-
   ?         6 Outline-Button-Hover Effekte 
   !                    by Kevin Powell   
     https://www.youtube.com/watch?v=3LlLkapKw6Q
@@ -1414,58 +1378,40 @@ todo    flex-basis
               Zweiliniger Rahmen, der nach hover ausgefüllt und verdoppelt wird.
               
 -) Wiederholende values mit custom properties kaschieren.
-
 -) Wiederholenden Code gruppieren! 
    h1, h3, btn, .Class_X {...}
-
 -) :is() Pseudoklasse verwenden: 
    header:is(h3, p, .Class_Button, ....){....} gute Möglichkeit zum gruppieren.
    
    :is() umgekehrt:   
    :is(header, .Class_X, ...) p:hover{...} wendet auf alle p in header und Class_x das :hover an!
    Wichtig: Das Element mit der höchsten Spezifität setzt die ganze Gruppe darauf -> zb.: Klasse ist höher als p
-
 -) Attribute nutzen! Alles was gesetzt wurde, kann verwendet werden, auch zb.: 
    a[href="about.html"], a[class=""], a[class|="link"] selektiert alle Klassen die mit "link" beginnen, aber das ganze Wort.
    a{^="http"] selektiert alle http und https, 
-
 -) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
-
 -) ::after / ::before für zb.: Punkt -> Strich Animation, Icons über url, pdf files etc...
-
 -) Font Styling
-
 -) Use padding on text! like: padding: 2rem 0;
-
 /*
 -) Try get "this is 1 block to read, this is anothe rone,...."
-
 -) No text-align on large texts
-
 -) margin-inline , background-clip background-text-clip 
-
 -) Optimale textlänge mit clamp:    width: clamp(45ch, 50%, 75ch);
-
 -) ch als Eineheit benutzen!
-
 -) inset ist wie padding/margin! Zb.: el{ inset: 3rem 3rem 3rem 3rem }
-
 -) scroll-behaviour : smooth
-
 -) content-visibility auto
-
 -) Swiping: .container {scroll-snap-type: y mandatory} .child (muat be saection) {scroll-snap-align: start} 
             create a anker point for swipping like tinder
 */
 
 /*
 -) if / else
-
 vollwertiges if
 Wenn am Gameboard_Span das data-ingame attribute "yes" ist, dann soll Button, Input, #ID-xy,,... rot sein!
 #ID_Gameboard_Span[data-ingame='yes'] button, input, #ID_xy, .Class_yx {
     background-color: red;
-
 Tuascht den h3 Text aus und stellt #ID_Info um
 #ID_Gameboard_Span[data-ingame='yes'] h3:after, #ID_Info {
     content: "Not allowed!";
@@ -1476,72 +1422,47 @@ Tuascht den h3 Text aus und stellt #ID_Info um
     display: block;
   
 }
-
-
 :checked { if  }
 :not(:checked) { else  }
-
 [data-attr="true"] {  if   }
 [data-attr="false"] {  elseif  }
 :not([data-attr]) {  else }
-
 The following selector matches only <a> elements that directly contain an <img> child:
 a:has(> img)
-
 The following selector matches <h1> elements only if they have a <p> element directly following them:
 h1:has(+ p)
 */
 
 /*
-
 -) Trenner:
      / =======  
 !        Functions
            ======== /
-
      / =======  
 ?        Headlines
            ======== /     
  */
                               
 /* #region Media Queries */ /*
-
       Max-Width - Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop 
                   und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
-
          Kleine Endgeräte (Smartphones, kleiner als 768px):
                @media (max-width: 575.98px) { … }
-
                @media (max-width: 767.98px) { … }
-
          Kleine Endgeräte (Tablets, kleiner als 992px):
-
                @media (max-width: 991.98px) { … }
-
          Große Endgeräte (Laptops, Bildschirme, kleiner als 1200px):
-
                @media (max-width: 1199.98px) { … }
-
       Min-Widt - ist intuitiver und besser lesbar.
-
          Kleine Endgeräte (Smartphones, 576px und größer):
-
                @media (min-width: 576px) { … }
-
          Mittlere Endgeräte (Tablets, 768px und größer):
-
                @media (min-width: 768px) { … }
-
          Große Endgeräte (Laptops, Bildschirme, 992px und größer):
-
                @media (min-width: 992px) { … }
-
          Sehr große Endgeräte (Große Bildschirme, iMac, 1200px und größer):
-
                @media (min-width: 1200px) { … }
-
                                                                                                                                                                                                                                                                                                    /*#endregion*/ /*
-
 /* #region Scrollbar Design */ /*                                                                                                                                                                                                                                                                                                                                 
 -) Scrollbar Design:
       Scrollbar Firefox
@@ -1550,9 +1471,7 @@ h1:has(+ p)
             scrollbar-width: .5rem;
             scrollbar-gutter: both-edges ;
          }
-
        Scrollbar Chrome, Safari,...
-
          ::-webkit-scrollbar — the entire scrollbar.
          ::-webkit-scrollbar-button — the buttons on the scrollbar (arrows pointing upwards and downwards that scroll one line at a time).
          ::-webkit-scrollbar-thumb — the draggable scrolling handle.
@@ -1560,7 +1479,6 @@ h1:has(+ p)
          ::-webkit-scrollbar-track-piece — the part of the track (progress bar) not covered by the handle.
          ::-webkit-scrollbar-corner — the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet This is often the bottom-right corner of the browser window.
          ::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some element
-
                                                                                                                                                                                                                                  /*#endregion*/
 
 /*#region CSS-Templates */
@@ -1581,7 +1499,6 @@ h1:has(+ p)
   transition: all 250ms ease;
   position: relative;
 }
-
 .element:after {
   transition: all 250ms ease;
   content: "";
@@ -1593,15 +1510,12 @@ h1:has(+ p)
   height: 1rem;
   background-color: pink;
 }
-
 .element::after + :hover {
   width: 5rem;
 }
-
 .element:hover:after {
   width: 100%;
 }
-
 */
 
 /*
@@ -1611,4 +1525,5 @@ HTML:
 
 /*#endregion*/
 
-/*#endregion*/ {display: none;}
+/*#endregion*/ 
+
