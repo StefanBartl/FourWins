@@ -1,12 +1,12 @@
 //#region Table of Content
 /*
-!                                             Four-Wins-Online Main-CSS-Stylsheet
-                                                               powered by
-!                                                                Stefan Bartl
-!                                                     (WKDSteVIE / WKDMinerva)
-                                                                     2021                                                                                                                                                                        
-                                              ________________________________________                                                                                                                                                                                                  
-!                                                           Table of content              
+!                                      Four-Wins-Online Translation-JS-File
+?                                                          powered by
+!                                                          Stefan Bartl
+!                                             (WKDSteVIE / WKDMinerva)
+?                                                                 2021                                                                                                                                                                        
+?                                  ________________________________________                                                                                                                                                                                                  
+!                                                          Table of content              
  
                                     1) Translation-Managing Functions & Page Library     
                                                                                           

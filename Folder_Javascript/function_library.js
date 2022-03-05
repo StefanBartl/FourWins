@@ -1,12 +1,12 @@
 //#region Table of Content
 /*
-!                                             Four-Wins-Online Main-CSS-Stylsheet
-                                                               powered by
-!                                                                Stefan Bartl
-!                                                     (WKDSteVIE / WKDMinerva)
-                                                                     2021                                                                                                                                                                        
-                                              ________________________________________                                                                                                                                                                                                  
-!                                                           Table of content              
+!                                Four-Wins-Online Function_Library-JS-File
+?                                                         powered by
+!                                                          Stefan Bartl
+!                                               (WKDSteVIE / WKDMinerva)
+?                                                               2021                                                                                                                                                                        
+?                               ________________________________________                                                                                                                                                                                                  
+!                                                         Table of content              
         open jobs
                                                        1) Helper Functions                                  
                                                                                                             
@@ -64,7 +64,8 @@
 /*
 ?                               Jobs To-do:
 
-todo        
+todo        -) Gameboard-Sizing Transition by change?
+todo        -) Saving via local storage
 
 ?                               Finish
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
@@ -617,9 +618,8 @@ function Correct_Sound_Setting() {
 /* ==================
 !     Create new Gameboard
         ================== */
-function Create_Gameboard(size){
-  //console.log("Given" + size + "from DEV to create a gamebord.");
-
+function Create_Gameboard(sizeX, sizeY){
+  //console.log("Given",  sizeX, "x", sizeY, "to create a gameboard.");
 
   // Remove the old Gameboard cells if existing
  if(document.getElementById("ID_GameboardWrapper")){
@@ -631,36 +631,43 @@ for(column of  columnsArray) column.remove();
 for(topCell of topCellsArray) topCell.remove();
 for(cells of cellsArray) cells.remove();
 
-  for (let x = 1; x <= size; x++) {
-    // Create the Column Wrapper
+  // Create Columns
+  for (let columns = 1; columns <= sizeX; columns++) {
+    // Create the Column Wrappers
     let column = document.createElement("div");
     column.classList.add("Class_Columns");
-    column.id = `ID_Column${x}`;
+    column.id = `ID_Column${columns}`;
     document.getElementById("ID_GameboardWrapper").appendChild(column);
+  };
 
+  //Create Top Cells
+  for (let column = 1; column <= sizeX; column++) {
     // Create the Top Cells
     let topcell = document.createElement("div");
     topcell.classList.add("Class_TopCells");
-    topcell.id = `ID_C${x}R1`;
-    topcell.setAttribute("data-column", x);
+    topcell.id = `ID_C${column}R0`;
+    topcell.setAttribute("data-column", column);
+    document.getElementById(`ID_Column${column}`).appendChild(topcell);
 
-    document.getElementById(`ID_Column${x}`).appendChild(topcell);
-
-    // Create the cells
-    let columncounter = x;
-    for (let row = 2; row <= size ; row++) {
-      let cell = document.createElement("div");
-      cell.classList.add("Class_Cells");
-      cell.id = `ID_C${columncounter}R${row}`;
-      document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
-    };
+        // Create the Cells
+        for (let row = 1; row <= sizeY ; row++) {
+          let cell = document.createElement("div");
+          cell.classList.add("Class_Cells");
+          cell.id = `ID_C${column}R${row}`;
+          document.getElementById(`ID_Column${column}`).appendChild(cell);
+        };
   };
-  Game.gameboard_size = size;
+
+  Game.gameboard_size_x = sizeX;
+  Game.gameboard_size_y = sizeY;
 return
 };
 
 
-  //Create a new one
+
+
+  //Create a new Gameboard 
+  // Create Wrapper
   const new_gameboard_wrapper = document.createElement("div");
   new_gameboard_wrapper.classList.add("Class_GameboardWrapper");
   new_gameboard_wrapper.id = "ID_GameboardWrapper";
@@ -677,35 +684,39 @@ document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "no")
   {
     insertAfter(left_sidebar, new_gameboard_wrapper); 
    // console.log("Appended to left sidebar");
-
 };
 
-  for (let x = 1; x <= size; x++) {
-    // Create the Column Wrapper
+  // Create Columns
+  for (let columns = 1; columns <= sizeX; columns++) {
+    // Create the Column Wrappers
     let column = document.createElement("div");
     column.classList.add("Class_Columns");
-    column.id = `ID_Column${x}`;
+    column.id = `ID_Column${columns}`;
     document.getElementById("ID_GameboardWrapper").appendChild(column);
+  };
 
+  //Create Top Cells
+  for (let column = 1; column <= sizeX; column++) {
     // Create the Top Cells
     let topcell = document.createElement("div");
     topcell.classList.add("Class_TopCells");
-    topcell.id = `ID_C${x}R1`;
-    topcell.setAttribute("data-column", x);
+    topcell.id = `ID_C${column}R0`;
+    topcell.setAttribute("data-column", column);
+    document.getElementById(`ID_Column${column}`).appendChild(topcell);
 
-    document.getElementById(`ID_Column${x}`).appendChild(topcell);
-
-    // Create the cells
-    let columncounter = x;
-    for (let row = 2; row <= size ; row++) {
-      let cell = document.createElement("div");
-      cell.classList.add("Class_Cells");
-      cell.id = `ID_C${columncounter}R${row}`;
-      document.getElementById(`ID_Column${columncounter}`).appendChild(cell);
-    };
+        // Create the Cells
+        for (let row = 1; row <= sizeY ; row++) {
+          let cell = document.createElement("div");
+          cell.classList.add("Class_Cells");
+          cell.id = `ID_C${column}R${row}`;
+          document.getElementById(`ID_Column${column}`).appendChild(cell);
+        };
   };
-  Game.gameboard_size = size;
- // console.log("New Gameboard with", size, "created");
+
+  Game.gameboard_size_x = sizeX;
+  Game.gameboard_size_y = sizeY;
+  //console.log("Gameboard with",  sizeX, "x", sizeY, "created.");
+
 };
 
 /* =============

@@ -1,11 +1,11 @@
 //#region Table of content
 /*
-!                                             Four-Wins-Online Main-CSS-Stylsheet
-                                                               powered by
+!                                         Four-Wins-Online CPU_Player-JS-File
+?                                                              powered by
 !                                                                Stefan Bartl
 !                                                     (WKDSteVIE / WKDMinerva)
-                                                                     2021                                                                                                                                                                        
-                                              ________________________________________                                                                                                                                                                                                  
+?                                                                    2021                                                                                                                                                                        
+?                                  ________________________________________                                                                                                                                                                                                  
 !                                                           Table of content              
 
                                               1) CPU Player Algorhytmus                              

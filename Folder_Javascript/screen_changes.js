@@ -1,12 +1,12 @@
 //#region Table of Content
 /*
-!                                             Four-Wins-Online Main-CSS-Stylsheet
-                                                               powered by
-!                                                                Stefan Bartl
-!                                                     (WKDSteVIE / WKDMinerva)
-                                                                     2021                                                                                                                                                                        
-                                              ________________________________________                                                                                                                                                                                                  
-!                                                           Table of content              
+!                             Four-Wins-Online Screen_Changes-JS-File
+?                                                       powered by
+!                                                       Stefan Bartl
+!                                         (WKDSteVIE / WKDMinerva)
+?                                                             2021                                                                                                                                                                        
+?                          ________________________________________                                                                                                                                                                                                  
+!                                                        Table of content              
 open jobs
                                              1) Toggle Start / Game Screen                        
                                                                                                   
@@ -17,7 +17,9 @@ open jobs
 //#region Open Jobs
 /*
 ?                               Jobs To-do:
-todo        -) Check somehow the Firework-Animation!
+
+todo        -) Win Divs Player 2! Design! 
+todo        -) Game 3 doesnt start
 todo        -) Bring text to Library!
 
 ?                               Finish
@@ -402,7 +404,7 @@ function Game_End_Screen(gameResult) {
     document.getElementById("ID_Game_End_Container").remove();
 
     // Creat a new one!
-    Create_Gameboard(Game.gameboard_size);
+    Create_Gameboard(Game.gameboard_sizeX, Game.gameboard_sizeY);
 
     // Add Games won Notificiations-Container
     if (!document.getElementById("ID_Win_Div_One"))
@@ -473,7 +475,7 @@ function Game_End_Screen(gameResult) {
                 if(document.getElementById("ID_Win_Div_Two").lastElementChild && document.getElementById("ID_Win_Div_Two").lastElementChild.getAttribute("data-winstays") === "yes")
                 document.getElementById("ID_Win_Div_Two").lastElementChild.remove();
                 document.getElementById("ID_Win_Div_Two").appendChild(tally_img);
-                
+
       } else if (gameResult === 3){
         if(document.getElementById("ID_Draw_Div").lastElementChild && document.getElementById("ID_Draw_Div").lastElementChild.getAttribute("data-winstays") === "yes")
         document.getElementById("ID_Draw_Div").lastElementChild.remove();

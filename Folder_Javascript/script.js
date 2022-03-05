@@ -1,12 +1,12 @@
 //#region Table of Content
 /*
-!                                           Four-Wins-Online Main-Javascript-File
-?                                                               powered by
-!                                                                Stefan Bartl
-!                                                     (WKDSteVIE / WKDMinerva)
+!                                        Four-Wins-Online Main-Javascript-File
+?                                                              powered by
+!                                                              Stefan Bartl
+!                                                (WKDSteVIE / WKDMinerva)
 ?                                                                     2021             
 ?                                     ________________________________________                                                                                                                                                                                                  
-!                                                           Table of content              
+!                                                              Table of content              
 
                                                     1) General  Settings & Page Set-Up                                
                                                                                                 
@@ -23,11 +23,11 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) Finish Gameboard-Sizing for both directions! Transition by change! 
-todo        -) Saving via local storage
+todo        -) Delete all own notification
 
 ?                               Finish
 
+todo        -) Info H angleichen und durchschauen!
 todo        -) Update Function Headlines and find a way for infoboxes with description and additional infos!
 todo        -) Final formatation.
 todo        -) Make sure all important is commented.
@@ -81,7 +81,7 @@ const Windows = {
   // Object for storing returned Values from own Alert / Confirm / Prompt Windows
 };
 
-Create_Gameboard(7);
+Create_Gameboard(7, 6);
 
 Set_Page_Language();
 
@@ -357,9 +357,12 @@ Die/der erste SpielerIn, welche dies schafft hat die Runde gewonnen.
 
 Informationen & Einstellungs-Menü:
 Es ist nur vor dem Spiel möglich die Größe des Gameboards zu verändern. Andererseits würde es die Möglichkeit eröffnen sich unfaire Vorteile zu verschaffen!
+Standardgröße ist 7 Spalten und 6 Reihen - Einwurfreihe exklusive.
+
 Eine Farbwahl der Spielsteine ist möglich - auch während des Spieles. 
 Grundeinstellung ist Gelb für den / die linke Spieler_in und Rot für das Gegenüber.
-Der Sound hat eine On/Off Funktion und es ist möglich zwischen Deutsch und English zu wöhlen.
+
+Der Sound hat eine On/Off Funktion. und es ist möglich zwischen Deutscher und Englischer Sprache zu wählen.
 Bei Spielen gegen den Computer wird der Spielausgang in einer Statistik aufgezeichnet. Diesen findet man in den Spieleinstellungen unter "Statistiken gegen den CPU".
 Diese Statistiken kann man separat zurücksetzen.
 
@@ -393,6 +396,13 @@ and the settings are retained. If you want to delete these settings, you can do 
     });
   }
 });
+
+document.getElementById("ID_Gameboard_Size_Button").addEventListener("click", ()=>{
+  const sizeX = document.getElementById("ID_Gameboard_Size_X").value;
+  const sizeY = document.getElementById("ID_Gameboard_Size_Y").value;
+  Create_Gameboard(sizeX, sizeY);
+});
+
 language_menu.addEventListener("change", () => {
   // Save language in Local Storage and Game Object
   // Important maybe for later: With more languages, if/else needed!
@@ -491,10 +501,6 @@ delete_all.addEventListener("click", () => {
   }
 });
 
-document.getElementById("ID_Gameboard_Size_Button").addEventListener("click", ()=>{
-    let size = document.getElementById("ID_Gameboard_Size").value;
-    Create_Gameboard(size);
-});
 //#endregion
 
 /* ========================== 

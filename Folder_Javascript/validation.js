@@ -1,11 +1,11 @@
 //#region Table of Content
 /*
-!                                             Four-Wins-Online Main-CSS-Stylsheet
-                                                               powered by
-!                                                                Stefan Bartl
-!                                                     (WKDSteVIE / WKDMinerva)
-                                                                     2021                                                                                                                                                                        
-                                              ________________________________________                                                                                                                                                                                                  
+!                                        Four-Wins-Online Validation-JS-File
+?                                                           powered by
+!                                                           Stefan Bartl
+!                                              (WKDSteVIE / WKDMinerva)
+?                                                                 2021                                                                                                                                                                        
+?                               ________________________________________                                                                                                                                                                                                  
 !                                                           Table of content              
 open jobs
                                                             1) Validators                                       
