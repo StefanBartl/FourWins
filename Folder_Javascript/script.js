@@ -29,7 +29,7 @@ todo   -) Delete all own notification
 
 todo    -) Info H angleichen und durchschauen!
 todo    -) Test all functions! ( and write the correct ' ')
-todo    -) Update Function Headlines and find a way for infoboxes with description and additional infos!
+todo    -) Update Function Headlines and find a way for infoboxes with description and additional infos! Maybe like in KI Easy.
 todo    -) Final formatation.
 todo    -) Make sure all important is commented.
 todo    -) Write a final Comment.
@@ -838,7 +838,7 @@ function Player_1_Placement_Finish() {
     return;
   };
 
-  TopCell_Validation(false);
+  TopCell_Locking_Validation(false);
 
   //   If no win, next Player is on turn
   Turning_PlayerIsOnTurn();
@@ -874,7 +874,7 @@ function Player_2_Placement_Finish() {
     return;
   }
 
-  TopCell_Validation( false);
+  TopCell_Locking_Validation( false);
 
   // Next Player is on turn
   if (Game.Game_against_KI === false) Unlock_TopCells();

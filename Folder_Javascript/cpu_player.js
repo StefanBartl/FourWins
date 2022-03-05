@@ -52,9 +52,9 @@ todo        -) Write a final Comment.
 
 //#region 1) CPU Player Algrorhytm
 
-/* ==============
-         KI Placement 
-         ============= */
+/* ==========
+!    KI Placement 
+       =========== */
 function KI_Placement(valid_number) {
   // console.log("Entered KI Placement Function. Random number for topCell is:  ", random_number);
 
@@ -66,37 +66,38 @@ function KI_Placement(valid_number) {
 
   // If it was the last Cell in the Column, lock it
   const columnNumber = valid_number + 1;
-  TopCell_Validation(true);
+  TopCell_Locking_Validation(true);
   setTimeout(() => {
     Unlock_TopCells();
   }, 1000);
 }
 
 /* ======================
-         Easy-CPU Algorhytmus 
+!         Easy-CPU Algorhytmus 
          ===================== */
 function KI_Easy() {
-  /*
-                            Infobox
+ /*
+?                            Infobox
 Function to let KI Easy produce a random, but valid number for placement
 */
-  console.log("KI Easy starts to thinking....");
-  // Get a random number
-  const random_number = getRandomInt(7);
-  // Proof if in this column a placement is possible
-  const number_proofing = TopCell_Validation(true);
-  // console.log("Number to proof is valid:", number_proofing);
 
-  // If it is possible, name it valid_number and invoke "KI_Thinking", if it isn't get a random number again and proof it as long as there is a valid number
-  if (number_proofing === true) {
-    const valid_number = random_number;
-    // console.log("KI Easy makes placement:", valid_number - 1);
-    Thinking_Effect(true, valid_number);
+ // console.log("KI Easy starts to thinking....");
+  // Get a random number
+  const random_number = getRandomInt(Game.gameboard_size_x);
+  // Proof if in this column a placement is possible
+  let proofed_number = random_number;
+  Game.rowCounter[`C${random_number}`] > 0 ? proofed_number = true : proofed_number = false; 
+  // console.log("Number to proof is valid:", proofed_number);
+
+  // If proofed_number is true invoke "KI_Thinking", if it isn't get a random number again and proof it as long as there is a valid number
+  if (proofed_number === true) {
+    // console.log("KI Easy makes placement in column:", random number);
+    Thinking_Effect(true, random_number);
   } else KI_Easy();
 }
 
 /* ========================
-         Normal-CPU Algorhytmus 
+!         Normal-CPU Algorhytmus 
          ======================= */
 function KI_Normal() {
   /* 
@@ -178,7 +179,7 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
 }
 
 /* ======================
-         Hard-CPU Algorhytmus 
+!         Hard-CPU Algorhytmus 
          ===================== */
 function KI_Hard() {
   /*
@@ -191,7 +192,7 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
 }
 
 /* ======================
-         Placement-Randomizer 
+!         Placement-Randomizer 
          ===================== */
 function Randomizer(arr1, arr2) {
   // console.log("Randomizer getted arrays:", arr1,  arr2);
