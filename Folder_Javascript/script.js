@@ -23,7 +23,8 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) Finish Gameboard-Sizing! 
+todo        -) Finish Gameboard-Sizing for both directions! Transition by change! 
+todo        -) Saving via local storage
 
 ?                               Finish
 
@@ -35,7 +36,7 @@ todo        -) Save Default Script Files with the new Script Layout for later Pr
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 
 !                             Session progress
-?-) Choosing Animation locking repaired and improved useability
+?-) 
 ?-) 
 
                                                                                                                                                                                                                                                                                                                               */

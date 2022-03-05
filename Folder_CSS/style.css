@@ -1041,6 +1041,18 @@ select:hover {
   top: 0.5rem;
   right: 45%;
 }
+
+*[data-wincounter = "yes"] {
+  height: 3rem;
+  margin: .5rem;
+  filter: invert(1);
+}
+
+
+
+
+
+
 /* #endregion */
 
 /* #region 9) Helpers */
@@ -1336,6 +1348,8 @@ https://developer.chrome.com/docs/devtools/
 -) Wichtig: Um alle Browser anzugleichen, bei Designgruppen outline wegnehmen und dann für alle einen hover & focus machen!
 -) Chrome Dev Tools das Element auswählen, Button (links oben) nutzen um zb.: Text Kontrast ablesen zu können !
 -) Visbug nutzen!
+-) Benutze 'yx' statt "yx", dann ist es leichter dem User die Möglichkeit "ab" zu geben
+.
 ?         CSS
 todo box-sizing 
         *, *::before, *::after  {box-sizing: border-box} nimmt alle width-heights von den bordern weg - agieren wie outline, aber in den Richtungen steuerbar.
@@ -1354,7 +1368,38 @@ https://www.youtube.com/watch?v=3LlLkapKw6Q
 todo     Buttons
     Animation mit brightness oder saturation langsam hoch fahren
     Hat ein Button einen border, kannst du dem anderen einen Border in der Farbe seines Hintergrundes geben damit die width/height ausgeglichen wird.
-    
+
+todo em / rem
+    Für Fonst-Size eher rem, für padding/margin eher em --> rem bleibt immer gleich solange root 16px bleibt , bei em wird das margin/paddingh höher wenn man die font size des elements  größer wird 
+      rem= follow the device pre-assigned font-size      em= follow your font-size parent,
+      normally the parent is <body>, if is not modified by you, it will be like 16px (depends on the browser)
+      so if you write 1em = you write 15px;  (rounded for simplicity)
+      2em = 30px
+      3em = 45px
+      1.5em = (1.5*15) -> 22px;
+      1- and that's is fantastic, because no need to write very long complex px or points numbers;
+      2 - just change the parent number to change all children size!
+      font-size it works with both text and svg.
+      be careful: EM can make bugs in your html, 
+      because if you select elements without specifying well, 
+      it can happen as in the video (or recursive things)
+      example: 
+      div {
+      font-size: 2em;
+      }
+      and you have nesting divs like this:
+      <div>
+          <div>
+                <div>
+                </div>
+          </div>
+      </div>
+      in that case is like recursive:
+      the first div have 2em size;
+      second 4em;
+      third 8em
+      because everyone is parent, so use IDs or class               
+
 ?         Flexbox & Grid
 todo    margin-collapse
       Sobald flex oder grid attached collapsen die block-margins nicht mehr. Das bedeutet zb.: wenn mehrerer columns nebeneinander sind und dann der screen kleiner wird verdoppeln sich die Abstände!
@@ -1442,7 +1487,9 @@ h1:has(+ p)
 ?        Headlines
            ======== /     
  */
-                              
+               
+ /*#endregion*//*
+
 /* #region Media Queries */ /*
       Max-Width - Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop 
                   und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
@@ -1463,6 +1510,7 @@ h1:has(+ p)
          Sehr große Endgeräte (Große Bildschirme, iMac, 1200px und größer):
                @media (min-width: 1200px) { … }
                                                                                                                                                                                                                                                                                                    /*#endregion*/ /*
+
 /* #region Scrollbar Design */ /*                                                                                                                                                                                                                                                                                                                                 
 -) Scrollbar Design:
       Scrollbar Firefox

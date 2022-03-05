@@ -367,7 +367,7 @@ function Stats() {
   document.getElementById("ID_Normal_2").innerText = value;
 }
 
-/* ==========
+/* ========== 
 !     Update Stats
         =========== */
 function Update_Stats(winning_player) {
@@ -381,7 +381,8 @@ function Update_Stats(winning_player) {
       value = localStorage.KI_Easy_Wins || 0;
       value++;
       localStorage.KI_Easy_Wins = value;
-      // ...and set new value in Settings-Stats-Menu;
+      // ...and set new value in Settings-Stats-Menu if it exists;
+      if (document.getElementById("ID_Easy_1"))
       document.getElementById("ID_Easy_1").innerText = value;
     }
     //     if CPU Wins...
@@ -389,6 +390,7 @@ function Update_Stats(winning_player) {
       value = localStorage.KI_Easy_CPUWins || 0;
       value++;
       localStorage.Easy_CPUWins = value;
+      if (document.getElementById("ID_Easy_3"))
       document.getElementById("ID_Easy_3").innerText = value;
     }
     //     if it is a draw...
@@ -396,6 +398,7 @@ function Update_Stats(winning_player) {
       value = localStorage.KI_Easy_Draws || 0;
       value++;
       localStorage.Easy_Draws = value;
+      if (document.getElementById("ID_Easy_2"))
       document.getElementById("ID_Easy_2").innerText = value;
     }
   }
@@ -405,18 +408,21 @@ function Update_Stats(winning_player) {
       value = localStorage.KI_Normal_Wins || 0;
       value++;
       localStorage.KI_Normal_Wins = value;
+      if (document.getElementById("ID_Normal_1"))
       document.getElementById("ID_Normal_1").innerText = value;
     }
     if (winning_player === 2 && Game.KI_Level === "Normal") {
       value = localStorage.KI_Normal_CPUWins || 0;
       value++;
       localStorage.Normal_CPUWins = value;
+      if (document.getElementById("ID_Normal_2"))
       document.getElementById("ID_Normal_3").innerText = value;
     }
     if (winning_player === 3 && Game.KI_Level === "Normal") {
       value = localStorage.KI_Normal_Draws || 0;
       value++;
       localStorage.Normal_Draws = value;
+      if (document.getElementById("ID_Normal_3"))
       document.getElementById("ID_Normal_2").innerText = value;
     }
   }
@@ -1099,6 +1105,8 @@ function applyClass(name,element,doRemove){
 -) Ternäre Operatoren nutzen ! --> x >10 ? "Wenn x größer ist als 10" : "Wenn nicht, dann mach dies"
 
 -) Verwende "conditionales": const user = user_name || "Player 1"
+
+-) Array.from() konvertiert iterierbare Objekte zu arrays!
 
 -) String to number: let int = "14" --> neueZahl = +int / Number to string: const stringZahl = 5 + ""; in concentation --> double tilde ~~
 

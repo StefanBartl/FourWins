@@ -70,9 +70,8 @@ const thinking_div = document.getElementById("ID_Thinking_Div");
 const settings_menu = document.getElementById("ID_Settings_Menu");
 const settings_span = document.getElementById("ID_Setting_Span");
 const info_h = document.getElementById("ID_Info");
-const gameboard_size_button = document.getElementById(
-  "ID_Gameboard_Size_Button"
-);
+const gameboard_h = document.getElementById("ID_Gameboard_h");
+const gameboard_size_button = document.getElementById("ID_Gameboard_Size_Button");
 const colour = document.querySelector(".Class_Colour_Toggle");
 const toggle_colour_button = document.getElementById("ID_Toggle_Button");
 const toggle_colour_slider = document.getElementById("ID_Colour_Slider");
