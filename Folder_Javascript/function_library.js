@@ -648,7 +648,9 @@ for(cells of cellsArray) cells.remove();
     topcell.id = `ID_C${column}R0`;
     topcell.setAttribute("data-column", column);
     document.getElementById(`ID_Column${column}`).appendChild(topcell);
-
+    // Remove the leftz border of the first TopCell (styling issues)
+    document.getElementById('ID_C1R0').style.borderLeft = "none"; 
+        
         // Create the Cells
         for (let row = 1; row <= sizeY ; row++) {
           let cell = document.createElement("div");
@@ -703,6 +705,8 @@ document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "no")
     topcell.id = `ID_C${column}R0`;
     topcell.setAttribute("data-column", column);
     document.getElementById(`ID_Column${column}`).appendChild(topcell);
+        // Remove the leftz border of the first TopCell (styling issues)
+        document.getElementById('ID_C1R0').style.borderLeft = "none";
 
         // Create the Cells
         for (let row = 1; row <= sizeY ; row++) {

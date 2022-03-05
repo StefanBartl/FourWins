@@ -47,7 +47,8 @@ todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to 
 const Game = {
   // Game Object for storing important values in variables. Collected access via Game.[variable]
   // Setting the Gameboard arrays to keep Coin placements
-  gameboard_size: 7,
+  gameboard_size_x: 7,
+  gameboard_size_y: 6,
   user_changed_gameboard: false,
   actualGameboardPlayer1: {
 
@@ -356,8 +357,9 @@ Die/der erste SpielerIn, welche dies schafft hat die Runde gewonnen.
 3) Ein Unentschieden tritt ein, wenn kein Stein mehr spielbar ist und nimmt gewonnen hat. In diesem Fall beginnt derjenige, der nicht den letzten Spielzug machte.
 
 Informationen & Einstellungs-Menü:
-Es ist nur vor dem Spiel möglich die Größe des Gameboards zu verändern. Andererseits würde es die Möglichkeit eröffnen sich unfaire Vorteile zu verschaffen!
+Es ist nur jeweils vor dem Spiel möglich die Größe des Gameboards zu verändern. Andererseits würde es die Möglichkeit eröffnen sich unfaire Vorteile zu verschaffen!
 Standardgröße ist 7 Spalten und 6 Reihen - Einwurfreihe exklusive.
+Jede Zelle hat ein 1:1 Höhen und Seitenverhältniss, deswegen werden die Spielfeldzellen kleiner  je mehr Spalten gewählt werden.
 
 Eine Farbwahl der Spielsteine ist möglich - auch während des Spieles. 
 Grundeinstellung ist Gelb für den / die linke Spieler_in und Rot für das Gegenüber.
@@ -556,7 +558,7 @@ function Game_Preparations() {
     } 
   };
 
-  for (let i = 1; i <= Game.gameboard_size; i++) {
+  for (let i = 1; i <= Game.gameboard_size_x; i++) {
     // Create the Arrays to validate placements
     let arr = [];
     Game.player1_coins[`C${i}`] = [];
@@ -564,7 +566,7 @@ function Game_Preparations() {
     Game.actualGameboardPlayer1[`C${i}`] = [];
     Game.actualGameboardPlayer2[`C${i}`] = [];
     // Create row counter for easy calculation of the correct row for  placement
-    Game.rowCounter[`C${i}`] = `${Game.gameboard_size}`;
+    Game.rowCounter[`C${i}`] = `${Game.gameboard_size_y}`;
   };
 
   // console.log("Game against CPU:", Game.Game_against_ki, "KI Level:", Game.KI_Level);
@@ -665,9 +667,7 @@ function Prepare_Placement() {
   // Increase round counter
   Game.roundCounter++;
 
-  // Proof if the Gameboard  size was changed by the user - if so, subtract 1 from 
-  Game.user_changed_gameboard ?  Game.coin_placement_row =  parseInt(Game.rowCounter[`C${Game.clicked_column}`] ) + 1 : Game.coin_placement_row =  parseInt(Game.rowCounter[`C${Game.clicked_column}`] ) 
-  
+  Game.coin_placement_row =  parseInt(Game.rowCounter[`C${Game.clicked_column}`] ) ;
   Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row}` ;
  
    Make_Placement();
@@ -743,13 +743,13 @@ function Make_Placement() {
   topCell.appendChild(coin);
 
   // Trigger the correct animation (animation length) from total 52vh  (/ 6 * x)
-  let lenght = (48 / (Game.gameboard_size - 1)) * Game.coin_placement_row;
+  let ratio_value = (48 / (Game.gameboard_size_y - 1)) * Game.coin_placement_row;
 
   coin.animate(
     [
       // keyframes
       { transform: "translateY(0)" },
-      { transform: `translateY(${lenght}vh)` },
+      { transform: `translateY(${ratio_value}vh)` },
     ],
     {
       // timing options
@@ -779,9 +779,7 @@ function Placement_End() {
   document.getElementById(`${Game.clicked_TopCell_ID}`).firstChild.remove();
 
   // Proof is user changed Gameboard size. If true, adjust ID_Variable
-  Game.user_changed_gameboard ===  false 
-  ? coin_destination = document.getElementById(`ID_C${Game.clicked_column}R${Game.coin_placement_row}`) 
-  :  coin_destination = document.getElementById(`ID_C${Game.clicked_column}R${Game.coin_placement_row  - 1}`);
+  coin_destination = document.getElementById(`ID_C${Game.clicked_column}R${Game.coin_placement_row}`);
 
   // Make the Placement
   if (Game.playerIsOnTurn === "left") {

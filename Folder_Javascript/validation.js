@@ -25,7 +25,7 @@ open jobs
 /*
 ?                               Jobs To-do:
 
-todo        -) 
+todo        -) TopCell Validation not working
 
 ?                               Finish
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)

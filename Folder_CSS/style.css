@@ -36,27 +36,37 @@
 
 /* #region Jobs To-Do */
 /*
-!                                    Jobs To-Do: 
-                                                    
+
+!                           Jobs To-Do: 
+
+todo    -) Gameboard Style 
 todo    -) data-x Attribute verwenden wo es Sinn macht.
 todo    -) Scrollbar rechts am starting Bildschirm muss weg, sonst funktioniert das Menu ästhetisch nicht mehr.
+todo    -) Settings Menu wird manchmal schwarz
 todo    -) :focus on all :hovers for Cross-Browser-Support!
 todo    -) Test and repair responsivness in all sizes! -> Menu muss von der Seite weg!
 todo    -) CSS-Code minimizing f.e. bind repetative Classes to one Class!
 todo    -) INGAME Section?
 todo    -) Fonts!
 todo    -) Font working on all Browser correctly?
-todo    -) Find a final, real good styling!                                        
+todo    -) Find a final, real good styling!
+
+
+?                               Finish
+
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo    -) Final formatation (especially script & library sections/functions), comments:
 todo    -) Make sure all important is commented !
 todo    -) Write a final Comment !
-todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
-                  
-?                                 Session progress:                                                
+todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "global" Library for JS & CSS !
+
+
+!                         Session progress:                                                
+
 ? -)
 ? -) 
-                                                                                                                                                                                                                                                                                       */
+                                                                                                                                                                                                                                                                                       
+*/
 /* #endregion */
 
 /* #region 1) General */
@@ -88,7 +98,12 @@ todo    -) Save Default Script Files with the new Script Layout for later Projec
   scroll-behavior: smooth;
   overflow-x: hidden;
   overflow-y: auto;
+    
 }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+} 
 
 /* =======
 !         fonts 
@@ -96,6 +111,8 @@ todo    -) Save Default Script Files with the new Script Layout for later Projec
 
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+
 
 /* #endregion */
 
@@ -224,8 +241,6 @@ footer {
 
 /* #region 3) Gameboard */
 
-
-
 .Class_Columns {
   width: 100%;
   height: max-content;
@@ -243,15 +258,15 @@ footer {
   cursor: pointer;
 }
 
-#ID_C1R1 {
- border-left: none;
-}
-
-/*
+/* If cell is full,...*/
 .Class_Full_Column {
   box-shadow: 0 -5px 0 var(--gameboard);
+  /*
+  oder jetzt mit border Top mnöglich?
+  */
+
 }
-*/
+
 
 .Class_Cells {
   aspect-ratio: 1 / 1;
@@ -1344,13 +1359,14 @@ todo
     Tools nutzen!
 https://www.mozilla.org/de/firefox/developer/
 https://developer.chrome.com/docs/devtools/
--) In Konsole: document.designMode = "on"
+-) In Konsole document.designMode = "on" stellen und man kann die Page verändern
+-) Page-Refresh CTRL+F 
 -) Wichtig: Um alle Browser anzugleichen, bei Designgruppen outline wegnehmen und dann für alle einen hover & focus machen!
 -) Chrome Dev Tools das Element auswählen, Button (links oben) nutzen um zb.: Text Kontrast ablesen zu können !
 -) Visbug nutzen!
 -) Benutze 'yx' statt "yx", dann ist es leichter dem User die Möglichkeit "ab" zu geben
 .
-?         CSS
+?         CSS  ______GEt failed videos!
 todo box-sizing 
         *, *::before, *::after  {box-sizing: border-box} nimmt alle width-heights von den bordern weg - agieren wie outline, aber in den Richtungen steuerbar.
 todo div
