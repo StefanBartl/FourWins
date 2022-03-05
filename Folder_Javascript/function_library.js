@@ -157,7 +157,7 @@ function Unlock_TopCells() {
 
   for (let topCell of topCellsArray) {
     topCell.style.cursor = "pointer";
-    if (Game.rowCounter[`${Game.clicked_column}`] >= 3) topCell.style = "pointer-events: all";
+    if (Game.rowCounter[`${Game.clicked_column}`] >= 2) topCell.style = "pointer-events: all";
   }
 };
 

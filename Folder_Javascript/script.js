@@ -23,17 +23,18 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) Delete all own notification
+todo   -) Delete all own notification
 
 ?                               Finish
 
-todo        -) Info H angleichen und durchschauen!
-todo        -) Update Function Headlines and find a way for infoboxes with description and additional infos!
-todo        -) Final formatation.
-todo        -) Make sure all important is commented.
-todo        -) Write a final Comment.
-todo        -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
-todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo    -) Info H angleichen und durchschauen!
+todo    -) Test all functions! ( and write the correct ' ')
+todo    -) Update Function Headlines and find a way for infoboxes with description and additional infos!
+todo    -) Final formatation.
+todo    -) Make sure all important is commented.
+todo    -) Write a final Comment.
+todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
+todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 
 !                             Session progress
 ?-) 

@@ -7,17 +7,16 @@
 ?                                                                 2021                                                                                                                                                                        
 ?                               ________________________________________                                                                                                                                                                                                  
 !                                                           Table of content              
-open jobs
+
                                                             1) Validators                                       
-                                                                                                                
+                                                                                         
+                                                               - Top-Cell Validator        
+
                                                                 - Diagonal Validator                                
                                                                                                                     
                                                                 - Column Validator                                  
                                                                                                                     
-                                                                - Row Validator                                     
-                                                                                                                    
-                                                                - Top-Cell Validator                                
-                                                                                                                                                             
+                                                                - Row Validator                                                                                                                                                                                                                                                                                                                                        
                                                                                                                                                                                                                                                                                */
 //#endregion
 
@@ -25,13 +24,13 @@ open jobs
 /*
 ?                               Jobs To-do:
 
-todo        -) TopCell Validation not working
+todo    -)
 
 ?                               Finish
-todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo        -) Final formatation.
-todo        -) Make sure all important is commented.
-todo        -) Write a final Comment.
+todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo    -) Final formatation.
+todo    -) Make sure all important is commented.
+todo    -) Write a final Comment.
 
 !                             Session progress
 ?-) 
@@ -40,6 +39,49 @@ todo        -) Write a final Comment.
 //#endregion
 
 //#region 1) Validators
+
+/*       ==================
+!          Lock Top-Cell if full Column 
+            =================== */
+function TopCell_Validation(invokedForKiValidation) {
+  // Function for proofing if TopCell should be locked. In case of CPU is invoking if placement is possible too.Also to give, after locking them while placement, columns free where the row counter is higher than 0.
+  console.log('Entered Top-Cell Validation.');
+
+  const topCellsArray = document.getElementsByClassName('Class_TopCells');
+
+  // Important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section!
+  // Proof if the columnNumber was the last possible cell to play in the column
+  if ( Game.rowCounter[`C${Game.clicked_column}`] === 0) {
+    // If it was lock it for further placements
+    // console.log("TopCell-Validator locked cell.");
+    document.getElementById(`ID_C${Game.clicked_column}R0`).innerText = 'Full!';
+    document.getElementById(`ID_C${Game.clicked_column}R0`).setAttribute('data-columnfull', 'yes');
+    // Give the rest of the TopCells free again
+    for(let topCell = 0; topCell < topCellsArray.length; topCell++){
+      // (Jump over the locked column)
+      if(topCell === Game.clicked_column - 1) continue;
+
+     topCellsArray[topCell].style = 'pointer-events: all';
+    };
+    console.log('Full Column ' + `${Game.clicked_column}` + ' locked, Top-Cells free again.');
+    return
+  };
+
+  // If the column is locked for placements, return false to CPU Placement, so they know they cant make a placement there. Else return true so they hav a valid column number.
+  if (invokedForKiValidation === true) {
+      console.log('CPU Placement possible.');
+      return true
+    };
+
+    // If it passes the proofment, just give the TopCell free again which are not full and return
+  for(let topCell of topCellsArray){
+    if(!topCell.getAttribute('data-columnfull')){
+        topCell.style = 'pointer-events: all';
+      };
+  };
+    console.log('Not full Top-Cells free again.');
+  return;
+};            
 
 /*     =================
 !        Diagonal Win-Validation 
@@ -187,44 +229,5 @@ function Row_Validator(player, column) {
   }
   //(Under construction for winChain!)
 }
-
-/*       ==================
-!          Lock Top-Cell if full Column 
-            =================== */
-function TopCell_Validation(invokedForKiValidation) {
-  console.log("Entered Top-Cell Validation.");
-
-  // Important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section!
-  // Proof if the columnNumber was the last possible cell to play in the column
-  if ( Game.rowCounter[`C${Game.clicked_column}`] === 2 && invokedForKiValidation === false) {
-    // If it was lock it for further placements
-    // console.log("TopCell-Validator locked cell.");
-    document.getElementById(`ID_C${Game.clicked_column}R1`).innerText = "Full!";
-    document
-      .getElementById(`ID_C${Game.clicked_column}R1`)
-      .style = "pointer-events: none";
-    return
-  };
-
-  // If the column is locked for placements, return false to KI Normal & KI Easy, so they know they cant make a placement there. Else return true so they hav a valid column number.
-  if (invokedForKiValidation === true) {
-    if ( Game.rowCounter[`C${Game.clicked_column}`] < 3) {
-      document
-      .getElementById(`ID_C${Game.clicked_column}R1`).style = "pointer-events: none";
-      console.log("Top-Cell is locked now / was locked for placements.");
-      return false;
-    } else {
-      console.log("CPU Placement possible.)");
-      return true};
-  };
-
-    // If it passes the proofment, just give the TopCell free again and return
-  const topCellsArray = document.getElementsByClassName("Class_TopCells");
-  for(let topCell of topCellsArray){
-  topCell.style = "pointer-events: all";
-  };
-    console.log("Top-Cell is free again.");
-  return;
-};
 
 //#endregion

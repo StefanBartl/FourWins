@@ -258,9 +258,10 @@ footer {
   cursor: pointer;
 }
 
-/* If cell is full,...*/
-.Class_Full_Column {
+/* If column is full,...*/
+.Class_TopCells[data-columnfull='yes'] {
   box-shadow: 0 -5px 0 var(--gameboard);
+  pointer-events: none;
   /*
   oder jetzt mit border Top mnöglich?
   */
