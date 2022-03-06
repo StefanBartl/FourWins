@@ -18,9 +18,7 @@ open jobs
 /*
 ?                               Jobs To-do:
 
-todo    -) Win Div in Game-End-Screen / Text infos
-todo    -) Win Divs Player 2! Design! 
-todo    -) Game 3 doesnt start
+todo    -) Win Divs Design! They need an Infotext or something for clearer user understanding.. 
 todo    -) Bring text to Library!
 
 ?                               Finish

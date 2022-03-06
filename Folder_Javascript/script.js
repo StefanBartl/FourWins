@@ -28,7 +28,7 @@ todo   -) Delete all own notification (Promise)
 ?                               Finish
 
 todo    -) Info H angleichen und durchschauen!
-todo    -) Test all functions! ( and write the correct ' ')
+todo    -) Test all functions! Write the correct ' , infoboxes, headlines.
 todo    -) Update Function Headlines and find a way for infoboxes with description and additional infos! Maybe like in KI Easy.
 todo    -) Final formatation.
 todo    -) Make sure all important is commented.
@@ -118,7 +118,7 @@ sound_checkbox.addEventListener("click", () => {
 
 //#endregion
 
-//#region Choosing Colour Left Player
+//#region Set  Left Player Colour
 
 // Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted
 Game.player_Colour_Left = localStorage.Player_Colour_Left || "yellow";
@@ -129,48 +129,6 @@ if (Game.player_Colour_Left === "red") {
   toggle_colour_button.classList.remove("Class_Toggle");
   toggle_colour_slider.style.backgroundColor = "yellow";
 }
-
-/* =============================
-         Colour-Change Event-Listener 
-         ============================= */
-document.querySelector(".Class_Colour_Toggle").addEventListener("click", () => {
-  //console.log("Colour toggle clicked");
-  if (
-    localStorage.Player_Colour_Left === "yellow" ||
-    localStorage.Player_Colour_Left === undefined
-  ) {
-    //console.log("Set colour toggle to red.");
-    localStorage.Player_Colour_Left = "red";
-    Game.player_Colour_Left = "red";
-    toggle_colour_button.classList.add("Class_Toggle");
-    toggle_colour_slider.style.backgroundColor = "red";
-    // console.log("Colour toggle changed colour for future coins to red.")
-  } else if (localStorage.Player_Colour_Left === "red") {
-    // console.log("Set colour toggle to yellow.")
-    localStorage.Player_Colour_Left = "yellow";
-    Game.player_Colour_Left = "yellow";
-    toggle_colour_button.classList.remove("Class_Toggle");
-    toggle_colour_slider.style.backgroundColor = "yellow";
-    // console.log("Colour toggle changed colour for future coins to yellow.")
-  }
-
-  // Changing colour of existing coins
-  if (Game.state == "InGame") {
-    const cellsArray = document.getElementsByClassName("Class_Cells");
-    //Loops trough cellsArray
-    for (let cell of cellsArray) {
-      // If one cell have tht Class with a red or yellow Coin Background attached, change it to the other colored background (PNG)
-      if (cell.classList.contains("Class_PlacedCoin_1")) {
-        cell.classList.remove("Class_PlacedCoin_1");
-        cell.classList.add("Class_PlacedCoin_2");
-      } else if (cell.classList.contains("Class_PlacedCoin_2")) {
-        cell.classList.remove("Class_PlacedCoin_2");
-        cell.classList.add("Class_PlacedCoin_1");
-      }
-      // console.log("Existing coins changed colour.");
-    }
-  }
-});
 
 //#endregion
 
@@ -292,7 +250,6 @@ settings_span.addEventListener("mouseenter", () => {
   if (!settings_span.classList.contains("Class_Show_Settings")) {
     settings_span.classList.remove("Class_Hide_Settings");
     settings_span.classList.add("Class_Show_Settings");
-    settings_menu.style.zIndex = "3";
     return;
   }
 });
@@ -302,7 +259,6 @@ settings_span.addEventListener("touchstart", () => {
   if (!settings_span.classList.contains("Class_Show_Settings")) {
     settings_span.classList.remove("Class_Hide_Settings");
     settings_span.classList.add("Class_Show_Settings");
-    settings_menu.style.zIndex = "3";
     return;
   }
 });
@@ -315,7 +271,6 @@ main_wrapper.addEventListener("mouseenter", () => {
   if (settings_span.classList.contains("Class_Show_Settings")) {
     settings_span.classList.remove("Class_Show_Settings");
     settings_span.classList.add("Class_Hide_Settings");
-    settings_menu.style.zIndex = "0";
     return;
   }
 });
@@ -325,7 +280,6 @@ main_wrapper.addEventListener("touchstart", () => {
   if (settings_span.classList.contains("Class_Show_Settings")) {
     settings_span.classList.remove("Class_Show_Settings");
     settings_span.classList.add("Class_Hide_Settings");
-    settings_menu.style.zIndex = "0";
     return;
   }
 });
@@ -335,7 +289,6 @@ document.querySelector("#ID_Header").addEventListener("mousemove", () => {
   if (settings_span.classList.contains("Class_Show_Settings")) {
     settings_span.classList.remove("Class_Show_Settings");
     settings_span.classList.add("Class_Hide_Settings");
-    settings_menu.style.zIndex = "0";
     return;
   }
 });
@@ -406,6 +359,45 @@ document.getElementById("ID_Gameboard_Size_Button").addEventListener("click", ()
   Create_Gameboard(sizeX, sizeY);
 });
 
+document.querySelector(".Class_Colour_Toggle").addEventListener("click", () => {
+  //console.log("Colour toggle clicked");
+  if (
+    localStorage.Player_Colour_Left === "yellow" ||
+    localStorage.Player_Colour_Left === undefined
+  ) {
+    //console.log("Set colour toggle to red.");
+    localStorage.Player_Colour_Left = "red";
+    Game.player_Colour_Left = "red";
+    toggle_colour_button.classList.add("Class_Toggle");
+    toggle_colour_slider.style.backgroundColor = "red";
+    // console.log("Colour toggle changed colour for future coins to red.")
+  } else if (localStorage.Player_Colour_Left === "red") {
+    // console.log("Set colour toggle to yellow.")
+    localStorage.Player_Colour_Left = "yellow";
+    Game.player_Colour_Left = "yellow";
+    toggle_colour_button.classList.remove("Class_Toggle");
+    toggle_colour_slider.style.backgroundColor = "yellow";
+    // console.log("Colour toggle changed colour for future coins to yellow.")
+  }
+
+  // Changing colour of existing coins
+  if (Game.state == "InGame") {
+    const cellsArray = document.getElementsByClassName("Class_Cells");
+    //Loops trough cellsArray
+    for (let cell of cellsArray) {
+      // If one cell have tht Class with a red or yellow Coin Background attached, change it to the other colored background (PNG)
+      if (cell.classList.contains("Class_PlacedCoin_1")) {
+        cell.classList.remove("Class_PlacedCoin_1");
+        cell.classList.add("Class_PlacedCoin_2");
+      } else if (cell.classList.contains("Class_PlacedCoin_2")) {
+        cell.classList.remove("Class_PlacedCoin_2");
+        cell.classList.add("Class_PlacedCoin_1");
+      }
+      // console.log("Existing coins changed colour.");
+    }
+  }
+});
+
 language_menu.addEventListener("change", () => {
   // Save language in Local Storage and Game Object
   // Important maybe for later: With more languages, if/else needed!
@@ -463,24 +455,29 @@ language_menu.addEventListener("change", () => {
     }
   }
 });
+
 stats_reset_easy.addEventListener("click", () => {
   localStorage.KI_Easy_Wins = 0;
   localStorage.KI_Easy_CPUWins = 0;
   localStorage.KI_Easy_Draws = 0;
   Stats();
 });
+
 stats_reset_normal.addEventListener("click", () => {
   localStorage.KI_Normal_Wins = 0;
   localStorage.KI_Normal_CPUWins = 0;
   localStorage.KI_Normal_Draws = 0;
   Stats();
 });
+
 contact_h.addEventListener("click", () => {
   window.open("https://stefanbartl.github.io/StefanBartl_Portfolio/");
 });
+
 credits_h.addEventListener("click", () => {
   window.open("https://github.com/StefanBartl/FourWins/blob/main/README.md");
 });
+
 delete_all.addEventListener("click", () => {
   // Play warning sound
   warning_audio.play();

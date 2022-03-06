@@ -1,45 +1,48 @@
 /* #region Table of Content */
 /*    
-!                                             Four-Wins-Online Main-CSS-Stylsheet
-                                                               powered by
-!                                                                Stefan Bartl
-!                                                     (WKDSteVIE / WKDMinerva)
-                                                                     2021                                                                                                                                                                        
-                                              ________________________________________                                                                                                                                                                                                  
-!                                                           Table of content              
-                                                               1) General                                  
-                                                                                                            
-                                                               2) Layout                                   
-                                                                                                            
-                                                               3) Gameboard                                
-                                                                                                            
-                                                               4) Settings Menu                                                                           
-                                                                                                            
-                                                               5) Typography                               
-                                                                                                            
-                                                               6) Inputs, Buttons, Dropdowns, etc...       
-                                                                                                         
-                                                               7) Animations & Transitions                
-                                                                                                            
-                                                               8) Game End Screen                           
-                                                               9) Helpers                                   
-                                                                                                            
-                                                               10) Media Queries                            
-                                                                                                            
-                                                               11) Final Information & Comments             
-                                                                                                            
-                                                               12) Credits                                 
-                                                                                                            
-                                                               13-15) My CSS-Guideline                          
-                                                                                                                                                                                                                                                                             */
-/*#endregion*/
+!                                       Four-Wins-Online Main-CSS-Stylsheet
+?                                                            powered by
+!                                                            Stefan Bartl
+!                                              (WKDSteVIE / WKDMinerva)
+?                                                                  2021                                                                                                                                                                        
+?                               ________________________________________                                                                                                                                                                                                  
+!                                                           Table of content
 
+?                                                              1) General                                  
+                                                                                                            
+?                                                              2) Layout                                   
+                                                                                                            
+?                                                              3) Gameboard                                
+                                                                                                            
+?                                                              4) Settings Menu                                                                           
+                                                                                                            
+?                                                              5) Typography                               
+                                                                                                            
+?                                                              6) Inputs, Buttons, Dropdowns, etc...       
+                                                                                                         
+?                                                              7) Animations & Transitions                
+                                                                                                            
+?                                                              8) Game End Screen           
+
+?                                                              9) Helpers                                   
+                                                                                                            
+?                                                             10) Media Queries                            
+                                                                                                            
+?                                                             11) Final Information & Comments             
+                                                                                                            
+?                                                             12) Credits                                 
+                                                                                                            
+?                                                        13-15) My CSS-Guideline                          
+!                                                                                                                                                                                                                                                                             */
+
+/*#endregion*/
 /* #region Jobs To-Do */
 /*
 
 !                           Jobs To-Do: 
 
 todo    -) Gameboard Style 
+todo    -) Game-End-Screen Style
 todo    -) data-x Attribute verwenden wo es Sinn macht.
 todo    -) Scrollbar rechts am starting Bildschirm muss weg, sonst funktioniert das Menu ästhetisch nicht mehr.
 todo    -) Settings Menu wird manchmal schwarz
@@ -98,12 +101,61 @@ todo    -) Save Default Script Files with the new Script Layout for later Projec
   scroll-behavior: smooth;
   overflow-x: hidden;
   overflow-y: auto;
-    
+  
 }
 
+/* =======
+!         Resets 
+         ======= */
+/* #region Resets */
+
+/* box-sizing */
 *, *::before, *::after {
   box-sizing: border-box;
 } 
+
+/* margins */
+body,
+h1, h2, h3, h4, h5, h6,
+figure, picture {
+  margin: 0;
+}
+
+/* set up the body*/
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* make form elements easier to work with */ 
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* remove animations for people who turned them off*/
+@media (prefers-reduced-motion: reduce){
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* #endregion */
 
 /* =======
 !         fonts 
@@ -401,9 +453,10 @@ footer {
   height: 80vh;
   width: 100vw;
   max-width: 100%;
-  z-index: 3;
+  z-index: 1;
   justify-content: center;
   overflow: auto;
+  
   background-color: var(--base-border);
   box-shadow: 0.1rem 0.1rem 1rem black;
   border: solid 2px var(--base-colour);
@@ -418,6 +471,9 @@ footer {
 
 #ID_Setting_Span::-webkit-scrollbar {
   width: 1rem;
+}
+
+#ID_Setting_Span[data-endscreen = "no"]{
 }
 
 #ID_Setting_Span::-webkit-scrollbar-corner {
@@ -1057,11 +1113,10 @@ select:hover {
 }
 
 #ID_Settings_Menu[data-endscreen = "yes"]{
-
+  
 }
 
 #ID_Setting_Span[data-endscreen = "yes"]{
-
 }
 
 #ID_Canvas_Div{
