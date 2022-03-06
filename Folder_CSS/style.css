@@ -1038,17 +1038,23 @@ select:hover {
   }
 }
 
+body[data-gameend = 'yes']{
+  display: flex;
+}
+
 #ID_MainWrapper[data-gameend = 'yes']{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
   font-size: large;
 }
 
 #ID_MainWrapper[data-canvasend = 'yes']{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
   font-size: large;
 }
 
@@ -1059,8 +1065,7 @@ select:hover {
   transform: translateX(-50%);
   min-height: 35vh;
   aspect-ratio: 1/1;
-  margin-block: 5em;
-  
+  margin-block: 2em;
 }
 
 .Class_Top_End {
@@ -1069,16 +1074,15 @@ select:hover {
 }
 
 #ID_End_H1 {
-  min-width: 100%;
-  padding-top: 10em;
+ margin-top:10vh; 
 }
 
 #ID_End_Text {
-  min-width: 100%
+  margin-top: 5vh;
 }
 
 #ID_End_Button_Div {
-  min-width: 100%;
+  margin-top: 4vh;
   justify-content: center;
   align-content: center;
 }

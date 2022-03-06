@@ -40,6 +40,9 @@ function Game_Screen() {
 Game.state = "InGame";
 document.getElementById('ID_MainWrapper').setAttribute('data-ingame', 'yes');
 document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'yes');
+document.body.setAttribute('data-gameend', 'no');
+document.getElementById('ID_MainWrapper').setAttribute('data-gameend', 'no');
+document.getElementById('ID_MainWrapper').setAttribute('data-canvasend', 'no');
 
 if(Game.state === "Game End"){
   document.getElementById("ID_Turn_Div").classList.remove("Class_Invisible");
@@ -81,6 +84,9 @@ function Start_Screen() {
   //console.log("Entering Game-Screen.");
   document.getElementById('ID_MainWrapper').setAttribute('data-ingame', 'no');
   document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'no');
+  document.body.setAttribute('data-gameend', 'no');
+  document.getElementById('ID_MainWrapper').setAttribute('data-gameend', 'no');
+  document.getElementById('ID_MainWrapper').setAttribute('data-canvasend', 'no');
   
   // Add the start screen elements
   document.getElementById("ID_Header").style = "display: block";
@@ -153,8 +159,10 @@ function Preparations(gameResult) {
   document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'no');
 
   Game.state = "Game End";
+  document.body.setAttribute('data-gameend', 'yes');
   document.getElementById("ID_GameboardWrapper").setAttribute("data-gameend", "yes");
   document.getElementById('ID_MainWrapper').setAttribute('data-gameend', 'yes');
+
 
   // Assign correct names to the winner, loser or draw variables and return it, also set  the wins counter
   let winner, loser;
@@ -232,6 +240,7 @@ function Game_End_Screen(gameResult) {
     const canvas_div = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Canvas_Div", Class: "Class_Canvas_Div" });
     const firework_canvas = Create_DOM_Element({ ParentID: "ID_Canvas_Div",  Element: "canvas", ID: "ID_Firework", Class: "Class_Firework" });
     Fireworks("ID_Firework");
+    document.body.setAttribute('data-gameend', 'no');
     document.getElementById('ID_MainWrapper').setAttribute('data-gameend', 'no');
     document.getElementById('ID_MainWrapper').setAttribute('data-canvasend', 'yes');
 
@@ -265,14 +274,6 @@ function Game_End_Screen(gameResult) {
 
   // If the KI won against Player CPU is always Player 2 and if Game against KI is true >>> CPU won), add the lose text and screen
   if (gameResult === 2 && Game.Game_against_KI === true) {
-    document.getElementById("ID_MainWrapper").style.backgroundImage =
-      "url('./Folder_Graphics/Folder_Icons/freesvg_com/SadSmileyWhite.svg')";
-    document.getElementById("ID_MainWrapper").style.backgroundPosition =
-      "center";
-    document.getElementById("ID_MainWrapper").style.backgroundSize =
-      "3%";
-    document.getElementById("ID_MainWrapper").style.backgroundRepeat =
-      "no-repeat";
     if (Game.Language === "de") {
       document.getElementById("ID_End_H1").innerText = "Verloren!";
       document.getElementById(
@@ -339,10 +340,6 @@ function Game_End_Screen(gameResult) {
               ============== */
 function Start_New_Game(gameResult){
 // console.log("Entered New Game function.");
-
-// Disable special styling for Settings Menu during End-Screen
-document.getElementById("ID_Settings_Menu").setAttribute("data-endscreen",  "no");
-document.getElementById("ID_Setting_Span").setAttribute("data-endscreen",  "no");
 
 //Make sure the stats are up to date
 Stats();
@@ -413,11 +410,16 @@ document.getElementById("ID_Canvas_Div").remove();
 }
 
 // Remove the Game End Screen
+document.body.setAttribute('data-gameend', 'no');
 document.getElementById('ID_MainWrapper').setAttribute('data-gameend', 'no');
 document.getElementById('ID_MainWrapper').setAttribute('data-canvasend', 'no');
 document.getElementById('ID_End_H1').remove();
 document.getElementById('ID_End_Text').remove();
 document.getElementById('ID_End_Button_Div').remove();
+
+// Disable special styling for Settings Menu during End-Screen
+document.getElementById("ID_Settings_Menu").setAttribute("data-endscreen",  "no");
+document.getElementById("ID_Setting_Span").setAttribute("data-endscreen",  "no");
 
 // Creat a new Gameboard!
 Create_Gameboard(Game.gameboard_sizeX, Game.gameboard_sizeY);

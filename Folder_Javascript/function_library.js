@@ -540,28 +540,28 @@ _valuesArray = arrayTwo;
 const element = document.createElement(_element);
 
 // Properties 
-if (_id != undefined) element.id = _id;
-if (_class != undefined) element.classList.add(_class);
-if (_text != undefined) element.innerText = _text;
-if (_for != undefined) element.for = _for;
-if (_title != undefined) element.title = _text;
-if (_alt != undefined) element.alt = _alt;
+if (_id !== undefined) element.id = _id;
+if (_class !== undefined) element.classList.add(_class);
+if (_text !== undefined) element.innerText = _text;
+if (_for !== undefined) element.for = _for;
+if (_title !== undefined) element.title = _text;
+if (_alt !== undefined) element.alt = _alt;
 
 // Properties for Image-DOM-Elements
-if (_src != undefined) element.src = _src;
-if (_width != undefined) element.width = _width;
-if (_height != undefined) element.height = _height;
+if (_src !== undefined) element.src = _src;
+if (_width !== undefined) element.width = _width;
+if (_height !== undefined) element.height = _height;
 if (_aspectRatio != undefined) element.aspectRatio = _aspectRatio;
 
 // Properties for Input-DOM-Elements
-if (_type != undefined) element.type = _type;
-if (_min != undefined) element.min = _min;
-if (_max != undefined) element.max = _max;
-if (_value != undefined) element.min = _value;
-if (_placeholder != undefined) element.min = _placeholder;
+if (_type !== undefined) element.type = _type;
+if (_min !== undefined) element.min = _min;
+if (_max !== undefined) element.max = _max;
+if (_value !== undefined) element.min = _value;
+if (_placeholder !== undefined) element.min = _placeholder;
 
 // Attribute
-element.setAttribute(`${_attribute}`, `${_attribute_value}`);
+if(_attribute !== undefined) element.setAttribute(`${_attribute}`, `${_attribute_value}`);
 
 // Dropdown-Menu Generator
 // Proof if both needed Arrays were passed
@@ -771,7 +771,7 @@ Smooth in / Smooth Out Class recommended.
 }
 
 /* ===========================
-!     Set multiple Attrubutes on 1 Element
+!     Set multiple Attributes on 1 Element
         =========================== */
 function setAttributes(el, attrs) {
 for (var key in attrs) {
