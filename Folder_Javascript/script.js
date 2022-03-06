@@ -518,9 +518,9 @@ start_button.addEventListener("click", Game_Preparations);
 
 //#region 2) Main Game
 
-/* ===============
-!         Preparing to Play 
-         =============== */
+/* ============
+!     Preparing to Play 
+            ============= */
 function Game_Preparations() {
   // Function to do all the preparations to start the Game
   // console.log("Entered Game Preparations");
@@ -601,9 +601,9 @@ function Game_Preparations() {
 
   // console.log("Finished Game preparations.");
 }
-/* ===========
-!         Play Game 
-         ========== */
+/* ========
+!     Play Game 
+            ========= */
 function PlayGame() {
   // console.log("Entered Play Game Function.");
 
@@ -653,9 +653,9 @@ function PlayGame() {
   // console.log("Leaving Play Game Function.");
 };
 
-/* ================
-!         Prepare Placement >>>
-         ================ */
+/* ==============
+!     Prepare Placement
+            ============== */
 function Prepare_Placement() {
   // console.log("Entered Function for preparing new Placement.");
 
@@ -677,9 +677,9 @@ function Prepare_Placement() {
    Make_Placement();
 };
 
-/* ================
-!         do the Placement 
-         =============== */
+/* =============
+!     do the Placement 
+            ============= */
 function Make_Placement() {
   /*                 console.log(
     "Make placement on coin placement id:",
@@ -773,9 +773,9 @@ function Make_Placement() {
   // console.log("Placement done.");
 }
 
-/* ================
-!         Placement Done 
-         =============== */
+/* ============
+!     Placement Done 
+            ============ */
 function Placement_End() {
  // console.log("Entered End of Placement");
 
@@ -817,9 +817,9 @@ function Placement_End() {
     : Player_2_Placement_Finish();
 }
 
-/* =============================
-!         Get ready for next Placement 
-         ============================ */
+/* =====================
+!     Get ready for next Placement 
+            ====================== */
 function Player_1_Placement_Finish() {
   //  Invoke Winning-Validation for Player 1
   const valid_row = Row_Validator(1, Game.coin_placement_row);
@@ -861,9 +861,9 @@ function Player_1_Placement_Finish() {
   };
 }
 
-/* ================
-!         Win-Validation
-         =============== */
+/* ===========
+!   Win-Validation
+          ============ */
 function Player_2_Placement_Finish() {
   //  Invoke Winning-Validation for Player 2
   const valid_row = Row_Validator(2, Game.coin_placement_row);

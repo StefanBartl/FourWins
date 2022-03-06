@@ -40,9 +40,9 @@ todo    -) Write a final Comment.
 
 //#region 1) Validators
 
-/*       ==================
-!          Lock Top-Cell if full Column 
-            =================== */
+/* =====================
+!     Lock Top-Cell if full Column 
+            ===================== */
 function TopCell_Locking_Validation(invokedForKiValidation) {
   // Function for proofing if TopCell should be locked. In case of CPU is invoking if placement is possible too.Also to give, after locking them while placement, columns free where the row counter is higher than 0.
   console.log('Entered Top-Cell Validation.');
@@ -83,9 +83,9 @@ function TopCell_Locking_Validation(invokedForKiValidation) {
   return;
 };            
 
-/*     =================
-!        Diagonal Win-Validation 
-           ================= */
+/* ==================
+!     Diagonal Win-Validation 
+            ================== */
 function Diagonal_Validator(player, columnNumber, row) {
   // console.log("Diagonal Validation started.")
 
@@ -149,9 +149,9 @@ function Diagonal_Validator(player, columnNumber, row) {
   }
 }
 
-/*      ================
-!         Column Win-Validation 
-           ================= */
+/* =================
+!     Column Win-Validation 
+            ================= */
 function Column_Validator(player) {
   // Get the actual state of the Gameboard
   let Players_Gameboard;
@@ -193,9 +193,9 @@ function Column_Validator(player) {
   //(Under construction for winChain!)
 }
 
-/*     ==============
-!        Row Win-Validation 
-          =============== */
+/* ===============
+!     Row Win-Validation 
+            =============== */
 function Row_Validator(player, column) {
   // Get the actual state of the Gameboard
   let Players_Gameboard;

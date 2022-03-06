@@ -7,11 +7,12 @@
 ?                                                             2021                                                                                                                                                                        
 ?                          ________________________________________                                                                                                                                                                                                  
 !                                                        Table of content              
-open jobs
-                                             1) Toggle Start / Game Screen                        
+
+?                                            1) Toggle Start / Game Screen                        
                                                                                                   
-                                             2) Game-End Screen Functions                         
-                                                                                                                                                                                                                                                                                                                                                                                                                           */
+?                                            2) Game-End Screen Functions
+                                             
+?                                            3) Start new Game                                                                                                                                                                                                                                                                                                                                                                                                                          */
 //#endregion
 
 //#region Open Jobs
@@ -33,9 +34,9 @@ todo    -) Write a final Comment.
 //#endregion
 
 //#region 1) Toggle between Start and Game Screen
-/* ======================
-!         Show the Game-Screen 
-         ===================== */
+/* =================
+!     Show the Game-Screen 
+            ================= */
 function Game_Screen() {
 //console.log("Entering Game-Screen.");
 Game.state = "InGame";
@@ -75,9 +76,9 @@ document.getElementById("ID_Gameboard_Span").setAttribute("data-ingame",  "yes")
 Game.Language === "de" ? document.getElementById("ID_Gameboard_h").innerText = "Nur zu Spielbeginn erlaubt!" :  document.getElementById("ID_Gameboard_h").innerText = "Only allowed at Start-Screen!" ; 
 
 };
-/* =======================
-!         Show the Start-Screen 
-         ====================== */
+/* ================
+!     Show the Start-Screen 
+            ================ */
 function Start_Screen() {
   //console.log("Entering Game-Screen.");
   document.getElementById('ID_MainWrapper').setAttribute('data-ingame', 'no');
@@ -110,9 +111,9 @@ function Start_Screen() {
 
 //#region 2) Game End Screen
 
-/*     ======================
-!        Preparations for Game-End-Screen 
-         ======================= */
+/* =========================
+!     Preparations for Game-End-Screen 
+           ========================= */
 function Preparations(gameResult) {
   // console.log("Entered Game End Screen preparations.");
 
@@ -181,9 +182,9 @@ function Preparations(gameResult) {
   return names_from_result;
 }
 
-/*     ====================
- !       Creation of Game-End-Screen 
-          ==================== */
+/* ======================
+ !    Creation of Game-End-Screen 
+            ====================== */
 function Game_End_Screen(gameResult) {
   // console.log("Entered Game End Screen Function.");
 
@@ -331,13 +332,12 @@ function Game_End_Screen(gameResult) {
   document.getElementById("ID_NewGame_Button").addEventListener("click", ()=>{Start_New_Game(gameResult)});
   //#endregion
 };
-//#endregion
 
-  /*    ============== 
-!          Start a New Game
-            =============== */
+  /* ============== 
+!       Start a New Game
+              ============== */
 function Start_New_Game(gameResult){
-  // console.log("Entered New Game function.");
+// console.log("Entered New Game function.");
 
 // Disable special styling for Settings Menu during End-Screen
 document.getElementById("ID_Settings_Menu").setAttribute("data-endscreen",  "no");
@@ -371,12 +371,12 @@ turn_text.classList.remove("Class_Invisible");
 if (
 document.getElementById("ID_Thinking_Div") &&
 document
-  .getElementById("ID_Thinking_Div")
-  .classList.contains("Class_Invisible")
+.getElementById("ID_Thinking_Div")
+.classList.contains("Class_Invisible")
 )
 document
-  .getElementById("ID_Thinking_Div")
-  .classList.remove("Class_Invisible");
+.getElementById("ID_Thinking_Div")
+.classList.remove("Class_Invisible");
 
 // Trigger next Player is on turn, so the loser of this reound starts the next round.
 Turning_PlayerIsOnTurn();
@@ -395,9 +395,9 @@ Game.actualGameboardPlayer2[`C${x}`].length = 0;
 // Reset Gameboard on screen
 for (let cell of cellsArray) {
 if (cell.classList.contains("Class_PlacedCoin_1"))
-  cell.classList.remove("Class_PlacedCoin_1");
+cell.classList.remove("Class_PlacedCoin_1");
 if (cell.classList.contains("Class_PlacedCoin_2"))
-  cell.classList.remove("Class_PlacedCoin_2");
+cell.classList.remove("Class_PlacedCoin_2");
 cell.style.opacity = 0.7;
 }
 
@@ -428,33 +428,33 @@ document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'yes'
 // Container
 if (Game.Player_1_wins > 0  && !document.getElementById("ID_Win_Div_One"))
 win_div_one = Create_DOM_Element({
-  ParentID: "ID_MainWrapper",
-  Element: "div",
-  ID: "ID_Win_Div_One"
+ParentID: "ID_MainWrapper",
+Element: "div",
+ID: "ID_Win_Div_One"
 });
 if (Game.Player_2_wins > 0  && !document.getElementById("ID_Win_Div_Two"))
 win_div_two = Create_DOM_Element({
-  ParentID: "ID_MainWrapper",
-  Element: "div",
-  ID: "ID_Win_Div_Two"
+ParentID: "ID_MainWrapper",
+Element: "div",
+ID: "ID_Win_Div_Two"
 });
 if (Game.Draws > 0  && !document.getElementById("ID_Draw_Div"))
 draw_div = Create_DOM_Element({
-  ParentID: "ID_MainWrapper",
-  Element: "div",
-  ID: "ID_Draw_Div"
+ParentID: "ID_MainWrapper",
+Element: "div",
+ID: "ID_Draw_Div"
 });
 
 // Add Text
 if(Game.Language === "de"){
-    if(document.getElementById('ID_Win_Div_One')) document.getElementById('ID_Win_Div_One').innerText = 'Spiele gewonnen:';
-    if(document.getElementById('ID_Win_Div_Two'))   document.getElementById('ID_Win_Div_Two').innerText = 'Spiele gewonnen:';
-    if(document.getElementById('ID_Draw_Div'))  document.getElementById('ID_Draw_Div').innerText = 'Unentschieden:';
-  } else if (Game.Language === 'en'){
-    if(document.getElementById('ID_Win_Div_One')) document.getElementById('ID_Win_Div_One').innerText = 'Wons:';
-    if(document.getElementById('ID_Win_Div_Two')) document.getElementById('ID_Win_Div_Two').innerText = 'Wons:';
-    if(document.getElementById('ID_Draw_Div')) document.getElementById('ID_Draw_Div').innerText = 'Draws:';
-  }
+if(document.getElementById('ID_Win_Div_One')) document.getElementById('ID_Win_Div_One').innerText = 'Spiele gewonnen:';
+if(document.getElementById('ID_Win_Div_Two'))   document.getElementById('ID_Win_Div_Two').innerText = 'Spiele gewonnen:';
+if(document.getElementById('ID_Draw_Div'))  document.getElementById('ID_Draw_Div').innerText = 'Unentschieden:';
+} else if (Game.Language === 'en'){
+if(document.getElementById('ID_Win_Div_One')) document.getElementById('ID_Win_Div_One').innerText = 'Wons:';
+if(document.getElementById('ID_Win_Div_Two')) document.getElementById('ID_Win_Div_Two').innerText = 'Wons:';
+if(document.getElementById('ID_Draw_Div')) document.getElementById('ID_Draw_Div').innerText = 'Draws:';
+}
 
 // Increas won games counter in Settings-Menu amd create correct notification on Game Screen
 const tally_img = document.createElement("img");
@@ -471,24 +471,24 @@ Game.Draws !== 0 ? tally_counter_draws = Game.Draws : tally_counter_draws= 1;
 if (gameResult === 1){
 tally_img.id = "ID_Tally_IMG_P1";    
 if(Game.Player_1_wins === 6){
-      tally_counter_p1 = 1;
-    }
+tally_counter_p1 = 1;
+}
 } else if (gameResult === 2){
 tally_img.id = "ID_Tally_IMG_P2";   
 if(Game.Player_2_wins === 6){
-  tally_counter_p2 = 1;
+tally_counter_p2 = 1;
 }
 } else if (gameResult === 3){
 tally_img.id = "ID_Tally_IMG_Draw";    
 if(Game.Draws === 6){
-  tally_counter_draws = 1;
+tally_counter_draws = 1;
 }
 };
-            if (tally_counter_p1 ===  1 || tally_counter_p2 ===  1 || tally_counter_draws ===  1) {tally_img.src =  './Folder_Graphics/tally/1.png'; tally_img.setAttribute("data-winstays", "no");
-  } else if (tally_counter_p1 ===  2 || tally_counter_p1 ===  2 || tally_counter_draws ===  2) {tally_img.src =  './Folder_Graphics/tally/2.png'; tally_img.setAttribute("data-winstays", "no");
-  } else if (tally_counter_p1 ===  3 || tally_counter_p1 ===  3 || tally_counter_draws ===  3) {tally_img.src =  './Folder_Graphics/tally/3.png'; tally_img.setAttribute("data-winstays", "no");
-  } else if (tally_counter_p1 ===  4 || tally_counter_p1 ===  4 || tally_counter_draws ===  4) {tally_img.src =  './Folder_Graphics/tally/4.png'; tally_img.setAttribute("data-winstays", "no");
-  } else if (tally_counter_p1 ===  5 || tally_counter_p1 ===  5 || tally_counter_draws ===  5) {tally_img.src =  './Folder_Graphics/tally/5.png'; tally_img.setAttribute("data-winstays", "yes");
+      if (tally_counter_p1 ===  1 || tally_counter_p2 ===  1 || tally_counter_draws ===  1) {tally_img.src =  './Folder_Graphics/tally/1.png'; tally_img.setAttribute("data-winstays", "no");
+} else if (tally_counter_p1 ===  2 || tally_counter_p1 ===  2 || tally_counter_draws ===  2) {tally_img.src =  './Folder_Graphics/tally/2.png'; tally_img.setAttribute("data-winstays", "no");
+} else if (tally_counter_p1 ===  3 || tally_counter_p1 ===  3 || tally_counter_draws ===  3) {tally_img.src =  './Folder_Graphics/tally/3.png'; tally_img.setAttribute("data-winstays", "no");
+} else if (tally_counter_p1 ===  4 || tally_counter_p1 ===  4 || tally_counter_draws ===  4) {tally_img.src =  './Folder_Graphics/tally/4.png'; tally_img.setAttribute("data-winstays", "no");
+} else if (tally_counter_p1 ===  5 || tally_counter_p1 ===  5 || tally_counter_draws ===  5) {tally_img.src =  './Folder_Graphics/tally/5.png'; tally_img.setAttribute("data-winstays", "yes");
 };
 
 if (gameResult === 1){
@@ -511,3 +511,4 @@ document.getElementById("ID_Draw_Div").appendChild(tally_img);
 
 //#endregion
 };
+//#endregion

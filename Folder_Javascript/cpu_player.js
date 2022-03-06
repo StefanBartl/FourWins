@@ -54,8 +54,8 @@ todo        -) Write a final Comment.
 //#region 1) CPU Player Algrorhytm
 
 /* ==========
-!    KI Placement 
-       =========== */
+!     KI Placement 
+            =========== */
 function KI_Placement(valid_number) {
   // console.log("Entered KI Placement Function. Random number for topCell is:  ", random_number);
 
@@ -73,9 +73,9 @@ function KI_Placement(valid_number) {
   }, 1000);
 }
 
-/* ======================
-!         Easy-CPU Algorhytmus 
-         ===================== */
+/* ==================
+!     Easy-CPU Algorhytmus 
+            ================== */
 function KI_Easy() {
  /*
 ?                            Infobox
@@ -97,9 +97,9 @@ Function to let KI Easy produce a random, but valid number for placement
   } else KI_Easy();
 }
 
-/* ========================
-!         Normal-CPU Algorhytmus 
-         ======================= */
+/* ====================
+!     Normal-CPU Algorhytmus 
+            ==================== */
 function KI_Normal() {
   /* 
                                 Infobox
@@ -179,9 +179,9 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
   }
 }
 
-/* ======================
-!         Hard-CPU Algorhytmus 
-         ===================== */
+/* ==================
+!     Hard-CPU Algorhytmus 
+            ================== */
 function KI_Hard() {
   /*
                                 Infobox / Ideas
@@ -192,9 +192,9 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
   // Code here... :-)
 }
 
-/* ======================
-!         Placement-Randomizer 
-         ===================== */
+/* =================
+!     Placement-Randomizer 
+            ================= */
 function Randomizer(arr1, arr2) {
   // console.log("Randomizer getted arrays:", arr1,  arr2);
 
@@ -218,9 +218,9 @@ function Randomizer(arr1, arr2) {
   return valid_number;
 }
 
-/* ===============================
-         Detect diagonal 3 Coin-Chains 
-         ============================== */
+/* =======================
+!     Detect diagonal 3 Coin-Chains 
+            ======================= */
 function Detect_3_Coin_Chains_Diagonal() {
   //#region Detect KI Diagonal 3 Coin Chains
   //console.log("Entered Diagonal 3 Coin Chains Detection");
@@ -341,9 +341,9 @@ function Detect_3_Coin_Chains_Diagonal() {
   //#endregion
 }
 
-/* ===============================
-         Detect horizontal 3 Coin-Chains 
-         ============================== */
+/* ========================
+!     Detect horizontal 3 Coin-Chains 
+            ======================== */
 function Detect_3_Coin_Chains_Upwards() {
   // +++ Basically it depends hardly of the Column Validator from the Win-Validation section +++
 
@@ -470,9 +470,9 @@ function Detect_3_Coin_Chains_Upwards() {
   }
 }
 
-/* ===============================
-         Detect vertival 3 Coin-Chains (!BUGGY!) 
-         ============================== */
+/* =====================
+!     Detect vertival 3 Coin-Chains (!BUGGY!) 
+            ===================== */
 function Detect_3_Coin_Chains_Sideways() {
   // +++ Basically it depends hardly on the Row Validator from the Win-Validation Section +++
   // INFO: This algorithm does not take into account, for example, if two coins are next to each other, then one cell is free and then another coin, that this leads to a winning chain. This should be removed in KI Hard
@@ -762,9 +762,9 @@ function Detect_3_Coin_Chains_Sideways() {
   }
 }
 
-/* =============================
-         Upwards-Placement Detection 
-         ============================ */
+/* ======================
+!     Upwards-Placement Detection 
+            ======================= */
 function Get_Valid_Upwards_Placemement() {
   // Try to make placement on top of an other KI placement if there is enough space to can finish it
   let value,
@@ -817,9 +817,9 @@ function Get_Valid_Upwards_Placemement() {
   if (valid_number_array.length > 0) return valid_number_array;
 }
 
-/* ==============================
-         Sideways-Placement Detection 
-         ============================= */
+/* ======================
+!     Sideways-Placement Detection 
+            ====================== */
 function Get_Valid_Sideways_Placement() {
   let valid_number_array = [];
 

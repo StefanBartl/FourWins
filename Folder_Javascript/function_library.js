@@ -7,8 +7,8 @@
 ?                                                               2021                                                                                                                                                                        
 ?                               ________________________________________                                                                                                                                                                                                  
 !                                                         Table of content              
-        open jobs
-                                                       1) Helper Functions                                  
+
+?                                                      1) Helper Functions                                  
                                                                                                             
                                                         - Insert Element after Element                      
                                                                                                             
@@ -52,9 +52,9 @@
                                                                                                                 
                                                         - Fireworks                                                                                                                                                                    
                                                                                                    
-                                                2) Callback, Promises, Async / Awair        
+?                                               2) Callback, Promises, Async / Awair        
 
-                                                2) My Javascript-Coding-Guideline                                                                                                                                                                                                                                                                                   
+?                                               2) My Javascript-Coding-Guideline                                                                                                                                                                                                                                                                                   
                                                                                                                                                                                                                                                                                                        
                                                                                                                                                                                                                                                                               */
 
@@ -80,25 +80,23 @@ todo        -) Write a final Comment.
 
 //#region 1) Helper Functions
 
-/* ============================
- !     Insert Element after Reference Node
-         ============================ */
+/* ==========================
+ !    Insert Element after Reference Node
+            =========================== */
 function insertAfter(referenceNode, newNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 };
 
-
 /* ============================
- !     Insert Element before Reference Node
-         ============================ */
+ !    Insert Element before Reference Node
+            ============================ */
 function insertBefore(newNode, existingNode) {
   existingNode.parentNode.insertBefore(newNode, existingNode);
 }
 
-
 /* ========================
  !    Adding the Choosing-Animation 
-        ========================= */
+            ======================== */
 function Add_Choosing_Ani(column) {
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -125,9 +123,9 @@ function Add_Choosing_Ani(column) {
   }
 };
 
-/* =========================
+/* ========================
 !     Remove the Choosing-Animation 
-        ========================== */
+            ======================== */
 function Remove_Choosing_Ani(column) {
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -143,9 +141,9 @@ function Remove_Choosing_Ani(column) {
   }
 };
 
-/* ===============
-!      Lock all Top-Cells 
-         =============== */
+/* ==============
+!     Lock all Top-Cells 
+            ============== */
 function Lock_TopCells() {
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -157,8 +155,8 @@ function Lock_TopCells() {
 };
 
 /* ================
-!      Unlock all Top-Cells 
-         ================ */
+!     Unlock all Top-Cells 
+            ================ */
 function Unlock_TopCells() {
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName("Class_TopCells");
@@ -169,9 +167,9 @@ function Unlock_TopCells() {
   }
 };
 
-/* ======================
-!      Simulate a "Thinking-Effect" 
-         ====================== */
+/* =====================
+!     Simulate a "Thinking-Effect" 
+            ===================== */
 function Thinking_Effect(invokerKI, valid_number) {
   // First make sure there is no "Thinking" Div attached
   if (!document.getElementById("ID_Thinking_Div")) {
@@ -218,31 +216,31 @@ function Thinking_Effect(invokerKI, valid_number) {
   }
 };
 
-/* ======================
+/* =====================
 !     Get unique values from Array
-        ======================= */
+            ====================== */
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
   // var unique = array.filter(onlyUnique);
 };
 
-/* ============================
-!       Get a random Integer exklusive value
-          ============================ */
+/* ===========================
+!     Get a random Integer exklusive value
+            =========================== */
 function getRandomInt(max) {
 return Math.floor(Math.random() * max);
 };
         
-/* ============================
+/* ===========================
 !     Get a random Integer within 2 values
-        ============================= */
+            =========================== */
 function getRandomIntNoZero(minvalue, maxvalue) {
     return minvalue + Math.floor(Math.random() * (maxvalue - minvalue + 1));
   };
 
-/* =====================
+/* ====================
 !     Push values to local Storage 
-        ====================== */
+            ===================== */
 function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event) {
   document
     .getElementById(`${IDfromTrigger}`)
@@ -254,9 +252,9 @@ function Push_to_LocalStorage(IDfromTrigger, IDfromValue, key, event) {
     });
 };
 
-/* ==========================
+/* =========================
 !     Swap between 2 Classes by Events 
-        =========================== */
+            ========================= */
 function Swap_Two_Classes_by_Events(
   element_ID,
   event_1,
@@ -282,9 +280,9 @@ function Swap_Two_Classes_by_Events(
     });
 };
 
-/* =================
+/* ================
 !     Changing Players turn 
-        ================== */
+            ================= */
 function Turning_PlayerIsOnTurn() {
   // Change Player
   Game.playerIsOnTurn === "left"
@@ -358,9 +356,9 @@ function Turning_PlayerIsOnTurn() {
   }
 }
 
-/* ================
+/* ===============
 !     Create Starting Stats 
-        ================= */
+            =============== */
 function Stats() {
   let value = localStorage.KI_Easy_Wins || 0;
   document.getElementById("ID_Easy_1").innerText = value;
@@ -376,9 +374,9 @@ function Stats() {
   document.getElementById("ID_Normal_2").innerText = value;
 }
 
-/* ========== 
+/* ========= 
 !     Update Stats
-        =========== */
+            ========== */
 function Update_Stats(winning_player) {
   // console.log("Updated Stats.");
   // To reduce repetition only the KI Easy section is commented out. It's basically the same in KI Normal.
@@ -438,9 +436,9 @@ function Update_Stats(winning_player) {
   // Enough space for a unbeatable level ??? :-)
 }
 
-/* ==============================================
+/* =============================================
 !     Create own Notification / Alert /  Prompt / Confirm - Windows 
-        =============================================== */
+            ============================================= */
 function New_Window(options) {
   // console.log("Entered New Window function.");
 
@@ -609,9 +607,9 @@ Smooth in / Smooth Out Class recommended.
   // console.log("New Window created.");
 }
 
-/* ====================
+/* ===================
 !     Sound Settings Validation 
-        ===================== */
+            =================== */
 function Correct_Sound_Setting() {
   // Make sure, User prefered Sound-Setting is also shown in the Settings-Menu after closed and reopened window
   const sound_checkbox = document.getElementById("ID_Sound_Checkbox");
@@ -625,9 +623,9 @@ function Correct_Sound_Setting() {
   }
 }
 
-/* ==================
+/* =================
 !     Create new Gameboard
-        ================== */
+            ================== */
 function Create_Gameboard(sizeX, sizeY){
   //console.log("Given",  sizeX, "x", sizeY, "to create a gameboard.");
 
@@ -700,7 +698,7 @@ document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "no")
 
 /* =============
 !     Creator-Function
-        ============== */
+             ============= */
 function Create_DOM_Element(options, arrayOne, arrayTwo) {
   // console.log("Entered Creator function.");
 
@@ -789,9 +787,9 @@ parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width
   // console.log("New DOM-Element created.");
 }
 
-/* ============================
+/* ===========================
 !     Set multiple Attrubutes on 1 Element
-        ============================= */
+            =========================== */
 function setAttributes(el, attrs) {
   for (var key in attrs) {
     el.setAttribute(key, attrs[key]);
@@ -799,9 +797,9 @@ function setAttributes(el, attrs) {
   // Call: setAttributes(elem, {"src": "http://example.com/something.jpeg", "height": "100%", ...});
 }
 
-/* =================================
+/* ================================
 !     Set multiple Attrubutes on multiple Elements
-        ================================== */
+            ================================= */
 function setAttributesArr(arr, attrs) {
   for (let el of arr) {
     for (var key in attrs) {
@@ -811,9 +809,9 @@ function setAttributesArr(arr, attrs) {
   // Call: setAttributesArr(arr with (DOM-Objects!), {"src": "http://example.com/something.jpeg", "height": "100%", ...});
 }
 
-/* =======================
+/* =====================
 !     Fireworks-Canvas-Animation 
-        ======================= */
+            ====================== */
 function Fireworks(canvasID) {
   // Firework Function not from me, so special thanks goes to Adam, which published it at codepen! Link below!
   // Fireworks from Adam: https://codepen.io/Adam12132/pen/gOGrwMR
@@ -974,8 +972,8 @@ function Fireworks(canvasID) {
 //#region 2) Callback, Promises, Async/Await
 
 /* =======
-!     Callback
-        =======*/
+!   Callback
+          =======*/
 
 // Standard Callback function
 function myCallback(name, callback) {
@@ -990,9 +988,9 @@ function myCallback(name, callback) {
 // console.log(username);
 //});
 
-/* =======
+/* ======
 !     Promise
-        =======*/
+            ======*/
 // Standard Promise
 const myPromise = new Promise((resolve, reject) => {
   setTimeout(() => {
@@ -1013,9 +1011,9 @@ const myPromise2 = new Promise((resolve, reject) => {
 //Promise.all([myPromise, myPromise2])
 //  .then(result => {console.log(result)});
 
-/* ===========
+/* ==========
 !     Async / Await
-        ===========*/
+          ===========*/
 // Get functions which return a promise
 function firstPromise() {
   return new Promise((resolve, reject) => {
@@ -1041,9 +1039,9 @@ async function result() {
 }
 //result();
 
-/* ================
+/* ===============
 !     Await with Promises
-        ================= */
+            =============== */
 const testAwait = function AwaitPromise() {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
