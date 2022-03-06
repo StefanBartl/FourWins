@@ -29,6 +29,7 @@
 
 !                           Jobs To-Do: 
 
+todo    -) settingsmenu
 todo    -) Gameboard Style 
 todo    -) Game-End-Screen Style
 todo    -) data-x Attribute verwenden wo es Sinn macht.
@@ -220,6 +221,12 @@ footer {
   border-top: solid 1px var(--base-border);
   border-bottom: solid 1px var(--base-border);
   grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+}
+
+.Class_Sidebars h3{
+  margin-top: auto;
 }
 
 /* =========
@@ -436,7 +443,6 @@ footer {
   z-index: 1;
   justify-content: center;
   overflow: auto;
-  
   background-color: var(--base-border);
   box-shadow: 0.1rem 0.1rem 1rem black;
   border: solid 2px var(--base-colour);
@@ -451,9 +457,6 @@ footer {
 
 #ID_Setting_Span::-webkit-scrollbar {
   width: 1rem;
-}
-
-#ID_Setting_Span[data-endscreen = "no"]{
 }
 
 #ID_Setting_Span::-webkit-scrollbar-corner {
@@ -481,16 +484,17 @@ footer {
 #ID_Gameboard_Span{
   display:grid;
   grid: 2rem auto  / 1fr;
-
 }
 
+#ID_Gameboard_Span h3{
+  margin-top: 1em;
+}
 
 #ID_Gameboard_Size_Container {
   display: grid;
-  grid: 1fr / 1fr 1fr;
+  grid: 1fr 1fr / 1fr 1fr 1fr;
   justify-items:center ;
   align-items:baseline ;
-  margin-bottom: 1rem;
 }
 #ID_Gameboard_Size_Container input {
     width: 80%;
@@ -1118,13 +1122,6 @@ body[data-gameend = 'yes']{
   filter: invert(1);
 }
 
-#ID_Settings_Menu[data-endscreen = "yes"]{
-  
-}
-
-#ID_Setting_Span[data-endscreen = "yes"]{
-}
-
 #ID_Canvas_Div{
   z-index: -1;
 }
@@ -1425,7 +1422,11 @@ https://developer.chrome.com/docs/devtools/
 -) Visbug nutzen!
 -) Benutze 'yx' statt "yx", dann ist es leichter dem User die Möglichkeit "ab" zu geben
 .
-?         CSS-Allgemein
+?         CSS-
+
+todo cross-browser support
+        :focus überall wo :hover gesetzt wird
+
 todo box-sizing 
         *, *::before, *::after  {box-sizing: border-box} nimmt alle width-heights von den bordern weg - agieren wie outline, aber in den Richtungen steuerbar.
 todo div

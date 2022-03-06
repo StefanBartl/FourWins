@@ -34,7 +34,7 @@ todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do o
 */
 //#endregion
 
-//#region 1) General Settings & Set-Up Page
+//#region 1) General Settings & Set-Up Pages
 
 const Game = {
   // Game Object for storing important values in variables. Collected access via Game.[variable]
@@ -449,14 +449,6 @@ language_menu.addEventListener("change", () => {
       }
     }
   }
-});
-
-save_button.addEventListener('click', ()=>{
-
-}); 
-
-save_button.addEventListener('click', ()=>{
-
 });
 
 stats_reset_easy.addEventListener("click", () => {
