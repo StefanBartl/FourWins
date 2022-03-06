@@ -1033,6 +1033,31 @@ cancel_button.alt = "Button to go back";
 };
 //#endregion
 
+/* Translation in Settings Menu
+
+saveload_h.innerText = 'Speichern/Laden';
+saveload_h.title = 'Speichere oder lade dein Spiel!';
+saveload_h.alt = 'Hier kannst du dein Spiel speichern oder laden.';
+save_button.innerText = 'Speichern';
+save_button.title = 'Hier Spielstand speichern!';
+save_button.alt = 'Button zum Spielstand speichern.';
+load_button.innerText = 'Laden';
+load_button.title = 'Hier Spielstand laden!';
+load_button.alt = 'Button zum Spielstand laden.'
+
+
+saveload_h.innerText = 'Save/Load';
+saveload_h.title = 'Save or load game!';
+saveload_h.alt = 'Here you can save or load your game.';
+save_button.innerText = 'Save';
+save_button.title = 'Save game here!';
+save_button.alt = 'Button for save game.';
+load_button.innerText = 'Load';
+load_button.title = 'Load game here!"';
+load_button.alt = 'Button for load game.';
+
+*/
+
 //#region CSS for the Windows-Function:
 /*
 

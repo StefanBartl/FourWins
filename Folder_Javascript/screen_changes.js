@@ -17,7 +17,8 @@
 /*
 ?                  Jobs To-do:
 
-todo    -)
+todo    -) Win Div remove others
+todo    -) Firework container text not working
 
 ?                  Finish
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
@@ -511,6 +512,12 @@ if(document.getElementById("ID_Draw_Div").lastElementChild && document.getElemen
 document.getElementById("ID_Draw_Div").lastElementChild.remove();
 document.getElementById("ID_Draw_Div").appendChild(tally_img);
 };
+
+// Invoke next Placement & make sure correct Player is on turn
+if(gameResult === 1 && Game.playerIsOnTurn === "left") Turning_PlayerIsOnTurn();
+if(gameResult === 2 && Game.playerIsOnTurn === "right") Turning_PlayerIsOnTurn();
+
+PlayGame();
 
 //#endregion
 };

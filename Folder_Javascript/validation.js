@@ -8,7 +8,7 @@
 ?                   ____________________________                                                                                                                                                                                                  
 !                                    Table of content              
                                                                                                                              
-?                                 1) Top-Cell Validator        
+?                                 1) Column-Locking Validator        
 ?                                 2) Diagonal Validator                                                                                                 
 ?                                 3) Column Validator                                                                             
 ?                                 4) Row Validator                                                                                                                                                                                                                                                                                                                                        
@@ -36,7 +36,7 @@ todo    -) Write a final Comment.
 /* =====================
 !     Lock Top-Cell if full Column 
             ===================== */
-function TopCell_Locking_Validation(invokedForKiValidation) {
+function Column_Locking_Validation(invokedForKiValidation) {
   // Function for proofing if TopCell should be locked. In case of CPU is invoking if placement is possible too.Also to give, after locking them while placement, columns free where the row counter is higher than 0.
   console.log('Entered Top-Cell Validation.');
 

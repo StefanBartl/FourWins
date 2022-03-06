@@ -9,9 +9,10 @@
 !                                     Table of content              
 
  ?                    1) General  Settings & Page Set-Up                                                                                                                            
- ?                    2) Main Game functions          
- ?                    3) Final Information & Comments                                                                                                                           
- ?                    4) Credits                                                            
+ ?                    2) Main Game functions     
+ ?                    3) Placements     
+ ?                    4) Final Information & Comments                                                                                                                           
+ ?                    5) Credits                                                            
 */
 //#endregion
 
@@ -19,6 +20,7 @@
 /*
 ?                  Jobs To-do:
 
+todo    -) Test Draw & all Game variants
 todo    -) Wohnzimmer und Küche!
 todo    -) Rechnungen!
 
@@ -655,7 +657,9 @@ function PlayGame() {
   }
   // console.log("Leaving Play Game Function.");
 };
+//#endregion
 
+//#region 3) Placements
 /* ==============
 !     Prepare Placement
             ============== */
@@ -820,11 +824,11 @@ function Placement_End() {
     : Player_2_Placement_Finish();
 }
 
-/* =====================
-!     Get ready for next Placement 
-            ====================== */
+/* ==================
+!     Finish Placement  Player 1 
+            =================== */
 function Player_1_Placement_Finish() {
-  //  Invoke Winning-Validation for Player 1
+  //  Invoke Winning-Validation for Player 1  and stop this loop if win.
   const valid_row = Row_Validator(1, Game.coin_placement_row);
   const valid_column = Column_Validator(
     1,
@@ -836,20 +840,22 @@ function Player_1_Placement_Finish() {
     Game.clicked_column,
     Game.coin_placement_row
   );
-
   if (valid_row === true || valid_column === true || valid_diagonal === true) return;
 
-  if (Game.roundCounter === 42) {
+  // If there are no more cells to  play invoke draw 
+  if (Game.roundCounter === (Game.gameboard_size_x * Game.gameboard_size_y)) {
     Game_End_Screen(3);
     return;
   };
 
-  TopCell_Locking_Validation(false);
-
-  //   If no win, next Player is on turn
-  Turning_PlayerIsOnTurn();
-
+// If no win..
+// Proof if Column is full and Unlock the TopCells
   if (Game.Game_against_KI === false) Unlock_TopCells();
+
+  Column_Locking_Validation(false);
+
+  //  Next Player is on turn
+  Turning_PlayerIsOnTurn();
 
   // If Game is against CPU invoke correct CPU
   if (Game.KI_Level === "Easy" || Game.KI_Level === "Einfach") {
@@ -864,26 +870,30 @@ function Player_1_Placement_Finish() {
   };
 }
 
-/* ===========
-!   Win-Validation
-          ============ */
+/* =================
+!   Finish Placement Player 2
+          =================== */
 function Player_2_Placement_Finish() {
-  //  Invoke Winning-Validation for Player 2
+  //  Invoke Winning-Validation for Player 2 and stop this loop if win.
   const valid_row = Row_Validator(2, Game.coin_placement_row);
   const valid_column = Column_Validator(2,  Game.clicked_column, Game.coin_placement_row);
   const valid_diagonal = Diagonal_Validator(2, Game.clicked_column, Game.coin_placement_row);
+  if (valid_row === true || valid_column === true || valid_diagonal === true) return;
 
-  if (valid_row === true || valid_column === true || valid_diagonal === true)
-    return;
-  if (Game.roundCounter === 42) {
+// If there are no more cells to  play invoke draw 
+  if (Game.roundCounter === (Game.gameboard_size_x * Game.gameboard_size_y)) {
     Game_End_Screen(3);
     return;
   }
 
-  TopCell_Locking_Validation( false);
+// If no win...
+// If placement was from human, proof if Column is full and Unlock the TopCells
+  if (Game.Game_against_KI === false) {
+    Column_Locking_Validation(false);
+    Unlock_TopCells();
+  };
 
-  // Next Player is on turn
-  if (Game.Game_against_KI === false) Unlock_TopCells();
+    // Next Player is on turn
   Turning_PlayerIsOnTurn();
 }
 //#endregion
