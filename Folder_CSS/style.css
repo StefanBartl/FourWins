@@ -437,7 +437,7 @@ footer {
   right: -95%;
   display: flex;
   flex-wrap: wrap;
-  height: 80vh;
+  height: 90vh;
   width: 100vw;
   max-width: 100%;
   z-index: 1;
@@ -450,7 +450,7 @@ footer {
   border-bottom-left-radius: 10%;
   color: var(--main-black);
   text-align: center;
-  font-size: small;
+  font-size: large;
   scrollbar-color: dark;
   scrollbar-gutter: both-edges;
 }
@@ -463,38 +463,48 @@ footer {
   background-color: var(--gameboard);
 }
 
+
 #ID_Info_Container,
+#ID_Gameboard_Size_Span,
 #ID_Colour_Container,
 #ID_Sound_Container,
 #ID_Language_Container,
 #ID_Stats_Container,
-#ID_Contacts_Container,
-#ID_Credits_Container,
 #ID_Delete_All_Container {
   min-width: 100%;
-  min-height: 5rem;
+  min-height: 3rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  outline: dashed 2px var(--base-colour);
-  
+}
+
+#ID_Contacts_Container,
+#ID_Credits_Container {
+  min-width: 100%;
+  min-height: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 #ID_Gameboard_Span{
-  display:grid;
-  grid: 2rem auto  / 1fr;
+  margin-block: 1em;
 }
 
 #ID_Gameboard_Span h3{
-  margin-top: 1em;
+  height: 2rem;
+  padding-top: 1em;
 }
 
 #ID_Gameboard_Size_Container {
-  display: grid;
-  grid: 1fr 1fr / 1fr 1fr 1fr;
-  justify-items:center ;
-  align-items:baseline ;
+  display: flex;
+  justify-items:center;
+  align-items:baseline;
+  gap: 1rem;
+  margin-inline: 1rem;
+  margin-bottom: 1rem;
 }
 #ID_Gameboard_Size_Container input {
     width: 80%;
@@ -503,12 +513,7 @@ footer {
 
 #ID_Gameboard_Size_Container button {
   width: 80%;
-  height: 100%;
-}
-
-#ID_Colour_Container,
-#ID_Sound_Container {
-     display: flex;
+  height: 2rem;;
 }
 
 /* =========
@@ -523,7 +528,10 @@ footer {
 #ID_Contact,
 #ID_Credits {
   min-width: 100%;
-  
+}
+
+#ID_Label_Colour{
+ 
 }
 
 #ID_Info,
@@ -557,65 +565,6 @@ footer {
   color: red;
 }
 
-#ID_Info_Container,
-#ID_Gameboard_Size_Container button,
-#ID_Reset_Easy,
-#ID_Reset_Normal,
-#ID_Contacts_Container,
-#ID_Credits_Container,
-#ID_Delete_All
-{
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  transition: all 250ms ease;
-  position: relative;
-}
-
-#ID_Info:after,
-#ID_Contact:after,
-#ID_Credits:after {
-  transition: all 250ms ease;
-  content: "";
-  display: block;
-  position: absolute;
-  left: 32%;
-  bottom: 0;
-  width: 0%;
-  height: 0.3rem;
-  background-color: var(--gameboard);
-}
-
-#ID_Info:hover:after,
-#ID_Contact:hover:after,
-#ID_Credits:hover:after {
-  width: 36%;
-}
-
-#ID_Gameboard_Size_Container button:after,
-#ID_Reset_Easy:after,
-#ID_Reset_Normal:after,
-#ID_Delete_All:after
-{
-  transition: all 250ms ease;
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0%;
-  height: 0.3rem;
-  background-color: var(--gameboard);
-}
-
-#ID_Gameboard_Size_Container button:hover:after,
-#ID_Reset_Easy:hover:after,
-#ID_Reset_Normal:hover:after,
-#ID_Delete_All:hover:after
-{
-  width: 100%;
-}
 
 #ID_Reset_Easy:hover,
 #ID_Reset_Normal:hover{
@@ -628,6 +577,29 @@ footer {
   color: black;
   background-color: lightgrey;
   opacity: .3;
+}
+
+#ID_Gameboard_h{
+  margin-bottom: .5em;
+}
+
+
+#ID_Colour_Container h3,
+#ID_Language_Container h3,
+#ID_Stats_Container h3 {
+  height: 2rem;
+  padding-top: 1em;
+}
+
+#ID_Sound_Container h3{
+  height: 2rem;
+  padding-top: 1em;
+}
+
+.Class_Colour_Toggle {
+  min-width: 100%;
+  height: 40%;
+  display: flex;
 }
 
 /* #endregion */
@@ -801,18 +773,15 @@ select:hover {
 
 #ID_Language_Menu {
   cursor: pointer;
-  min-width: 50%;
+  width: 50%;
+  height: 1.5rem;
   border: none;
+  margin-bottom: 1em; 
 }
 
 /* =====
 !     toggle 
             ===== */
-
-.Class_Colour_Toggle {
-  min-width: 100%;
-  display: flex;
-}
 
 #ID_Toggle_Button {
   position: relative;
@@ -853,6 +822,10 @@ select:hover {
 /* ========
 !     summarys 
             ======== */
+
+.Class_Summary_Details {
+  margin-top: 1em;
+}
 
 .Class_Summary_Details:hover {
   cursor: pointer;
