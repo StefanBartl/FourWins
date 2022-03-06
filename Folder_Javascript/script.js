@@ -20,14 +20,8 @@
 /*
 ?                  Jobs To-do:
 
-todo    -) Test Draw & all Game variants
-todo    -) Wohnzimmer und Küche!
-todo    -) Rechnungen!
-
 ?                  Finish
-
-todo    -) Info H angleichen und durchschauen!
-todo    -) Test all functions! Write the correct ' , infoboxes, headlines.
+todo    -) Test all functions! All Game variants! Draw! Write the correct ' , infoboxes, headlines.
 todo    -) Update Function Headlines and find a way for infoboxes with description and additional infos! Maybe like in KI Easy.
 todo    -) Final formatation.
 todo    -) Make sure all important is commented.
@@ -37,7 +31,6 @@ todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do o
 
 !                  Session progress
 ?-) 
-
 */
 //#endregion
 
@@ -331,21 +324,25 @@ und die Einstellungen trotzdem erhalten bleiben. Wollen Sie diese Einstellungen 
       Alert: true,
       Text: `Online-4-Wins
 
-1) The aim of the game is to be able to place 4 tokens (coins) next to each other, on top of each other or diagonally.
-The first player to do this wins the round.
-2) The following round starts with the loser from the previous round. (Balances game advantages)
-3) A tie occurs when there is no more playable checker and has won. In this case, the player who did not make the last move begins.
-
-Information & Settings menu:
-It is only possible to change the size of the gameboard before the game. On the other hand, it would open up the possibility of gaining unfair advantages!
-A color choice of the "coins" is possible - also during the game. 
-The basic setting is yellow for the player on the left and red for the opponent.
-The sound has an on/off function and it is possible to choose between German and English.
-In games against the computer, the outcome of the game is recorded in a statistic. This can be found in the game settings under "Stats vs. CPU".
-These statistics can be reset separately.
-
-The settings sound, language, statistics against the CPU and saved player names are saved in your browser. So it is possible that you close the browser
-and the settings are retained. If you want to delete these settings, you can do this in the settings menu at the bottom by clicking on "Delete all".
+      1) The aim of the game is to be able to place 4 tokens (coins) next to each other, on top of each other or diagonally.
+      The first player to do this wins the round.
+      2) The following round starts with the loser from the previous round. (Balances game advantages)
+      3) A tie occurs when there is no more playable checker and has won. In this case, the player who did not make the last move begins.
+      
+      Information & Settings menu:
+      It is only possible to change the size of the gameboard before each game. On the other hand, it would open up the possibility of gaining unfair advantages!
+      Standard size is 7 columns and 6 rows - excluding throw-in row.
+      Each cell has a 1:1 height and aspect ratio, so the more columns you choose, the smaller the gamefield cells will be.
+      
+      A color choice of the game pieces is possible - even during the game.
+      The basic setting is yellow for the player on the left and red for the opponent.
+      
+      The sound has an on/off function. and it is possible to choose between German and English language.
+      When playing against the computer, the outcome of the game is recorded in a statistic. This can be found in the game settings under "Stats vs. CPU".
+      These statistics can be reset separately.
+      
+      The settings sound, language, statistics against the CPU and saved player names are saved in your browser. So it is possible that you close the browser
+      and the settings are retained. If you want to delete these settings, you can do this in the settings menu at the bottom by clicking on "Delete all".
 `,
     });
   }
@@ -904,6 +901,7 @@ function Player_2_Placement_Finish() {
 ?                     Bonus Jobs to-do:
 
 -) Highlight the winning chain!
+-) Beautify the win notifications with images, f.e.: with tally's!
 -) Make the Coin Images a variable _> User could choice between coin appearance!
 -) Implement Classic and Personal style!
 -) Save /Load Game function via saving cell-states in localStorage!

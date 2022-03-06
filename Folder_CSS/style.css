@@ -1,38 +1,26 @@
 /* #region Table of Content */
 /*    
-!                                       Four-Wins-Online Main-CSS-Stylsheet
-?                                                            powered by
-!                                                            Stefan Bartl
-!                                              (WKDSteVIE / WKDMinerva)
-?                                                                  2021                                                                                                                                                                        
-?                               ________________________________________                                                                                                                                                                                                  
-!                                                           Table of content
+!                  Four-Wins-Online Main-CSS-Stylsheet
+?                                    powered by
+!                                     Stefan Bartl
+!                      (WKDSteVIE / WKDMinerva)
+?                                          2021                                                                                                                                                                        
+?                  ________________________________                                                                                                                                                                                                  
+!                                   Table of content
 
-?                                                              1) General                                  
-                                                                                                            
-?                                                              2) Layout                                   
-                                                                                                            
-?                                                              3) Gameboard                                
-                                                                                                            
-?                                                              4) Settings Menu                                                                           
-                                                                                                            
-?                                                              5) Typography                               
-                                                                                                            
-?                                                              6) Inputs, Buttons, Dropdowns, etc...       
-                                                                                                         
-?                                                              7) Animations & Transitions                
-                                                                                                            
-?                                                              8) Game End Screen           
-
-?                                                              9) Helpers                                   
-                                                                                                            
-?                                                             10) Media Queries                            
-                                                                                                            
-?                                                             11) Final Information & Comments             
-                                                                                                            
-?                                                             12) Credits                                 
-                                                                                                            
-?                                                        13-15) My CSS-Guideline                          
+?                                     1) General                                                                                                
+?                                     2) Layout                                                                                                                                      
+?                                     3) Gameboard                                                                                                                                 
+?                                     4) Settings Menu                                                                                                                                                                                   
+?                                     5) Typography                                                                                                                                        
+?                                     6) Inputs, Buttons, Dropdowns, etc...                                                                                                         
+?                                     7) Animations & Transitions                                                                                                                       
+?                                     8) Game End Screen           
+?                                     9) Helpers                                   
+?                                    10) Media Queries                                                                                                                                   
+?                                    11) Final Information & Comments                                                                                                                    
+?                                    12) Credits                                                                                                                                       
+?                               13-15) My CSS-Guideline                          
 !                                                                                                                                                                                                                                                                             */
 
 /*#endregion*/
@@ -54,30 +42,24 @@ todo    -) Fonts!
 todo    -) Font working on all Browser correctly?
 todo    -) Find a final, real good styling!
 
-
 ?                               Finish
-
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo    -) Final formatation (especially script & library sections/functions), comments:
 todo    -) Make sure all important is commented !
 todo    -) Write a final Comment !
 todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "global" Library for JS & CSS !
 
-
 !                         Session progress:                                                
-
-? -)
-? -) 
-                                                                                                                                                                                                                                                                                       
+? -)                                                                                                                                                                                             
 */
 /* #endregion */
 
 /* #region 1) General */
 
 :root {
-  /* ===============
- !        colour pallete 
-          ================ */
+  /* ==========
+ !       colour pallete 
+              ========== */
 
   --prime-blueviolett: hsl(238, 56%, 19%);
   --prime-darkgrey: hsl(330, 2%, 17%);
@@ -104,9 +86,9 @@ todo    -) Save Default Script Files with the new Script Layout for later Projec
   
 }
 
-/* =======
-!         Resets 
-         ======= */
+/* =====
+!     resets 
+            ===== */
 /* #region Resets */
 
 /* box-sizing */
@@ -157,13 +139,11 @@ select {
 
 /* #endregion */
 
-/* =======
-!         fonts 
-         ======= */
+/* =====
+!     fonts 
+            ===== */
 
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
-
-
 
 /* #endregion */
 
@@ -182,9 +162,9 @@ body {
   font-family: "Bebas Neue", cursive;
 }
 
-/* =============
- !        1. Grid Layer 
-          ============== */
+/* ==========
+ !    1. grid layer 
+            ========== */
 
 header {
   border-bottom: solid 1vh var(--base-border);
@@ -209,9 +189,9 @@ footer {
   text-align: center;
 }
 
-/* ===================
-!        Sidebars Grid Layer 
-          ==================== */
+/* ===============
+!     sidebars grid layer 
+          ================ */
 
 .Class_LeftSidebarWrapper {
   grid-area: leftSide;
@@ -242,9 +222,9 @@ footer {
   grid-area: sidebar;
 }
 
-/* ===================
-         Gameboard (Grid?) 
-          ==================== */
+/* =========
+!     gameboard 
+            ========= */
 
 .Class_GameboardWrapper {
   grid-area: gameboard;
@@ -309,7 +289,7 @@ footer {
   cursor: pointer;
 }
 
-    /* If column is full loch the top-cell,...*/
+    /* If column is full lock the top-cell,...*/
 .Class_TopCells[data-columnfull='yes'] {
   border-top: solid 2px var(--gameboard);
   pointer-events: none;
@@ -330,9 +310,9 @@ footer {
   align-content: center;
 }
 
-/* ===============================
- !        Game Screen Gameboard Classes 
-         =============================== */
+/* ========================
+ !      game screen gameboard classes 
+                ======================== */
 
 .Class_Turn_Players {
   min-width: 100%;
@@ -359,9 +339,9 @@ footer {
   right: 3%;
 }
 
-/* ==============
-         placing coins
-            ============= */
+/* ==========
+!     placing coins
+            ========== */
 
 .Class_Coin_Yellow {
   background-image: url("../Folder_Graphics/Coins/yellow.png");
@@ -402,9 +382,9 @@ footer {
 
 /* #region 4) Settings Menu */
 
-/* ========
-         layout 
-         ======= */
+/* ======
+!     layout 
+            ===== */
 
 .Class_Settings_Menu {
   position: absolute;
@@ -527,9 +507,9 @@ footer {
      display: flex;
 }
 
-/* ============
-  !       typography 
-         =========== */
+/* =========
+!     typography 
+            ========= */
 
 #ID_Info,
 #ID_Sound,
@@ -558,9 +538,9 @@ footer {
   margin-inline: 1rem;
 }
 
-/* =======
-         hover 
-         ====== */
+/* =====
+!     hover 
+            ====== */
 
 #ID_Info:hover {
   color: black;
@@ -671,9 +651,9 @@ footer {
 
 /* #region 6) Inputs, Buttons, Dropdowns, etc...  */
 
-/* ============
-         inputs text
-         ============ */
+/* ========
+!     inputs: text
+            ======== */
 
 input {
   width: 28ch;
@@ -700,9 +680,9 @@ input:focus {
   box-shadow: inset 0 0 1rem white;
 }
 
-/* ============
-         checkboxes 
-         =========== */
+/* =========
+!     checkboxes 
+            ========= */
 
 #ID_Sound_Checkbox {
   height: 1.5rem;
@@ -714,9 +694,9 @@ input:focus {
   box-shadow: none;
 }
 
-/* =========
-         buttons 
-         ======== */
+/* ======
+!     buttons 
+            ====== */
 
 button {
   cursor: pointer;
@@ -788,9 +768,9 @@ button:hover {
   margin-top: 10vh;
 }
 
-/* ===========
-         dropdowns 
-         ========== */
+/* =========
+!     dropdowns 
+            ========= */
 
 select {
   text-align-last: center;
@@ -821,9 +801,9 @@ select:hover {
   border: none;
 }
 
-/* ========
-         toggle 
-         ======= */
+/* =====
+!     toggle 
+            ===== */
 
 .Class_Colour_Toggle {
   min-width: 100%;
@@ -866,9 +846,9 @@ select:hover {
   box-shadow: none;
 }
 
-/* ==========
-         summarys 
-         ========= */
+/* ========
+!     summarys 
+            ======== */
 
 .Class_Summary_Details:hover {
   cursor: pointer;
@@ -886,9 +866,10 @@ select:hover {
 /* #region 7) Animations & Transitions */
 
 /*#region  Choosing Coin Animations */
-/* =========================
-         choosing coin animations
-         ========================= */
+
+/* ==================
+!     choosing coin animations
+            =================== */
 
 .Class_ChoosingAnimation_Coin_1 {
   background-image: url("../Folder_Graphics/Coins/yellow.png");
@@ -933,9 +914,9 @@ select:hover {
 
 /*#region Save Name Animations */
 
-/* ============================
-         player save name animations
-         ============================ */
+/* =====================
+!     player save name animations
+            ===================== */
 
 .Class_Buttons_Add_Hover_Animations_1 {
   cursor: pointer;
@@ -1010,9 +991,9 @@ select:hover {
 
 /* #region 8) Game End Screen */
 
-/* ==========================
-         firework canvas container
-         ========================== */
+/* ===================
+!     firework canvas container
+            =================== */
 
 .Class_Canvas_Div {
   position: absolute;
@@ -1087,9 +1068,9 @@ body[data-gameend = 'yes']{
   align-content: center;
 }
 
-/* ============
-         win counter
-         ============ */
+/* =========
+!     win counter
+            ========= */
 
 #ID_Win_Div_One {
   position: absolute;
@@ -1148,8 +1129,6 @@ body[data-gameend = 'yes']{
   z-index: -1;
 }
 
-
-
 /* #endregion */
 
 /* #region 9) Helpers */
@@ -1192,9 +1171,9 @@ body[data-gameend = 'yes']{
   }
 }
 
-/* ============
-         new windows
-         ============ */
+/* ==========
+!     new windows
+            ========== */
 
 .Class_Window {
   min-height: 30vh;
@@ -1413,27 +1392,25 @@ todo
 
 /* #region 12) Credits */
 /*
-            ============================================================================================================
-                                                                                                               
-                                                 Credits & Special Thanks to:                                                 
-                                                                                                               
-            Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    
-                                                 https://www.theodinproject.com/                                               
-                                                                                                               
-                        Greetings to the many, many programmers who take the time to put there knowledge online!         
-                  Of course also big thanks to all photographers and graphic designers who make their works available.        
-                                                                                                               
-                                                CSS - what a wonderful language.                                              
-                                                                                                                                                                                                    
-            ============================================================================================================                                                                                                                                                               */
+                                                                                                  
+ !                                              Credits & Special Thanks to:                                                 
+                                                                                                  
+Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    
+?                                             https://www.theodinproject.com/                                               
+                                                                                                  
+                  Greetings to the many, many programmers who take the time to put there knowledge online!         
+            Of course also big thanks to all photographers and graphic designers who make their works available.        
+                                                                                                  
+?                                             CSS - what a wonderful language.                                              
+*/
 
 /* #endregion */
 
-                                                                                                  /* ====================
-                                                                                                  ?     My CSS-Coding Guideline
-                                                                                                          =====================*/
+/* ====================
+?     My CSS-Coding Guideline
+        =====================*/
 
-/* #region CSS-Check & Infolist */ /*                -
+/* #region CSS-Check & Infolist */ /*                
 ?         Umgebung
 -) VS Studio Terminal hilft bei Tippfehler!
 -) Auskommentieren CTRL + K + C
@@ -1448,7 +1425,7 @@ https://developer.chrome.com/docs/devtools/
 -) Visbug nutzen!
 -) Benutze 'yx' statt "yx", dann ist es leichter dem User die Möglichkeit "ab" zu geben
 .
-?         CSS  ______GEt failed videos!
+?         CSS-Allgemein
 todo box-sizing 
         *, *::before, *::after  {box-sizing: border-box} nimmt alle width-heights von den bordern weg - agieren wie outline, aber in den Richtungen steuerbar.
 todo div
