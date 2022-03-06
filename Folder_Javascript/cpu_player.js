@@ -8,7 +8,7 @@
 ?                                  ________________________________________                                                                                                                                                                                                  
 !                                                           Table of content              
 
-                                              1) CPU Player Algorhytmus                              
+?                                             1) CPU Player Algorhytmus                              
                                                                                                         
                                                     - KI Placement                                      
                                                                                                         
@@ -36,14 +36,15 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) Update whole CPU Player!
-todo        -) CPU not playing after Game-End
+todo    -) Update whole CPU Player!
+todo    -) CPU not playing after Game-End
+todo    -) Better Table of Content=    
 
 ?                               Finish
-todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo        -) Final formatation.
-todo        -) Make sure all important is commented.
-todo        -) Write a final Comment.
+todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo    -) Final formatation.
+todo    -) Make sure all important is commented.
+todo    -) Write a final Comment.
 
 !                             Session progress
 ?-) 

@@ -1,18 +1,16 @@
 //#region Table of Content
 /*
-!                             Four-Wins-Online Screen_Changes-JS-File
-?                                                       powered by
-!                                                       Stefan Bartl
-!                                         (WKDSteVIE / WKDMinerva)
-?                                                             2021                                                                                                                                                                        
-?                          ________________________________________                                                                                                                                                                                                  
-!                                                        Table of content              
+!                  Four-Wins-Online Screen_Changes-JS-File
+?                                       powered by
+!                                       Stefan Bartl
+!                         (WKDSteVIE / WKDMinerva)
+?                                             2021                                                                                                                                                                        
+?                  ____________________________________                                                                                                                                                                                                  
+!                                     Table of content              
 
-?                                            1) Toggle Start / Game Screen                        
-                                                                                                  
-?                                            2) Game-End Screen Functions
-                                             
-?                                            3) Start new Game                                                                                                                                                                                                                                                                                                                                                                                                                          */
+?                             1) Toggle Start / Game Screen                                                                                                       
+?                             2) Game-End-Screen                     
+?                             3) Start a new Game                                                                                                                                                                                                                                                                                                                                                                                                                          */
 //#endregion
 
 //#region Open Jobs
@@ -109,7 +107,7 @@ function Start_Screen() {
 };
 //#endregion
 
-//#region 2) Game End Screen
+//#region 2) Game-End-Screen
 
 /* =========================
 !     Preparations for Game-End-Screen 
@@ -333,6 +331,9 @@ function Game_End_Screen(gameResult) {
   //#endregion
 };
 
+//#endregion
+
+//#region 3) Start a new Game
   /* ============== 
 !       Start a New Game
               ============== */

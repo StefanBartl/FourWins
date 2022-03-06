@@ -1,29 +1,27 @@
 //#region Table of Content
 /*
-!                                        Four-Wins-Online DOM-Elements-JS-File
-?                                                               powered by
-!                                                                Stefan Bartl
-!                                                     (WKDSteVIE / WKDMinerva)
-?                                                                     2021             
-?                                     ________________________________________                                                                                                                                                                                                  
-!                                                           Table of content              
-
-                                                    1)                                
-                                                                                                
-                                                    2)      
-                                                                                                
-                                                    3) Final Information & Comments                             
-                                                                                                
-                                                    4) Credits                                                            
-
-                                                                                                                                                                                                                                                                               */
+!                  Four-Wins-Online DOM-Elements-JS-File
+?                                        powered by
+!                                        Stefan Bartl
+!                           (WKDSteVIE / WKDMinerva)
+?                                               2021             
+?                  ___________________________________                                                                                                                                                                                                  
+!                                        Table of content              
+ 
+?                                 1) Container & Wrapper                                                                                                                              
+?                                 2) Text, Inputs, Images,...
+?                                 3) Settings-Menu
+?                                 4) Global Counters                                                                                               
+?                                 5) Final Information & Comments                                                                                                                             
+?                                 6) Credits                                                            
+*/
 //#endregion
 
 //#region Open Jobs
 /*
 ?                               Jobs To-do:
 
-todo        
+todo        -)
 
 ?                               Finish
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
@@ -37,7 +35,7 @@ todo        -) Write a final Comment.
                                                                                                                                                                                                                                                                                                                               */
 //#endregion
 
-//#region Container & Wrapper
+//#region 1) Container & Wrapper
 const header = document.getElementById("ID_Header");
 const main_wrapper = document.getElementById("ID_MainWrapper");
 const left_sidebar = document.getElementById("ID_LeftSidebarWrapper");
@@ -46,7 +44,7 @@ const right_sidebar = document.getElementById("ID_RightSidebarWrapper");
 const footer = document.getElementById("ID_FooterWrapper");
 //#endregion
 
-//#region Text, Inputs, Images
+//#region 2) Text, Inputs, Images
 const head_title = document.getElementById("ID_Head_Title");
 const headline_top = document.getElementById("ID_Headline");
 const headline_p = document.getElementById("ID_Header_p");
@@ -66,7 +64,7 @@ const turn_text = document.getElementById("ID_h3_turnText");
 const thinking_div = document.getElementById("ID_Thinking_Div");
 //#endregion
 
-//#region Settings menu
+//#region 3) Settings menu
 const settings_menu = document.getElementById("ID_Settings_Menu");
 const settings_span = document.getElementById("ID_Setting_Span");
 const info_h = document.getElementById("ID_Info");
@@ -93,7 +91,7 @@ const delete_all = document.getElementById("ID_Delete_All");
 const label_colour = document.getElementById("ID_Label_Colour");
 //#endregion
 
-//#region Global
+//#region 4) Global Counters
 // Counters to count wins if more Games are played
 let count_wins_player_one = 0,
   count_wins_player_two = 0;
