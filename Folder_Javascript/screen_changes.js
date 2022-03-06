@@ -18,13 +18,13 @@ open jobs
 /*
 ?                               Jobs To-do:
 
-todo    -) Win Divs Design! They need an Infotext or something for clearer user understanding.. 
+todo    -)
 
 ?                               Finish
-todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo        -) Final formatation.
-todo        -) Make sure all important is commented.
-todo        -) Write a final Comment.
+todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo    -) Final formatation.
+todo    -) Make sure all important is commented.
+todo    -) Write a final Comment.
 
 !                             Session progress
 ?-) 
@@ -116,8 +116,6 @@ function Start_Screen() {
 function Preparations(gameResult) {
   // console.log("Entered Game End Screen preparations.");
 
-  Game.state = "Prepare Game-End";
-
   // Play correct Audio
   if (
     gameResult === 2 &&
@@ -155,6 +153,10 @@ function Preparations(gameResult) {
   // Enable Gameboard-Size changing
   document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'no');
 
+  Game.state = "Game End";
+  document.getElementById("ID_GameboardWrapper").setAttribute("data-gameend", "yes");
+  document.getElementById('ID_MainWrapper').setAttribute('data-gameend', 'yes');
+
   // Assign correct names to the winner, loser or draw variables and return it, also set  the wins counter
   let winner, loser;
   const names_from_result = [];
@@ -186,10 +188,7 @@ function Game_End_Screen(gameResult) {
   // console.log("Entered Game End Screen Function.");
 
   const result = Preparations(gameResult);
-
-  Game.state = "Game End";
-  document.getElementById("ID_GameboardWrapper").setAttribute("data-gameend", "yes");
-  
+ 
   //#region Creation of End-Screen
 
   // Create the Containers for the texts
@@ -234,6 +233,7 @@ function Game_End_Screen(gameResult) {
     const canvas_div = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Canvas_Div", Class: "Class_Canvas_Div" });
     const firework_canvas = Create_DOM_Element({ ParentID: "ID_Canvas_Div",  Element: "canvas", ID: "ID_Firework", Class: "Class_Firework" });
     Fireworks("ID_Firework");
+    document.getElementById('ID_MainWrapper').setAttribute('data-gameend', 'no');
     document.getElementById('ID_MainWrapper').setAttribute('data-canvasend', 'yes');
 
     // Add correct Language to Game End Screen
@@ -412,6 +412,7 @@ document.getElementById("ID_Canvas_Div").remove();
 }
 
 // Remove the Game End Screen
+document.getElementById('ID_MainWrapper').setAttribute('data-gameend', 'no');
 document.getElementById('ID_MainWrapper').setAttribute('data-canvasend', 'no');
 document.getElementById('ID_End_H1').remove();
 document.getElementById('ID_End_Text').remove();

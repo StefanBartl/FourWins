@@ -1038,13 +1038,18 @@ select:hover {
   }
 }
 
-
+#ID_MainWrapper[data-gameend = 'yes']{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: large;
+}
 
 #ID_MainWrapper[data-canvasend = 'yes']{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  
+  font-size: large;
 }
 
 #ID_GameboardWrapper[data-gameend="yes"]{
