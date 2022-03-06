@@ -64,7 +64,6 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) New Windows promise & transitions?
 todo        -) Saving via local storage
 
 ?                               Finish
@@ -482,18 +481,9 @@ function New_Window(options) {
   const button_div = document.createElement("div");
   button_div.classList.add("Class_Buttons_Div");
   const confirm_button = document.createElement("button");
+  confirm_button.id = `${_id}_OK_Button`;
   confirm_button.classList.add("Class_Window_Buttons");
   confirm_button.innerText = "OK";
-  confirm_button.addEventListener("click", () => {
-    window.remove();
-    if (_confirm === true) {
-      Windows[_variable] = true;
-    } else if (_alert === true) {
-      Windows[_variable] === true;
-    } else if (_prompt === true) {
-      Windows[_variable] === true;
-    }
-  });
 
   // Append it
   inner_window.appendChild(headline);
@@ -505,44 +495,55 @@ function New_Window(options) {
     const cancel_button = document.createElement("button");
     cancel_button.innerText = "Cancel";
     cancel_button.addEventListener("click", () => {
-      window.remove();
-      if (_confirm === true) {
-        Windows[_variable] = false;
-      } else if (_prompt === true) {
-        Windows[_variable] === false;
-      }
+      window.classList.add('Class:Smooth_Out');
+      // After waiting for animation end, remove window
+      setTimeout(()=>{
+        window.remove();
+      }, 2000);
     });
     button_div.appendChild(cancel_button);
-  }
+  };
+
   // Invoke-Example Confirm: New_Window({ID: "ID_Test_Window", Name: "Test Window", Text: "Test Test Test", Confirm: true, Variable: "Tester"}); Find Confirm Boolean: Windows.Tester
 
   button_div.appendChild(confirm_button);
   window.appendChild(inner_window);
   document.body.appendChild(window);
+  window.classList.add('Class_Smooth_In');
 
   // Create Input-Text and add it
   if (_prompt === true) {
     const user_input = document.createElement("input");
     user_input.type = "text";
+    user_input.id = `${_id}_textinput`;
     inner_window.insertBefore(user_input, inner_window.children[2]);
-    confirm_button.addEventListener("click", () => {
-      window.remove();
-      Windows[_variable] = user_input.value;
+  };
       // Invoke Example Prompt: New_Window({ID: "ID_Test_Window", Name: "Test Window", Text: "Test Test Test", Prompt: true, Variable: "Tester"}); Find Input value: Windows.Tester
-    });
-  }
+  
+/*
+?                                                Infobox: 
 
+Always have to create the OK Button Event Listener via WINDOW_ID_OK_Button.addEventListener so one 
+can make the window also a confirm window with add code in event listener which should fire after confirm!
+! Example:
+document.getElementById('Window_OK_Button').addEventListener('click', ()=>{
+localStorage.clear();
+console.log('Local Storage deleted');
+document.getElementById('Window').classList.add('Class_Smooth_Out');
+  // After waiting for animation end, remove window
+  setTimeout(()=>{
+  document.getElementById('Window').remove();
+}, 2000);
+});
+
+Cancel Button removes windows by itself.
+Acces to user input of prompt via WINDOW_ID_textinput.value 
+Smooth in / Smooth Out Class recommended.
+*/
+
+//#region CSS for the Windows-Function:
   /*
-                                                Info: 
- To know if User clicked "Confirm" or Cancel, you need a variable outside of the function which can be manipulated by the Event-Listeners. 
- --> Create an empty Windows{} Object. You find the "returns" than in the Windows.[variable]. You also can change the Event-Listeners for your needs.
-
- */
-
-  //#region CSS for the Windows-Function:
-  /*
-  CSS: 
-.
+ 
 .Class_Window{
    min-height: 30vh;
    max-height: 75vh;

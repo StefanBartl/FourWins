@@ -23,7 +23,7 @@
 /*
 ?                               Jobs To-do:
 
-todo   -) Delete all own notification (Promise)
+todo   -) Delete all to own notification (Promise) and transiton!
 
 ?                               Finish
 
@@ -481,25 +481,30 @@ credits_h.addEventListener("click", () => {
 delete_all.addEventListener("click", () => {
   // Play warning sound
   warning_audio.play();
-  // Confirm message
-  let warning;
+
+  // Create Confirm Window
   if (Game.Language === "de") {
-    warning = confirm(
-      `${
-        localStorage.getItem("Player_One_Name") || "Spieler"
-      }, willst du wirklich die gespeicherte Sprache, die Spieler Namen und die Statistiken von deinem local-Storage löschen? Diese Daten sind nur in deinem Browser gespeichert und können nach einer Löschung nicht wiederhergestellt werden.`
-    );
-  } else
-    warning = confirm(
-      `${
-        localStorage.getItem("Player_One_Name") || "Player"
-      }, do you really want do delete the saved language, saved Player names and the stats from your local Storage? The data is stored in your Browser and cannot be restored again after deleting it.`
-    );
-  // Clear local storage
-  if (warning === true) {
-    localStorage.clear();
+    const confirm =  New_Window({ID: "ID_Delete_Window", Name: "Notification", Text: `${
+      localStorage.getItem("Player_One_Name") || "Spieler"
+    }, willst du wirklich die gespeicherte Sprache, die Spieler Namen und die Statistiken von deinem local-Storage löschen? Diese Daten sind nur in deinem Browser gespeichert und können nach einer Löschung nicht wiederhergestellt werden.`, 
+    Confirm: true}); 
+  } else {
+    const confirm =  New_Window({ID: "ID_Delete_Window", Name: 'Notification', Text: `${
+      localStorage.getItem("Player_One_Name") || "Player"
+    }, do you really want do delete the saved language, saved Player names and the stats from your local Storage? The data is stored in your Browser and cannot be restored again after deleting it.`, 
+    Confirm: true}); 
   }
-});
+    // If user clicked OK after notification, delete local storage
+    document.getElementById('ID_Delete_Window_OK_Button').addEventListener('click', ()=>{
+      localStorage.clear();
+      console.log('Local Storage deleted');
+      document.getElementById('ID_Delete_Window').classList.add('Class_Smooth_Out');
+       // After waiting for animation end, remove window
+       setTimeout(()=>{
+        document.getElementById('ID_Delete_Window').remove();
+      }, 2000);
+    });
+    });  
 
 //#endregion
 
