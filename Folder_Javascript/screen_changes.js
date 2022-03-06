@@ -18,9 +18,10 @@ open jobs
 /*
 ?                               Jobs To-do:
 
-todo        -) Win Divs Player 2! Design! 
-todo        -) Game 3 doesnt start
-todo        -) Bring text to Library!
+todo    -) Win Div in Game-End-Screen / Text infos
+todo    -) Win Divs Player 2! Design! 
+todo    -) Game 3 doesnt start
+todo    -) Bring text to Library!
 
 ?                               Finish
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
@@ -41,15 +42,15 @@ todo        -) Write a final Comment.
 function Game_Screen() {
 //console.log("Entering Game-Screen.");
 Game.state = "InGame";
+document.getElementById('ID_MainWrapper').setAttribute('data-ingame', 'yes');
+document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'yes');
 
 if(Game.state === "Game End"){
-  document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "yes");
   document.getElementById("ID_Turn_Div").classList.remove("Class_Invisible");
 
    // Disable Gameboard-Size changing
    document.getElementById("ID_Gameboard_Span").setAttribute("data-ingame",  "yes");
    Game.Language === "de" ? document.getElementById("ID_Gameboard_h").innerText = "Nur zu Spielbeginn erlaubt!" :  document.getElementById("ID_Gameboard_h").innerText = "Only allowed at Start-Screen!" ; 
-   document.getElementById("ID_Game_End_Container").appendChild(document.getElementById("ID_Settings_Menu"));
    return
 };
 
@@ -58,15 +59,19 @@ if(Game.state === "Game End"){
   document.getElementById("ID_LeftSidebarWrapper").style = "display: none";
   document.getElementById("ID_RightSidebarWrapper").style = "display: none";
   document.getElementById("ID_FooterWrapper").style = "display: none";
-  // Use the new free space for the Gameboard
-  document
-    .getElementById("ID_MainWrapper")
-    .classList.add("Class_Main_Wrapper_InGame");
-  document
-    .getElementById("ID_GameboardWrapper")
-    .setAttribute("data-ingame", "yes");
-  if (document.getElementById("ID_h3_turnText"))
-    document.getElementById("ID_h3_turnText").style = "display: block";
+  
+
+  // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it. Hide win notivications.
+  if(document.getElementById('ID_Turn_Div') && document.getElementById('ID_Turn_Div').classList.contains('Class_Invisible'))
+      document.getElementById('ID_Turn_Div').classList.remove('Class_Invisible');
+  if(document.getElementById('ID_Win_Div One') && document.getElementById('ID_Win_Div_One').classList.contains('Class_Invisible'))
+      document.getElementById('ID_Win_Div_One').classList.remove('Class_Invisible');
+  if(document.getElementById('ID_Win_Div_Two') && document.getElementById('ID_Win_Div_Two').classList.contains('Class_Invisible'))
+      document.getElementById('ID_Win_Div_Two').classList.remove('Class_Invisible');
+  if(document.getElementById('ID_Draw_Div') && document.getElementById('ID_Draw_Div').classList.contains('Class_Invisible'))
+      document.getElementById('ID_Draw_Div').classList.remove('Class_Invisible');
+  if (document.getElementById('ID_h3_turnText'))
+      document.getElementById('ID_h3_turnText').style = 'display: block';
 
 // Disable Gameboard-Size changing
 document.getElementById("ID_Gameboard_Span").setAttribute("data-ingame",  "yes");
@@ -78,20 +83,27 @@ Game.Language === "de" ? document.getElementById("ID_Gameboard_h").innerText = "
          ====================== */
 function Start_Screen() {
   //console.log("Entering Game-Screen.");
-
+  document.getElementById('ID_MainWrapper').setAttribute('data-ingame', 'no');
+  document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'no');
+  
   // Add the start screen elements
   document.getElementById("ID_Header").style = "display: block";
   document.getElementById("ID_LeftSidebarWrapper").style = "display: block";
   document.getElementById("ID_RightSidebarWrapper").style = "display: block";
   document.getElementById("ID_FooterWrapper").style = "display: block";
 
-  document
-    .getElementById("ID_MainWrapper")
-    .classList.remove("Class_Main_Wrapper_InGame");
-  document
-    .getElementById("ID_GameboardWrapper")
-    .classList.remove("Class_Gameboard_Wrapper_InGame");
-  document.getElementById("ID_h3_turnText").style = "display: none";
+
+  // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it. Hide win notivications.
+  if(document.getElementById('ID_Turn_Div') && !document.getElementById('ID_Turn_Div').classList.contains('Class_Invisible'))
+      document.getElementById('ID_Turn_Div').classList.add('Class_Invisible');
+  if(document.getElementById('ID_Win_Div_One') && !document.getElementById('ID_Win_Div_One').classList.contains('Class_Invisible'))
+      document.getElementById('ID_Win_Div_One').classList.add('Class_Invisible');
+  if(document.getElementById('ID_Win_Div_Two') && !document.getElementById('ID_Win_Div_Two').classList.contains('Class_Invisible'))
+      document.getElementById('ID_Win_Div_Two').classList.add('Class_Invisible');
+  if(document.getElementById('ID_Draw_Div') && !document.getElementById('ID_Draw_Div').classList.contains('Class_Invisible'))
+      document.getElementById('ID_Draw_Div').classList.add('Class_Invisible');
+  if (document.getElementById('ID_h3_turnText'))
+       document.getElementById('ID_h3_turnText').style = 'display: none';
 
     // Enable Gameboard-Size changing
     document.getElementById("ID_Gameboard_Span").setAttribute("data-ingame",  "no");
@@ -130,15 +142,21 @@ function Preparations(gameResult) {
     topCell.style = "pointer-events:none";
   }
 
-  // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it
-  if(document.getElementById("ID_Turn_Div").classList.contains("Class_Invisible"))
-  document.getElementById("ID_Turn_Div").classList.add("Class_Invisible");
-  
+  // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it. Hide win notivications.
+  if(document.getElementById('ID_Turn_Div') && !document.getElementById('ID_Turn_Div').classList.contains('Class_Invisible'))
+  document.getElementById('ID_Turn_Div').classList.add('Class_Invisible');
+  if(document.getElementById('ID_Win_Div_One') && !document.getElementById('ID_Win_Div_One').classList.contains('Class_Invisible'))
+  document.getElementById('ID_Win_Div_One').classList.add('Class_Invisible');
+  if(document.getElementById('ID_Win_Div_Two') && !document.getElementById('ID_Win_Div_Two').classList.contains('Class_Invisible'))
+  document.getElementById('ID_Win_Div_Two').classList.add('Class_Invisible');
+  if(document.getElementById('ID_Draw_Div') && !document.getElementById('ID_Draw_Div').classList.contains('Class_Invisible'))
+  document.getElementById('ID_Draw_Div').classList.add('Class_Invisible');
   
  // Make Settings Menu visible during End-Screen
- document.getElementById("ID_Setting_Span").setAttribute("data-endscreen",  "yes");
+ if(document.getElementById("ID_Settings_Menu"))  document.getElementById("ID_Settings_Menu").setAttribute("data-endscreen",  "yes");
+ if(document.getElementById("ID_Setting_Span"))  document.getElementById("ID_Setting_Span").setAttribute("data-endscreen",  "yes");
   // Enable Gameboard-Size changing
-  document.getElementById("ID_Gameboard_Span").setAttribute("data-ingame",  "no");
+  document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'no');
 
   // Assign correct names to the winner, loser or draw variables and return it
   let winner, loser;
@@ -170,33 +188,25 @@ function Game_End_Screen(gameResult) {
   const result = Preparations(gameResult);
 
   Game.state = "Game End";
-  document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "no");
   document.getElementById("ID_GameboardWrapper").setAttribute("data-gameend", "yes");
   
   //#region Creation of End-Screen
-  // DIV Container for the End Screen (Fireworks, Text, Buttons and the Gameboard Animation)
-  const game_end_container = Create_DOM_Element({
-    ParentID: "ID_MainWrapper",
-    Element: "div",
-    ID: "ID_Game_End_Container",
-    Class: "Class_Game_End_Container",
-  });
 
   // Create the Containers for the texts
   const winning_head = Create_DOM_Element({
-    ParentID: "ID_Game_End_Container",
+    ParentID: "ID_MainWrapper",
     Element: "h1",
     ID: "ID_End_H1",
-    Class: "Class_Game_End",
+    Class: "Class_Game_End_Animation",
   });
   const winning_text = Create_DOM_Element({
-    ParentID: "ID_Game_End_Container",
+    ParentID: "ID_MainWrapper",
     Element: "p",
     ID: "ID_End_Text",
-    Class: "Class_Game_End",
+    Class: "Class_Game_End_Animation",
   });
   const button_wrapper = Create_DOM_Element({
-    ParentID: "ID_Game_End_Container",
+    ParentID: 'ID_MainWrapper',
     Element: "div",
     ID: "ID_End_Button_Div",
   });
@@ -204,14 +214,16 @@ function Game_End_Screen(gameResult) {
     ParentID: "ID_End_Button_Div",
     Element: "button",
     ID: "ID_NewGame_Button",
-    Class: "Class_Game_End",
+    Class: "Class_Game_End_Animation",
   });
   const back_button = Create_DOM_Element({
     ParentID: "ID_End_Button_Div",
     Element: "button",
     ID: "ID_Back_Button",
-    Class: "Class_Game_End",
+    Class: "Class_Game_End_Animation",
   });
+
+  insertAfter(left_sidebar, document.getElementById('ID_GameboardWrapper'));
 
   // If it is not a draw or a loose against CPU, it is a win from a Human Playert, so add the fireworks
   if (
@@ -219,9 +231,10 @@ function Game_End_Screen(gameResult) {
   ) {
     // Canvas with fireworks layed in a div container, which is then pushed to the Main Wrapper, Now, everything which is pushed to the Main Wrapper
     // with a greater z-index is visible over the fireworks canvas
-    const canvas_div = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Canvas_Div", Class: "Class_Game_End_Div" });
+    const canvas_div = Create_DOM_Element({ ParentID: "ID_MainWrapper", Element: "div", ID: "ID_Canvas_Div", Class: "Class_Canvas_Div" });
     const firework_canvas = Create_DOM_Element({ ParentID: "ID_Canvas_Div",  Element: "canvas", ID: "ID_Firework", Class: "Class_Firework" });
     Fireworks("ID_Firework");
+    document.getElementById('ID_MainWrapper').setAttribute('data-canvasend', 'yes');
 
     // Add correct Language to Game End Screen
     if (Game.Language === "de") {
@@ -253,13 +266,13 @@ function Game_End_Screen(gameResult) {
 
   // If the KI won against Player CPU is always Player 2 and if Game against KI is true >>> CPU won), add the lose text and screen
   if (gameResult === 2 && Game.Game_against_KI === true) {
-    document.getElementById("ID_Game_End_Container").style.backgroundImage =
+    document.getElementById("ID_MainWrapper").style.backgroundImage =
       "url('./Folder_Graphics/Folder_Icons/freesvg_com/SadSmileyWhite.svg')";
-    document.getElementById("ID_Game_End_Container").style.backgroundPosition =
+    document.getElementById("ID_MainWrapper").style.backgroundPosition =
       "center";
-    document.getElementById("ID_Game_End_Container").style.backgroundSize =
+    document.getElementById("ID_MainWrapper").style.backgroundSize =
       "3%";
-    document.getElementById("ID_Game_End_Container").style.backgroundRepeat =
+    document.getElementById("ID_MainWrapper").style.backgroundRepeat =
       "no-repeat";
     if (Game.Language === "de") {
       document.getElementById("ID_End_H1").innerText = "Verloren!";
@@ -303,18 +316,9 @@ function Game_End_Screen(gameResult) {
       "To Starting-Screen - Button";
   }
 
-  // After Creating the End Screen Container and pushing text to it, remove the Gameboard from the MainWrapper Div to the End Screen Container and assign the class with the End Animation
-  document.getElementById("ID_GameboardWrapper").classList.add("Class_Gameboard_End");
-  document.getElementById("ID_GameboardWrapper").setAttribute("data-gameend", "yes");
-  document.getElementById("ID_Game_End_Container").appendChild(document.getElementById("ID_GameboardWrapper"));
-
     // Enable Gameboard-Size changing and append it
     document.getElementById("ID_Gameboard_Span").setAttribute("data-ingame",  "no");
-    setTimeout(()=>{
-      // Proof if Game is still in Game-End Screen after 5 seconds, then append Settings-Menu
-      if (document.getElementById("ID_Game_End_Container"))      
-        document.getElementById("ID_Game_End_Container").appendChild(document.getElementById("ID_Settings_Menu"));
-    }, 5000);
+
   //#endregion
 
   //#region Event-Listeners
@@ -330,8 +334,10 @@ function Game_End_Screen(gameResult) {
   document.getElementById("ID_NewGame_Button").addEventListener("click", () => {
     // console.log("New Game selected, preparations will be done...");
 
-     // Disable special settings for Settings Menu during End-Screen
+     // Disable special styling for Settings Menu during End-Screen
+     document.getElementById("ID_Settings_Menu").setAttribute("data-endscreen",  "no");
      document.getElementById("ID_Setting_Span").setAttribute("data-endscreen",  "no");
+
     //Make sure the stas are up to date
      Stats();
 
@@ -401,10 +407,14 @@ function Game_End_Screen(gameResult) {
     }
 
     // Remove the Game End Screen
-    document.getElementById("ID_Game_End_Container").remove();
+    document.getElementById('ID_MainWrapper').setAttribute('data-canvasend', 'no');
+    document.getElementById('ID_End_H1').remove();
+    document.getElementById('ID_End_Text').remove();
+    document.getElementById('ID_End_Button_Div').remove();
 
     // Creat a new one!
     Create_Gameboard(Game.gameboard_sizeX, Game.gameboard_sizeY);
+    document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'yes');
 
     // Add Games won Notificiations-Container
     if (!document.getElementById("ID_Win_Div_One"))

@@ -23,7 +23,7 @@
 /*
 ?                               Jobs To-do:
 
-todo   -) Delete all own notification
+todo   -) Delete all own notification (Promise)
 
 ?                               Finish
 

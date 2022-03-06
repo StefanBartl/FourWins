@@ -64,7 +64,7 @@
 /*
 ?                               Jobs To-do:
 
-todo        -) Gameboard-Sizing Transition by change?
+todo        -) New Windows promise & transitions?
 todo        -) Saving via local storage
 
 ?                               Finish
@@ -87,6 +87,15 @@ todo        -) Write a final Comment.
 function insertAfter(referenceNode, newNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 };
+
+
+/* ============================
+ !     Insert Element before Reference Node
+         ============================ */
+function insertBefore(newNode, existingNode) {
+  existingNode.parentNode.insertBefore(newNode, existingNode);
+}
+
 
 /* ========================
  !    Adding the Choosing-Animation 
@@ -621,54 +630,22 @@ function Correct_Sound_Setting() {
 function Create_Gameboard(sizeX, sizeY){
   //console.log("Given",  sizeX, "x", sizeY, "to create a gameboard.");
 
-  // Remove the old Gameboard cells if existing
- if(document.getElementById("ID_GameboardWrapper")){
+// Make sure there are valid values to create (if user doesnt change size between games, tehre would be undefined)
+sizeX === undefined || sizeX === null ? sizeX = Game.gameboard_size_x : sizeX = sizeX;
+sizeY === undefined || sizeY === null ? sizeY = Game.gameboard_size_y : sizeY = sizeY;
 
+
+// Replace an old Gameboard if exists and create a new one
+ if(document.getElementById("ID_GameboardWrapper")){
+  // Remove the old Gameboard cells
 const columnsArray = document.querySelectorAll(".Class_Columns");
 const topCellsArray = document.querySelectorAll("Class_TopCells");
 const cellsArray = document.querySelectorAll("Class_Cells");
 for(column of  columnsArray) column.remove();
 for(topCell of topCellsArray) topCell.remove();
 for(cells of cellsArray) cells.remove();
-
-  // Create Columns
-  for (let columns = 1; columns <= sizeX; columns++) {
-    // Create the Column Wrappers
-    let column = document.createElement("div");
-    column.classList.add("Class_Columns");
-    column.id = `ID_Column${columns}`;
-    document.getElementById("ID_GameboardWrapper").appendChild(column);
-  };
-
-  //Create Top Cells
-  for (let column = 1; column <= sizeX; column++) {
-    // Create the Top Cells
-    let topcell = document.createElement("div");
-    topcell.classList.add("Class_TopCells");
-    topcell.id = `ID_C${column}R0`;
-    topcell.setAttribute("data-column", column);
-    document.getElementById(`ID_Column${column}`).appendChild(topcell);
-    // Remove the leftz border of the first TopCell (styling issues)
-    document.getElementById('ID_C1R0').style.borderLeft = "none"; 
-        
-        // Create the Cells
-        for (let row = 1; row <= sizeY ; row++) {
-          let cell = document.createElement("div");
-          cell.classList.add("Class_Cells");
-          cell.id = `ID_C${column}R${row}`;
-          document.getElementById(`ID_Column${column}`).appendChild(cell);
-        };
-  };
-
-  Game.gameboard_size_x = sizeX;
-  Game.gameboard_size_y = sizeY;
-return
-};
-
-
-
-
-  //Create a new Gameboard 
+ } else {
+   //Create a new Gameboard  (Starting-Screen)
   // Create Wrapper
   const new_gameboard_wrapper = document.createElement("div");
   new_gameboard_wrapper.classList.add("Class_GameboardWrapper");
@@ -686,8 +663,9 @@ document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "no")
   {
     insertAfter(left_sidebar, new_gameboard_wrapper); 
    // console.log("Appended to left sidebar");
-};
+};};
 
+  // Create new cells and insert
   // Create Columns
   for (let columns = 1; columns <= sizeX; columns++) {
     // Create the Column Wrappers
@@ -705,8 +683,6 @@ document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "no")
     topcell.id = `ID_C${column}R0`;
     topcell.setAttribute("data-column", column);
     document.getElementById(`ID_Column${column}`).appendChild(topcell);
-        // Remove the leftz border of the first TopCell (styling issues)
-        document.getElementById('ID_C1R0').style.borderLeft = "none";
 
         // Create the Cells
         for (let row = 1; row <= sizeY ; row++) {
@@ -719,8 +695,6 @@ document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "no")
 
   Game.gameboard_size_x = sizeX;
   Game.gameboard_size_y = sizeY;
-  //console.log("Gameboard with",  sizeX, "x", sizeY, "created.");
-
 };
 
 /* =============
@@ -747,12 +721,13 @@ function Create_DOM_Element(options, arrayOne, arrayTwo) {
     _max = options.Max,
     _value = options.Value,
     _placeholder = options.Placeholder,
+    _insertBefore = options.InsertBefore;
     _optionsArray = arrayOne,
     _valuesArray = arrayTwo;
 
   const element = document.createElement(_element);
 
-  // Important properties for "simple" DOM-Elements
+  // Properties 
   if (_id != undefined) element.id = _id;
   if (_class != undefined) element.classList.add(_class);
   if (_text != undefined) element.innerText = _text;
@@ -760,13 +735,14 @@ function Create_DOM_Element(options, arrayOne, arrayTwo) {
   if (_title != undefined) element.title = _text;
   if (_alt != undefined) element.alt = _alt;
 
-  // Important properties for Image-DOM-Elements
+  // Properties for Image-DOM-Elements
   if (_src != undefined) element.src = _src;
   if (_width != undefined) element.width = _width;
   if (_height != undefined) element.height = _height;
   if (_aspectRatio != undefined) element.aspectRatio = _aspectRatio;
 
-  // Important properties for Input-DOM-Elements
+  // Properties for Input-DOM-Elements
+  if (_type != undefined) element.type = _type;
   if (_min != undefined) element.min = _min;
   if (_max != undefined) element.max = _max;
   if (_value != undefined) element.min = _value;
@@ -788,7 +764,9 @@ function Create_DOM_Element(options, arrayOne, arrayTwo) {
     }
   }
 
-  // Finally, push the complete dynamically created, finished object to the DOM!
+  // Finally, push the complete dynamically created, finished object to the DOM with insert before...
+  if(_insertBefore !== undefined) {insertBefore(element, _insertBefore); return};
+  //...ao aspendChild!
   document.getElementById(_parentID).appendChild(element);
 
   /*
@@ -1122,6 +1100,8 @@ function applyClass(name,element,doRemove){
 -) Verwende "conditionales": const user = user_name || "Player 1"
 
 -) Array.from() konvertiert iterierbare Objekte zu arrays!
+
+-) arr.map ()
 
 -) String to number: let int = "14" --> neueZahl = +int / Number to string: const stringZahl = 5 + ""; in concentation --> double tilde ~~
 

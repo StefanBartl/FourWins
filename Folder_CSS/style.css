@@ -109,7 +109,6 @@ todo    -) Save Default Script Files with the new Script Layout for later Projec
 !         fonts 
          ======= */
 
-@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
 
@@ -258,16 +257,16 @@ footer {
   cursor: pointer;
 }
 
-/* If column is full,...*/
+    /* If column is full loch the top-cell,...*/
 .Class_TopCells[data-columnfull='yes'] {
-  box-shadow: 0 -5px 0 var(--gameboard);
+  border-top: solid 2px var(--gameboard);
   pointer-events: none;
-  /*
-  oder jetzt mit border Top mnöglich?
-  */
-
+  
 }
 
+#ID_C1R0{
+    border-left: none;
+}
 
 .Class_Cells {
   aspect-ratio: 1 / 1;
@@ -959,7 +958,7 @@ select:hover {
          firework canvas container
          ========================== */
 
-.Class_Game_End_Div {
+.Class_Canvas_Div {
   position: absolute;
   left: 0;
   top: 0;
@@ -967,21 +966,9 @@ select:hover {
   height: 100vh;
 }
 
-/* ===========================
-         game end content container
-         =========================== */
+/* Content Animation */ 
 
-.Class_Game_End_Container {
-  z-index: 4;
-  position: absolute;
-  display: flex;
-  flex-wrap: wrap;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  justify-content: center;
-  text-align: center;
+.Class_Game_End{
   animation: End_Animation 4s ease-in;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
@@ -995,20 +982,25 @@ select:hover {
   }
 }
 
-.Class_Gameboard_End {
-  z-index: 4;
-  min-width: 15vw;
-  min-height: 15vw;
-  aspect-ratio: 1/1;
-  margin-bottom: 5vw;
-  border-radius: 0rem;
+
+
+#ID_MainWrapper[data-canvasend = 'yes']{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
 }
 
 #ID_GameboardWrapper[data-gameend="yes"]{
-     margin-block: 2rem;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  min-height: 35vh;
+  aspect-ratio: 1/1;
+  margin-block: 5em;
+  
 }
-
-
 
 .Class_Top_End {
   background-color: var(--base-border);
@@ -1017,11 +1009,11 @@ select:hover {
 
 #ID_End_H1 {
   min-width: 100%;
-  padding-top: 1%;
+  padding-top: 10em;
 }
 
 #ID_End_Text {
-  min-width: 100%;
+  min-width: 100%
 }
 
 #ID_End_Button_Div {
@@ -1064,8 +1056,17 @@ select:hover {
   filter: invert(1);
 }
 
+#ID_Settings_Menu[data-endscreen = "yes"]{
 
+}
 
+#ID_Setting_Span[data-endscreen = "yes"]{
+
+}
+
+#ID_Canvas_Div{
+  z-index: -1;
+}
 
 
 
@@ -1267,7 +1268,7 @@ select:hover {
     margin-bottom: 5%;
   }
 
-  #ID-Settings_Span {
+  #ID_Setting_Span {
     overflow: hidden;
   }
 
