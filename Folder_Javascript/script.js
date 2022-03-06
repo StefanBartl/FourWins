@@ -23,7 +23,8 @@
 /*
 ?                               Jobs To-do:
 
-todo   -) Delete all to own notification (Promise) and transiton!
+todo    -) Wohnzimmer und Küche!
+todo    -) Rechnungen!
 
 ?                               Finish
 

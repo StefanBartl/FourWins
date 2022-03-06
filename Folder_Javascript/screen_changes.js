@@ -19,7 +19,6 @@ open jobs
 ?                               Jobs To-do:
 
 todo    -) Win Divs Design! They need an Infotext or something for clearer user understanding.. 
-todo    -) Bring text to Library!
 
 ?                               Finish
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
@@ -156,22 +155,25 @@ function Preparations(gameResult) {
   // Enable Gameboard-Size changing
   document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'no');
 
-  // Assign correct names to the winner, loser or draw variables and return it
+  // Assign correct names to the winner, loser or draw variables and return it, also set  the wins counter
   let winner, loser;
   const names_from_result = [];
   if (gameResult === 1) {
+    Game.Player_1_wins++;
     names_from_result.push(
       (winner = Game.Player_One_Name),
       (loser = Game.Player_Two_Name)
     );
   } else if (gameResult === 2) {
+    Game.Player_2_wins++;
     names_from_result.push(
       (winner = Game.Player_Two_Name),
       (loser = Game.Player_One_Name)
     );
-  } else if (gameResult === 3)
+  } else if (gameResult === 3){
+   Game.Draws++;
     names_from_result.push(Game.Player_One_Name, Game.Player_Two_Name);
-
+  }
   // console.log("Finished Game End Screen preparations and returned:", names_from_result);
 
   return names_from_result;
@@ -326,170 +328,185 @@ function Game_End_Screen(gameResult) {
     document.location.reload();
   });
 
-  /*    ================== 
-?        New Game Event-Listener
-            ==================== */
-  document.getElementById("ID_NewGame_Button").addEventListener("click", () => {
-    // console.log("New Game selected, preparations will be done...");
-
-     // Disable special styling for Settings Menu during End-Screen
-     document.getElementById("ID_Settings_Menu").setAttribute("data-endscreen",  "no");
-     document.getElementById("ID_Setting_Span").setAttribute("data-endscreen",  "no");
-
-    //Make sure the stas are up to date
-     Stats();
-
-    Game.state = "InGame";
-
-    //#region Reset Game
-    const topCellsArray = document.getElementsByClassName("Class_TopCells");
-    const cellsArray = document.getElementsByClassName("Class_Cells");
-    // Remove TopCell Style classes collected during the Game and End-Screen & unlock the placement function again
-    for (let topCell of topCellsArray) {
-      topCell.classList.remove("Class_Top_End");
-      topCell.innerText = "";
-      topCell.style = "pointer-events:auto";
-      topCell.classList.remove("Class_Full_Column");
-    }
-
-    // Set the collected sttributes to "no"
-    for (let cell of cellsArray) {
-      cell.setAttribute("isPlayed", "no");
-      cell.setAttribute("winChain", "no");
-    }
-
-    // Show the "Player ... is on turn"-Infobox and the "Thinking-Effectt" again
-    if (turn_text && turn_text.classList.contains("Class_Invisible"))
-      turn_text.classList.remove("Class_Invisible");
-    if (
-      document.getElementById("ID_Thinking_Div") &&
-      document
-        .getElementById("ID_Thinking_Div")
-        .classList.contains("Class_Invisible")
-    )
-      document
-        .getElementById("ID_Thinking_Div")
-        .classList.remove("Class_Invisible");
-
-    // Trigger next Player is on turn, so the loser of this reound starts the next round.
-    Turning_PlayerIsOnTurn();
-
-    // If the win was from Human Player 1 and it is a game against the CPU, start next round
-    if (gameResult === 1 && Game.Game_against_KI === true) {
-      Game.KI_Level === "Easy" ? KI_Easy() : KI_Normal();
-    }
-
-    // Reset the Gameboard in Game Object
-    for (let x = 1; x < 8; x++) {
-      Game.actualGameboardPlayer1[`C${x}`].length = 0;
-      Game.actualGameboardPlayer2[`C${x}`].length = 0;
-    }
-
-    // Reset Gameboard on screen
-    for (let cell of cellsArray) {
-      if (cell.classList.contains("Class_PlacedCoin_1"))
-        cell.classList.remove("Class_PlacedCoin_1");
-      if (cell.classList.contains("Class_PlacedCoin_2"))
-        cell.classList.remove("Class_PlacedCoin_2");
-      cell.style.opacity = 0.7;
-    }
-
-    // Reset round
-    Game.roundCounter = 0;
-    //#endregion
-
-    // If there was firework, remove it
-    if (document.getElementById("ID_Firework")) {
-      document.getElementById("ID_Firework").remove();
-      document.getElementById("ID_Canvas_Div").remove();
-    }
-
-    // Remove the Game End Screen
-    document.getElementById('ID_MainWrapper').setAttribute('data-canvasend', 'no');
-    document.getElementById('ID_End_H1').remove();
-    document.getElementById('ID_End_Text').remove();
-    document.getElementById('ID_End_Button_Div').remove();
-
-    // Creat a new one!
-    Create_Gameboard(Game.gameboard_sizeX, Game.gameboard_sizeY);
-    document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'yes');
-
-    // Add Games won Notificiations-Container
-    if (!document.getElementById("ID_Win_Div_One"))
-      win_div_one = Create_DOM_Element({
-        ParentID: "ID_MainWrapper",
-        Element: "div",
-        ID: "ID_Win_Div_One",
-      });
-    if (!document.getElementById("ID_Win_Div_Two"))
-      win_div_two = Create_DOM_Element({
-        ParentID: "ID_MainWrapper",
-        Element: "div",
-        ID: "ID_Win_Div_Two",
-      });
-    if (!document.getElementById("ID_Draw_Div"))
-      draw_div = Create_DOM_Element({
-        ParentID: "ID_MainWrapper",
-        Element: "div",
-        ID: "ID_Draw_Div",
-      });
-
-    // Increas won games counter in Settings-Menu amd create correct notification on Game Screen
-    const tally_img = document.createElement("img");
-    tally_img.setAttribute("data-wincounter", "yes");
-
-    // Get correct counter-values
-    // Calculate correct tally: Because we only have 5 tallys and a Player can have f.e. 12 wins, we must calculated the corect tally. In this example: there have to be two 5er tally and one 2 tally.... 
-    // My solution: Reset the counter variable to 1 every time it goes over 5
-    let tally_counter_p1, tally_counter_p2, tally_counter_draws;
-    Game.Player_1_wins !== 0 ? tally_counter_p1 = Game.Player_1_wins : tally_counter_p1 = 1;
-    Game.Player_2_wins !== 0 ? tally_counter_p2 = Game.Player_2_wins : tally_counter_p2 = 1;
-    Game.Draws !== 0 ? tally_counter_draws = Game.Draws : tally_counter_draws= 1;
-
-    if (gameResult === 1){
-      tally_img.id = "ID_Tally_IMG_P1";    
-      Game.Player_1_wins++;
-      if(Game.Player_1_wins === 6){
-            tally_counter_p1 = 1;
-          }
-    } else if (gameResult === 2){
-      tally_img.id = "ID_Tally_IMG_P2";   
-      Game.Player_2_wins++;
-      if(Game.Player_2_wins === 6){
-        tally_counter_p2 = 1;
-      }
-    } else if (gameResult === 3){
-      tally_img.id = "ID_Tally_IMG_Draw";    
-      Game.Draw++;
-      if(Game.Draws === 6){
-        tally_counter_draws = 1;
-      }
-    };
-                  if (tally_counter_p1 ===  1 || tally_counter_p2 ===  1 || tally_counter_draws ===  1) {tally_img.src =  './Folder_Graphics/tally/1.png'; tally_img.setAttribute("data-winstays", "no");
-        } else if (tally_counter_p1 ===  2 || tally_counter_p1 ===  2 || tally_counter_draws ===  2) {tally_img.src =  './Folder_Graphics/tally/2.png'; tally_img.setAttribute("data-winstays", "no");
-        } else if (tally_counter_p1 ===  3 || tally_counter_p1 ===  3 || tally_counter_draws ===  3) {tally_img.src =  './Folder_Graphics/tally/3.png'; tally_img.setAttribute("data-winstays", "no");
-        } else if (tally_counter_p1 ===  4 || tally_counter_p1 ===  4 || tally_counter_draws ===  4) {tally_img.src =  './Folder_Graphics/tally/4.png'; tally_img.setAttribute("data-winstays", "no");
-        } else if (tally_counter_p1 ===  5 || tally_counter_p1 ===  5 || tally_counter_draws ===  5) {tally_img.src =  './Folder_Graphics/tally/5.png'; tally_img.setAttribute("data-winstays", "yes");
-      };
-
-      if (gameResult === 1){
-        // First proof iof there is a taly in the Container and if it should be removed. If yes, remove the 1er, 2er, 3er and 4er tallys so if ist the 6 win, tally 5 + tally 1 are appended
-      if(document.getElementById("ID_Win_Div_One").lastElementChild && document.getElementById("ID_Win_Div_One").lastElementChild.getAttribute("data-winstays") === "yes")
-      document.getElementById("ID_Win_Div_One").lastElementChild.remove();
-      // Append tally to DIV
-      document.getElementById("ID_Win_Div_One").appendChild(tally_img);
-
-      } else if (gameResult === 2){
-                if(document.getElementById("ID_Win_Div_Two").lastElementChild && document.getElementById("ID_Win_Div_Two").lastElementChild.getAttribute("data-winstays") === "yes")
-                document.getElementById("ID_Win_Div_Two").lastElementChild.remove();
-                document.getElementById("ID_Win_Div_Two").appendChild(tally_img);
-
-      } else if (gameResult === 3){
-        if(document.getElementById("ID_Draw_Div").lastElementChild && document.getElementById("ID_Draw_Div").lastElementChild.getAttribute("data-winstays") === "yes")
-        document.getElementById("ID_Draw_Div").lastElementChild.remove();
-        document.getElementById("ID_Draw_Div").appendChild(tally_img);
-      };
-  });
+  document.getElementById("ID_NewGame_Button").addEventListener("click", ()=>{Start_New_Game(gameResult)});
   //#endregion
-}
+};
 //#endregion
+
+  /*    ============== 
+!          Start a New Game
+            =============== */
+function Start_New_Game(gameResult){
+  // console.log("Entered New Game function.");
+
+// Disable special styling for Settings Menu during End-Screen
+document.getElementById("ID_Settings_Menu").setAttribute("data-endscreen",  "no");
+document.getElementById("ID_Setting_Span").setAttribute("data-endscreen",  "no");
+
+//Make sure the stats are up to date
+Stats();
+
+Game.state = "InGame";
+
+//#region Reset Game
+const topCellsArray = document.getElementsByClassName("Class_TopCells");
+const cellsArray = document.getElementsByClassName("Class_Cells");
+// Remove TopCell Style classes collected during the Game and End-Screen & unlock the placement function again
+for (let topCell of topCellsArray) {
+topCell.classList.remove("Class_Top_End");
+topCell.innerText = "";
+topCell.style = "pointer-events:auto";
+topCell.classList.remove("Class_Full_Column");
+}
+
+// Set the collected sttributes to "no"
+for (let cell of cellsArray) {
+cell.setAttribute("isPlayed", "no");
+cell.setAttribute("winChain", "no");
+}
+
+// Show the "Player ... is on turn"-Infobox and the "Thinking-Effectt" again
+if (turn_text && turn_text.classList.contains("Class_Invisible"))
+turn_text.classList.remove("Class_Invisible");
+if (
+document.getElementById("ID_Thinking_Div") &&
+document
+  .getElementById("ID_Thinking_Div")
+  .classList.contains("Class_Invisible")
+)
+document
+  .getElementById("ID_Thinking_Div")
+  .classList.remove("Class_Invisible");
+
+// Trigger next Player is on turn, so the loser of this reound starts the next round.
+Turning_PlayerIsOnTurn();
+
+// If the win was from Human Player 1 and it is a game against the CPU, start next round
+if (gameResult === 1 && Game.Game_against_KI === true) {
+Game.KI_Level === "Easy" ? KI_Easy() : KI_Normal();
+}
+
+// Reset the Gameboard in Game Object
+for (let x = 1; x < 8; x++) {
+Game.actualGameboardPlayer1[`C${x}`].length = 0;
+Game.actualGameboardPlayer2[`C${x}`].length = 0;
+}
+
+// Reset Gameboard on screen
+for (let cell of cellsArray) {
+if (cell.classList.contains("Class_PlacedCoin_1"))
+  cell.classList.remove("Class_PlacedCoin_1");
+if (cell.classList.contains("Class_PlacedCoin_2"))
+  cell.classList.remove("Class_PlacedCoin_2");
+cell.style.opacity = 0.7;
+}
+
+// Reset round
+Game.roundCounter = 0;
+//#endregion
+
+// If there was firework, remove it
+if (document.getElementById("ID_Firework")) {
+document.getElementById("ID_Firework").remove();
+document.getElementById("ID_Canvas_Div").remove();
+}
+
+// Remove the Game End Screen
+document.getElementById('ID_MainWrapper').setAttribute('data-canvasend', 'no');
+document.getElementById('ID_End_H1').remove();
+document.getElementById('ID_End_Text').remove();
+document.getElementById('ID_End_Button_Div').remove();
+
+// Creat a new Gameboard!
+Create_Gameboard(Game.gameboard_sizeX, Game.gameboard_sizeY);
+document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'yes');
+
+//#region Win/Draw Notifications
+// Add Notificiation how many times a player have won / game was draw
+
+// Container
+if (Game.Player_1_wins > 0  && !document.getElementById("ID_Win_Div_One"))
+win_div_one = Create_DOM_Element({
+  ParentID: "ID_MainWrapper",
+  Element: "div",
+  ID: "ID_Win_Div_One"
+});
+if (Game.Player_2_wins > 0  && !document.getElementById("ID_Win_Div_Two"))
+win_div_two = Create_DOM_Element({
+  ParentID: "ID_MainWrapper",
+  Element: "div",
+  ID: "ID_Win_Div_Two"
+});
+if (Game.Draws > 0  && !document.getElementById("ID_Draw_Div"))
+draw_div = Create_DOM_Element({
+  ParentID: "ID_MainWrapper",
+  Element: "div",
+  ID: "ID_Draw_Div"
+});
+
+// Add Text
+if(Game.Language === "de"){
+    if(document.getElementById('ID_Win_Div_One')) document.getElementById('ID_Win_Div_One').innerText = 'Spiele gewonnen:';
+    if(document.getElementById('ID_Win_Div_Two'))   document.getElementById('ID_Win_Div_Two').innerText = 'Spiele gewonnen:';
+    if(document.getElementById('ID_Draw_Div'))  document.getElementById('ID_Draw_Div').innerText = 'Unentschieden:';
+  } else if (Game.Language === 'en'){
+    if(document.getElementById('ID_Win_Div_One')) document.getElementById('ID_Win_Div_One').innerText = 'Wons:';
+    if(document.getElementById('ID_Win_Div_Two')) document.getElementById('ID_Win_Div_Two').innerText = 'Wons:';
+    if(document.getElementById('ID_Draw_Div')) document.getElementById('ID_Draw_Div').innerText = 'Draws:';
+  }
+
+// Increas won games counter in Settings-Menu amd create correct notification on Game Screen
+const tally_img = document.createElement("img");
+tally_img.setAttribute("data-wincounter", "yes");
+
+// Get correct counter-values
+// Calculate correct tally: Because we only have 5 tallys and a Player can have f.e. 12 wins, we must calculated the corect tally. In this example: there have to be two 5er tally and one 2 tally.... 
+// My solution: Reset the counter variable to 1 every time it goes over 5
+let tally_counter_p1, tally_counter_p2, tally_counter_draws;
+Game.Player_1_wins !== 0 ? tally_counter_p1 = Game.Player_1_wins : tally_counter_p1 = 1;
+Game.Player_2_wins !== 0 ? tally_counter_p2 = Game.Player_2_wins : tally_counter_p2 = 1;
+Game.Draws !== 0 ? tally_counter_draws = Game.Draws : tally_counter_draws= 1;
+
+if (gameResult === 1){
+tally_img.id = "ID_Tally_IMG_P1";    
+if(Game.Player_1_wins === 6){
+      tally_counter_p1 = 1;
+    }
+} else if (gameResult === 2){
+tally_img.id = "ID_Tally_IMG_P2";   
+if(Game.Player_2_wins === 6){
+  tally_counter_p2 = 1;
+}
+} else if (gameResult === 3){
+tally_img.id = "ID_Tally_IMG_Draw";    
+if(Game.Draws === 6){
+  tally_counter_draws = 1;
+}
+};
+            if (tally_counter_p1 ===  1 || tally_counter_p2 ===  1 || tally_counter_draws ===  1) {tally_img.src =  './Folder_Graphics/tally/1.png'; tally_img.setAttribute("data-winstays", "no");
+  } else if (tally_counter_p1 ===  2 || tally_counter_p1 ===  2 || tally_counter_draws ===  2) {tally_img.src =  './Folder_Graphics/tally/2.png'; tally_img.setAttribute("data-winstays", "no");
+  } else if (tally_counter_p1 ===  3 || tally_counter_p1 ===  3 || tally_counter_draws ===  3) {tally_img.src =  './Folder_Graphics/tally/3.png'; tally_img.setAttribute("data-winstays", "no");
+  } else if (tally_counter_p1 ===  4 || tally_counter_p1 ===  4 || tally_counter_draws ===  4) {tally_img.src =  './Folder_Graphics/tally/4.png'; tally_img.setAttribute("data-winstays", "no");
+  } else if (tally_counter_p1 ===  5 || tally_counter_p1 ===  5 || tally_counter_draws ===  5) {tally_img.src =  './Folder_Graphics/tally/5.png'; tally_img.setAttribute("data-winstays", "yes");
+};
+
+if (gameResult === 1){
+// First proof if there is a taly in the Container and if it should be removed. If yes, remove the 1er, 2er, 3er and 4er tallys so if ist the 6 win, tally 5 + tally 1 are appended
+if(document.getElementById("ID_Win_Div_One").lastElementChild && document.getElementById("ID_Win_Div_One").lastElementChild.getAttribute("data-winstays") === "yes")
+document.getElementById("ID_Win_Div_One").lastElementChild.remove();
+// Append tally to DIV
+document.getElementById("ID_Win_Div_One").appendChild(tally_img);
+
+} else if (gameResult === 2){
+if(document.getElementById("ID_Win_Div_Two").lastElementChild && document.getElementById("ID_Win_Div_Two").lastElementChild.getAttribute("data-winstays") === "yes")
+document.getElementById("ID_Win_Div_Two").lastElementChild.remove();
+document.getElementById("ID_Win_Div_Two").appendChild(tally_img);
+
+} else if (gameResult === 3){
+if(document.getElementById("ID_Draw_Div").lastElementChild && document.getElementById("ID_Draw_Div").lastElementChild.getAttribute("data-winstays") === "yes")
+document.getElementById("ID_Draw_Div").lastElementChild.remove();
+document.getElementById("ID_Draw_Div").appendChild(tally_img);
+};
+
+//#endregion
+};

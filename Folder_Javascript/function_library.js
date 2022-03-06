@@ -722,7 +722,8 @@ function Create_DOM_Element(options, arrayOne, arrayTwo) {
     _max = options.Max,
     _value = options.Value,
     _placeholder = options.Placeholder,
-    _insertBefore = options.InsertBefore;
+    _attribute = options.Attribute;
+    _attribute_value = options.AttributeValue;
     _optionsArray = arrayOne,
     _valuesArray = arrayTwo;
 
@@ -749,6 +750,9 @@ function Create_DOM_Element(options, arrayOne, arrayTwo) {
   if (_value != undefined) element.min = _value;
   if (_placeholder != undefined) element.min = _placeholder;
 
+  // Attribute
+  element.setAttribute(`${_attribute}`, `${_attribute_value}`);
+
   // Dropdown-Menu Generator
   // Proof if both needed Arrays were passed
   if (
@@ -765,9 +769,7 @@ function Create_DOM_Element(options, arrayOne, arrayTwo) {
     }
   }
 
-  // Finally, push the complete dynamically created, finished object to the DOM with insert before...
-  if(_insertBefore !== undefined) {insertBefore(element, _insertBefore); return};
-  //...ao aspendChild!
+  // Finally, push the complete dynamically created, finished object to the DOM with appendChild!
   document.getElementById(_parentID).appendChild(element);
 
   /*
@@ -1080,9 +1082,9 @@ function applyClass(name,element,doRemove){
 }
 //#endregion
 
-                                                                                                  /* ========================
-                                                                                                  ?     My Javascript-Coding Guideline
-                                                                                                          =========================*/
+                                        /* ========================
+?                                              My Javascript-Coding Guideline
+                                                =========================*/
 
 //#region  My Javascript-Coding-Guideline
 /*

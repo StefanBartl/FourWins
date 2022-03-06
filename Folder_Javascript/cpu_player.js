@@ -37,6 +37,7 @@
 ?                               Jobs To-do:
 
 todo        -) Update whole CPU Player!
+todo        -) CPU not playing after Game-End
 
 ?                               Finish
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
