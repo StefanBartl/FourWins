@@ -1,32 +1,28 @@
 //#region Table of Content
 /*
-!                                        Four-Wins-Online Main-Javascript-File
-?                                                              powered by
-!                                                              Stefan Bartl
-!                                                (WKDSteVIE / WKDMinerva)
-?                                                                     2021             
-?                                     ________________________________________                                                                                                                                                                                                  
-!                                                              Table of content              
+!                  Four-Wins-Online Main-Javascript-File
+?                                      powered by
+!                                      Stefan Bartl
+!                        (WKDSteVIE / WKDMinerva)
+?                                            2021             
+?                  ________________________________                                                                                                                                                                                                  
+!                                     Table of content              
 
-                                                    1) General  Settings & Page Set-Up                                
-                                                                                                
-                                                    2) Main Game functions          
-                                                                                                
-                                                    3) Final Information & Comments                             
-                                                                                                
-                                                    4) Credits                                                            
-
-                                                                                                                                                                                                                                                                               */
+ ?                    1) General  Settings & Page Set-Up                                                                                                                            
+ ?                    2) Main Game functions          
+ ?                    3) Final Information & Comments                                                                                                                           
+ ?                    4) Credits                                                            
+*/
 //#endregion
 
 //#region Open Jobs
 /*
-?                               Jobs To-do:
+?                  Jobs To-do:
 
 todo    -) Wohnzimmer und Küche!
 todo    -) Rechnungen!
 
-?                               Finish
+?                  Finish
 
 todo    -) Info H angleichen und durchschauen!
 todo    -) Test all functions! Write the correct ' , infoboxes, headlines.
@@ -37,11 +33,10 @@ todo    -) Write a final Comment.
 todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "gloabl" Library for JS & CSS !
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 
-!                             Session progress
-?-) 
+!                  Session progress
 ?-) 
 
-                                                                                                                                                                                                                                                                                                                              */
+*/
 //#endregion
 
 //#region 1) General Settings & Set-Up Page
@@ -455,6 +450,14 @@ language_menu.addEventListener("change", () => {
       }
     }
   }
+});
+
+save_button.addEventListener('click', ()=>{
+
+}); 
+
+save_button.addEventListener('click', ()=>{
+
 });
 
 stats_reset_easy.addEventListener("click", () => {
@@ -893,7 +896,7 @@ function Player_2_Placement_Finish() {
 -) Highlight the winning chain!
 -) Make the Coin Images a variable _> User could choice between coin appearance!
 -) Implement Classic and Personal style!
--) Save Game function!
+-) Save /Load Game function via saving cell-states in localStorage!
 -) Improve KI Normal, especially the Diagonal Detection!
 -) Write a KI Heavy Algorhytmus!
 -) Make it possible to switch from Game Mode to the Starting Screen to change Settings, Names etc...

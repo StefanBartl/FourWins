@@ -1,44 +1,37 @@
 //#region Table of Content
 /*
-!                                        Four-Wins-Online Validation-JS-File
-?                                                           powered by
-!                                                           Stefan Bartl
-!                                              (WKDSteVIE / WKDMinerva)
-?                                                                 2021                                                                                                                                                                        
-?                               ________________________________________                                                                                                                                                                                                  
-!                                                           Table of content              
-
-                                                            1) Validators                                       
-                                                                                         
-                                                               - Top-Cell Validator        
-
-                                                                - Diagonal Validator                                
-                                                                                                                    
-                                                                - Column Validator                                  
-                                                                                                                    
-                                                                - Row Validator                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                               */
+!                  Four-Wins-Online Validation-JS-File
+?                                     powered by
+!                                      Stefan Bartl
+!                        (WKDSteVIE / WKDMinerva)
+?                                            2021                                                                                                                                                                        
+?                   ____________________________                                                                                                                                                                                                  
+!                                    Table of content              
+                                                                                                                             
+?                                 1) Top-Cell Validator        
+?                                 2) Diagonal Validator                                                                                                 
+?                                 3) Column Validator                                                                             
+?                                 4) Row Validator                                                                                                                                                                                                                                                                                                                                        
+*/
 //#endregion
 
 //#region Open Jobs
 /*
-?                               Jobs To-do:
+?                  Jobs To-do:
 
 todo    -)
 
-?                               Finish
+?                  Finish
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo    -) Final formatation.
 todo    -) Make sure all important is commented.
 todo    -) Write a final Comment.
 
-!                             Session progress
+!                  Session progress
 ?-) 
 
-                                                                                                                                                                                                                                                                                                                              */
+*/
 //#endregion
-
-//#region 1) Validators
 
 /* =====================
 !     Lock Top-Cell if full Column 
@@ -229,5 +222,3 @@ function Row_Validator(player, column) {
   }
   //(Under construction for winChain!)
 }
-
-//#endregion

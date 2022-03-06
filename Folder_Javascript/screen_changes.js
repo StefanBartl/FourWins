@@ -15,20 +15,20 @@
 
 //#region Open Jobs
 /*
-?                               Jobs To-do:
+?                  Jobs To-do:
 
 todo    -)
 
-?                               Finish
+?                  Finish
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo    -) Final formatation.
 todo    -) Make sure all important is commented.
 todo    -) Write a final Comment.
 
-!                             Session progress
+!                  Session progress
 ?-) 
 
-                                                                                                                                                                                                                                                                                                                              */
+*/
 //#endregion
 
 //#region 1) Toggle between Start and Game Screen

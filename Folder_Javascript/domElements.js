@@ -11,19 +11,17 @@
 ?                                 1) Container & Wrapper                                                                                                                              
 ?                                 2) Text, Inputs, Images,...
 ?                                 3) Settings-Menu
-?                                 4) Global Counters                                                                                               
-?                                 5) Final Information & Comments                                                                                                                             
-?                                 6) Credits                                                            
+?                                 4) Global Counters                                                                                                                                                    
 */
 //#endregion
 
 //#region Open Jobs
 /*
-?                               Jobs To-do:
+?                  Jobs To-do:
 
 todo        -)
 
-?                               Finish
+?                  Finish
 todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo        -) Final formatation.
 todo        -) Make sure all important is commented.
@@ -32,7 +30,7 @@ todo        -) Write a final Comment.
 !                             Session progress
 ?-) 
 
-                                                                                                                                                                                                                                                                                                                              */
+*/
 //#endregion
 
 //#region 1) Container & Wrapper
@@ -75,6 +73,9 @@ const toggle_colour_button = document.getElementById("ID_Toggle_Button");
 const toggle_colour_slider = document.getElementById("ID_Colour_Slider");
 const language_h = document.getElementById("ID_Language");
 const language_menu = document.getElementById("ID_Language_Menu");
+const saveload_h = document.getElementById('ID_SaveLoad_Game_h');
+const save_button = document.getElementById('ID_Save_Button');
+const load_button = document.getElementById('ID_Load_Button');
 const select_deutsch = document.getElementById("ID_Deutsch");
 const select_english = document.getElementById("ID_English");
 const contact_h = document.getElementById("ID_Contact");

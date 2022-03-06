@@ -1,35 +1,9 @@
- <!--#region Table of Content -->
-                                                                                                                                                                                                                                                                                                                                                <!--
-!                                             Four-Wins-Online Main-HTML File
-?                                                               powered by
-!                                                                Stefan Bartl
-!                                                     (WKDSteVIE / WKDMinerva)
-?                                                                     2021                                                                                                                                    
-?                                     ________________________________________                                                                                                                                                                                                  
-!                                                           Table of content              
-
-                                                    1.                                 
-                                                                                                
-                                                    2.           
-                                                                                                
-                                                    3. Final Information & Comments                             
-                                                                                                
-                                                    4. Credits           
-
---><!-- #endregion -->
-
- <!--#region Jobs To-do -->
-                                                                                                                                                                                                                                                                                                                                                <!--
-?                                               Jobs To-do:
-
+<!--#region Jobs To-do -->                                                                                                                                                                                                                                                                                                                                               <!--
+?                        Jobs To-do:
 todo        -) Comment and Style it
-
-!                             Session progress
+!                      Session progress
 ?-) 
-
 --><!-- #endregion -->
-
-
 <!DOCTYPE html>
 <html lang="de">
   <head>
@@ -63,146 +37,151 @@ todo        -) Comment and Style it
 
   <body>
 
-    <header class="Class_HeaderWrapper" id="ID_Header">
-      <h1 class="Class_HeadlineTop" id="ID_Headline"></h1>
-      <p id="ID_Header_p"></p>
-    </header>
+        <header class="Class_HeaderWrapper" id="ID_Header">
+          <h1 class="Class_HeadlineTop" id="ID_Headline"></h1>
+          <p id="ID_Header_p"></p>
+        </header>
 
-    <div class='Class_MainWrapper' id='ID_MainWrapper' data-ingame='no'>
-      <section class="Class_LeftSidebarWrapper" id="ID_LeftSidebarWrapper">
-        <div class="Class_Sidebars">
-          <h3 class="Class_Players" id="ID_Player_1_Headline"></h3>
-          <span class="Class_Naming_Span">
-            <input
-              type="text"
-              max="15"
-              id="ID_Player_1_Name"
-              name="Player_1_ Name"
-            />
-            <img
-              src="./Folder_Graphics/Folder_Icons/simpleicons_org/circleci.svg"
-              id="ID_SVG_Player_1"
-              class="Class_Player_Name_Buttons"
-              for="Player_1_Name"
-            />
+        <div class='Class_MainWrapper' id='ID_MainWrapper' data-ingame='no'>
+          <section class="Class_LeftSidebarWrapper" id="ID_LeftSidebarWrapper">
+            <div class="Class_Sidebars">
+              <h3 class="Class_Players" id="ID_Player_1_Headline"></h3>
+              <span class="Class_Naming_Span">
+                <input
+                  type="text"
+                  max="15"
+                  id="ID_Player_1_Name"
+                  name="Player_1_ Name"
+                />
+                <img
+                  src="./Folder_Graphics/Folder_Icons/simpleicons_org/circleci.svg"
+                  id="ID_SVG_Player_1"
+                  class="Class_Player_Name_Buttons"
+                  for="Player_1_Name"
+                />
+              </span>
+            </div>
+          </section>
+
+          <section class="Class_RightSidebarWrapper" id="ID_RightSidebarWrapper">
+            <div class="Class_Sidebars">
+              <h3 class="Class_Players" id="ID_Player_2_Headline"></h3>
+              <span class="Class_Naming_Span">
+                <img
+                  src="./Folder_Graphics/Folder_Icons/simpleicons_org/circleci _GESPIEGELTxcf.png"
+                  id="ID_SVG_Player_2"
+                  class="Class_Player_Name_Buttons"
+                  for="Player_2_Name"
+                />
+                <input
+                  type="text"
+                  max="15"
+                  id="ID_Player_2_Name"
+                  name="Player_2_ Name"
+                />
+              </span>
+            </div>
+          </section>
+        </div>
+
+        <footer class="Class_FooterWrapper" id="ID_FooterWrapper">
+          <div id="ID_Choose_KI_Div">
+            <h6 id="ID_Play_Against"></h6>
+            <select name="Choose_KI" id="ID_Choose_KI">
+              <option value="No" id="ID_No"></option>
+              <option value="CPU Easy" id="ID_Easy_Text" selected></option>
+              <option value="CPU Normal" id="ID_Normal_Text"></option>
+            </select>
+          </div>
+          <button type="button" id="ID_Start_Button" class="Buttons"></button>
+        </footer>
+
+        <div class="Class_Settings_Menu" id="ID_Settings_Menu">
+          <span id="ID_Setting_Span" data-endscreen="no">
+            <div id="ID_Info_Container">
+              <h3 id="ID_Info"></h3>
+            </div>
+            <span id="ID_Gameboard_Span" data-ingame="no" data-gamend="no">
+              <h3 id="ID_Gameboard_h"></h3>
+            <div id="ID_Gameboard_Size_Container">
+              <input type="number" name="gameboard_size_x" id="ID_Gameboard_Size_X" min="1" max="14" placeholder="1-14" value="7"/>
+              <input type="number" name="gameboard_size_y" id="ID_Gameboard_Size_Y" min="1" max="14" placeholder="1-14" value="6"/>
+
+              <button id="ID_Gameboard_Size_Button"></button>
+            </div>
+          </span>
+            <div id="ID_Colour_Container">
+              <h3 id="ID_Label_Colour"></h3>
+              <div class="Class_Colour_Toggle">
+                <span class="Class_Colour_Slider" id="ID_Colour_Slider"
+                  ><div id="ID_Toggle_Button"></div
+                ></span>
+              </div>
+            </div>
+            <div id="ID_Sound_Container">
+              <h3 id="ID_Sound"></h3>
+              <input type="checkbox" id="ID_Sound_Checkbox" />
+            </div>
+            <div id="ID_Language_Container">
+              <h3 id="ID_Language"></h3>
+              <select name="LanguageMenu" id="ID_Language_Menu">
+                <option value="Deutsch" id="ID_German" selected>Deutsch</option>
+                <option value="English" id="ID_English">English</option>
+              </select>
+            </div>
+            <div id="ID_SaveLoad_Game_Container">
+              <h3 id="ID_SaveLoad_h"></h3>
+              <button id="ID_Save_Button"></button>
+              <button id="ID_Load_Button"></button>
+            </div>
+            <div id="ID_Stats_Container">
+              <h4 id="ID_Stats"></h4>
+              <div class="Class_StatsWrapper" id="ID_Stats_First_Wrapper">
+                <h5 id="ID_Stats_Summary_Easy"></h5>
+                <details class="Class_Summary_Details">
+                  <summary id="ID_Stats_Easy"></summary>
+                  <span class="Class_Settings_Summarys"
+                    ><p id="ID_Easy_1">0</p>
+                    /
+                    <p id="ID_Easy_2">0</p>
+                    /
+                    <p id="ID_Easy_3">0</p></span
+                  >
+                  <button id="ID_Reset_Easy" class="Class_Reset_Buttons">
+                    Reset CPU Easy
+                  </button>
+                </details>
+              </div>
+              <div class="Class_StatsWrapper" id="ID_Stats_Second_Wrapper">
+                <h5>Normal</h5>
+                <details class="Class_Summary_Details">
+                  <summary id="ID_Stats_Normal"></summary>
+                  <span class="Class_Settings_Summarys"
+                    ><p id="ID_Normal_1">0</p>
+                    /
+                    <p id="ID_Normal_2">0</p>
+                    /
+                    <p id="ID_Normal_3">0</p></span
+                  >
+                  <button id="ID_Reset_Normal" class="Class_Reset_Buttons">
+                    Reset CPU Normal
+                  </button>
+                </details>
+              </div>
+            </div>
+            <div id="ID_Contacts_Container">
+              <h3 id="ID_Contact"></h3>
+            </div>
+            <div id="ID_Credits_Container">
+              <h3 id="ID_Credits"></h3>
+            </div>
+            <div id="ID_Delete_All_Container">
+              <button id="ID_Delete_All"></button>
+            </div>
           </span>
         </div>
-      </section>
 
-      <section class="Class_RightSidebarWrapper" id="ID_RightSidebarWrapper">
-        <div class="Class_Sidebars">
-          <h3 class="Class_Players" id="ID_Player_2_Headline"></h3>
-          <span class="Class_Naming_Span">
-            <img
-              src="./Folder_Graphics/Folder_Icons/simpleicons_org/circleci _GESPIEGELTxcf.png"
-              id="ID_SVG_Player_2"
-              class="Class_Player_Name_Buttons"
-              for="Player_2_Name"
-            />
-            <input
-              type="text"
-              max="15"
-              id="ID_Player_2_Name"
-              name="Player_2_ Name"
-            />
-          </span>
-        </div>
-      </section>
-    </div>
-
-    <footer class="Class_FooterWrapper" id="ID_FooterWrapper">
-      <div id="ID_Choose_KI_Div">
-        <h6 id="ID_Play_Against"></h6>
-        <select name="Choose_KI" id="ID_Choose_KI">
-          <option value="No" id="ID_No"></option>
-          <option value="CPU Easy" id="ID_Easy_Text" selected></option>
-          <option value="CPU Normal" id="ID_Normal_Text"></option>
-        </select>
-      </div>
-      <button type="button" id="ID_Start_Button" class="Buttons"></button>
-    </footer>
-
-    <div class="Class_Settings_Menu" id="ID_Settings_Menu">
-      <span id="ID_Setting_Span" data-endscreen="no">
-        <div id="ID_Info_Container">
-          <h3 id="ID_Info"></h3>
-        </div>
-        <span id="ID_Gameboard_Span" data-ingame="no" data-gamend="no">
-          <h3 id="ID_Gameboard_h"></h3>
-        <div id="ID_Gameboard_Size_Container">
-          <input type="number" name="gameboard_size_x" id="ID_Gameboard_Size_X" min="1" max="14" placeholder="1-14" value="7"/>
-          <input type="number" name="gameboard_size_y" id="ID_Gameboard_Size_Y" min="1" max="14" placeholder="1-14" value="6"/>
-
-          <button id="ID_Gameboard_Size_Button"></button>
-        </div>
-      </span>
-        <div id="ID_Colour_Container">
-          <h3 id="ID_Label_Colour"></h3>
-          <div class="Class_Colour_Toggle">
-            <span class="Class_Colour_Slider" id="ID_Colour_Slider"
-              ><div id="ID_Toggle_Button"></div
-            ></span>
-          </div>
-        </div>
-        <div id="ID_Sound_Container">
-          <h3 id="ID_Sound"></h3>
-          <input type="checkbox" id="ID_Sound_Checkbox" />
-        </div>
-        <div id="ID_Language_Container">
-          <h3 id="ID_Language"></h3>
-          <select name="LanguageMenu" id="ID_Language_Menu">
-            <option value="Deutsch" id="ID_German" selected>Deutsch</option>
-            <option value="English" id="ID_English">English</option>
-          </select>
-        </div>
-        <div id="ID_Stats_Container">
-          <h4 id="ID_Stats"></h4>
-          <div class="Class_StatsWrapper" id="ID_Stats_First_Wrapper">
-            <h5 id="ID_Stats_Summary_Easy"></h5>
-            <details class="Class_Summary_Details">
-              <summary id="ID_Stats_Easy"></summary>
-              <span class="Class_Settings_Summarys"
-                ><p id="ID_Easy_1">0</p>
-                /
-                <p id="ID_Easy_2">0</p>
-                /
-                <p id="ID_Easy_3">0</p></span
-              >
-              <button id="ID_Reset_Easy" class="Class_Reset_Buttons">
-                Reset CPU Easy
-              </button>
-            </details>
-          </div>
-          <div class="Class_StatsWrapper" id="ID_Stats_Second_Wrapper">
-            <h5>Normal</h5>
-            <details class="Class_Summary_Details">
-              <summary id="ID_Stats_Normal"></summary>
-              <span class="Class_Settings_Summarys"
-                ><p id="ID_Normal_1">0</p>
-                /
-                <p id="ID_Normal_2">0</p>
-                /
-                <p id="ID_Normal_3">0</p></span
-              >
-              <button id="ID_Reset_Normal" class="Class_Reset_Buttons">
-                Reset CPU Normal
-              </button>
-            </details>
-          </div>
-        </div>
-        <div id="ID_Contacts_Container">
-          <h3 id="ID_Contact"></h3>
-        </div>
-        <div id="ID_Credits_Container">
-          <h3 id="ID_Credits"></h3>
-        </div>
-        <div id="ID_Delete_All_Container">
-          <button id="ID_Delete_All"></button>
-        </div>
-      </span>
-    </div>
-
-    <!-- #region Javascript-Files-->
+  <!-- #region Javascript-Files-->
     <script
       type="text/javascript"
       src="Folder_Javascript/domElements.js"
@@ -226,20 +205,6 @@ todo        -) Comment and Style it
     ></script>
     <script type="text/javascript" src="Folder_Javascript/script.js"></script>
     <!-- #endregion -->
+  
   </body>
 </html>
-
-<!--
- 
-                                                                                                        /* ======================
-                                                                                                        ?     My HTML-Coding Guideline
-                                                                                                                =======================*/
--->
-    <!--#region HTML-Check & Infolist -->
-<!--
- Emmet: 
-               Emmet snippet Lorem*10 erzeugt 10 Lorem Ipsum Sätze.  
-
--->
-
-    <!-- #endregion -->

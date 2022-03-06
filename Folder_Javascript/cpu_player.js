@@ -1,58 +1,44 @@
 //#region Table of content
 /*
-!                                         Four-Wins-Online CPU_Player-JS-File
-?                                                              powered by
-!                                                                Stefan Bartl
-!                                                     (WKDSteVIE / WKDMinerva)
-?                                                                    2021                                                                                                                                                                        
-?                                  ________________________________________                                                                                                                                                                                                  
-!                                                           Table of content              
-
-?                                             1) CPU Player Algorhytmus                              
-                                                                                                        
-                                                    - KI Placement                                      
-                                                                                                        
-                                                    - KI Easy                                           
-                                                                                                            
-                                                    - KI Normal                                         
-                                                                                                        
-                                                    - KI Hard                                           
-                                                                                                        
-                                                    - Randomizer                                                                                                                                                                                                                              
-                                                                                                        
-                                                    - Detect 3 Coin Chains Diagonal                                                                                                                                                                                                                                 
-                                                                                                        
-                                                    - Detect 3 Coin Chains Upwards                                                                                                                                                                                                                                     
-                                                                                                        
-                                                    - Detect 3 Coin Chains Sideways                                
-                                                                                                        
-                                                    - Get Valid Upwards Placement                                                                                                                                                                                                                                  
-                                                                                                                                                                                                                                                                                        
-                                                    - Get Valid Sideways Placement                                                                                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                                                  */
+!                  Four-Wins-Online CPU_Player-JS-File
+?                                       powered by
+!                                        Stefan Bartl
+!                          (WKDSteVIE / WKDMinerva)
+?                                              2021                                                                                                                                                                        
+?                  ________________________________                                                                                                                                                                                                  
+!                                       Table of content                                         
+                                                                                             
+?                                    - KI Placement                                                                                                                                              
+?                                    - KI Easy                                           
+?                                    - KI Normal                                                                                                                                                
+?                                    - KI Hard                                           
+?                                    - Randomizer                                                                                                        
+?                                    - Detect 3 Coin Chains Diagonal                                                                                                                                                                                                                                                                                 
+?                                    - Detect 3 Coin Chains Upwards                                                                                                                                                                                                                                                           
+?                                    - Detect 3 Coin Chains Sideways                                                     
+?                                    - Get Valid Upwards Placement                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+?                                    - Get Valid Sideways Placement                                                                                                                                                                               
+*/
 //#endregion
 
 //#region Open Jobs
 /*
-?                               Jobs To-do:
+?                  Jobs To-do:
 
 todo    -) Update whole CPU Player!
 todo    -) CPU not playing after Game-End
-todo    -) Better Table of Content=    
 
-?                               Finish
+?                  Finish
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo    -) Final formatation.
 todo    -) Make sure all important is commented.
 todo    -) Write a final Comment.
 
-!                             Session progress
+!                  Session progress
 ?-) 
 
-                                                                                                                                                                                                                                                                                                                              */
+*/
 //#endregion
-
-//#region 1) CPU Player Algrorhytm
 
 /* ==========
 !     KI Placement 
@@ -72,7 +58,7 @@ function KI_Placement(valid_number) {
   setTimeout(() => {
     Unlock_TopCells();
   }, 1000);
-}
+};
 
 /* ==================
 !     Easy-CPU Algorhytmus 
@@ -96,7 +82,7 @@ Function to let KI Easy produce a random, but valid number for placement
     // console.log("KI Easy makes placement in column:", random number);
     Thinking_Effect(true, random_number);
   } else KI_Easy();
-}
+};
 
 /* ====================
 !     Normal-CPU Algorhytmus 
@@ -178,7 +164,7 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
     KI_Easy();
     return;
   }
-}
+};
 
 /* ==================
 !     Hard-CPU Algorhytmus 
@@ -191,7 +177,7 @@ try to avoid upwards, sideways and diagonal finishing moves from Human Player an
 Also prefer make placements on a 2 Coin chain, also in all three directions.
 */
   // Code here... :-)
-}
+};
 
 /* =================
 !     Placement-Randomizer 
@@ -217,7 +203,7 @@ function Randomizer(arr1, arr2) {
 
   //console.log("Randomizer has choosen a column: " + valid_number);
   return valid_number;
-}
+};
 
 /* =======================
 !     Detect diagonal 3 Coin-Chains 
@@ -340,7 +326,7 @@ function Detect_3_Coin_Chains_Diagonal() {
   }
 
   //#endregion
-}
+};
 
 /* ========================
 !     Detect horizontal 3 Coin-Chains 
@@ -469,7 +455,7 @@ function Detect_3_Coin_Chains_Upwards() {
   ) {
     return 7;
   }
-}
+};
 
 /* =====================
 !     Detect vertival 3 Coin-Chains (!BUGGY!) 
@@ -761,7 +747,7 @@ function Detect_3_Coin_Chains_Sideways() {
         return 2;
     }
   }
-}
+};
 
 /* ======================
 !     Upwards-Placement Detection 
@@ -816,7 +802,7 @@ function Get_Valid_Upwards_Placemement() {
 
   // If finished return all valid columns
   if (valid_number_array.length > 0) return valid_number_array;
-}
+};
 
 /* ======================
 !     Sideways-Placement Detection 
@@ -1032,5 +1018,4 @@ function Get_Valid_Sideways_Placement() {
   let unique_valid_number_array = valid_number_array.filter(onlyUnique);
   //console.log("Sideways array after filter out: " + unique_valid_number_array);
   if (unique_valid_number_array.length > 0) return unique_valid_number_array;
-}
-//#endregion
+};
