@@ -464,9 +464,6 @@ footer {
 
 #ID_Info_Container,
 #ID_Gameboard_Size_Span,
-#ID_Colour_Container,
-#ID_Sound_Container,
-#ID_Language_Container,
 #ID_Stats_Container,
 #ID_Delete_All_Container {
   min-width: 100%;
@@ -477,18 +474,85 @@ footer {
   justify-content: center;
 }
 
-#ID_Contacts_Container,
-#ID_Credits_Container {
-  min-width: 100%;
-  min-height: 2rem;
+#ID_Info_Container{
+    border-bottom: dashed 4px red;
+}
+
+#ID_Mechanic_Settings{
+  border-block: dashed 4px red;
+  margin-block: 2em;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
 
-#ID_Gameboard_Span{
+
+#ID_Colour_Container,
+#ID_Language_Container,
+#ID_Sound_Container{
+  min-width: 100%;
   margin-block: 1em;
+  height: 2em;
+}
+
+#ID_Colour_Container h3,
+#ID_Language_Container h3,
+#ID_Sound_Container h3{
+  margin-bottom: .5em;
+}
+
+
+#ID_Label_Colour{
+ 
+}
+
+.Class_Colour_Toggle {
+  min-width: 100%;
+  height: 40%;
+  display: flex;
+}
+
+#ID_Sound_Checkbox {
+  height: 1.5rem;
+  box-shadow: 0 0 1rem black;
+  border-radius: 20%;
+}
+
+#ID_Sound_Checkbox:hover {
+  box-shadow: none;
+}
+
+#ID_Language_Menu {
+  cursor: pointer;
+  width: 50%;
+  height: 1.5rem;
+  border: none;
+  margin-bottom: 1em; 
+}
+
+#ID_Contacts_Container{
+  margin-top: 2em;  
+  border-top: dashed 4px red;
+}
+
+#ID_Contacts_Container,
+#ID_Credits_Container{
+  min-width: 100%;
+  min-height: 2rem;
+  padding-top: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#ID_Delete_All_Container{
+  padding-top: 2em;
+}
+
+#ID_Gameboard_Span{
+  margin-top: 1em;
 }
 
 #ID_Gameboard_Span h3{
@@ -501,17 +565,17 @@ footer {
   justify-items:center;
   align-items:baseline;
   gap: 1rem;
-  margin-inline: 1rem;
-  margin-bottom: 1rem;
+  margin-inline: 1em;
+  margin-bottom: -1em;
 }
 #ID_Gameboard_Size_Container input {
     width: 80%;
-    margin-block: auto;  
+    margin-top: : auto;  
 }
 
 #ID_Gameboard_Size_Container button {
   width: 80%;
-  height: 2rem;;
+  height: 2em;;
 }
 
 /* =========
@@ -526,10 +590,6 @@ footer {
 #ID_Contact,
 #ID_Credits {
   min-width: 100%;
-}
-
-#ID_Label_Colour{
- 
 }
 
 #ID_Info,
@@ -582,23 +642,12 @@ footer {
 }
 
 
-#ID_Colour_Container h3,
-#ID_Language_Container h3,
 #ID_Stats_Container h3 {
   height: 2rem;
   padding-top: 1em;
 }
 
-#ID_Sound_Container h3{
-  height: 2rem;
-  padding-top: 1em;
-}
 
-.Class_Colour_Toggle {
-  min-width: 100%;
-  height: 40%;
-  display: flex;
-}
 
 /* #endregion */
 
@@ -654,19 +703,7 @@ input:focus {
   box-shadow: inset 0 0 1rem white;
 }
 
-/* =========
-!     checkboxes 
-            ========= */
 
-#ID_Sound_Checkbox {
-  height: 1.5rem;
-  box-shadow: 0 0 1rem black;
-  border-radius: 20%;
-}
-
-#ID_Sound_Checkbox:hover {
-  box-shadow: none;
-}
 
 /* ======
 !     buttons 
@@ -769,13 +806,6 @@ select:hover {
   border-radius: 10rem;
 }
 
-#ID_Language_Menu {
-  cursor: pointer;
-  width: 50%;
-  height: 1.5rem;
-  border: none;
-  margin-bottom: 1em; 
-}
 
 /* =====
 !     toggle 

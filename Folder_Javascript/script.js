@@ -19,8 +19,7 @@
 //#region Open Jobs
 /*
 ?                  Jobs To-do:
-todo    -) Info OK and Delete-All Cancel Buttons in owmn WIndows not working
-
+todo    -)
 ?                  Finish
 todo    -) Test all functions! All Game variants! Draw! Write the correct ' , infoboxes, headlines.
 todo    -) Update Function Headlines and find a way for infoboxes with description and additional infos! Maybe like in KI Easy.
@@ -69,10 +68,6 @@ clicked_TopCell_ID: "",
   player_Colour_Left: "yellow",
   Sound: true,
   state: "startingScreen",
-};
-
-const Windows = {
-  // Object for storing returned Values from own Alert / Confirm / Prompt Windows
 };
 
 Create_Gameboard(7, 6);
@@ -495,6 +490,12 @@ delete_all.addEventListener("click", () => {
       localStorage.clear();
       //console.log('Local Storage deleted');
     });
+
+    //Reset name inputs
+    player_1_name.value = player_1_name.placeholder;
+    Game.player_1_name = player_1_name.placeholder;
+    player_2_name.value = player_2_name.placeholder;
+    Game.player_2_name = player_2_name.placeholder;
 });  
 
 //#endregion
