@@ -142,7 +142,14 @@ select {
 !     fonts 
             ===== */
 
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+
+/* 
+  Handwriting
+font-family: 'Comforter Brush', cursive;
+*/
+@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
 
 /* #endregion */
 
@@ -157,8 +164,8 @@ body {
   align-items: center;
   text-align: center;
   display: grid;
-  grid: 15vh auto 15vh / 1fr;
-  font-family: "Bebas Neue", cursive;
+  grid: 20vh auto auto / 1fr;
+  font-family: 'Anton', sans-serif;
 }
 
 /* ==========
@@ -175,7 +182,7 @@ header {
 
 .Class_MainWrapper {
   display: grid;
-  grid: auto / 30vw auto 30vw;
+  grid: auto / 30% auto 30%;
   grid-template-areas: "leftSide gameboard rightSide";
 }
 
@@ -194,29 +201,14 @@ footer {
 
 .Class_LeftSidebarWrapper {
   grid-area: leftSide;
-  display: grid;
-  grid: repeat(4, 1fr) / 1fr;
-  grid-template-areas:
-    " . "
-    " sidebar "
-    " . "
-    " . ";
 }
 
 .Class_RightSidebarWrapper {
   grid-area: rightSide;
   z-index: 1;
-  display: grid;
-  grid: repeat(4, 1fr) / 1fr;
-  grid-template-areas:
-    " . "
-    " sidebar "
-    " . "
-    " . ";
 }
 
 .Class_Sidebars {
-  border-top: solid 1px var(--base-border);
   border-bottom: solid 1px var(--base-border);
   grid-area: sidebar;
   display: flex;
@@ -224,7 +216,8 @@ footer {
 }
 
 .Class_Sidebars h3{
-  margin-top: auto;
+  border-top: solid 1px var(--base-border);
+  margin-top: 20%;
 }
 
 /* =========
@@ -259,13 +252,13 @@ footer {
 footer {
   display: grid;
   grid: 1fr / repeat(8, 1fr);
-  grid-gap: 2rem;
 }
 
 #ID_Choose_KI_Div {
-  grid-column-start: 4;
+  grid-column-start: 3;
   grid-column-end: 5;
   margin-bottom: 2rem;
+  justify-self: flex-end;
 }
 
 #ID_Start_Button {
@@ -502,11 +495,6 @@ footer {
   margin-bottom: .5em;
 }
 
-
-#ID_Label_Colour{
- 
-}
-
 .Class_Colour_Toggle {
   min-width: 100%;
   height: 40%;
@@ -570,7 +558,7 @@ footer {
 }
 #ID_Gameboard_Size_Container input {
     width: 80%;
-    margin-top: : auto;  
+    margin-top: auto;  
 }
 
 #ID_Gameboard_Size_Container button {
@@ -581,6 +569,15 @@ footer {
 /* =========
 !     typography 
             ========= */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Comforter Brush', cursive;
+  margin-bottom:  .2em;
+}
+
+#ID_Play_Against{
+ font-size: large;
+}
 
 #ID_Info,
 #ID_Sound,
