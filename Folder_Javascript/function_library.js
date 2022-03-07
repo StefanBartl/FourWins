@@ -634,15 +634,10 @@ headline.innerText = _name;
 const textfield = document.createElement("p");
 textfield.innerText = _text;
 
-// Create OK Button
 const button_div = document.createElement("div");
 button_div.classList.add("Class_Buttons_Div");
-const confirm_button = document.createElement("button");
-confirm_button.id = `${_id}_OK_Button`;
-confirm_button.classList.add("Class_Window_Buttons");
-confirm_button.innerText = "OK";
 
-// Append it
+// Append
 inner_window.appendChild(headline);
 inner_window.appendChild(textfield);
 inner_window.appendChild(button_div);
@@ -652,18 +647,32 @@ if (_confirm === true || _prompt === true) {
   const cancel_button = document.createElement("button");
   cancel_button.innerText = "Cancel";
   cancel_button.addEventListener("click", () => {
-    window.classList.add('Class:Smooth_Out');
+    window.classList.add('Class_Smooth_Out');
     // After waiting for animation end, remove window
     setTimeout(()=>{
       window.remove();
-    }, 2000);
+    }, 100);
   });
   button_div.appendChild(cancel_button);
 };
 
+// Create Confirm Button
+  // Create OK Button
+  const confirm_button = document.createElement("button");
+  confirm_button.id = `${_id}_OK_Button`;
+  confirm_button.classList.add("Class_Window_Buttons");
+  confirm_button.innerText = "OK";
+  confirm_button.addEventListener("click", () => {
+    window.classList.add('Class_Smooth_Out');
+    // After waiting for animation end, remove window
+    setTimeout(()=>{
+      window.remove();
+    }, 100);
+  });
+  button_div.appendChild(confirm_button);
+
 // Invoke-Example Confirm: New_Window({ID: "ID_Test_Window", Name: "Test Window", Text: "Test Test Test", Confirm: true, Variable: "Tester"}); Find Confirm Boolean: Windows.Tester
 
-button_div.appendChild(confirm_button);
 window.appendChild(inner_window);
 document.body.appendChild(window);
 window.classList.add('Class_Smooth_In');
@@ -673,15 +682,18 @@ if (_prompt === true) {
   const user_input = document.createElement("input");
   user_input.type = "text";
   user_input.id = `${_id}_textinput`;
-  inner_window.insertBefore(user_input, inner_window.children[2]);
+  user_input.classList.add('Class_Window_User_Input');
+  inner_window.insertBefore(user_input, inner_window.children[3]);
+// If prompt and user clicked OK, send user input to....
+  confirm_button.addEventListener("click", () => {
+      //Example from "Four Wins"-Project:
+      Game[`${_id}_userInput`] = document.getElementById(`${_id}_textinput`).value;
+  });
 };
     // Invoke Example Prompt: New_Window({ID: "ID_Test_Window", Name: "Test Window", Text: "Test Test Test", Prompt: true, Variable: "Tester"}); Find Input value: Windows.Tester
 
 /*
 ?                                                Infobox: 
-
-Always have to create the OK Button Event Listener via WINDOW_ID_OK_Button.addEventListener so one 
-can make the window also a confirm window with add code in event listener which should fire after confirm!
 ! Example:
 document.getElementById('Window_OK_Button').addEventListener('click', ()=>{
 localStorage.clear();
@@ -694,7 +706,6 @@ document.getElementById('Window').remove();
 });
 
 Cancel Button removes windows by itself.
-Acces to user input of prompt via WINDOW_ID_textinput.value 
 Smooth in / Smooth Out Class recommended.
 */
 

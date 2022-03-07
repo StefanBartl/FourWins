@@ -19,6 +19,7 @@
 //#region Open Jobs
 /*
 ?                  Jobs To-do:
+todo    -) Info OK and Delete-All Cancel Buttons in owmn WIndows not working
 
 ?                  Finish
 todo    -) Test all functions! All Game variants! Draw! Write the correct ' , infoboxes, headlines.
@@ -492,14 +493,9 @@ delete_all.addEventListener("click", () => {
     // If user clicked OK after notification, delete local storage
     document.getElementById('ID_Delete_Window_OK_Button').addEventListener('click', ()=>{
       localStorage.clear();
-      console.log('Local Storage deleted');
-      document.getElementById('ID_Delete_Window').classList.add('Class_Smooth_Out');
-       // After waiting for animation end, remove window
-       setTimeout(()=>{
-        document.getElementById('ID_Delete_Window').remove();
-      }, 2000);
+      //console.log('Local Storage deleted');
     });
-    });  
+});  
 
 //#endregion
 
@@ -924,3 +920,4 @@ function Player_2_Placement_Finish() {
 ====================================================================================================================                                                                                                                                                               */
 
 //#endregion
+                  

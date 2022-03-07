@@ -29,12 +29,10 @@
 
 !                           Jobs To-Do: 
 
-todo    -) settingsmenu
 todo    -) Gameboard Style 
 todo    -) Game-End-Screen Style
 todo    -) data-x Attribute verwenden wo es Sinn macht.
 todo    -) Scrollbar rechts am starting Bildschirm muss weg, sonst funktioniert das Menu ästhetisch nicht mehr.
-todo    -) Settings Menu wird manchmal schwarz
 todo    -) :focus on all :hovers for Cross-Browser-Support!
 todo    -) Test and repair responsivness in all sizes! -> Menu muss von der Seite weg!
 todo    -) CSS-Code minimizing f.e. bind repetative Classes to one Class!
@@ -1112,7 +1110,7 @@ body[data-gameend = 'yes']{
 }
 
 .Class_Smooth_In {
-  animation: SmoothInAnimation 2s ease-in;
+  animation: SmoothInAnimation .1s ease-in;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
@@ -1127,7 +1125,7 @@ body[data-gameend = 'yes']{
 }
 
 .Class_Smooth_Out {
-  animation: SmoothOutAnimation 2s ease-out;
+  animation: SmoothOutAnimation .1s ease-out;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
