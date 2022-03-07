@@ -29,7 +29,6 @@
 
 !                           Jobs To-Do: 
 
-todo    -) Gameboard Style 
 todo    -) Game-End-Screen Style
 todo    -) data-x Attribute verwenden wo es Sinn macht.
 todo    -) Scrollbar rechts am starting Bildschirm muss weg, sonst funktioniert das Menu ästhetisch nicht mehr.
@@ -213,11 +212,13 @@ footer {
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
+  border-top: solid 1px var(--base-border);
+  margin-top: 20%;
+
 }
 
 .Class_Sidebars h3{
-  border-top: solid 1px var(--base-border);
-  margin-top: 20%;
+  margin-top: 1em;
 }
 
 /* =========
@@ -252,6 +253,7 @@ footer {
 footer {
   display: grid;
   grid: 1fr / repeat(8, 1fr);
+  gap: 1em;
 }
 
 #ID_Choose_KI_Div {
@@ -261,10 +263,6 @@ footer {
   justify-self: flex-end;
 }
 
-#ID_Start_Button {
-  grid-column-start: 5;
-  grid-column-end: 6;
-}
 
 /* #endregion */
 
@@ -554,7 +552,7 @@ footer {
   align-items:baseline;
   gap: 1rem;
   margin-inline: 1em;
-  margin-bottom: -1em;
+  margin-bottom: -3em;
 }
 #ID_Gameboard_Size_Container input {
     width: 80%;
@@ -922,7 +920,7 @@ select:hover {
 
 .Class_Buttons_Add_Hover_Animations_1 {
   cursor: pointer;
-  animation: Button_1_Add_Animation 2s;
+  animation: Button_1_Add_Animation .1s;
   animation-fill-mode: forwards;
 }
 
@@ -939,7 +937,7 @@ select:hover {
 }
 
 .Class_Buttons_Remove_Hover_Animations_1 {
-  animation: Button_1_Remove_Animation 2s;
+  animation: Button_1_Remove_Animation .5s;
   animation-fill-mode: forwards;
 }
 @keyframes Button_1_Remove_Animation {
@@ -956,7 +954,7 @@ select:hover {
 
 .Class_Buttons_Add_Hover_Animations_2 {
   cursor: pointer;
-  animation: Button_2_Add_Animation 2s;
+  animation: Button_2_Add_Animation .1s;
   animation-fill-mode: forwards;
 }
 
@@ -973,7 +971,7 @@ select:hover {
 }
 
 .Class_Buttons_Remove_Hover_Animations_2 {
-  animation: Button_2_Remove_Animation 2s;
+  animation: Button_2_Remove_Animation .5s;
   animation-fill-mode: forwards;
 }
 @keyframes Button_2_Remove_Animation {
@@ -1415,10 +1413,11 @@ https://www.mozilla.org/de/firefox/developer/
 https://developer.chrome.com/docs/devtools/
 -) In Konsole document.designMode = "on" stellen und man kann die Page verändern
 -) Page-Refresh CTRL+F 
+-) Zen-Mode STRG + #
 -) Wichtig: Um alle Browser anzugleichen, bei Designgruppen outline wegnehmen und dann für alle einen hover & focus machen!
 -) Chrome Dev Tools das Element auswählen, Button (links oben) nutzen um zb.: Text Kontrast ablesen zu können !
 -) Visbug nutzen!
--) Benutze 'yx' statt "yx", dann ist es leichter dem User die Möglichkeit "ab" zu geben
+-) Benutze '' statt "", dann ist es leichter dem User die Möglichkeit "" zu geben
 .
 ?         CSS-
 
