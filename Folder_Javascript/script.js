@@ -19,7 +19,7 @@
 //#region Open Jobs
 /*
 ?                  Jobs To-do:
-todo    -)
+todo    -)  CPU Game not give game back
 ?                  Finish
 todo    -) Test all functions! All Game variants! Draw! Write the correct ' , infoboxes, headlines.
 todo    -) Update Function Headlines and find a way for infoboxes with description and additional infos! Maybe like in KI Easy.
