@@ -1,0 +1,227 @@
+                                    /* ====================
+                                    ?     my css-coding guideline
+                                            =====================*/
+/* umgebung
+
+-) VS Studio Terminal hilft bei Tippfehler!
+-) Auskommentieren CTRL + K + C
+-) Chrome / Firefox Dev Browsers installieren -> Element - Layout - Styles to change CS properties, toggle states, analyze animations etc...
+    Tools nutzen!
+https://www.mozilla.org/de/firefox/developer/
+https://developer.chrome.com/docs/devtools/
+-) In Konsole document.designMode = "on" stellen und man kann die Page verändern
+-) Page-Refresh CTRL+F 
+-) Zen-Mode STRG + #
+-) Wichtig: Um alle Browser anzugleichen, bei Designgruppen outline wegnehmen und dann für alle einen hover & focus machen!
+-) Chrome Dev Tools das Element auswählen, Button (links oben) nutzen um zb.: Text Kontrast ablesen zu können !
+-) Visbug nutzen!
+-) Benutze '' statt "", dann ist es leichter dem User die Möglichkeit "" zu geben
+
+
+?         CSS
+
+todo cross-browser support
+        :focus überall wo :hover gesetzt wird
+
+todo box-sizing 
+        *, *::before, *::after  {box-sizing: border-box} nimmt alle width-heights von den bordern weg - agieren wie outline, aber in den Richtungen steuerbar.
+todo div
+        Default kein margin.
+todo    height
+   height: 100%;  Der Prozentwert bezieht sich auf das parent-Element. Wenn parent body{} ist und sonst kein Element angehängt ist, ist der Container (body) klein!
+   height: auto; Ist der Defaultwert und aus responsiven Gründen immer vorzuziehen wenn es geht. Ansonsten min-height - height: px; nur dann, wenn es sein muss!
+https://www.youtube.com/watch?v=SjYYfd7obug&t=272s
+todo     border
+    border: 0; entfernt die border width.
+todo     margin
+    margin-left: auto; --> nimmt den Platz rechts und halbiert ihn.
+    margin: auto; interresant für nav-Listen ul li:nth-of-type(5) selektiert das 5te li-Element inder Liste. Ist es das letzte li, kannst du es mit margin-left: auto; ganz nach rechts schieben! Ein zusätzliches  margin-rihgt: aut; centert es daann
+https://www.youtube.com/watch?v=3LlLkapKw6Q
+todo     Buttons
+    Animation mit brightness oder saturation langsam hoch fahren
+    Hat ein Button einen border, kannst du dem anderen einen Border in der Farbe seines Hintergrundes geben damit die width/height ausgeglichen wird.
+
+todo em / rem
+    Für Fonst-Size eher rem, für padding/margin eher em --> rem bleibt immer gleich solange root 16px bleibt , bei em wird das margin/paddingh höher wenn man die font size des elements  größer wird 
+      rem= follow the device pre-assigned font-size      em= follow your font-size parent,
+      normally the parent is <body>, if is not modified by you, it will be like 16px (depends on the browser)
+      so if you write 1em = you write 15px;  (rounded for simplicity)
+      2em = 30px
+      3em = 45px
+      1.5em = (1.5*15) -> 22px;
+      1- and that's is fantastic, because no need to write very long complex px or points numbers;
+      2 - just change the parent number to change all children size!
+      font-size it works with both text and svg.
+      be careful: EM can make bugs in your html, 
+      because if you select elements without specifying well, 
+      it can happen as in the video (or recursive things)
+      example: 
+      div {
+      font-size: 2em;
+      }
+      and you have nesting divs like this:
+      <div>
+          <div>
+                <div>
+                </div>
+          </div>
+      </div>
+      in that case is like recursive:
+      the first div have 2em size;
+      second 4em;
+      third 8em
+      because everyone is parent, so use IDs or class               
+
+?         Flexbox & Grid
+todo    margin-collapse
+      Sobald flex oder grid attached collapsen die block-margins nicht mehr. Das bedeutet zb.: wenn mehrerer columns nebeneinander sind und dann der screen kleiner wird verdoppeln sich die Abstände!
+      Besser: Margins ganz weglassen und mit Gap arbeiten. Alle flex-items verhalten sich so, auch h, p, usw... haben bei Block margins und verdoppeln sich. 
+?         CSS-Grid
+-) grid-template-columns
+  grid-template-columns: repeat(auto-fill / auto-fit, minmax(250px, 1fr)); => Row darf höchsten 1fr hoch sein und wenn es 250px wird macht Grid eine neue Row auf!
+https://www.youtube.com/watch?v=qII5BueXWD4
+?         CSS-Flexbox
+todo    flex-basis
+    Ist die ideale Größe für Container. In Verbindung mit flex-wrap kann man container (text) overflow verhindern.
+  ?         6 Outline-Button-Hover Effekte 
+  !                    by Kevin Powell   
+    https://www.youtube.com/watch?v=3LlLkapKw6Q
+    outline + padding erzeugt gerahmten Text, wenn dann :hover, focus {outline-offset: 2px}gesetzt wird erzuegt man einen "wird größer"-Effekt.
+              Das kann man auch mit transition unterstützen: zb.: 250ms ease ! 
+              Doppelter Rahmen Effekt nach außen: border: 2px; outline: 2px outline-offset: -2px for dem hover/focus, outline-offset: 2px in diesem.
+              Doppelter Rahmen Effekt nach innen: Dazu muss im focus/hover outline-offset: -6px gesetzt werden.
+              + wenn jetzt die Outline eine andere Farbe hat als Hintergrund+Border ergibt sich ein neues Effektbild. 
+              "Zoom"-Effekt.
+              Zweiliniger Rahmen, der nach hover ausgefüllt und verdoppelt wird.
+              
+-) Wiederholende values mit custom properties kaschieren.
+-) Wiederholenden Code gruppieren! 
+   h1, h3, btn, .Class_X {...}
+-) :is() Pseudoklasse verwenden: 
+   header:is(h3, p, .Class_Button, ....){....} gute Möglichkeit zum gruppieren.
+   
+   :is() umgekehrt:   
+   :is(header, .Class_X, ...) p:hover{...} wendet auf alle p in header und Class_x das :hover an!
+   Wichtig: Das Element mit der höchsten Spezifität setzt die ganze Gruppe darauf -> zb.: Klasse ist höher als p
+-) Attribute nutzen! Alles was gesetzt wurde, kann verwendet werden, auch zb.: 
+   a[href="about.html"], a[class=""], a[class|="link"] selektiert alle Klassen die mit "link" beginnen, aber das ganze Wort.
+   a{^="http"] selektiert alle http und https, 
+-) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
+-) ::after / ::before für zb.: Punkt -> Strich Animation, Icons über url, pdf files etc...
+-) Font Styling
+-) Use padding on text! like: padding: 2rem 0;
+/*
+-) Try get "this is 1 block to read, this is anothe rone,...."
+-) No text-align on large texts
+-) margin-inline , background-clip background-text-clip 
+-) Optimale textlänge mit clamp:    width: clamp(45ch, 50%, 75ch);
+-) ch als Eineheit benutzen!
+-) inset ist wie padding/margin! Zb.: el{ inset: 3rem 3rem 3rem 3rem }
+-) scroll-behaviour : smooth
+-) content-visibility auto
+-) Swiping: .container {scroll-snap-type: y mandatory} .child (muat be saection) {scroll-snap-align: start} 
+            create a anker point for swipping like tinder
+
+if/else
+:checked { if  }
+:not(:checked) { else  }
+[data-attr="true"] {  if   }
+[data-attr="false"] {  elseif  }
+:not([data-attr]) {  else }
+The following selector matches only <a> elements that directly contain an <img> child:
+a:has(> img)
+The following selector matches <h1> elements only if they have a <p> element directly following them:
+h1:has(+ p)
+*/
+
+/* trenner
+-) Trenner:
+     / =======  
+!        Functions
+           ======== /
+     / =======  
+?        Headlines
+           ======== /     
+ */
+               
+/* #region media queries */ /*
+      Max-Width - Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop 
+                  und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
+         Kleine Endgeräte (Smartphones, kleiner als 768px):
+               @media (max-width: 575.98px) { … }
+               @media (max-width: 767.98px) { … }
+         Kleine Endgeräte (Tablets, kleiner als 992px):
+               @media (max-width: 991.98px) { … }
+         Große Endgeräte (Laptops, Bildschirme, kleiner als 1200px):
+               @media (max-width: 1199.98px) { … }
+      Min-Widt - ist intuitiver und besser lesbar.
+         Kleine Endgeräte (Smartphones, 576px und größer):
+               @media (min-width: 576px) { … }
+         Mittlere Endgeräte (Tablets, 768px und größer):
+               @media (min-width: 768px) { … }
+         Große Endgeräte (Laptops, Bildschirme, 992px und größer):
+               @media (min-width: 992px) { … }
+         Sehr große Endgeräte (Große Bildschirme, iMac, 1200px und größer):
+               @media (min-width: 1200px) { … }
+
+  /*#endregion*/ /*
+
+/* #region scrollbar design */ /*                                                                                                                                                                                                                                                                                                                                 
+-) Scrollbar Design:
+      Scrollbar Firefox
+         el{
+            scrollbar-color: dark;
+            scrollbar-width: .5rem;
+            scrollbar-gutter: both-edges ;
+         }
+       Scrollbar Chrome, Safari,...
+         ::-webkit-scrollbar — the entire scrollbar.
+         ::-webkit-scrollbar-button — the buttons on the scrollbar (arrows pointing upwards and downwards that scroll one line at a time).
+         ::-webkit-scrollbar-thumb — the draggable scrolling handle.
+         ::-webkit-scrollbar-track — the track (progress bar) of the scrollbar, where there is a gray bar on top of a white bar.
+         ::-webkit-scrollbar-track-piece — the part of the track (progress bar) not covered by the handle.
+         ::-webkit-scrollbar-corner — the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet This is often the bottom-right corner of the browser window.
+         ::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some element
+                                                                                                                                                                                                                                 /*#endregion*/
+
+/*#region box-hover-line  */
+
+/*
+.element {
+  width: 25rem;
+  height: 15rem;
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  transition: all 250ms ease;
+  position: relative;
+}
+.element:after {
+  transition: all 250ms ease;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1rem;
+  height: 1rem;
+  background-color: pink;
+}
+.element::after + :hover {
+  width: 5rem;
+}
+.element:hover:after {
+  width: 100%;
+}
+*/
+
+/*
+HTML:
+<div class="element">Element</div>
+*/
+
+/*#endregion*/

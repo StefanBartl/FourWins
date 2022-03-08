@@ -50,7 +50,7 @@ todo    -) Save Default Script Files with the new Script Layout for later Projec
 */
 /* #endregion */
 
-/* #region 1) General */
+/* #region 1) general */
 
 :root {
   /* ==========
@@ -96,7 +96,7 @@ todo    -) Save Default Script Files with the new Script Layout for later Projec
 /* margins */
 body,
 h1, h2, h3, h4, h5, h6,
-figure, picture {
+figure, picture {1
   margin: 0;
 }
 
@@ -376,13 +376,12 @@ footer {
 ?     settings-menu layout 
             =============== */
 
-.Class_Settings_Menu {
+#ID_Settings_Menu {
   position: absolute;
   top: 5vh;
   right: 0;
   height: 90vh;
   width: clamp(270px, 20%, 25vw);
-  line-height: 0;
 }
 
 #ID_Setting_Span {
@@ -392,29 +391,17 @@ footer {
   display: flex;
   flex-wrap: wrap;
   height: 90vh;
-  width: 100vw;
   max-width: 100%;
   z-index: 1;
   justify-content: center;
   overflow: auto;
   background-color: var(--base-border);
-  box-shadow: 0.1rem 0.1rem 1rem black;
-  border: solid 2px var(--base-colour);
   border-top-left-radius: 10%;
   border-bottom-left-radius: 10%;
+  border: solid 1px var(-base-colour);
   color: var(--main-black);
   text-align: center;
   font-size: large;
-  scrollbar-color: dark;
-  scrollbar-gutter: both-edges;
-}
-
-#ID_Setting_Span::-webkit-scrollbar {
-  width: 1rem;
-}
-
-#ID_Setting_Span::-webkit-scrollbar-corner {
-  background-color: var(--gameboard);
 }
 
 /* ===============
@@ -422,26 +409,50 @@ footer {
             ================ */
 
 #ID_Info_Container,
-#ID_Gameboard_Size_Span,
-#ID_Stats_Container,
 #ID_Delete_All_Container {
   min-width: 100%;
-  min-height: 3rem;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 #ID_Info_Container{
-    border-bottom: dashed 4px red;
+    border-bottom: dashed 4px var(--base-colour);
+}
+
+#ID_Gameboard_Span{
+  display: flex;
+  flex-direction: column;
+}
+
+#ID_Gameboard_Span h3{
+  height: 2em;
+}
+
+#ID_Gameboard_Size_Container {
+  display: flex;
+  justify-items:center;
+  align-items:center;
+  gap: 1rem;
+  margin-inline: 1em;
+  margin-bottom: 1em;
+}
+
+#ID_Gameboard_Size_Container input {
+    width: 80%; 
+}
+
+#ID_Gameboard_Size_Container button {
+  width: 80%;
+  height: 2em;;
 }
 
 #ID_Mechanic_Settings{
-  border-block: dashed 4px red;
-  margin-block: 2em;
+  border-block: dashed 4px var(--base-colour);
+  min-width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -450,14 +461,6 @@ footer {
 #ID_Language_Container,
 #ID_Sound_Container{
   min-width: 100%;
-  margin-block: 1em;
-  height: 2em;
-}
-
-#ID_Colour_Container h3,
-#ID_Language_Container h3,
-#ID_Sound_Container h3{
-  margin-bottom: .5em;
 }
 
 .Class_Colour_Toggle {
@@ -479,57 +482,50 @@ footer {
 #ID_Language_Menu {
   cursor: pointer;
   width: 50%;
-  height: 1.5rem;
+  height: 1.5em;
   border: none;
   margin-bottom: 1em; 
 }
 
+#ID_Stats_Container{
+  display: grid;
+  grid: 5em 1fr/ 1fr 10% 1fr ;
+  grid-template-areas: 
+    "h h h"
+    "e . n";
+  min-width: 100%;  
+  margin-bottom: 1em;
+}
+
+#ID_Stats {
+  grid-area: h;
+}
+
+#ID_Stats_First_Wrapper{
+  grid-area: e;
+  min-width: 100%;
+  min-height: 100%;
+}
+#ID_Stats_Second_Wrapper {
+  grid-area: n;
+  min-width: 100%;
+  min-height: 100%;
+}
+
 #ID_Contacts_Container{
-  margin-top: 2em;  
-  border-top: dashed 4px red;
+  border-top: dashed 4px var(--base-colour);
 }
 
 #ID_Contacts_Container,
 #ID_Credits_Container{
   min-width: 100%;
-  min-height: 2rem;
-  padding-top: 2em;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  min-height: 2em;
 }
 
 #ID_Delete_All_Container{
-  padding-top: 2em;
+  margin-block: 1em;
 }
 
-#ID_Gameboard_Span{
-  margin-top: 1em;
-}
-
-#ID_Gameboard_Span h3{
-  height: 2rem;
-  padding-top: 1em;
-}
-
-#ID_Gameboard_Size_Container {
-  display: flex;
-  justify-items:center;
-  align-items:baseline;
-  gap: 1rem;
-  margin-inline: 1em;
-  margin-bottom: -3em;
-}
-#ID_Gameboard_Size_Container input {
-    width: 80%;
-    margin-top: auto;  
-}
-
-#ID_Gameboard_Size_Container button {
-  width: 80%;
-  height: 2em;;
-}
 
 /* =========
 ?     typography 
@@ -556,7 +552,6 @@ h1, h2, h3, h4, h5, h6 {
 
 #ID_Info,
 #ID_Language,
-#ID_Stats,
 #ID_Contact,
 #ID_Credits {
   cursor: pointer;
@@ -564,10 +559,6 @@ h1, h2, h3, h4, h5, h6 {
 
 #ID_Info {
   color: var(--main-red);
-}
-
-.Class_StatsWrapper {
-  margin-inline: 1rem;
 }
 
 /* =====
@@ -595,15 +586,6 @@ h1, h2, h3, h4, h5, h6 {
   color: black;
   background-color: lightgrey;
   opacity: .3;
-}
-
-#ID_Gameboard_h{
-  margin-bottom: .5em;
-}
-
-#ID_Stats_Container h3 {
-  height: 2rem;
-  padding-top: 1em;
 }
 
 /* #endregion */
@@ -640,7 +622,6 @@ input {
   max-width: 80%;
   height: 2rem;
   text-align: center;
-  margin-bottom: 5vh;
   cursor: pointer;
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
@@ -658,6 +639,10 @@ input:focus {
   background-color: var(--prime-darkgrey);
   color: var(--base-border);
   box-shadow: inset 0 0 1rem white;
+}
+
+.Class_Sidebars input {
+  margin-bottom: 5vh;
 }
 
 /* ======
@@ -961,9 +946,11 @@ select:hover {
 @keyframes Show_Settings_Animation {
   from {
     right: -95%;
+    box-shadow: 0em 0em 2em white;
   }
   to {
     right: 0;
+    box-shadow: 0em 0em 2em black;
   }
 }
 
@@ -975,9 +962,11 @@ select:hover {
 @keyframes Hide_Settings_Animation {
   from {
     right: 0vw;
+    box-shadow: 0em 0em 2em black;
   }
   to {
     right: -95%;
+    box-shadow: 0em 0em 2em white;
   }
 }
 
