@@ -34,62 +34,58 @@ todo        -) Write a final Comment.
 //#endregion
 
 //#region 1) Container & Wrapper
-const header = document.getElementById("ID_Header");
-const main_wrapper = document.getElementById("ID_MainWrapper");
-const left_sidebar = document.getElementById("ID_LeftSidebarWrapper");
-const gameboard = document.getElementById("ID_GameboardWrapper");
-const right_sidebar = document.getElementById("ID_RightSidebarWrapper");
-const footer = document.getElementById("ID_FooterWrapper");
+const header = document.getElementById('ID_Header');
+const main_wrapper = document.getElementById('main__section');
+const left_sidebar = document.getElementById('leftSidebar__wrapper');
+const gameboard = document.getElementById('ID_GameboardWrapper');
+const right_sidebar = document.getElementById('sidebarRight__wrapper');
+const footer = document.getElementById('footer');
 //#endregion
 
 //#region 2) Text, Inputs, Images
-const head_title = document.getElementById("ID_Head_Title");
-const headline_top = document.getElementById("ID_Headline");
-const headline_p = document.getElementById("ID_Header_p");
-const player_1_headline = document.getElementById("ID_Player_1_Headline");
-const player_1_name = document.getElementById("ID_Player_1_Name");
-const player_1_svg = document.getElementById("ID_SVG_Player_1");
-const player_2_headline = document.getElementById("ID_Player_2_Headline");
-const player_2_name = document.getElementById("ID_Player_2_Name");
-const player_2_svg = document.getElementById("ID_SVG_Player_2");
-const start_button = document.getElementById("ID_Start_Button");
-const play_against = document.getElementById("ID_Play_Against");
-const choose_ki = document.getElementById("ID_Choose_KI");
-const ki_level_dropdown_no = document.getElementById("ID_No");
-const ki_level_dropdown_easy = document.getElementById("ID_Easy_Text");
-const ki_level_dropdown_normal = document.getElementById("ID_Normal_Text");
-const turn_text = document.getElementById("ID_h3_turnText");
-const thinking_div = document.getElementById("ID_Thinking_Div");
+const head_title = document.getElementById('ID_Head_Title');
+const headline = document.getElementById('headline');
+const headline_p = document.getElementById('headline_p');
+const player_1_headline = document.getElementById('player1__headline');
+const player_1_name = document.getElementById('player1_name__input');
+const player_1_svg = document.getElementById('player1_name_svg');
+const player_2_headline = document.getElementById('player2__headline');
+const player_2_name = document.getElementById('player2_name__input');
+const player_2_svg = document.getElementById('player2_name_svg');
+const start_button = document.getElementById('start__button');
+const play_against = document.getElementById('choosing_cpu_headline');
+const choose_ki = document.getElementById('choosing_cpu__select');
+const ki_level_dropdown_no = document.getElementById('cpu_opt_no');
+const ki_level_dropdown_easy = document.getElementById('cpu_easy');
+const ki_level_dropdown_normal = document.getElementById('cpu_normal');
+const turn_text = document.getElementById('ID_h3_turnText');
+const thinking_div = document.getElementById('ID_Thinking_Div');
 //#endregion
 
 //#region 3) Settings menu
-const settings_menu = document.getElementById("ID_Settings_Menu");
-const settings_span = document.getElementById("ID_Setting_Span");
-const info_h = document.getElementById("ID_Info");
-const gameboard_h = document.getElementById("ID_Gameboard_h");
-const gameboard_size_button = document.getElementById("ID_Gameboard_Size_Button");
-const colour = document.querySelector(".Class_Colour_Toggle");
-const toggle_colour_button = document.getElementById("ID_Toggle_Button");
-const toggle_colour_slider = document.getElementById("ID_Colour_Slider");
-const language_h = document.getElementById("ID_Language");
-const language_menu = document.getElementById("ID_Language_Menu");
-const saveload_h = document.getElementById('ID_SaveLoad_Game_h');
-const save_button = document.getElementById('ID_Save_Button');
-const load_button = document.getElementById('ID_Load_Button');
-const select_deutsch = document.getElementById("ID_Deutsch");
-const select_english = document.getElementById("ID_English");
-const contact_h = document.getElementById("ID_Contact");
-const credits_h = document.getElementById("ID_Credits");
-const sound_h = document.getElementById("ID_Sound");
-const sound_checkbox = document.getElementById("ID_Sound_Checkbox");
-const stats = document.getElementById("ID_Stats");
-const stats_easy = document.getElementById("ID_Stats_Easy");
-const stats_normal = document.getElementById("ID_Stats_Normal");
-const stats_reset_easy = document.getElementById("ID_Reset_Easy");
-const stats_sum_easy = document.getElementById("ID_Stats_Summary_Easy");
-const stats_reset_normal = document.getElementById("ID_Reset_Normal");
-const delete_all = document.getElementById("ID_Delete_All");
-const label_colour = document.getElementById("ID_Label_Colour");
+const settings_menu = document.getElementById('settings_menu__section');
+const settings_menu_headline = document.getElementById('settings_menu__headline');
+const settings_span = document.getElementById('settings_span');
+const info_h = document.getElementById('info_h');
+const gameboard_h = document.getElementById('settings_gameboard_h');
+const gameboard_size_button = document.getElementById('settings_gameboard_button');
+const colour = document.querySelector('.container_colour_toggle');
+const toggle_colour_button = document.getElementById('button__toggle');
+const toggle_colour_slider = document.getElementById('colour_slider');
+const language_h = document.getElementById('h__language');
+const language_menu = document.getElementById('select__language');
+const contact_h = document.getElementById('h__contact');
+const credits_h = document.getElementById('h__credits');
+const sound_h = document.getElementById('h__sound');
+const sound_checkbox = document.getElementById('checkbox__sound');
+const stats = document.getElementById('h__stats');
+const stats_easy = document.getElementById('stats_easy');
+const stats_normal = document.getElementById('stats_normal');
+const stats_reset_easy = document.getElementById('reset__easy');
+const stats_sum_easy = document.getElementById('h__stats_easy');
+const stats_reset_normal = document.getElementById('reset__normal');
+const delete_all = document.getElementById('button__delete');
+const label_colour = document.getElementById('colour_h');
 //#endregion
 
 //#region 4) Global Counters

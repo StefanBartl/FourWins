@@ -42,11 +42,11 @@ function Column_Locking_Validation(invokedForKiValidation) {
 
   const topCellsArray = document.getElementsByClassName('Class_TopCells');
 
-  // Important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section!
+  // Important! Because the pointer events are also settet to 'all' back after during the placement animations during the game, this function have to be after the coin placement section!
   // Proof if the columnNumber was the last possible cell to play in the column
   if ( Game.rowCounter[`C${Game.clicked_column}`] === 0) {
     // If it was lock it for further placements
-    // console.log("TopCell-Validator locked cell.");
+    // console.log('TopCell-Validator locked cell.');
     document.getElementById(`ID_C${Game.clicked_column}R0`).innerText = 'Full!';
     document.getElementById(`ID_C${Game.clicked_column}R0`).setAttribute('data-columnfull', 'yes');
     // Give the rest of the TopCells free again
@@ -80,7 +80,7 @@ function Column_Locking_Validation(invokedForKiValidation) {
 !     Diagonal Win-Validation 
             ================== */
 function Diagonal_Validator(player, columnNumber, row) {
-  // console.log("Diagonal Validation started.")
+  // console.log('Diagonal Validation started.')
 
   const basis = document.getElementById(`ID_C${columnNumber}R${row}`),
     // Get the to validate Gameboard cell for diagonal validation in right-up and left-down direction (which are in this context the same) based the basis (the played) cell
@@ -101,11 +101,11 @@ function Diagonal_Validator(player, columnNumber, row) {
       third_plus.classList.contains(`Class_PlacedCoin_${player}`) &&
       fourth_plus.classList.contains(`Class_PlacedCoin_${player}`)
     ) {
-      // .. if yes, mark winning chain and invoke win"
+      // .. if yes, mark winning chain and invoke win'
       const arr = [basis, second_plus, third_plus, fourth_minus];
-      setAttributesArr(arr, { "data-winChain": "yes" });
+      setAttributesArr(arr, { 'data-winChain': 'yes' });
 
-      Game_End_Screen(player, "Diagonal");
+      Game_End_Screen(player, 'Diagonal');
       return;
     }
   }
@@ -135,8 +135,8 @@ function Diagonal_Validator(player, columnNumber, row) {
     ) {
       // .. if yes, invoke win as above....
       const arr = [basis, second_minus, third_minus, fourth_minus];
-      setAttributesArr(arr, { "data-winChain": "yes" });
-      Game_End_Screen(player, "Diagonal");
+      setAttributesArr(arr, { 'data-winChain': 'yes' });
+      Game_End_Screen(player, 'Diagonal');
       return true;
     }
   }
@@ -179,7 +179,7 @@ function Column_Validator(player) {
         array[4] - array[5] === 1)
     ) {
       // Invoke a win
-      Game_End_Screen(player, "Column");
+      Game_End_Screen(player, 'Column');
       return true;
     }
   }
@@ -216,7 +216,7 @@ function Row_Validator(player, column) {
     // Invoke win if thera are 4 coins after another
     if (countFor_Win === 4) {
       // Invoke a win
-      Game_End_Screen(player, "Row");
+      Game_End_Screen(player, 'Row');
       return true;
     }
   }

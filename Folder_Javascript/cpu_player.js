@@ -8,10 +8,10 @@
 ?                  ________________________________                                                                                                                                                                                                  
 !                                       Table of content                                         
                                                                                              
-?                                    - KI Placement                                                                                                                                              
-?                                    - KI Easy                                           
-?                                    - KI Normal                                                                                                                                                
-?                                    - KI Hard                                           
+?                                    - CPU Placement                                                                                                                                              
+?                                    - CPU Easy                                           
+?                                    - CPU Normal                                                                                                                                                
+?                                    - CPU Hard                                           
 ?                                    - Randomizer                                                                                                        
 ?                                    - Detect 3 Coin Chains Diagonal                                                                                                                                                                                                                                                                                 
 ?                                    - Detect 3 Coin Chains Upwards                                                                                                                                                                                                                                                           
@@ -40,10 +40,10 @@ todo    -) Write a final Comment.
 //#endregion
 
 /* ==========
-!     KI Placement 
+!     CPU Placement 
             =========== */
-function KI_Placement(valid_number) {
-  // console.log("Entered KI Placement Function. Random number for topCell is:  ", random_number);
+function CPU_Placement(valid_number) {
+  // console.log("Entered CPU Placement Function. Random number for topCell is:  ", random_number);
 
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName('Class_TopCells');
@@ -62,13 +62,13 @@ function KI_Placement(valid_number) {
 /* ==================
 !     Easy-CPU Algorhytmus 
             ================== */
-function KI_Easy() {
+function CPU_Easy() {
  /*
 ?                            Infobox
-Function to let KI Easy produce a random, but valid number for placement
+Function to let CPU Easy produce a random, but valid number for placement
 */
 
- // console.log("KI Easy starts to thinking....");
+ // console.log("CPU Easy starts to thinking....");
   // Get a random number
   const random_number = getRandomInt(Game.gameboard_size_x);
   // Proof if in this column a placement is possible
@@ -76,31 +76,31 @@ Function to let KI Easy produce a random, but valid number for placement
   Game.rowCounter[`C${random_number}`] > 0 ? proofed_number = true : proofed_number = false; 
   // console.log("Number to proof is valid:", proofed_number);
 
-  // If proofed_number is true invoke "KI_Thinking", if it isn't get a random number again and proof it as long as there is a valid number
+  // If proofed_number is true invoke "CPU_Thinking", if it isn't get a random number again and proof it as long as there is a valid number
   if (proofed_number === true) {
-    // console.log("KI Easy makes placement in column:", random number);
+    // console.log("CPU Easy makes placement in column:", random number);
     Thinking_Effect(true, random_number);
-  } else KI_Easy();
+  } else CPU_Easy();
 };
 
 /* ====================
 !     Normal-CPU Algorhytmus 
             ==================== */
-function KI_Normal() {
+function CPU_Normal() {
   /* 
                                 Infobox
-Function to let KI Normal make placements as near as its possible to other Coins from him,
+Function to let CPU Normal make placements as near as its possible to other Coins from him,
 try to avoid upwards and sideways finishing moves from Human Player and try to make them self.
 
 Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as espected.I'm getting hands on soon.
 */
 
-  // console.log("KI Normal startzs to thinking...");
+  // console.log("CPU Normal startzs to thinking...");
 
-  // If it is the first KI Normal Placement, make a random placement
-  if (Game.roundCounter === 1 || Game.roundCounter === 2) KI_Easy();
+  // If it is the first CPU Normal Placement, make a random placement
+  if (Game.roundCounter === 1 || Game.roundCounter === 2) CPU_Easy();
   else {
-    // Proof if KI have to make or avoid diagonal finishing move
+    // Proof if CPU have to make or avoid diagonal finishing move
     const diagonal = Detect_3_Coin_Chains_Diagonal();
     if (diagonal !== undefined) {
       console.log("Diagonal Chain Detected in column:", diagonal);
@@ -113,7 +113,7 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
       }
     }
 
-    // Proof if KI have to make or avoid vertial finishing move
+    // Proof if CPU have to make or avoid vertial finishing move
     const upwards = Detect_3_Coin_Chains_Upwards();
     if (upwards !== undefined) {
       console.log("Upwards Chain detected in column:", upwards);
@@ -157,10 +157,10 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
       }
     }
 
-    // console.log("KI Normal does not have a valid placement. Submit this task to CPU Easy...");
+    // console.log("CPU Normal does not have a valid placement. Submit this task to CPU Easy...");
     // If nothing is possible, make random placement
-    // console.log("Nothing possible. Ask KI Easy for valid placement...");
-    KI_Easy();
+    // console.log("Nothing possible. Ask CPU Easy for valid placement...");
+    CPU_Easy();
     return;
   }
 };
@@ -168,10 +168,10 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
 /* ==================
 !     Hard-CPU Algorhytmus 
             ================== */
-function KI_Hard() {
+function CPU_Hard() {
   /*
                                 Infobox / Ideas
-Function to let KI Normal make placements as near as its possible to other Coins from him,
+Function to let CPU Normal make placements as near as its possible to other Coins from him,
 try to avoid upwards, sideways and diagonal finishing moves from Human Player and try to make them self.
 Also prefer make placements on a 2 Coin chain, also in all three directions.
 */
@@ -208,7 +208,7 @@ function Randomizer(arr1, arr2) {
 !     Detect diagonal 3 Coin-Chains 
             ======================= */
 function Detect_3_Coin_Chains_Diagonal() {
-  //#region Detect KI Diagonal 3 Coin Chains
+  //#region Detect CPU Diagonal 3 Coin Chains
   //console.log("Entered Diagonal 3 Coin Chains Detection");
   // Maybe Buggy - hard to test....
 
@@ -337,7 +337,7 @@ function Detect_3_Coin_Chains_Upwards() {
 
   // !! Array so: array = [Game.actualPlayer.C1, C2,...] und dann iteriere!!!!!!!!!!
 
-  // KI Finishing Upwards Section
+  // CPU Finishing Upwards Section
   let array = Game.actualGameboardPlayer2.C1;
   // If every row number subtracted with the next row number is equal to 1, there are 3 coins upon each other.
   if (
@@ -461,8 +461,8 @@ function Detect_3_Coin_Chains_Upwards() {
             ===================== */
 function Detect_3_Coin_Chains_Sideways() {
   // +++ Basically it depends hardly on the Row Validator from the Win-Validation Section +++
-  // INFO: This algorithm does not take into account, for example, if two coins are next to each other, then one cell is free and then another coin, that this leads to a winning chain. This should be removed in KI Hard
-  // Detect possible finishing move  from KI
+  // INFO: This algorithm does not take into account, for example, if two coins are next to each other, then one cell is free and then another coin, that this leads to a winning chain. This should be removed in CPU Hard
+  // Detect possible finishing move  from CPU
   let countFor_Win = 0;
   // For every made placement in the column
   for (let el of Game.actualGameboardPlayer2.C1) {
@@ -470,7 +470,7 @@ function Detect_3_Coin_Chains_Sideways() {
     if (Game.actualGameboardPlayer2.C2.indexOf(el) !== -1) countFor_Win++;
     // Same in the third column from the basis placement...
     if (Game.actualGameboardPlayer2.C3.indexOf(el) !== -1) countFor_Win++;
-    // There are 3 Coins after another from the KI. If the next (4.) column is free, finish and win
+    // There are 3 Coins after another from the CPU. If the next (4.) column is free, finish and win
     if (el === 7) {
       // If game is in row 7, finish
       if (
@@ -752,13 +752,13 @@ function Detect_3_Coin_Chains_Sideways() {
 !     Upwards-Placement Detection 
             ======================= */
 function Get_Valid_Upwards_Placemement() {
-  // Try to make placement on top of an other KI placement if there is enough space to can finish it
+  // Try to make placement on top of an other CPU placement if there is enough space to can finish it
   let value,
     valid_number_array = [];
-  // If in one Column is a KI Placement... (slice is not undefined)
+  // If in one Column is a CPU Placement... (slice is not undefined)
   value = Game.actualGameboardPlayer2.C1.slice(-1)[0];
   if (value !== undefined) {
-    value -= 1; //...and in there is no higher placement from Player 2 in this column (slice value -1), push column value (Column x Minus 1 due to KI Placement array begin with 0 for C1, so push this number), else try next column
+    value -= 1; //...and in there is no higher placement from Player 2 in this column (slice value -1), push column value (Column x Minus 1 due to CPU Placement array begin with 0 for C1, so push this number), else try next column
     if (Game.actualGameboardPlayer1.C1.indexOf(value) === -1)
       valid_number_array.push(0);
   }
@@ -809,7 +809,7 @@ function Get_Valid_Upwards_Placemement() {
 function Get_Valid_Sideways_Placement() {
   let valid_number_array = [];
 
-  // Get all placements from KI in a column
+  // Get all placements from CPU in a column
   for (let a = 0; a < Game.actualGameboardPlayer2.C1.length; a++) {
     // Get 1 placement
     let i = Game.actualGameboardPlayer2.C1[a];

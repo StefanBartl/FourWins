@@ -12,7 +12,7 @@
 
                                         - Lock Top Cells                                                                                                                                 
                                         - Unlock Top Cells    
-                                        - "Thinking"-Effect         
+                                        - 'Thinking'-Effect         
                                         - Add choosing Animation                                                                                                                              
                                         - Remove choosing Animation                                                                                                                       
                                         - Change which Player is on turn                                                                                                                    
@@ -60,27 +60,27 @@ todo    -) Write a final Comment.
             ======================== */
 function Add_Choosing_Ani(column) {
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName("Class_TopCells");
+  const topCellsArray = document.getElementsByClassName('Class_TopCells');
 
   column -= 1;
 
-  if (Game.playerIsOnTurn === "left" && Game.player_Colour_Left === "yellow") {
-    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");
+  if (Game.playerIsOnTurn === 'left' && Game.player_Colour_Left === 'yellow') {
+    topCellsArray[column].classList.add('Class_ChoosingAnimation_Coin_1');
   } else if (
-    Game.playerIsOnTurn === "left" &&
-    Game.player_Colour_Left === "red"
+    Game.playerIsOnTurn === 'left' &&
+    Game.player_Colour_Left === 'red'
   ) {
-    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2");
+    topCellsArray[column].classList.add('Class_ChoosingAnimation_Coin_2');
   } else if (
-    Game.playerIsOnTurn === "right" &&
-    Game.player_Colour_Left === "yellow"
+    Game.playerIsOnTurn === 'right' &&
+    Game.player_Colour_Left === 'yellow'
   ) {
-    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_2");
+    topCellsArray[column].classList.add('Class_ChoosingAnimation_Coin_2');
   } else if (
-    Game.playerIsOnTurn === "right" &&
-    Game.player_Colour_Left === "red"
+    Game.playerIsOnTurn === 'right' &&
+    Game.player_Colour_Left === 'red'
   ) {
-    topCellsArray[column].classList.add("Class_ChoosingAnimation_Coin_1");
+    topCellsArray[column].classList.add('Class_ChoosingAnimation_Coin_1');
   }
 };
 
@@ -89,16 +89,16 @@ function Add_Choosing_Ani(column) {
             ======================== */
 function Remove_Choosing_Ani(column) {
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName("Class_TopCells");
+  const topCellsArray = document.getElementsByClassName('Class_TopCells');
 
   column -= 1;
 
-  if (Game.playerIsOnTurn === "left") {
-    topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1");
-    topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2");
+  if (Game.playerIsOnTurn === 'left') {
+    topCellsArray[column].classList.remove('Class_ChoosingAnimation_Coin_1');
+    topCellsArray[column].classList.remove('Class_ChoosingAnimation_Coin_2');
   } else {
-    topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_1");
-    topCellsArray[column].classList.remove("Class_ChoosingAnimation_Coin_2");
+    topCellsArray[column].classList.remove('Class_ChoosingAnimation_Coin_1');
+    topCellsArray[column].classList.remove('Class_ChoosingAnimation_Coin_2');
   }
 };
 
@@ -107,11 +107,11 @@ function Remove_Choosing_Ani(column) {
             ============== */
 function Lock_TopCells() {
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName("Class_TopCells");
+  const topCellsArray = document.getElementsByClassName('Class_TopCells');
 
   for (let topCell of topCellsArray) {
-    topCell.style.cursor = "none";
-    topCell.style = "pointer-events:none";
+    topCell.style.cursor = 'none';
+    topCell.style = 'pointer-events:none';
   }
 };
 
@@ -120,57 +120,57 @@ function Lock_TopCells() {
             ================ */
 function Unlock_TopCells() {
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName("Class_TopCells");
+  const topCellsArray = document.getElementsByClassName('Class_TopCells');
 
   for (let topCell of topCellsArray) {
-    topCell.style.cursor = "pointer";
-    if (Game.rowCounter[`${Game.clicked_column}`] >= 2) topCell.style = "pointer-events: all";
+    topCell.style.cursor = 'pointer';
+    if (Game.rowCounter[`${Game.clicked_column}`] >= 2) topCell.style = 'pointer-events: all';
   }
 };
 
 /* =====================
-!     Simulate a "Thinking-Effect" 
+!     Simulate a 'Thinking-Effect' 
             ===================== */
-function Thinking_Effect(invokerKI, valid_number) {
-  // First make sure there is no "Thinking" Div attached
-  if (!document.getElementById("ID_Thinking_Div")) {
+function Thinking_Effect(invokerCPU, valid_number) {
+  // First make sure there is no 'Thinking' Div attached
+  if (!document.getElementById('ID_Thinking_Div')) {
     // If it isn't create DOM ELement for the thinking dots in the turning DIV
-    const thinker_div = document.createElement("div");
-    thinker_div.classList.add("Class_Thinking");
-    thinker_div.id = "ID_Thinking_Div";
-    document.getElementById("ID_Turn_Div").appendChild(thinker_div);
+    const thinker_div = document.createElement('div');
+    thinker_div.classList.add('Class_Thinking');
+    thinker_div.id = 'ID_Thinking_Div';
+    document.getElementById('ID_Turn_Div').appendChild(thinker_div);
     // Set a Intervall which change the dots in the DOM Element. The changing is realised with setTiemouts, which fakes an text animation effect. This happens all 2 seconds again.
     window.thinking = setInterval(() => {
       const dot1 = setTimeout(() => {
-        thinker_div.innerText = ".";
+        thinker_div.innerText = '.';
       }, 100);
       const dot2 = setTimeout(() => {
-        thinker_div.innerText = ". .";
+        thinker_div.innerText = '. .';
       }, 500);
       const dot3 = setTimeout(() => {
-        thinker_div.innerText = ". . .";
+        thinker_div.innerText = '. . .';
       }, 1000);
       const dot4 = setTimeout(() => {
-        thinker_div.innerText = ".....";
+        thinker_div.innerText = '.....';
       }, 1500);
     }, 2000);
   }
   
-  // If the invoker is KI do additional tasks...
-  if (invokerKI === true) {
+  // If the invoker is CPU do additional tasks...
+  if (invokerCPU === true) {
     // Get a random number
     const random_number = getRandomInt(7);
     // Multiplicy it with 1000 to get a correct time value to invoking setTimeout
     let thinking_duration = random_number * 1000;
-    // If the random time was under 2 (seconds), set it to 2 seconds to make sure "thinking" is not "too fast"
+    // If the random time was under 2 (seconds), set it to 2 seconds to make sure 'thinking' is not 'too fast'
     if (thinking_duration < 2000) thinking_duration = 2000;
-    // Invoke Placement with the given valid number and clear the setted interval after the "thinking" time.
+    // Invoke Placement with the given valid number and clear the setted interval after the 'thinking' time.
     setTimeout(() => {
-      KI_Placement(valid_number);
+      CPU_Placement(valid_number);
       clearInterval(thinking);
-      // Remove the "dots"-Div container from the turning Div if it exists
-      if (document.getElementById("ID_Thinking_Div")) {
-        document.getElementById("ID_Thinking_Div").remove();
+      // Remove the 'dots'-Div container from the turning Div if it exists
+      if (document.getElementById('ID_Thinking_Div')) {
+        document.getElementById('ID_Thinking_Div').remove();
         clearInterval(window.thinking);
       }
     }, thinking_duration);
@@ -182,72 +182,72 @@ function Thinking_Effect(invokerKI, valid_number) {
             ================= */
 function Turning_PlayerIsOnTurn() {
   // Change Player
-  Game.playerIsOnTurn === "left"
-    ? (Game.playerIsOnTurn = "right")
-    : (Game.playerIsOnTurn = "left");
+  Game.playerIsOnTurn === 'left'
+    ? (Game.playerIsOnTurn = 'right')
+    : (Game.playerIsOnTurn = 'left');
 
   // Assign text message to Player and with the correct language
-  if (Game.Language === "de") {
+  if (Game.Language === 'de') {
     // Deutsch
 
-    if (Game.playerIsOnTurn === "left") {
+    if (Game.playerIsOnTurn === 'left') {
       document.getElementById(
-        "ID_h3_turnText"
+        'ID_h3_turnText'
       ).innerText = `Dein Zug, ${Game.Player_One_Name}`;
     } else if (
-      Game.playerIsOnTurn === "right" &&
-      Game.Game_against_KI === false
+      Game.playerIsOnTurn === 'right' &&
+      Game.Game_against_CPU === false
     ) {
       document.getElementById(
-        "ID_h3_turnText"
+        'ID_h3_turnText'
       ).innerText = `Du bist dran, ${Game.Player_Two_Name}`;
     } else {
       document.getElementById(
-        "ID_h3_turnText"
+        'ID_h3_turnText'
       ).innerText = `${Game.Player_Two_Name} denkt nach...`;
     }
   } else {
     // English
 
-    if (Game.playerIsOnTurn === "left") {
+    if (Game.playerIsOnTurn === 'left') {
       document.getElementById(
-        "ID_h3_turnText"
+        'ID_h3_turnText'
       ).innerText = `Your turn, ${Game.Player_One_Name}`;
     } else if (
-      Game.playerIsOnTurn === "right" &&
-      Game.Game_against_KI === false
+      Game.playerIsOnTurn === 'right' &&
+      Game.Game_against_CPU === false
     ) {
       document.getElementById(
-        "ID_h3_turnText"
+        'ID_h3_turnText'
       ).innerText = `Do you best, ${Game.Player_Two_Name}`;
     } else {
       document.getElementById(
-        "ID_h3_turnText"
+        'ID_h3_turnText'
       ).innerText = `${Game.Player_Two_Name}'s is thinking...`;
     }
   }
 
   // Add correct positioning Class to div
-  if (Game.playerIsOnTurn === "left") {
-    document.getElementById("ID_Turn_Div").classList.remove("Class_Right_Pos");
-    document.getElementById("ID_Turn_Div").classList.add("Class_Left_Pos");
+  if (Game.playerIsOnTurn === 'left') {
+    document.getElementById('ID_Turn_Div').classList.remove('Class_Right_Pos');
+    document.getElementById('ID_Turn_Div').classList.add('Class_Left_Pos');
   } else {
-    document.getElementById("ID_Turn_Div").classList.remove("Class_Left_Pos");
-    document.getElementById("ID_Turn_Div").classList.add("Class_Right_Pos");
+    document.getElementById('ID_Turn_Div').classList.remove('Class_Left_Pos');
+    document.getElementById('ID_Turn_Div').classList.add('Class_Right_Pos');
   }
 
-  // If there was a "Player thinking animation", end it, remove the Div Container from DOM, trigger the same effect for the other player. (KI Thinking is invoked in the KI-Function because of shorter delay)
-  if (Game.Game_against_KI === false) {
-    if (document.getElementById("ID_Thinking_Div")) {
-      document.getElementById("ID_Thinking_Div").remove();
+  // If there was a 'Player thinking animation', end it, remove the Div Container from DOM, trigger the same effect for the other player. (CPU Thinking is invoked in the CPU-Function because of shorter delay)
+  if (Game.Game_against_CPU === false) {
+    if (document.getElementById('ID_Thinking_Div')) {
+      document.getElementById('ID_Thinking_Div').remove();
       clearInterval(window.thinking);
       setTimeout(Thinking_Effect, 8000);
     }
   }
-  // Nearly the same in Game against KI, until no new timer is setted, because this makes the KI after his placement.
-  if (Game.Game_against_KI === true) {
-    if (document.getElementById("ID_Thinking_Div")) {
-      document.getElementById("ID_Thinking_Div").remove();
+  // Nearly the same in Game against CPU, until no new timer is setted, because this makes the CPU after his placement.
+  if (Game.Game_against_CPU === true) {
+    if (document.getElementById('ID_Thinking_Div')) {
+      document.getElementById('ID_Thinking_Div').remove();
       clearInterval(window.thinking);
     }
   }
@@ -257,77 +257,77 @@ function Turning_PlayerIsOnTurn() {
 !     Create Starting Stats 
             =============== */
 function Stats() {
-  let value = localStorage.KI_Easy_Wins || 0;
-  document.getElementById("ID_Easy_1").innerText = value;
-  value = localStorage.KI_Easy_CPUWins || 0;
-  document.getElementById("ID_Easy_3").innerText = value;
-  value = localStorage.KI_Easy_Draws || 0;
-  document.getElementById("ID_Easy_2").innerText = value;
-  value = localStorage.KI_Normal_Wins || 0;
-  document.getElementById("ID_Normal_1").innerText = value;
-  value = localStorage.KI_Normal_CPUWins || 0;
-  document.getElementById("ID_Normal_3").innerText = value;
-  value = localStorage.KI_Normal_Draws || 0;
-  document.getElementById("ID_Normal_2").innerText = value;
+  let value = localStorage.CPU_Easy_Wins || 0;
+  document.getElementById('easy_wins').innerText = value;
+  value = localStorage.CPU_Easy_CPUWins || 0;
+  document.getElementById('easy_loose').innerText = value;
+  value = localStorage.CPU_Easy_Draws || 0;
+  document.getElementById('easy_draw').innerText = value;
+  value = localStorage.CPU_Normal_Wins || 0;
+  document.getElementById('normal_wins').innerText = value;
+  value = localStorage.CPU_Normal_CPUWins || 0;
+  document.getElementById('normal_loose').innerText = value;
+  value = localStorage.CPU_Normal_Draws || 0;
+  document.getElementById('normal_draw').innerText = value;
 };
 
 /* ========= 
 !     Update Stats
             ========== */
 function Update_Stats(winning_player) {
-  // console.log("Updated Stats.");
-  // To reduce repetition only the KI Easy section is commented out. It's basically the same in KI Normal.
+  // console.log('Updated Stats.');
+  // To reduce repetition only the CPU Easy section is commented out. It's basically the same in CPU Normal.
   let value;
   // Easy Stats
-  if (Game.KI_Level === "Easy") {
+  if (Game.CPU_Level === 'Easy') {
     //   if Player wins           Get value from storage or set to 0; increase value;  update storage with increased value; .....
     if (winning_player === 1) {
-      value = localStorage.KI_Easy_Wins || 0;
+      value = localStorage.CPU_Easy_Wins || 0;
       value++;
-      localStorage.KI_Easy_Wins = value;
+      localStorage.CPU_Easy_Wins = value;
       // ...and set new value in Settings-Stats-Menu if it exists;
-      if (document.getElementById("ID_Easy_1"))
-      document.getElementById("ID_Easy_1").innerText = value;
+      if (document.getElementById('easy_wins'))
+      document.getElementById('easy_wins').innerText = value;
     }
     //     if CPU Wins...
     if (winning_player === 2) {
-      value = localStorage.KI_Easy_CPUWins || 0;
+      value = localStorage.CPU_Easy_CPUWins || 0;
       value++;
       localStorage.Easy_CPUWins = value;
-      if (document.getElementById("ID_Easy_3"))
-      document.getElementById("ID_Easy_3").innerText = value;
+      if (document.getElementById('easy_loose'))
+      document.getElementById('easy_loose').innerText = value;
     }
     //     if it is a draw...
     if (winning_player === 3) {
-      value = localStorage.KI_Easy_Draws || 0;
+      value = localStorage.CPU_Easy_Draws || 0;
       value++;
       localStorage.Easy_Draws = value;
-      if (document.getElementById("ID_Easy_2"))
-      document.getElementById("ID_Easy_2").innerText = value;
+      if (document.getElementById('easy_draw'))
+      document.getElementById('easy_draw').innerText = value;
     }
   }
   // Normal Stats
-  else if (Game.KI_Level === "Normal") {
-    if (winning_player === 1 && Game.KI_Level === "Normal") {
-      value = localStorage.KI_Normal_Wins || 0;
+  else if (Game.CPU_Level === 'Normal') {
+    if (winning_player === 1 && Game.CPU_Level === 'Normal') {
+      value = localStorage.CPU_Normal_Wins || 0;
       value++;
-      localStorage.KI_Normal_Wins = value;
-      if (document.getElementById("ID_Normal_1"))
-      document.getElementById("ID_Normal_1").innerText = value;
+      localStorage.CPU_Normal_Wins = value;
+      if (document.getElementById('normal_wins'))
+      document.getElementById('normal_wins').innerText = value;
     }
-    if (winning_player === 2 && Game.KI_Level === "Normal") {
-      value = localStorage.KI_Normal_CPUWins || 0;
+    if (winning_player === 2 && Game.CPU_Level === 'Normal') {
+      value = localStorage.CPU_Normal_CPUWins || 0;
       value++;
       localStorage.Normal_CPUWins = value;
-      if (document.getElementById("ID_Normal_2"))
-      document.getElementById("ID_Normal_3").innerText = value;
+      if (document.getElementById('normal_draw'))
+      document.getElementById('normal_loose').innerText = value;
     }
-    if (winning_player === 3 && Game.KI_Level === "Normal") {
-      value = localStorage.KI_Normal_Draws || 0;
+    if (winning_player === 3 && Game.CPU_Level === 'Normal') {
+      value = localStorage.CPU_Normal_Draws || 0;
       value++;
       localStorage.Normal_Draws = value;
-      if (document.getElementById("ID_Normal_3"))
-      document.getElementById("ID_Normal_2").innerText = value;
+      if (document.getElementById('normal_loose'))
+      document.getElementById('normal_draw').innerText = value;
     }
   }
   // Enough space for a unbeatable level ??? :-)
@@ -338,12 +338,12 @@ function Update_Stats(winning_player) {
             =================== */
 function Correct_Sound_Setting() {
   // Make sure, User prefered Sound-Setting is also shown in the Settings-Menu after closed and reopened window
-  const sound_checkbox = document.getElementById("ID_Sound_Checkbox");
-  if (localStorage.Sound === "false" && sound_checkbox.checked === true) {
+  const sound_checkbox = document.getElementById('checkbox__sound');
+  if (localStorage.Sound === 'false' && sound_checkbox.checked === true) {
     sound_checkbox.click();
     Game.Sound = false;
   }
-  if (localStorage.Sound === "true" && sound_checkbox.checked === false) {
+  if (localStorage.Sound === 'true' && sound_checkbox.checked === false) {
     sound_checkbox.click();
     Game.Sound = true;
   }
@@ -353,7 +353,7 @@ function Correct_Sound_Setting() {
 !     Create new Gameboard
             ================== */
 function Create_Gameboard(sizeX, sizeY){
-  //console.log("Given",  sizeX, "x", sizeY, "to create a gameboard.");
+  //console.log('Given',  sizeX, 'x', sizeY, 'to create a gameboard.');
 
 // Make sure there are valid values to create (if user doesnt change size between games, tehre would be undefined)
 sizeX === undefined || sizeX === null ? sizeX = Game.gameboard_size_x : sizeX = sizeX;
@@ -361,58 +361,58 @@ sizeY === undefined || sizeY === null ? sizeY = Game.gameboard_size_y : sizeY = 
 
 
 // Replace an old Gameboard if exists and create a new one
- if(document.getElementById("ID_GameboardWrapper")){
+ if(document.getElementById('ID_GameboardWrapper')){
   // Remove the old Gameboard cells
-const columnsArray = document.querySelectorAll(".Class_Columns");
-const topCellsArray = document.querySelectorAll("Class_TopCells");
-const cellsArray = document.querySelectorAll("Class_Cells");
+const columnsArray = document.querySelectorAll('.Class_Columns');
+const topCellsArray = document.querySelectorAll('Class_TopCells');
+const cellsArray = document.querySelectorAll('Class_Cells');
 for(column of  columnsArray) column.remove();
 for(topCell of topCellsArray) topCell.remove();
 for(cells of cellsArray) cells.remove();
  } else {
    //Create a new Gameboard  (Starting-Screen)
   // Create Wrapper
-  const new_gameboard_wrapper = document.createElement("div");
-  new_gameboard_wrapper.classList.add("Class_GameboardWrapper");
-  new_gameboard_wrapper.id = "ID_GameboardWrapper";
-  Game.state !== "InGame"
-    ? new_gameboard_wrapper.setAttribute("data-ingame", "no")
-    : new_gameboard_wrapper.setAttribute("data-ingame", "yes");
+  const new_gameboard_wrapper = document.createElement('div');
+  new_gameboard_wrapper.classList.add('Class_GameboardWrapper');
+  new_gameboard_wrapper.id = 'ID_GameboardWrapper';
+  Game.state !== 'InGame'
+    ? new_gameboard_wrapper.setAttribute('data-ingame', 'no')
+    : new_gameboard_wrapper.setAttribute('data-ingame', 'yes');
 
-  if(Game.state === "Game End"){
-document.getElementById("ID_Game_End_Container").appendChild(document.getElementById("ID_GameboardWrapper"));
-document.getElementById("ID_GameboardWrapper").classList.add("Class_Gameboard_End");
-document.getElementById("ID_GameboardWrapper").setAttribute("data-ingame", "no");
- // console.log("Appended to Game End Container!");
+  if(Game.state === 'Game End'){
+document.getElementById('ID_Game_End_Container').appendChild(document.getElementById('ID_GameboardWrapper'));
+document.getElementById('ID_GameboardWrapper').classList.add('Class_Gameboard_End');
+document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'no');
+ // console.log('Appended to Game End Container!');
   } else  
   {
     insertAfter(left_sidebar, new_gameboard_wrapper); 
-   // console.log("Appended to left sidebar");
+   // console.log('Appended to left sidebar');
 };};
 
   // Create new cells and insert
   // Create Columns
   for (let columns = 1; columns <= sizeX; columns++) {
     // Create the Column Wrappers
-    let column = document.createElement("div");
-    column.classList.add("Class_Columns");
+    let column = document.createElement('div');
+    column.classList.add('Class_Columns');
     column.id = `ID_Column${columns}`;
-    document.getElementById("ID_GameboardWrapper").appendChild(column);
+    document.getElementById('ID_GameboardWrapper').appendChild(column);
   };
 
   //Create Top Cells
   for (let column = 1; column <= sizeX; column++) {
     // Create the Top Cells
-    let topcell = document.createElement("div");
-    topcell.classList.add("Class_TopCells");
+    let topcell = document.createElement('div');
+    topcell.classList.add('Class_TopCells');
     topcell.id = `ID_C${column}R0`;
-    topcell.setAttribute("data-column", column);
+    topcell.setAttribute('data-column', column);
     document.getElementById(`ID_Column${column}`).appendChild(topcell);
 
         // Create the Cells
         for (let row = 1; row <= sizeY ; row++) {
-          let cell = document.createElement("div");
-          cell.classList.add("Class_Cells");
+          let cell = document.createElement('div');
+          cell.classList.add('Class_Cells');
           cell.id = `ID_C${column}R${row}`;
           document.getElementById(`ID_Column${column}`).appendChild(cell);
         };
@@ -508,7 +508,7 @@ function Swap_Two_Classes_by_Events(
 !     Creator-Function
              ============= */
 function Create_DOM_Element(options, arrayOne, arrayTwo) {
-// console.log("Entered Creator function.");
+// console.log('Entered Creator function.');
 
 // Define the possible Parameter-List with the associated variables declared
 const _parentID = options.ParentID,
@@ -585,21 +585,21 @@ All types of Elements possible which you can create 'the normal way' too!
 the Element argument (tor define which kind of element it is)! 
 
 I recommend the following method for invoking:
-Create_DOM_Element({ParentID: "anyId", Element: "div"});
+Create_DOM_Element({ParentID: 'anyId', Element: 'div'});
 
 Possible arguments:
 parentID, Element-Type, Input-Type, ID, Class, Text, For, Title, Alt, Src, Width, Height, AspectRatio, Min, Max, Value, Placeholder, arrayOne, arrayTwo
 
 */
 
-// console.log("New DOM-Element created.");
+// console.log('New DOM-Element created.');
 };
 
 /* =============================================
 !     Create own Notification / Alert /  Prompt / Confirm - Windows 
             ============================================= */
 function New_Window(options) {
-// console.log("Entered New Window function.");
+// console.log('Entered New Window function.');
 
 // Set up parameter list
 const _id = options.ID,
@@ -611,31 +611,31 @@ const _id = options.ID,
   _variable = options.Variable;
 
 // Create all base Elements
-const window = document.createElement("div");
+const window = document.createElement('div');
 window.id = _id;
-window.classList.add("Class_Window");
+window.classList.add('Class_Window');
 window.draggable = true;
 
 if (_alert === true) {
-  window.innerText = "Alert Window";
+  window.innerText = 'Alert Window';
 } else if (_confirm === true) {
-  window.innerText = "Confirm Window";
+  window.innerText = 'Confirm Window';
 } else if (_prompt === true) {
-  window.innerText = "Prompt Window";
+  window.innerText = 'Prompt Window';
 } else {
-  window.innerText = "Notification Window";
+  window.innerText = 'Notification Window';
 }
 
-const inner_window = document.createElement("div");
-inner_window.classList.add("Class_Inner_Window");
-const headline = document.createElement("h3");
+const inner_window = document.createElement('div');
+inner_window.classList.add('Class_Inner_Window');
+const headline = document.createElement('h3');
 headline.innerText = _name;
 
-const textfield = document.createElement("p");
+const textfield = document.createElement('p');
 textfield.innerText = _text;
 
-const button_div = document.createElement("div");
-button_div.classList.add("Class_Buttons_Div");
+const button_div = document.createElement('div');
+button_div.classList.add('Class_Buttons_Div');
 
 // Append
 inner_window.appendChild(headline);
@@ -644,9 +644,9 @@ inner_window.appendChild(button_div);
 
 // Create Cancel Button to make Confirm-Window
 if (_confirm === true || _prompt === true) {
-  const cancel_button = document.createElement("button");
-  cancel_button.innerText = "Cancel";
-  cancel_button.addEventListener("click", () => {
+  const cancel_button = document.createElement('button');
+  cancel_button.innerText = 'Cancel';
+  cancel_button.addEventListener('click', () => {
     window.classList.add('Class_Smooth_Out');
     // After waiting for animation end, remove window
     setTimeout(()=>{
@@ -658,11 +658,11 @@ if (_confirm === true || _prompt === true) {
 
 // Create Confirm Button
   // Create OK Button
-  const confirm_button = document.createElement("button");
+  const confirm_button = document.createElement('button');
   confirm_button.id = `${_id}_OK_Button`;
-  confirm_button.classList.add("Class_Window_Buttons");
-  confirm_button.innerText = "OK";
-  confirm_button.addEventListener("click", () => {
+  confirm_button.classList.add('Class_Window_Buttons');
+  confirm_button.innerText = 'OK';
+  confirm_button.addEventListener('click', () => {
     window.classList.add('Class_Smooth_Out');
     // After waiting for animation end, remove window
     setTimeout(()=>{
@@ -671,7 +671,7 @@ if (_confirm === true || _prompt === true) {
   });
   button_div.appendChild(confirm_button);
 
-// Invoke-Example Confirm: New_Window({ID: "ID_Test_Window", Name: "Test Window", Text: "Test Test Test", Confirm: true, Variable: "Tester"}); Find Confirm Boolean: Windows.Tester
+// Invoke-Example Confirm: New_Window({ID: 'ID_Test_Window', Name: 'Test Window', Text: 'Test Test Test', Confirm: true, Variable: 'Tester'}); Find Confirm Boolean: Windows.Tester
 
 window.appendChild(inner_window);
 document.body.appendChild(window);
@@ -679,18 +679,18 @@ window.classList.add('Class_Smooth_In');
 
 // Create Input-Text and add it
 if (_prompt === true) {
-  const user_input = document.createElement("input");
-  user_input.type = "text";
+  const user_input = document.createElement('input');
+  user_input.type = 'text';
   user_input.id = `${_id}_textinput`;
   user_input.classList.add('Class_Window_User_Input');
   inner_window.insertBefore(user_input, inner_window.children[3]);
 // If prompt and user clicked OK, send user input to....
-  confirm_button.addEventListener("click", () => {
-      //Example from "Four Wins"-Project:
+  confirm_button.addEventListener('click', () => {
+      //Example from 'Four Wins'-Project:
       Game[`${_id}_userInput`] = document.getElementById(`${_id}_textinput`).value;
   });
 };
-    // Invoke Example Prompt: New_Window({ID: "ID_Test_Window", Name: "Test Window", Text: "Test Test Test", Prompt: true, Variable: "Tester"}); Find Input value: Windows.Tester
+    // Invoke Example Prompt: New_Window({ID: 'ID_Test_Window', Name: 'Test Window', Text: 'Test Test Test', Prompt: true, Variable: 'Tester'}); Find Input value: Windows.Tester
 
 /*
 ?                                                Infobox: 
@@ -774,7 +774,7 @@ Smooth in / Smooth Out Class recommended.
 */
 //#endregion
 
-// console.log("New Window created.");
+// console.log('New Window created.');
 };
 
 /* ===========================
@@ -784,7 +784,7 @@ function setAttributes(el, attrs) {
 for (var key in attrs) {
 el.setAttribute(key, attrs[key]);
 }
-// Call: setAttributes(elem, {"src": "http://example.com/something.jpeg", "height": "100%", ...});
+// Call: setAttributes(elem, {'src': 'http://example.com/something.jpeg', 'height': '100%', ...});
 };
 
 /* ================================
@@ -796,7 +796,7 @@ for (var key in attrs) {
   el.setAttribute(key, attrs[key]);
 }
 }
-// Call: setAttributesArr(arr with (DOM-Objects!), {"src": "http://example.com/something.jpeg", "height": "100%", ...});
+// Call: setAttributesArr(arr with (DOM-Objects!), {'src': 'http://example.com/something.jpeg', 'height': '100%', ...});
 };
 
 /* =====================
@@ -808,7 +808,7 @@ function Fireworks(canvasID) {
 const canvas = document.getElementById(canvasID);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-var ctx = canvas.getContext("2d");
+var ctx = canvas.getContext('2d');
 function Firework(x, y, height, yVol, R, G, B) {
 this.x = x;
 this.y = y;
@@ -821,8 +821,8 @@ this.radius = 2;
 this.boom = false;
 var boomHeight = Math.floor(Math.random() * 200) + 50;
 this.draw = function () {
-  ctx.fillStyle = "rgba(" + R + "," + G + "," + B + ")";
-  ctx.strokeStyle = "rgba(" + R + "," + G + "," + B + ")";
+  ctx.fillStyle = 'rgba(' + R + ',' + G + ',' + B + ')';
+  ctx.strokeStyle = 'rgba(' + R + ',' + G + ',' + B + ')';
   ctx.beginPath();
   //   ctx.arc(this.x,boomHeight,this.radius,Math.PI * 2,0,false);
   ctx.stroke();
@@ -858,7 +858,7 @@ this.update = function () {
 this.update();
 }
 
-window.addEventListener("click", (e) => {
+window.addEventListener('click', (e) => {
 var x = e.clientX;
 var y = canvas.height;
 var R = Math.floor(Math.random() * 255);
@@ -885,12 +885,12 @@ this.yVol = Math.random() * 10 - 4;
 
 // console.log(this.xVol,this.yVol)
 this.draw = function () {
-  //   ctx.globalCompositeOperation = "lighter"
-  ctx.fillStyle = "rgba(" + R + "," + G + "," + B + "," + this.A + ")";
+  //   ctx.globalCompositeOperation = 'lighter'
+  ctx.fillStyle = 'rgba(' + R + ',' + G + ',' + B + ',' + this.A + ')';
   ctx.save();
   ctx.beginPath();
-  // ctx.fillStyle = "white"
-  ctx.globalCompositeOperation = "screen";
+  // ctx.fillStyle = 'white'
+  ctx.globalCompositeOperation = 'screen';
   ctx.arc(this.x, this.y, this.radius, Math.PI * 2, 0, false);
   ctx.fill();
 
@@ -928,7 +928,7 @@ fireworkArray.push(new Firework(x, y, height, 5, R, G, B));
 function animate() {
 requestAnimationFrame(animate);
 // ctx.clearRect(0,0,canvas.width,canvas.height)
-ctx.fillStyle = "rgba(0,0,0,0.1)";
+ctx.fillStyle = 'rgba(0,0,0,0.1)';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 for (var i = 0; i < fireworkArray.length; i++) {
   fireworkArray[i].update();
@@ -952,7 +952,7 @@ particleArray = particleArray.filter((obj) => !obj.fade);
 }
 animate();
 
-window.addEventListener("resize", (e) => {
+window.addEventListener('resize', (e) => {
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 });
@@ -962,34 +962,34 @@ canvas.height = window.innerHeight;
 !     Save / Load Window 
             ============== */
 function Save_Load_Window() {
-console.log("Entered Save-Load Window function.");
+console.log('Entered Save-Load Window function.');
 
 // Create all base Elements
-const window = document.createElement("div");
+const window = document.createElement('div');
 window.id = 'ID_Save_Load_Window';
-window.classList.add("Class_Window");
-window.setAttribute("data-state", "hide")
+window.classList.add('Class_Window');
+window.setAttribute('data-state', 'hide')
 
-const inner_window = document.createElement("div");
-inner_window.classList.add("Class_Inner_Window");
-const headline = document.createElement("h3");
+const inner_window = document.createElement('div');
+inner_window.classList.add('Class_Inner_Window');
+const headline = document.createElement('h3');
 
-const textfield = document.createElement("p");
+const textfield = document.createElement('p');
 
 // Create Buttons
-const save_load_button_div = document.createElement("div");
-save_load_button_div.classList.add("Class_Save_Load_Buttons_Div");
+const save_load_button_div = document.createElement('div');
+save_load_button_div.classList.add('Class_Save_Load_Buttons_Div');
 
-const save_button = document.createElement("button");
+const save_button = document.createElement('button');
 save_button.id = `Save_Button`;
-save_button.classList.add("Class_Window_Buttons");
+save_button.classList.add('Class_Window_Buttons');
 
-const load_button = document.createElement("button");
+const load_button = document.createElement('button');
 load_button.id = `Load_Button`;
-load_button.classList.add("Class_Window_Buttons");
+load_button.classList.add('Class_Window_Buttons');
 
-const cancel_button = document.createElement("button");
-cancel_button.addEventListener("click", () => {
+const cancel_button = document.createElement('button');
+cancel_button.addEventListener('click', () => {
 window.classList.add('Class_Smooth_Out');
 // After waiting for animation end, remove window
 setTimeout(()=>{
@@ -1014,32 +1014,32 @@ window.classList.add('Class_Smooth_In');
 //#region Translation
 
 if(Game.Language === 'de'){
-window.innerText = "Speichern/Laden";
+window.innerText = 'Speichern/Laden';
 headline.innerText = '';
 textfield.innerText = 'Hier kannst du deine Spiele speichern/laden:';
-save_button.innerText = "Speichern";
+save_button.innerText = 'Speichern';
 save_button.title = 'Hier klicken um zu speichern!';
 save_button.alt = 'Button um zu speichern.';
-load_button.innerText = "Laden";
+load_button.innerText = 'Laden';
 load_button.title = 'Hier klicken um zu laden!';
 load_button.alt = 'Button um zu laden.'
-cancel_button.innerText = "Zurück";
+cancel_button.innerText = 'Zurück';
 cancel_button.title = 'Hier gehts zurück!';
-cancel_button.alt = "Button um zum Game Bildschirm zu kommen";
+cancel_button.alt = 'Button um zum Game Bildschirm zu kommen';
 
-} else if (Game.Language === "en"){
-window.innerText = "Save/Load Window";
+} else if (Game.Language === 'en'){
+window.innerText = 'Save/Load Window';
 headline.innerText = '';
 textfield.innerText = 'Here you can save or load your games:';
-save_button.innerText = "Save";
+save_button.innerText = 'Save';
 save_button.title = 'Click to save!';
 save_button.alt = 'Button to save.';
-load_button.innerText = "Load";
+load_button.innerText = 'Load';
 load_button.title = 'Click to load!';
 load_button.alt = 'Button to load.'
-cancel_button.innerText = "Cancel";
+cancel_button.innerText = 'Cancel';
 cancel_button.title = 'Click to back!';
-cancel_button.alt = "Button to go back";
+cancel_button.alt = 'Button to go back';
 };
 //#endregion
 
@@ -1063,7 +1063,7 @@ save_button.innerText = 'Save';
 save_button.title = 'Save game here!';
 save_button.alt = 'Button for save game.';
 load_button.innerText = 'Load';
-load_button.title = 'Load game here!"';
+load_button.title = 'Load game here!'';
 load_button.alt = 'Button for load game.';
 
 */
@@ -1133,7 +1133,7 @@ border: solid 1px black;
 */
 //#endregion
 
-// console.log("New Window created.");
+// console.log('New Window created.');
 };
 
 //#region Callback, Promises, Async/Await
@@ -1144,14 +1144,14 @@ border: solid 1px black;
 
 // Standard Callback function
 function myCallback(name, callback) {
-  // name = "Setting Parameters here overwrites arguments in invoking! (Scope)";
+  // name = 'Setting Parameters here overwrites arguments in invoking! (Scope)';
   // After 1 second the callback function gets invoked, which in this examle creates a Object username with either the 1 argument by invoking or the name in this function
   setTimeout(() => {
     callback({ username: name });
   }, 1000);
 }
 // Second argument  have acces to the callback function, so acces to the Object where username: name. With that variables you can work. (.then)
-//const myName = myCallback("Steve", (username) => {
+//const myName = myCallback('Steve', (username) => {
 // console.log(username);
 //});
 
@@ -1161,7 +1161,7 @@ function myCallback(name, callback) {
 // Standard Promise
 const myPromise = new Promise((resolve, reject) => {
   setTimeout(() => {
-    resolve({ var: "My Test" });
+    resolve({ var: 'My Test' });
   }, 2000);
 });
 
@@ -1171,7 +1171,7 @@ const myPromise = new Promise((resolve, reject) => {
 // Get values from muitple Promises at the same time
 const myPromise2 = new Promise((resolve, reject) => {
   setTimeout(() => {
-    resolve({ var: "+ my second Test in Promise.all!" });
+    resolve({ var: '+ my second Test in Promise.all!' });
   }, 2000);
 });
 //? You have to pass an array!
@@ -1185,7 +1185,7 @@ const myPromise2 = new Promise((resolve, reject) => {
 function firstPromise() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve({ var: "Code after 3 seconds" });
+      resolve({ var: 'Code after 3 seconds' });
     }, 3000);
   });
 }
@@ -1193,7 +1193,7 @@ function firstPromise() {
 function secondPromise() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve({ var: "Code after 4 seconds" });
+      resolve({ var: 'Code after 4 seconds' });
     }, 4000);
   });
 }
@@ -1212,7 +1212,7 @@ async function result() {
 const testAwait = function AwaitPromise() {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve("Inside test await");
+      resolve('Inside test await');
     }, 2000);
   });
   return promise;
@@ -1234,23 +1234,23 @@ function createClass(name,rules){
   if(!(style.sheet||{}).insertRule) 
       (style.styleSheet || style.sheet).addRule(name, rules);
   else
-      style.sheet.insertRule(name+"{"+rules+"}",0);
+      style.sheet.insertRule(name+'{'+rules+'}',0);
 
-//createClass('.whatever',"background-color: green;");
+//createClass('.whatever','background-color: green;');
 };
 
 /* =============
 !     Apply CSS-Class
           ============= */
 function applyClass(name,element,doRemove){
-  if(typeof element.valueOf() == "string"){
+  if(typeof element.valueOf() == 'string'){
       element = document.getElementById(element);
   }
   if(!element) return;
   if(doRemove){
-      element.className = element.className.replace(new RegExp("\\b" + name + "\\b","g"));
+      element.className = element.className.replace(new RegExp('\\b' + name + '\\b','g'));
   }else{      
-      element.className = element.className + " " + name;
+      element.className = element.className + ' ' + name;
   }
 };
 //#endregion
@@ -1271,34 +1271,34 @@ function applyClass(name,element,doRemove){
 
 -) bundlephobia.com zeigt dir die Package-Ladezeiten
 
--) Ternäre Operatoren nutzen ! --> x >10 ? "Wenn x größer ist als 10" : "Wenn nicht, dann mach dies"
+-) Ternäre Operatoren nutzen ! --> x >10 ? 'Wenn x größer ist als 10' : 'Wenn nicht, dann mach dies'
 
--) Verwende "conditionales": const user = user_name || "Player 1"
+-) Verwende 'conditionales': const user = user_name || 'Player 1'
 
 -) Array.from() konvertiert iterierbare Objekte zu arrays!
 
 -) arr.map ()
 
--) String to number: let int = "14" --> neueZahl = +int / Number to string: const stringZahl = 5 + ""; in concentation --> double tilde ~~
+-) String to number: let int = '14' --> neueZahl = +int / Number to string: const stringZahl = 5 + ''; in concentation --> double tilde ~~
 
--) Array alle "strings" zu "numbers" --> values = array.map(Number) /  Boolean: array.map(Boolean)
+-) Array alle 'strings' zu 'numbers' --> values = array.map(Number) /  Boolean: array.map(Boolean)
 
 -) 2 << 3 = 16 ist gleich wie 2 ** 4 = 16 oder old style Math.pow(2, 3)
 
--) Konvertiere eine float zu Int mit "zahl | 0" => rundet auf wenn negativ und ab wenn positiv. Doppelt tilde ~~ macht das gleiche!
+-) Konvertiere eine float zu Int mit 'zahl | 0' => rundet auf wenn negativ und ab wenn positiv. Doppelt tilde ~~ macht das gleiche!
  
--) | 0 rundet ja eine positive float auf eine Int ab, also "1222 / 10 | 0" ist das gleiche wie "1220 / 10 ==> 122.0 | 0 ==> 122"
+-) | 0 rundet ja eine positive float auf eine Int ab, also '1222 / 10 | 0' ist das gleiche wie '1220 / 10 ==> 122.0 | 0 ==> 122'
  
 -) Object oder Array destructing: const {name, age, ...} = user --> und die variablen haben die Werte von den zugehörigen user-Objekt. Also statt name = this name...
  
--) Console.time("") ...... console.timeEnd("") misst die Dauer der Ausführung des Codes dazwischen und gibt ihn in der Konsole aus. Praktisch für zb.: Loops oder Funktionen!
+-) Console.time('') ...... console.timeEnd('') misst die Dauer der Ausführung des Codes dazwischen und gibt ihn in der Konsole aus. Praktisch für zb.: Loops oder Funktionen!
 
 -) slice() kann auch negative values haben und damit bekommt man die letzten values eines arrays
  
--) "...rest"-Parameter sammelt alle werte ab diesem Parameter in einem gleichnamigen Array. Kann auch anders benannt werden! 
+-) '...rest'-Parameter sammelt alle werte ab diesem Parameter in einem gleichnamigen Array. Kann auch anders benannt werden! 
 
 -) Variablen zb.: so zuweisen: n = n + n + (options.number || 5) 
-      Wichtig: wird hier für options.number 0 eingesetzt, ist es false (aufgrund OR) und es wird immer + 5 gerechnet. Außerdem bekommt man einen Error bei null, undefined bzw. false value wenn options.number gar nicht übergeben wird. Das muss alles mit if statements abgefangen werden"
+      Wichtig: wird hier für options.number 0 eingesetzt, ist es false (aufgrund OR) und es wird immer + 5 gerechnet. Außerdem bekommt man einen Error bei null, undefined bzw. false value wenn options.number gar nicht übergeben wird. Das muss alles mit if statements abgefangen werden'
  
 -) Keine reduntatn if statements; if (n < 0){....} else if (n >= 0){...}  -> Zweites if ist nicht notwendig!
 

@@ -43,7 +43,7 @@ todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do o
 todo    -) Final formatation (especially script & library sections/functions), comments:
 todo    -) Make sure all important is commented !
 todo    -) Write a final Comment !
-todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "global" Library for JS & CSS !
+todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new 'global' Library for JS & CSS !
 
 !                         Session progress:                                                
 ? -)                                                                                                                                                                                             
@@ -155,7 +155,7 @@ select {
 body {
   background-color: var(--base-colour);
   z-index: -3;
-  font-family: "Titillium Web", sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   color: var(--top-header);
   justify-content: center;
   align-items: center;
@@ -177,26 +177,26 @@ header {
   grid: 1fr 1fr / 1fr;
 }
 
-#ID_MainWrapper {
+#main__section {
   display: grid;
   grid: auto / 30% auto 30%;
-  grid-template-areas: "leftSide gameboard rightSide";
+  grid-template-areas: 'leftSide gameboard rightSide';
 }
 
 /* ===============
 ?     sidebars grid layer 
           ================ */
 
-.Class_LeftSidebarWrapper {
+#leftSidebar__wrapper {
   grid-area: leftSide;
 }
 
-.Class_RightSidebarWrapper {
+#sidebarRight__wrapper {
   grid-area: rightSide;
   z-index: 1;
 }
 
-.Class_Sidebars {
+.sidebars {
   border-bottom: solid 1px var(--base-border);
   grid-area: sidebar;
   display: flex;
@@ -206,7 +206,7 @@ header {
 
 }
 
-.Class_Sidebars h3{
+.sidebars h3{
   margin-top: 1em;
 }
 
@@ -226,7 +226,7 @@ header {
   border-top: none;
 }
 
-.Class_GameboardWrapper[data-inGame="yes"] {
+.Class_GameboardWrapper[data-inGame='yes'] {
     position: absolute;
     top: 20%;
     left: 50%;
@@ -235,7 +235,7 @@ header {
     aspect-ratio: 1/1;
 }
 
-.Class_GameboardWrapper[data-inGame="gameend"] {
+.Class_GameboardWrapper[data-inGame='gameend'] {
     margin-block: 2rem;
 }
 
@@ -248,7 +248,7 @@ footer {
   margin-block: 1em;
 }
 
-#ID_Choose_KI_Div {
+#choosing_cpu {
   grid-column-start: 3;
   grid-column-end: 5;
   justify-self: flex-end;
@@ -325,7 +325,7 @@ footer {
             ========== */
 
 .Class_Coin_Yellow {
-  background-image: url("../Folder_Graphics/Coins/yellow.png");
+  background-image: url('../Folder_Graphics/Coins/yellow.png');
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
@@ -336,7 +336,7 @@ footer {
 }
 
 .Class_Coin_Red {
-  background-image: url("../Folder_Graphics/Coins/red.png");
+  background-image: url('../Folder_Graphics/Coins/red.png');
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
@@ -347,14 +347,14 @@ footer {
 }
 
 .Class_PlacedCoin_1 {
-  background-image: url("../Folder_Graphics/Coins/yellow.png");
+  background-image: url('../Folder_Graphics/Coins/yellow.png');
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .Class_PlacedCoin_2 {
-  background-image: url("../Folder_Graphics/Coins/red.png");
+  background-image: url('../Folder_Graphics/Coins/red.png');
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
@@ -367,7 +367,7 @@ footer {
 ?     settings-menu layout 
             =============== */
 
-#ID_Settings_Menu {
+#settings_menu__section {
   position: absolute;
   top: 5vh;
   right: 0;
@@ -375,7 +375,7 @@ footer {
   width: clamp(270px, 20%, 25vw);
 }
 
-#ID_Setting_Span {
+#settings_span {
   position: relative;
   top: 0;
   right: -95%;
@@ -394,8 +394,12 @@ footer {
   font-size: large;
 }
 
-#ID_Setting_Span >div{
+#settings_span >div, h2, h3 {
   min-width: 100%;
+}
+
+#settings_span h2{
+  color: red;
 }
 
 /* ===============
@@ -403,67 +407,62 @@ footer {
             ================ */
 
 
-#ID_Info{
-  padding-block: 1em; 
-}
-
-#ID_Gameboard_Span{
+#settings_span__gameboard{
   display: flex;
   flex-direction: column;
 }
 
-#ID_Gameboard_Span h3{
+#settings_span__gameboard h3{
   height: 2em;
 }
 
-#ID_Gameboard_Size_Container {
+#container_settings_gameboard_sizing {
   display: flex;
   justify-items:center;
   align-items:center;
   gap: 1rem;
   margin-inline: 1em;
-  margin-bottom: 1em;
 }
 
-#ID_Gameboard_Size_Container input {
+#container_settings_gameboard_sizing input {
     width: 80%; 
 }
 
-#ID_Gameboard_Size_Container button {
+#container_settings_gameboard_sizing button {
   width: 80%;
   height: 2em;;
 }
 
-#ID_Mechanic_Settings{
+#span_settings_mechanics{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-#ID_Colour_Container,
-#ID_Language_Container,
-#ID_Sound_Container{
+#container_colour,
+#container__language,
+#container__sound{
   margin-bottom: .5em;
 }
 
-.Class_Colour_Toggle {
+.container_colour_toggle {
   min-width: 100%;
   height: 40%;
   display: flex;
 }
 
-#ID_Sound_Checkbox {
+#h__soundund_Checkbox {
   height: 1.5rem;
   box-shadow: 0 0 1rem black;
   border-radius: 20%;
 }
 
-#ID_Sound_Checkbox:hover {
+#checkbox__sound:hover {
   box-shadow: none;
 }
 
-#ID_Language_Menu {
+#select__language {
   cursor: pointer;
   width: 80%;
   height: 1.5em;
@@ -471,31 +470,45 @@ footer {
   margin-bottom: 1em; 
 }
 
-#ID_Stats_Container{
+#container__stats{
   display: grid;
-  grid: 2em 5em/ 1fr 10% 1fr ;
+  grid: 2em auto/ 1fr 1fr ;
   grid-template-areas: 
-    "h h h"
-    "e . n";
+    'h h h'
+    'e . n';
   min-width: 100%;  
-  margin-top: 1em;
 }
 
-#ID_Stats {
+#h__stats {
   grid-area: h;
 }
 
-#ID_Stats_First_Wrapper{
+#h__stats_First_Wrapper{
   grid-area: e;
 }
-#ID_Stats_Second_Wrapper {
+#h__stats_Second_Wrapper {
   grid-area: n;
 }
 
+details[open] p {
+  animation: animateDown 0.2s linear forwards;
+}
 
-#ID_Contacts_Container,
-#ID_Credits_Container,
-#ID_Delete_All_Container{
+@keyframes animateDown {
+  0% {
+    opacity: 0;
+    transform: translatey(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translatey(0);
+  }
+}
+
+
+#container__contacts,
+#container__credits,
+#container__delete{
   margin-block: .5em;
 }
 
@@ -509,15 +522,15 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom:  .2em;
 }
 
-#ID_Play_Against{
+#choosing_cpu_headline{
  font-size: large;
 }
 
 
-#ID_Info,
-#ID_Language,
-#ID_Contact,
-#ID_Credits {
+#info_h,
+#h__language,
+#h__contact,
+#h__credits {
   cursor: pointer;
 }
 
@@ -526,20 +539,20 @@ h1, h2, h3, h4, h5, h6 {
 ?     hover 
             ====== */
 
-#ID_Info:hover,
-#ID_Stats_First_Wrapper :hover,
-#ID_Stats_Second_Wrapper :hover,
-#ID_Contact:hover,
-#ID_Credits:hover {
+#info_h:hover,
+#wrapper__stats_easy :hover,
+#wrapper__stats_normal :hover,
+#h__contact:hover,
+#h__credits:hover {
   color: red;
 }
 
-#ID_Reset_Easy:hover,
-#ID_Reset_Normal:hover{
+#reset_easy:hover,
+#reset__normal:hover{
   color: white;             
 }
 
-#ID_Gameboard_Span[data-ingame='yes']  {
+#settings_span__gameboard[data-ingame='yes']  {
   pointer-events: none;
   color: black;
   background-color: lightgrey;
@@ -573,7 +586,7 @@ input {
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
-  font-family: "Bebas Neue", cursive;
+  font-family: 'Bebas Neue', cursive;
 }
 
 input:hover {
@@ -588,7 +601,7 @@ input:focus {
   box-shadow: inset 0 0 1rem white;
 }
 
-.Class_Sidebars input {
+.sidebars input {
   margin-bottom: 5vh;
 }
 
@@ -601,7 +614,7 @@ button {
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
-  font-family: "Bebas Neue", cursive;
+  font-family: 'Bebas Neue', cursive;
 }
 
 button:hover {
@@ -610,13 +623,13 @@ button:hover {
   box-shadow: inset 0 0 1rem white;
 }
 
-.Class_Naming_Span {
+.naming__span {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.Class_Player_Name_Buttons {
+.name_svgs {
   max-width: 1.5rem;
   max-height: 1.5rem;
   margin-left: 1rem;
@@ -625,18 +638,17 @@ button:hover {
   filter: invert(1);
 }
 
-#ID_Reset_Easy {
+#reset_easy {
   min-width: 50%;
 }
 
-#ID_Reset_Normal {
+#reset__normal {
   min-width: 50%;
 }
 
-#ID_Delete_All {
+#button__delete {
   cursor: pointer;
-  height: 2rem;
-  width: 8rem;
+  
   border-radius: 10%;
 }
 
@@ -671,7 +683,7 @@ select {
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
-  font-family: "Bebas Neue", cursive;
+  font-family: 'Bebas Neue', cursive;
 }
 
 select:hover {
@@ -680,7 +692,7 @@ select:hover {
   box-shadow: inset 0 0 1rem white;
 }
 
-#ID_Choose_KI {
+#choosing_cpu__select {
   min-height: rem;
   border-radius: 10rem;
 }
@@ -689,7 +701,7 @@ select:hover {
 ?     toggle 
             ===== */
 
-#ID_Toggle_Button {
+#button__toggle {
   position: relative;
   top: 0;
   left: 5%;
@@ -699,7 +711,7 @@ select:hover {
   border-radius: 50%;
 }
 
-#ID_Toggle_Button:hover {
+#button__toggle:hover {
   background-color: var(--gameboard);
 }
 
@@ -707,7 +719,7 @@ select:hover {
   transform: translateX(1.8rem);
 }
 
-.Class_Colour_Slider {
+.span_colour_slider {
   position: relative;
   cursor: pointer;
   top: 0%;
@@ -721,7 +733,7 @@ select:hover {
   border: none;
 }
 
-.Class_Colour_Slider:hover {
+.span_colour_slider:hover {
   box-shadow: none;
 }
 
@@ -729,15 +741,17 @@ select:hover {
 ?     summarys 
             ======== */
 
-.Class_Summary_Details {
+.summary__details
+ {
   margin-top: 1em;
 }
 
-.Class_Summary_Details:hover {
+.summary__details
+:hover {
   cursor: pointer;
 }
 
-.Class_Settings_Summarys {
+.span_stats {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -755,7 +769,7 @@ select:hover {
             =================== */
 
 .Class_ChoosingAnimation_Coin_1 {
-  background-image: url("../Folder_Graphics/Coins/yellow.png");
+  background-image: url('../Folder_Graphics/Coins/yellow.png');
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: top;
@@ -775,7 +789,7 @@ select:hover {
 }
 
 .Class_ChoosingAnimation_Coin_2 {
-  background-image: url("../Folder_Graphics/Coins/red.png");
+  background-image: url('../Folder_Graphics/Coins/red.png');
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: top;
@@ -950,7 +964,7 @@ body[data-gameend = 'yes']{
   display: flex;
 }
 
-#ID_MainWrapper[data-gameend = 'yes']{
+#main__section[data-gameend = 'yes']{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -958,7 +972,7 @@ body[data-gameend = 'yes']{
   font-size: large;
 }
 
-#ID_MainWrapper[data-canvasend = 'yes']{
+#main__section[data-canvasend = 'yes']{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -966,7 +980,7 @@ body[data-gameend = 'yes']{
   font-size: large;
 }
 
-#ID_GameboardWrapper[data-gameend="yes"]{
+#ID_GameboardWrapper[data-gameend='yes']{
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -1037,7 +1051,7 @@ body[data-gameend = 'yes']{
   font-size: large;
 }
 
-*[data-wincounter = "yes"] {
+*[data-wincounter = 'yes'] {
   height: 3rem;
   margin: .5rem;
   filter: invert(1);
@@ -1194,7 +1208,7 @@ body[data-gameend = 'yes']{
     top: 2vh;
     filter: invert(1);
   }
-  .Class_Naming_Span {
+  .naming__span {
     display: inline-block;
     justify-content: center;
     align-content: center;
@@ -1202,23 +1216,23 @@ body[data-gameend = 'yes']{
     align-items: center;
   }
 
-  .Class_Player_Name_Buttons {
+  .name_svgs {
     margin-block: 1rem;
   }
 
-  #ID_Player_1_Name {
+  #player1_name__input {
     min-width: 100%;
   }
 
-  #ID_Player_2_Name {
+  #player2_name__input {
     min-width: 100%;
   }
 
-  .Class_LeftSidebarWrapper {
+  #leftSidebar__wrapper {
     width: 100%;
     margin-block: 2rem;
   }
-  .Class_RightSidebarWrapper {
+  #sidebarRight__wrapper {
     width: 100%;
     margin-block: 2rem;
     margin-bottom: 1rem;
@@ -1240,12 +1254,12 @@ body[data-gameend = 'yes']{
     bottom: 0;
   }
 
-  #ID_Start_Button {
+  #start__button {
     min-width: 30%;
     margin-bottom: 5%;
   }
 
-  #ID_Setting_Span {
+  #settings_span {
     overflow: hidden;
   }
 
@@ -1313,7 +1327,7 @@ todo
                                                                                                   
  !                                              Credits & Special Thanks to:                                                 
                                                                                                   
-Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    
+Special thanks to the 'Odin Project'-Team who did a great job in giving advice for learning Web-Development.    
 ?                                             https://www.theodinproject.com/                                               
                                                                                                   
                   Greetings to the many, many programmers who take the time to put there knowledge online!         
