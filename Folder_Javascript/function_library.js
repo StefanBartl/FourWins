@@ -282,26 +282,83 @@ Element: 'div',
 ID: 'div__drawGames'
 });
 
-// Add Text
+// add headelines
 if(Game.Language === 'de'){
 if(document.getElementById('div__wonGames_P1')) document.getElementById('div__wonGames_P1').innerText = 'Spiele gewonnen:';
-if(document.getElementById('div__wonGames_P2'))   document.getElementById('div__wonGames_P2').innerText = 'Spiele gewonnen:';
+if(document.getElementById('div__wonGames_P2'))
+Game.Game_against_CPU === false ?    document.getElementById('div__wonGames_P2').innerText = 'Spiele gewonnen:' :    document.getElementById('div__wonGames_P2').innerText = 'Spiele verloren';
 if(document.getElementById('div__drawGames'))  document.getElementById('div__drawGames').innerText = 'Unentschieden:';
 } else if (Game.Language === 'en'){
-if(document.getElementById('div__wonGames_P1')) document.getElementById('div__wonGames_P1').innerText = 'Wons:';
-if(document.getElementById('div__wonGames_P2')) document.getElementById('div__wonGames_P2').innerText = 'Wons:';
-if(document.getElementById('div__drawGames')) document.getElementById('div__drawGames').innerText = 'Draws:';
-}
-const p1_value = document.createElement('h3');
-document.getElementById('div__wonGames_P1').appendChild(p1_value);
-p1_value.innerText = `${Game.Player_1_wins }`;
-const p2_value = document.createElement('h3');
-document.getElementById('div__wonGames_P2').appendChild(p2_value);
-p2_value.innerText = `${Game.Player_2_wins }`;
-const draw_value = document.createElement('h3');
-document.getElementById('div__drawGames').appendChild(draw_value);
-draw_value.innerText = `${Game.Draws}`;
+if(document.getElementById('div__wonGames_P1')) document.getElementById('div__wonGames_P1').innerText = 'Wins';
+if(document.getElementById('div__wonGames_P2')) 
+Game.Game_against_CPU === false ?    document.getElementById('div__wonGames_P2').innerText = 'Wins' :    document.getElementById('div__wonGames_P2').innerText = 'Lost:';
 
+if(document.getElementById('div__drawGames')) document.getElementById('div__drawGames').innerText = 'Draws:';
+};
+
+// add image-container
+const img__container1 = document.createElement('div');
+img__container1.id = 'container__tally1';
+if(document.getElementById('div__wonGames_P1')) document.getElementById('div__wonGames_P1').appendChild(img__container1);
+const img__container2 = document.createElement('div');
+img__container2.id = 'container__tally2';
+if(document.getElementById('div__wonGames_P2'))document.getElementById('div__wonGames_P2').appendChild(img__container2);
+const img__container3 = document.createElement('div');
+img__container3.id = 'container__tally3';
+if(document.getElementById('div__drawGames'))document.getElementById('div__drawGames').appendChild(img__container3);
+
+//#region tally-images
+const img__tallyOne = document.createElement('img');
+img__tallyOne.src = './Folder_Graphics/tally/1.png';
+img__tallyOne.classList.add('img__tallys');
+
+const img__tallyTwo = document.createElement('img');
+img__tallyTwo.src = './Folder_Graphics/tally/2.png';
+img__tallyTwo.classList.add('img__tallys');
+
+const img__tallyThree = document.createElement('img');
+img__tallyThree.src = './Folder_Graphics/tally/3.png';
+img__tallyThree.classList.add('img__tallys');
+
+const img__tallyFour = document.createElement('img');
+img__tallyFour.src = './Folder_Graphics/tally/4.png';
+img__tallyFour.classList.add('img__tallys');
+
+const img__tallyFive = document.createElement('img');
+img__tallyFive.src = './Folder_Graphics/tally/5.png';
+img__tallyFive.classList.add('img__tallys');
+//#endregion
+
+//attach correct image to container
+
+function Attach_Tally(containerNumber){
+  console.log('Try to attach tally...');
+  // set up variables
+  const container = document.getElementById(`container__tally${containerNumber}`)
+  let  result;
+  if(containerNumber === 1) result = Game.Player_1_wins;
+  if(containerNumber === 2) result = Game.Player_2_wins;
+  if(containerNumber === 3) result = Game.Draws;
+
+  // remove all elements from img container
+  while (container.firstChild) {
+  container.removeChild(container.lastChild);
+    console.log(`...while loop removed tallys from container number ${containerNumber}.`);
+  };
+  if (result === 1) { container.appendChild(img__tallyOne); console.log('Appended tally 1');}  
+  if (result === 2) {container.appendChild(img__tallyTwo); console.log('Appended tally 2');}  
+  if (result === 3) { container.appendChild(img__tallyThree); console.log('Appended tally 3');}    
+  if (result === 4) { container.appendChild(img__tallyFour); console.log('Appended tally 4');}    
+  if (result === 5) { container.appendChild(img__tallyFive); console.log('Appended tally 5');}    
+};
+
+Attach_Tally(1);
+Attach_Tally(2);
+Attach_Tally(3);
+
+if(Game.Player_1_wins === 1){
+  document.getElementById('div__wonGames_P1').appendChild()
+}
 document.getElementById('div__wonGames_P1').classList.add('Class_Invisible');
 document.getElementById('div__wonGames_P2').classList.add('Class_Invisible');
 document.getElementById('div__drawGames').classList.add('Class_Invisible');
@@ -316,64 +373,12 @@ if(Game.Draws > 0){
 };
 
 
-// // Increas won games counter in Settings-Menu amd create correct notification on Game Screen
-// const tally_img = document.createElement('img');
-// tally_img.setAttribute('data-wincounter', 'yes');
-
-// // Get correct counter-values
-// // Calculate correct tally: Because we only have 5 tallys and a Player can have f.e. 12 wins, we must calculated the corect tally. In this example: there have to be two 5er tally and one 2 tally.... 
-// // My solution: Reset the counter variable to 1 every time it goes over 5
-// let tally_counter_p1, tally_counter_p2, tally_counter_draws;
-// Game.Player_1_wins !== 0 ? tally_counter_p1 = Game.Player_1_wins : tally_counter_p1 = 1;
-// Game.Player_2_wins !== 0 ? tally_counter_p2 = Game.Player_2_wins : tally_counter_p2 = 1;
-// Game.Draws !== 0 ? tally_counter_draws = Game.Draws : tally_counter_draws= 1;
-
-// if (gameResult === 1){
-// tally_img.id = 'ID_Tally_IMG_P1';    
-// if(Game.Player_1_wins === 6){
-// tally_counter_p1 = 1;
-// }
-// } else if (gameResult === 2){
-// tally_img.id = 'ID_Tally_IMG_P2';   
-// if(Game.Player_2_wins === 6){
-// tally_counter_p2 = 1;
-// }
-// } else if (gameResult === 3){
-// tally_img.id = 'ID_Tally_IMG_Draw';    
-// if(Game.Draws === 6){
-// tally_counter_draws = 1;
-// }
-// };
-// if (tally_counter_p1 ===  1 || tally_counter_p2 ===  1 || tally_counter_draws ===  1) {tally_img.src =  './Folder_Graphics/tally/1.png'; tally_img.setAttribute('data-winstays', 'no');};
-// if (tally_counter_p1 ===  2 || tally_counter_p1 ===  2 || tally_counter_draws ===  2) {tally_img.src =  './Folder_Graphics/tally/2.png'; tally_img.setAttribute('data-winstays', 'no');};
-// if (tally_counter_p1 ===  3 || tally_counter_p1 ===  3 || tally_counter_draws ===  3) {tally_img.src =  './Folder_Graphics/tally/3.png'; tally_img.setAttribute('data-winstays', 'no');};
-// if (tally_counter_p1 ===  4 || tally_counter_p1 ===  4 || tally_counter_draws ===  4) {tally_img.src =  './Folder_Graphics/tally/4.png'; tally_img.setAttribute('data-winstays', 'no');};
-// if (tally_counter_p1 ===  5 || tally_counter_p1 ===  5 || tally_counter_draws ===  5) {tally_img.src =  './Folder_Graphics/tally/5.png'; tally_img.setAttribute('data-winstays', 'yes')};
-
-
-// if (gameResult === 1){
-// // First proof if there is a taly in the Container and if it should be removed. If yes, remove the 1er, 2er, 3er and 4er tallys so if ist the 6 win, tally 5 + tally 1 are appended
-// if(document.getElementById('div__wonGames_P1').lastElementChild && document.getElementById('div__wonGames_P1').lastElementChild.getAttribute('data-winstays') === 'no')
-// if(Game.Player_1_wins < 5 || Game.Player_1_wins > 5){
-// document.getElementById('div__wonGames_P1').lastElementChild.remove();
-// }
-// // Append tally to DIV
-// document.getElementById('div__wonGames_P1').appendChild(tally_img);
-// };
-
-// if (gameResult === 2){
-// if(document.getElementById('div__wonGames_P2').lastElementChild && document.getElementById('div__wonGames_P2').lastElementChild.getAttribute('data-winstays') === 'no')
-// document.getElementById('div__wonGames_P2').lastElementChild.remove();
-// document.getElementById('div__wonGames_P2').appendChild(tally_img);
-// }; 
-
-// if (gameResult === 3){
-// if(document.getElementById('div__drawGames').lastElementChild && document.getElementById('div__drawGames').lastElementChild.getAttribute('data-winstays') === 'no')
-// document.getElementById('div__drawGames').lastElementChild.remove();
-// document.getElementById('div__drawGames').appendChild(tally_img);
-// };
 
 };
+
+
+
+
 
 /* ===============
 !     Create Starting Stats 

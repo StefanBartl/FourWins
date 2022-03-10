@@ -761,6 +761,63 @@ select:hover {
 
 /* #endregion */
 
+
+/* #region game-screen*/
+
+
+
+
+
+/* ===========
+?     win notifications
+            ============ */
+
+#div__wonGames_P2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  margin: 2em;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: column;
+  justify-content: end;
+  font-size: large;
+}
+
+#div__wonGames_P2 {
+  position: absolute;
+  top: 0;
+  right: 3rem;
+  display: flex;
+  margin: 2em;
+  align-items: center;
+  flex-direction: column;
+  justify-content: end;
+  font-size: large;
+}
+
+#div__drawGames {
+  position: absolute;
+  margin-top: 2em;
+  top: 0;
+  right: 50%;
+  transform: translateX(+50%);
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  font-size: large;
+  
+}
+
+.img__tallys{
+  filter: invert(1);
+  height: 2em;
+}
+
+/* #endregion*/
+
+
 /* #region 7) animations & transitions */
 
 /*#region  choosing coin animations */
@@ -986,54 +1043,6 @@ body[data-gameend = 'yes']{
 }
 
 
-
-/* ===========
-?     win notifications
-            ============ */
-
-#div__wonGames_P2 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  margin: 2em;
-  flex-wrap: wrap;
-  align-items: center;
-  flex-direction: column;
-  justify-content: end;
-  font-size: large;
-}
-
-#div__wonGames_P2 {
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
-  margin: 2em;
-  align-items: center;
-  flex-direction: column;
-  justify-content: end;
-  font-size: large;
-}
-
-#div__drawGames {
-  position: absolute;
-  margin-top: 2em;
-  top: 0;
-  right: 50%;
-  transform: translateX(+50%);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start; 
-  font-size: large;
-}
-
-*[data-wincounter = 'yes'] {
-  height: 3rem;
-  margin: .5rem;
-  filter: invert(1);
-}
 
 #div__canvas{
   z-index: -1;
