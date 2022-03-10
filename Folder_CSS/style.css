@@ -245,7 +245,7 @@ footer {
   gap: 1em;
   justify-content: center;
   text-align: center;
-  margin-block: 1em;
+   margin-block: 1em;
 }
 
 #choosing_cpu {
@@ -258,12 +258,12 @@ footer {
 
 /* #region 3) gameboard */
 
-.Class_Columns {
+.columns {
   width: 100%;
   height: max-content;
 }
 
-.Class_TopCells {
+.topCells {
   outline: none;
   aspect-ratio: 1/1;
   border-left: dashed 0.15rem var(--base-border);
@@ -272,7 +272,7 @@ footer {
 }
 
     /* If column is full lock the top-cell,...*/
-.Class_TopCells[data-columnfull='yes'] {
+.topCells[data-columnfull='yes'] {
   border-top: solid 2px var(--gameboard);
   pointer-events: none;
 }
@@ -281,7 +281,7 @@ footer {
     border-left: none;
 }
 
-.Class_Cells {
+.cells {
   aspect-ratio: 1 / 1;
   border: solid 0.2rem var(--gameboard);
   border-radius: 10rem;
@@ -324,7 +324,7 @@ footer {
 ?     placing coins
             ========== */
 
-.Class_Coin_Yellow {
+.coin__yellow {
   background-image: url('../Folder_Graphics/Coins/yellow.png');
   background-size: 80%;
   background-position: center;
@@ -335,7 +335,7 @@ footer {
   z-index: 0;
 }
 
-.Class_Coin_Red {
+.coin__red {
   background-image: url('../Folder_Graphics/Coins/red.png');
   background-size: 80%;
   background-position: center;
@@ -346,14 +346,14 @@ footer {
   z-index: 0;
 }
 
-.Class_PlacedCoin_1 {
+.placedCoin__1 {
   background-image: url('../Folder_Graphics/Coins/yellow.png');
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.Class_PlacedCoin_2 {
+.placedCoin__2 {
   background-image: url('../Folder_Graphics/Coins/red.png');
   background-size: 80%;
   background-position: center;
@@ -461,7 +461,7 @@ footer {
 #checkbox__sound:hover {
   box-shadow: none;
 }
-
+ 
 #select__language {
   cursor: pointer;
   width: 80%;
@@ -564,7 +564,7 @@ h1, h2, h3, h4, h5, h6 {
 /* #region 5) typographie */
 
 
-#ID_h3_turnText {
+#h__turnDiv {
   width: 10rem;
   border: dashed 0.3rem var(--base-border);
   padding: 1rem;
@@ -652,7 +652,7 @@ button:hover {
   border-radius: 10%;
 }
 
-#ID_NewGame_Button {
+#button__newGame {
   cursor: pointer;
   min-width: 12.5vw;
   min-height: 7.5vh;
@@ -661,7 +661,7 @@ button:hover {
   margin-top: 10vh;
 }
 
-#ID_Back_Button {
+#button__startingScreen {
   cursor: pointer;
   min-width: 12.5vw;
   min-height: 7.5vh;
@@ -928,7 +928,7 @@ select:hover {
 
 /*#region game-end animations*/
 
-.Class_Game_End{
+.animation__GameEnd{
   animation: End_Animation 4s ease-in;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
@@ -952,7 +952,7 @@ select:hover {
 ?     firework canvas container
             =================== */
 
-.Class_Canvas_Div {
+.div__canvas {
   position: absolute;
   left: 0;
   top: 0;
@@ -980,7 +980,7 @@ body[data-gameend = 'yes']{
   font-size: large;
 }
 
-#ID_GameboardWrapper[data-gameend='yes']{
+#wrapper__gameboard[data-gameend='yes']{
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -995,15 +995,15 @@ body[data-gameend = 'yes']{
   opacity: 0.7;
 }
 
-#ID_End_H1 {
+#h__gameEnd {
  margin-top:10vh; 
 }
 
-#ID_End_Text {
+#p__gameEnd {
   margin-top: 5vh;
 }
 
-#ID_End_Button_Div {
+#button__gameEnd {
   margin-top: 4vh;
   justify-content: center;
   align-content: center;
@@ -1013,7 +1013,7 @@ body[data-gameend = 'yes']{
 ?     win notifications
             ============ */
 
-#ID_Win_Div_One {
+#div__wonGames_P2 {
   position: absolute;
   top: 0;
   left: 0;
@@ -1026,7 +1026,7 @@ body[data-gameend = 'yes']{
   font-size: large;
 }
 
-#ID_Win_Div_Two {
+#div__wonGames_P2 {
   position: absolute;
   top: 0;
   right: 0;
@@ -1038,7 +1038,7 @@ body[data-gameend = 'yes']{
   font-size: large;
 }
 
-#ID_Draw_Div {
+#div__drawGames {
   position: absolute;
   margin-top: 2em;
   top: 0;
@@ -1057,7 +1057,7 @@ body[data-gameend = 'yes']{
   filter: invert(1);
 }
 
-#ID_Canvas_Div{
+#div__canvas{
   z-index: -1;
 }
 
@@ -1273,20 +1273,20 @@ body[data-gameend = 'yes']{
     display: none;
   }
 
-  #ID_NewGame_Button {
+  #button__newGame {
     min-width: 40%;
   }
 
-  #ID_Back_Button {
+  #button__startingScreen {
     min-width: 40%;
   }
 
-  #ID_End_Button_Div {
+  #button__gameEnd {
     margin-block: 2rem;
   }
 
   /* Win Marks */
-  #ID_Win_Div_One {
+  #div__wonGames {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1296,7 +1296,7 @@ body[data-gameend = 'yes']{
     align-items: flex-end;
   }
 
-  #ID_Win_Div_Two {
+  #div__wonGames_P2 {
     position: absolute;
     bottom: 0;
     right: 0;

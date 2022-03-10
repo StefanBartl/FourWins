@@ -37,13 +37,13 @@ function Game_Screen() {
 //console.log('Entering Game-Screen.');
 Game.state = 'InGame';
 document.getElementById('main__section').setAttribute('data-ingame', 'yes');
-document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'yes');
+document.getElementById('wrapper__gameboard').setAttribute('data-ingame', 'yes');
 document.body.setAttribute('data-gameend', 'no');
 document.getElementById('main__section').setAttribute('data-gameend', 'no');
 document.getElementById('main__section').setAttribute('data-canvasend', 'no');
 
 if(Game.state === 'Game End'){
-  document.getElementById('ID_Turn_Div').classList.remove('Class_Invisible');
+  document.getElementById('div__turnPlayers').classList.remove('Class_Invisible');
 
    // Disable Gameboard-Size changing
    document.getElementById('settings_span__gameboard').setAttribute('data-ingame',  'yes');
@@ -59,16 +59,16 @@ if(Game.state === 'Game End'){
   
 
   // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it. Hide win notivications.
-  if(document.getElementById('ID_Turn_Div') && document.getElementById('ID_Turn_Div').classList.contains('Class_Invisible'))
-      document.getElementById('ID_Turn_Div').classList.remove('Class_Invisible');
-  if(document.getElementById('ID_Win_Div One') && document.getElementById('ID_Win_Div_One').classList.contains('Class_Invisible'))
-      document.getElementById('ID_Win_Div_One').classList.remove('Class_Invisible');
-  if(document.getElementById('ID_Win_Div_Two') && document.getElementById('ID_Win_Div_Two').classList.contains('Class_Invisible'))
-      document.getElementById('ID_Win_Div_Two').classList.remove('Class_Invisible');
-  if(document.getElementById('ID_Draw_Div') && document.getElementById('ID_Draw_Div').classList.contains('Class_Invisible'))
-      document.getElementById('ID_Draw_Div').classList.remove('Class_Invisible');
-  if (document.getElementById('ID_h3_turnText'))
-      document.getElementById('ID_h3_turnText').style = 'display: block';
+  if(document.getElementById('div__turnPlayers') && document.getElementById('div__turnPlayers').classList.contains('Class_Invisible'))
+      document.getElementById('div__turnPlayers').classList.remove('Class_Invisible');
+  if(document.getElementById('ID_Win_Div One') && document.getElementById('div__wonGames_P1').classList.contains('Class_Invisible'))
+      document.getElementById('div__wonGames_P1').classList.remove('Class_Invisible');
+  if(document.getElementById('div__wonGames_P2') && document.getElementById('div__wonGames_P2').classList.contains('Class_Invisible'))
+      document.getElementById('div__wonGames_P2').classList.remove('Class_Invisible');
+  if(document.getElementById('div__drawGames') && document.getElementById('div__drawGames').classList.contains('Class_Invisible'))
+      document.getElementById('div__drawGames').classList.remove('Class_Invisible');
+  if (document.getElementById('h__turnDiv'))
+      document.getElementById('h__turnDiv').style = 'display: block';
 
 // Disable Gameboard-Size changing
 document.getElementById('settings_span__gameboard').setAttribute('data-ingame',  'yes');
@@ -81,7 +81,7 @@ Game.Language === 'de' ? document.getElementById('settings_gameboard_h').innerTe
 function Start_Screen() {
   //console.log('Entering Game-Screen.');
   document.getElementById('main__section').setAttribute('data-ingame', 'no');
-  document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'no');
+  document.getElementById('wrapper__gameboard').setAttribute('data-ingame', 'no');
   document.body.setAttribute('data-gameend', 'no');
   document.getElementById('main__section').setAttribute('data-gameend', 'no');
   document.getElementById('main__section').setAttribute('data-canvasend', 'no');
@@ -94,16 +94,16 @@ function Start_Screen() {
 
 
   // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it. Hide win notivications.
-  if(document.getElementById('ID_Turn_Div') && !document.getElementById('ID_Turn_Div').classList.contains('Class_Invisible'))
-      document.getElementById('ID_Turn_Div').classList.add('Class_Invisible');
-  if(document.getElementById('ID_Win_Div_One') && !document.getElementById('ID_Win_Div_One').classList.contains('Class_Invisible'))
-      document.getElementById('ID_Win_Div_One').classList.add('Class_Invisible');
-  if(document.getElementById('ID_Win_Div_Two') && !document.getElementById('ID_Win_Div_Two').classList.contains('Class_Invisible'))
-      document.getElementById('ID_Win_Div_Two').classList.add('Class_Invisible');
-  if(document.getElementById('ID_Draw_Div') && !document.getElementById('ID_Draw_Div').classList.contains('Class_Invisible'))
-      document.getElementById('ID_Draw_Div').classList.add('Class_Invisible');
-  if (document.getElementById('ID_h3_turnText'))
-       document.getElementById('ID_h3_turnText').style = 'display: none';
+  if(document.getElementById('div__turnPlayers') && !document.getElementById('div__turnPlayers').classList.contains('Class_Invisible'))
+      document.getElementById('div__turnPlayers').classList.add('Class_Invisible');
+  if(document.getElementById('div__wonGames_P1') && !document.getElementById('div__wonGames_P1').classList.contains('Class_Invisible'))
+      document.getElementById('div__wonGames_P1').classList.add('Class_Invisible');
+  if(document.getElementById('div__wonGames_P2') && !document.getElementById('div__wonGames_P2').classList.contains('Class_Invisible'))
+      document.getElementById('div__wonGames_P2').classList.add('Class_Invisible');
+  if(document.getElementById('div__drawGames') && !document.getElementById('div__drawGames').classList.contains('Class_Invisible'))
+      document.getElementById('div__drawGames').classList.add('Class_Invisible');
+  if (document.getElementById('h__turnDiv'))
+       document.getElementById('h__turnDiv').style = 'display: none';
 
     // Enable Gameboard-Size changing
     document.getElementById('settings_span__gameboard').setAttribute('data-ingame',  'no');
@@ -134,25 +134,25 @@ function Preparations(gameResult) {
   if (Game.Game_against_CPU === true) Update_Stats(gameResult);
 
   // Loop trough TopCells to give them a better look in the black Game End Screen & Lock the placement function
-  const topCellsArray = document.getElementsByClassName('Class_TopCells');
+  const topCellsArray = document.getElementsByClassName('topCells');
   for (let topCell of topCellsArray) {
     topCell.classList.add('Class_Top_End');
     topCell.style = 'pointer-events:none';
   }
 
   // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it. Hide win notivications.
-  if(document.getElementById('ID_Turn_Div') && !document.getElementById('ID_Turn_Div').classList.contains('Class_Invisible'))
-  document.getElementById('ID_Turn_Div').classList.add('Class_Invisible');
+  if(document.getElementById('div__turnPlayers') && !document.getElementById('div__turnPlayers').classList.contains('Class_Invisible'))
+  document.getElementById('div__turnPlayers').classList.add('Class_Invisible');
   
  // Make Settings Menu visible during End-Screen
  if(document.getElementById('settings_menu__section'))  document.getElementById('settings_menu__section').setAttribute('data-endscreen',  'yes');
  if(document.getElementById('settings_span'))  document.getElementById('settings_span').setAttribute('data-endscreen',  'yes');
   // Enable Gameboard-Size changing
-  document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'no');
+  document.getElementById('wrapper__gameboard').setAttribute('data-ingame', 'no');
 
   Game.state = 'Game End';
   document.body.setAttribute('data-gameend', 'yes');
-  document.getElementById('ID_GameboardWrapper').setAttribute('data-gameend', 'yes');
+  document.getElementById('wrapper__gameboard').setAttribute('data-gameend', 'yes');
   document.getElementById('main__section').setAttribute('data-gameend', 'yes');
 
 
@@ -194,34 +194,34 @@ function Game_End_Screen(gameResult) {
   const winning_head = Create_DOM_Element({
     ParentID: 'main__section',
     Element: 'h1',
-    ID: 'ID_End_H1',
-    Class: 'Class_Game_End_Animation',
+    ID: 'h__gameEnd',
+    Class: 'animation__GameEnd',
   });
   const winning_text = Create_DOM_Element({
     ParentID: 'main__section',
     Element: 'p',
-    ID: 'ID_End_Text',
-    Class: 'Class_Game_End_Animation',
+    ID: 'p__gameEnd',
+    Class: 'animation__GameEnd',
   });
   const button_wrapper = Create_DOM_Element({
     ParentID: 'main__section',
     Element: 'div',
-    ID: 'ID_End_Button_Div',
+    ID: 'button__gameEnd',
   });
   const new_game_button = Create_DOM_Element({
-    ParentID: 'ID_End_Button_Div',
+    ParentID: 'button__gameEnd',
     Element: 'button',
-    ID: 'ID_NewGame_Button',
-    Class: 'Class_Game_End_Animation',
+    ID: 'button__newGame',
+    Class: 'animation__GameEnd',
   });
   const back_button = Create_DOM_Element({
-    ParentID: 'ID_End_Button_Div',
+    ParentID: 'button__gameEnd',
     Element: 'button',
-    ID: 'ID_Back_Button',
-    Class: 'Class_Game_End_Animation',
+    ID: 'button__startingScreen',
+    Class: 'animation__GameEnd',
   });
 
-  insertAfter(left_sidebar, document.getElementById('ID_GameboardWrapper'));
+  insertAfter(left_sidebar, document.getElementById('wrapper__gameboard'));
 
   // If it is not a draw or a loose against CPU, it is a win from a Human Playert, so add the fireworks
   if (
@@ -229,9 +229,9 @@ function Game_End_Screen(gameResult) {
   ) {
     // Canvas with fireworks layed in a div container, which is then pushed to the Main Wrapper, Now, everything which is pushed to the Main Wrapper
     // with a greater z-index is visible over the fireworks canvas
-    const canvas_div = Create_DOM_Element({ ParentID: 'main__section', Element: 'div', ID: 'ID_Canvas_Div', Class: 'Class_Canvas_Div' });
-    const firework_canvas = Create_DOM_Element({ ParentID: 'ID_Canvas_Div',  Element: 'canvas', ID: 'ID_Firework', Class: 'Class_Firework' });
-    Fireworks('ID_Firework');
+    const canvas_div = Create_DOM_Element({ ParentID: 'main__section', Element: 'div', ID: 'div__canvas', Class: 'div__canvas' });
+    const firework_canvas = Create_DOM_Element({ ParentID: 'div__canvas',  Element: 'canvas', ID: 'firework' });
+    Fireworks('firework');
     document.getElementById('main__section').setAttribute('data-gameend', 'no');
     document.getElementById('main__section').setAttribute('data-canvasend', 'yes');
 
@@ -239,26 +239,26 @@ function Game_End_Screen(gameResult) {
     if (Game.Language === 'de') {
       // Deutsch for Games with a wining Human Player
       document.getElementById(
-        'ID_End_H1'
+        'h__gameEnd'
       ).innerText = `Gratulation, ${result[0]}!`;
       document.getElementById(
-        'ID_End_H1'
+        'h__gameEnd'
       ).alt = `${result[0]} hat das Spiel gewonnen`;
       document.getElementById(
-        'ID_End_Text'
+        'p__gameEnd'
       ).innerText = `Du hast das Spiel gewonnen!\n Gibst du ${result[1]} eine Chance auf Revanche oder wollt ihr zurück zur Startseite?`;
-      document.getElementById('ID_End_H1').alt =
+      document.getElementById('h__gameEnd').alt =
         'Willst du noch einmal spielen? Klicke auf den Button';
     } else {
       // Else add English for Games with a winning Human Player
       document.getElementById(
-        'ID_End_H1'
+        'h__gameEnd'
       ).innerText = `Congratulations, ${result[0]}!`;
-      document.getElementById('ID_End_H1').alt = `${result[0]} won the game.`;
+      document.getElementById('h__gameEnd').alt = `${result[0]} won the game.`;
       document.getElementById(
-        'ID_End_Text'
+        'p__gameEnd'
       ).innerText = `You have won the Game!\n Will you give ${result[1]} a chance to revanche or do you want back to Starting-Screen?`;
-      document.getElementById('ID_End_H1').alt =
+      document.getElementById('h__gameEnd').alt =
         'Another game or back to starting screen?';
     }
   }
@@ -266,14 +266,14 @@ function Game_End_Screen(gameResult) {
   // If the CPU won against Player CPU is always Player 2 and if Game against CPU is true >>> CPU won), add the lose text and screen
   if (gameResult === 2 && Game.Game_against_CPU === true) {
     if (Game.Language === 'de') {
-      document.getElementById('ID_End_H1').innerText = 'Verloren!';
+      document.getElementById('h__gameEnd').innerText = 'Verloren!';
       document.getElementById(
-        'ID_End_Text'
+        'p__gameEnd'
       ).innerText = `${result[1]}, lass den Kopf nicht hängen. Dieses mal war der Computer sehr stark. Willst du eine Revanche?`;
     } else {
-      document.getElementById('ID_End_H1').innerText = 'Lost!';
+      document.getElementById('h__gameEnd').innerText = 'Lost!';
       document.getElementById(
-        'ID_End_Text'
+        'p__gameEnd'
       ).innerText = `${result[1]}, keep your head held high. This time the computer was very strong. Do you want revenge?`;
     }
   }
@@ -281,29 +281,29 @@ function Game_End_Screen(gameResult) {
   // ... for a Draw use this text
   if (gameResult === 3) {
     if (Game.Language === 'de') {
-      document.getElementById('ID_End_H1').innerText = 'Unentschieden!';
+      document.getElementById('h__gameEnd').innerText = 'Unentschieden!';
       document.getElementById(
-        'ID_End_Text'
+        'p__gameEnd'
       ).innerText = `${result[0]} & ${result[1]}, seid ihr etwa gleich stark in 4-Gewinnt?\nWollt ihr es noch einmal ausprobieren und euch messen oder zurück zum Startbildschirm?`;
     } else {
-      document.getElementById('ID_End_H1').innerText = 'Draw !';
+      document.getElementById('h__gameEnd').innerText = 'Draw !';
       document.getElementById(
-        'ID_End_Text'
+        'p__gameEnd'
       ).innerText = `${result[0]} & ${result[1]}, are you same smart in 4-Wins?\nDo you want to find this out or back to the starting screen?`;
     }
   }
 
   // Doesnt matter if Game won, Draw or loose against CPU, this Elements hav to be the same (except of the language, ofc...)
   if (Game.Language === 'de') {
-    document.getElementById('ID_NewGame_Button').innerText = 'Neues Spiel';
-    document.getElementById('ID_NewGame_Button').alt = 'Neues Spiel - Button';
-    document.getElementById('ID_Back_Button').innerText = 'Zur Startseite';
-    document.getElementById('ID_Back_Button').alt = 'Zur Startseite - Button';
+    document.getElementById('button__newGame').innerText = 'Neues Spiel';
+    document.getElementById('button__newGame').alt = 'Neues Spiel - Button';
+    document.getElementById('button__startingScreen').innerText = 'Zur Startseite';
+    document.getElementById('button__startingScreen').alt = 'Zur Startseite - Button';
   } else {
-    document.getElementById('ID_NewGame_Button').innerText = 'New Game';
-    document.getElementById('ID_NewGame_Button').alt = 'New Game - Button';
-    document.getElementById('ID_Back_Button').innerText = 'Starting Screen';
-    document.getElementById('ID_Back_Button').alt =
+    document.getElementById('button__newGame').innerText = 'New Game';
+    document.getElementById('button__newGame').alt = 'New Game - Button';
+    document.getElementById('button__startingScreen').innerText = 'Starting Screen';
+    document.getElementById('button__startingScreen').alt =
       'To Starting-Screen - Button';
   }
 
@@ -314,68 +314,68 @@ function Game_End_Screen(gameResult) {
 
   //#region Event-Listeners
 
-  document.getElementById('ID_Back_Button').addEventListener('click', () => {
+  document.getElementById('button__startingScreen').addEventListener('click', () => {
     // Back to the starting screen with page refresh
     document.location.reload();
   });
 
-  document.getElementById('ID_NewGame_Button').addEventListener('click', ()=>{Start_New_Game(gameResult)});
+  document.getElementById('button__newGame').addEventListener('click', ()=>{Start_New_Game(gameResult)});
   //#endregion
 
 //#region Win/Draw Notifications
 // Add Notificiation how many times a player have won / game was draw
 
 // Container
-if (!document.getElementById('ID_Win_Div_One'))
+if (!document.getElementById('div__wonGames_P1'))
 win_div_one = Create_DOM_Element({
 ParentID: 'main__section',
 Element: 'div',
-ID: 'ID_Win_Div_One'
+ID: 'div__wonGames_P1'
 });
-if (!document.getElementById('ID_Win_Div_Two'))
+if (!document.getElementById('div__wonGames_P2'))
 win_div_two = Create_DOM_Element({
 ParentID: 'main__section',
 Element: 'div',
-ID: 'ID_Win_Div_Two'
+ID: 'div__wonGames_P2'
 });
-if (!document.getElementById('ID_Draw_Div'))
+if (!document.getElementById('div__drawGames'))
 draw_div = Create_DOM_Element({
 ParentID: 'main__section',
 Element: 'div',
-ID: 'ID_Draw_Div'
+ID: 'div__drawGames'
 });
 
 // Add Text
 if(Game.Language === 'de'){
-if(document.getElementById('ID_Win_Div_One')) document.getElementById('ID_Win_Div_One').innerText = 'Spiele gewonnen:';
-if(document.getElementById('ID_Win_Div_Two'))   document.getElementById('ID_Win_Div_Two').innerText = 'Spiele gewonnen:';
-if(document.getElementById('ID_Draw_Div'))  document.getElementById('ID_Draw_Div').innerText = 'Unentschieden:';
+if(document.getElementById('div__wonGames_P1')) document.getElementById('div__wonGames_P1').innerText = 'Spiele gewonnen:';
+if(document.getElementById('div__wonGames_P2'))   document.getElementById('div__wonGames_P2').innerText = 'Spiele gewonnen:';
+if(document.getElementById('div__drawGames'))  document.getElementById('div__drawGames').innerText = 'Unentschieden:';
 } else if (Game.Language === 'en'){
-if(document.getElementById('ID_Win_Div_One')) document.getElementById('ID_Win_Div_One').innerText = 'Wons:';
-if(document.getElementById('ID_Win_Div_Two')) document.getElementById('ID_Win_Div_Two').innerText = 'Wons:';
-if(document.getElementById('ID_Draw_Div')) document.getElementById('ID_Draw_Div').innerText = 'Draws:';
+if(document.getElementById('div__wonGames_P1')) document.getElementById('div__wonGames_P1').innerText = 'Wons:';
+if(document.getElementById('div__wonGames_P2')) document.getElementById('div__wonGames_P2').innerText = 'Wons:';
+if(document.getElementById('div__drawGames')) document.getElementById('div__drawGames').innerText = 'Draws:';
 }
 const p1_value = document.createElement('h3');
-document.getElementById('ID_Win_Div_One').appendChild(p1_value);
+document.getElementById('div__wonGames_P1').appendChild(p1_value);
 p1_value.innerText = `${Game.Player_1_wins }`;
 const p2_value = document.createElement('h3');
-document.getElementById('ID_Win_Div_Two').appendChild(p2_value);
+document.getElementById('div__wonGames_P2').appendChild(p2_value);
 p2_value.innerText = `${Game.Player_2_wins }`;
 const draw_value = document.createElement('h3');
-document.getElementById('ID_Draw_Div').appendChild(draw_value);
+document.getElementById('div__drawGames').appendChild(draw_value);
 draw_value.innerText = `${Game.Draws}`;
 
-document.getElementById('ID_Win_Div_One').classList.add('Class_Invisible');
-document.getElementById('ID_Win_Div_Two').classList.add('Class_Invisible');
-document.getElementById('ID_Draw_Div').classList.add('Class_Invisible');
+document.getElementById('div__wonGames_P1').classList.add('Class_Invisible');
+document.getElementById('div__wonGames_P2').classList.add('Class_Invisible');
+document.getElementById('div__drawGames').classList.add('Class_Invisible');
 if(Game.Player_1_wins > 0){
-  document.getElementById('ID_Win_Div_One').classList.remove('Class_Invisible');
+  document.getElementById('div__wonGames_P1').classList.remove('Class_Invisible');
 };
 if(Game.Player_2_wins > 0){
-  document.getElementById('ID_Win_Div_Two').classList.remove('Class_Invisible');
+  document.getElementById('div__wonGames_P2').classList.remove('Class_Invisible');
 };
 if(Game.Draws > 0){
-  document.getElementById('ID_Draw_Div').classList.remove('Class_Invisible');
+  document.getElementById('div__drawGames').classList.remove('Class_Invisible');
 };
 
 
@@ -416,24 +416,24 @@ if(Game.Draws > 0){
 
 // if (gameResult === 1){
 // // First proof if there is a taly in the Container and if it should be removed. If yes, remove the 1er, 2er, 3er and 4er tallys so if ist the 6 win, tally 5 + tally 1 are appended
-// if(document.getElementById('ID_Win_Div_One').lastElementChild && document.getElementById('ID_Win_Div_One').lastElementChild.getAttribute('data-winstays') === 'no')
+// if(document.getElementById('div__wonGames_P1').lastElementChild && document.getElementById('div__wonGames_P1').lastElementChild.getAttribute('data-winstays') === 'no')
 // if(Game.Player_1_wins < 5 || Game.Player_1_wins > 5){
-// document.getElementById('ID_Win_Div_One').lastElementChild.remove();
+// document.getElementById('div__wonGames_P1').lastElementChild.remove();
 // }
 // // Append tally to DIV
-// document.getElementById('ID_Win_Div_One').appendChild(tally_img);
+// document.getElementById('div__wonGames_P1').appendChild(tally_img);
 // };
 
 // if (gameResult === 2){
-// if(document.getElementById('ID_Win_Div_Two').lastElementChild && document.getElementById('ID_Win_Div_Two').lastElementChild.getAttribute('data-winstays') === 'no')
-// document.getElementById('ID_Win_Div_Two').lastElementChild.remove();
-// document.getElementById('ID_Win_Div_Two').appendChild(tally_img);
+// if(document.getElementById('div__wonGames_P2').lastElementChild && document.getElementById('div__wonGames_P2').lastElementChild.getAttribute('data-winstays') === 'no')
+// document.getElementById('div__wonGames_P2').lastElementChild.remove();
+// document.getElementById('div__wonGames_P2').appendChild(tally_img);
 // }; 
 
 // if (gameResult === 3){
-// if(document.getElementById('ID_Draw_Div').lastElementChild && document.getElementById('ID_Draw_Div').lastElementChild.getAttribute('data-winstays') === 'no')
-// document.getElementById('ID_Draw_Div').lastElementChild.remove();
-// document.getElementById('ID_Draw_Div').appendChild(tally_img);
+// if(document.getElementById('div__drawGames').lastElementChild && document.getElementById('div__drawGames').lastElementChild.getAttribute('data-winstays') === 'no')
+// document.getElementById('div__drawGames').lastElementChild.remove();
+// document.getElementById('div__drawGames').appendChild(tally_img);
 // };
 //#endregion
 
@@ -454,8 +454,8 @@ Stats();
 Game.state = 'InGame';
 
 //#region Reset Game
-const topCellsArray = document.getElementsByClassName('Class_TopCells');
-const cellsArray = document.getElementsByClassName('Class_Cells');
+const topCellsArray = document.getElementsByClassName('topCells');
+const cellsArray = document.getElementsByClassName('cells');
 // Remove TopCell Style classes collected during the Game and End-Screen & unlock the placement function again
 for (let topCell of topCellsArray) {
 topCell.classList.remove('Class_Top_End');
@@ -474,13 +474,13 @@ cell.setAttribute('winChain', 'no');
 if (turn_text && turn_text.classList.contains('Class_Invisible'))
 turn_text.classList.remove('Class_Invisible');
 if (
-document.getElementById('ID_Thinking_Div') &&
+document.getElementById('div__thinking') &&
 document
-.getElementById('ID_Thinking_Div')
+.getElementById('div__thinking')
 .classList.contains('Class_Invisible')
 )
 document
-.getElementById('ID_Thinking_Div')
+.getElementById('div__thinking')
 .classList.remove('Class_Invisible');
 
 // Trigger next Player is on turn, so the loser of this reound starts the next round.
@@ -499,10 +499,10 @@ Game.actualGameboardPlayer2[`C${x}`].length = 0;
 
 // Reset Gameboard on screen
 for (let cell of cellsArray) {
-if (cell.classList.contains('Class_PlacedCoin_1'))
-cell.classList.remove('Class_PlacedCoin_1');
-if (cell.classList.contains('Class_PlacedCoin_2'))
-cell.classList.remove('Class_PlacedCoin_2');
+if (cell.classList.contains('placedCoin__1'))
+cell.classList.remove('placedCoin__1');
+if (cell.classList.contains('placedCoin__2'))
+cell.classList.remove('placedCoin__2');
 cell.style.opacity = 0.7;
 }
 
@@ -511,18 +511,18 @@ Game.roundCounter = 0;
 //#endregion
 
 // If there was firework, remove it
-if (document.getElementById('ID_Firework')) {
-document.getElementById('ID_Firework').remove();
-document.getElementById('ID_Canvas_Div').remove();
+if (document.getElementById('firework')) {
+document.getElementById('firework').remove();
+document.getElementById('div__canvas').remove();
 }
 
 // Remove the Game End Screen
 document.body.setAttribute('data-gameend', 'no');
 document.getElementById('main__section').setAttribute('data-gameend', 'no');
 document.getElementById('main__section').setAttribute('data-canvasend', 'no');
-document.getElementById('ID_End_H1').remove();
-document.getElementById('ID_End_Text').remove();
-document.getElementById('ID_End_Button_Div').remove();
+document.getElementById('h__gameEnd').remove();
+document.getElementById('p__gameEnd').remove();
+document.getElementById('button__gameEnd').remove();
 
 // Disable special styling for Settings Menu during End-Screen
 document.getElementById('settings_menu__section').setAttribute('data-endscreen',  'no');
@@ -530,7 +530,7 @@ document.getElementById('settings_span').setAttribute('data-endscreen',  'no');
 
 // Creat a new Gameboard!
 Create_Gameboard(Game.gameboard_sizeX, Game.gameboard_sizeY);
-document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'yes');
+document.getElementById('wrapper__gameboard').setAttribute('data-ingame', 'yes');
 
 
 // Invoke next Placement & make sure correct Player is on turn

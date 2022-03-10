@@ -34,16 +34,16 @@ todo        -) Write a final Comment.
 //#endregion
 
 //#region 1) Container & Wrapper
-const header = document.getElementById('ID_Header');
+const header = document.querySelector('header');
 const main_wrapper = document.getElementById('main__section');
 const left_sidebar = document.getElementById('leftSidebar__wrapper');
-const gameboard = document.getElementById('ID_GameboardWrapper');
+const gameboard = document.getElementById('wrapper__gameboard');
 const right_sidebar = document.getElementById('sidebarRight__wrapper');
 const footer = document.getElementById('footer');
 //#endregion
 
 //#region 2) Text, Inputs, Images
-const head_title = document.getElementById('ID_Head_Title');
+const head_title = document.getElementById('page__title');
 const headline = document.getElementById('headline');
 const headline_p = document.getElementById('headline_p');
 const player_1_headline = document.getElementById('player1__headline');
@@ -58,8 +58,8 @@ const choose_ki = document.getElementById('choosing_cpu__select');
 const ki_level_dropdown_no = document.getElementById('cpu_opt_no');
 const ki_level_dropdown_easy = document.getElementById('cpu_easy');
 const ki_level_dropdown_normal = document.getElementById('cpu_normal');
-const turn_text = document.getElementById('ID_h3_turnText');
-const thinking_div = document.getElementById('ID_Thinking_Div');
+const turn_text = document.getElementById('h__turnDiv');
+const thinking_div = document.getElementById('div__thinking');
 //#endregion
 
 //#region 3) Settings menu

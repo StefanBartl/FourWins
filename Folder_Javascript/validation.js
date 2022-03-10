@@ -40,7 +40,7 @@ function Column_Locking_Validation(invokedForKiValidation) {
   // Function for proofing if TopCell should be locked. In case of CPU is invoking if placement is possible too.Also to give, after locking them while placement, columns free where the row counter is higher than 0.
   console.log('Entered Top-Cell Validation.');
 
-  const topCellsArray = document.getElementsByClassName('Class_TopCells');
+  const topCellsArray = document.getElementsByClassName('topCells');
 
   // Important! Because the pointer events are also settet to 'all' back after during the placement animations during the game, this function have to be after the coin placement section!
   // Proof if the columnNumber was the last possible cell to play in the column
@@ -96,10 +96,10 @@ function Diagonal_Validator(player, columnNumber, row) {
     fourth_plus != null
   ) {
     if (
-      basis.classList.contains(`Class_PlacedCoin_${player}`) &&
-      second_plus.classList.contains(`Class_PlacedCoin_${player}`) &&
-      third_plus.classList.contains(`Class_PlacedCoin_${player}`) &&
-      fourth_plus.classList.contains(`Class_PlacedCoin_${player}`)
+      basis.classList.contains(`placedCoin__${player}`) &&
+      second_plus.classList.contains(`placedCoin__${player}`) &&
+      third_plus.classList.contains(`placedCoin__${player}`) &&
+      fourth_plus.classList.contains(`placedCoin__${player}`)
     ) {
       // .. if yes, mark winning chain and invoke win'
       const arr = [basis, second_plus, third_plus, fourth_minus];
@@ -128,10 +128,10 @@ function Diagonal_Validator(player, columnNumber, row) {
     fourth_minus != null
   ) {
     if (
-      basis.classList.contains(`Class_PlacedCoin_${player}`) &&
-      second_minus.classList.contains(`Class_PlacedCoin_${player}`) &&
-      third_minus.classList.contains(`Class_PlacedCoin_${player}`) &&
-      fourth_minus.classList.contains(`Class_PlacedCoin_${player}`)
+      basis.classList.contains(`placedCoin__${player}`) &&
+      second_minus.classList.contains(`placedCoin__${player}`) &&
+      third_minus.classList.contains(`placedCoin__${player}`) &&
+      fourth_minus.classList.contains(`placedCoin__${player}`)
     ) {
       // .. if yes, invoke win as above....
       const arr = [basis, second_minus, third_minus, fourth_minus];

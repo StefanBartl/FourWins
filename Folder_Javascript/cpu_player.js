@@ -46,7 +46,7 @@ function CPU_Placement(valid_number) {
   // console.log("Entered CPU Placement Function. Random number for topCell is:  ", random_number);
 
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName('Class_TopCells');
+  const topCellsArray = document.getElementsByClassName('topCells');
 
   // Make the Placement
   topCellsArray[valid_number].click();
@@ -228,9 +228,9 @@ function Detect_3_Coin_Chains_Diagonal() {
         `ID_C${columnNumber + 3}R${rowNumber + 2}`
       );
       if (
-        basis.classList.contains(".Class_PlacedCoin_2 ") &&
-        second_plus.classList.contains(".Class_PlacedCoin_2 ") &&
-        third_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        basis.classList.contains(".placedCoin__2 ") &&
+        second_plus.classList.contains(".placedCoin__2 ") &&
+        third_plus.classList.contains(".placedCoin__2 ") &&
         free_fourth.getAttribute("data-isPlayed") !== "yes" &&
         ground_fourth.getAttribute("data-isPlayed") === "yes"
       ) {
@@ -256,9 +256,9 @@ function Detect_3_Coin_Chains_Diagonal() {
         `ID_C${columnNumber - 3}R${rowNumber + 2}`
       );
       if (
-        basis.classList.contains(".Class_PlacedCoin_2 ") &&
-        second_plus.classList.contains(".Class_PlacedCoin_2 ") &&
-        third_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        basis.classList.contains(".placedCoin__2 ") &&
+        second_plus.classList.contains(".placedCoin__2 ") &&
+        third_plus.classList.contains(".placedCoin__2 ") &&
         free_fourth.getAttribute("data-isPlayed") !== "yes" &&
         ground_fourth.getAttribute("data-isPlayed") === "yes"
       ) {
@@ -284,9 +284,9 @@ function Detect_3_Coin_Chains_Diagonal() {
         `ID_C${columnNumber + 3}R${rowNumber - 2}`
       );
       if (
-        basis.classList.contains(".Class_PlacedCoin_2 ") &&
-        second_plus.classList.contains(".Class_PlacedCoin_2 ") &&
-        third_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        basis.classList.contains(".placedCoin__2 ") &&
+        second_plus.classList.contains(".placedCoin__2 ") &&
+        third_plus.classList.contains(".placedCoin__2 ") &&
         free_fourth.getAttribute("data-isPlayed") !== "yes" &&
         ground_fourth.getAttribute("data-isPlayed") === "yes"
       ) {
@@ -312,9 +312,9 @@ function Detect_3_Coin_Chains_Diagonal() {
         `ID_C${columnNumber - 3}R${rowNumber + 2}`
       );
       if (
-        basis.classList.contains(".Class_PlacedCoin_2 ") &&
-        second_plus.classList.contains(".Class_PlacedCoin_2 ") &&
-        third_plus.classList.contains(".Class_PlacedCoin_2 ") &&
+        basis.classList.contains(".placedCoin__2 ") &&
+        second_plus.classList.contains(".placedCoin__2 ") &&
+        third_plus.classList.contains(".placedCoin__2 ") &&
         free_fourth.getAttribute("data-isPlayed") !== "yes" &&
         ground_fourth.getAttribute("data-isPlayed") === "yes"
       ) {

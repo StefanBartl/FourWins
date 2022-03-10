@@ -60,7 +60,7 @@ todo    -) Write a final Comment.
             ======================== */
 function Add_Choosing_Ani(column) {
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName('Class_TopCells');
+  const topCellsArray = document.getElementsByClassName('topCells');
 
   column -= 1;
 
@@ -89,7 +89,7 @@ function Add_Choosing_Ani(column) {
             ======================== */
 function Remove_Choosing_Ani(column) {
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName('Class_TopCells');
+  const topCellsArray = document.getElementsByClassName('topCells');
 
   column -= 1;
 
@@ -107,7 +107,7 @@ function Remove_Choosing_Ani(column) {
             ============== */
 function Lock_TopCells() {
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName('Class_TopCells');
+  const topCellsArray = document.getElementsByClassName('topCells');
 
   for (let topCell of topCellsArray) {
     topCell.style.cursor = 'none';
@@ -120,7 +120,7 @@ function Lock_TopCells() {
             ================ */
 function Unlock_TopCells() {
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName('Class_TopCells');
+  const topCellsArray = document.getElementsByClassName('topCells');
 
   for (let topCell of topCellsArray) {
     topCell.style.cursor = 'pointer';
@@ -133,12 +133,12 @@ function Unlock_TopCells() {
             ===================== */
 function Thinking_Effect(invokerCPU, valid_number) {
   // First make sure there is no 'Thinking' Div attached
-  if (!document.getElementById('ID_Thinking_Div')) {
+  if (!document.getElementById('div__thinking')) {
     // If it isn't create DOM ELement for the thinking dots in the turning DIV
     const thinker_div = document.createElement('div');
     thinker_div.classList.add('Class_Thinking');
-    thinker_div.id = 'ID_Thinking_Div';
-    document.getElementById('ID_Turn_Div').appendChild(thinker_div);
+    thinker_div.id = 'div__thinking';
+    document.getElementById('div__turnPlayers').appendChild(thinker_div);
     // Set a Intervall which change the dots in the DOM Element. The changing is realised with setTiemouts, which fakes an text animation effect. This happens all 2 seconds again.
     window.thinking = setInterval(() => {
       const dot1 = setTimeout(() => {
@@ -169,8 +169,8 @@ function Thinking_Effect(invokerCPU, valid_number) {
       CPU_Placement(valid_number);
       clearInterval(thinking);
       // Remove the 'dots'-Div container from the turning Div if it exists
-      if (document.getElementById('ID_Thinking_Div')) {
-        document.getElementById('ID_Thinking_Div').remove();
+      if (document.getElementById('div__thinking')) {
+        document.getElementById('div__thinking').remove();
         clearInterval(window.thinking);
       }
     }, thinking_duration);
@@ -192,18 +192,18 @@ function Turning_PlayerIsOnTurn() {
 
     if (Game.playerIsOnTurn === 'left') {
       document.getElementById(
-        'ID_h3_turnText'
+        'h__turnDiv'
       ).innerText = `Dein Zug, ${Game.Player_One_Name}`;
     } else if (
       Game.playerIsOnTurn === 'right' &&
       Game.Game_against_CPU === false
     ) {
       document.getElementById(
-        'ID_h3_turnText'
+        'h__turnDiv'
       ).innerText = `Du bist dran, ${Game.Player_Two_Name}`;
     } else {
       document.getElementById(
-        'ID_h3_turnText'
+        'h__turnDiv'
       ).innerText = `${Game.Player_Two_Name} denkt nach...`;
     }
   } else {
@@ -211,43 +211,43 @@ function Turning_PlayerIsOnTurn() {
 
     if (Game.playerIsOnTurn === 'left') {
       document.getElementById(
-        'ID_h3_turnText'
+        'h__turnDiv'
       ).innerText = `Your turn, ${Game.Player_One_Name}`;
     } else if (
       Game.playerIsOnTurn === 'right' &&
       Game.Game_against_CPU === false
     ) {
       document.getElementById(
-        'ID_h3_turnText'
+        'h__turnDiv'
       ).innerText = `Do you best, ${Game.Player_Two_Name}`;
     } else {
       document.getElementById(
-        'ID_h3_turnText'
+        'h__turnDiv'
       ).innerText = `${Game.Player_Two_Name}'s is thinking...`;
     }
   }
 
   // Add correct positioning Class to div
   if (Game.playerIsOnTurn === 'left') {
-    document.getElementById('ID_Turn_Div').classList.remove('Class_Right_Pos');
-    document.getElementById('ID_Turn_Div').classList.add('Class_Left_Pos');
+    document.getElementById('div__turnPlayers').classList.remove('Class_Right_Pos');
+    document.getElementById('div__turnPlayers').classList.add('Class_Left_Pos');
   } else {
-    document.getElementById('ID_Turn_Div').classList.remove('Class_Left_Pos');
-    document.getElementById('ID_Turn_Div').classList.add('Class_Right_Pos');
+    document.getElementById('div__turnPlayers').classList.remove('Class_Left_Pos');
+    document.getElementById('div__turnPlayers').classList.add('Class_Right_Pos');
   }
 
   // If there was a 'Player thinking animation', end it, remove the Div Container from DOM, trigger the same effect for the other player. (CPU Thinking is invoked in the CPU-Function because of shorter delay)
   if (Game.Game_against_CPU === false) {
-    if (document.getElementById('ID_Thinking_Div')) {
-      document.getElementById('ID_Thinking_Div').remove();
+    if (document.getElementById('div__thinking')) {
+      document.getElementById('div__thinking').remove();
       clearInterval(window.thinking);
       setTimeout(Thinking_Effect, 8000);
     }
   }
   // Nearly the same in Game against CPU, until no new timer is setted, because this makes the CPU after his placement.
   if (Game.Game_against_CPU === true) {
-    if (document.getElementById('ID_Thinking_Div')) {
-      document.getElementById('ID_Thinking_Div').remove();
+    if (document.getElementById('div__thinking')) {
+      document.getElementById('div__thinking').remove();
       clearInterval(window.thinking);
     }
   }
@@ -361,11 +361,11 @@ sizeY === undefined || sizeY === null ? sizeY = Game.gameboard_size_y : sizeY = 
 
 
 // Replace an old Gameboard if exists and create a new one
- if(document.getElementById('ID_GameboardWrapper')){
+ if(document.getElementById('wrapper__gameboard')){
   // Remove the old Gameboard cells
-const columnsArray = document.querySelectorAll('.Class_Columns');
-const topCellsArray = document.querySelectorAll('Class_TopCells');
-const cellsArray = document.querySelectorAll('Class_Cells');
+const columnsArray = document.querySelectorAll('.columns');
+const topCellsArray = document.querySelectorAll('topCells');
+const cellsArray = document.querySelectorAll('cells');
 for(column of  columnsArray) column.remove();
 for(topCell of topCellsArray) topCell.remove();
 for(cells of cellsArray) cells.remove();
@@ -374,15 +374,15 @@ for(cells of cellsArray) cells.remove();
   // Create Wrapper
   const new_gameboard_wrapper = document.createElement('div');
   new_gameboard_wrapper.classList.add('Class_GameboardWrapper');
-  new_gameboard_wrapper.id = 'ID_GameboardWrapper';
+  new_gameboard_wrapper.id = 'wrapper__gameboard';
   Game.state !== 'InGame'
     ? new_gameboard_wrapper.setAttribute('data-ingame', 'no')
     : new_gameboard_wrapper.setAttribute('data-ingame', 'yes');
 
   if(Game.state === 'Game End'){
-document.getElementById('ID_Game_End_Container').appendChild(document.getElementById('ID_GameboardWrapper'));
-document.getElementById('ID_GameboardWrapper').classList.add('Class_Gameboard_End');
-document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'no');
+document.getElementById('ID_Game_End_Container').appendChild(document.getElementById('wrapper__gameboard'));
+document.getElementById('wrapper__gameboard').classList.add('Class_Gameboard_End');
+document.getElementById('wrapper__gameboard').setAttribute('data-ingame', 'no');
  // console.log('Appended to Game End Container!');
   } else  
   {
@@ -395,26 +395,26 @@ document.getElementById('ID_GameboardWrapper').setAttribute('data-ingame', 'no')
   for (let columns = 1; columns <= sizeX; columns++) {
     // Create the Column Wrappers
     let column = document.createElement('div');
-    column.classList.add('Class_Columns');
-    column.id = `ID_Column${columns}`;
-    document.getElementById('ID_GameboardWrapper').appendChild(column);
+    column.classList.add('columns');
+    column.id = `column${columns}`;
+    document.getElementById('wrapper__gameboard').appendChild(column);
   };
 
   //Create Top Cells
   for (let column = 1; column <= sizeX; column++) {
     // Create the Top Cells
     let topcell = document.createElement('div');
-    topcell.classList.add('Class_TopCells');
+    topcell.classList.add('topCells');
     topcell.id = `ID_C${column}R0`;
     topcell.setAttribute('data-column', column);
-    document.getElementById(`ID_Column${column}`).appendChild(topcell);
+    document.getElementById(`column${column}`).appendChild(topcell);
 
         // Create the Cells
         for (let row = 1; row <= sizeY ; row++) {
           let cell = document.createElement('div');
-          cell.classList.add('Class_Cells');
+          cell.classList.add('cells');
           cell.id = `ID_C${column}R${row}`;
-          document.getElementById(`ID_Column${column}`).appendChild(cell);
+          document.getElementById(`column${column}`).appendChild(cell);
         };
   };
 

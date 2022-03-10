@@ -373,16 +373,16 @@ document.querySelector('.container_colour_toggle').addEventListener('click', () 
 
   // Changing colour of existing coins
   if (Game.state == 'InGame') {
-    const cellsArray = document.getElementsByClassName('Class_Cells');
+    const cellsArray = document.getElementsByClassName('cells');
     //Loops trough cellsArray
     for (let cell of cellsArray) {
       // If one cell have tht Class with a red or yellow Coin Background attached, change it to the other colored background (PNG)
-      if (cell.classList.contains('Class_PlacedCoin_1')) {
-        cell.classList.remove('Class_PlacedCoin_1');
-        cell.classList.add('Class_PlacedCoin_2');
-      } else if (cell.classList.contains('Class_PlacedCoin_2')) {
-        cell.classList.remove('Class_PlacedCoin_2');
-        cell.classList.add('Class_PlacedCoin_1');
+      if (cell.classList.contains('placedCoin__1')) {
+        cell.classList.remove('placedCoin__1');
+        cell.classList.add('placedCoin__2');
+      } else if (cell.classList.contains('placedCoin__2')) {
+        cell.classList.remove('placedCoin__2');
+        cell.classList.add('placedCoin__1');
       }
       // console.log('Existing coins changed colour.');
     }
@@ -404,24 +404,24 @@ language_menu.addEventListener('change', () => {
   Translate_StartScreen(languageCode, true);
 
   // If exist yet, translate actual Turning Div
-  if (document.getElementById('ID_h3_turnText')) {
+  if (document.getElementById('h__turnDiv')) {
     if (Game.Language === 'de') {
       // Deutsch
 
       if (Game.playerIsOnTurn === 'left') {
         document.getElementById(
-          'ID_h3_turnText'
+          'h__turnDiv'
         ).innerText = `Dein Zug, ${Game.Player_One_Name}`;
       } else if (
         Game.playerIsOnTurn === 'right' &&
         Game.Game_against_CPU === false
       ) {
         document.getElementById(
-          'ID_h3_turnText'
+          'h__turnDiv'
         ).innerText = `Du bist dran, ${Game.Player_Two_Name}`;
       } else {
         document.getElementById(
-          'ID_h3_turnText'
+          'h__turnDiv'
         ).innerText = `${Game.Player_Two_Name} denkt nach...`;
       }
     } else {
@@ -429,18 +429,18 @@ language_menu.addEventListener('change', () => {
 
       if (Game.playerIsOnTurn === 'left') {
         document.getElementById(
-          'ID_h3_turnText'
+          'h__turnDiv'
         ).innerText = `Your turn, ${Game.Player_One_Name}`;
       } else if (
         Game.playerIsOnTurn === 'right' &&
         Game.Game_against_CPU === false
       ) {
         document.getElementById(
-          'ID_h3_turnText'
+          'h__turnDiv'
         ).innerText = `Do you best, ${Game.Player_Two_Name}`;
       } else {
         document.getElementById(
-          'ID_h3_turnText'
+          'h__turnDiv'
         ).innerText = `${Game.Player_Two_Name}'s is thinking...`;
       }
     }
@@ -475,18 +475,18 @@ delete_all.addEventListener('click', () => {
 
   // Create Confirm Window
   if (Game.Language === 'de') {
-    const confirm =  New_Window({ID: 'ID_Delete_Window', Name: 'Notification', Text: `${
+    const confirm =  New_Window({ID: 'newWindow__delete', Name: 'Notification', Text: `${
       localStorage.getItem('Player_One_Name') || 'Spieler'
     }, willst du wirklich die gespeicherte Sprache, die Spieler Namen und die Statistiken von deinem local-Storage löschen? Diese Daten sind nur in deinem Browser gespeichert und können nach einer Löschung nicht wiederhergestellt werden.`, 
     Confirm: true}); 
   } else {
-    const confirm =  New_Window({ID: 'ID_Delete_Window', Name: 'Notification', Text: `${
+    const confirm =  New_Window({ID: 'newWindow__delete', Name: 'Notification', Text: `${
       localStorage.getItem('Player_One_Name') || 'Player'
     }, do you really want do delete the saved language, saved Player names and the stats from your local Storage? The data is stored in your Browser and cannot be restored again after deleting it.`, 
     Confirm: true}); 
   }
     // If user clicked OK after notification, delete local storage
-    document.getElementById('ID_Delete_Window_OK_Button').addEventListener('click', ()=>{
+    document.getElementById('newWindow__delete_OK_Button').addEventListener('click', ()=>{
       localStorage.clear();
       //console.log('Local Storage deleted');
     });
@@ -531,7 +531,7 @@ function Game_Preparations() {
   // console.log('Setted Names:', Game.Player_One_Name, Game.Player_Two_Name);
 
   // Get all Cells
-  const cellsArray = document.getElementsByClassName('Class_Cells');
+  const cellsArray = document.getElementsByClassName('cells');
 
   // Give all cells samedata-isplayed attribute
   for (let cell of cellsArray) {
@@ -572,13 +572,12 @@ function Game_Preparations() {
   Create_DOM_Element({
     ParentID: 'main__section',
     Element: 'div',
-    Class: 'Class_Turn_PLayers',
-    ID: 'ID_Turn_Div',
+    ID: 'div__turnPlayers',
   });
   Create_DOM_Element({
-    ParentID: 'ID_Turn_Div',
+    ParentID: 'div__turnPlayers',
     Element: 'h3',
-    ID: 'ID_h3_turnText',
+    ID: 'h__turnDiv',
   });
 
   // Show correct player is on turn message
@@ -600,12 +599,12 @@ function PlayGame() {
 
   // Let Game Objects know we are in Game know
   Game.state = 'InGame';
-  document.getElementById('ID_GameboardWrapper').setAttribute('data-inGame', 'yes');
+  document.getElementById('wrapper__gameboard').setAttribute('data-inGame', 'yes');
 
   // Detect the correct the Top Cells for looping trough to put the event listeners on them so the players can make there placements
 
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName('Class_TopCells');
+  const topCellsArray = document.getElementsByClassName('topCells');
   for (let topCell of topCellsArray) {
 
     let topCellColumn = parseInt(topCell.getAttribute('data-column'));
@@ -653,7 +652,7 @@ function Prepare_Placement() {
   // console.log('Entered Function for preparing new Placement.');
 
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName('Class_TopCells');
+  const topCellsArray = document.getElementsByClassName('topCells');
 
   // Get the played top cell for getting the right column
   topCell = document.getElementById(`${Game.clicked_TopCell_ID}`);
@@ -688,7 +687,7 @@ function Make_Placement() {
   const coin = document.createElement('div');
 
   if (Game.playerIsOnTurn === 'left' && Game.player_Colour_Left === 'yellow') {
-    coin.classList.add('Class_Coin_Yellow');
+    coin.classList.add('coin__yellow');
     Game.actualGameboardPlayer1[`C${Game.clicked_column}`].push(
       Game.coin_placement_row
     );
@@ -703,7 +702,7 @@ function Make_Placement() {
     Game.playerIsOnTurn === 'left' &&
     Game.player_Colour_Left === 'red'
   ) {
-    coin.classList.add('Class_Coin_Red');
+    coin.classList.add('coin__red');
     Game.actualGameboardPlayer1[`C${Game.clicked_column}`].push(
       Game.coin_placement_row
     );
@@ -713,7 +712,7 @@ function Make_Placement() {
   };
   
   if (Game.playerIsOnTurn === 'right' && Game.player_Colour_Left === 'yellow') {
-    coin.classList.add('Class_Coin_Red');
+    coin.classList.add('coin__red');
     Game.actualGameboardPlayer2[`C${Game.clicked_column}`].push(
       Game.coin_placement_row
     );
@@ -726,7 +725,7 @@ function Make_Placement() {
     Game.playerIsOnTurn === 'right' &&
     Game.player_Colour_Left === 'red'
   ) {
-    coin.classList.add('Class_Coin_Yellow');
+    coin.classList.add('coin__yellow');
     Game.actualGameboardPlayer2[`C${Game.clicked_column}`].push(
       Game.coin_placement_row
     );
@@ -782,11 +781,11 @@ function Placement_End() {
   if (Game.playerIsOnTurn === 'left') {
     // Place the Coin as background image on the correct column (set by the decreased row counter)
     if (Game.player_Colour_Left === 'yellow') {
-      coin_destination.classList.add('Class_PlacedCoin_1');
+      coin_destination.classList.add('placedCoin__1');
       coin_destination.style.opacity = '1';
       coin_destination.setAttribute('data-isPlayed', 'yes');
     } else {
-      coin_destination.classList.add('Class_PlacedCoin_2');
+      coin_destination.classList.add('placedCoin__2');
       coin_destination.style.opacity = '1';
       coin_destination.setAttribute('data-isPlayed', 'yes');
     }
@@ -794,11 +793,11 @@ function Placement_End() {
     // If Placement was from Human  Player 2
 
     if (Game.player_Colour_Left === 'red') {
-      coin_destination.classList.add('Class_PlacedCoin_1');
+      coin_destination.classList.add('placedCoin__1');
       coin_destination.style.opacity = '1';
       coin_destination.setAttribute('data-isPlayed', 'yes');
     } else {
-      coin_destination.classList.add('Class_PlacedCoin_2');
+      coin_destination.classList.add('placedCoin__2');
       coin_destination.style.opacity = '1';
       coin_destination.setAttribute('data-isPlayed', 'yes');
     }
@@ -881,6 +880,7 @@ function Player_2_Placement_Finish() {
 
     // Next Player is on turn
   Turning_PlayerIsOnTurn();
+  Unlock_TopCells();
 }
 //#endregion
 
