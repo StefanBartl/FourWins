@@ -110,10 +110,10 @@ sound_checkbox.addEventListener('click', () => {
 // Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted
 Game.player_Colour_Left = localStorage.Player_Colour_Left || 'yellow';
 if (Game.player_Colour_Left === 'red') {
-  toggle_colour_button.classList.add('Class_Toggle');
+  toggle_colour_button.classList.add('toggle__colour');
   toggle_colour_slider.style.backgroundColor = 'red';
 } else {
-  toggle_colour_button.classList.remove('Class_Toggle');
+  toggle_colour_button.classList.remove('toggle__colour');
   toggle_colour_slider.style.backgroundColor = 'yellow';
 }
 
@@ -350,7 +350,7 @@ document.getElementById('settings_gameboard_button').addEventListener('click', (
   Create_Gameboard(sizeX, sizeY);
 });
 
-document.querySelector('.container_colour_toggle').addEventListener('click', () => {
+document.getElementById('container__toggleColour').addEventListener('click', () => {
   //console.log('Colour toggle clicked');
   if (
     localStorage.Player_Colour_Left === 'yellow' ||
@@ -359,14 +359,14 @@ document.querySelector('.container_colour_toggle').addEventListener('click', () 
     //console.log('Set colour toggle to red.');
     localStorage.Player_Colour_Left = 'red';
     Game.player_Colour_Left = 'red';
-    toggle_colour_button.classList.add('Class_Toggle');
+    toggle_colour_button.classList.add('toggle__colour');
     toggle_colour_slider.style.backgroundColor = 'red';
     // console.log('Colour toggle changed colour for future coins to red.')
   } else if (localStorage.Player_Colour_Left === 'red') {
     // console.log('Set colour toggle to yellow.')
     localStorage.Player_Colour_Left = 'yellow';
     Game.player_Colour_Left = 'yellow';
-    toggle_colour_button.classList.remove('Class_Toggle');
+    toggle_colour_button.classList.remove('toggle__colour');
     toggle_colour_slider.style.backgroundColor = 'yellow';
     // console.log('Colour toggle changed colour for future coins to yellow.')
   }
