@@ -33,7 +33,7 @@ todo        -) Write a final Comment.
 */
 //#endregion
 
-//#region 1) Container & Wrapper
+//#region 1) container & wrapper
 const header = document.querySelector('header');
 const main_wrapper = document.getElementById('main__section');
 const left_sidebar = document.getElementById('leftSidebar__wrapper');
@@ -42,7 +42,7 @@ const right_sidebar = document.getElementById('sidebarRight__wrapper');
 const footer = document.getElementById('footer');
 //#endregion
 
-//#region 2) Text, Inputs, Images
+//#region 2) text, inputs, images
 const head_title = document.getElementById('page__title');
 const headline = document.getElementById('headline');
 const headline_p = document.getElementById('headline_p');
@@ -62,7 +62,7 @@ const turn_text = document.getElementById('h__turnDiv');
 const thinking_div = document.getElementById('div__thinking');
 //#endregion
 
-//#region 3) Settings menu
+//#region 3) settings-menu
 const settings_menu = document.getElementById('settings_menu__section');
 const settings_menu_headline = document.getElementById('settings_menu__headline');
 const settings_span = document.getElementById('settings_span');
@@ -88,7 +88,7 @@ const delete_all = document.getElementById('button__delete');
 const label_colour = document.getElementById('colour_h');
 //#endregion
 
-//#region 4) Global Counters
+//#region 4) global counters
 // Counters to count wins if more Games are played
 let count_wins_player_one = 0,
   count_wins_player_two = 0;

@@ -72,6 +72,11 @@ todo em / rem
       third 8em
       because everyone is parent, so use IDs or class               
 
+todo BEM
+      Bei der Block Elements Modiyfier-Schreibweise schreibt man Elemente mit doppelten Unterstrich z.b.: .div__card . Sinn ist, dass 
+      wenn man mehrere dieser Elemente hat man alle Eigenschaften welche diese teilen in eine Klasse schreibt und man dann mit .card--yellow oder card--small die Unterschiede
+      zuweist und leichter sichtbar macht.   
+
 ?         Flexbox & Grid
 todo    margin-collapse
       Sobald flex oder grid attached collapsen die block-margins nicht mehr. Das bedeutet zb.: wenn mehrerer columns nebeneinander sind und dann der screen kleiner wird verdoppeln sich die Abstände!

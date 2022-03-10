@@ -40,6 +40,7 @@ todo    -) Find a final, real good styling!
 
 ?                               Finish
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo    -) Find ID's mitz gemeinsamen properties und füge sie zu Klassen hinzu - wenn es Sinn macht!
 todo    -) Final formatation (especially script & library sections/functions), comments:
 todo    -) Make sure all important is commented !
 todo    -) Write a final Comment !
@@ -967,8 +968,7 @@ body[data-gameend = 'yes']{
 #main__section[data-gameend = 'yes']{
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  min-width: 100vw;
+  gap: 2em;
   font-size: large;
 }
 
@@ -980,34 +980,12 @@ body[data-gameend = 'yes']{
   font-size: large;
 }
 
-#wrapper__gameboard[data-gameend='yes']{
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  min-height: 35vh;
-  aspect-ratio: 1/1;
-  margin-block: 2em;
-}
-
 .Class_Top_End {
   background-color: var(--base-border);
   opacity: 0.7;
 }
 
-#h__gameEnd {
- margin-top:10vh; 
-}
 
-#p__gameEnd {
-  margin-top: 5vh;
-}
-
-#button__gameEnd {
-  margin-top: 4vh;
-  justify-content: center;
-  align-content: center;
-}
 
 /* ===========
 ?     win notifications

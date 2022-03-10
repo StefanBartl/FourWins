@@ -140,7 +140,7 @@ function Diagonal_Validator(player, columnNumber, row) {
       return true;
     }
   }
-}
+};
 
 /* =================
 !     Column Win-Validation 
@@ -184,7 +184,7 @@ function Column_Validator(player) {
     }
   }
   //(Under construction for winChain!)
-}
+};
 
 /* ===============
 !     Row Win-Validation 
@@ -221,4 +221,4 @@ function Row_Validator(player, column) {
     }
   }
   //(Under construction for winChain!)
-}
+};
