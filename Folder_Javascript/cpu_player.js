@@ -43,7 +43,7 @@ todo    -) Write a final Comment.
 !     CPU Placement 
             =========== */
 function CPU_Placement(valid_number) {
-  // console.log("Entered CPU Placement Function. Random number for topCell is:  ", random_number);
+  console.log("Entered CPU Placement Function. Random number for topCell is:  ", valid_number);
 
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName('topCells');
@@ -54,9 +54,6 @@ function CPU_Placement(valid_number) {
   // If it was the last Cell in the Column, lock it
   const columnNumber = valid_number + 1;
   Column_Locking_Validation(true);
-  setTimeout(() => {
-    Unlock_TopCells();
-  }, 1000);
 };
 
 /* ==================

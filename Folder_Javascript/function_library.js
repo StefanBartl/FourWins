@@ -113,6 +113,7 @@ function Lock_TopCells() {
     topCell.style.cursor = 'none';
     topCell.style = 'pointer-events:none';
   }
+  console.log('Locked top cells.')
 };
 
 /* ================
@@ -123,9 +124,12 @@ function Unlock_TopCells() {
   const topCellsArray = document.getElementsByClassName('topCells');
 
   for (let topCell of topCellsArray) {
+    const topCellColumn = parseInt(topCell.getAttribute('data-column'));
+    if (Game.rowCounter[`C${topCellColumn}`] >= 2){
+    topCell.style = 'pointer-events: all';
     topCell.style.cursor = 'pointer';
-    if (Game.rowCounter[`${Game.clicked_column}`] >= 2) topCell.style = 'pointer-events: all';
-  }
+    };};
+  //console.log('Unlocked top cells.')
 };
 
 /* =====================
