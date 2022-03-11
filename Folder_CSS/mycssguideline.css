@@ -146,7 +146,7 @@ todo        flex
 -) .columns > * {} 
 Selektiert alle direkten children von allen die die .columns Klasse tragen
 
--)  .card::nth-child(2) selektiert das zweite child der .card klasse. odd/even möglich. first/last-child bzw last-of-type möglich.
+-)  .card::nth-child(2) selektiert das zweite child der .card klasse. odd/even möglich. first/last-child bzw last-of -type möglich.
       li:nth-child(5n) selektiert jedes 5 Element. Kalkulationen wie (5n-2) möglich.
 
 -) :is() Pseudoklasse verwenden: 
@@ -165,6 +165,8 @@ p ~ span matcht alle <span> (en-US) Elemente, die einem <p> Element innerhalb de
 ul > li matcht alle <li> Elemente, die innerhalb eines <ul> Element sind.
 div span matcht jedes <span> (en-US) Element, das innerhalb eines <div> Elements ist.
 section > blockquote:only-of-type {...} selektiert eine blockquote im section elemen nur dann wenn es das einzige ist. geht auch mit only-child
+
+<p lang="de">Servus!</p> kann man mit p:lang("de"){} selektieren!
 
 
 https://developer.mozilla.org/de/docs/Web/CSS/CSS_Selectors

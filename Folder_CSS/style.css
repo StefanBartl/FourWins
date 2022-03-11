@@ -28,7 +28,6 @@
 !                           Jobs To-Do: 
 
 todo    -) Game-End-Screen Style
-todo    -) data-x Attribute verwenden wo es Sinn macht.
 todo    -) Scrollbar rechts am starting Bildschirm muss weg, sonst funktioniert das Menu ästhetisch nicht mehr.
 todo    -) :focus on all :hovers for Cross-Browser-Support!
 todo    -) Test and repair responsivness in all sizes! -> Menu muss von der Seite weg!
@@ -39,6 +38,7 @@ todo    -) Font working on all Browser correctly?
 todo    -) Find a final, real good styling!
 
 ?                               Finish
+todo    -)) CSS-Guideline
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo    -) Find ID's mitz gemeinsamen properties und füge sie zu Klassen hinzu - wenn es Sinn macht!
 todo    -) Final formatation (especially script & library sections/functions), comments:
@@ -162,7 +162,7 @@ body {
   align-items: center;
   text-align: center;
   display: grid;
-  grid: 20vh auto auto / 1fr;
+  grid: 10vh auto auto / 1fr;
   font-family: 'Anton', sans-serif;
 }
 
