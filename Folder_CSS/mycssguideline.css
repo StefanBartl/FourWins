@@ -28,6 +28,7 @@ todo box-sizing
 todo div
         Default kein margin.
 todo    height
+   height wirkt sich nur aus wenn parent auch eine explizite height-value gesetzt hat.
    height: 100%;  Der Prozentwert bezieht sich auf das parent-Element. Wenn parent body{} ist und sonst kein Element angehängt ist, ist der Container (body) klein!
    height: auto; Ist der Defaultwert und aus responsiven Gründen immer vorzuziehen wenn es geht. Ansonsten min-height - height: px; nur dann, wenn es sein muss!
 https://www.youtube.com/watch?v=SjYYfd7obug&t=272s
@@ -72,24 +73,61 @@ todo em / rem
       third 8em
       because everyone is parent, so use IDs or class               
 
-todo BEM
+todo        BEM
       Bei der Block Elements Modiyfier-Schreibweise schreibt man Elemente mit doppelten Unterstrich z.b.: .div__card . Sinn ist, dass 
       wenn man mehrere dieser Elemente hat man alle Eigenschaften welche diese teilen in eine Klasse schreibt und man dann mit .card--yellow oder card--small die Unterschiede
       zuweist und leichter sichtbar macht.   
 
+todo        z-index
+      Geht nur auf ge-flexten items oder position: relative;
+
+todo        shape-outside
+      Kann Text um etwas herum stylen
+
 ?         Flexbox & Grid
-todo    margin-collapse
+todo        margin-collapse
       Sobald flex oder grid attached collapsen die block-margins nicht mehr. Das bedeutet zb.: wenn mehrerer columns nebeneinander sind und dann der screen kleiner wird verdoppeln sich die Abstände!
       Besser: Margins ganz weglassen und mit Gap arbeiten. Alle flex-items verhalten sich so, auch h, p, usw... haben bei Block margins und verdoppeln sich. 
-?         CSS-Grid
--) grid-template-columns
-  grid-template-columns: repeat(auto-fill / auto-fit, minmax(250px, 1fr)); => Row darf höchsten 1fr hoch sein und wenn es 250px wird macht Grid eine neue Row auf!
+
+ ?                                  CSS-Grid
+      -) grid-template-columns
+      grid-template-columns: repeat(auto-fill / auto-fit, minmax(250px, 1fr)); => Row darf höchsten 1fr hoch sein und wenn es 250px wird macht Grid eine neue Row auf!  
 https://www.youtube.com/watch?v=qII5BueXWD4
-?         CSS-Flexbox
-todo    flex-basis
-    Ist die ideale Größe für Container. In Verbindung mit flex-wrap kann man container (text) overflow verhindern.
-  ?         6 Outline-Button-Hover Effekte 
-  !                    by Kevin Powell   
+
+?                                   CSS-Flexbox
+https://www.youtube.com/watch?v=u044iM9xsWU&t=307s
+! Parents:
+todo        display: flex
+      Gibt den flex-items max-content, macht sie also so groß wie ihr content ist und holt so viele wie es geht in eine line ohne line-nbreaks (Zeilenumbrüche) auszulösen
+      Sollte sich ein Content nicht mehr ausgehen, dann kommt line-break und der container wird nach unten größer.
+
+todo        flex-wrap
+      Default: nowrap; Wenn man ihn auf wrap setzt verhindert man den overflow. 
+
+todo        flex-direction
+      Default: row;  Bedeutet das parent eine row-direction hat und jedes child ein column ist.
+      Wechselt man zu column, ist parent eine column und jedes child eine row.
+      Hervorragend für Media-Queries zu verwenden!
+
+! Childs:
+todo        flex-basis
+      Default: auto; Ist die ideale Größe für den Container, fast identisch mit width (man setzt auch entweder width oder flex-basis).
+      Ob man ein parent flex-basis: 100% oder width: 100% setzt ist egal.
+
+todo        flex-shrink
+      Default: 1; Deswegen werden flex-items auch sofort solange kleiner bis ihr content erreicht wurde.
+
+todo        flex-grow
+      Default: 0; Setzt man ihn auf 1 erlaubt man den items den vorhandenen, übrig gebliebenen Platz unter sich aufzuteilen.
+      Setzt man ihn auf einen item auf 2 und lässt ihn bei den anderen auf 1, dann hat dieses eine item den doppelten Platz der anderen.
+
+todo        flex
+      Ist eine shorthand für flex-grow, flex-shrink und flex-basis.
+      flex: 1; berechnet für alle items die gleiche Größe und setzt folgende Werte: grow: 1; shrink: 1; basis: 0 (statt auto).
+      Setzt man shrink: 0 und basis: 100% will jedes item 100% des parents ausfüllen, weil  nicht erlaubt wurde zu shrinken. Also haben alle items width: 100% !
+
+ ?         6 Outline-Button-Hover Effekte 
+ !                    by Kevin Powell   
     https://www.youtube.com/watch?v=3LlLkapKw6Q
     outline + padding erzeugt gerahmten Text, wenn dann :hover, focus {outline-offset: 2px}gesetzt wird erzuegt man einen "wird größer"-Effekt.
               Das kann man auch mit transition unterstützen: zb.: 250ms ease ! 
@@ -100,19 +138,44 @@ todo    flex-basis
               Zweiliniger Rahmen, der nach hover ausgefüllt und verdoppelt wird.
               
 -) Wiederholende values mit custom properties kaschieren.
+
+?                                   Selektoren
 -) Wiederholenden Code gruppieren! 
    h1, h3, btn, .Class_X {...}
+
+-) .columns > * {} 
+Selektiert alle direkten children von allen die die .columns Klasse tragen
+
+-)  .card::nth-child(2) selektiert das zweite child der .card klasse. odd/even möglich. first/last-child bzw last-of-type möglich.
+      li:nth-child(5n) selektiert jedes 5 Element. Kalkulationen wie (5n-2) möglich.
+
 -) :is() Pseudoklasse verwenden: 
    header:is(h3, p, .Class_Button, ....){....} gute Möglichkeit zum gruppieren.
-   
    :is() umgekehrt:   
    :is(header, .Class_X, ...) p:hover{...} wendet auf alle p in header und Class_x das :hover an!
    Wichtig: Das Element mit der höchsten Spezifität setzt die ganze Gruppe darauf -> zb.: Klasse ist höher als p
--) Attribute nutzen! Alles was gesetzt wurde, kann verwendet werden, auch zb.: 
+
+   -) Attribute nutzen! Alles was gesetzt wurde, kann verwendet werden, auch zb.: 
    a[href="about.html"], a[class=""], a[class|="link"] selektiert alle Klassen die mit "link" beginnen, aber das ganze Wort.
-   a{^="http"] selektiert alle http und https, 
--) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
+   a{^="http"] selektiert alle http und https,  *[lang="de"] selektiert alle Elemente mit attribut "de"
+
+strong, h1, div usw...
+h2 + p matcht jedes <p>, das direkt einem <h2> folgt.
+p ~ span matcht alle <span> (en-US) Elemente, die einem <p> Element innerhalb desselben Elements folgen.
+ul > li matcht alle <li> Elemente, die innerhalb eines <ul> Element sind.
+div span matcht jedes <span> (en-US) Element, das innerhalb eines <div> Elements ist.
+section > blockquote:only-of-type {...} selektiert eine blockquote im section elemen nur dann wenn es das einzige ist. geht auch mit only-child
+
+
+https://developer.mozilla.org/de/docs/Web/CSS/CSS_Selectors
+
+?                                   Pseudoelemente
+
 -) ::after / ::before für zb.: Punkt -> Strich Animation, Icons über url, pdf files etc...
+
+?                                   Allgemeines
+
+-) CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
 -) Font Styling
 -) Use padding on text! like: padding: 2rem 0;
 /*
@@ -137,9 +200,22 @@ The following selector matches only <a> elements that directly contain an <img> 
 a:has(> img)
 The following selector matches <h1> elements only if they have a <p> element directly following them:
 h1:has(+ p)
-*/
 
-/* trenner
+?                                   Vorlagen & Tipps
+
+todo        click-jumping in document
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 3rem;
+}
+section:target {
+  outline: 3px dottet red;
+}
+section:target b > h2 {
+  color: purple;
+}
+
+
 -) Trenner:
      / =======  
 !        Functions
@@ -150,6 +226,7 @@ h1:has(+ p)
  */
                
 /* #region media queries */ /*
+
       Max-Width - Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop 
                   und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
          Kleine Endgeräte (Smartphones, kleiner als 768px):

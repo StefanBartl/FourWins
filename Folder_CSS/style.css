@@ -77,10 +77,10 @@ todo    -) Save Default Script Files with the new Script Layout for later Projec
   overflow-wrap: break-word;
   word-wrap: break-word;
 
-  scroll-behavior: smooth;
   overflow-x: hidden;
   overflow-y: auto;
 }
+
 
 /* =====
 ?     resets 
