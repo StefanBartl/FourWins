@@ -19,7 +19,7 @@
 /*
 ?                  Jobs To-do:
 
-todo    -)
+todo    -) Validation complete update for various gameboard sizes
 
 ?                  Finisf
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
@@ -147,24 +147,17 @@ function Diagonal_Validator(player, columnNumber, row) {
             ================= */
 function Column_Validator(player) {
   // Get the actual state of the Gameboard
-  let Players_Gameboard;
-  if (player === 1) Players_Gameboard = Game.actualGameboardPlayer1;
-  if (player === 2) Players_Gameboard = Game.actualGameboardPlayer2;
 
   // Helper array with the pushed values from the Gameboard
-  const validation_array = [
-    Players_Gameboard.C1,
-    Players_Gameboard.C2,
-    Players_Gameboard.C3,
-    Players_Gameboard.C4,
-    Players_Gameboard.C5,
-    Players_Gameboard.C6,
-    Players_Gameboard.C7,
-  ];
+ let validation_array = [];
+
+ for (let columnArr = 1; columnArr <= Game.gameboard_size_x;  columnArr++ ){
+   player === 1 ? validation_array.push(Game.actualGameboardPlayer1[`C${columnArr}`]) :  validation_array.push(Game.actualGameboardPlayer2[`C${columnArr}`]);
+};
 
   // Now we have an iterable array and can loop trough
   for (let obj of validation_array) {
-    // And we making an iterable array again which allows us to reduce()
+    // And we making an iterable array again from the obj arrays
     const array = Array.from(obj);
     // If every row number subtracted with the next row number is equal to 1, there are 4 coins upon each other.
     if (

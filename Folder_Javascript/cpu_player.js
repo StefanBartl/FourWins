@@ -102,7 +102,7 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
     if (diagonal !== undefined) {
       console.log("Diagonal Chain Detected in column:", diagonal);
       // If there is a possibility, proof if placement on top is possible
-      const diagonal_topVal = Column_Validation(diagonal, true);
+      const diagonal_topVal = Column_Validator(diagonal, true);
       console.log("Diagonal placement possible:", diagonal_topVal);
       if (diagonal_topVal === true) {
         Thinking_Effect(true, diagonal - 1);
@@ -115,7 +115,7 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
     if (upwards !== undefined) {
       console.log("Upwards Chain detected in column:", upwards);
       // If there is a possibility, proof if placement on top is possible
-      const upwards_topVal = Column_Validation(upwards, true);
+      const upwards_topVal = Column_Validator(upwards, true);
       console.log("Upwards placement possible:", upwards_topVal);
       if (upwards_topVal === true) {
         Thinking_Effect(true, upwards - 1);
@@ -135,7 +135,7 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
     console.log("Upwards placements found in columns:", numbers_upwards);
     // Take the first one and proof it
     if (numbers_upwards !== undefined) {
-      const proof_up = Column_Validation(numbers_upwards[0], true);
+      const proof_up = Column_Validator(numbers_upwards[0], true);
       console.log("Valid Upwards placement found:", proof_up);
       if (proof_up === true) {
         Thinking_Effect(true, numbers_upwards[0]);
@@ -146,7 +146,7 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
     const numbers_sideways = Get_Valid_Sideways_Placement();
     console.log("Sideways placements found in columns:", numbers_sideways);
     if (numbers_sideways !== undefined) {
-      const proof_side = Column_Validation(numbers_sideways[0], true);
+      const proof_side = Column_Validator(numbers_sideways[0], true);
       console.log("Valid Sideways placement found:", proof_side);
       if (proof_side === true) {
         Thinking_Effect(true, numbers_sideways[0]);
@@ -237,7 +237,7 @@ function Detect_3_Coin_Chains_Diagonal() {
     }
   }
 
-  for (let columnNumber = 7; columnNumber > 3; columnNumber--) {
+  for (let columnNumber = Game.gameboard_size_x; columnNumber > 3; columnNumber--) {
     for (let rowNumber = 2; rowNumber < 5; rowNumber++) {
       let basis = document.getElementById(`ID_C${columnNumber}R${rowNumber}`),
         second_plus = document.getElementById(
@@ -266,7 +266,7 @@ function Detect_3_Coin_Chains_Diagonal() {
   }
 
   for (let columnNumber = 1; columnNumber < 5; columnNumber++) {
-    for (let rowNumber = 7; rowNumber > 5; rowNumber--) {
+    for (let rowNumber = Game.gameboard_size_y; rowNumber > 5; rowNumber--) {
       let basis = document.getElementById(`ID_C${columnNumber}R${rowNumber}`),
         second_plus = document.getElementById(
           `ID_C${columnNumber + 1}R${rowNumber - 1}`
@@ -293,7 +293,7 @@ function Detect_3_Coin_Chains_Diagonal() {
     }
   }
 
-  for (let columnNumber = 7; columnNumber > 3; columnNumber--) {
+  for (let columnNumber = Game.gameboard_size_x; columnNumber > 3; columnNumber--) {
     for (let rowNumber = 2; rowNumber > 5; rowNumber++) {
       let basis = document.getElementById(`ID_C${columnNumber}R${rowNumber}`),
         second_plus = document.getElementById(
