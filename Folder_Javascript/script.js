@@ -71,7 +71,11 @@ clicked_TopCell_ID: '',
   state: 'startingScreen',
 };
 
-Create_Gameboard(7, 6);
+//Reset Gameboard size values and than create new gameboard
+document.getElementById('settings_gameboard_sizeX').value = 7;
+document.getElementById('settings_gameboard_sizeY').value = 6;
+Create_Gameboard(document.getElementById('settings_gameboard_sizeX').value, document.getElementById('settings_gameboard_sizeY').value);
+
 
 Set_Page_Language();
 
@@ -380,6 +384,7 @@ document.getElementById('settings_gameboard_button').addEventListener('click', (
   const sizeX = document.getElementById('settings_gameboard_sizeX').value;
   const sizeY = document.getElementById('settings_gameboard_sizeY').value;
   Create_Gameboard(sizeX, sizeY);
+  Game.user_changed_gameboard = true;
 });
 
 document.getElementById('container__toggleColour').addEventListener('click', () => {
@@ -727,16 +732,12 @@ function Make_Placement() {
   // Create the correct coin, set correct position and append it to the DOM
   const coin = document.createElement('div');
 
+  // if left player is on turn
   if (Game.playerIsOnTurn === 'left' && Game.player_Colour_Left === 'yellow') {
     coin.classList.add('coin__yellow');
-    Game.actualGameboardPlayer1[`C${Game.clicked_column}`].push(
-      Game.coin_placement_row
-    );
-    // to try:
-    // Push row placement in a newly player array to get rid auf the actual Gameboard Objec
-    Game.player1_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
-    // Collect all placements in one array
-    Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
+    Game.actualGameboardPlayer1[`C${Game.clicked_column}`].push(Game.coin_placement_row );
+   Game.player1_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
+   Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
   };
 
   if (
@@ -747,17 +748,16 @@ function Make_Placement() {
     Game.actualGameboardPlayer1[`C${Game.clicked_column}`].push(
       Game.coin_placement_row
     );
-    // to try:
     Game.player1_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
   };
   
+  //if player right is on turn
   if (Game.playerIsOnTurn === 'right' && Game.player_Colour_Left === 'yellow') {
     coin.classList.add('coin__red');
     Game.actualGameboardPlayer2[`C${Game.clicked_column}`].push(
       Game.coin_placement_row
     );
-    // to try:
     Game.player2_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
   }; 
@@ -770,23 +770,24 @@ function Make_Placement() {
     Game.actualGameboardPlayer2[`C${Game.clicked_column}`].push(
       Game.coin_placement_row
     );
-    // to try:
     Game.player2_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
   };
 
-  // Get the played top cell for getting the right column and append the coin
+  // get the played top cell for getting the right column and append the coin
   topCell = document.getElementById(`${Game.clicked_TopCell_ID}`);
   topCell.appendChild(coin);
 
-  // Trigger the correct animation (animation length) from total 52vh  (/ 6 * x)
-  let ratio_value = (48 / (Game.gameboard_size_y - 1)) * Game.coin_placement_row;
+  // Trigger the correct animation (animation length) from 48vh
+  let gameboard__height = document.getElementById('wrapper__gameboard').clientHeight;
+  let cell__height = gameboard__height / (Game.gameboard_size_x + 1) * 10;
+  let animation__length =  cell__height *  Game.coin_placement_row;
 
   coin.animate(
     [
       // keyframes
       { transform: 'translateY(0)' },
-      { transform: `translateY(${ratio_value}vh)` },
+      { transform: `translateY(${animation__length}px)` },
     ],
     {
       // timing options

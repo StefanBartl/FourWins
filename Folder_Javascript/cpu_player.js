@@ -26,6 +26,7 @@
 ?                  Jobs To-do:
 
 todo    -) Update whole CPU Player!
+todo    -) recode whole hardcoded C1 C2.. stuff
 
 ?                  Finish
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)

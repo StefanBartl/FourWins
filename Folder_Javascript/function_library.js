@@ -8,7 +8,7 @@
 ?                  _____________________________________                                                                                                                                                                                                  
 !                                        Table of content              
 
-?                              1) Game-Helper-Functions
+?                              1) game-functions library
 
                                         - Lock Top Cells                                                                                                                                 
                                         - Unlock Top Cells    
@@ -22,7 +22,7 @@
                                         - Update Stats                                                                                                                  
                                         - Correct Sound Setting    
 
-?                             2) My Generic-Javascipt Library                                  
+?                             2) my generic-javascript library                                  
                                                                                                             
                                       - Insert Element before reference Node
                                       - Insert Element after reference Node                                                                                                                            
@@ -53,7 +53,7 @@ todo    -) Write a final Comment.
 */
 //#endregion
 
-//#region 1) Game-Helper-Functions
+//#region 1) game-functions library
 
 /* ========================
  !    Adding the Choosing-Animation 
@@ -376,10 +376,6 @@ if(Game.Draws > 0){
 
 };
 
-
-
-
-
 /* ===============
 !     Create Starting Stats 
             =============== */
@@ -551,7 +547,7 @@ document.getElementById('wrapper__gameboard').setAttribute('data-ingame', 'no');
 
 //#endregion
 
-//#region  2) My Generic-Javascript-Library
+//#region  2) my generic-javascript library
 
 /* ==========================
  !    Insert Element after Reference Node
@@ -1276,11 +1272,11 @@ function myCallback(name, callback) {
   setTimeout(() => {
     callback({ username: name });
   }, 1000);
-}
-// Second argument  have acces to the callback function, so acces to the Object where username: name. With that variables you can work. (.then)
+  // Second argument  have acces to the callback function, so acces to the Object where username: name. With that variables you can work. (.then)
 //const myName = myCallback('Steve', (username) => {
 // console.log(username);
 //});
+};
 
 /* ======
 !     Promise
@@ -1290,20 +1286,21 @@ const myPromise = new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve({ var: 'My Test' });
   }, 2000);
+
+  //myPromise
+//  .then(myTest => {console.log(myTest)} );
 });
 
-//myPromise
-//  .then(myTest => {console.log(myTest)} );
-
-// Get values from muitple Promises at the same time
+// Get values from multiple Promises at the same time
 const myPromise2 = new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve({ var: '+ my second Test in Promise.all!' });
   }, 2000);
-});
-//? You have to pass an array!
+  //? You have to pass an array!
 //Promise.all([myPromise, myPromise2])
 //  .then(result => {console.log(result)});
+
+});
 
 /* ==========
 !     Async / Await
