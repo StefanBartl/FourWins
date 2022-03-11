@@ -67,6 +67,7 @@ clicked_TopCell_ID: '',
   // Standard is: Left Yellow / Right Red
   player_Colour_Left: 'yellow',
   Sound: true,
+  menuAnimation: 'true',
   state: 'startingScreen',
 };
 
@@ -229,6 +230,15 @@ player_2_svg.addEventListener('click', () => {
 // Get up-tp-date stats for the Settings-Menu
 Stats();
 
+// set and proof to fire menu animation
+Game.menuAnimation = localStorage.menuAnimation || 'true';
+if(Game.menuAnimation === 'true'){
+  settings_span.classList.add('colourAnimation');
+  aniToggle_checkbox.checked = true;
+} else {
+  aniToggle_checkbox.checked = false;
+};
+
 /* ====================================
  !        Show Settings-Menu Event-Listeners 
          =================================== */
@@ -236,18 +246,18 @@ settings_span.addEventListener('mouseenter', () => {
   //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
   if (!settings_span.classList.contains('Class_Show_Settings')) {
     settings_span.classList.remove('Class_Hide_Settings');
+    settings_span.classList.remove('colourAnimation');
     settings_span.classList.add('Class_Show_Settings');
-    return;
-  }
+  };
 });
 
 settings_span.addEventListener('touchstart', () => {
   //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
   if (!settings_span.classList.contains('Class_Show_Settings')) {
     settings_span.classList.remove('Class_Hide_Settings');
+    settings_span.classList.remove('colourAnimation');
     settings_span.classList.add('Class_Show_Settings');
-    return;
-  }
+  };
 });
 
 /* ====================================
@@ -258,8 +268,16 @@ main_wrapper.addEventListener('mouseenter', () => {
   if (settings_span.classList.contains('Class_Show_Settings')) {
     settings_span.classList.remove('Class_Show_Settings');
     settings_span.classList.add('Class_Hide_Settings');
-    return;
+
   }
+  // If menu animation is not setted of, attach animation class after small delay to make sure the triggered hide animation is fired
+  if(Game.menuAnimation === 'true'){
+  setTimeout(()=>{
+    settings_span.classList.remove('Class_Hide_Settings');
+    settings_span.classList.add('colourAnimation');
+  }, 10);
+  };
+
 });
 
 main_wrapper.addEventListener('touchstart', () => {
@@ -267,8 +285,15 @@ main_wrapper.addEventListener('touchstart', () => {
   if (settings_span.classList.contains('Class_Show_Settings')) {
     settings_span.classList.remove('Class_Show_Settings');
     settings_span.classList.add('Class_Hide_Settings');
-    return;
-  }
+
+    if(Game.menuAnimation === 'true'){
+      setTimeout(()=>{
+        settings_span.classList.remove('Class_Hide_Settings');
+        settings_span.classList.add('colourAnimation');
+      }, 10);
+      };
+  };
+  
 });
 
 document.querySelector('header').addEventListener('mousemove', () => {
@@ -276,9 +301,16 @@ document.querySelector('header').addEventListener('mousemove', () => {
   if (settings_span.classList.contains('Class_Show_Settings')) {
     settings_span.classList.remove('Class_Show_Settings');
     settings_span.classList.add('Class_Hide_Settings');
-    return;
-  }
+
+    if(Game.menuAnimation === 'true'){
+      setTimeout(()=>{
+        settings_span.classList.remove('Class_Hide_Settings');
+        settings_span.classList.add('colourAnimation');
+      }, 10);
+      };
+  };
 });
+
 //#endregion
 
 //#region Settings Menu Event-Listeners
@@ -446,6 +478,15 @@ language_menu.addEventListener('change', () => {
     }
   }
 });
+
+aniToggle_checkbox.addEventListener('click', ()=>{
+      if(localStorage.menuAnimation === 'true' || localStorage.menuAnimation === undefined){
+          localStorage.menuAnimation = 'false' 
+          Game.menuAnimation = 'false';
+        } else {
+             localStorage.menuAnimation = 'true';
+             Game.menuAnimation = 'true';
+}});
 
 stats_reset_easy.addEventListener('click', () => {
   localStorage.CPU_Easy_Wins = 0;

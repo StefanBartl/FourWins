@@ -82,9 +82,6 @@ todo    -) Save Default Script Files with the new Script Layout for later Projec
 }
 
 
-/* =====
-?     resets 
-            ===== */
 /* #region Resets */
 
 /* box-sizing */
@@ -136,9 +133,6 @@ select {
 /* #endregion */
 
 /*#region fonts */
-/* =====
-?     fonts 
-            ===== */
 
 /* Page: Sans-serif,   font-family: 'Anton', sans-serif; */
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
@@ -153,43 +147,53 @@ select {
 
 /* #region 2) layout */
 
+/* =========
+?     page layout
+          ========= */
+
 body {
   background-color: var(--base-colour);
-  z-index: -3;
   font-family: 'Titillium Web', sans-serif;
   color: var(--top-header);
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  display: grid;
-  grid: 10vh auto auto / 1fr;
+  display: flex;
+  flex-direction: column;
   font-family: 'Anton', sans-serif;
 }
 
-/* ==========
-?     body grid layer 
-            ========== */
-
 header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-bottom: solid 1vh var(--base-border);
   border-radius: 1em;
-  line-height: 0;
-  display: grid;
-  grid: 1fr 1fr / 1fr;
 }
 
 #main__section {
   display: grid;
-  grid: auto / 30% auto 30%;
+  grid: auto / 31% auto 31%;
   grid-template-areas: 'leftSide gameboard rightSide';
 }
 
-/* ===============
-?     sidebars grid layer 
-          ================ */
+/* =======
+?     sidebars
+          ======= */
+
+.sidebars {
+  border-block: solid 1px var(--base-border);
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20%;
+  min-width: 100%;
+  gap: 1em;
+}
 
 #leftSidebar__wrapper {
   grid-area: leftSide;
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;
 }
 
 #sidebarRight__wrapper {
@@ -197,17 +201,42 @@ header {
   z-index: 1;
 }
 
-.sidebars {
-  border-bottom: solid 1px var(--base-border);
-  grid-area: sidebar;
+.sidebars h2{
+  margin-top: 1em;
   display: flex;
-  flex-direction: column;
-  border-top: solid 1px var(--base-border);
-  margin-top: 20%;
-
+  justify-content: center;
 }
 
-.sidebars h3{
+.naming__span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2em;
+}
+
+.name_svgs {
+  width: 1.5em;
+  height: 1.5em;
+  margin-inline: 1em;
+  filter: invert(1);
+}
+
+/* left sidebar extra content */
+
+#choosing_cpu {
+min-width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 1em;
+padding-bottom: 2em;
+border-bottom: solid 1px var(--base-border);
+}
+
+#choosing_cpu h3{
+  display: flex;
+  justify-content: center;
+  font-size: x-large;
   margin-top: 1em;
 }
 
@@ -221,7 +250,7 @@ header {
   background-color: var(--gameboard);
   border: solid 1rem var(--gameboard);
   border-top: dashed 0.1rem var(--gameboard);
-  border-radius: 2rem;
+  border-radius: 2em;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-top: none;
@@ -239,29 +268,13 @@ header {
 .Class_GameboardWrapper[data-inGame='gameend'] {
     margin-block: 2rem;
 }
-
-footer {
-  display: grid;
-  grid: 1fr / repeat(8, 1fr);
-  gap: 1em;
-  justify-content: center;
-  text-align: center;
-   margin-block: 1em;
-}
-
-#choosing_cpu {
-  grid-column-start: 3;
-  grid-column-end: 5;
-  justify-self: flex-end;
-}
-
 /* #endregion */
 
 /* #region 3) gameboard */
 
 .columns {
   width: 100%;
-  height: max-content;
+  /*height: max-content;*/
 }
 
 .topCells {
@@ -288,14 +301,13 @@ footer {
   border-radius: 10rem;
   background-color: var(--base-border);
   opacity: 0.7;
-  justify-content: center;
-  align-content: center;
 }
 
 /* ========================
  ?      game screen gameboard classes 
                 ======================== */
 
+/*
 .Class_Turn_Players {
   min-width: 100%;
   min-height: 100%;
@@ -305,6 +317,7 @@ footer {
   justify-content: center;
   align-content: center;
 }
+*/
 
 .Class_Thinking {
   text-align: center;
@@ -325,41 +338,39 @@ footer {
 ?     placing coins
             ========== */
 
-.coin__yellow {
-  background-image: url('../Folder_Graphics/Coins/yellow.png');
+.coin__red, 
+.coin__yellow,
+.placedCoin__1,
+.placedCoin__2{
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.coin__red,
+.coin__yellow{
   width: 100%;
   height: 100%;
   border-radius: 50%;
   z-index: 0;
+}
+
+.coin__yellow {
+  background-image: url('../Folder_Graphics/Coins/yellow.png');
 }
 
 .coin__red {
   background-image: url('../Folder_Graphics/Coins/red.png');
-  background-size: 80%;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  z-index: 0;
 }
 
 .placedCoin__1 {
   background-image: url('../Folder_Graphics/Coins/yellow.png');
-  background-size: 80%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .placedCoin__2 {
   background-image: url('../Folder_Graphics/Coins/red.png');
-  background-size: 80%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
+
 /* #endregion */
 
 /* #region 4) settings menu */
@@ -379,7 +390,7 @@ footer {
 #settings_span {
   position: relative;
   top: 0;
-  right: -95%;
+  right: -98%;
   display: flex;
   flex-wrap: wrap;
   height: 90vh;
@@ -390,6 +401,7 @@ footer {
   background-color: var(--base-border);
   border-top-left-radius: 10%;
   border-bottom-left-radius: 10%;
+  box-shadow: 0em 0em 2em white;
   color: var(--main-black);
   text-align: center;
   font-size: large;
@@ -489,9 +501,6 @@ footer {
   transform: translateX(1.8rem);
 }
 
-
-
-
 #h__soundund_Checkbox {
   height: 1.5rem;
   box-shadow: 0 0 1rem black;
@@ -552,10 +561,9 @@ details[open] p {
   margin-block: .5em;
 }
 
-
-/* =========
-?     typography 
-            ========= */
+/* ============
+?    sm- typography 
+            ============ */
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Comforter Brush', cursive;
@@ -566,7 +574,6 @@ h1, h2, h3, h4, h5, h6 {
  font-size: large;
 }
 
-
 #info_h,
 #h__language,
 #h__contact,
@@ -574,10 +581,9 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 
-
-/* =====
-?     hover 
-            ====== */
+/* =======
+?     sm-hover 
+            ======== */
 
 #info_h:hover,
 #wrapper__stats_easy :hover,
@@ -603,7 +609,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* #region 5) typographie */
 
-
 #h__turnDiv {
   width: 10rem;
   border: dashed 0.3rem var(--base-border);
@@ -618,12 +623,11 @@ h1, h2, h3, h4, h5, h6 {
             ======== */
 
 input {
-  width: 28ch;
+  width: 15ch;
   max-width: 80%;
   height: 2rem;
   text-align: center;
   cursor: pointer;
-  border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
   font-family: 'Bebas Neue', cursive;
@@ -639,10 +643,6 @@ input:focus {
   background-color: var(--prime-darkgrey);
   color: var(--base-border);
   box-shadow: inset 0 0 1rem white;
-}
-
-.sidebars input {
-  margin-bottom: 5vh;
 }
 
 /* ======
@@ -661,21 +661,6 @@ button:hover {
   background-color: var(--prime-darkgrey);
   color: var(--base-border);
   box-shadow: inset 0 0 1rem white;
-}
-
-.naming__span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.name_svgs {
-  max-width: 1.5rem;
-  max-height: 1.5rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-bottom: 5vh;
-  filter: invert(1);
 }
 
 #reset_easy {
@@ -763,10 +748,6 @@ select:hover {
 
 
 /* #region game-screen*/
-
-
-
-
 
 /* ===========
 ?     win notifications
@@ -944,6 +925,33 @@ select:hover {
 
 /*#region settings menu animations */
 
+/* ==================
+?     coloured box animation 
+            ================== */
+            .colourAnimation{
+              animation: colouredBoxAnimation infinite alternate-reverse 10s;
+            }
+            
+            @keyframes colouredBoxAnimation {
+              from{
+                box-shadow: 0em 0em 2em white;
+              }
+              25%{
+                box-shadow: 0em 0em 2em red;
+              }
+            
+              50%{
+                box-shadow: 0em 0em 2em green;
+              }
+              75%{
+                box-shadow: 0em 0em 2em blue;
+              }
+              to {
+                box-shadow: 0em 0em 2em orangered;
+              }
+            }
+
+
 /* ==============
 ?     settings-menu animation 
             =============== */
@@ -956,7 +964,7 @@ select:hover {
 
 @keyframes Show_Settings_Animation {
   from {
-    right: -95%;
+    right: -98%;
     box-shadow: 0em 0em 2em white;
   }
   to {
@@ -976,11 +984,10 @@ select:hover {
     box-shadow: 0em 0em 2em black;
   }
   to {
-    right: -95%;
+    right: -98%;
     box-shadow: 0em 0em 2em white;
   }
 }
-
 
 /*#endregion */
 

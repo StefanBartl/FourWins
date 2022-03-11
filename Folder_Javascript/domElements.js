@@ -39,7 +39,6 @@ const main_wrapper = document.getElementById('main__section');
 const left_sidebar = document.getElementById('leftSidebar__wrapper');
 const gameboard = document.getElementById('wrapper__gameboard');
 const right_sidebar = document.getElementById('sidebarRight__wrapper');
-const footer = document.getElementById('footer');
 //#endregion
 
 //#region 2) text, inputs, images
@@ -74,6 +73,8 @@ const toggle_colour_button = document.getElementById('button__toggle');
 const toggle_colour_slider = document.getElementById('colour_slider');
 const language_h = document.getElementById('h__language');
 const language_menu = document.getElementById('select__language');
+const aniToggle__h = document.getElementById('h__aniToggle');
+const aniToggle_checkbox = document.getElementById('checkbox__aniToggle');
 const contact_h = document.getElementById('h__contact');
 const credits_h = document.getElementById('h__credits');
 const sound_h = document.getElementById('h__sound');

@@ -54,9 +54,7 @@ if(Game.state === 'Game End'){
   // Remove the start screen elements
   document.querySelector('header').style = 'display: none';
   document.getElementById('leftSidebar__wrapper').style = 'display: none';
-  document.getElementById('sidebarRight__wrapper').style = 'display: none';
-  document.getElementById('footer').style = 'display: none';
-  
+  document.getElementById('sidebarRight__wrapper').style = 'display: none';  
 
   // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it.. Show Win Notifications
   if(document.getElementById('div__turnPlayers') && document.getElementById('div__turnPlayers').classList.contains('Class_Invisible'))
@@ -89,8 +87,6 @@ function Start_Screen() {
   document.querySelector('header').style = 'display: block';
   document.getElementById('leftSidebar__wrapper').style = 'display: block';
   document.getElementById('sidebarRight__wrapper').style = 'display: block';
-  document.getElementById('footer').style = 'display: block';
-
 
   // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it. Hide win notivications.
   if(document.getElementById('div__turnPlayers') && !document.getElementById('div__turnPlayers').classList.contains('Class_Invisible'))

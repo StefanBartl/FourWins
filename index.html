@@ -55,6 +55,16 @@
                 />
               </span>
             </div>
+            <div id='choosing_cpu'>
+              <h3 id='choosing_cpu_headline'></h3>
+              <select name='choose_cpu__select' id='choosing_cpu__select'>
+                <option value='No' id='cpu_opt_no'></option>
+                <option value='CPU Easy' id='cpu_easy' selected></option>
+                <option value='CPU Normal' id='cpu_normal'></option>
+              </select>
+              <button  id='start__button'></button>
+            </div>
+        
           </div>
 
           <div id='sidebarRight__wrapper'>
@@ -112,6 +122,11 @@
                 <option value='Deutsch'  selected>Deutsch</option>
                 <option value='English'>English</option>
               </select>
+              <div id="div__aniToggle">
+                <h3 id="h__aniToggle"></h3>
+                <input type="checkbox" name="aniToggle" id="checkbox__aniToggle" checked>
+              </div>
+
             </div>
           </span>
 
@@ -163,18 +178,6 @@
             </div>
           </span>
         </section>
-
-        <footer  id='footer'>
-          <div id='choosing_cpu'>
-            <h3 id='choosing_cpu_headline'></h3>
-            <select name='choose_cpu__select' id='choosing_cpu__select'>
-              <option value='No' id='cpu_opt_no'></option>
-              <option value='CPU Easy' id='cpu_easy' selected></option>
-              <option value='CPU Normal' id='cpu_normal'></option>
-            </select>
-          </div>
-          <button  id='start__button'></button>
-        </footer>
 
   <!-- #region Javascript-Files-->
     <script

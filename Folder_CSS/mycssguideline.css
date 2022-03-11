@@ -217,7 +217,33 @@ section:target b > h2 {
   color: purple;
 }
 
+/* ==================
+?     coloured box animation 
+            ================== */
+.colourAnimation{
+animation: colouredBoxAnimation infinite alternate-reverse 10s;
+}
 
+@keyframes colouredBoxAnimation {
+from{
+box-shadow: 0em 0em 2em white;
+}
+25%{
+box-shadow: 0em 0em 2em red;
+}
+
+50%{
+box-shadow: 0em 0em 2em green;
+}
+75%{
+box-shadow: 0em 0em 2em blue;
+}
+to {
+box-shadow: 0em 0em 2em orangered;
+}
+}
+
+/*
 -) Trenner:
      / =======  
 !        Functions
