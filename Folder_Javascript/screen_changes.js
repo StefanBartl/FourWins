@@ -17,6 +17,7 @@
 /*
 ?                  Jobs To-do:
 todo    -) Win-Screen to new layout
+todo    -) improve winchain animation
 
 ?                  Finish
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
@@ -319,9 +320,8 @@ function Game_End_Screen(gameResult) {
   });
 
   document.getElementById('button__newGame').addEventListener('click', ()=>{Start_New_Game(gameResult)});
-  //#
   
-// add winchain higuhlight animation
+// add winchain highlight animation
 const cellsArray = document.querySelectorAll('.cells');
 for(let cell of cellsArray){
 if(cell.getAttribute('data-winchain') === 'yes')cell.animate(
@@ -342,6 +342,8 @@ if(cell.getAttribute('data-winchain') === 'yes')cell.animate(
 )
 };
 };
+
+//#endregion
 
 //#endregion
 

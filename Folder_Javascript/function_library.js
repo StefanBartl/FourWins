@@ -15,7 +15,9 @@
                                         - 'Thinking'-Effect         
                                         - Add choosing Animation                                                                                                                              
                                         - Remove choosing Animation                                                                                                                       
-                                        - Change which Player is on turn                                                                                                                    
+                                        - Change which Player is on turn 
+                                        - Won games counter
+                                        - Attach tally                                                                                                                   
                                         - Game Screen                                                                                                                                      
                                         - Start Screen                                                                 
                                         - Stats                                             
@@ -331,8 +333,29 @@ img__tallyFive.classList.add('img__tallys');
 
 //attach correct image to container
 
+Attach_Tally(1);
+Attach_Tally(2);
+Attach_Tally(3);
+
+document.getElementById('div__wonGames_P1').classList.add('Class_Invisible');
+document.getElementById('div__wonGames_P2').classList.add('Class_Invisible');
+document.getElementById('div__drawGames').classList.add('Class_Invisible');
+if(Game.Player_1_wins > 0){
+  document.getElementById('div__wonGames_P1').classList.remove('Class_Invisible');
+};
+if(Game.Player_2_wins > 0){
+  document.getElementById('div__wonGames_P2').classList.remove('Class_Invisible');
+};
+if(Game.Draws > 0){
+  document.getElementById('div__drawGames').classList.remove('Class_Invisible');
+};
+};
+
+/* ==============
+!     attach correct tally 
+            ============== */
 function Attach_Tally(containerNumber){
-  console.log('Try to attach tally...');
+  //console.log('Try to attach tally...');
   // set up variables
   const container = document.getElementById(`container__tally${containerNumber}`)
   let  result;
@@ -352,32 +375,8 @@ function Attach_Tally(containerNumber){
   if (result === 5) { container.appendChild(img__tallyFive); console.log('Appended tally 5');}    
 };
 
-Attach_Tally(1);
-Attach_Tally(2);
-Attach_Tally(3);
-
-if(Game.Player_1_wins === 1){
-  document.getElementById('div__wonGames_P1').appendChild()
-}
-document.getElementById('div__wonGames_P1').classList.add('Class_Invisible');
-document.getElementById('div__wonGames_P2').classList.add('Class_Invisible');
-document.getElementById('div__drawGames').classList.add('Class_Invisible');
-if(Game.Player_1_wins > 0){
-  document.getElementById('div__wonGames_P1').classList.remove('Class_Invisible');
-};
-if(Game.Player_2_wins > 0){
-  document.getElementById('div__wonGames_P2').classList.remove('Class_Invisible');
-};
-if(Game.Draws > 0){
-  document.getElementById('div__drawGames').classList.remove('Class_Invisible');
-};
-
-
-
-};
-
 /* ===============
-!     Create Starting Stats 
+!     create starting stats 
             =============== */
 function Stats() {
   let value = localStorage.CPU_Easy_Wins || 0;

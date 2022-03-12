@@ -19,13 +19,13 @@
 /*
 ?                  Jobs To-do:
 
-todo    -) Row-Win update
+todo    
 
 ?                  Finisf
-todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo    -) Final formatation.
-todo    -) Make sure all important is commented.
-todo    -) Write a final Comment.
+todo    Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo    Final formatation.
+todo    Make sure all important is commented.
+todo    Write a final Comment.
 
 !                  Session progress
 ?-) 
@@ -142,10 +142,10 @@ function Diagonal_Validator(player, columnNumber, row) {
 };
 
 /* =================
-!     Column Win-Validation 
+ !     Column Win-Validation 
             ================= */
 function validator__column(player){
-console.log(`Entered column win validation for player ${player}.`)
+//console.log(`Entered column win validation for player ${player}.`)
 let playerPlacements, arrayToValidate;
 
 // get correct placements array
@@ -187,36 +187,35 @@ for(let columnNumber = 1; columnNumber <= Game.gameboard_size_x; columnNumber++)
 /* ===============
 !     Row Win-Validation 
             =============== */
-function Row_Validator(player, column) {
-  // Get the actual state of the Gameboard
-  let Players_Gameboard;
-  if (player === 1) Players_Gameboard = Game.actualGameboardPlayer1;
-  if (player === 2) Players_Gameboard = Game.actualGameboardPlayer2;
+function Row_Validator(player,  placedRow) {
+  //console.log(`Entered row validator for player ${player}, clicked column ${clickedColumn} and placed row ${placedRow}.`)
+  let playerPlacements;
+ 
+  // get correct placements array
+  player == 1 ? playerPlacements = Game.player1_coins : playerPlacements = Game.player2_coins;
 
-  // Set a counting Variable & a helper array with the pushed values from the Gameboard
-  let countFor_Win = 0;
-  const validation_array = [
-    Players_Gameboard.C1,
-    Players_Gameboard.C2,
-    Players_Gameboard.C3,
-    Players_Gameboard.C4,
-    Players_Gameboard.C5,
-    Players_Gameboard.C6,
-    Players_Gameboard.C7,
-  ];
-
-  // Now we have an iterable array and can loop trough
-  for (let el of validation_array) {
-    // If the array element (f.e. Column 2) have given value (f.e. Row 5) inrease counter and  . So, if 4 ColumnArrays from the actual Gamebpoard have a coin from this player in the same row, its a
-    if (el.indexOf(column) != -1) countFor_Win++;
-    // Decrease the counter if there is an empty value in the column, but only do that if there was ab positive value before (this makes it possible to detect rows / 4 after another)
-    if (el.indexOf(column) === -1 && countFor_Win != 0) countFor_Win--;
-    // Invoke win if thera are 4 coins after another
-    if (countFor_Win === 4) {
-      // Invoke a win
-      Game_End_Screen(player, 'Row');
-      return true;
-    }
-  }
-  //(Under construction for winChain!)
+  // loop trough placement array
+  for (let columnNumber = 1; columnNumber < Game.gameboard_size_x; columnNumber++) {
+    // Starting with column 1, if there is a placement in given row  go to the next column and proof i there is a placement in ghiven row, and so on.... 
+    if (playerPlacements[`C${columnNumber}`].indexOf(placedRow) != -1) {
+        if(playerPlacements[`C${columnNumber + 1}`].indexOf(placedRow) != -1){
+          if(playerPlacements[`C${columnNumber + 2}`].indexOf(placedRow) != -1){
+            if(playerPlacements[`C${columnNumber + 3}`].indexOf(placedRow) != -1){
+              //console.log('Row win detected!');
+              // mark winning chain
+              let basis, second, third, fourth;
+              basis = document.getElementById(`ID_C${columnNumber}R${placedRow}`)
+              second = document.getElementById(`ID_C${columnNumber + 1}R${placedRow }`)
+              third = document.getElementById(`ID_C${columnNumber + 2}R${placedRow }`)
+              fourth = document.getElementById(`ID_C${columnNumber + 3}R${placedRow }`)
+              const arr = [basis, second, third, fourth];
+              setAttributesArr(arr, { 'data-winchain': 'yes' });
+              // invoke win
+              Game_End_Screen(player, 'Row');
+              return true;
+            };
+          };
+        };
+    };
+  };
 };

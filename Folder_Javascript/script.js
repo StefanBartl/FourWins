@@ -19,18 +19,17 @@
 //#region Open Jobs
 /*
 ?                  Jobs To-do:
-todo    -)  
+todo      
 ?                  Finish
-todo    -) Test all functions! All Game variants! Draw! Write the correct ' , infoboxes, headlines.
-todo    -) Update Function Headlines and find a way for infoboxes with description and additional infos! Maybe like in CPU Easy.
-todo    -) Final formatation.
-todo    -) Make sure all important is commented.
-todo    -) Write a final Comment.
-todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new 'gloabl' Library for JS & CSS !
-todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-
+todo    test all functions! all game variants! draw! 
+todo    write comments and prrof existed ones, infoboxes for description if needed, update headlines, console.log the arguments and as much as make sense!
+todo    finalize formatation. last update table of contents.
+todo    make sure all important is commented. write final informations / comment if make sense.
+todo    save default script files with the updatet script layout for later projects. also the index with the all new toggle slider and make a generic library for js & css !
+todo    cleanout functions an minimize code as much as it make sense. do the guidelines.
+todo    take a look at the bonus jobs - maybe you have enough passion to do one :-)
 !                  Session progress
-?-) 
+?          
 */
 //#endregion
 
@@ -855,7 +854,7 @@ function Placement_End() {
             =================== */
 function Player_1_Placement_Finish() {
   //  invoke winning-validation for player 1 and if true invoke game-end function
-  const valid_row = Row_Validator(1, Game.coin_placement_row);
+  const valid_row = Row_Validator(1,  Game.coin_placement_row);
   const valid_column = validator__column(
     1,
     Game.clicked_column,
@@ -899,7 +898,7 @@ function Player_1_Placement_Finish() {
 !   finish placement player 2
           =================== */
 function Player_2_Placement_Finish() {
-  const valid_row = Row_Validator(2, Game.coin_placement_row);
+  const valid_row = Row_Validator(2,  Game.coin_placement_row);
   const valid_column = validator__column(2,  Game.clicked_column, Game.coin_placement_row);
   const valid_diagonal = Diagonal_Validator(2, Game.clicked_column, Game.coin_placement_row);
   if (valid_row === true || valid_column === true || valid_diagonal === true) return;
