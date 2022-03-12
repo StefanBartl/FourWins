@@ -190,17 +190,18 @@ for(let columnNumber = 1; columnNumber <= Game.gameboard_size_x; columnNumber++)
 function Row_Validator(player,  placedRow) {
   //console.log(`Entered row validator for player ${player}, clicked column ${clickedColumn} and placed row ${placedRow}.`)
   let playerPlacements;
- 
   // get correct placements array
   player == 1 ? playerPlacements = Game.player1_coins : playerPlacements = Game.player2_coins;
-
   // loop trough placement array
   for (let columnNumber = 1; columnNumber < Game.gameboard_size_x; columnNumber++) {
-    // Starting with column 1, if there is a placement in given row  go to the next column and proof i there is a placement in ghiven row, and so on.... 
+    // Starting with column 1, if there is a placement in given row  go to the next column and proof i there is a placement in given row, and so on.... 
     if (playerPlacements[`C${columnNumber}`].indexOf(placedRow) != -1) {
-        if(playerPlacements[`C${columnNumber + 1}`].indexOf(placedRow) != -1){
-          if(playerPlacements[`C${columnNumber + 2}`].indexOf(placedRow) != -1){
-            if(playerPlacements[`C${columnNumber + 3}`].indexOf(placedRow) != -1){
+        if(playerPlacements[`C${columnNumber + 1}`]  
+            && playerPlacements[`C${columnNumber + 1}`].indexOf(placedRow) != -1){
+          if(playerPlacements[`C${columnNumber + 2}`]
+              && playerPlacements[`C${columnNumber + 2}`].indexOf(placedRow) != -1){
+            if(playerPlacements[`C${columnNumber + 3}`]
+                && playerPlacements[`C${columnNumber + 3}`].indexOf(placedRow) != -1){
               //console.log('Row win detected!');
               // mark winning chain
               let basis, second, third, fourth;

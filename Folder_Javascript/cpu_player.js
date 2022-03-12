@@ -38,7 +38,7 @@ todo    -) Make sure all important is commented.
 todo    -) Write a final Comment.
 
 !                  Session progress
-?-) Detect 3 Coin Chains upward repaired
+?-)
 
 */
 //#endregion
@@ -77,56 +77,56 @@ function CPU_Normal() {
                                 Infobox
 Function to let CPU Normal make placements as near as its possible to other Coins from him,
 try to avoid upwards and sideways finishing moves from Human Player and try to make them self.
-
-Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as espected.I'm getting hands on soon.
 */
-  // console.log("CPU Normal startzs to thinking...");
+
+  // console.log("CPU Normal starts.");
   // If it is the first CPU Normal Placement, make a random placement
   if (Game.roundCounter === 1 || Game.roundCounter === 2) CPU_Easy();
   else {
     // Proof if CPU have to make or avoid diagonal finishing move
     const diagonal = Detect_3_Coin_Chains_Diagonal();
     if (diagonal !== undefined) {
-      //console.log("Diagonal Chain Detected in column:", diagonal);
+       console.log("CPU Normal: Diagonal Chain Detected in column ", diagonal);
       // If there is a possibility, proof if placement on top is possible
       const diagonal_topVal = validator__column(diagonal, true);
-      //console.log("Diagonal placement possible:", diagonal_topVal);
+       console.log("CPU Normal: Diagonal placement possible in column ", diagonal,  diagonal_topVal);
       if (diagonal_topVal === true) {
-        Thinking_Effect(true, diagonal - 1);
+        let placeInColumn = diagonal - 1;
+        Thinking_Effect(true, placeInColumn);
         return;
-      }
-    }
+      };
+    };
 
     // Proof if CPU have to make or avoid vertial finishing move
     const upwards = Detect_3_Coin_Chains_Upwards();
     if (upwards !== undefined) {
-     // console.log("Upwards Chain detected in column:", upwards);
+     // console.log("CPU Normal: Upwards Chain detected in column ", upwards);
       // If there is a possibility, proof if placement on top is possible
      let columnToProof = Game.rowCounter[`C${upwards}`];
-     //console.log('row counter for this column is: ' + columnToProof);
      let upwards_topVal;
      columnToProof > 1 ? upwards_topVal = true : upwards_topVal = false; 
-      //console.log("Upwards placement possible:", upwards_topVal);
+      //console.log("CPU Normal: Upwards placement possible in column", upwards,  upwards_topVal);
       if (upwards_topVal === true) {
-        Thinking_Effect(true, upwards - 1);
+        let placeInColumn = upwards - 1;
+        Thinking_Effect(true, placeInColumn);
         return;
       };
     };
 
     const sideways = Detect_3_Coin_Chains_Sideways();
     if (sideways !== undefined) {
-      console.log("Sideway chain detected in column:", sideways);
+      // console.log("CPU Normal: Sideway chain detected in column ", sideways);
       Thinking_Effect(true, sideways);
       return;
     }
 
     // If not, get possible placements
     const numbers_upwards = Get_Valid_Upwards_Placemement();
-    console.log("Upwards placements found in columns:", numbers_upwards);
+    // console.log("Upwards placements found in columns:", numbers_upwards);
     // Take the first one and proof it
     if (numbers_upwards !== undefined) {
       const proof_up = validator__column(numbers_upwards[0], true);
-      console.log("Valid Upwards placement found:", proof_up);
+     // console.log("Valid Upwards placement found:", proof_up);
       if (proof_up === true) {
         Thinking_Effect(true, numbers_upwards[0]);
         return;
@@ -137,7 +137,7 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
     console.log("Sideways placements found in columns:", numbers_sideways);
     if (numbers_sideways !== undefined) {
       const proof_side = validator__column(numbers_sideways[0], true);
-      console.log("Valid Sideways placement found:", proof_side);
+    //  console.log("Valid Sideways placement found:", proof_side);
       if (proof_side === true) {
         Thinking_Effect(true, numbers_sideways[0]);
         return;
@@ -149,7 +149,7 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
     // console.log("Nothing possible. Ask CPU Easy for valid placement...");
     CPU_Easy();
     return;
-  }
+  };
 };
 
 /* ==================
@@ -170,7 +170,7 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
 //#region Detect placement possibilities 
 
 /* =======================
-!     Detect diagonal 3 Coin-Chains 
+!     Detect diagonal 3 Coin-Chains !NOT Tested 
             ======================= */
 function Detect_3_Coin_Chains_Diagonal() {
   //console.log("Entered Diagonal 3 Coin Chains Detection");
@@ -236,7 +236,7 @@ function Detect_3_Coin_Chains_Diagonal() {
 !     Detect horizontal 3 Coin-Chains 
             ======================== */
 function Detect_3_Coin_Chains_Upwards() {
-console.log('Detection of 3 coins up started');
+// console.log('Detection of 3 coins up started');
 
 // detection function
   function Detection_3Coins_Up(player){
@@ -255,7 +255,7 @@ console.log('Detection of 3 coins up started');
         if(arrayToValidate[row] - arrayToValidate[row + 1] === 1){
             //console.log('2 coins upon each other.');
             if(arrayToValidate[row + 1] - arrayToValidate[row + 2] === 1){
-              console.log('3 coins upon each other, colum number', columnNumber)
+             // console.log('3 coins upon each other, colum number', columnNumber)
               return columnNumber
             };
           };
@@ -266,303 +266,136 @@ console.log('Detection of 3 coins up started');
 
   // Invoke first CPU coins to detect a possible finishing placement...
   let up_finish = Detection_3Coins_Up(2);
-  if (up_finish !== undefined){console.log('Finish placement up with column', up_finish); return up_finish;};
+  if (up_finish !== undefined){
+    //console.log('Finish placement up with column', up_finish);
+     return up_finish
+    };
+
   // Invoke player 1 coins to detect finishing possibility
 let up_defense = Detection_3Coins_Up(1);
-  if (up_defense !== undefined){console.log('Defense placement up with column', up_defense); return up_defense;};
-  console.log('No upwards 3 Coin chains detected.');
+  if (up_defense !== undefined){
+    //console.log('Defense placement up with column', up_defense); 
+    return up_defense
+  };
+  // console.log('No upwards 3 Coin chains detected.');
 };
 
-/* =====================
-!     Detect vertival 3 Coin-Chains (!BUGGY!) 
-            ===================== */
+/* ======================
+!     Detect vertival 3 Coin-Chains 
+            ====================== */
 function Detect_3_Coin_Chains_Sideways() {
-  // +++ Basically it depends hardly on the Row Validator from the Win-Validation Section +++
-  // INFO: This algorithm does not take into account, for example, if two coins are next to each other, then one cell is free and then another coin, that this leads to a winning chain. This should be removed in CPU Hard
-  // Detect possible finishing move  from CPU
-  let countFor_Win = 0;
-  // For every made placement in the column
-  for (let el of Game.actualGameboardPlayer2.C1) {
-    // If in the next column and the same row  there also a placement, increase counter
-    if (Game.actualGameboardPlayer2.C2.indexOf(el) !== -1) countFor_Win++;
-    // Same in the third column from the basis placement...
-    if (Game.actualGameboardPlayer2.C3.indexOf(el) !== -1) countFor_Win++;
-    // There are 3 Coins after another from the CPU. If the next (4.) column is free, finish and win
-    if (el === 7) {
-      // If game is in row 7, finish
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C4R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 3;
-    } else {
-      // If game is above row 7, ccheck if a finish move is possible
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C4R${el}`).getAttribute("data-isPlayed") ===
-          "no" &&
-        document
-          .getElementById(`ID_C4R${el - 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 3;
-    }
-  }
+console.log('Detection of 3 Coins sideways started');
 
-  countFor_Win = 0;
-  for (let el of Game.actualGameboardPlayer2.C2) {
-    if (Game.actualGameboardPlayer2.C3.indexOf(el) !== -1) countFor_Win++;
-    if (Game.actualGameboardPlayer2.C4.indexOf(el) !== -1) countFor_Win++;
-    if (el === 7) {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C5R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 4;
-      // From Column 2 on maybe there is also a free valid slot before the 3 Coin  chain to finish
-      else if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C1R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 0;
-    } else {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C5R${el}`).getAttribute("data-isPlayed") ===
-          "no" &&
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C5R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 4;
-      else if (
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C1R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 0;
-    }
-  }
+  // detection function
+  function Detection_3Coins_sideways(player){
+  console.log(`Detect 3 Coin sideway chains for player ${player}...`);
+  let playerPlacements;
+  // get correct placements array
+  player == 1 ? playerPlacements = Game.player1_coins : playerPlacements = Game.player2_coins;
 
-  countFor_Win = 0;
-  for (let el of Game.actualGameboardPlayer2.C3) {
-    if (Game.actualGameboardPlayer2.C4.indexOf(el) !== -1) countFor_Win++;
-    if (Game.actualGameboardPlayer2.C5.indexOf(el) !== -1) countFor_Win++;
-    if (el === 7) {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C6R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 5;
-      else if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C2R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 1;
-    } else {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C6R${el}`).getAttribute("data-isPlayed") ===
-          "no" &&
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C6R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 5;
-      else if (
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C2R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 1;
-    }
-  }
+  // loop trough placement array from left to right side
+  for (let columnNumber = 1; columnNumber < Game.gameboard_size_x; columnNumber++) {
+    // Starting with column 1, if there is a placement in given row  go to the next column and proof i there is a placement in given row, and so on....
+    for(let placedRow of playerPlacements[`C${columnNumber}`]){
+        if(playerPlacements[`C${columnNumber + 1}`]
+            && playerPlacements[`C${columnNumber + 1}`].indexOf(placedRow) != -1){
+          if(playerPlacements[`C${columnNumber + 2}`]
+              && playerPlacements[`C${columnNumber + 2}`].indexOf(placedRow) != -1){
+              // proof if placement is possible (so no empty space above or already played) left or right and if so, return correct column
+              let basis, second, third, fourth, columnToFinish;
+              // proof if right side exists & is free
+              if(document.getElementById(`ID_C${columnNumber + 3}R${placedRow - 1}`)
+              && document.getElementById(`ID_C${columnNumber + 3}R${placedRow - 1}`).getAttribute('data-isplayed') === 'yes' 
+              && document.getElementById(`ID_C${columnNumber + 3}R${placedRow}`).getAttribute('data-isplayed') === 'no'){
+                    columnToFinish = columnNumber + 3;
+                    console.log(`Detected sideway chain with possible right placement in column  ${columnToFinish}.`);
+                    // mark winchain
+                    basis = document.getElementById(`ID_C${columnNumber}R${placedRow}`)
+                    second = document.getElementById(`ID_C${columnNumber + 1}R${placedRow }`)
+                    third = document.getElementById(`ID_C${columnNumber + 2}R${placedRow }`)
+                    fourth = document.getElementById(`ID_C${columnNumber + 3}R${placedRow }`)
+                    // return result if win or defend detected
+                    return columnToFinish;
+              };
+              // proof if left side exists & is free
+              if(document.getElementById(`ID_C${columnNumber - 1}R${placedRow - 1}`)
+              && document.getElementById(`ID_C${columnNumber - 1}R${placedRow - 1}`).getAttribute('data-isplayed') === 'yes'
+              && document.getElementById(`ID_C${columnNumber - 1}R${placedRow}`).getAttribute('data-isplayed') === 'no'){
+                    columnToFinish = columnNumber - 1;
+                    console.log(`Detected sideway chain with possible left placement in column  ${columnToFinish}.`);
+                    // mark winchain
+                    basis = document.getElementById(`ID_C${columnNumber}R${placedRow}`)
+                    second = document.getElementById(`ID_C${columnNumber + 1}R${placedRow }`)
+                    third = document.getElementById(`ID_C${columnNumber + 2}R${placedRow }`)
+                    fourth = document.getElementById(`ID_C${columnNumber - 1}R${placedRow }`)
+                    // return result if win or defend detected
+                    return columnToFinish;                
+          };           
+        };
+    };
+  };
+};
 
-  countFor_Win = 0;
-  for (let el of Game.actualGameboardPlayer2.C4) {
-    if (Game.actualGameboardPlayer2.C5.indexOf(el) !== -1) countFor_Win++;
-    if (Game.actualGameboardPlayer2.C6.indexOf(el) !== -1) countFor_Win++;
-    if (el === 7) {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C7R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 6;
-      else if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C3R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 2;
-    } else {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C7R${el}`).getAttribute("data-isPlayed") ===
-          "no" &&
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C7R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 6;
-      else if (
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C3R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 2;
-    }
-  }
+  // loop trough placement array from right to left side
+  for (let columnNumber = Game.gameboard_size_x; columnNumber > 0 ; columnNumber--) {
+    // Starting with column 1, if there is a placement in given row  go to the next column and proof i there is a placement in given row, and so on....
+    for(let placedRow of playerPlacements[`C${columnNumber}`]){
+        if(playerPlacements[`C${columnNumber - 1}`]
+            && playerPlacements[`C${columnNumber - 1}`].indexOf(placedRow) != -1){
+          if(playerPlacements[`C${columnNumber - 2}`]
+              && playerPlacements[`C${columnNumber - 2}`].indexOf(placedRow) != -1){
+              // proof if placement is possible (so no empty space above or already played) left or right and if so, return correct column
+              let basis, second, third, fourth, columnToFinish;
+              // proof if right side exists & is free
+              if(document.getElementById(`ID_C${columnNumber - 3}R${placedRow - 1}`)
+              && document.getElementById(`ID_C${columnNumber - 3}R${placedRow - 1}`).getAttribute('data-isplayed') === 'yes' 
+              && document.getElementById(`ID_C${columnNumber - 3}R${placedRow}`).getAttribute('data-isplayed') === 'no'){
+                    columnToFinish = columnNumber - 3;
+                    console.log(`Detected sideway chain with possible right placement in column  ${columnToFinish}.`);
+                    // mark winchain
+                    basis = document.getElementById(`ID_C${columnNumber}R${placedRow}`)
+                    second = document.getElementById(`ID_C${columnNumber - 1}R${placedRow }`)
+                    third = document.getElementById(`ID_C${columnNumber - 2}R${placedRow }`)
+                    fourth = document.getElementById(`ID_C${columnNumber - 3}R${placedRow }`)
+                    // return result if win or defend detected
+                    return columnToFinish;
+              };
+              // proof if left side exists & is free
+              if(document.getElementById(`ID_C${columnNumber + 1}R${placedRow - 1}`)
+              && document.getElementById(`ID_C${columnNumber + 1}R${placedRow - 1}`).getAttribute('data-isplayed') === 'yes'
+              && document.getElementById(`ID_C${columnNumber + 1}R${placedRow}`).getAttribute('data-isplayed') === 'no'){
+                    columnToFinish = columnNumber + 1;
+                    console.log(`Detected sideway chain with possible left placement in column  ${columnToFinish}.`);
+                    // mark winchain
+                    basis = document.getElementById(`ID_C${columnNumber}R${placedRow}`)
+                    second = document.getElementById(`ID_C${columnNumber - 1}R${placedRow }`)
+                    third = document.getElementById(`ID_C${columnNumber - 2}R${placedRow }`)
+                    fourth = document.getElementById(`ID_C${columnNumber + 1}R${placedRow }`)
+                    // return result if win or defend detected
+                    return columnToFinish;                
+          };           
+        };
+    };
+  };
+};
 
-  // Detect 3 Coin chains from Humans to avoid finishing moves
-  countFor_Win = 0;
-  for (let el of Game.actualGameboardPlayer1.C1) {
-    if (Game.actualGameboardPlayer1.C2.indexOf(el) !== -1) countFor_Win++;
-    if (Game.actualGameboardPlayer1.C3.indexOf(el) !== -1) countFor_Win++;
-    if (el === 7) {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C4R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 3;
-    } else {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C4R${el}`).getAttribute("data-isPlayed") ===
-          "no" &&
-        document
-          .getElementById(`ID_C4R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 3;
-    }
-  }
 
-  countFor_Win = 0;
-  for (let el of Game.actualGameboardPlayer1.C2) {
-    if (Game.actualGameboardPlayer1.C3.indexOf(el) !== -1) countFor_Win++;
-    if (Game.actualGameboardPlayer1.C4.indexOf(el) !== -1) countFor_Win++;
-    if (el === 7) {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C5R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 4;
-      else if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C1R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 0;
-    } else {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C5R${el}`).getAttribute("data-isPlayed") ===
-          "no" &&
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C5R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 4;
-      else if (
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C1R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 0;
-    }
-  }
+};
 
-  countFor_Win = 0;
-  for (let el of Game.actualGameboardPlayer1.C3) {
-    if (Game.actualGameboardPlayer1.C4.indexOf(el) !== -1) countFor_Win++;
-    if (Game.actualGameboardPlayer1.C5.indexOf(el) !== -1) countFor_Win++;
-    if (el === 7) {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C6R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 5;
-      else if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C2R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 1;
-    } else {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C6R${el}`).getAttribute("data-isPlayed") ===
-          "no" &&
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C6R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 5;
-      else if (
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C2R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 1;
-    }
-  }
-
-  countFor_Win = 0;
-  for (let el of Game.actualGameboardPlayer1.C4) {
-    if (Game.actualGameboardPlayer1.C5.indexOf(el) !== -1) countFor_Win++;
-    if (Game.actualGameboardPlayer1.C6.indexOf(el) !== -1) countFor_Win++;
-    if (el === 7) {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C7R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 6;
-      else if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C3R${el}`).getAttribute("data-isPlayed") ===
-          "no"
-      )
-        return 2;
-    } else {
-      if (
-        countFor_Win === 2 &&
-        document.getElementById(`ID_C7R${el}`).getAttribute("data-isPlayed") ===
-          "no" &&
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C7R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 6;
-      else if (
-        countFor_Win === 2 &&
-        document
-          .getElementById(`ID_C3R${el + 1}`)
-          .getAttribute("data-isPlayed") !== "no"
-      )
-        return 2;
-    }
-  }
+  // Invoke first CPU coins to detect a possible finishing placement...
+  let sideway_finish = Detection_3Coins_sideways(2);
+  if (sideway_finish !== undefined){
+    console.log('Finish placement sideway with column', sideway_finish);
+    return sideway_finish
+  };
+  // Invoke player 1 coins to detect finishing possibility
+let sideway_defense = Detection_3Coins_sideways(1);
+  if (sideway_defense !== undefined){
+    console.log('Defense placement up with column', sideway_defense);
+     return sideway_defense
+  };
+  // if no chain detected, leave function
+  console.log('No upwards 3 Coin chains detected.');
 };
 
 /* ======================
