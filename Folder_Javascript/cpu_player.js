@@ -7,17 +7,20 @@
 ?                                              2021                                                                                                                                                                        
 ?                  ________________________________                                                                                                                                                                                                  
 !                                       Table of content                                         
-                                                                                             
-?                                    - CPU Placement                                                                                                                                              
-?                                    - CPU Easy                                           
-?                                    - CPU Normal                                                                                                                                                
-?                                    - CPU Hard                                           
-?                                    - Randomizer                                                                                                        
-?                                    - Detect 3 Coin Chains Diagonal                                                                                                                                                                                                                                                                                 
-?                                    - Detect 3 Coin Chains Upwards                                                                                                                                                                                                                                                           
-?                                    - Detect 3 Coin Chains Sideways                                                     
-?                                    - Get Valid Upwards Placement                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-?                                    - Get Valid Sideways Placement                                                                                                                                                                               
+                                                   
+?                                    1) CPU control algorithms
+.                                         - CPU Easy                                           
+.                                         - CPU Normal                                                                                                                                                
+.                                         - CPU Hard 
+?                                    2)  Detect placement opportunities 
+.                                         - Detect 3 Coin Chains Diagonal                                                                                                                                                                                                                                                                                 
+.                                         - Detect 3 Coin Chains Upwards                                                                                                                                                                                                                                                           
+.                                         - Detect 3 Coin Chains Sideways                                                     
+.                                         - Get Valid Upwards Placement                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+.                                         - Get Valid Sideways Placement    
+?                                    3) CPU placements
+.                                         - CPU Placement                        
+.                                         - Placement Randomizer                                                                                                                                                                                          
 */
 //#endregion
 
@@ -35,27 +38,12 @@ todo    -) Make sure all important is commented.
 todo    -) Write a final Comment.
 
 !                  Session progress
-?-) 
+?-) Detect 3 Coin Chains upward repaired
 
 */
 //#endregion
-
-/* ==========
-!     CPU Placement 
-            =========== */
-function CPU_Placement(valid_number) {
-  console.log("Entered CPU Placement Function. Random number for topCell is:  ", valid_number);
-
-  // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName('topCells');
-
-  // Make the Placement
-  topCellsArray[valid_number].click();
-
-  // If it was the last Cell in the Column, lock it
-  const columnNumber = valid_number + 1;
-  Column_Locking_Validation(true);
-};
+        
+//#region  CPU control algorithms
 
 /* ==================
 !     Easy-CPU Algorhytmus 
@@ -92,19 +80,17 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
 
 Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as espected.I'm getting hands on soon.
 */
-
   // console.log("CPU Normal startzs to thinking...");
-
   // If it is the first CPU Normal Placement, make a random placement
   if (Game.roundCounter === 1 || Game.roundCounter === 2) CPU_Easy();
   else {
     // Proof if CPU have to make or avoid diagonal finishing move
     const diagonal = Detect_3_Coin_Chains_Diagonal();
     if (diagonal !== undefined) {
-      console.log("Diagonal Chain Detected in column:", diagonal);
+      //console.log("Diagonal Chain Detected in column:", diagonal);
       // If there is a possibility, proof if placement on top is possible
       const diagonal_topVal = validator__column(diagonal, true);
-      console.log("Diagonal placement possible:", diagonal_topVal);
+      //console.log("Diagonal placement possible:", diagonal_topVal);
       if (diagonal_topVal === true) {
         Thinking_Effect(true, diagonal - 1);
         return;
@@ -114,15 +100,18 @@ Buggy because of the "3 Coin Chain Diagonal" Functions (below) doesn't work as e
     // Proof if CPU have to make or avoid vertial finishing move
     const upwards = Detect_3_Coin_Chains_Upwards();
     if (upwards !== undefined) {
-      console.log("Upwards Chain detected in column:", upwards);
+     // console.log("Upwards Chain detected in column:", upwards);
       // If there is a possibility, proof if placement on top is possible
-      const upwards_topVal = validator__column(upwards, true);
-      console.log("Upwards placement possible:", upwards_topVal);
+     let columnToProof = Game.rowCounter[`C${upwards}`];
+     //console.log('row counter for this column is: ' + columnToProof);
+     let upwards_topVal;
+     columnToProof > 1 ? upwards_topVal = true : upwards_topVal = false; 
+      //console.log("Upwards placement possible:", upwards_topVal);
       if (upwards_topVal === true) {
         Thinking_Effect(true, upwards - 1);
         return;
-      }
-    }
+      };
+    };
 
     const sideways = Detect_3_Coin_Chains_Sideways();
     if (sideways !== undefined) {
@@ -176,42 +165,18 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
   // Code here... :-)
 };
 
-/* =================
-!     Placement-Randomizer 
-            ================= */
-function Randomizer(arr1, arr2) {
-  // console.log("Randomizer getted arrays:", arr1,  arr2);
+//#endregion
 
-  let randomizing_number;
-  const randomizing_array = [];
-
-  for (let i = 0; i < arr1.length; i++) {
-    randomizing_array.push(arr1[i]);
-  }
-
-  if (arr2 !== undefined) {
-    for (let i = 0; i < arr2.length; i++) {
-      randomizing_array.push(arr2[i]);
-    }
-  }
-
-  randomizing_number = getRandomInt(randomizing_array.length);
-  valid_number = randomizing_array[randomizing_number];
-
-  //console.log("Randomizer has choosen a column: " + valid_number);
-  return valid_number;
-};
+//#region Detect placement possibilities 
 
 /* =======================
 !     Detect diagonal 3 Coin-Chains 
             ======================= */
 function Detect_3_Coin_Chains_Diagonal() {
-  //#region Detect CPU Diagonal 3 Coin Chains
   //console.log("Entered Diagonal 3 Coin Chains Detection");
-  // Maybe Buggy - hard to test....
 
-  for (let columnNumber = 1; columnNumber < 5; columnNumber++) {
-    for (let rowNumber = 2; rowNumber < 5; rowNumber++) {
+  for (let columnNumber = 1; columnNumber < (Game.gameboard_size_x -2); columnNumber++) {
+    for (let rowNumber = 1; rowNumber < (Game.gameboard_size_y -2); rowNumber++) {
       let basis = document.getElementById(`ID_C${columnNumber}R${rowNumber}`),
         second_plus = document.getElementById(
           `ID_C${columnNumber + 1}R${rowNumber + 1}`
@@ -232,14 +197,14 @@ function Detect_3_Coin_Chains_Diagonal() {
         free_fourth.getAttribute("data-isPlayed") !== "yes" &&
         ground_fourth.getAttribute("data-isPlayed") === "yes"
       ) {
-        console.log("Diagonal Right-Bottom");
+        console.log("Diagonal Right");
         return columnNumber + 3;
       }
     }
   }
 
   for (let columnNumber = Game.gameboard_size_x; columnNumber > 3; columnNumber--) {
-    for (let rowNumber = 2; rowNumber < 5; rowNumber++) {
+    for (let rowNumber = 1; rowNumber < (Game.gameboard_size_y - 2); rowNumber++) {
       let basis = document.getElementById(`ID_C${columnNumber}R${rowNumber}`),
         second_plus = document.getElementById(
           `ID_C${columnNumber - 1}R${rowNumber + 1}`
@@ -260,198 +225,52 @@ function Detect_3_Coin_Chains_Diagonal() {
         free_fourth.getAttribute("data-isPlayed") !== "yes" &&
         ground_fourth.getAttribute("data-isPlayed") === "yes"
       ) {
-        console.log("Diagonal Left-Bottom");
+        console.log("Diagonal Left");
         return columnNumber + 3;
       }
     }
   }
-
-  for (let columnNumber = 1; columnNumber < 5; columnNumber++) {
-    for (let rowNumber = Game.gameboard_size_y; rowNumber > 5; rowNumber--) {
-      let basis = document.getElementById(`ID_C${columnNumber}R${rowNumber}`),
-        second_plus = document.getElementById(
-          `ID_C${columnNumber + 1}R${rowNumber - 1}`
-        ),
-        third_plus = document.getElementById(
-          `ID_C${columnNumber + 2}R${rowNumber - 2}`
-        );
-      free_fourth = document.getElementById(
-        `ID_C${columnNumber + 3}R${rowNumber - 3}`
-      );
-      ground_fourth = document.getElementById(
-        `ID_C${columnNumber + 3}R${rowNumber - 2}`
-      );
-      if (
-        basis.classList.contains(".placedCoin__2 ") &&
-        second_plus.classList.contains(".placedCoin__2 ") &&
-        third_plus.classList.contains(".placedCoin__2 ") &&
-        free_fourth.getAttribute("data-isPlayed") !== "yes" &&
-        ground_fourth.getAttribute("data-isPlayed") === "yes"
-      ) {
-        console.log("Diagonal Right-Top detected");
-        return columnNumber + 3;
-      }
-    }
-  }
-
-  for (let columnNumber = Game.gameboard_size_x; columnNumber > 3; columnNumber--) {
-    for (let rowNumber = 2; rowNumber > 5; rowNumber++) {
-      let basis = document.getElementById(`ID_C${columnNumber}R${rowNumber}`),
-        second_plus = document.getElementById(
-          `ID_C${columnNumber - 1}R${rowNumber + 1}`
-        ),
-        third_plus = document.getElementById(
-          `ID_C${columnNumber - 2}R${rowNumber + 2}`
-        );
-      free_fourth = document.getElementById(
-        `ID_C${columnNumber - 3}R${rowNumber + 3}`
-      );
-      ground_fourth = document.getElementById(
-        `ID_C${columnNumber - 3}R${rowNumber + 2}`
-      );
-      if (
-        basis.classList.contains(".placedCoin__2 ") &&
-        second_plus.classList.contains(".placedCoin__2 ") &&
-        third_plus.classList.contains(".placedCoin__2 ") &&
-        free_fourth.getAttribute("data-isPlayed") !== "yes" &&
-        ground_fourth.getAttribute("data-isPlayed") === "yes"
-      ) {
-        console.log("Diagonal Right-Bottom detected");
-        return columnNumber + 3;
-      }
-    }
-  }
-
-  //#endregion
-};
+  };
 
 /* ========================
 !     Detect horizontal 3 Coin-Chains 
             ======================== */
 function Detect_3_Coin_Chains_Upwards() {
-  // +++ Basically it depends hardly of the Column Validator from the Win-Validation section +++
+console.log('Detection of 3 coins up started');
 
-  // Job: Is there any way to make that code smaller? So much repetition, but not possible to build a autmatism because of Game.actualGameboard is a Object, nnot an array an i fdind no way to iterate trough....
+// detection function
+  function Detection_3Coins_Up(player){
+    let playerPlacements, arrayToValidate;
+      // get correct placements array
+  player == 1 ? playerPlacements = Game.player1_coins : playerPlacements = Game.player2_coins;
+  // loop trough columns
+  for(let columnNumber = 1; columnNumber <= Game.gameboard_size_x; columnNumber++){
+    // get current array  
+    arrayToValidate = playerPlacements[`C${columnNumber}`];
+    // validate only if there are at least 4 coins
+    if(arrayToValidate.length >= 3){
+      // loop trough array to validate
+      for(let row = 0; row  < arrayToValidate.length;  row++){
+        // console.log('Values to validate, basis row: ' + arrayToValidate[row] + "  plus 1 : " + arrayToValidate[row + 1] + ' plus 2: ' + arrayToValidate[row + 2]);
+        if(arrayToValidate[row] - arrayToValidate[row + 1] === 1){
+            //console.log('2 coins upon each other.');
+            if(arrayToValidate[row + 1] - arrayToValidate[row + 2] === 1){
+              console.log('3 coins upon each other, colum number', columnNumber)
+              return columnNumber
+            };
+          };
+      };
+    };  
+  };
+  };
 
-  // !! Array so: array = [Game.actualPlayer.C1, C2,...] und dann iteriere!!!!!!!!!!
-
-  // CPU Finishing Upwards Section
-  let array = Game.actualGameboardPlayer2.C1;
-  // If every row number subtracted with the next row number is equal to 1, there are 3 coins upon each other.
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    // Than make placement in this column (minus 1 due to topCell array starts with 0)
-    return 1;
-  }
-  array = Game.actualGameboardPlayer2.C2;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 2;
-  }
-  array = Game.actualGameboardPlayer2.C3;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 3;
-  }
-  array = Game.actualGameboardPlayer2.C4;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 4;
-  }
-  array = Game.actualGameboardPlayer2.C5;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 5;
-  }
-  array = Game.actualGameboardPlayer2.C6;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 6;
-  }
-  array = Game.actualGameboardPlayer2.C7;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 7;
-  }
-
-  // Avoid Human Player Upwards finishing moves section
-  array = Game.actualGameboardPlayer1.C1;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 1;
-  }
-  array = Game.actualGameboardPlayer1.C2;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 2;
-  }
-  array = Game.actualGameboardPlayer1.C3;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 3;
-  }
-  array = Game.actualGameboardPlayer1.C4;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 4;
-  }
-  array = Game.actualGameboardPlayer1.C5;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 5;
-  }
-  array = Game.actualGameboardPlayer1.C6;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 6;
-  }
-  array = Game.actualGameboardPlayer1.C7;
-  if (
-    (array[0] - array[1] === 1 && array[1] - array[2] === 1) ||
-    (array[1] - array[2] === 1 && array[2] - array[3] === 1) ||
-    (array[2] - array[3] === 1 && array[3] - array[4] === 1)
-  ) {
-    return 7;
-  }
+  // Invoke first CPU coins to detect a possible finishing placement...
+  let up_finish = Detection_3Coins_Up(2);
+  if (up_finish !== undefined){console.log('Finish placement up with column', up_finish); return up_finish;};
+  // Invoke player 1 coins to detect finishing possibility
+let up_defense = Detection_3Coins_Up(1);
+  if (up_defense !== undefined){console.log('Defense placement up with column', up_defense); return up_defense;};
+  console.log('No upwards 3 Coin chains detected.');
 };
 
 /* =====================
@@ -1016,3 +835,52 @@ function Get_Valid_Sideways_Placement() {
   //console.log("Sideways array after filter out: " + unique_valid_number_array);
   if (unique_valid_number_array.length > 0) return unique_valid_number_array;
 };
+
+//#endregion
+
+//#region CPU placement
+
+/* ==========
+!     CPU Placement 
+            =========== */
+function CPU_Placement(valid_number) {
+  console.log("Entered CPU Placement Function. Random number for topCell is:  ", valid_number);
+
+  // Get all Top-Cells
+  const topCellsArray = document.getElementsByClassName('topCells');
+
+  // Make the Placement
+  topCellsArray[valid_number].click();
+
+  // If it was the last Cell in the Column, lock it
+  const columnNumber = valid_number + 1;
+  Column_Locking_Validation(true);
+};
+
+/* =================
+!     Placement-Randomizer 
+            ================= */
+function Randomizer(arr1, arr2) {
+// console.log("Randomizer getted arrays:", arr1,  arr2);
+
+let randomizing_number;
+const randomizing_array = [];
+
+for (let i = 0; i < arr1.length; i++) {
+randomizing_array.push(arr1[i]);
+}
+
+if (arr2 !== undefined) {
+for (let i = 0; i < arr2.length; i++) {
+randomizing_array.push(arr2[i]);
+}
+}
+
+randomizing_number = getRandomInt(randomizing_array.length);
+valid_number = randomizing_array[randomizing_number];
+
+//console.log("Randomizer has choosen a column: " + valid_number);
+return valid_number;
+};
+  
+//#endregion

@@ -8,8 +8,12 @@
 ?                  ____________________________________                                                                                                                                                                                                  
 !                                     Table of content              
 
-?                             1) Toggle Start / Game Screen                                                                                                       
-?                             2) Game-End-Screen                     
+?                             1) Toggle Start / Game Screen          
+.                                  - Show game screen
+.                                  - Show start screen                                                                                             
+?                             2) Game-End-Screen           
+.                                  - Preparations for game end screen
+.                                  - Creation of game end screen          
 ?                             3) Start a new Game                                                                                                                                                                                                                                                                                                                                                                                                                          */
 //#endregion
 

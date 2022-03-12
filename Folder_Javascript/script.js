@@ -8,9 +8,17 @@
 ?                  ________________________________                                                                                                                                                                                                  
 !                                     Table of content              
 
- ?                    1) General  Settings & Page Set-Up                                                                                                                            
- ?                    2) Main Game functions     
- ?                    3) Placements     
+ ?                    1) General  Settings & Page Set-Up      
+ .                          - Game Object
+ .                          - Game settings                                                                                                                      
+ ?                    2) Main Game functions  
+ .                          - Game preparations
+ .                          - Play Game 
+ ?                    3) Placements   
+ .                          - Prepare placements
+ .                          - Make placement
+ .                          - End of placement
+.                           - Finish played round   
  ?                    4) Final Information & Comments                                                                                                                           
  ?                    5) Credits                                                            
 */
@@ -27,6 +35,7 @@ todo    finalize formatation. last update table of contents.
 todo    make sure all important is commented. write final informations / comment if make sense.
 todo    save default script files with the updatet script layout for later projects. also the index with the all new toggle slider and make a generic library for js & css !
 todo    cleanout functions an minimize code as much as it make sense. do the guidelines.
+todo    turn off console.logs
 todo    take a look at the bonus jobs - maybe you have enough passion to do one :-)
 !                  Session progress
 ?          
@@ -70,11 +79,12 @@ clicked_TopCell_ID: '',
   state: 'startingScreen',
 };
 
+//#region Game settings
+
 //Reset Gameboard size values and than create new gameboard
 document.getElementById('settings_gameboard_sizeX').value = 7;
 document.getElementById('settings_gameboard_sizeY').value = 6;
 Create_Gameboard(document.getElementById('settings_gameboard_sizeX').value, document.getElementById('settings_gameboard_sizeY').value);
-
 
 Set_Page_Language();
 
@@ -545,6 +555,8 @@ delete_all.addEventListener('click', () => {
 
 //#endregion
 
+//#endregion
+
 /* ========================== 
 ?        Start-Game Event-Listener
        ========================== */
@@ -552,7 +564,7 @@ start_button.addEventListener('click', Game_Preparations);
 
 //#endregion
 
-//#region 2) main game
+//#region 2) Main game
 
 /* ============
 !     Preparing to Play 

@@ -21,7 +21,7 @@
 
 todo    
 
-?                  Finisf
+?                  Finish
 todo    Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
 todo    Final formatation.
 todo    Make sure all important is commented.

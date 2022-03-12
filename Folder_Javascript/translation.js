@@ -8,30 +8,16 @@
 ?                  _______________________________                                                                                                                                                                                                  
 !                                     Table of content              
  
- ?                          1) Setting Page Language                                                                                                                  
- ?                          2) Page Library                                                                  
-                          
+ ?                             1) Translation Manager
+.                                     - Set page language
+.                                     - Translate start-screen                                                                                                             
+ ?                              2) Page Library
+.                                     - Deutsch
+.                                     - English                                                                                       
 */
 //#endregion
 
-//#region Open Jobs
-/*
-?                  Jobs To-do:
-
-todo    -) 
-
-?                  Finish
-todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo    -) Final formatation.
-todo    -) Make sure all important is commented.
-todo    -) Write a final Comment.
-
-!                  Session progress
-?-) 
-*/
-//#endregion
-
-//#region 1) Translation-Manager
+//#region Translation Manager
 
 /* ===================
 !     Detect Language and set it 
@@ -82,7 +68,7 @@ function Translate_StartScreen(language, byUser) {
 
 //#endregion
 
-//#region Page-Library
+//#region Page Library
 
 /* ============
 !     Library Deutsch 
