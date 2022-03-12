@@ -1,6 +1,6 @@
 //#region Table of content
 /*
-!                  Four-Wins-Online CPU_Player-JS-File
+!                    Four-Wins-Online CPU_Player-JS-File
 ?                                       powered by
 !                                        Stefan Bartl
 !                          (WKDSteVIE / WKDMinerva)
@@ -8,17 +8,17 @@
 ?                  ________________________________                                                                                                                                                                                                  
 !                                       Table of content                                         
                                                    
-?                                    1) CPU control algorithms
+?                              1) CPU control algorithms
 .                                         - CPU Easy                                           
 .                                         - CPU Normal                                                                                                                                                
 .                                         - CPU Hard 
-?                                    2)  Detect placement opportunities 
-.                                         - Detect 3 Coin Chains Diagonal                                                                                                                                                                                                                                                                                 
-.                                         - Detect 3 Coin Chains Upwards                                                                                                                                                                                                                                                           
-.                                         - Detect 3 Coin Chains Sideways                                                     
-.                                         - Get Valid Upwards Placement                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-.                                         - Get Valid Sideways Placement    
-?                                    3) CPU placements
+?                              2)  Detect placement opportunities 
+.                                         - Detect_3_Coin_Chains_Diagonal                                                                                                                                                                                                                                                                            
+.                                         - Detect_3_Coin_Chains_Upwards                                                                                                                                                                                                                                                          
+.                                         - Detect_3_Coin_Chains_Sideways                                                     
+.                                         - Get_Valid_Upwards_Placemement                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+.                                         - Get_Valid_Sideways_Placement 
+?                             3) CPU placements
 .                                         - CPU Placement                        
 .                                         - Placement Randomizer                                                                                                                                                                                          
 */
@@ -28,14 +28,13 @@
 /*
 ?                  Jobs To-do:
 
-todo    -) Update whole CPU Player!
-todo    -) recode whole hardcoded C1 C2.. stuff
+todo   
 
 ?                  Finish
-todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo    -) Final formatation.
-todo    -) Make sure all important is commented.
-todo    -) Write a final Comment.
+todo    Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
+todo    Final formatation.
+todo    Make sure all important is commented.
+todo    Write a final Comment.
 
 !                  Session progress
 ?-)
@@ -49,11 +48,10 @@ todo    -) Write a final Comment.
 !     Easy-CPU Algorhytmus 
             ================== */
 function CPU_Easy() {
- /*
-?                            Infobox
-Function to let CPU Easy produce a random, but valid number for placement
+/*
+?                                     Infobox
+Function to let CPU Easy produce a random, but valid number for placement.
 */
-
  // console.log("CPU Easy starts to thinking....");
   // Get a random number
   const random_number = getRandomInt(Game.gameboard_size_x);
@@ -73,8 +71,8 @@ Function to let CPU Easy produce a random, but valid number for placement
 !     Normal-CPU Algorhytmus 
             ==================== */
 function CPU_Normal() {
-  /* 
-                                Infobox
+/* 
+?                                         Infobox
 Function to let CPU Normal make placements as near as its possible to other Coins from him,
 try to avoid upwards and sideways finishing moves from Human Player and try to make them self.
 */
@@ -93,7 +91,7 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
       if (diagonal_topVal === true) {
         let placeInColumn = diagonal - 1;
         Thinking_Effect(true, placeInColumn);
-        return;
+        return
       };
     };
 
@@ -109,7 +107,7 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
       if (upwards_topVal === true) {
         let placeInColumn = upwards - 1;
         Thinking_Effect(true, placeInColumn);
-        return;
+        return
       };
     };
 
@@ -117,19 +115,20 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
     if (sideways !== undefined) {
       // console.log("CPU Normal: Sideway chain detected in column ", sideways);
       Thinking_Effect(true, sideways);
-      return;
-    }
+      return
+    };
 
+    let randomNumber,  randomizedColumn, columnToProof;
     // If not, get possible placement upon a placed coin
     const numbers_upwards = Get_Valid_Upwards_Placemement();
     // Take the first one and proof it
     if (numbers_upwards !== undefined) {
      // console.log("Got posssible placements upon coins in column(s):", numbers_upwards);
      // randomize placement if there are more than 1 possibility
-     const randomNumber = getRandomInt(numbers_upwards.length);
-     const randomizedColumn = numbers_upwards[randomNumber];
+     randomNumber = getRandomInt(numbers_upwards.length);
+     randomizedColumn = numbers_upwards[randomNumber];
      // proof top cell limit in this column
-     const columnToProof = Game.rowCounter[`C${randomizedColumn}`];
+     columnToProof = Game.rowCounter[`C${randomizedColumn}`];
      let upwards_topVal;
      columnToProof > 1 ? upwards_topVal = true : upwards_topVal = false; 
      //console.log(`In column ${randomizedColumn} top-cell is not locked: ${upwards_topVal}.`);
@@ -138,28 +137,35 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
         // console.log(`Number upwards placement in column ${randomizedColumn} made.`);
         let upwardsPlacement =  randomizedColumn - 1;
         Thinking_Effect(true, upwardsPlacement);
-        return;
+        return
       };
     };
 
  // If not, get possible placement beside a placed coin
-    const numbers_sideways = Get_Valid_Sideways_Placement();
-    if (numbers_sideways !== undefined) {
-      //! This is not valid
-      console.log("Got posssible placements beside coins in column(s):", numbers_sideways);
-      const proof_side = validator__column(numbers_sideways[0], true);
-    //  console.log("Valid Sideways placement found:", proof_side);
-      if (proof_side === true) {
-        Thinking_Effect(true, numbers_sideways[0]);
-        return;
-      }
-    }
-
+ const numbers_sideways = Get_Valid_Sideways_Placement();
+ // Take the first one and proof it
+ if (numbers_sideways !== undefined) {
+ // console.log("Got posssible placements sideways coins in column(s):", numbers_sideways);
+  // randomize placement if there are more than 1 possibility
+  randomNumber = getRandomInt(numbers_sideways.length);
+  randomizedColumn = numbers_sideways[randomNumber];
+  // proof top cell limit in this column
+  columnToProof = Game.rowCounter[`C${randomizedColumn}`];
+  let sideways_topVal;
+  columnToProof > 1 ? sideways_topVal = true : sideways_topVal = false; 
+  // console.log(`In column ${randomizedColumn} top-cell is not locked: ${sideways_topVal}.`);
+ // if all ok invoke placement
+  if (sideways_topVal === true) {
+    // console.log(`Number upwards placement in column ${randomizedColumn} made.`);
+     let sidewaysPlacement =  randomizedColumn - 1;
+     Thinking_Effect(true, sidewaysPlacement);
+     return
+   };
+ };
     // console.log("CPU Normal does not have a valid placement. Submit this task to CPU Easy...");
     // If nothing is possible, make random placement
     // console.log("Nothing possible. Ask CPU Easy for valid placement...");
     CPU_Easy();
-    return;
   };
 };
 
@@ -167,13 +173,13 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
 !     Hard-CPU Algorhytmus 
             ================== */
 function CPU_Hard() {
-  /*
-                                Infobox / Ideas
-Function to let CPU Normal make placements as near as its possible to other Coins from him,
+/*
+?                                    Infobox / Ideas for writing this function
+Function to let CPU Normal make placements as near as its possible to other Coins from istelf,
 try to avoid upwards, sideways and diagonal finishing moves from Human Player and try to make them self.
 Also prefer make placements on a 2 Coin chain, also in all three directions.
 */
-  // Code here... :-)
+//? Code here... :-)
 };
 
 //#endregion
@@ -417,7 +423,7 @@ let sideway_defense = Detection_3Coins_sideways(1);
             ======================= */
 function Get_Valid_Upwards_Placemement() {
   // Try to make placement on top of an other CPU placement
-
+// console.log(`Entered valid upwards placement.`);
 let upwardsArray = [];
 let lastPlacement;
 
@@ -429,9 +435,10 @@ let lastPlacement;
       lastPlacement = Game.player2_coins[`C${columnNumber}`].slice(-1);
      // console.log(`Found a last placement for upwards: ${lastPlacement[0]}`);
       // if there is a value & it is not the last cell & not played yet
+      let row_minus_one = lastPlacement[0] - 1;
       if( lastPlacement[0] !== undefined
       && lastPlacement[0] !== 1
-      && document.getElementById(`ID_C${columnNumber}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'no'){
+      && document.getElementById(`ID_C${columnNumber}R${row_minus_one}`).getAttribute('data-isplayed') === 'no'){
        // console.log(`Last Placement in row ${lastPlacement[0]} & column ${columnNumber} pushed to upwards array.`);
         upwardsArray.push(columnNumber);
       };
@@ -452,216 +459,94 @@ let lastPlacement;
 !     Sideways-Placement Detection 
             ====================== */
 function Get_Valid_Sideways_Placement() {
-  let valid_number_array = [];
+ // This function let the CPU know if he can make a placement near (left or right) to an already placed coin.
+  // console.log(`Entered sideways placement detection.`);
+ 
+ let sidewaysArray = [];
+ let lastPlacement;
+ const leftMinusOne = Game.gameboard_size_x - 1;
+ 
+     // loop trough columns
+     for(let columnNumber = 1; columnNumber <= Game.gameboard_size_x; columnNumber++){
+      // proof if there is a placement in collumn array  
+      // get the last placement of column for valid placement upon single coin 
+       lastPlacement = Game.player2_coins[`C${columnNumber}`].slice(-1);
+    //   console.log(`Found a last placement for sideways in column ${columnNumber} and row ${lastPlacement[0]}.`);
+       
+      // left and right exceptions (trying placing outside of gameboard would cause error)
+      //left side last row
+      // if placement is in the first column, in the last row & on the right side it is free...
+      if(lastPlacement[0] !== undefined 
+          && columnNumber === 1 
+          && lastPlacement[0] === Game.gameboard_size_y
+          &&  document.getElementById(`ID_C${2}R${1}`).getAttribute('data-isplayed') === 'no'){
+            sidewaysArray.push(2);
+      };
+      // left side II
+      // if placement is in the first column, is not in the last row, on the right side it is free & its possible to place there...
+      if(lastPlacement[0] !== undefined 
+        && columnNumber === 1 
+        && lastPlacement[0] !== Game.gameboard_size_y
+        &&  document.getElementById(`ID_C${2}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
+        &&  document.getElementById(`ID_C${2}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
+          sidewaysArray.push(2);
+    };
 
-  // Get all placements from CPU in a column
-  for (let a = 0; a < Game.actualGameboardPlayer2.C1.length; a++) {
-    // Get 1 placement
-    let i = Game.actualGameboardPlayer2.C1[a];
-    // x is the row above, so i - 1
-    let x = i + 1;
-    if (i === 7) {
-      // Also if the column next to the placement is free and its the bottom row,  make placement
-      if (
-        document.getElementById(`ID_C2R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(1);
-    } else {
-      // If the column next to the placement is free                                      and the column next to the placement and 1 row above is not free, so he can place on the row (coin needs a coin above), make placement
-      if (
-        document.getElementById(`ID_C2R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        document.getElementById(`ID_C2R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(1);
-    }
-  }
+      //right side last row
+      // if placement is in the first column, in the last row & on the right side it is free...
+      if(lastPlacement[0] !== undefined 
+        && columnNumber === Game.gameboard_size_x 
+        && lastPlacement[0] === Game.gameboard_size_y
+        &&  document.getElementById(`ID_C${leftMinusOne}R${1}`).getAttribute('data-isplayed') === 'no'){
+          sidewaysArray.push(leftMinusOne );
+    };
+    // right side II
+    // if placement is in the first column, is not in the last row, on the right side it is free & its possible to place there...
+    if(lastPlacement[0] !== undefined 
+      && columnNumber === Game.gameboard_size_x 
+      && lastPlacement[0] !== Game.gameboard_size_y
+      &&  document.getElementById(`ID_C${leftMinusOne}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
+      &&  document.getElementById(`ID_C${leftMinusOne}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
+        sidewaysArray.push(leftMinusOne );
+  };
 
-  for (let a = 0; a < Game.actualGameboardPlayer2.C2.length; a++) {
-    let i = Game.actualGameboardPlayer2.C2[a];
-    let x = i + 1;
-    if (i === 7) {
-      if (
-        document.getElementById(`ID_C1R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(0);
-      if (
-        document.getElementById(`ID_C3R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(2);
-    } else {
-      if (
-        document.getElementById(`ID_C1R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        document.getElementById(`ID_C1R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(0);
-      if (
-        document.getElementById(`ID_C3R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        document.getElementById(`ID_C3R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(2);
-    }
-  }
-
-  for (let a = 0; a < Game.actualGameboardPlayer2.C3.length; a++) {
-    let i = Game.actualGameboardPlayer2.C3[a];
-    let x = i + 1;
-    if (i === 7) {
-      if (
-        document.getElementById(`ID_C2R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(1);
-      if (
-        document.getElementById(`ID_C4R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(3);
-    } else {
-      if (
-        document.getElementById(`ID_C2R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        document.getElementById(`ID_C2R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(1);
-      if (
-        document.getElementById(`ID_C4R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        document.getElementById(`ID_C4R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(3);
-    }
-  }
-
-  for (let a = 0; a < Game.actualGameboardPlayer2.C4.length; a++) {
-    let i = Game.actualGameboardPlayer2.C4[a];
-    let x = i + 1;
-    if (i === 7) {
-      if (
-        document.getElementById(`ID_C3R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(2);
-      if (
-        document.getElementById(`ID_C5R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(4);
-    } else {
-      if (
-        document.getElementById(`ID_C3R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        document.getElementById(`ID_C3R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(2);
-      if (
-        document.getElementById(`ID_C5R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        document.getElementById(`ID_C5R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(4);
-    }
-  }
-
-  for (let a = 0; a < Game.actualGameboardPlayer2.C5.length; a++) {
-    let i = Game.actualGameboardPlayer2.C5[a];
-    let x = i + 1;
-    if (i === 7) {
-      if (
-        document.getElementById(`ID_C4R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(3);
-      if (
-        document.getElementById(`ID_C6R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(5);
-    } else {
-      if (
-        document.getElementById(`ID_C4R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        document.getElementById(`ID_C4R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(3);
-      if (
-        document.getElementById(`ID_C6R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        document.getElementById(`ID_C6R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(5);
-    }
-  }
-
-  for (let a = 0; a < Game.actualGameboardPlayer2.C6.length; a++) {
-    let i = Game.actualGameboardPlayer2.C6[a];
-    let x = i + 1;
-    if (i === 7) {
-      if (
-        document.getElementById(`ID_C5R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(4);
-      if (
-        document.getElementById(`ID_C7R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(6);
-    } else {
-      if (
-        document.getElementById(`ID_C5R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        document.getElementById(`ID_C5R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(4);
-      if (
-        document.getElementById(`ID_C7R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        document.getElementById(`ID_C7R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(6);
-    }
-  }
-
-  for (let a = 0; a < Game.actualGameboardPlayer2.C7.length; a++) {
-    let i = Game.actualGameboardPlayer2.C7[a];
-    let x = i + 1;
-    if (i === 7) {
-      if (
-        document.getElementById(`ID_C6R${7}`).getAttribute("data-isPlayed") ===
-        null
-      )
-        valid_number_array.push(5);
-    } else {
-      if (
-        document.getElementById(`ID_C6R${i}`).getAttribute("data-isPlayed") ===
-          null &&
-        !document.getElementById(`ID_C6R${x}`).getAttribute("data-isPlayed") !==
-          null
-      )
-        valid_number_array.push(5);
-    }
-  }
-  // console.log("Sideways array before filter out: " + valid_number_array);
-  let unique_valid_number_array = valid_number_array.filter(onlyUnique);
-  //console.log("Sideways array after filter out: " + unique_valid_number_array);
-  if (unique_valid_number_array.length > 0) return unique_valid_number_array;
+  // normal 
+      //normal last row
+      // proof placement to the left
+      if(lastPlacement[0] !== undefined 
+        &&  document.getElementById(`ID_C${columnNumber + 1}R${1}`).getAttribute('data-isplayed') === 'no'){
+          sidewaysArray.push(columnNumber + 1);
+    };
+    // proof placemenmt to the right
+    if(lastPlacement[0] !== undefined 
+      &&  document.getElementById(`ID_C${columnNumber - 1}R${1}`).getAttribute('data-isplayed') === 'no'){
+        sidewaysArray.push(columnNumber - 1);
+  };
+  
+  //normal II
+      // proof placement to the left
+      if(lastPlacement[0] !== undefined 
+        &&  document.getElementById(`ID_C${columnNumber + 1}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
+        &&  document.getElementById(`ID_C${columnNumber + 1}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
+          sidewaysArray.push(columnNumber + 1);
+    };
+      // proof placement to the right
+      if(lastPlacement[0] !== undefined 
+        &&  document.getElementById(`ID_C${columnNumber  - 1}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
+        &&  document.getElementById(`ID_C${columnNumber - 1}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
+          sidewaysArray.push(columnNumber - 1);
+    };
+  // console.log(`Sideways array: ${sidewaysArray}`);
+ 
+   // if finished return all valid columns
+     if(sidewaysArray.length > 0) {
+       // console.log(`Sideways returned array: ${sidewaysArray}`);
+       return sidewaysArray
+     }
+         else 
+         {// console.log('No sideways placement found.');
+       };
+};
 };
 
 //#endregion
@@ -672,7 +557,8 @@ function Get_Valid_Sideways_Placement() {
 !     CPU Placement 
             =========== */
 function CPU_Placement(valid_number) {
-  console.log("Entered CPU Placement Function. Number for clicking top-cell is:  ", valid_number);
+  // !Update: Remove the -1 in the CPU Normal usw.. an calculate here one time -1 from argument for the array!
+ // console.log(`Entered CPU Placement Function. Column ${column} is clicked `);
 
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName('topCells');
