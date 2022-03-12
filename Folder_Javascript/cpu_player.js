@@ -120,22 +120,33 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
       return;
     }
 
-    // If not, get possible placements
+    // If not, get possible placement upon a placed coin
     const numbers_upwards = Get_Valid_Upwards_Placemement();
-    // console.log("Upwards placements found in columns:", numbers_upwards);
     // Take the first one and proof it
     if (numbers_upwards !== undefined) {
-      const proof_up = validator__column(numbers_upwards[0], true);
-     // console.log("Valid Upwards placement found:", proof_up);
-      if (proof_up === true) {
-        Thinking_Effect(true, numbers_upwards[0]);
+     // console.log("Got posssible placements upon coins in column(s):", numbers_upwards);
+     // randomize placement if there are more than 1 possibility
+     const randomNumber = getRandomInt(numbers_upwards.length);
+     const randomizedColumn = numbers_upwards[randomNumber];
+     // proof top cell limit in this column
+     const columnToProof = Game.rowCounter[`C${randomizedColumn}`];
+     let upwards_topVal;
+     columnToProof > 1 ? upwards_topVal = true : upwards_topVal = false; 
+     //console.log(`In column ${randomizedColumn} top-cell is not locked: ${upwards_topVal}.`);
+    // if all ok invoke placement
+     if (upwards_topVal === true) {
+        // console.log(`Number upwards placement in column ${randomizedColumn} made.`);
+        let upwardsPlacement =  randomizedColumn - 1;
+        Thinking_Effect(true, upwardsPlacement);
         return;
-      }
-    }
+      };
+    };
 
+ // If not, get possible placement beside a placed coin
     const numbers_sideways = Get_Valid_Sideways_Placement();
-    console.log("Sideways placements found in columns:", numbers_sideways);
     if (numbers_sideways !== undefined) {
+      //! This is not valid
+      console.log("Got posssible placements beside coins in column(s):", numbers_sideways);
       const proof_side = validator__column(numbers_sideways[0], true);
     //  console.log("Valid Sideways placement found:", proof_side);
       if (proof_side === true) {
@@ -170,10 +181,13 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
 //#region Detect placement possibilities 
 
 /* =======================
-!     Detect diagonal 3 Coin-Chains !NOT Tested 
+!     Detect diagonal 3 Coin-Chains 
             ======================= */
 function Detect_3_Coin_Chains_Diagonal() {
-  //console.log("Entered Diagonal 3 Coin Chains Detection");
+  
+//? Not adequately tested due to difficult test requirements
+
+  console.log("Entered Diagonal 3 Coin Chains Detection");
 
   for (let columnNumber = 1; columnNumber < (Game.gameboard_size_x -2); columnNumber++) {
     for (let rowNumber = 1; rowNumber < (Game.gameboard_size_y -2); rowNumber++) {
@@ -201,7 +215,7 @@ function Detect_3_Coin_Chains_Diagonal() {
         return columnNumber + 3;
       }
     }
-  }
+  };
 
   for (let columnNumber = Game.gameboard_size_x; columnNumber > 3; columnNumber--) {
     for (let rowNumber = 1; rowNumber < (Game.gameboard_size_y - 2); rowNumber++) {
@@ -229,11 +243,11 @@ function Detect_3_Coin_Chains_Diagonal() {
         return columnNumber + 3;
       }
     }
-  }
   };
+};
 
 /* ========================
-!     Detect horizontal 3 Coin-Chains 
+!     Detect vertical 3 Coin-Chains 
             ======================== */
 function Detect_3_Coin_Chains_Upwards() {
 // console.log('Detection of 3 coins up started');
@@ -281,14 +295,14 @@ let up_defense = Detection_3Coins_Up(1);
 };
 
 /* ======================
-!     Detect vertival 3 Coin-Chains 
+!     Detect horizontal 3 Coin-Chains 
             ====================== */
 function Detect_3_Coin_Chains_Sideways() {
-console.log('Detection of 3 Coins sideways started');
+// console.log('Detection of 3 Coins sideways started');
 
   // detection function
   function Detection_3Coins_sideways(player){
-  console.log(`Detect 3 Coin sideway chains for player ${player}...`);
+ // console.log(`Detect 3 Coin sideway chains for player ${player}...`);
   let playerPlacements;
   // get correct placements array
   player == 1 ? playerPlacements = Game.player1_coins : playerPlacements = Game.player2_coins;
@@ -385,72 +399,53 @@ console.log('Detection of 3 Coins sideways started');
   // Invoke first CPU coins to detect a possible finishing placement...
   let sideway_finish = Detection_3Coins_sideways(2);
   if (sideway_finish !== undefined){
-    console.log('Finish placement sideway with column', sideway_finish);
+   // console.log('Finish placement sideway with column', sideway_finish);
     return sideway_finish
   };
   // Invoke player 1 coins to detect finishing possibility
 let sideway_defense = Detection_3Coins_sideways(1);
   if (sideway_defense !== undefined){
-    console.log('Defense placement up with column', sideway_defense);
+   // console.log('Defense placement up with column', sideway_defense);
      return sideway_defense
   };
   // if no chain detected, leave function
-  console.log('No upwards 3 Coin chains detected.');
+ // console.log('No sideways Coin chains detected.');
 };
 
 /* ======================
 !     Upwards-Placement Detection 
             ======================= */
 function Get_Valid_Upwards_Placemement() {
-  // Try to make placement on top of an other CPU placement if there is enough space to can finish it
-  let value,
-    valid_number_array = [];
-  // If in one Column is a CPU Placement... (slice is not undefined)
-  value = Game.actualGameboardPlayer2.C1.slice(-1)[0];
-  if (value !== undefined) {
-    value -= 1; //...and in there is no higher placement from Player 2 in this column (slice value -1), push column value (Column x Minus 1 due to CPU Placement array begin with 0 for C1, so push this number), else try next column
-    if (Game.actualGameboardPlayer1.C1.indexOf(value) === -1)
-      valid_number_array.push(0);
-  }
-  value = Game.actualGameboardPlayer2.C2.slice(-1)[0];
-  if (value !== undefined) {
-    value -= 1;
-    if (Game.actualGameboardPlayer1.C2.indexOf(value) === -1)
-      valid_number_array.push(1);
-  }
-  value = Game.actualGameboardPlayer2.C3.slice(-1)[0];
-  if (value !== undefined) {
-    value -= 1;
-    if (Game.actualGameboardPlayer1.C3.indexOf(value) === -1)
-      valid_number_array.push(2);
-  }
-  value = Game.actualGameboardPlayer2.C4.slice(-1)[0];
-  if (value !== undefined) {
-    value -= 1;
-    if (Game.actualGameboardPlayer1.C4.indexOf(value) === -1)
-      valid_number_array.push(3);
-  }
-  value = Game.actualGameboardPlayer2.C5.slice(-1)[0];
-  if (value !== undefined) {
-    value -= 1;
-    if (Game.actualGameboardPlayer1.C5.indexOf(value) === -1)
-      valid_number_array.push(4);
-  }
-  value = Game.actualGameboardPlayer2.C6.slice(-1)[0];
-  if (value !== undefined) {
-    value -= 1;
-    if (Game.actualGameboardPlayer1.C6.indexOf(value) === -1)
-      valid_number_array.push(5);
-  }
-  value = Game.actualGameboardPlayer2.C7.slice(-1)[0];
-  if (value !== undefined) {
-    value -= 1;
-    if (Game.actualGameboardPlayer1.C7.indexOf(value) === -1)
-      valid_number_array.push(6);
-  }
+  // Try to make placement on top of an other CPU placement
 
-  // If finished return all valid columns
-  if (valid_number_array.length > 0) return valid_number_array;
+let upwardsArray = [];
+let lastPlacement;
+
+ // First detect 2 coin chains to prefer them
+    // loop trough columns
+    for(let columnNumber = 1; columnNumber <= Game.gameboard_size_x; columnNumber++){
+     // proof if there is a placement in collumn array  
+     // get the last placement of column for valid placement upon single coin 
+      lastPlacement = Game.player2_coins[`C${columnNumber}`].slice(-1);
+     // console.log(`Found a last placement for upwards: ${lastPlacement[0]}`);
+      // if there is a value & it is not the last cell & not played yet
+      if( lastPlacement[0] !== undefined
+      && lastPlacement[0] !== 1
+      && document.getElementById(`ID_C${columnNumber}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'no'){
+       // console.log(`Last Placement in row ${lastPlacement[0]} & column ${columnNumber} pushed to upwards array.`);
+        upwardsArray.push(columnNumber);
+      };
+    };
+    // console.log(`Upwards array: ${upwardsArray}`);
+
+  // if finished return all valid columns
+    if(upwardsArray.length > 0) {
+      // console.log(`Upwards returned array: ${upwardsArray}`);
+      return upwardsArray
+    }
+        else 
+        {// console.log('No upwards placement found.');
+      };
 };
 
 /* ======================
@@ -677,7 +672,7 @@ function Get_Valid_Sideways_Placement() {
 !     CPU Placement 
             =========== */
 function CPU_Placement(valid_number) {
-  console.log("Entered CPU Placement Function. Random number for topCell is:  ", valid_number);
+  console.log("Entered CPU Placement Function. Number for clicking top-cell is:  ", valid_number);
 
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName('topCells');
