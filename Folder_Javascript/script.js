@@ -856,7 +856,7 @@ function Placement_End() {
 function Player_1_Placement_Finish() {
   //  invoke winning-validation for player 1 and if true invoke game-end function
   const valid_row = Row_Validator(1, Game.coin_placement_row);
-  const valid_column = Column_Validator(
+  const valid_column = validator__column(
     1,
     Game.clicked_column,
     Game.coin_placement_row
@@ -900,7 +900,7 @@ function Player_1_Placement_Finish() {
           =================== */
 function Player_2_Placement_Finish() {
   const valid_row = Row_Validator(2, Game.coin_placement_row);
-  const valid_column = Column_Validator(2,  Game.clicked_column, Game.coin_placement_row);
+  const valid_column = validator__column(2,  Game.clicked_column, Game.coin_placement_row);
   const valid_diagonal = Diagonal_Validator(2, Game.clicked_column, Game.coin_placement_row);
   if (valid_row === true || valid_column === true || valid_diagonal === true) return;
 

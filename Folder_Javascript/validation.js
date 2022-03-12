@@ -38,7 +38,7 @@ todo    -) Write a final Comment.
             ===================== */
 function Column_Locking_Validation(invokedForKiValidation) {
   // Function for proofing if TopCell should be locked. In case of CPU is invoking if placement is possible too.Also to give, after locking them while placement, columns free where the row counter is higher than 0.
-  console.log('Entered Top-Cell Validation.');
+  //console.log('Entered Top-Cell Validation.');
 
   const topCellsArray = document.getElementsByClassName('topCells');
 
@@ -56,13 +56,13 @@ function Column_Locking_Validation(invokedForKiValidation) {
 
      topCellsArray[topCell].style = 'pointer-events: all';
     };
-    console.log('Full Column ' + `${Game.clicked_column}` + ' locked, Top-Cells free again.');
+    //console.log('Full Column ' + `${Game.clicked_column}` + ' locked, Top-Cells free again.');
     return
   };
 
   // If the column is locked for placements, return false to CPU Placement, so they know they cant make a placement there. Else return true so they hav a valid column number.
   if (invokedForKiValidation === true) {
-      console.log('CPU Placement possible.');
+  //    console.log('CPU Placement possible.');
       return true
     };
 
@@ -72,7 +72,7 @@ function Column_Locking_Validation(invokedForKiValidation) {
         topCell.style = 'pointer-events: all';
       };
   };
-    console.log('Not full Top-Cells free again.');
+ //   console.log('Not full Top-Cells free again.');
   return;
 };            
 
@@ -104,7 +104,6 @@ function Diagonal_Validator(player, columnNumber, row) {
       // .. if yes, mark winning chain and invoke win'
       const arr = [basis, second_plus, third_plus, fourth_minus];
       setAttributesArr(arr, { 'data-winChain': 'yes' });
-
       Game_End_Screen(player, 'Diagonal');
       return;
     }
@@ -145,38 +144,44 @@ function Diagonal_Validator(player, columnNumber, row) {
 /* =================
 !     Column Win-Validation 
             ================= */
-function Column_Validator(player) {
-  // Get the actual state of the Gameboard
+function validator__column(player){
+console.log(`Entered column win validation for player ${player}.`)
+let playerPlacements, arrayToValidate;
 
-  // Helper array with the pushed values from the Gameboard
- let validation_array = [];
-
- for (let columnArr = 1; columnArr <= Game.gameboard_size_x;  columnArr++ ){
-   player === 1 ? validation_array.push(Game.actualGameboardPlayer1[`C${columnArr}`]) :  validation_array.push(Game.actualGameboardPlayer2[`C${columnArr}`]);
+// get correct placements array
+player == 1 ? playerPlacements = Game.player1_coins : playerPlacements = Game.player2_coins;
+// loop trough columns
+for(let columnNumber = 1; columnNumber <= Game.gameboard_size_x; columnNumber++){
+  // get current array  
+  arrayToValidate = playerPlacements[`C${columnNumber}`];
+  // validate only if there are at least 4 coins
+  if(arrayToValidate.length >= 4){
+    // loop trough array to validate
+    for(let row = 0; row  < arrayToValidate.length;  row++){
+      // console.log('Values to validate, basis row: ' + arrayToValidate[row] + "  plus 1 : " + arrayToValidate[row + 1] + ' plus 2: ' + arrayToValidate[row + 2]);
+      if(arrayToValidate[row] - arrayToValidate[row + 1] === 1){
+          //console.log('2 coins upon each other.');
+          if(arrayToValidate[row + 1] - arrayToValidate[row + 2] === 1){
+            //console.log('3 coins upon each other')
+            if(arrayToValidate[row + 2] - arrayToValidate[row + 3]){
+              //console.log('Column WIN detected!');
+                    // mark winning chain
+                    let basis, second, third, fourth;
+                    basis = document.getElementById(`ID_C${columnNumber}R${arrayToValidate[row]}`)
+                    second = document.getElementById(`ID_C${columnNumber}R${arrayToValidate[row + 1] }`)
+                    third = document.getElementById(`ID_C${columnNumber}R${arrayToValidate[row + 2] }`)
+                    fourth = document.getElementById(`ID_C${columnNumber}R${arrayToValidate[row + 3] }`)
+                    const arr = [basis, second, third, fourth];
+                    setAttributesArr(arr, { 'data-winChain': 'yes' });
+                    // invoke win
+                    Game_End_Screen(player, 'Column');
+                    return true;
+            };
+          };
+        };
+    };
+  };  
 };
-
-  // Now we have an iterable array and can loop trough
-  for (let obj of validation_array) {
-    // And we making an iterable array again from the obj arrays
-    const array = Array.from(obj);
-    // If every row number subtracted with the next row number is equal to 1, there are 4 coins upon each other.
-    if (
-      (array[0] - array[1] === 1 &&
-        array[1] - array[2] === 1 &&
-        array[2] - array[3] === 1) ||
-      (array[1] - array[2] === 1 &&
-        array[2] - array[3] === 1 &&
-        array[3] - array[4] === 1) ||
-      (array[2] - array[3] === 1 &&
-        array[3] - array[4] === 1 &&
-        array[4] - array[5] === 1)
-    ) {
-      // Invoke a win
-      Game_End_Screen(player, 'Column');
-      return true;
-    }
-  }
-  //(Under construction for winChain!)
 };
 
 /* ===============
