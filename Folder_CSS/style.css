@@ -371,6 +371,11 @@ border-bottom: solid 1px var(--base-border);
   background-image: url('../Folder_Graphics/Coins/red.png');
 }
 
+*[data-winchain = 'yes']{
+}
+
+
+
 /* #endregion */
 
 /* #region 4) settings menu */
@@ -746,7 +751,6 @@ select:hover {
 
 /* #endregion */
 
-
 /* #region game-screen*/
 
 /* ===========
@@ -797,7 +801,6 @@ select:hover {
 }
 
 /* #endregion*/
-
 
 /* #region 7) animations & transitions */
 

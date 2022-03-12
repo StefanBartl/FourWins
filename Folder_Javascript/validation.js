@@ -19,7 +19,7 @@
 /*
 ?                  Jobs To-do:
 
-todo    -) Validation complete update for various gameboard sizes
+todo    -) Row-Win update
 
 ?                  Finisf
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
@@ -103,7 +103,7 @@ function Diagonal_Validator(player, columnNumber, row) {
     ) {
       // .. if yes, mark winning chain and invoke win'
       const arr = [basis, second_plus, third_plus, fourth_minus];
-      setAttributesArr(arr, { 'data-winChain': 'yes' });
+      setAttributesArr(arr, { 'data-winchain': 'yes' });
       Game_End_Screen(player, 'Diagonal');
       return;
     }
@@ -172,7 +172,7 @@ for(let columnNumber = 1; columnNumber <= Game.gameboard_size_x; columnNumber++)
                     third = document.getElementById(`ID_C${columnNumber}R${arrayToValidate[row + 2] }`)
                     fourth = document.getElementById(`ID_C${columnNumber}R${arrayToValidate[row + 3] }`)
                     const arr = [basis, second, third, fourth];
-                    setAttributesArr(arr, { 'data-winChain': 'yes' });
+                    setAttributesArr(arr, { 'data-winchain': 'yes' });
                     // invoke win
                     Game_End_Screen(player, 'Column');
                     return true;

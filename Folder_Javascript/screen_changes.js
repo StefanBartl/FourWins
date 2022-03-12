@@ -16,6 +16,7 @@
 //#region Open Jobs
 /*
 ?                  Jobs To-do:
+todo    -) Win-Screen to new layout
 
 ?                  Finish
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
@@ -229,7 +230,7 @@ function Game_End_Screen(gameResult) {
     // with a greater z-index is visible over the fireworks canvas
     const canvas_div = Create_DOM_Element({ ParentID: 'main__section', Element: 'div', ID: 'div__canvas', Class: 'div__canvas' });
     const firework_canvas = Create_DOM_Element({ ParentID: 'div__canvas',  Element: 'canvas', ID: 'firework' });
-    Fireworks('firework');
+    // Fireworks('firework');
     document.getElementById('main__section').setAttribute('data-gameend', 'no');
     document.getElementById('main__section').setAttribute('data-canvasend', 'yes');
 
@@ -318,7 +319,28 @@ function Game_End_Screen(gameResult) {
   });
 
   document.getElementById('button__newGame').addEventListener('click', ()=>{Start_New_Game(gameResult)});
-  //#endregion
+  //#
+  
+// add winchain higuhlight animation
+const cellsArray = document.querySelectorAll('.cells');
+for(let cell of cellsArray){
+if(cell.getAttribute('data-winchain') === 'yes')cell.animate(
+  [
+    // keyframes
+    { backgroundColor: 'purble' },
+    { backgroundColor: 'green' },
+    { backgroundColor: 'orange' },
+    { backgroundColor: 'black' },
+    { backgroundColor: 'green' },
+  ],
+  {
+    // timing options
+    duration: 10000,
+    iterations: Infinity,
+    direction: "alternate-reverse"
+  }
+)
+};
 };
 
 //#endregion
@@ -420,7 +442,5 @@ if(gameResult === 1 && Game.playerIsOnTurn === 'left') Turning_PlayerIsOnTurn();
 if(gameResult === 2 && Game.playerIsOnTurn === 'right') Turning_PlayerIsOnTurn();
 
 PlayGame();
-
-
 };
 //#endregion
