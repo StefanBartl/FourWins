@@ -248,6 +248,7 @@ Stats();
 Game.menuAnimation = localStorage.menuAnimation || 'true';
 if(Game.menuAnimation === 'true'){
   settings_span.classList.add('colourAnimation');
+  start_button.classList.add('colourAnimation');
   aniToggle_checkbox.checked = true;
 } else {
   aniToggle_checkbox.checked = false;
@@ -498,9 +499,11 @@ aniToggle_checkbox.addEventListener('click', ()=>{
       if(localStorage.menuAnimation === 'true' || localStorage.menuAnimation === undefined){
           localStorage.menuAnimation = 'false' 
           Game.menuAnimation = 'false';
+          start_button.classList.remove('colourAnimation');
         } else {
              localStorage.menuAnimation = 'true';
              Game.menuAnimation = 'true';
+             start_button.classList.add('colourAnimation');
 }});
 
 stats_reset_easy.addEventListener('click', () => {
