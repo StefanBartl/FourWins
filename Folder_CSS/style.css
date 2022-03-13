@@ -27,15 +27,14 @@
 
 !                           Jobs To-Do: 
 
-todo    -) Game-End-Screen Style
-todo    -) Scrollbar rechts am starting Bildschirm muss weg, sonst funktioniert das Menu ästhetisch nicht mehr.
-todo    -) :focus on all :hovers for Cross-Browser-Support!
-todo    -) Test and repair responsivness in all sizes! -> Menu muss von der Seite weg!
-todo    -) CSS-Code minimizing f.e. bind repetative Classes to one Class!
-todo    -) INGAME Section?
-todo    -) Fonts!
-todo    -) Font working on all Browser correctly?
-todo    -) Find a final, real good styling!
+todo    -) start screen layout 
+todo    -) scrollbar rechts am starting Bildschirm muss weg, sonst funktioniert das Menu ästhetisch nicht mehr.
+todo    -) test and repair responsivness in all sizes! -> menu muss von der Seite weg!
+todo    -) CSS-Code minimizing f.e. bind repetative classes to one class!
+todo    -) INGAME section?
+todo    -) fonts!
+todo    -) font working on all browser correctly?
+todo    -) find a final, real good styling!
 
 ?                               Finish
 todo    -)) CSS-Guideline
@@ -64,6 +63,8 @@ todo    -) Save Default Script Files with the new Script Layout for later Projec
   --prime-yellow: hsl(43, 100%, 50%);
   --prime-manner: hsl(10, 60%, 80%);
   --prime-lightgrey: hsl(71, 13%, 67%);
+  --prime-pink: hsl(330, 100%, 50%);
+  --prime-pinkviolett: hsl(300, 100%, 50%);
 
   --base-colour: hsl(201, 79%, 46%);
   --main-black: hsl(0, 0%, 0%);
@@ -979,7 +980,7 @@ select:hover {
 /*#region game-end animations*/
 
 .animation__GameEnd{
-  animation: End_Animation 4s ease-in;
+  animation: End_Animation 2s ease-in;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
@@ -997,11 +998,6 @@ select:hover {
 /* #endregion */
 
 /* #region 8) game-end screen */
-
-
-body[data-gameend = 'yes']{
-  display: flex;
-}
 
 #main__section[data-gameend = 'yes'],
 #main__section[data-canvasend = 'yes']{
@@ -1029,12 +1025,6 @@ body[data-gameend = 'yes']{
     margin-top: 3%;
 }
 
-/* Try to get transparent black background if canvasend! */
-.topCellsCanvas{
-  
-}
-
-
 /* ===================
 ?     firework canvas container
             =================== */
@@ -1048,6 +1038,11 @@ body[data-gameend = 'yes']{
   z-index: -1;
 }
 
+/* Try to get transparent black background if canvasend! 
+.topCellsCanvas{
+  
+}
+*/
 
 /* #endregion */
 

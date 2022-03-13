@@ -20,7 +20,7 @@
 //#region Open Jobs
 /*
 ?                  Jobs To-do:
-todo    -) improve winchain animation
+todo    -) 
 
 ?                  Finish
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
@@ -44,7 +44,6 @@ function Game_Screen() {
 Game.state = 'InGame';
 document.getElementById('main__section').setAttribute('data-ingame', 'yes');
 document.getElementById('wrapper__gameboard').setAttribute('data-ingame', 'yes');
-document.body.setAttribute('data-gameend', 'no');
 document.getElementById('main__section').setAttribute('data-gameend', 'no');
 document.getElementById('main__section').setAttribute('data-canvasend', 'no');
 
@@ -86,7 +85,6 @@ function Start_Screen() {
   //console.log('Entering Game-Screen.');
   document.getElementById('main__section').setAttribute('data-ingame', 'no');
   document.getElementById('wrapper__gameboard').setAttribute('data-ingame', 'no');
-  document.body.setAttribute('data-gameend', 'no');
   document.getElementById('main__section').setAttribute('data-gameend', 'no');
   document.getElementById('main__section').setAttribute('data-canvasend', 'no');
   
@@ -154,7 +152,6 @@ if(document.getElementById('div__drawGames')) document.getElementById('div__draw
   document.getElementById('wrapper__gameboard').setAttribute('data-ingame', 'no');
 
   Game.state = 'Game End';
-  document.body.setAttribute('data-gameend', 'yes');
   document.getElementById('wrapper__gameboard').setAttribute('data-gameend', 'yes');
   document.getElementById('main__section').setAttribute('data-gameend', 'yes');
 
@@ -234,7 +231,7 @@ function Game_End_Screen(gameResult) {
     // with a greater z-index is visible over the fireworks canvas
     const canvas_div = Create_DOM_Element({ ParentID: 'main__section', Element: 'div', ID: 'div__canvas', Class: 'div__canvas' });
     const firework_canvas = Create_DOM_Element({ ParentID: 'div__canvas',  Element: 'canvas', ID: 'firework' });
-    Fireworks('firework');
+    //Fireworks('firework');
     document.getElementById('main__section').setAttribute('data-gameend', 'no');
     document.getElementById('main__section').setAttribute('data-canvasend', 'yes');
     // If firework canvas background top cells hace to be transparent / black to look good.
@@ -335,11 +332,12 @@ for(let cell of cellsArray){
 if(cell.getAttribute('data-winchain') === 'yes')cell.animate(
   [
     // keyframes
-    { backgroundColor: 'purble' },
-    { backgroundColor: 'green' },
-    { backgroundColor: 'orange' },
-    { backgroundColor: 'black' },
-    { backgroundColor: 'green' },
+    { backgroundColor: 'purble', border: 'solid 0.2rem purble', transform: 'scale(1)'},
+    { backgroundColor: 'greenyellow', border: 'solid 0.2rem green', transform: 'scale(1.5)'},
+    { backgroundColor: 'orange', border: 'solid 0.2rem orange', transform: 'scale(1)'},
+    { backgroundColor: 'black', border: 'solid 0.2rem black', transform: 'scale(1.5)'},
+    { backgroundColor: 'white', border: 'solid 0.2rem white', transform: 'scale(1)'},
+    { backgroundColor: 'hsl(300, 100%, 50%)', border: 'solid 0.2rem hsl(300, 100%, 50%)', transform: 'scale(1.5)'} //pinkviolett
   ],
   {
     // timing options
@@ -431,7 +429,6 @@ document.getElementById('div__canvas').remove();
 }
 
 // Remove the Game End Screen
-document.body.setAttribute('data-gameend', 'no');
 document.getElementById('main__section').setAttribute('data-gameend', 'no');
 document.getElementById('main__section').setAttribute('data-canvasend', 'no');
 document.getElementById('h__gameEnd').remove();
