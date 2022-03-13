@@ -270,19 +270,34 @@ if(Game.menuAnimation === "true"){
   aniToggle_checkbox.checked = false;
 };
 
+//?  Set attribute-marker to change settings-menu  for smartphones/small devices
+// at start...
+if (window.innerWidth < 767.98){
+  settings_span.setAttribute("data-device", "smart");
+  settings_menu.setAttribute("data-device", "smart");
+  // console.log("Small Device");
+}
+// ...and at resizing window...
+window.addEventListener("resize", ()=>{
+      // width under ~770px change to small device
+    if (window.innerWidth < 767.98){
+      settings_span.setAttribute("data-device", "smart");
+      settings_menu.setAttribute("data-device", "smart");
+     //  console.log("Small Device");
+    } else {
+      settings_span.setAttribute("data-device", "default");
+      settings_menu.setAttribute("data-device", "default");
+     //  console.log("Default Device");
+    };
+});
+
+// on desktop attach the menu animation
+if(settings_menu.getAttribute("data-device") === "default"){
+
 /* ====================================
  !        Show Settings-Menu Event-Listeners 
          =================================== */
 settings_span.addEventListener("mouseenter", () => {
-  //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
-  if (!settings_span.classList.contains("Class_Show_Settings")) {
-    settings_span.classList.remove("Class_Hide_Settings");
-    settings_span.classList.remove("colourAnimation");
-    settings_span.classList.add("Class_Show_Settings");
-  };
-});
-
-settings_span.addEventListener("touchstart", () => {
   //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
   if (!settings_span.classList.contains("Class_Show_Settings")) {
     settings_span.classList.remove("Class_Hide_Settings");
@@ -311,22 +326,6 @@ main_wrapper.addEventListener("mouseenter", () => {
 
 });
 
-main_wrapper.addEventListener("touchstart", () => {
-  //If the settíngs menu is leaved to the main wrapper and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
-  if (settings_span.classList.contains("Class_Show_Settings")) {
-    settings_span.classList.remove("Class_Show_Settings");
-    settings_span.classList.add("Class_Hide_Settings");
-
-    if(Game.menuAnimation === "true"){
-      setTimeout(()=>{
-        settings_span.classList.remove("Class_Hide_Settings");
-        settings_span.classList.add("colourAnimation");
-      }, 10);
-      };
-  };
-  
-});
-
 document.querySelector("header").addEventListener("mousemove", () => {
   //If the settíngs menu is leaved to the header and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
   if (settings_span.classList.contains("Class_Show_Settings")) {
@@ -341,6 +340,9 @@ document.querySelector("header").addEventListener("mousemove", () => {
       };
   };
 });
+};
+
+
 
 //#endregion
 
@@ -814,6 +816,9 @@ function Make_Placement() {
   let gameboard__height = document.getElementById("wrapper__gameboard").clientHeight;
   let cell__height = gameboard__height / (Game.gameboard_size_x + 1) * 10;
   let animation__length =  cell__height *  Game.coin_placement_row;
+
+// consider small devices
+if(settings_menu.getAttribute("data-device") === "smart") animation__length *= 0.6;
 // animate coin
   coin.animate(
     [

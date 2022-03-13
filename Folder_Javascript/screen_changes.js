@@ -56,6 +56,9 @@ if(Game.state === "Game End"){
    return
 };
 
+// on small devices dont show settings menu
+if(settings_span.getAttribute("data-device")  === "smart") settings_span.style = "display: none";
+
   // Remove the start screen elements
   document.querySelector("header").style = "display: none";
   document.getElementById("wrapper__leftSidebar").style = "display: none";

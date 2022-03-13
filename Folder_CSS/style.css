@@ -28,7 +28,6 @@
 
 !                           Jobs To-Do: 
 
-todo    test and repair responsivness in all sizes! -> menu muss von der Seite weg?
 todo    CSS-Code minimizing f.e. bind repetative classes to one class!
 todo    INGAME section?
 todo    fonts!
@@ -233,7 +232,7 @@ padding-bottom: 2em;
 border-bottom: solid 1px var(--base-border);
 }
 
-#choosing_cpu h3{
+#wrapper__choosingCPU h3{
   display: flex;
   justify-content: center;
   font-size: x-large;
@@ -376,7 +375,7 @@ border-bottom: solid 1px var(--base-border);
 ?     settings-menu layout 
             =============== */
 
-#section__settings_menu {
+#section__settings_menu[data-device = "default"] {
   position: absolute;
   top: 5vh;
   right: 0;
@@ -384,7 +383,7 @@ border-bottom: solid 1px var(--base-border);
   width: clamp(270px, 20%, 25vw);
 }
 
-#settings_span {
+#settings_span[data-device = "default"]  {
   position: relative;
   top: 0;
   right: -98%;
@@ -1152,9 +1151,9 @@ select:hover {
 }
 /* #endregion */
 
-/* #region 11) media queries */
+/*#region 11) media queries */
 
-/* smartphones and other small devices */
+/*#region smartphones and other small devices */
 @media (max-width: 767.98px) {
   body {
     max-width: 100vw;
@@ -1200,11 +1199,15 @@ select:hover {
     border: none;
   }
 
+  #div__turnPlayers{
+    z-index: -1;
+  }
+
   .Class_Left_Pos {
-    bottom: 0;
+    top: 0;
   }
   .Class_Right_Pos {
-    bottom: 0;
+    top: 0;
   }
 
   #button__start {
@@ -1212,11 +1215,31 @@ select:hover {
     margin-bottom: 5%;
   }
 
-  #settings_span {
-    overflow: hidden;
-  }
+#settings_span[data-device = "smart"]{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;;
+  margin-top: 2em;
+  max-width: 100%;
+  justify-content: center;
+  overflow: auto;
+  background-color: var(--base-border);
+  box-shadow: 0em 0em 2em white;
+  border-top-left-radius: 3%;
+  border-top-right-radius: 3%;
+  color: var(--main-black);
+  text-align: center;
+  font-size: large;
+}
 
-  /* Gaḿe End Screen Mobile*/
+#wrapper__gameboard[data-ingame="yes"] {
+  max-width: 100%;
+  aspect-ratio: 1/1;
+  
+}
+/*#endregion*/
+
+  /* Gaḿe End Screen */
                /* Move Gameboard at the End of the Game Animation */
 
   /*
