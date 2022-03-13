@@ -60,7 +60,7 @@ Function to let CPU Easy produce a random, but valid number for placement.
   Game.rowCounter[`C${random_number}`] > 0 ? proofed_number = true : proofed_number = false; 
   // console.log("Number to proof is valid:", proofed_number);
 
-  // If proofed_number is true invoke "CPU_Thinking", if it isn't get a random number again and proof it as long as there is a valid number
+  // If proofed_number is true invoke "CPU_Thinking", if it isn"t get a random number again and proof it as long as there is a valid number
   if (proofed_number === true) {
     // console.log("CPU Easy makes placement in column:", random number);
     Thinking_Effect(true, random_number);
@@ -252,7 +252,7 @@ function Detect_3_Coin_Chains_Diagonal() {
 !     Detect vertical 3 Coin-Chains 
             ======================== */
 function Detect_3_Coin_Chains_Upwards() {
-// console.log('Detection of 3 coins up started');
+// console.log("Detection of 3 coins up started");
 
 // detection function
   function Detection_3Coins_Up(player){
@@ -267,11 +267,11 @@ function Detect_3_Coin_Chains_Upwards() {
     if(arrayToValidate.length >= 3){
       // loop trough array to validate
       for(let row = 0; row  < arrayToValidate.length;  row++){
-        // console.log('Values to validate, basis row: ' + arrayToValidate[row] + "  plus 1 : " + arrayToValidate[row + 1] + ' plus 2: ' + arrayToValidate[row + 2]);
+        // console.log("Values to validate, basis row: " + arrayToValidate[row] + "  plus 1 : " + arrayToValidate[row + 1] + " plus 2: " + arrayToValidate[row + 2]);
         if(arrayToValidate[row] - arrayToValidate[row + 1] === 1){
-            //console.log('2 coins upon each other.');
+            //console.log("2 coins upon each other.");
             if(arrayToValidate[row + 1] - arrayToValidate[row + 2] === 1){
-             // console.log('3 coins upon each other, colum number', columnNumber)
+             // console.log("3 coins upon each other, colum number", columnNumber)
               return columnNumber
             };
           };
@@ -283,24 +283,24 @@ function Detect_3_Coin_Chains_Upwards() {
   // Invoke first CPU coins to detect a possible finishing placement...
   let up_finish = Detection_3Coins_Up(2);
   if (up_finish !== undefined){
-    //console.log('Finish placement up with column', up_finish);
+    //console.log("Finish placement up with column", up_finish);
      return up_finish
     };
 
   // Invoke player 1 coins to detect finishing possibility
 let up_defense = Detection_3Coins_Up(1);
   if (up_defense !== undefined){
-    //console.log('Defense placement up with column', up_defense); 
+    //console.log("Defense placement up with column", up_defense); 
     return up_defense
   };
-  // console.log('No upwards 3 Coin chains detected.');
+  // console.log("No upwards 3 Coin chains detected.");
 };
 
 /* ======================
 !     Detect horizontal 3 Coin-Chains 
             ====================== */
 function Detect_3_Coin_Chains_Sideways() {
-// console.log('Detection of 3 Coins sideways started');
+// console.log("Detection of 3 Coins sideways started");
 
   // detection function
   function Detection_3Coins_sideways(player){
@@ -321,8 +321,8 @@ function Detect_3_Coin_Chains_Sideways() {
               let basis, second, third, fourth, columnToFinish;
               // proof if right side exists & is free
               if(document.getElementById(`ID_C${columnNumber + 3}R${placedRow - 1}`)
-              && document.getElementById(`ID_C${columnNumber + 3}R${placedRow - 1}`).getAttribute('data-isplayed') === 'yes' 
-              && document.getElementById(`ID_C${columnNumber + 3}R${placedRow}`).getAttribute('data-isplayed') === 'no'){
+              && document.getElementById(`ID_C${columnNumber + 3}R${placedRow - 1}`).getAttribute("data-isplayed") === "yes" 
+              && document.getElementById(`ID_C${columnNumber + 3}R${placedRow}`).getAttribute("data-isplayed") === "no"){
                     columnToFinish = columnNumber + 3;
                     console.log(`Detected sideway chain with possible right placement in column  ${columnToFinish}.`);
                     // mark winchain
@@ -335,8 +335,8 @@ function Detect_3_Coin_Chains_Sideways() {
               };
               // proof if left side exists & is free
               if(document.getElementById(`ID_C${columnNumber - 1}R${placedRow - 1}`)
-              && document.getElementById(`ID_C${columnNumber - 1}R${placedRow - 1}`).getAttribute('data-isplayed') === 'yes'
-              && document.getElementById(`ID_C${columnNumber - 1}R${placedRow}`).getAttribute('data-isplayed') === 'no'){
+              && document.getElementById(`ID_C${columnNumber - 1}R${placedRow - 1}`).getAttribute("data-isplayed") === "yes"
+              && document.getElementById(`ID_C${columnNumber - 1}R${placedRow}`).getAttribute("data-isplayed") === "no"){
                     columnToFinish = columnNumber - 1;
                     console.log(`Detected sideway chain with possible left placement in column  ${columnToFinish}.`);
                     // mark winchain
@@ -364,8 +364,8 @@ function Detect_3_Coin_Chains_Sideways() {
               let basis, second, third, fourth, columnToFinish;
               // proof if right side exists & is free
               if(document.getElementById(`ID_C${columnNumber - 3}R${placedRow - 1}`)
-              && document.getElementById(`ID_C${columnNumber - 3}R${placedRow - 1}`).getAttribute('data-isplayed') === 'yes' 
-              && document.getElementById(`ID_C${columnNumber - 3}R${placedRow}`).getAttribute('data-isplayed') === 'no'){
+              && document.getElementById(`ID_C${columnNumber - 3}R${placedRow - 1}`).getAttribute("data-isplayed") === "yes" 
+              && document.getElementById(`ID_C${columnNumber - 3}R${placedRow}`).getAttribute("data-isplayed") === "no"){
                     columnToFinish = columnNumber - 3;
                     console.log(`Detected sideway chain with possible right placement in column  ${columnToFinish}.`);
                     // mark winchain
@@ -378,8 +378,8 @@ function Detect_3_Coin_Chains_Sideways() {
               };
               // proof if left side exists & is free
               if(document.getElementById(`ID_C${columnNumber + 1}R${placedRow - 1}`)
-              && document.getElementById(`ID_C${columnNumber + 1}R${placedRow - 1}`).getAttribute('data-isplayed') === 'yes'
-              && document.getElementById(`ID_C${columnNumber + 1}R${placedRow}`).getAttribute('data-isplayed') === 'no'){
+              && document.getElementById(`ID_C${columnNumber + 1}R${placedRow - 1}`).getAttribute("data-isplayed") === "yes"
+              && document.getElementById(`ID_C${columnNumber + 1}R${placedRow}`).getAttribute("data-isplayed") === "no"){
                     columnToFinish = columnNumber + 1;
                     console.log(`Detected sideway chain with possible left placement in column  ${columnToFinish}.`);
                     // mark winchain
@@ -401,17 +401,17 @@ function Detect_3_Coin_Chains_Sideways() {
   // Invoke first CPU coins to detect a possible finishing placement...
   let sideway_finish = Detection_3Coins_sideways(2);
   if (sideway_finish !== undefined){
-   // console.log('Finish placement sideway with column', sideway_finish);
+   // console.log("Finish placement sideway with column", sideway_finish);
     return sideway_finish
   };
   // Invoke player 1 coins to detect finishing possibility
 let sideway_defense = Detection_3Coins_sideways(1);
   if (sideway_defense !== undefined){
-   // console.log('Defense placement up with column', sideway_defense);
+   // console.log("Defense placement up with column", sideway_defense);
      return sideway_defense
   };
   // if no chain detected, leave function
- // console.log('No sideways Coin chains detected.');
+ // console.log("No sideways Coin chains detected.");
 };
 
 /* ======================
@@ -434,7 +434,7 @@ let lastPlacement;
       let row_minus_one = lastPlacement[0] - 1;
       if( lastPlacement[0] !== undefined
       && lastPlacement[0] !== 1
-      && document.getElementById(`ID_C${columnNumber}R${row_minus_one}`).getAttribute('data-isplayed') === 'no'){
+      && document.getElementById(`ID_C${columnNumber}R${row_minus_one}`).getAttribute("data-isplayed") === "no"){
        // console.log(`Last Placement in row ${lastPlacement[0]} & column ${columnNumber} pushed to upwards array.`);
         upwardsArray.push(columnNumber);
       };
@@ -447,7 +447,7 @@ let lastPlacement;
       return upwardsArray
     }
         else 
-        {// console.log('No upwards placement found.');
+        {// console.log("No upwards placement found.");
       };
 };
 
@@ -475,7 +475,7 @@ function Get_Valid_Sideways_Placement() {
       if(lastPlacement[0] !== undefined 
           && columnNumber === 1 
           && lastPlacement[0] === Game.gameboard_size_y
-          &&  document.getElementById(`ID_C${2}R${1}`).getAttribute('data-isplayed') === 'no'){
+          &&  document.getElementById(`ID_C${2}R${1}`).getAttribute("data-isplayed") === "no"){
             sidewaysArray.push(2);
       };
       // left side II
@@ -483,8 +483,8 @@ function Get_Valid_Sideways_Placement() {
       if(lastPlacement[0] !== undefined 
         && columnNumber === 1 
         && lastPlacement[0] !== Game.gameboard_size_y
-        &&  document.getElementById(`ID_C${2}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
-        &&  document.getElementById(`ID_C${2}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
+        &&  document.getElementById(`ID_C${2}R${lastPlacement[0]}`).getAttribute("data-isplayed") === "no"
+        &&  document.getElementById(`ID_C${2}R${lastPlacement[0] - 1}`).getAttribute("data-isplayed") === "yes"){
           sidewaysArray.push(2);
     };
 
@@ -493,7 +493,7 @@ function Get_Valid_Sideways_Placement() {
       if(lastPlacement[0] !== undefined 
         && columnNumber === Game.gameboard_size_x 
         && lastPlacement[0] === Game.gameboard_size_y
-        &&  document.getElementById(`ID_C${leftMinusOne}R${1}`).getAttribute('data-isplayed') === 'no'){
+        &&  document.getElementById(`ID_C${leftMinusOne}R${1}`).getAttribute("data-isplayed") === "no"){
           sidewaysArray.push(leftMinusOne );
     };
     // right side II
@@ -501,8 +501,8 @@ function Get_Valid_Sideways_Placement() {
     if(lastPlacement[0] !== undefined 
       && columnNumber === Game.gameboard_size_x 
       && lastPlacement[0] !== Game.gameboard_size_y
-      &&  document.getElementById(`ID_C${leftMinusOne}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
-      &&  document.getElementById(`ID_C${leftMinusOne}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
+      &&  document.getElementById(`ID_C${leftMinusOne}R${lastPlacement[0]}`).getAttribute("data-isplayed") === "no"
+      &&  document.getElementById(`ID_C${leftMinusOne}R${lastPlacement[0] - 1}`).getAttribute("data-isplayed") === "yes"){
         sidewaysArray.push(leftMinusOne );
   };
 
@@ -511,13 +511,13 @@ function Get_Valid_Sideways_Placement() {
       // proof placement to the left
       if(lastPlacement[0] !== undefined 
         &&  document.getElementById(`ID_C${columnNumber - 1}R${1}`)
-        &&  document.getElementById(`ID_C${columnNumber - 1}R${1}`).getAttribute('data-isplayed') === 'no'){
+        &&  document.getElementById(`ID_C${columnNumber - 1}R${1}`).getAttribute("data-isplayed") === "no"){
           sidewaysArray.push(columnNumber - 1);
     };
     // proof placemenmt to the right
     if(lastPlacement[0] !== undefined 
       &&  document.getElementById(`ID_C${columnNumber + 1}R${1}`)
-      &&  document.getElementById(`ID_C${columnNumber + 1}R${1}`).getAttribute('data-isplayed') === 'no'){
+      &&  document.getElementById(`ID_C${columnNumber + 1}R${1}`).getAttribute("data-isplayed") === "no"){
         sidewaysArray.push(columnNumber + 1);
   };
   
@@ -525,15 +525,15 @@ function Get_Valid_Sideways_Placement() {
       // proof placement to the left
       if(lastPlacement[0] !== undefined 
         &&  document.getElementById(`ID_C${columnNumber - 1}R${lastPlacement[0]}`)
-        &&  document.getElementById(`ID_C${columnNumber - 1}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
-        &&  document.getElementById(`ID_C${columnNumber - 1}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
+        &&  document.getElementById(`ID_C${columnNumber - 1}R${lastPlacement[0]}`).getAttribute("data-isplayed") === "no"
+        &&  document.getElementById(`ID_C${columnNumber - 1}R${lastPlacement[0] - 1}`).getAttribute("data-isplayed") === "yes"){
           sidewaysArray.push(columnNumber - 1);
     };
       // proof placement to the right
       if(lastPlacement[0] !== undefined 
         &&  document.getElementById(`ID_C${columnNumber  + 1}R${lastPlacement[0]}`)
-        &&  document.getElementById(`ID_C${columnNumber  + 1}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
-        &&  document.getElementById(`ID_C${columnNumber  + 1}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
+        &&  document.getElementById(`ID_C${columnNumber  + 1}R${lastPlacement[0]}`).getAttribute("data-isplayed") === "no"
+        &&  document.getElementById(`ID_C${columnNumber  + 1}R${lastPlacement[0] - 1}`).getAttribute("data-isplayed") === "yes"){
           sidewaysArray.push(columnNumber +1);
     };
   // console.log(`Sideways array: ${sidewaysArray}`);
@@ -544,7 +544,7 @@ function Get_Valid_Sideways_Placement() {
        return sidewaysArray
      }
          else 
-         {// console.log('No sideways placement found.');
+         {// console.log("No sideways placement found.");
        };
 };
 };
@@ -563,7 +563,7 @@ function CPU_Placement(columnNumber) {
 clickNumber = columnNumber - 1;
 
   // Get all Top-Cells
-  const topCellsArray = document.getElementsByClassName('topCells');
+  const topCellsArray = document.getElementsByClassName("topCells");
 
   // Make the Placement
   topCellsArray[clickNumber].click();

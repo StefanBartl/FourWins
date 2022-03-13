@@ -38,11 +38,11 @@ todo    -) find a final, real good styling!
 ?                               Finish
 todo    -)) CSS-Guideline
 todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo    -) Find ID's mitz gemeinsamen properties und füge sie zu Klassen hinzu - wenn es Sinn macht!
+todo    -) Find ID"s mitz gemeinsamen properties und füge sie zu Klassen hinzu - wenn es Sinn macht!
 todo    -) Final formatation (especially script & library sections/functions), comments:
 todo    -) Make sure all important is commented !
 todo    -) Write a final Comment !
-todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new 'global' Library for JS & CSS !
+todo    -) Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "global" Library for JS & CSS !
 
 !                         Session progress:                                                
 ? -)                                                                                                                                                                                             
@@ -133,12 +133,12 @@ select {
 
 /*#region fonts */
 
-/* Page: Sans-serif,   font-family: 'Anton', sans-serif; */
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+/* Page: Sans-serif,   font-family: "Anton", sans-serif; */
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 
 
-/* Headlines: Handwriting, font-family: 'Comforter Brush', cursive; */
-@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
+/* Headlines: Handwriting, font-family: "Comforter Brush", cursive; */
+@import url("https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap");
 
 /* #endregion */
 
@@ -152,11 +152,11 @@ select {
 
 body {
   background-color: var(--base-colour);
-  font-family: 'Titillium Web', sans-serif;
+  font-family: "Titillium Web", sans-serif;
   color: var(--top-header);
   display: flex;
   flex-direction: column;
-  font-family: 'Anton', sans-serif;
+  font-family: "Anton", sans-serif;
 }
 
 header {
@@ -168,10 +168,10 @@ header {
   font-size: 1.3vw;
 }
 
-#main__section {
+#section__main {
   display: grid;
   grid: auto / 31% auto 31%;
-  grid-template-areas: 'leftSide gameboard rightSide';
+  grid-template-areas: "leftSide gameboard rightSide";
 }
 
 /* =======
@@ -188,14 +188,14 @@ header {
   gap: 1em;
 }
 
-#leftSidebar__wrapper {
+#wrapper__leftSidebar {
   grid-area: leftSide;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#sidebarRight__wrapper {
+#wrapper__rightSidebar {
   grid-area: rightSide;
   z-index: 1;
 }
@@ -255,7 +255,7 @@ border-bottom: solid 1px var(--base-border);
   border-top: none;
 }
 
-.Class_GameboardWrapper[data-inGame='yes'] {
+.Class_GameboardWrapper[data-inGame="yes"] {
     position: absolute;
     top: 20%;
     left: 50%;
@@ -264,7 +264,7 @@ border-bottom: solid 1px var(--base-border);
     aspect-ratio: 1/1;
 }
 
-.Class_GameboardWrapper[data-inGame='gameend'] {
+.Class_GameboardWrapper[data-inGame="gameend"] {
     margin-block: 2rem;
 }
 /* #endregion */
@@ -285,7 +285,7 @@ border-bottom: solid 1px var(--base-border);
 }
 
     /* If column is full lock the top-cell,...*/
-.topCells[data-columnfull='yes'] {
+.topCells[data-columnfull="yes"] {
   border-top: solid 2px var(--gameboard);
   pointer-events: none;
 }
@@ -352,19 +352,19 @@ border-bottom: solid 1px var(--base-border);
 }
 
 .coin__yellow {
-  background-image: url('../Folder_Graphics/Coins/yellow.png');
+  background-image: url("../Folder_Graphics/Coins/yellow.png");
 }
 
 .coin__red {
-  background-image: url('../Folder_Graphics/Coins/red.png');
+  background-image: url("../Folder_Graphics/Coins/red.png");
 }
 
 .placedCoin__1 {
-  background-image: url('../Folder_Graphics/Coins/yellow.png');
+  background-image: url("../Folder_Graphics/Coins/yellow.png");
 }
 
 .placedCoin__2 {
-  background-image: url('../Folder_Graphics/Coins/red.png');
+  background-image: url("../Folder_Graphics/Coins/red.png");
 }
 
 /* #endregion */
@@ -375,7 +375,7 @@ border-bottom: solid 1px var(--base-border);
 ?     settings-menu layout 
             =============== */
 
-#settings_menu__section {
+#section__settings_menu {
   position: absolute;
   top: 5vh;
   right: 0;
@@ -518,8 +518,8 @@ border-bottom: solid 1px var(--base-border);
   display: grid;
   grid: 2em auto/ 1fr 1fr ;
   grid-template-areas: 
-    'h h h'
-    'e . n';
+    "h h h"
+    "e . n";
   min-width: 100%;  
 }
 
@@ -561,7 +561,7 @@ details[open] p {
             ============ */
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Comforter Brush', cursive;
+  font-family: "Comforter Brush", cursive;
   margin-bottom:  .2em;
 }
 
@@ -593,7 +593,7 @@ h1, h2, h3, h4, h5, h6 {
   color: white;             
 }
 
-#settings_span__gameboard[data-ingame='yes']  {
+#settings_span__gameboard[data-ingame="yes"]  {
   pointer-events: none;
   color: black;
   background-color: lightgrey;
@@ -657,8 +657,8 @@ h1, h2, h3, h4, h5, h6 {
             
  /*#region 9) game-end screen */
 
-#main__section[data-gameend = 'yes'],
-#main__section[data-canvasend = 'yes']{
+#section__main[data-gameend = "yes"],
+#section__main[data-canvasend = "yes"]{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -668,13 +668,13 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
-#main__section[data-gameend = 'yes'] > *,
-#main__section[data-canvasend = 'yes'] > *{
+#section__main[data-gameend = "yes"] > *,
+#section__main[data-canvasend = "yes"] > *{
   flex: 1;
 }
 
-#wrapper__gameboard[data-gameend = 'yes'],
-#wrapper__gameboard[data-canvasend = 'yes']{
+#wrapper__gameboard[data-gameend = "yes"],
+#wrapper__gameboard[data-canvasend = "yes"]{
   flex-grow: 3;
   aspect-ratio: 1/1;
 }
@@ -727,7 +727,7 @@ input {
   cursor: pointer;
   box-shadow: 0 0 1rem black;
   border: none;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
 }
 
 input:hover {
@@ -751,7 +751,7 @@ button {
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
 }
 
 button:hover {
@@ -794,7 +794,7 @@ select {
   border-radius: 10%;
   box-shadow: 0 0 1rem black;
   border: none;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
 }
 
 select:hover {
@@ -803,7 +803,7 @@ select:hover {
   box-shadow: inset 0 0 1rem white;
 }
 
-#choosing_cpu__select {
+#select__choosing_cpu {
   min-height: rem;
   border-radius: 10rem;
 }
@@ -840,7 +840,7 @@ select:hover {
             =================== */
 
 .Class_ChoosingAnimation_Coin_1 {
-  background-image: url('../Folder_Graphics/Coins/yellow.png');
+  background-image: url("../Folder_Graphics/Coins/yellow.png");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: top;
@@ -860,7 +860,7 @@ select:hover {
 }
 
 .Class_ChoosingAnimation_Coin_2 {
-  background-image: url('../Folder_Graphics/Coins/red.png');
+  background-image: url("../Folder_Graphics/Coins/red.png");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: top;
@@ -1153,6 +1153,135 @@ select:hover {
 
 /* #region 11) media queries */
 
+/* smartphones and other small devices */
+@media (max-width: 767.98px) {
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  #section__main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #gameboard__wrapper {
+    min-width: 75vw;
+    min-height: 50vw;
+  }
+
+  #gameboard__wrapper[data-ingame = "yes"] {
+    min-width: 100%;
+    margin-top: 0%;
+  }
+
+  .Class_Settings_Menu {
+    position: absolute;
+    right: 46vw;
+    top: 2vh;
+    filter: invert(1);
+  }
+  .naming__span {
+    display: inline-block;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .name_svgs {
+    margin-block: 1rem;
+  }
+
+  #input__player1_name {
+    min-width: 100%;
+  }
+
+  #input__player2_name {
+    min-width: 100%;
+  }
+
+  #wrapper__leftSidebar {
+    width: 100%;
+    margin-block: 2rem;
+  }
+  #wrapper__rightSidebar {
+    width: 100%;
+    margin-block: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .Class_Turn_Players {
+    display: flex;
+    min-width: 100%;
+    margin-bottom: 5%;
+    margin-top: 3%;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+  }
+  .Class_Left_Pos {
+    bottom: 0;
+  }
+  .Class_Right_Pos {
+    bottom: 0;
+  }
+
+  #button__start {
+    min-width: 30%;
+    margin-bottom: 5%;
+  }
+
+  #settings_span {
+    overflow: hidden;
+  }
+
+  /* Gaḿe End Screen Mobile*/
+               /* Move Gameboard at the End of the Game Animation */
+  .Class_Gameboard_End {
+    transform: scale(0.5);
+  }
+
+  /*
+  .topCellsCanvas {
+    display: none;
+  }
+*/ 
+  
+  #button__newGame {
+    min-width: 40%;
+  }
+
+  #button__startingScreen {
+    min-width: 40%;
+  }
+
+  #button__gameEnd {
+    margin-block: 2rem;
+  }
+
+  /* Win Marks */
+  #div__wonGames {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    min-width: 3rem;
+    min-height: 2rem;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  #div__wonGames_P2 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    min-width: 3rem;
+    min-height: 2rem;
+    display: flex;
+    align-items: flex-end;
+  }
+}
 
 /* #endregion*/
 
@@ -1174,7 +1303,7 @@ todo
                                                                                                   
  !                                              Credits & Special Thanks to:                                                 
                                                                                                   
-Special thanks to the 'Odin Project'-Team who did a great job in giving advice for learning Web-Development.    
+Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    
 ?                                             https://www.theodinproject.com/                                               
                                                                                                   
                   Greetings to the many, many programmers who take the time to put there knowledge online!         

@@ -264,7 +264,8 @@ box-shadow: 0em 0em 2em orangered;
                @media (max-width: 991.98px) { … }
          Große Endgeräte (Laptops, Bildschirme, kleiner als 1200px):
                @media (max-width: 1199.98px) { … }
-      Min-Widt - ist intuitiver und besser lesbar.
+
+      Min-Width - ist intuitiver und besser lesbar.
          Kleine Endgeräte (Smartphones, 576px und größer):
                @media (min-width: 576px) { … }
          Mittlere Endgeräte (Tablets, 768px und größer):

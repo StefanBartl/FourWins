@@ -1,126 +1,126 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
   <head>
-    <title id='page__title'></title>
+    <title id="title__page"></title>
     <!-- Javascript und CSS Dateieinbindung -->
-    <link rel='stylesheet' type='text/css' href='Folder_CSS/style.css' />
+    <link rel="stylesheet" type="text/css" href="Folder_CSS/style.css" />
     <!-- Favicon & AppleTouch-->
     <link
-      rel='icon'
-      sizes='16x16'
-      href='Folder_Graphics/Folder_Icons/pb_200x200.ico'
+      rel="icon"
+      sizes="16x16"
+      href="Folder_Graphics/Folder_Icons/pb_200x200.ico"
     />
     <link
-      rel='apple-touch-icon'
-      sizes='120x120'
-      href='Folder_Graphics/Folder_Icons/pb_200x200.png'
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="Folder_Graphics/Folder_Icons/pb_200x200.png"
     />
     <!-- Metadaten  -->
-    <meta name='author' content='Stefan Bartl' />
+    <meta name="author" content="Stefan Bartl" />
     <meta
-      name='description'
-      content='Online-Version of the well knowed family Game 'Four-Wins'. Play it against friends or CPU!'
+      name="description"
+      content="Online-Version of the well knowed family Game "Four-Wins". Play it against friends or CPU!"
     />
     <meta
-      name='keywords'
-      content='Game, Browsergame, Spiel, Browserspiel, Four, Four Wins, 4, Vier, 4 Gewinnt'
+      name="keywords"
+      content="Game, Browsergame, Spiel, Browserspiel, Four, Four Wins, 4, Vier, 4 Gewinnt"
     />
-    <meta charset='UTF-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
   <body>
 
         <header>
-          <h1 id='headline'></h1>
-          <p id='headline_p'></p>
+          <h1 id="headline"></h1>
+          <p id="p__headline"></p>
         </header>
 
-        <section id='main__section' data-ingame='no'>
-          <div  id='leftSidebar__wrapper'>
-            <div class='sidebars'>
-              <h2  id='player1__headline'></h2>
-              <span class='naming__span'>
+        <section id="section__main" data-ingame="no">
+          <div  id="wrapper__leftSidebar">
+            <div class="sidebars">
+              <h2  id="player1__headline"></h2>
+              <span class="naming__span">
                 <input
-                  type='text'
-                  max='18'
-                  id='player1_name__input'
-                  name='player_1_ Name'
+                  type="text"
+                  max="18"
+                  id="input__player1_name"
+                  name="player_1_ Name"
                 />
                 <img
-                  src='./Folder_Graphics/Folder_Icons/simpleicons_org/circleci.svg'
-                  id='player1_name_svg'
-                  class='name_svgs'
-                  for='player_1_Name'
+                  src="./Folder_Graphics/Folder_Icons/simpleicons_org/circleci.svg"
+                  id="player1_name_svg"
+                  class="name_svgs"
+                  for="player_1_Name"
                 />
               </span>
             </div>
-            <div id='choosing_cpu'>
-              <h3 id='choosing_cpu_headline'></h3>
-              <select name='choose_cpu__select' id='choosing_cpu__select'>
-                <option value='No' id='cpu_opt_no'></option>
-                <option value='CPU Easy' id='cpu_easy' selected></option>
-                <option value='CPU Normal' id='cpu_normal'></option>
+            <div id="choosing_cpu">
+              <h3 id="choosing_cpu_headline"></h3>
+              <select name="choose_cpu__select" id="select__choosing_cpu">
+                <option value="No" id="cpu_opt_no"></option>
+                <option value="CPU Easy" id="cpu_easy" selected></option>
+                <option value="CPU Normal" id="cpu_normal"></option>
               </select>
-              <button  id='start__button'></button>
+              <button  id="button__start"></button>
             </div>
         
           </div>
 
-          <div id='sidebarRight__wrapper'>
-            <div class='sidebars'>
-              <h2  id='player2__headline'></h2>
-              <span class='naming__span'>
+          <div id="wrapper__rightSidebar">
+            <div class="sidebars">
+              <h2  id="player2__headline"></h2>
+              <span class="naming__span">
                 <img
-                  src='./Folder_Graphics/Folder_Icons/simpleicons_org/circleci _GESPIEGELTxcf.png'
-                  id='player2_name_svg'
-                  class='name_svgs'
-                  for='player_2_Name'
+                  src="./Folder_Graphics/Folder_Icons/simpleicons_org/circleci _GESPIEGELTxcf.png"
+                  id="player2_name_svg"
+                  class="name_svgs"
+                  for="player_2_Name"
                 />
                 <input
-                  type='text'
-                  max='18'
-                  id='player2_name__input'
-                  name='player_2_ Name'
+                  type="text"
+                  max="18"
+                  id="input__player2_name"
+                  name="player_2_ Name"
                 />
               </span>
             </div>
           </div>
         </section>
 
-        <section  id='settings_menu__section'>
-          <span id='settings_span' data-endscreen='no'>
-            <h2 id='settings_menu__headline'></h2>
+        <section  id="section__settings_menu">
+          <span id="settings_span" data-endscreen="no">
+            <h2 id="settings_menu__headline"></h2>
 
-              <h3 id='info_h'></h3>
+              <h3 id="info_h"></h3>
 
-            <span id='settings_span__gameboard' data-ingame='no' data-gamend='no'>
-              <h3 id='settings_gameboard_h'></h3>
-            <div id='container_settings_gameboard_sizing'>
-              <input type='number' name='gameboard_size_x' id='settings_gameboard_sizeX' min='4' max='50' placeholder='1-14' value='7'/>
-              <input type='number' name='gameboard_size_y' id='settings_gameboard_sizeY' min='4' max='50' placeholder='1-14' value='6'/>
-              <button id='settings_gameboard_button'></button>
+            <span id="settings_span__gameboard" data-ingame="no" data-gamend="no">
+              <h3 id="settings_gameboard_h"></h3>
+            <div id="container_settings_gameboard_sizing">
+              <input type="number" name="gameboard_size_x" id="settings_gameboard_sizeX" min="4" max="50" placeholder="1-14" value="7"/>
+              <input type="number" name="gameboard_size_y" id="settings_gameboard_sizeY" min="4" max="50" placeholder="1-14" value="6"/>
+              <button id="settings_gameboard_button"></button>
             </div>
           </span>
 
-          <span id='span_settings_mechanics'>
-            <div id='container_colour'>
-              <h3 id='colour_h'></h3>
-              <div id='container__toggleColour'>
-                <span id='colour_slider'
-                  ><div id='button__toggle'></div
+          <span id="span_settings_mechanics">
+            <div id="container_colour">
+              <h3 id="colour_h"></h3>
+              <div id="container__toggleColour">
+                <span id="colour_slider"
+                  ><div id="button__toggle"></div
                 ></span>
               </div>
             </div>
-            <div id='container__sound'>
-              <h3 id='h__sound'></h3>
-              <input type='checkbox' id='checkbox__sound' />
+            <div id="container__sound">
+              <h3 id="h__sound"></h3>
+              <input type="checkbox" id="checkbox__sound" />
             </div>
-            <div id='container__language'>
-              <h3 id='h__language'></h3>
-              <select name='LanguageMenu' id='select__language'>
-                <option value='Deutsch'  selected>Deutsch</option>
-                <option value='English'>English</option>
+            <div id="container__language">
+              <h3 id="h__language"></h3>
+              <select name="LanguageMenu" id="select__language">
+                <option value="Deutsch"  selected>Deutsch</option>
+                <option value="English">English</option>
               </select>
               <div id="div__aniToggle">
                 <h3 id="h__aniToggle"></h3>
@@ -130,80 +130,80 @@
             </div>
           </span>
 
-            <div id='container__stats'>
-              <h3 id='h__stats'></h3>
-              <div  id='wrapper__stats_easy'>
-                <h4 id='h__stats_easy'></h4>
-                <details class='summary__details'>
-                  <summary id='stats_easy'></summary>
-                  <span class='span_stats'
-                    ><p id='easy_wins'>0</p>
+            <div id="container__stats">
+              <h3 id="h__stats"></h3>
+              <div  id="wrapper__stats_easy">
+                <h4 id="h__stats_easy"></h4>
+                <details class="summary__details">
+                  <summary id="stats_easy"></summary>
+                  <span class="span_stats"
+                    ><p id="easy_wins">0</p>
                     /
-                    <p id='easy_draw'>0</p>
+                    <p id="easy_draw">0</p>
                     /
-                    <p id='easy_loose'>0</p></span
+                    <p id="easy_loose">0</p></span
                   >
-                  <button id='reset__easy'>
+                  <button id="reset__easy">
                     Reset CPU Easy
                   </button>
                 </details>
               </div>
-              <div  id='wrapper__stats_normal'>
+              <div  id="wrapper__stats_normal">
                 <h4>Normal</h4>
-                <details class='summary__details'>
-                  <summary id='stats_normal'></summary>
-                  <span class='span_stats'>
-                    <p id='normal_wins'>0</p>
+                <details class="summary__details">
+                  <summary id="stats_normal"></summary>
+                  <span class="span_stats">
+                    <p id="normal_wins">0</p>
                     /
-                    <p id='normal_draw'>0</p>
+                    <p id="normal_draw">0</p>
                     /
-                    <p id='normal_loose'>0</p>
+                    <p id="normal_loose">0</p>
                   </span>
-                  <button id='reset__normal'>
+                  <button id="reset__normal">
                     Reset CPU Normal
                   </button>
                 </details>
               </div>
             </div>
 
-            <div id='container__contacts'>
-              <h3 id='h__contact'></h3>
+            <div id="container__contacts">
+              <h3 id="h__contact"></h3>
             </div>
-            <div id='container__credits'>
-              <h3 id='h__credits'></h3>
+            <div id="container__credits">
+              <h3 id="h__credits"></h3>
             </div>
 
-            <div id='container__delete'>
-              <button id='button__delete'></button>
+            <div id="container__delete">
+              <button id="button__delete"></button>
             </div>
           </span>
         </section>
 
   <!-- #region Javascript-Files-->
     <script
-      type='text/javascript'
-      src='Folder_Javascript/domElements.js'
+      type="text/javascript"
+      src="Folder_Javascript/domElements.js"
     ></script>
-    <script type='text/javascript' 
-    src='Folder_Javascript/function_library.js'>
+    <script type="text/javascript" 
+    src="Folder_Javascript/function_library.js">
   </script>
     <script
-      type='text/javascript'
-      src='Folder_Javascript/screen_changes.js'
+      type="text/javascript"
+      src="Folder_Javascript/screen_changes.js"
     ></script>
     <script
-      type='text/javascript'
-      src='Folder_Javascript/validation.js'
+      type="text/javascript"
+      src="Folder_Javascript/validation.js"
     ></script>
     <script
-      type='text/javascript'
-      src='Folder_Javascript/cpu_player.js'
+      type="text/javascript"
+      src="Folder_Javascript/cpu_player.js"
     ></script>
     <script
-      type='text/javascript'
-      src='Folder_Javascript/translation.js'
+      type="text/javascript"
+      src="Folder_Javascript/translation.js"
     ></script>
-    <script type='text/javascript' src='Folder_Javascript/script.js'></script>
+    <script type="text/javascript" src="Folder_Javascript/script.js"></script>
     <!-- #endregion -->
   
   </body>
