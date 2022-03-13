@@ -89,8 +89,7 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
       const diagonal_topVal = validator__column(diagonal, true);
        console.log("CPU Normal: Diagonal placement possible in column ", diagonal,  diagonal_topVal);
       if (diagonal_topVal === true) {
-        let placeInColumn = diagonal - 1;
-        Thinking_Effect(true, placeInColumn);
+        Thinking_Effect(true, diagonal);
         return
       };
     };
@@ -105,8 +104,7 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
      columnToProof > 1 ? upwards_topVal = true : upwards_topVal = false; 
       //console.log("CPU Normal: Upwards placement possible in column", upwards,  upwards_topVal);
       if (upwards_topVal === true) {
-        let placeInColumn = upwards - 1;
-        Thinking_Effect(true, placeInColumn);
+        Thinking_Effect(true, upwards);
         return
       };
     };
@@ -135,8 +133,7 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
     // if all ok invoke placement
      if (upwards_topVal === true) {
         // console.log(`Number upwards placement in column ${randomizedColumn} made.`);
-        let upwardsPlacement =  randomizedColumn - 1;
-        Thinking_Effect(true, upwardsPlacement);
+        Thinking_Effect(true, randomizedColumn);
         return
       };
     };
@@ -157,8 +154,7 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
  // if all ok invoke placement
   if (sideways_topVal === true) {
     // console.log(`Number upwards placement in column ${randomizedColumn} made.`);
-     let sidewaysPlacement =  randomizedColumn - 1;
-     Thinking_Effect(true, sidewaysPlacement);
+     Thinking_Effect(true, randomizedColumn);
      return
    };
  };
@@ -514,27 +510,31 @@ function Get_Valid_Sideways_Placement() {
       //normal last row
       // proof placement to the left
       if(lastPlacement[0] !== undefined 
-        &&  document.getElementById(`ID_C${columnNumber + 1}R${1}`).getAttribute('data-isplayed') === 'no'){
-          sidewaysArray.push(columnNumber + 1);
+        &&  document.getElementById(`ID_C${columnNumber - 1}R${1}`)
+        &&  document.getElementById(`ID_C${columnNumber - 1}R${1}`).getAttribute('data-isplayed') === 'no'){
+          sidewaysArray.push(columnNumber - 1);
     };
     // proof placemenmt to the right
     if(lastPlacement[0] !== undefined 
-      &&  document.getElementById(`ID_C${columnNumber - 1}R${1}`).getAttribute('data-isplayed') === 'no'){
-        sidewaysArray.push(columnNumber - 1);
+      &&  document.getElementById(`ID_C${columnNumber + 1}R${1}`)
+      &&  document.getElementById(`ID_C${columnNumber + 1}R${1}`).getAttribute('data-isplayed') === 'no'){
+        sidewaysArray.push(columnNumber + 1);
   };
   
   //normal II
       // proof placement to the left
       if(lastPlacement[0] !== undefined 
-        &&  document.getElementById(`ID_C${columnNumber + 1}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
-        &&  document.getElementById(`ID_C${columnNumber + 1}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
-          sidewaysArray.push(columnNumber + 1);
+        &&  document.getElementById(`ID_C${columnNumber - 1}R${lastPlacement[0]}`)
+        &&  document.getElementById(`ID_C${columnNumber - 1}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
+        &&  document.getElementById(`ID_C${columnNumber - 1}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
+          sidewaysArray.push(columnNumber - 1);
     };
       // proof placement to the right
       if(lastPlacement[0] !== undefined 
-        &&  document.getElementById(`ID_C${columnNumber  - 1}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
-        &&  document.getElementById(`ID_C${columnNumber - 1}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
-          sidewaysArray.push(columnNumber - 1);
+        &&  document.getElementById(`ID_C${columnNumber  + 1}R${lastPlacement[0]}`)
+        &&  document.getElementById(`ID_C${columnNumber  + 1}R${lastPlacement[0]}`).getAttribute('data-isplayed') === 'no'
+        &&  document.getElementById(`ID_C${columnNumber  + 1}R${lastPlacement[0] - 1}`).getAttribute('data-isplayed') === 'yes'){
+          sidewaysArray.push(columnNumber +1);
     };
   // console.log(`Sideways array: ${sidewaysArray}`);
  
@@ -556,19 +556,17 @@ function Get_Valid_Sideways_Placement() {
 /* ==========
 !     CPU Placement 
             =========== */
-function CPU_Placement(valid_number) {
-  // !Update: Remove the -1 in the CPU Normal usw.. an calculate here one time -1 from argument for the array!
- // console.log(`Entered CPU Placement Function. Column ${column} is clicked `);
+function CPU_Placement(columnNumber) {
+ // console.log(`Entered CPU Placement Function. Column ${columnNumber} is clicked `);
+
+ // to click correct subtract 1 from column number because an array starts with 0
+clickNumber = columnNumber - 1;
 
   // Get all Top-Cells
   const topCellsArray = document.getElementsByClassName('topCells');
 
   // Make the Placement
-  topCellsArray[valid_number].click();
-
-  // If it was the last Cell in the Column, lock it
-  const columnNumber = valid_number + 1;
-  Column_Locking_Validation(true);
+  topCellsArray[clickNumber].click();
 };
 
 /* =================
@@ -591,10 +589,10 @@ randomizing_array.push(arr2[i]);
 }
 
 randomizing_number = getRandomInt(randomizing_array.length);
-valid_number = randomizing_array[randomizing_number];
+columnNumber = randomizing_array[randomizing_number];
 
-//console.log("Randomizer has choosen a column: " + valid_number);
-return valid_number;
+//console.log("Randomizer has choosen a column: " + columnNumber);
+return columnNumber;
 };
   
 //#endregion
