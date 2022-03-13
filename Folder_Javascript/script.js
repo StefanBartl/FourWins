@@ -43,7 +43,7 @@ todo    take a look at the bonus jobs - maybe you have enough passion to do one 
 */
 //#endregion
 
-//#region 1) General Settings & Set-Up Pages
+//#region 1) general settings & set-up pages
 
 const Game = {
   // Game Object for storing important values in variables. Collected access via Game.[variable]
@@ -75,7 +75,7 @@ clicked_TopCell_ID: '',
   Draws: 0,
   // Standard is: Left Yellow / Right Red
   player_Colour_Left: 'yellow',
-  Sound: true,
+  Sound: false,
   menuAnimation: 'true',
   state: 'startingScreen',
 };
@@ -90,20 +90,26 @@ Create_Gameboard(document.getElementById('settings_gameboard_sizeX').value, docu
 Set_Page_Language();
 
 //#region Audio
+
+// assign variables to the audio files 
+
+// Confirm Audio Sample
 const warning_audio = new Audio(
   'Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav'
-); // Confirm Audio Sample
-warning_audio.load();
-const lost_audio = new Audio('Folder_Audio/freesound_com/loose.wav'); // Loose against CPU Audio Sample
-lost_audio.load();
+); 
+
+ // Loose against CPU Audio Sample
+const lost_audio = new Audio('Folder_Audio/freesound_com/loose.wav');
+
+ // Winning Cheer Audio Sample
 const win_audio = new Audio(
   'Folder_Audio/freesound_com/klankbeeld__choir-sing-a-final-01.wav'
-); // Winning Cheer Audio Sample
-win_audio.load();
+);
+
+ //Placement Audio Sample
 const placing_audio = new Audio(
   'Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav'
-); //Placement Audio Sample
-placing_audio.load();
+);
 
 Game.Sound = localStorage.Sound || false;
 Correct_Sound_Setting();
@@ -112,11 +118,21 @@ sound_checkbox.addEventListener('click', () => {
   if (sound_checkbox.checked === true) {
     localStorage.Sound = true;
     Game.Sound = true;
+    starting_audio.muted = false;
   } else {
     localStorage.Sound = false;
     Game.Sound = false;
+    starting_audio.muted = true;
   }
 });
+
+// only preload audio (to have it ready if needed) if sound is on
+if(Game.Sound === true){
+warning_audio.load();
+lost_audio.load();
+win_audio.load();
+placing_audio.load();
+};
 
 //#endregion
 
@@ -568,7 +584,7 @@ start_button.addEventListener('click', Game_Preparations);
 
 //#endregion
 
-//#region 2) Main game
+//#region 2) main game
 
 /* ============
 !     Preparing to Play 
@@ -578,6 +594,9 @@ function Game_Preparations() {
   // console.log('Entered Game Preparations');
 
   Game.state = 'Preparations';
+
+  // stop playing starting screen sound
+  if (Game.Sound === true) starting_audio.pause(); 
 
   // disable gameboard-size changing during game
   document.getElementById('settings_span__gameboard').setAttribute('data-ingame',  'yes');
@@ -701,7 +720,7 @@ function PlayGame() {
 };
 //#endregion
 
-//#region 3) Placements
+//#region 3) placements
 /* ==============
 !     Prepare Placement
             ============== */
@@ -934,17 +953,14 @@ function Player_2_Placement_Finish() {
 };
 //#endregion
 
-//#region 3) Final informations and Comments
+//#region 4) final informations and comments
 
 /*
 ?                     Bonus Jobs to-do:
 
--) Highlight the winning chain!
--) Beautify the win notifications with images, f.e.: with tally's!
--) Make the Coin Images a variable _> User could choice between coin appearance!
+-) Make the Coin Images a variable _> User could choice between coin appearance 
 -) Implement Classic and Personal style!
 -) Save /Load Game function via saving cell-states in localStorage!
--) Improve CPU Normal, especially the Diagonal Detection!
 -) Write a CPU Heavy Algorhytmus!
 -) Make it possible to switch from Game Mode to the Starting Screen to change Settings, Names etc...
 -) Design a Starting Screen Animation to make it more interesting to play!  
@@ -952,7 +968,7 @@ function Player_2_Placement_Finish() {
                                                                                                                                                                                                                                                                                 */
 //#endregion
 
-//#region 4) Credits
+//#region 5) credits
 /*
     
 ====================================================================================================================

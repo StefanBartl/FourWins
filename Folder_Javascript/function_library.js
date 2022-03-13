@@ -1429,6 +1429,11 @@ function applyClass(name,element,doRemove){
 
 -) Variablen in return: return `(${variable})`
 
+? Selektoren 
+
+document.querySelector() selektiert auch nach CSS Regeln wie:
+ let test = document.querySelector('a:has(> img)');
+
 ==============================================================================================================================================================================================================================================================================================*/
 
 //#endregion

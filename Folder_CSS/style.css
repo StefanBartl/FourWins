@@ -11,15 +11,16 @@
 ?                                     1) general                                                                                                
 ?                                     2) layout                                                                                                                                      
 ?                                     3) gameboard                                                                                                                                 
-?                                     4) settings-menu                                                                                                                                                                                   
-?                                     5) typography                                                                                                                                        
-?                                     6) inputs, buttons, dropdowns, etc...                                                                                                         
-?                                     7) animations & transitions                                                                                                                       
-?                                     8) game-end screen           
-?                                     9) helpers                                   
-?                                    10) media queries                                                                                                                                   
-?                                    11) final information & comments                                                                                                                    
-?                                    12) credits                                                                                                                                                                                                                                                                                                                                                                                                              */
+?                                     4) settings-menu           
+?                                     5) game screen
+?                                     6) game-end screen                                                                                                                                                                         
+?                                     7) typography                                                                                                                                        
+?                                     8) inputs, buttons, dropdowns, etc...                                                                                                         
+?                                     9) animations & transitions                                                                                                                       
+?                                    10) helpers                                   
+?                                    11) media queries                                                                                                                                   
+?                                    12) final information & comments                                                                                                                    
+?                                    13) credits                                                                                                                                                                                                                                                                                                                                                                                                              */
 /*#endregion*/
 
 /* #region jobs to-do */
@@ -27,7 +28,6 @@
 
 !                           Jobs To-Do: 
 
-todo    -) start screen layout 
 todo    -) scrollbar rechts am starting Bildschirm muss weg, sonst funktioniert das Menu ästhetisch nicht mehr.
 todo    -) test and repair responsivness in all sizes! -> menu muss von der Seite weg!
 todo    -) CSS-Code minimizing f.e. bind repetative classes to one class!
@@ -81,7 +81,6 @@ todo    -) Save Default Script Files with the new Script Layout for later Projec
   overflow-x: hidden;
   overflow-y: auto;
 }
-
 
 /* #region Resets */
 
@@ -148,9 +147,9 @@ select {
 
 /* #region 2) layout */
 
-/* =========
-?     page layout
-          ========= */
+/* =============
+?     page basis layout
+          ============== */
 
 body {
   background-color: var(--base-colour);
@@ -194,7 +193,6 @@ header {
   grid-area: leftSide;
   display: flex;
   flex-direction: column;
-  
   align-items: center;
 }
 
@@ -240,10 +238,6 @@ border-bottom: solid 1px var(--base-border);
   justify-content: center;
   font-size: x-large;
   margin-top: 1em;
-}
-
-#start__button{
-  
 }
 
 /* =========
@@ -418,6 +412,7 @@ border-bottom: solid 1px var(--base-border);
   color: red;
 }
 
+
 /* ===============
 ?     settings-menu content 
             ================ */
@@ -484,30 +479,28 @@ border-bottom: solid 1px var(--base-border);
 #colour_slider{
   background-color: yellow;
   height: 100%;                 
-  width: 15%;
+  width: 23%;
   border-radius: 20%;
   box-shadow: 0 0 1em black;
 }
 
 #button__toggle {
-  background-color: black;
+  cursor: pointer;
+  background-color: var(--base-colour);
   width: 1em;
   height: 1em;
   border-radius: 50%;
+  transition: all 2s;
 }
 
 #button__toggle:hover {
-  background-color: white;
+  background-color: var(--gameboard);
 }
+
 
 .toggle__colour {
-  transform: translateX(1.8rem);
-}
+  transform: translateX(2rem);
 
-#h__soundund_Checkbox {
-  height: 1.5rem;
-  box-shadow: 0 0 1rem black;
-  border-radius: 20%;
 }
 
 #checkbox__sound:hover {
@@ -610,6 +603,108 @@ h1, h2, h3, h4, h5, h6 {
 
 /* #endregion */
 
+/* #region 7) game-screen*/
+
+/* ===========
+?     win notifications
+            ============ */
+
+            #div__wonGames_P2 {
+              position: absolute;
+              top: 0;
+              left: 0;
+              display: flex;
+              margin: 2em;
+              flex-wrap: wrap;
+              align-items: center;
+              flex-direction: column;
+              justify-content: end;
+              font-size: large;
+            }
+            
+            #div__wonGames_P2 {
+              position: absolute;
+              top: 0;
+              right: 3rem;
+              display: flex;
+              margin: 2em;
+              align-items: center;
+              flex-direction: column;
+              justify-content: end;
+              font-size: large;
+            }
+            
+            #div__drawGames {
+              position: absolute;
+              margin-top: 2em;
+              top: 0;
+              right: 50%;
+              transform: translateX(+50%);
+              display: flex;
+              align-items: center;
+              flex-direction: column; 
+              font-size: large;
+              
+            }
+            
+            .img__tallys{
+              filter: invert(1);
+              height: 2em;
+            }
+            
+            
+            
+            /* #endregion*/
+            
+ /*#region 9) game-end screen */
+
+#main__section[data-gameend = 'yes'],
+#main__section[data-canvasend = 'yes']{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 1em;
+  font-size: x-large;
+  align-items: center;
+  text-align: center;
+}
+
+#main__section[data-gameend = 'yes'] > *,
+#main__section[data-canvasend = 'yes'] > *{
+  flex: 1;
+}
+
+#wrapper__gameboard[data-gameend = 'yes'],
+#wrapper__gameboard[data-canvasend = 'yes']{
+  flex-grow: 3;
+  aspect-ratio: 1/1;
+}
+
+#h__gameEnd{
+    margin-top: 3%;
+}
+
+/* ===================
+?     firework canvas container
+            =================== */
+
+.div__canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+/* Try to get transparent black background if canvasend! 
+.topCellsCanvas{
+  
+}
+*/
+
+/* #endregion */
+         
 /* #region 5) typographie */
 
 #h__turnDiv {
@@ -737,60 +832,7 @@ select:hover {
 
 /* #endregion */
 
-/* #region game-screen*/
-
-/* ===========
-?     win notifications
-            ============ */
-
-#div__wonGames_P2 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  margin: 2em;
-  flex-wrap: wrap;
-  align-items: center;
-  flex-direction: column;
-  justify-content: end;
-  font-size: large;
-}
-
-#div__wonGames_P2 {
-  position: absolute;
-  top: 0;
-  right: 3rem;
-  display: flex;
-  margin: 2em;
-  align-items: center;
-  flex-direction: column;
-  justify-content: end;
-  font-size: large;
-}
-
-#div__drawGames {
-  position: absolute;
-  margin-top: 2em;
-  top: 0;
-  right: 50%;
-  transform: translateX(+50%);
-  display: flex;
-  align-items: center;
-  flex-direction: column; 
-  font-size: large;
-  
-}
-
-.img__tallys{
-  filter: invert(1);
-  height: 2em;
-}
-
-
-
-/* #endregion*/
-
-/* #region 7) animations & transitions */
+/* #region 8) animations & transitions */
 
 /*#region  choosing coin animations */
 
@@ -1002,56 +1044,7 @@ select:hover {
 
 /* #endregion */
 
-/* #region 8) game-end screen */
-
-#main__section[data-gameend = 'yes'],
-#main__section[data-canvasend = 'yes']{
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  gap: 1em;
-  font-size: x-large;
-  align-items: center;
-  text-align: center;
-}
-
-#main__section[data-gameend = 'yes'] > *,
-#main__section[data-canvasend = 'yes'] > *{
- flex: 1;
-}
-
-#wrapper__gameboard[data-gameend = 'yes'],
-#wrapper__gameboard[data-canvasend = 'yes']{
-  flex-grow: 3;
-  aspect-ratio: 1/1;
-}
-
-#h__gameEnd{
-    margin-top: 3%;
-}
-
-/* ===================
-?     firework canvas container
-            =================== */
-
-.div__canvas {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-}
-
-/* Try to get transparent black background if canvasend! 
-.topCellsCanvas{
-  
-}
-*/
-
-/* #endregion */
-
-/* #region 9) helpers */
+/* #region 10) helpers */
 
 .Class_Invisible {
   visibility: hidden;
@@ -1159,7 +1152,7 @@ select:hover {
 }
 /* #endregion */
 
-/* #region 10) media queries */
+/* #region 11) media queries */
 
 @media (max-width: 767.98px) {
   body {
@@ -1299,7 +1292,7 @@ select:hover {
 
 /* #endregion*/
 
-/* #region 11) final informations & comment */
+/* #region 12) final informations & comment */
 
 /*
 ?                         CSS Bonus Jobs
@@ -1312,7 +1305,7 @@ todo
 
 /* #endregion */
 
-/* #region 12) credits */
+/* #region 13) credits */
 /*
                                                                                                   
  !                                              Credits & Special Thanks to:                                                 

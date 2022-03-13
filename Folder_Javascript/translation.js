@@ -100,7 +100,7 @@ colour.title = 'Wähle eine Farbe für Spieler 1!';
 sound_checkbox.title = 'Sound ON / OFF';
 language_h.innerText = 'Spracheinstellung';
 language_menu.title = 'Wähle deine Sprache!';
-aniToggle__h.innerText = 'Farbanimation';
+aniToggle__h.innerText = 'Farbanimationen';
 aniToggle_checkbox.title = 'Schalte die farbigen Animation auf/ab (Start Button / Menü)';
 contact_h.innerText = 'Kontakt';
 contact_h.title = 'Zu den Kontaktmöglichkeiten';
@@ -124,7 +124,7 @@ ki_level_dropdown_normal.innerHTML = 'CPU Normal';
 // console.log('Page translated to Deutsch.');
 };
 
-/* ===========
+/* ============
 !     Library English 
             =========== */
 function English() {
