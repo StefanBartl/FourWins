@@ -27,7 +27,7 @@
 //#region Open Jobs
 /*
 ?                  Jobs To-do:
-todo    "" wieder zurück :-) und alle sectoins, div usw... als erster
+todo    
 ?                  Finish
 todo    test all functions! all game variants! draw! 
 todo    write comments and prrof existed ones, infoboxes for description if needed, update headlines, console.log the arguments and as much as make sense!

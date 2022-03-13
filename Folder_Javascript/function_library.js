@@ -495,7 +495,7 @@ for(cells of cellsArray) cells.remove();
    //Create a new Gameboard  (Starting-Screen)
   // Create Wrapper
   const new_gameboard_wrapper = document.createElement("div");
-  new_gameboard_wrapper.classList.add("Class_GameboardWrapper");
+  new_gameboard_wrapper.classList.add("gameboard");
   new_gameboard_wrapper.id = "wrapper__gameboard";
   Game.state !== "InGame"
     ? new_gameboard_wrapper.setAttribute("data-ingame", "no")
