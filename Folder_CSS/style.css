@@ -304,35 +304,32 @@ border-bottom: solid 1px var(--base-border);
 }
 
 /* ========================
- ?      game screen gameboard classes 
+! Own game screen region ? ?      game screen gameboard classes 
                 ======================== */
 
-/*
-.Class_Turn_Players {
-  min-width: 100%;
-  min-height: 100%;
-  margin-bottom: 3%;
-  margin-top: 3%;
+/* =======================================
+?     turn players motification & thinking
+            =================================== */
+
+.Class_Left_Pos {
+  position: absolute;
+  left: 10%;
+  top: 20%;
   text-align: center;
-  justify-content: center;
-  align-content: center;
+  font-size: large;
 }
-*/
+
+.Class_Right_Pos {
+  position: absolute;
+  right: 10%;
+  top: 20%;
+}
 
 .Class_Thinking {
   text-align: center;
   font-size: 3rem;
 }
 
-.Class_Left_Pos {
-  position: absolute;
-  left: 3%;
-}
-
-.Class_Right_Pos {
-  position: absolute;
-  right: 3%;
-}
 
 /* ==========
 ?     placing coins
@@ -672,28 +669,17 @@ button:hover {
 }
 
 #button__delete {
-  cursor: pointer;
-  
   border-radius: 10%;
 }
 
-#button__newGame {
-  cursor: pointer;
+#button__newGame,
+#button__startingScreen{
   min-width: 12.5vw;
   min-height: 7.5vh;
   border-radius: 10rem;
-  margin-right: 1rem;
-  margin-top: 10vh;
+  margin: 1rem;
 }
 
-#button__startingScreen {
-  cursor: pointer;
-  min-width: 12.5vw;
-  min-height: 7.5vh;
-  border-radius: 10rem;
-  margin-left: 1rem;
-  margin-top: 10vh;
-}
 
 /* =========
 ?     dropdowns 
@@ -721,7 +707,6 @@ select:hover {
   min-height: rem;
   border-radius: 10rem;
 }
-
 
 /* ========
 ?     summarys 
@@ -794,6 +779,8 @@ select:hover {
   filter: invert(1);
   height: 2em;
 }
+
+
 
 /* #endregion*/
 
@@ -926,28 +913,28 @@ select:hover {
 /* ==================
 ?     coloured box animation 
             ================== */
-            .colourAnimation{
-              animation: colouredBoxAnimation infinite alternate-reverse 10s;
-            }
-            
-            @keyframes colouredBoxAnimation {
-              from{
-                box-shadow: 0em 0em 2em white;
-              }
-              25%{
-                box-shadow: 0em 0em 2em red;
-              }
-            
-              50%{
-                box-shadow: 0em 0em 2em green;
-              }
-              75%{
-                box-shadow: 0em 0em 2em blue;
-              }
-              to {
-                box-shadow: 0em 0em 2em orangered;
-              }
-            }
+.colourAnimation{
+  animation: colouredBoxAnimation infinite alternate-reverse 10s;
+}
+
+@keyframes colouredBoxAnimation {
+  from{
+    box-shadow: 0em 0em 2em white;
+  }
+  25%{
+    box-shadow: 0em 0em 2em red;
+  }
+
+  50%{
+    box-shadow: 0em 0em 2em green;
+  }
+  75%{
+    box-shadow: 0em 0em 2em blue;
+  }
+  to {
+    box-shadow: 0em 0em 2em orangered;
+  }
+}
 
 
 /* ==============
@@ -1011,6 +998,43 @@ select:hover {
 
 /* #region 8) game-end screen */
 
+
+body[data-gameend = 'yes']{
+  display: flex;
+}
+
+#main__section[data-gameend = 'yes'],
+#main__section[data-canvasend = 'yes']{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 1em;
+  font-size: x-large;
+  align-items: center;
+  text-align: center;
+}
+
+#main__section[data-gameend = 'yes'] > *,
+#main__section[data-canvasend = 'yes'] > *{
+ flex: 1;
+}
+
+#wrapper__gameboard[data-gameend = 'yes'],
+#wrapper__gameboard[data-canvasend = 'yes']{
+  flex-grow: 3;
+  aspect-ratio: 1/1;
+}
+
+#h__gameEnd{
+    margin-top: 3%;
+}
+
+/* Try to get transparent black background if canvasend! */
+.topCellsCanvas{
+  
+}
+
+
 /* ===================
 ?     firework canvas container
             =================== */
@@ -1021,37 +1045,9 @@ select:hover {
   top: 0;
   width: 100vw;
   height: 100vh;
-}
-
-body[data-gameend = 'yes']{
-  display: flex;
-}
-
-#main__section[data-gameend = 'yes']{
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  font-size: large;
-}
-
-#main__section[data-canvasend = 'yes']{
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-width: 100vw;
-  font-size: large;
-}
-
-.Class_Top_End {
-  background-color: var(--base-border);
-  opacity: 0.7;
-}
-
-
-
-#div__canvas{
   z-index: -1;
 }
+
 
 /* #endregion */
 
@@ -1261,10 +1257,12 @@ body[data-gameend = 'yes']{
     transform: scale(0.5);
   }
 
-  .Class_Top_End {
+  /*
+  .topCellsCanvas {
     display: none;
   }
-
+*/ 
+  
   #button__newGame {
     min-width: 40%;
   }

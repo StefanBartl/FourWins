@@ -36,6 +36,7 @@ todo    make sure all important is commented. write final informations / comment
 todo    save default script files with the updatet script layout for later projects. also the index with the all new toggle slider and make a generic library for js & css !
 todo    cleanout functions an minimize code as much as it make sense. do the guidelines.
 todo    turn off console.logs
+todo    fix top cell transparent in topCellsCanvas class
 todo    take a look at the bonus jobs - maybe you have enough passion to do one :-)
 !                  Session progress
 ?          
@@ -631,7 +632,7 @@ function Game_Preparations() {
   });
   Create_DOM_Element({
     ParentID: 'div__turnPlayers',
-    Element: 'h3',
+    Element: 'h2',
     ID: 'h__turnDiv',
   });
 

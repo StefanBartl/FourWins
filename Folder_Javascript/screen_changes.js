@@ -20,7 +20,6 @@
 //#region Open Jobs
 /*
 ?                  Jobs To-do:
-todo    -) Win-Screen to new layout
 todo    -) improve winchain animation
 
 ?                  Finish
@@ -36,6 +35,7 @@ todo    -) Write a final Comment.
 //#endregion
 
 //#region 1) Toggle between Start and Game Screen
+
 /* =================
 !     Show the Game-Screen 
             ================= */
@@ -78,6 +78,7 @@ if(Game.state === 'Game End'){
 document.getElementById('settings_span__gameboard').setAttribute('data-ingame',  'yes');
 Game.Language === 'de' ? document.getElementById('settings_gameboard_h').innerText = 'Nur zu Spielbeginn erlaubt!' :  document.getElementById('settings_gameboard_h').innerText = 'Only allowed at Start-Screen!' ; 
 };
+
 /* ================
 !     Show the Start-Screen 
             ================ */
@@ -108,7 +109,6 @@ function Start_Screen() {
 
     // Enable Gameboard-Size changing
     document.getElementById('settings_span__gameboard').setAttribute('data-ingame',  'no');
-
 };
 //#endregion
 
@@ -129,7 +129,7 @@ function Preparations(gameResult) {
     lost_audio.play();
   } else if (gameResult !== 3 && Game.Sound === true) {
     win_audio.play();
-  }
+  };
 
   // If the Game was against CPU, update the stats in the local storage via invoking helper function Update_Stats()
   if (Game.Game_against_CPU === true) Update_Stats(gameResult);
@@ -137,9 +137,8 @@ function Preparations(gameResult) {
   // Loop trough TopCells to give them a better look in the black Game End Screen & Lock the placement function
   const topCellsArray = document.getElementsByClassName('topCells');
   for (let topCell of topCellsArray) {
-    topCell.classList.add('Class_Top_End');
     topCell.style = 'pointer-events:none';
-  }
+  };
 
   // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it. Hide win notivications.
   if(document.getElementById('div__turnPlayers') && !document.getElementById('div__turnPlayers').classList.contains('Class_Invisible'))
@@ -182,7 +181,7 @@ if(document.getElementById('div__drawGames')) document.getElementById('div__draw
   // console.log('Finished Game End Screen preparations and returned:', names_from_result);
 
   return names_from_result;
-}
+};
 
 /* ======================
  !    Creation of Game-End-Screen 
@@ -235,9 +234,14 @@ function Game_End_Screen(gameResult) {
     // with a greater z-index is visible over the fireworks canvas
     const canvas_div = Create_DOM_Element({ ParentID: 'main__section', Element: 'div', ID: 'div__canvas', Class: 'div__canvas' });
     const firework_canvas = Create_DOM_Element({ ParentID: 'div__canvas',  Element: 'canvas', ID: 'firework' });
-    // Fireworks('firework');
+    Fireworks('firework');
     document.getElementById('main__section').setAttribute('data-gameend', 'no');
     document.getElementById('main__section').setAttribute('data-canvasend', 'yes');
+    // If firework canvas background top cells hace to be transparent / black to look good.
+    const topCellsArray = document.getElementsByClassName('topCells');
+    for (let topCell of topCellsArray) {
+      topCell.classList.add('topCellsCanvas');
+    }; 
 
     // Add correct Language to Game End Screen
     if (Game.Language === 'de') {
@@ -264,8 +268,8 @@ function Game_End_Screen(gameResult) {
       ).innerText = `You have won the Game!\n Will you give ${result[1]} a chance to revanche or do you want back to Starting-Screen?`;
       document.getElementById('h__gameEnd').alt =
         'Another game or back to starting screen?';
-    }
-  }
+    };
+  };
 
   // If the CPU won against Player CPU is always Player 2 and if Game against CPU is true >>> CPU won), add the lose text and screen
   if (gameResult === 2 && Game.Game_against_CPU === true) {
@@ -279,8 +283,8 @@ function Game_End_Screen(gameResult) {
       document.getElementById(
         'p__gameEnd'
       ).innerText = `${result[1]}, keep your head held high. This time the computer was very strong. Do you want revenge?`;
-    }
-  }
+    };
+  };
 
   // ... for a Draw use this text
   if (gameResult === 3) {
@@ -294,8 +298,8 @@ function Game_End_Screen(gameResult) {
       document.getElementById(
         'p__gameEnd'
       ).innerText = `${result[0]} & ${result[1]}, are you same smart in 4-Wins?\nDo you want to find this out or back to the starting screen?`;
-    }
-  }
+    };
+  };
 
   // Doesnt matter if Game won, Draw or loose against CPU, this Elements hav to be the same (except of the language, ofc...)
   if (Game.Language === 'de') {
@@ -309,7 +313,7 @@ function Game_End_Screen(gameResult) {
     document.getElementById('button__startingScreen').innerText = 'Starting Screen';
     document.getElementById('button__startingScreen').alt =
       'To Starting-Screen - Button';
-  }
+  };
 
     // Enable Gameboard-Size changing and append it
     document.getElementById('settings_span__gameboard').setAttribute('data-ingame',  'no');
@@ -368,17 +372,17 @@ const topCellsArray = document.getElementsByClassName('topCells');
 const cellsArray = document.getElementsByClassName('cells');
 // Remove TopCell Style classes collected during the Game and End-Screen & unlock the placement function again
 for (let topCell of topCellsArray) {
-topCell.classList.remove('Class_Top_End');
+topCell.classList.remove('topCellsCanvas');
 topCell.innerText = '';
 topCell.style = 'pointer-events:auto';
 topCell.classList.remove('Class_Full_Column');
-}
+};
 
 // Set the collected sttributes to 'no'
 for (let cell of cellsArray) {
 cell.setAttribute('isPlayed', 'no');
 cell.setAttribute('winChain', 'no');
-}
+};
 
 // Show the 'Player ... is on turn'-Infobox and the 'Thinking-Effectt' again
 if (turn_text && turn_text.classList.contains('Class_Invisible'))
@@ -399,13 +403,13 @@ Turning_PlayerIsOnTurn();
 // If the win was from Human Player 1 and it is a game against the CPU, start next round
 if (gameResult === 1 && Game.Game_against_CPU === true) {
 Game.CPU_Level === 'Easy' ? CPU_Easy() : CPU_Normal();
-}
+};
 
 // Reset the Gameboard in Game Object
 for (let x = 1; x < 8; x++) {
 Game.actualGameboardPlayer1[`C${x}`].length = 0;
 Game.actualGameboardPlayer2[`C${x}`].length = 0;
-}
+};
 
 // Reset Gameboard on screen
 for (let cell of cellsArray) {
@@ -414,7 +418,7 @@ cell.classList.remove('placedCoin__1');
 if (cell.classList.contains('placedCoin__2'))
 cell.classList.remove('placedCoin__2');
 cell.style.opacity = 0.7;
-}
+};
 
 // Reset round
 Game.roundCounter = 0;
