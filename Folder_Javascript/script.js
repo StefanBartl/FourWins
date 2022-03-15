@@ -336,8 +336,6 @@ document.querySelector("header").addEventListener("mousemove", () => {
 });
 };
 
-
-
 //#endregion
 
 //#region Settings Menu Event-Listeners
@@ -574,6 +572,7 @@ delete_all.addEventListener("click", () => {
 //#endregion
 
 start_button.addEventListener("click", Game_Preparations);
+start_button.addEventListener("touchstart", Game_Preparations);
 
 //#endregion
 
