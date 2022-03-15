@@ -27,15 +27,10 @@
 /*
 
 !                           to-do 
-?                     responsive
-todo    start game button for smart screens
-todo    new window position
 
-todo    text-shadows für titel?
 todo    css-code minimizing f.e. bind repetative classes to one class!
 todo    INGAME section?
-todo    settings menu aufteilung
-todo    fonts!
+
 todo    font working on all browser correctly?
 todo    find a final, real good styling!
 
@@ -158,7 +153,7 @@ select {
 body {
   background-color: var(--base-colour);
   font-family: "Titillium Web", sans-serif;
-  color: var(--top-header);
+  color: white;
   display: flex;
   flex-direction: column;
   font-family: "Anton", sans-serif;
@@ -168,9 +163,10 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   border-bottom: solid 1vh var(--base-border);
   border-radius: 1em;
-  font-size: 1.3vw;
+  min-height: 20vh;
 }
 
 #section__main {
@@ -184,7 +180,6 @@ header {
           ==============  */
 
 .sidebars {
-  border-block: solid 1px var(--base-border);
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
@@ -200,15 +195,22 @@ header {
   align-items: center;
 }
 
-#wrapper__rightSidebar {
-  grid-area: rightSide;
-  z-index: 1;
+#wrapper__choosingCPU {
+min-width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 1em;
+padding-bottom: 2em;
+
 }
 
-.sidebars h2{
-  margin-top: 1em;
+#wrapper__rightSidebar {
+  grid-area: rightSide; 
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
 }
 
 .naming__span {
@@ -224,6 +226,10 @@ header {
   margin-inline: 1em;
   filter: invert(1);
 }
+
+#choosing_cpu_headline{
+  font-size: large;
+ }
 
      /*  ================  
 ?        ===  Gameboard  ===
@@ -243,11 +249,10 @@ header {
 
 .gameboard[data-inGame="yes"] {
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
-    min-height: 70vh;
-    aspect-ratio: 1/1;
+    width: min(40vw, 60%);
 }
 
 .gameboard[data-inGame="gameend"] {
@@ -288,10 +293,6 @@ header {
   opacity: 0.7;
 }
 
-/* ========================
-! Own game screen region ? ?      game screen gameboard classes 
-                ======================== */
-
      /*  ==========================  
 ?        ===  Active player notification  ===
           ==========================  */
@@ -314,7 +315,6 @@ header {
   text-align: center;
   font-size: 3rem;
 }
-
 
      /*  ============  
 ?        ===  Coins  ===
@@ -352,6 +352,43 @@ header {
 .placedCoin__2 {
   background-image: url("../Folder_Graphics/Coins/red.png");
 }
+
+
+#h__turnDiv {
+  width: 10rem;
+  border: dashed 0.3rem var(--base-border);
+  padding: 1rem;
+}
+
+/* #region typography*/
+
+#headline{
+  font-size: 5rem;
+  text-shadow: 1rem 1rem 1rem black;
+  text-decoration-line: underline;
+  text-decoration-style: double;
+}
+
+#p__headline{
+margin-top: -1rem;
+}
+
+.sidebars > h2, h3 {
+  text-shadow: 0 0 1rem black;
+}
+
+.sidebars h2{
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  font-size: xx-large;
+}
+
+#choosing_cpu_headline{
+  font-size: xx-large;
+}
+
+/* #endregion */
 
 /* #endregion */
 
@@ -427,7 +464,9 @@ header {
   height: 2em;;
 }
 
-#span_settings_mechanics{
+#span_settings_mechanics,
+#container__sound,
+#div__aniToggle {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -478,7 +517,6 @@ header {
 .toggle__colour {
   transform: translateX(2.8rem);
 }
-
  
 #select__language {
   cursor: pointer;
@@ -673,19 +711,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* #endregion */
          
-/* #region 7) typographie */
-
-#h__turnDiv {
-  width: 10rem;
-  border: dashed 0.3rem var(--base-border);
-  padding: 1rem;
-}
-
-#choosing_cpu_headline{
- font-size: large;
-}
-/* #endregion */
-
 /* #region 8) inputs, buttons, dropdowns, etc...  */
 
      /*  =============  
@@ -706,7 +731,10 @@ button:hover {
 }
 
 #button__start{
-  min-width: 24%;
+  width: 10rem;
+  height: 2rem;
+  margin-top: 1rem; 
+  font-size: x-large;  
 }
 
 #reset_easy {
@@ -725,7 +753,6 @@ button:hover {
 #button__startingScreen{
   min-width: 12.5vw;
   min-height: 7.5vh;
-  border-radius: 10rem;
   margin: 1rem;
 }
 
@@ -799,16 +826,6 @@ select:hover {
 
 #select__choosing_cpu {
   min-height: 1rem;
-}
-
-#wrapper__choosingCPU {
-min-width: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 1em;
-padding-bottom: 2em;
-border-bottom: solid 1px var(--base-border);
 }
 
 #wrapper__choosingCPU h3{
@@ -992,7 +1009,6 @@ border-bottom: solid 1px var(--base-border);
   }
 }
 
-
      /*  ==================  
 ?        ===  settings-menu  ===
           ==================  */
@@ -1050,6 +1066,33 @@ border-bottom: solid 1px var(--base-border);
 
 /*#endregion*/
 
+/*#region coloured text animtion */
+
+.colouredTextAnimation{
+  animation: headlineAnimation 30s infinite alternate-reverse;
+}
+
+@keyframes headlineAnimation {
+  from{
+    color: white;
+  }
+  25% {
+    color: var(--prime-darkgrey)
+  }
+  50% {
+    color: orange;
+  }
+  75% {
+    color: var(--gameboard);
+  }
+  to {
+    color:  white;
+  }
+}
+
+
+/*#endregion*/
+
 /* #endregion */
 
 /* #region 10) helpers */
@@ -1097,12 +1140,11 @@ border-bottom: solid 1px var(--base-border);
           ==================  */
 
 .Class_Window {
-  min-height: 30vh;
-  max-height: 75vh;
-  width: 50%;
+  max-height: 70vh;
+  width: 50vw;
   z-index: 10;
   position: absolute;
-  top: 10%;
+  top: 15%;
   left: 25%;
   display: grid;
   grid: 1rem auto 1rem / 1fr;

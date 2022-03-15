@@ -28,6 +28,7 @@
 /*
 ?                  to-do
 todo    emmet 
+todo    name save
 ?                  finish
 todo    test all functions! all game variants! draw! New Headline if youre looking at func! 
 todo    write comments and prrof existed ones, infoboxes for description if needed, update headlines, console.log the arguments and as much as make sense!
@@ -265,6 +266,7 @@ Game.menuAnimation = localStorage.menuAnimation || "true";
 if(Game.menuAnimation === "true"){
   settings_span.classList.add("colourAnimation");
   start_button.classList.add("colourAnimation");
+  document.getElementById("headline").classList.add("colouredTextAnimation");
   aniToggle_checkbox.checked = true;
 } else {
   aniToggle_checkbox.checked = false;
@@ -358,11 +360,13 @@ Informationen & Einstellungs-Menü:
 Es ist nur jeweils vor dem Spiel möglich die Größe des Gameboards zu verändern. Andererseits würde es die Möglichkeit eröffnen sich unfaire Vorteile zu verschaffen!
 Standardgröße ist 7 Spalten und 6 Reihen - Einwurfreihe exklusive.
 Jede Zelle hat ein 1:1 Höhen und Seitenverhältniss, deswegen werden die Spielfeldzellen kleiner  je mehr Spalten gewählt werden.
+Dies ist auch der Grund warum mit unrealistisch großer Differenz von Spalten und Reihen die Einwurfanimation immer ungenauer wird, da sich die Distanzen auf den verschiedenen Spieler-Bildschirmen mit meinen einfachen Mitteln nicht mehr berechnen lassen.
 
 Eine Farbwahl der Spielsteine ist möglich - auch während des Spieles. 
 Grundeinstellung ist Gelb für den / die linke Spieler_in und Rot für das Gegenüber.
 
 Der Sound hat eine On/Off Funktion. und es ist möglich zwischen Deutscher und Englischer Sprache zu wählen.
+Ebenso ist es möglich die Farbanimationen auszuschalten.
 Bei Spielen gegen den Computer wird der Spielausgang in einer Statistik aufgezeichnet. Diesen findet man in den Spieleinstellungen unter "Statistiken gegen den CPU".
 Diese Statistiken kann man separat zurücksetzen.
 
@@ -386,11 +390,13 @@ und die Einstellungen trotzdem erhalten bleiben. Wollen Sie diese Einstellungen 
       It is only possible to change the size of the gameboard before each game. On the other hand, it would open up the possibility of gaining unfair advantages!
       Standard size is 7 columns and 6 rows - excluding throw-in row.
       Each cell has a 1:1 height and aspect ratio, so the more columns you choose, the smaller the gamefield cells will be.
-      
+      This is also the reason why the throw-in animation becomes less and less precise with unrealistically large differences in columns and rows, since the distances on the various player screens can no longer be calculated with my simple means.
+
       A color choice of the game pieces is possible - even during the game.
       The basic setting is yellow for the player on the left and red for the opponent.
       
       The sound has an on/off function. and it is possible to choose between German and English language.
+      Also it's possible to turn of the coloured animations.
       When playing against the computer, the outcome of the game is recorded in a statistic. This can be found in the game settings under "Stats vs. CPU".
       These statistics can be reset separately.
       
@@ -510,10 +516,13 @@ aniToggle_checkbox.addEventListener("click", ()=>{
           localStorage.menuAnimation = "false" 
           Game.menuAnimation = "false";
           start_button.classList.remove("colourAnimation");
+          document.getElementById("headline").classList.remove("colouredTextAnimation");
+
         } else {
              localStorage.menuAnimation = "true";
              Game.menuAnimation = "true";
              start_button.classList.add("colourAnimation");
+             document.getElementById("headline").classList.add("colouredTextAnimation");
 }});
 
 stats_reset_easy.addEventListener("click", () => {
@@ -540,7 +549,7 @@ credits_h.addEventListener("click", () => {
 
 delete_all.addEventListener("click", () => {
   // Play warning sound
-  warning_audio.play();
+  if(Game.Sound === true)  warning_audio.play();
 
   // Create Confirm Window
   if (Game.Language === "de") {
@@ -802,7 +811,7 @@ function Make_Placement() {
 
   // trigger the correct animation (animated coin route-length) for the placement row in all gameboard sizes
   let gameboard__height = document.getElementById("wrapper__gameboard").clientHeight;
-  let cell__height = gameboard__height / (Game.gameboard_size_x + 1) * 10;
+  let cell__height = gameboard__height / (Game.gameboard_size_x + 1) * 10.5;
   let animation__length =  cell__height *  Game.coin_placement_row;
 
 // consider small devices
