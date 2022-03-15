@@ -571,7 +571,7 @@ delete_all.addEventListener("click", () => {
 
 //#endregion
 
-
+start_button.addEventListener("click", Game_Preparations);
 
 //#endregion
 

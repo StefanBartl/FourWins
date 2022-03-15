@@ -75,7 +75,7 @@ function Translate_StartScreen(language, byUser) {
           ===================  */
 function Deutsch() {
 // console.log("Entered Deutsch library.");
-head_title.innerText = "+++ 4-2Gewinnt +++";
+head_title.innerText = "+++ 4-Gewinnt +++";
 headline.innerText = "Online 4-Gewinnt";
 p__headline.innerText = "Spiele gegen deine Freunde oder gegen die CPU!";
 player_1_headline.innerText = "Wähle einen Namen";
