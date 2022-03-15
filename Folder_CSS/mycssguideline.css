@@ -186,6 +186,17 @@ ul > li matcht alle <li> Elemente, die innerhalb eines <ul> Element sind.
 div span matcht jedes <span> (en-US) Element, das innerhalb eines <div> Elements ist.
 section > blockquote:only-of-type {...} selektiert eine blockquote im section elemen nur dann wenn es das einzige ist. geht auch mit only-child
 
+if/else
+:checked { if  }
+:not(:checked) { else  }
+[data-attr="true"] {  if   }
+[data-attr="false"] {  elseif  }
+:not([data-attr]) {  else }
+The following selector matches only <a> elements that directly contain an <img> child:
+a:has(> img)
+The following selector matches <h1> elements only if they have a <p> element directly following them:
+h1:has(+ p)
+
 <p lang="de">Servus!</p> kann man mit p:lang("de"){} selektieren!
 
 
@@ -212,16 +223,6 @@ https://developer.mozilla.org/de/docs/Web/CSS/CSS_Selectors
 -) Swiping: .container {scroll-snap-type: y mandatory} .child (muat be saection) {scroll-snap-align: start} 
             create a anker point for swipping like tinder
 
-if/else
-:checked { if  }
-:not(:checked) { else  }
-[data-attr="true"] {  if   }
-[data-attr="false"] {  elseif  }
-:not([data-attr]) {  else }
-The following selector matches only <a> elements that directly contain an <img> child:
-a:has(> img)
-The following selector matches <h1> elements only if they have a <p> element directly following them:
-h1:has(+ p)
 
 ?                                   Vorlagen & Tipps
 
