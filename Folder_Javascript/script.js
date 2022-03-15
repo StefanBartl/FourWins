@@ -26,10 +26,10 @@
 
 //#region Open Jobs
 /*
-?                  Jobs To-do:
-todo    
-?                  Finish
-todo    test all functions! all game variants! draw! 
+?                  to-do
+todo    emmet 
+?                  finish
+todo    test all functions! all game variants! draw! New Headline if youre looking at func! 
 todo    write comments and prrof existed ones, infoboxes for description if needed, update headlines, console.log the arguments and as much as make sense!
 todo    finalize formatation. last update table of contents.
 todo    make sure all important is commented. write final informations / comment if make sense.
@@ -294,9 +294,6 @@ window.addEventListener("resize", ()=>{
 // on desktop attach the menu animation
 if(settings_menu.getAttribute("data-device") === "default"){
 
-/* ====================================
- !        Show Settings-Menu Event-Listeners 
-         =================================== */
 settings_span.addEventListener("mouseenter", () => {
   //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
   if (!settings_span.classList.contains("Class_Show_Settings")) {
@@ -306,9 +303,6 @@ settings_span.addEventListener("mouseenter", () => {
   };
 });
 
-/* ====================================
-!         Hide Settings-Menu Event-Listeners 
-         =================================== */
 main_wrapper.addEventListener("mouseenter", () => {
   //If the settíngs menu is leaved to the main wrapper and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
   if (settings_span.classList.contains("Class_Show_Settings")) {
@@ -579,18 +573,15 @@ delete_all.addEventListener("click", () => {
 
 //#endregion
 
-/* ========================== 
-?        Start-Game Event-Listener
-       ========================== */
 start_button.addEventListener("click", Game_Preparations);
 
 //#endregion
 
 //#region 2) main game
 
-/* ============
-!     Preparing to Play 
-            ============= */
+     /*  ================  
+!          ===  Preparings  ===
+          ================  */
 function Game_Preparations() {
   // function to do all the preparations to start the game
   // console.log("Entered Game Preparations");
@@ -671,9 +662,9 @@ function Game_Preparations() {
 
   // console.log("Finished Game preparations.");
 }
-/* ========
-!     Play Game 
-            ========= */
+     /*  ===========  
+!         ===  Play  ===
+          ===========  */
 function PlayGame() {
   // console.log("Entered Play Game Function.");
 
@@ -723,9 +714,10 @@ function PlayGame() {
 //#endregion
 
 //#region 3) placements
-/* ==============
-!     Prepare Placement
-            ============== */
+
+     /*  =====================  
+!         ===  Prepare placement  ===
+          =====================  */
 function Prepare_Placement() {
   // console.log("Entered Function for preparing new Placement.");
 
@@ -747,9 +739,9 @@ function Prepare_Placement() {
    Make_Placement();
 };
 
-/* =============
-!     do the placement 
-            ============= */
+     /*  ====================  
+!         ===  Make placement  ===
+          ====================  */
 function Make_Placement() {
   
   /*                 console.log(
@@ -845,9 +837,9 @@ if(settings_menu.getAttribute("data-device") === "smart") animation__length *= 0
   // console.log("Placement done.");
 };
 
-/* ====================
-!      placement marks and notes 
-            =================== */
+     /*  ===================  
+!         ===  End placement  ===
+          ===================  */
 function Placement_End() {
  // console.log("Entered End of Placement");
 
@@ -889,9 +881,9 @@ function Placement_End() {
     : Player_2_Placement_Finish();
 };
 
-/* ===================
-!     finish placement  player 1 
-            =================== */
+     /*  =====================  
+!         ===  After placement I  ===
+          =====================  */
 function Player_1_Placement_Finish() {
   //  invoke winning-validation for player 1 and if true invoke game-end function
   const valid_row = Row_Validator(1,  Game.coin_placement_row);
@@ -934,9 +926,9 @@ function Player_1_Placement_Finish() {
   };
 };
 
-/* ==================
-!   finish placement player 2
-          =================== */
+     /*  =====================  
+!         ===  After placement II  ===
+          =====================  */
 function Player_2_Placement_Finish() {
   const valid_row = Row_Validator(2,  Game.coin_placement_row);
   const valid_column = validator__column(2,  Game.clicked_column, Game.coin_placement_row);

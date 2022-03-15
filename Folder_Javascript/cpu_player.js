@@ -27,7 +27,6 @@
 //#region Open Jobs
 /*
 ?                  Jobs To-do:
-
 todo   
 
 ?                  Finish
@@ -44,9 +43,9 @@ todo    Write a final Comment.
         
 //#region  CPU control algorithms
 
-/* ==================
-!     Easy-CPU Algorhytmus 
-            ================== */
+     /*  ===================  
+!         ===  Easy algorhytm  ===
+          ===================  */
 function CPU_Easy() {
 /*
 ?                                     Infobox
@@ -67,9 +66,9 @@ Function to let CPU Easy produce a random, but valid number for placement.
   } else CPU_Easy();
 };
 
-/* ====================
-!     Normal-CPU Algorhytmus 
-            ==================== */
+     /*  =====================  
+!         ===  Normal algorhytm  ===
+          =====================  */
 function CPU_Normal() {
 /* 
 ?                                         Infobox
@@ -165,9 +164,9 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
   };
 };
 
-/* ==================
-!     Hard-CPU Algorhytmus 
-            ================== */
+     /*  ===================  
+!         ===  Hardalgorhytm  ===
+          ===================  */
 function CPU_Hard() {
 /*
 ?                                    Infobox / Ideas for writing this function
@@ -182,9 +181,9 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
 
 //#region Detect placement possibilities 
 
-/* =======================
-!     Detect diagonal 3 Coin-Chains 
-            ======================= */
+     /*  ========================  
+!         ===  3 coin chains diagonal  ===
+          ========================  */
 function Detect_3_Coin_Chains_Diagonal() {
   
 //? Not adequately tested due to difficult test requirements
@@ -248,9 +247,9 @@ function Detect_3_Coin_Chains_Diagonal() {
   };
 };
 
-/* ========================
-!     Detect vertical 3 Coin-Chains 
-            ======================== */
+     /*  =======================  
+!         ===  3 coin chains vertical  ===
+          =======================  */
 function Detect_3_Coin_Chains_Upwards() {
 // console.log("Detection of 3 coins up started");
 
@@ -296,9 +295,9 @@ let up_defense = Detection_3Coins_Up(1);
   // console.log("No upwards 3 Coin chains detected.");
 };
 
-/* ======================
-!     Detect horizontal 3 Coin-Chains 
-            ====================== */
+     /*  =========================  
+!         ===  3 coin chains horitontal  ===
+          =========================  */
 function Detect_3_Coin_Chains_Sideways() {
 // console.log("Detection of 3 Coins sideways started");
 
@@ -414,9 +413,9 @@ let sideway_defense = Detection_3Coins_sideways(1);
  // console.log("No sideways Coin chains detected.");
 };
 
-/* ======================
-!     Upwards-Placement Detection 
-            ======================= */
+     /*  =======================  
+!         ===  Upwards placements  ===
+          =======================  */
 function Get_Valid_Upwards_Placemement() {
   // Try to make placement on top of an other CPU placement
 // console.log(`Entered valid upwards placement.`);
@@ -451,9 +450,9 @@ let lastPlacement;
       };
 };
 
-/* ======================
-!     Sideways-Placement Detection 
-            ====================== */
+     /*  =======================  
+!         ===  Sideway placements  ===
+          =======================  */
 function Get_Valid_Sideways_Placement() {
  // This function let the CPU know if he can make a placement near (left or right) to an already placed coin.
   // console.log(`Entered sideways placement detection.`);
@@ -553,9 +552,9 @@ function Get_Valid_Sideways_Placement() {
 
 //#region CPU placement
 
-/* ==========
-!     CPU Placement 
-            =========== */
+     /*  ====================  
+!         ===  CPU placements  ===
+          ====================  */
 function CPU_Placement(columnNumber) {
  // console.log(`Entered CPU Placement Function. Column ${columnNumber} is clicked `);
 
@@ -569,9 +568,9 @@ clickNumber = columnNumber - 1;
   topCellsArray[clickNumber].click();
 };
 
-/* =================
-!     Placement-Randomizer 
-            ================= */
+     /*  =================  
+!         ===  Randomizer  ===
+          =================  */
 function Randomizer(arr1, arr2) {
 // console.log("Randomizer getted arrays:", arr1,  arr2);
 

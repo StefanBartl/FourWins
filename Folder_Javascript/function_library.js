@@ -43,12 +43,12 @@
 //#region Open Jobs
 /*
 ?                  Jobs To-do:
-
+todo    new headlines
 ?                  Finish
-todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo    -) Final formatation.
-todo    -) Make sure all important is commented.
-todo    -) Write a final Comment.
+todo    take a look at the bonus jobs - maybe you have enough passion to do one :-)
+todo    final formatation.
+todo    make sure all important is commented.
+todo    write a final comment.
 
 !                  Session progress
 ?-) 

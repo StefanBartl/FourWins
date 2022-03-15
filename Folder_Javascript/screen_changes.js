@@ -36,9 +36,9 @@ todo    -) Write a final Comment.
 
 //#region 1) Toggle between Start and Game Screen
 
-/* =================
-!     Show the Game-Screen 
-            ================= */
+     /*  ======================  
+!         ===  Show Game-Screen  ===
+          ======================  */
 function Game_Screen() {
 //console.log("Entering Game-Screen.");
 Game.state = "InGame";
@@ -81,9 +81,9 @@ document.getElementById("settings_span__gameboard").setAttribute("data-ingame", 
 Game.Language === "de" ? document.getElementById("settings_gameboard_h").innerText = "Nur zu Spielbeginn erlaubt!" :  document.getElementById("settings_gameboard_h").innerText = "Only allowed at Start-Screen!" ; 
 };
 
-/* ================
-!     Show the Start-Screen 
-            ================ */
+     /*  =====================  
+!         ===  Show Start-Screen  ===
+          =====================  */
 function Start_Screen() {
   //console.log("Entering Game-Screen.");
   document.getElementById("section__main").setAttribute("data-ingame", "no");
@@ -115,9 +115,9 @@ function Start_Screen() {
 
 //#region 2) Game-End-Screen
 
-/* =========================
-!     Preparations for Game-End-Screen 
-           ========================= */
+     /*  ===========================  
+!         ===  Game-Screen preparations  ===
+          ===========================  */
 function Preparations(gameResult) {
   // console.log("Entered Game End Screen preparations.");
 
@@ -183,9 +183,9 @@ if(document.getElementById("div__drawGames")) document.getElementById("div__draw
   return names_from_result;
 };
 
-/* ======================
- !    Creation of Game-End-Screen 
-            ====================== */
+     /*  ========================  
+!         ===  Game-Screen creation  ===
+          ========================  */
 function Game_End_Screen(gameResult) {
   // console.log("Entered Game End Screen Function.");
 
@@ -357,9 +357,9 @@ if(cell.getAttribute("data-winchain") === "yes")cell.animate(
 //#endregion
 
 //#region 3) Start a new Game
-  /* ============== 
-!       Start a New Game
-              ============== */
+     /*  ===================  
+!         ===  Start new game  ===
+          ===================  */
 function Start_New_Game(gameResult){
 // console.log("Entered New Game function.");
 

@@ -19,9 +19,9 @@
 
 //#region Translation Manager
 
-/* ===================
-!     Detect Language and set it 
-            =================== */
+     /*  ========================  
+!         ===  Detect & set language  ===
+          ========================  */
 function Set_Page_Language() {
   // Detect Browser language, if it can"t (i. g. restrictions) set English. Save information in Game Object
   // console.log("Setting Page Language...");
@@ -42,9 +42,9 @@ function Set_Page_Language() {
   }
 };
 
-/* ========================
-!     Translate Page to setted Language 
-            ======================== */
+     /*  ===================  
+!         ===  Translate page  ===
+          ===================  */
 function Translate_StartScreen(language, byUser) {
   // console.log("Translate the Page to setted Language:", language, "Setted by User:", byUser);
   // Make sure browser triggered invokes are not executed if the language was setted manually anytime before
@@ -70,9 +70,9 @@ function Translate_StartScreen(language, byUser) {
 
 //#region Page Library
 
-/* ============
-!     Library Deutsch 
-            ============ */
+     /*  ===================  
+!         ===  Deutsch library  ===
+          ===================  */
 function Deutsch() {
 // console.log("Entered Deutsch library.");
 head_title.innerText = "+++ 4-Gewinnt +++";
@@ -124,9 +124,9 @@ ki_level_dropdown_normal.innerHTML = "CPU Normal";
 // console.log("Page translated to Deutsch.");
 };
 
-/* ============
-!     Library English 
-            =========== */
+     /*  ===================  
+!         ===  English library  ===
+          ===================  */
 function English() {
 // console.log("Entered English library");
 head_title.innerText = "+++ 4-Wins +++";

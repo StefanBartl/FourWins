@@ -26,25 +26,27 @@
 /* #region jobs to-do */
 /*
 
-!                           Jobs To-Do: 
-
-todo    CSS-Code minimizing f.e. bind repetative classes to one class!
+!                           to-do 
+todo    Settings Menu Button for smart screens & getting  rid of my resize solution and only give them sm class if over 700px
+todo    text-shadows für titel?
+todo    css-code minimizing f.e. bind repetative classes to one class!
 todo    INGAME section?
+todo    settings menu aufteilung
 todo    fonts!
 todo    font working on all browser correctly?
 todo    find a final, real good styling!
 
-?                               Finish
-todo    css-duideline
+?                               finish
+todo    css-guideline
 todo    table of content update
-todo    Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo    Find ID"s mitz gemeinsamen properties und füge sie zu Klassen hinzu - wenn es Sinn macht!
-todo    Final formatation (especially script & library sections/functions), comments:
-todo    Make sure all important is commented !
-todo    Write a final Comment !
-todo    Save Default Script Files with the new Script Layout for later Projects. Also the index with the all new Toggle Slider and make a new "global" Library for JS & CSS !
+todo    take a look at the bonus jobs - maybe you have enough passion to do one :-)
+todo    Find id"s mitz gemeinsamen properties und füge sie zu Klassen hinzu - wenn es Sinn macht!
+todo    final formatation (especially script & library sections/functions), comments:
+todo    make sure all important is commented !
+todo    write a final Comment !
+todo    save default script file with the new layout for later projects. also the index with the all new toggle slider and make a new "global" library for js & css !
 
-!                         Session progress:                                                
+!                         session progress                                                
 ? -)                                                                                                                                                                                             
 */
 /* #endregion */
@@ -52,9 +54,9 @@ todo    Save Default Script Files with the new Script Layout for later Projects.
 /* #region 1) general */
 
 :root {
-  /* ==========
- ?       colour pallete 
-              ========== */
+     /*  ==================  
+?        ===  Colour-Palette  ===
+          ==================  */
 
   --prime-blueviolett: hsl(238, 56%, 19%);
   --prime-darkgrey: hsl(330, 2%, 17%);
@@ -146,9 +148,9 @@ select {
 
 /* #region 2) layout */
 
-/* =============
-?     page basis layout
-          ============== */
+     /*  =================  
+?        ===  Basis Layout  ===
+          =================  */
 
 body {
   background-color: var(--base-colour);
@@ -174,9 +176,9 @@ header {
   grid-template-areas: "leftSide gameboard rightSide";
 }
 
-/* =======
-?     sidebars
-          ======= */
+     /*  ==============  
+?        ===  Sidebars  ===
+          ==============  */
 
 .sidebars {
   border-block: solid 1px var(--base-border);
@@ -239,9 +241,9 @@ border-bottom: solid 1px var(--base-border);
   margin-top: 1em;
 }
 
-/* =========
-?     gameboard 
-            ========= */
+     /*  ================  
+?        ===  Gameboard  ===
+          ================  */
 
 .gameboard {
   grid-area: gameboard;
@@ -306,9 +308,9 @@ border-bottom: solid 1px var(--base-border);
 ! Own game screen region ? ?      game screen gameboard classes 
                 ======================== */
 
-/* =======================================
-?     turn players motification & thinking
-            =================================== */
+     /*  ==========================  
+?        ===  Active player notification  ===
+          ==========================  */
 
 .Class_Left_Pos {
   position: absolute;
@@ -330,9 +332,9 @@ border-bottom: solid 1px var(--base-border);
 }
 
 
-/* ==========
-?     placing coins
-            ========== */
+     /*  ============  
+?        ===  Coins  ===
+          ============  */
 
 .coin__red, 
 .coin__yellow,
@@ -371,9 +373,9 @@ border-bottom: solid 1px var(--base-border);
 
 /* #region 4) settings menu */
 
-/* ==============
-?     settings-menu layout 
-            =============== */
+     /*  ======================  
+?        ===  Settings-Menu (SM) ===
+          ======================  */
 
 #section__settings_menu[data-device = "default"] {
   position: absolute;
@@ -411,11 +413,9 @@ border-bottom: solid 1px var(--base-border);
   color: red;
 }
 
-
-/* ===============
-?     settings-menu content 
-            ================ */
-
+     /*  ================  
+?        ===  SM Content  ===
+          ================  */
 
 #settings_span__gameboard{
   display: flex;
@@ -462,12 +462,7 @@ border-bottom: solid 1px var(--base-border);
   flex-direction: column;
 }
 
-
-/* =====
-?     toggle 
-            ===== */
-
-
+/* section game mechanics */
 #container__toggleColour {
   height: 1em;
   width: 100%;
@@ -496,10 +491,8 @@ border-bottom: solid 1px var(--base-border);
   background-color: var(--gameboard);
 }
 
-
 .toggle__colour {
   transform: translateX(2rem);
-
 }
 
 #checkbox__sound:hover {
@@ -514,6 +507,7 @@ border-bottom: solid 1px var(--base-border);
   margin-bottom: 1em; 
 }
 
+/* section stats */
 #container__stats{
   display: grid;
   grid: 2em auto/ 1fr 1fr ;
@@ -549,16 +543,16 @@ details[open] p {
   }
 }
 
-
+/* section bottom */
 #container__contacts,
 #container__credits,
 #container__delete{
   margin-block: .5em;
 }
 
-/* ============
-?    sm- typography 
-            ============ */
+     /*  ===================  
+?        ===  SM-typography  ===
+          ===================  */
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Comforter Brush", cursive;
@@ -576,9 +570,9 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 
-/* =======
-?     sm-hover 
-            ======== */
+     /*  ===============  
+?        ===  SM-hover  ===
+          ===============  */
 
 #info_h:hover,
 #wrapper__stats_easy :hover,
@@ -604,55 +598,53 @@ h1, h2, h3, h4, h5, h6 {
 
 /* #region 5) game-screen*/
 
-/* ===========
-?     win notifications
-            ============ */
+     /*  =================  
+?        ===  Win counters  ===
+          =================  */
 
-            #div__wonGames_P2 {
-              position: absolute;
-              top: 0;
-              left: 0;
-              display: flex;
-              margin: 2em;
-              flex-wrap: wrap;
-              align-items: center;
-              flex-direction: column;
-              justify-content: end;
-              font-size: large;
-            }
-            
-            #div__wonGames_P2 {
-              position: absolute;
-              top: 0;
-              right: 3rem;
-              display: flex;
-              margin: 2em;
-              align-items: center;
-              flex-direction: column;
-              justify-content: end;
-              font-size: large;
-            }
-            
-            #div__drawGames {
-              position: absolute;
-              margin-top: 2em;
-              top: 0;
-              right: 50%;
-              transform: translateX(+50%);
-              display: flex;
-              align-items: center;
-              flex-direction: column; 
-              font-size: large;
-              
-            }
-            
-            .img__tallys{
-              filter: invert(1);
-              height: 2em;
-            }
-            
-            
-            
+#div__wonGames_P2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  margin: 2em;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: column;
+  justify-content: end;
+  font-size: large;
+}
+
+#div__wonGames_P2 {
+  position: absolute;
+  top: 0;
+  right: 3rem;
+  display: flex;
+  margin: 2em;
+  align-items: center;
+  flex-direction: column;
+  justify-content: end;
+  font-size: large;
+}
+
+#div__drawGames {
+  position: absolute;
+  margin-top: 2em;
+  top: 0;
+  right: 50%;
+  transform: translateX(+50%);
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  font-size: large;
+  
+}
+
+.img__tallys{
+  filter: invert(1);
+  height: 2em;
+}
+
             /* #endregion*/
             
  /*#region 6) game-end screen */
@@ -683,9 +675,9 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 3%;
 }
 
-/* ===================
-?     firework canvas container
-            =================== */
+     /*  ===================  
+?        ===  firework canvas  ===
+          =================== */
 
 .div__canvas {
   position: absolute;
@@ -715,9 +707,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* #region 8) inputs, buttons, dropdowns, etc...  */
 
-/* ========
-?     inputs: text
-            ======== */
+     /*  ===============  
+?        ===  inputs text  ===
+          ===============  */
 
 input {
   width: 19ch;
@@ -742,9 +734,9 @@ input:focus {
   box-shadow: inset 0 0 1rem white;
 }
 
-/* ======
-?     buttons 
-            ====== */
+     /*  =============  
+?        ===  buttons  ===
+          =============  */
 
 button {
   cursor: pointer;
@@ -780,10 +772,9 @@ button:hover {
   margin: 1rem;
 }
 
-
-/* =========
-?     dropdowns 
-            ========= */
+     /*  ================  
+?        ===  Dropdowns  ===
+          ================  */
 
 select {
   text-align-last: center;
@@ -808,9 +799,9 @@ select:hover {
   border-radius: 10rem;
 }
 
-/* ========
-?     summarys 
-            ======== */
+     /*  ===============  
+?        ===  summarys  ===
+          ===============  */
 
 .summary__details
  {
@@ -835,9 +826,9 @@ select:hover {
 
 /*#region  choosing coin animations */
 
-/* ==================
-?     choosing coin animations
-            =================== */
+     /*  ==================  
+?        === Choosing Coin  ===
+          ==================  */
 
 .Class_ChoosingAnimation_Coin_1 {
   background-image: url("../Folder_Graphics/Coins/yellow.png");
@@ -882,9 +873,9 @@ select:hover {
 
 /*#region save name animations */
 
-/* =====================
-?     player save name animations
-            ===================== */
+     /*  ===============  
+?        ===  save name  ===
+          ===============  */
 
 .Class_Buttons_Add_Hover_Animations_1 {
   cursor: pointer;
@@ -957,9 +948,9 @@ select:hover {
 
 /*#region settings menu animations */
 
-/* ==================
-?     coloured box animation 
-            ================== */
+     /*  ====================  
+?        ===  coloured element  ===
+          ====================  */
 .colourAnimation{
   animation: colouredBoxAnimation infinite alternate-reverse 10s;
 }
@@ -984,9 +975,9 @@ select:hover {
 }
 
 
-/* ==============
-?     settings-menu animation 
-            =============== */
+     /*  ==================  
+?        ===  settings-menu  ===
+          ==================  */
 
 .Class_Show_Settings {
   animation: Show_Settings_Animation 0.1s ease-in;
@@ -1083,9 +1074,9 @@ select:hover {
   }
 }
 
-/* ==========
-!     new windows
-            ========== */
+     /*  ==================  
+?        ===  New windows  ===
+          ==================  */
 
 .Class_Window {
   min-height: 30vh;
