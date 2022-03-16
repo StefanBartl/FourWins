@@ -192,7 +192,7 @@ function Turning_PlayerIsOnTurn() {
     ? (Game.playerIsOnTurn = "right")
     : (Game.playerIsOnTurn = "left");
 
-  // Assign text message to Player and with the correct language
+    // Assign text message to Player and with the correct language
   if (Game.Language === "de") {
     // Deutsch
 
@@ -257,6 +257,9 @@ function Turning_PlayerIsOnTurn() {
       clearInterval(window.thinking);
     }
   }
+
+  // hide if animations are off (its important to attach it anyway and hide it if user want it to, otherwise the user couldnt show it anymore if he / she click animaton on)
+  document.getElementById("h__turnDiv").style.visibility = "hidden";
 };
 
 /* =====================
@@ -298,6 +301,12 @@ Game.Game_against_CPU === false ?    document.getElementById("div__wonGames_P2")
 if(document.getElementById("div__drawGames")) document.getElementById("div__drawGames").innerText = "Draws:";
 };
 
+if (window.innerWidth < 767.98){
+  document.getElementById("div__wonGames_P1").setAttribute("data-device", "smart");
+  document.getElementById("div__wonGames_P2").setAttribute("data-device", "smart");
+  document.getElementById("div__drawGames").setAttribute("data-device", "smart");
+};
+
 // add image-container
 const img__container1 = document.createElement("div");
 img__container1.id = "container__tally1";
@@ -308,28 +317,6 @@ if(document.getElementById("div__wonGames_P2"))document.getElementById("div__won
 const img__container3 = document.createElement("div");
 img__container3.id = "container__tally3";
 if(document.getElementById("div__drawGames"))document.getElementById("div__drawGames").appendChild(img__container3);
-
-//#region tally-images
-const img__tallyOne = document.createElement("img");
-img__tallyOne.src = "./Folder_Graphics/tally/1.png";
-img__tallyOne.classList.add("img__tallys");
-
-const img__tallyTwo = document.createElement("img");
-img__tallyTwo.src = "./Folder_Graphics/tally/2.png";
-img__tallyTwo.classList.add("img__tallys");
-
-const img__tallyThree = document.createElement("img");
-img__tallyThree.src = "./Folder_Graphics/tally/3.png";
-img__tallyThree.classList.add("img__tallys");
-
-const img__tallyFour = document.createElement("img");
-img__tallyFour.src = "./Folder_Graphics/tally/4.png";
-img__tallyFour.classList.add("img__tallys");
-
-const img__tallyFive = document.createElement("img");
-img__tallyFive.src = "./Folder_Graphics/tally/5.png";
-img__tallyFive.classList.add("img__tallys");
-//#endregion
 
 //attach correct image to container
 
@@ -363,11 +350,38 @@ function Attach_Tally(containerNumber){
   if(containerNumber === 2) result = Game.Player_2_wins;
   if(containerNumber === 3) result = Game.Draws;
 
+// get image files
+
+//#region tally-images
+const img__tallyOne = document.createElement("img");
+img__tallyOne.src = "./Folder_Graphics/tally/1.png";
+img__tallyOne.classList.add("img__tallys");
+
+const img__tallyTwo = document.createElement("img");
+img__tallyTwo.src = "./Folder_Graphics/tally/2.png";
+img__tallyTwo.classList.add("img__tallys");
+
+const img__tallyThree = document.createElement("img");
+img__tallyThree.src = "./Folder_Graphics/tally/3.png";
+img__tallyThree.classList.add("img__tallys");
+
+const img__tallyFour = document.createElement("img");
+img__tallyFour.src = "./Folder_Graphics/tally/4.png";
+img__tallyFour.classList.add("img__tallys");
+
+const img__tallyFive = document.createElement("img");
+img__tallyFive.src = "./Folder_Graphics/tally/5.png";
+img__tallyFive.classList.add("img__tallys");
+//#endregion
+
+
   // remove all elements from img container
   while (container.firstChild) {
   container.removeChild(container.lastChild);
     console.log(`...while loop removed tallys from container number ${containerNumber}.`);
   };
+
+  // attach correct tally
   if (result === 1) { container.appendChild(img__tallyOne); console.log("Appended tally 1");}  
   if (result === 2) {container.appendChild(img__tallyTwo); console.log("Appended tally 2");}  
   if (result === 3) { container.appendChild(img__tallyThree); console.log("Appended tally 3");}    
@@ -497,6 +511,8 @@ for(cells of cellsArray) cells.remove();
   const new_gameboard_wrapper = document.createElement("div");
   new_gameboard_wrapper.classList.add("gameboard");
   new_gameboard_wrapper.id = "wrapper__gameboard";
+  window.innerWidth < 767.98 ? new_gameboard_wrapper.setAttribute("data-device", "smart") : new_gameboard_wrapper.setAttribute("data-device", "default");
+  
   Game.state !== "InGame"
     ? new_gameboard_wrapper.setAttribute("data-ingame", "no")
     : new_gameboard_wrapper.setAttribute("data-ingame", "yes");

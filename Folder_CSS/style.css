@@ -247,7 +247,7 @@ padding-bottom: 2em;
   border-top: none;
 }
 
-.gameboard[data-inGame="yes"] {
+.gameboard[data-ingame = "yes"] {
     position: absolute;
     top: 15%;
     left: 50%;
@@ -255,9 +255,15 @@ padding-bottom: 2em;
     width: min(40vw, 60%);
 }
 
-.gameboard[data-inGame="gameend"] {
+.gameboard[data-ingame = "gameend"] {
     margin-block: 2rem;
 }
+
+.gameboard[data-ingame = "yes"][data-device = "smart"]{
+  top: 23%;
+  min-width: 100vw;
+}
+
 /* #endregion */
 
 /* #region 3) gameboard */
@@ -617,10 +623,10 @@ h1, h2, h3, h4, h5, h6 {
 ?        ===  Win counters  ===
           =================  */
 
-#div__wonGames_P2 {
+#div__wonGames_P1 {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 3rem;
   display: flex;
   margin: 2em;
   flex-wrap: wrap;
@@ -652,7 +658,24 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   flex-direction: column; 
   font-size: large;
-  
+}
+#div__wonGames_P1[data-device = "smart"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: small;
+}
+
+#div__wonGames_P2[data-device = "smart"]  {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: small;
+}
+
+#div__drawGames[data-device = "smart"]  {
+  position: absolute;
+  font-size: small;
 }
 
 .img__tallys{
@@ -1266,7 +1289,7 @@ select:hover {
     margin-bottom: 5%;
   }
 
-#settings_span[data-device = "smart"]{
+#settings_span{
   display: flex;
   flex-wrap: wrap;
   gap: 1em;;
@@ -1276,8 +1299,6 @@ select:hover {
   overflow: auto;
   background-color: var(--base-border);
   box-shadow: 0em 0em 2em white;
-  border-top-left-radius: 3%;
-  border-top-right-radius: 3%;
   color: var(--main-black);
   text-align: center;
   font-size: large;

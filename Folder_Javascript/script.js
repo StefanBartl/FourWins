@@ -77,11 +77,19 @@ clicked_TopCell_ID: "",
   // Standard is: Left Yellow / Right Red
   player_Colour_Left: "yellow",
   Sound: false,
-  menuAnimation: "true",
+  animations: "true",
   state: "startingScreen",
 };
 
 //#region Game settings
+
+//?  Set attribute-marker for smartphones/small devices
+// at start...
+if (window.innerWidth < 767.98){
+  settings_span.setAttribute("data-device", "smart");
+  settings_menu.setAttribute("data-device", "smart");
+  // console.log("Small Device");
+};
 
 //Reset Gameboard size values and than create new gameboard
 document.getElementById("settings_gameboard_sizeX").value = 7;
@@ -137,7 +145,7 @@ placing_audio.load();
 
 //#endregion
 
-//#region Set  Left Player Colour
+//#region Set Left Player Colour
 
 // Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted
 Game.player_Colour_Left = localStorage.Player_Colour_Left || "yellow";
@@ -262,8 +270,8 @@ player_2_svg.addEventListener("click", () => {
 Stats();
 
 // set and proof to fire menu animation
-Game.menuAnimation = localStorage.menuAnimation || "true";
-if(Game.menuAnimation === "true"){
+Game.animations = localStorage.animations || "true";
+if(Game.animations === "true"){
   settings_span.classList.add("colourAnimation");
   start_button.classList.add("colourAnimation");
   document.getElementById("headline").classList.add("colouredTextAnimation");
@@ -272,13 +280,6 @@ if(Game.menuAnimation === "true"){
   aniToggle_checkbox.checked = false;
 };
 
-//?  Set attribute-marker to change settings-menu  for smartphones/small devices
-// at start...
-if (window.innerWidth < 767.98){
-  settings_span.setAttribute("data-device", "smart");
-  settings_menu.setAttribute("data-device", "smart");
-  // console.log("Small Device");
-}
 // ...and at resizing window...
 window.addEventListener("resize", ()=>{
       // width under ~770px change to small device
@@ -313,7 +314,7 @@ main_wrapper.addEventListener("mouseenter", () => {
 
   }
   // If menu animation is not setted of, attach animation class after small delay to make sure the triggered hide animation is fired
-  if(Game.menuAnimation === "true"){
+  if(Game.animations === "true"){
   setTimeout(()=>{
     settings_span.classList.remove("Class_Hide_Settings");
     settings_span.classList.add("colourAnimation");
@@ -328,7 +329,7 @@ document.querySelector("header").addEventListener("mousemove", () => {
     settings_span.classList.remove("Class_Show_Settings");
     settings_span.classList.add("Class_Hide_Settings");
 
-    if(Game.menuAnimation === "true"){
+    if(Game.animations === "true"){
       setTimeout(()=>{
         settings_span.classList.remove("Class_Hide_Settings");
         settings_span.classList.add("colourAnimation");
@@ -366,7 +367,7 @@ Eine Farbwahl der Spielsteine ist möglich - auch während des Spieles.
 Grundeinstellung ist Gelb für den / die linke Spieler_in und Rot für das Gegenüber.
 
 Der Sound hat eine On/Off Funktion. und es ist möglich zwischen Deutscher und Englischer Sprache zu wählen.
-Ebenso ist es möglich die Farbanimationen auszuschalten.
+Ebenso ist es möglich alle Animationen auszuschalten.
 Bei Spielen gegen den Computer wird der Spielausgang in einer Statistik aufgezeichnet. Diesen findet man in den Spieleinstellungen unter "Statistiken gegen den CPU".
 Diese Statistiken kann man separat zurücksetzen.
 
@@ -396,7 +397,7 @@ und die Einstellungen trotzdem erhalten bleiben. Wollen Sie diese Einstellungen 
       The basic setting is yellow for the player on the left and red for the opponent.
       
       The sound has an on/off function. and it is possible to choose between German and English language.
-      Also it's possible to turn of the coloured animations.
+      Also it's possible to turn of all animations.
       When playing against the computer, the outcome of the game is recorded in a statistic. This can be found in the game settings under "Stats vs. CPU".
       These statistics can be reset separately.
       
@@ -512,17 +513,18 @@ language_menu.addEventListener("change", () => {
 });
 
 aniToggle_checkbox.addEventListener("click", ()=>{
-      if(localStorage.menuAnimation === "true" || localStorage.menuAnimation === undefined){
-          localStorage.menuAnimation = "false" 
-          Game.menuAnimation = "false";
+      if(localStorage.animations === "true" || localStorage.animations === undefined){
+          localStorage.animations = "false" 
+          Game.animations = "false";
           start_button.classList.remove("colourAnimation");
           document.getElementById("headline").classList.remove("colouredTextAnimation");
-
+          document.getElementById("h__turnDiv").style.visibility = "hidden";
         } else {
-             localStorage.menuAnimation = "true";
-             Game.menuAnimation = "true";
+             localStorage.animations = "true";
+             Game.animations = "true";
              start_button.classList.add("colourAnimation");
              document.getElementById("headline").classList.add("colouredTextAnimation");
+             document.getElementById("h__turnDiv").style.visibility = "visible";
 }});
 
 stats_reset_easy.addEventListener("click", () => {
@@ -740,14 +742,14 @@ function Prepare_Placement() {
 
   Game.coin_placement_row =  parseInt(Game.rowCounter[`C${Game.clicked_column}`] ) ;
   Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row}` ;
- 
-   Make_Placement();
+
+  Game.animations === "true" ? Placement_Animation() : Placement_End();
 };
 
-     /*  ====================  
-!         ===  Make placement  ===
-          ====================  */
-function Make_Placement() {
+     /*  ================  
+!         ===  Animation  ===
+          ================  */
+function Placement_Animation() {
   
   /*                 console.log(
     "Make placement on coin. The placement id is:",
@@ -848,8 +850,8 @@ if(settings_menu.getAttribute("data-device") === "smart") animation__length *= 0
 function Placement_End() {
  // console.log("Entered End of Placement");
 
-   //  first remove the coin from the top-cell to get rid of the animated coin
-  document.getElementById(`${Game.clicked_TopCell_ID}`).firstChild.remove();
+    //  first remove the coin from the top-cell to get rid of the animated coin, if animation is on
+  if(Game.animations === "true")  document.getElementById(`${Game.clicked_TopCell_ID}`).firstChild.remove();
 
   // get the destination of the coin
   coin_destination = document.getElementById(`ID_C${Game.clicked_column}R${Game.coin_placement_row}`);
