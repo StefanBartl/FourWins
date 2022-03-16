@@ -222,41 +222,41 @@ choose_ki.addEventListener("change", () => {
 player_1_svg.addEventListener("click", () => {
   //console.log("Player 1 name saved to local Storage.");
   // Create notiification element
-  const notification = document.createElement("h3");
-  notification.innerText = "Name saved!";
-  notification.style.width = "100%";
-  notification.classList.add("Class_LeftNot");
+  let notificationL = document.createElement("h3");
+  notificationL.innerText = "Name saved!";
+  notificationL.style.width = "100%";
+  notificationL.id = "saveNameP1";
   // Push it to DOM
-  left_sidebar.appendChild(notification);
-  // Smooth showing
-  notification.classList.add("Class_Smooth_In");
+  left_sidebar.appendChild(notificationL);
+  // Smooth showing if animation is on
+  if(Game.animations === "true"){
+  notificationL.classList.add("Class_Smooth_In");
   // Smooth removing after 3 seconds
   setTimeout(() => {
-    notification.classList.remove("Class_Smooth_In");
-    notification.classList.add("Class_Smooth_Out");
+    notificationL.classList.remove("Class_Smooth_In");
+    notificationL.classList.add("Class_Smooth_Out");
   }, 3000);
+};
   // Remove it from DOM
   setTimeout(() => {
-    notification.remove();
+    notificationL.remove();
   }, 4000);
 });
+
 player_2_svg.addEventListener("click", () => {
   //console.log("Player 2 name saved to local Storage.");
-  // Create notiification element
-  const notification = document.createElement("h3");
+  let notification = document.createElement("h3");
   notification.innerText = "Name saved!";
   notification.style.width = "100%";
-  notification.classList.add("Class_RightNot");
-  // Push it to DOM
+  notification.id = "saveNameP2";
   right_sidebar.appendChild(notification);
-  // Smooth showing
+  if(Game.animations === "true"){
   notification.classList.add("Class_Smooth_In");
-  // Smooth removing after 3 seconds
   setTimeout(() => {
     notification.classList.remove("Class_Smooth_In");
     notification.classList.add("Class_Smooth_Out");
   }, 3000);
-  // Remove it from DOM
+  };
   setTimeout(() => {
     notification.remove();
   }, 4000);
@@ -311,8 +311,7 @@ main_wrapper.addEventListener("mouseenter", () => {
   if (settings_span.classList.contains("Class_Show_Settings")) {
     settings_span.classList.remove("Class_Show_Settings");
     settings_span.classList.add("Class_Hide_Settings");
-
-  }
+  };
   // If menu animation is not setted of, attach animation class after small delay to make sure the triggered hide animation is fired
   if(Game.animations === "true"){
   setTimeout(()=>{

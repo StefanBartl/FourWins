@@ -934,6 +934,49 @@ select:hover {
 ?        ===  save name  ===
           ===============  */
 
+  #saveNameP1{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+  }
+
+  #saveNameP2{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+  }
+
+
+.Class_Smooth_In {
+  animation: SmoothInAnimation .3s ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes SmoothInAnimation {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.Class_Smooth_Out {
+  animation: SmoothOutAnimation .3s ease-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+  
+  @keyframes SmoothOutAnimation {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0);
+    }
+  }
+
 .Class_Buttons_Add_Hover_Animations_1 {
   cursor: pointer;
   animation: Button_1_Add_Animation .1s;
@@ -1014,20 +1057,20 @@ select:hover {
 
 @keyframes colouredBoxAnimation {
   from{
-    box-shadow: 0em 0em 2em white;
+    box-shadow: 1rem 10rem white;
   }
   25%{
-    box-shadow: 0em 0em 2em red;
+    box-shadow: 1rem 0em 10rem red;
   }
 
   50%{
-    box-shadow: 0em 0em 2em green;
+    box-shadow: 1rem 0em 10rem green;
   }
   75%{
-    box-shadow: 0em 0em 2em blue;
+    box-shadow: 1rem 0em 10rem blue;
   }
   to {
-    box-shadow: 0em 0em 2em orangered;
+    box-shadow: 1rem 0em 10rem orangered;
   }
 }
 
@@ -1036,7 +1079,7 @@ select:hover {
           ==================  */
 
 .Class_Show_Settings {
-  animation: Show_Settings_Animation 0.1s ease-in;
+  animation: Show_Settings_Animation 0.3s ease-in;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
@@ -1053,7 +1096,7 @@ select:hover {
 }
 
 .Class_Hide_Settings {
-  animation: Hide_Settings_Animation 0.1s ease-out;
+  animation: Hide_Settings_Animation 0.3s ease-out;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
@@ -1125,36 +1168,6 @@ select:hover {
 
 .Class_Full_Column {
   pointer-events: none;
-}
-
-.Class_Smooth_In {
-  animation: SmoothInAnimation .1s ease-in;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-}
-
-@keyframes SmoothInAnimation {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-.Class_Smooth_Out {
-  animation: SmoothOutAnimation .1s ease-out;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-}
-
-@keyframes SmoothOutAnimation {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(0);
-  }
 }
 
      /*  ==================  
