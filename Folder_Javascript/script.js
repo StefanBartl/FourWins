@@ -595,9 +595,6 @@ function Game_Preparations() {
 
   Game.state = "Preparations";
 
-  // stop playing starting screen sound
-  if (Game.Sound === true) starting_audio.pause(); 
-
   // disable gameboard-size changing during game
   document.getElementById("settings_span__gameboard").setAttribute("data-ingame",  "yes");
   

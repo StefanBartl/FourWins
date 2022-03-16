@@ -726,11 +726,10 @@ h1, h2, h3, h4, h5, h6 {
   z-index: -1;
 }
 
-/* Try to get transparent black background if canvasend! 
+
 .topCellsCanvas{
-  
+ background-color: black; 
 }
-*/
 
 /* #endregion */
          
@@ -1302,6 +1301,11 @@ select:hover {
   color: var(--main-black);
   text-align: center;
   font-size: large;
+}
+
+#span_settings_mechanics,
+#settings_span__gameboard{
+  min-width: 100%;
 }
 
 #wrapper__gameboard[data-ingame="yes"] {

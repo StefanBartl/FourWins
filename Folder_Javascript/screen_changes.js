@@ -234,7 +234,7 @@ function Game_End_Screen(gameResult) {
     // with a greater z-index is visible over the fireworks canvas
     const canvas_div = Create_DOM_Element({ ParentID: "section__main", Element: "div", ID: "div__canvas", Class: "div__canvas" });
     const firework_canvas = Create_DOM_Element({ ParentID: "div__canvas",  Element: "canvas", ID: "firework" });
-    //Fireworks("firework");
+    Fireworks("firework");
     document.getElementById("section__main").setAttribute("data-gameend", "no");
     document.getElementById("section__main").setAttribute("data-canvasend", "yes");
     // If firework canvas background top cells hace to be transparent / black to look good.
