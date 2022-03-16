@@ -20,38 +20,24 @@
 .                                         - Get_Valid_Sideways_Placement 
 ?                             3) CPU placements
 .                                         - CPU Placement                        
-.                                         - Placement Randomizer                                                                                                                                                                                          
-*/
-//#endregion
+.                                         - Placement Randomizer                 
 
-//#region Open Jobs
-/*
-?                  Jobs To-do:
-todo   
-
-?                  Finish
-todo    Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo    Final formatation.
-todo    Make sure all important is commented.
-todo    Write a final Comment.
-
-!                  Session progress
-?-)
+?                  Javascript - what a wonderful language!
 
 */
 //#endregion
-        
+   
 //#region  CPU control algorithms
 
      /*  ===================  
 !         ===  Easy algorhytm  ===
           ===================  */
 function CPU_Easy() {
-/*
-?                                     Infobox
-Function to let CPU Easy produce a random, but valid number for placement.
-*/
+
+//? === CPU Easy produce a randum but valid placement ===
+
  // console.log("CPU Easy starts to thinking....");
+
   // Get a random number
   const random_number = getRandomInt(Game.gameboard_size_x);
   // Proof if in this column a placement is possible
@@ -70,13 +56,11 @@ Function to let CPU Easy produce a random, but valid number for placement.
 !         ===  Normal algorhytm  ===
           =====================  */
 function CPU_Normal() {
-/* 
-?                                         Infobox
-Function to let CPU Normal make placements as near as its possible to other Coins from him,
-try to avoid upwards and sideways finishing moves from Human Player and try to make them self.
-*/
+//? === Function to let CPU Normal make placements as near as its possible to other Coins from him, 
+//? try to avoid upwards and sideways finishing moves from Human Player and try to make them self. ===
 
   // console.log("CPU Normal starts.");
+
   // If it is the first CPU Normal Placement, make a random placement
   if (Game.roundCounter === 1 || Game.roundCounter === 2) CPU_Easy();
   else {
@@ -165,16 +149,15 @@ try to avoid upwards and sideways finishing moves from Human Player and try to m
 };
 
      /*  ===================  
-!         ===  Hardalgorhytm  ===
+!         ===  Hard algorhytm  ===
           ===================  */
 function CPU_Hard() {
 /*
-?                                    Infobox / Ideas for writing this function
+?                                    Ideas for writing this function
 Function to let CPU Normal make placements as near as its possible to other Coins from istelf,
 try to avoid upwards, sideways and diagonal finishing moves from Human Player and try to make them self.
 Also prefer make placements on a 2 Coin chain, also in all three directions.
 */
-//? Code here... :-)
 };
 
 //#endregion
@@ -186,9 +169,9 @@ Also prefer make placements on a 2 Coin chain, also in all three directions.
           ========================  */
 function Detect_3_Coin_Chains_Diagonal() {
   
-//? Not adequately tested due to difficult test requirements
+//? === detect valid diagonal placements to finish or defend a winning move ===
 
-  console.log("Entered Diagonal 3 Coin Chains Detection");
+  //console.log("Entered Diagonal 3 Coin Chains Detection");
 
   for (let columnNumber = 1; columnNumber < (Game.gameboard_size_x -2); columnNumber++) {
     for (let rowNumber = 1; rowNumber < (Game.gameboard_size_y -2); rowNumber++) {
@@ -251,6 +234,9 @@ function Detect_3_Coin_Chains_Diagonal() {
 !         ===  3 coin chains vertical  ===
           =======================  */
 function Detect_3_Coin_Chains_Upwards() {
+
+  //? === detect valid vertical placements to finish or defend a winning move ===
+
 // console.log("Detection of 3 coins up started");
 
 // detection function
@@ -299,6 +285,9 @@ let up_defense = Detection_3Coins_Up(1);
 !         ===  3 coin chains horitontal  ===
           =========================  */
 function Detect_3_Coin_Chains_Sideways() {
+
+//? === detect valid horizontal placements to finish or defend a winning move ===
+
 // console.log("Detection of 3 Coins sideways started");
 
   // detection function
@@ -417,8 +406,11 @@ let sideway_defense = Detection_3Coins_sideways(1);
 !         ===  Upwards placements  ===
           =======================  */
 function Get_Valid_Upwards_Placemement() {
-  // Try to make placement on top of an other CPU placement
+
+//? === Try to make placement on top of an other CPU placement ===
+
 // console.log(`Entered valid upwards placement.`);
+
 let upwardsArray = [];
 let lastPlacement;
 
@@ -454,7 +446,9 @@ let lastPlacement;
 !         ===  Sideway placements  ===
           =======================  */
 function Get_Valid_Sideways_Placement() {
- // This function let the CPU know if he can make a placement near (left or right) to an already placed coin.
+
+ //? === This function let the CPU know if he can make a placement near (left or right) to an already placed coin ===
+
   // console.log(`Entered sideways placement detection.`);
  
  let sidewaysArray = [];
@@ -466,7 +460,7 @@ function Get_Valid_Sideways_Placement() {
       // proof if there is a placement in collumn array  
       // get the last placement of column for valid placement upon single coin 
        lastPlacement = Game.player2_coins[`C${columnNumber}`].slice(-1);
-    //   console.log(`Found a last placement for sideways in column ${columnNumber} and row ${lastPlacement[0]}.`);
+    // console.log(`Found a last placement for sideways in column ${columnNumber} and row ${lastPlacement[0]}.`);
        
       // left and right exceptions (trying placing outside of gameboard would cause error)
       //left side last row
@@ -556,6 +550,9 @@ function Get_Valid_Sideways_Placement() {
 !         ===  CPU placements  ===
           ====================  */
 function CPU_Placement(columnNumber) {
+
+//? === cpu makes a placement ===
+
  // console.log(`Entered CPU Placement Function. Column ${columnNumber} is clicked `);
 
  // to click correct subtract 1 from column number because an array starts with 0
@@ -572,6 +569,9 @@ clickNumber = columnNumber - 1;
 !         ===  Randomizer  ===
           =================  */
 function Randomizer(arr1, arr2) {
+
+//? === randomizes numbers from different arrays ===
+
 // console.log("Randomizer getted arrays:", arr1,  arr2);
 
 let randomizing_number;

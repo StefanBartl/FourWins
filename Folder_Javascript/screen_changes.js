@@ -8,38 +8,28 @@
 ?                  ____________________________________                                                                                                                                                                                                  
 !                                     Table of content              
 
-?                             1) Toggle Start / Game Screen          
+?                             1) Toggle start / game screen          
 .                                  - Show game screen
 .                                  - Show start screen                                                                                             
 ?                             2) Game-End-Screen           
 .                                  - Preparations for game end screen
 .                                  - Creation of game end screen          
-?                             3) Start a new Game                                                                                                                                                                                                                                                                                                                                                                                                                          */
-//#endregion
+?                             3) Start a new game   
 
-//#region Open Jobs
-/*
-?                  Jobs To-do:
-todo    -) 
-
-?                  Finish
-todo    -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo    -) Final formatation.
-todo    -) Make sure all important is commented.
-todo    -) Write a final Comment.
-
-!                  Session progress
-?-) 
+?                  Javascript - what a wonderful language!
 
 */
 //#endregion
 
-//#region 1) Toggle between Start and Game Screen
+//#region 1) toggle between start and game screen
 
      /*  ======================  
 !         ===  Show Game-Screen  ===
           ======================  */
 function Game_Screen() {
+
+//? === show the game-screen ===
+
 //console.log("Entering Game-Screen.");
 Game.state = "InGame";
 document.getElementById("section__main").setAttribute("data-ingame", "yes");
@@ -50,7 +40,7 @@ document.getElementById("section__main").setAttribute("data-canvasend", "no");
 if(Game.state === "Game End"){
   document.getElementById("div__turnPlayers").classList.remove("Class_Invisible");
 
-   // Disable Gameboard-Size changing
+   // disable gameboard-size changing
    document.getElementById("settings_span__gameboard").setAttribute("data-ingame",  "yes");
    Game.Language === "de" ? document.getElementById("settings_gameboard_h").innerText = "Nur zu Spielbeginn erlaubt!" :  document.getElementById("settings_gameboard_h").innerText = "Only allowed at Start-Screen!" ; 
    return
@@ -59,12 +49,12 @@ if(Game.state === "Game End"){
 // on small devices dont show settings menu
 if(settings_span.getAttribute("data-device")  === "smart") settings_span.style = "display: none";
 
-  // Remove the start screen elements
+  // remove the start screen elements
   document.querySelector("header").style = "display: none";
   document.getElementById("wrapper__leftSidebar").style = "display: none";
   document.getElementById("wrapper__rightSidebar").style = "display: none";  
 
-  // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it.. Show Win Notifications
+  // hide the player is on turn infobox and proof if there is the thinking animation attached, if so, remove it and then show win tallys
   if(document.getElementById("div__turnPlayers") && document.getElementById("div__turnPlayers").classList.contains("Class_Invisible"))
       document.getElementById("div__turnPlayers").classList.remove("Class_Invisible");
   if(document.getElementById("ID_Win_Div One") && document.getElementById("div__wonGames_P1").classList.contains("Class_Invisible"))
@@ -76,7 +66,7 @@ if(settings_span.getAttribute("data-device")  === "smart") settings_span.style =
   if (document.getElementById("h__turnDiv"))
       document.getElementById("h__turnDiv").style = "display: block";
 
-// Disable Gameboard-Size changing
+// disable gameboard-size changing
 document.getElementById("settings_span__gameboard").setAttribute("data-ingame",  "yes");
 Game.Language === "de" ? document.getElementById("settings_gameboard_h").innerText = "Nur zu Spielbeginn erlaubt!" :  document.getElementById("settings_gameboard_h").innerText = "Only allowed at Start-Screen!" ; 
 };
@@ -85,18 +75,22 @@ Game.Language === "de" ? document.getElementById("settings_gameboard_h").innerTe
 !         ===  Show Start-Screen  ===
           =====================  */
 function Start_Screen() {
+  
+  //? === show the starting screen ==
+
   //console.log("Entering Game-Screen.");
+
   document.getElementById("section__main").setAttribute("data-ingame", "no");
   document.getElementById("wrapper__gameboard").setAttribute("data-ingame", "no");
   document.getElementById("section__main").setAttribute("data-gameend", "no");
   document.getElementById("section__main").setAttribute("data-canvasend", "no");
   
-  // Add the start screen elements
+  // add the start screen elements
   document.querySelector("header").style = "display: block";
   document.getElementById("wrapper__leftSidebar").style = "display: block";
   document.getElementById("wrapper__rightSidebar").style = "display: block";
 
-  // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it. Hide win notivications.
+  // hide the player is on turn infobox and proof if there is the thinking animation attached, if so, remove it and than hide win tallys
   if(document.getElementById("div__turnPlayers") && !document.getElementById("div__turnPlayers").classList.contains("Class_Invisible"))
       document.getElementById("div__turnPlayers").classList.add("Class_Invisible");
   if(document.getElementById("div__wonGames_P1") && !document.getElementById("div__wonGames_P1").classList.contains("Class_Invisible"))
@@ -108,20 +102,23 @@ function Start_Screen() {
   if (document.getElementById("h__turnDiv"))
        document.getElementById("h__turnDiv").style = "display: none";
 
-    // Enable Gameboard-Size changing
+    // enable gameboard-size changing
     document.getElementById("settings_span__gameboard").setAttribute("data-ingame",  "no");
 };
 //#endregion
 
-//#region 2) Game-End-Screen
+//#region 2) game-end screen
 
      /*  ===========================  
-!         ===  Game-Screen preparations  ===
+!         ===  Game-End Screen preparations  ===
           ===========================  */
 function Preparations(gameResult) {
+
+  //? === do all preparations to invoke the game-end screen ===
+
   // console.log("Entered Game End Screen preparations.");
 
-  // Play correct Audio
+  // play correct Audio
   if (
     gameResult === 2 &&
     Game.Game_against_CPU === true &&
@@ -132,26 +129,26 @@ function Preparations(gameResult) {
     win_audio.play();
   };
 
-  // If the Game was against CPU, update the stats in the local storage via invoking helper function Update_Stats()
+  // if the game was against CPU, update the stats in the local storage via invoking helper function Update_Stats()
   if (Game.Game_against_CPU === true) Update_Stats(gameResult);
 
-  // Loop trough TopCells to give them a better look in the black Game End Screen & Lock the placement function
+  // loop trough top-cells to give them a better look in the black game end screen & lock placement function
   const topCellsArray = document.getElementsByClassName("topCells");
   for (let topCell of topCellsArray) {
     topCell.style = "pointer-events:none";
   };
 
-  // Hide the Player is on turn Infobox and proof if there is the thinking animation attached, if so, remove it. Hide win notivications.
+  // hide the player is on turn infobox and proof if there is the thinking animation attached, if so, remove it and than hide win tallys
   if(document.getElementById("div__turnPlayers") && !document.getElementById("div__turnPlayers").classList.contains("Class_Invisible"))
   document.getElementById("div__turnPlayers").classList.add("Class_Invisible");
 if(document.getElementById("div__wonGames_P1")) document.getElementById("div__wonGames_P1").classList.add("Class_Invisible");
 if(document.getElementById("div__wonGames_P2")) document.getElementById("div__wonGames_P2").classList.add("Class_Invisible");
 if(document.getElementById("div__drawGames")) document.getElementById("div__drawGames").classList.add("Class_Invisible");
   
- // Make Settings Menu visible during End-Screen
+ // make settings-menu visible during end screen
  if(document.getElementById("section__settings_menu"))  document.getElementById("section__settings_menu").setAttribute("data-endscreen",  "yes");
  if(document.getElementById("settings_span"))  document.getElementById("settings_span").setAttribute("data-endscreen",  "yes");
-  // Enable Gameboard-Size changing
+  // enable gameboard-size changing
   document.getElementById("wrapper__gameboard").setAttribute("data-ingame", "no");
 
   Game.state = "Game End";
@@ -159,7 +156,7 @@ if(document.getElementById("div__drawGames")) document.getElementById("div__draw
   document.getElementById("section__main").setAttribute("data-gameend", "yes");
 
 
-  // Assign correct names to the winner, loser or draw variables and return it, also set  the wins counter
+  // assign correct names to the winner, loser or draw variables and return it, also set  the wins counter
   let winner, loser;
   const names_from_result = [];
   if (gameResult === 1) {
@@ -187,11 +184,14 @@ if(document.getElementById("div__drawGames")) document.getElementById("div__draw
 !         ===  Game-Screen creation  ===
           ========================  */
 function Game_End_Screen(gameResult) {
-  // console.log("Entered Game End Screen Function.");
+
+  //? === show the game-end screen ===
+
+  // console.log("Entered Game-end screen function.");
 
   const result = Preparations(gameResult);
  
-  //#region Creation of End-Screen
+  //#region creation of end-screen
 
   // Create the Containers for the texts
   const winning_head = Create_DOM_Element({
@@ -361,14 +361,17 @@ if(cell.getAttribute("data-winchain") === "yes")cell.animate(
 !         ===  Start new game  ===
           ===================  */
 function Start_New_Game(gameResult){
+
+//? === start a new game ===
+
 // console.log("Entered New Game function.");
 
-//Make sure the stats are up to date
+// make sure the stats are up to date
 Stats();
 Won_Games_Counter();
 Game.state = "InGame";
 
-//#region Reset Game
+//#region reset game
 const topCellsArray = document.getElementsByClassName("topCells");
 const cellsArray = document.getElementsByClassName("cells");
 // Remove TopCell Style classes collected during the Game and End-Screen & unlock the placement function again

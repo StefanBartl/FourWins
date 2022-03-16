@@ -9,24 +9,11 @@
 !                                        Table of content              
  
 ?                                 1) Container & Wrapper                                                                                                                              
-?                                 2) Text, Inputs, Images,...
-?                                 3) Settings-Menu
-?                                 4) Global Counters                                                                                                                                                    
-*/
-//#endregion
+?                                 2) Text, inputs, images,...
+?                                 3) Settings-menu
+?                                 4) Global counters                                                                                                                                                    
 
-//#region Open Jobs
-/*
-?                  Jobs To-do:
-todo        -)
-
-?                  Finish
-todo        -) Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo        -) Final formatation.
-todo        -) Make sure all important is commented.
-todo        -) Write a final Comment.
-!                             Session progress
-?-) 
+?                  Javascript - what a wonderful language!
 
 */
 //#endregion
@@ -88,10 +75,13 @@ const label_colour = document.getElementById("colour_h");
 //#endregion
 
 //#region 4) global counters
-// Counters to count wins if more Games are played
+
+//? === Counters to count wins if more Games are played ===
+
 let count_wins_player_one = 0,
   count_wins_player_two = 0;
 
 let player1_coins = [],
   player2_coins = [];
+
 //#endregion

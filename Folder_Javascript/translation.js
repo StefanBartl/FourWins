@@ -8,12 +8,14 @@
 ?                  _______________________________                                                                                                                                                                                                  
 !                                     Table of content              
  
- ?                             1) Translation Manager
+ ?                             1) Translation manager
 .                                     - Set page language
 .                                     - Translate start-screen                                                                                                             
  ?                              2) Page Library
 .                                     - Deutsch
-.                                     - English                                                                                       
+.                                     - English          
+?                  Javascript - what a wonderful language!
+
 */
 //#endregion
 
@@ -23,7 +25,9 @@
 !         ===  Detect & set language  ===
           ========================  */
 function Set_Page_Language() {
-  // Detect Browser language, if it can"t (i. g. restrictions) set English. Save information in Game Object
+
+  //? ===  Detect Browser language, if it can"t (i. g. restrictions) set English. Save information in Game Object ===
+  
   // console.log("Setting Page Language...");
 
   const LanguageIsSettedByUser = localStorage.LanguageIsSetttedByUser;
@@ -37,7 +41,7 @@ function Set_Page_Language() {
       navigator.language || navigator.userLanguage || "English";
     Game.Language = browserLanguage;
     Game.LanguageIsSetttedByUser = false;
-    // Invoke the translation with the getted language
+    // invoke the translation with the getted language
     Translate_StartScreen(browserLanguage, false);
   }
 };
@@ -46,8 +50,11 @@ function Set_Page_Language() {
 !         ===  Translate page  ===
           ===================  */
 function Translate_StartScreen(language, byUser) {
+
+  //? === Make sure browser triggered invokes are not executed if the language was setted by user anytime before ===
+
   // console.log("Translate the Page to setted Language:", language, "Setted by User:", byUser);
-  // Make sure browser triggered invokes are not executed if the language was setted manually anytime before
+
   const setted_language = localStorage.Language;
 
   if (byUser === true) {
@@ -56,11 +63,11 @@ function Translate_StartScreen(language, byUser) {
     language === "de" ? Deutsch() : English();
   }
 
-  // Never changing text
+  // never changing text
   credits_h.innerText = "Credits";
   sound_h.innerText = "Sound";
 
-  // Make sure the dropdown menu is always selected with the actual language
+  // make sure the dropdown menu is always selected with the actual language
   localStorage.getItem("Language") === "de"
     ? (document.getElementById("select__language").value = "Deutsch")
     : (document.getElementById("select__language").value = "English");
@@ -74,7 +81,9 @@ function Translate_StartScreen(language, byUser) {
 !         ===  Deutsch library  ===
           ===================  */
 function Deutsch() {
+
 // console.log("Entered Deutsch library.");
+
 head_title.innerText = "+++ 4-Gewinnt +++";
 headline.innerText = "Online 4-Gewinnt";
 p__headline.innerText = "Spiele gegen deine Freunde oder gegen die CPU!";
@@ -128,7 +137,9 @@ ki_level_dropdown_normal.innerHTML = "CPU Normal";
 !         ===  English library  ===
           ===================  */
 function English() {
+
 // console.log("Entered English library");
+
 head_title.innerText = "+++ 4-Wins +++";
 headline.innerText = "Four Wins";
 p__headline.innerText = "Play against friends or CPU!";

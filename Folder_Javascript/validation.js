@@ -11,24 +11,9 @@
 ?                                 1) Column-Locking Validator        
 ?                                 2) Diagonal Validator                                                                                                 
 ?                                 3) Column Validator                                                                             
-?                                 4) Row Validator                                                                                                                                                                                                                                                                                                                                        
-*/
-//#endregion
+?                                 4) Row Validator       
 
-//#region Open Jobs
-/*
-?                  Jobs To-do:
-
-todo    
-
-?                  Finish
-todo    Take a look at the Bonus Jobs - maybe you have enough passion to do one :-)
-todo    Final formatation.
-todo    Make sure all important is commented.
-todo    Write a final Comment.
-
-!                  Session progress
-?-) 
+?                  Javascript - what a wonderful language!
 
 */
 //#endregion
@@ -37,21 +22,23 @@ todo    Write a final Comment.
 !     Lock Top-Cell if full Column 
             ===================== */
 function Column_Locking_Validation(invokedForKiValidation) {
-  // Function for proofing if TopCell should be locked. In case of CPU is invoking if placement is possible too.Also to give, after locking them while placement, columns free where the row counter is higher than 0.
+
+//? === proof if column is full ===
+
   //console.log("Entered Top-Cell Validation.");
 
   const topCellsArray = document.getElementsByClassName("topCells");
 
-  // Important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section!
-  // Proof if the columnNumber was the last possible cell to play in the column
+  // important! Because the pointer events are also settet to "all" back after during the placement animations during the game, this function have to be after the coin placement section!
+  // proof if the columnNumber was the last possible cell to play in the column
   if ( Game.rowCounter[`C${Game.clicked_column}`] === 0) {
-    // If it was lock it for further placements
+    // if it was lock it for further placements
     // console.log("TopCell-Validator locked cell.");
     document.getElementById(`ID_C${Game.clicked_column}R0`).innerText = "Full!";
     document.getElementById(`ID_C${Game.clicked_column}R0`).setAttribute("data-columnfull", "yes");
-    // Give the rest of the TopCells free again
+    // give the rest of the TopCells free again
     for(let topCell = 0; topCell < topCellsArray.length; topCell++){
-      // (Jump over the locked column)
+      // (jump over the locked column)
       if(topCell === Game.clicked_column - 1) continue;
 
      topCellsArray[topCell].style = "pointer-events: all";
@@ -60,13 +47,13 @@ function Column_Locking_Validation(invokedForKiValidation) {
     return
   };
 
-  // If the column is locked for placements, return false to CPU Placement, so they know they cant make a placement there. Else return true so they hav a valid column number.
+  // if the column is locked for placements, return false to CPU Placement, so they know they cant make a placement there. Else return true so they hav a valid column number.
   if (invokedForKiValidation === true) {
-  //    console.log("CPU Placement possible.");
+  // console.log("CPU Placement possible.");
       return true
     };
 
-    // If it passes the proofment, just give the TopCell free again which are not full and return
+    // if it passes the proofment, just give the TopCell free again which are not full and return
   for(let topCell of topCellsArray){
     if(!topCell.getAttribute("data-columnfull")){
         topCell.style = "pointer-events: all";
@@ -80,15 +67,18 @@ function Column_Locking_Validation(invokedForKiValidation) {
 !     Diagonal Win-Validation 
             ================== */
 function Diagonal_Validator(player, columnNumber, row) {
+
+//? === validate if there are 4 coins diagonal ===
+
   // console.log("Diagonal Validation started.")
 
   const basis = document.getElementById(`ID_C${columnNumber}R${row}`),
-    // Get the to validate Gameboard cell for diagonal validation in right-up and left-down direction (which are in this context the same) based the basis (the played) cell
+    // get cells to validate gameboard cell for diagonal validation in right-up and left-down direction (which are in this context the same) based the basis (the played) cell
     second_plus = document.getElementById(`ID_C${columnNumber + 1}R${row + 1}`),
     third_plus = document.getElementById(`ID_C${columnNumber + 2}R${row + 2}`),
     fourth_plus = document.getElementById(`ID_C${columnNumber + 3}R${row + 3}`);
 
-  // If there are 3 more cells for validation, check if they contain a players coin...
+  // if there are 3 more cells for validation, check if they contain a players coin...
   if (
     basis != null &&
     second_plus != null &&
@@ -109,8 +99,8 @@ function Diagonal_Validator(player, columnNumber, row) {
     }
   }
 
-  // Now same as above but in the other two diaggonals
-  // Get the to validate Gameboard cell for diagonal validation in left-up and right-down direction
+  // now same as above but in the other two diaggonals
+  // get the to validate gameboard cell for diagonal validation in left-up and right-down direction
   const second_minus = document.getElementById(
       `ID_C${columnNumber - 1}R${row + 1}`
     ),
@@ -119,7 +109,7 @@ function Diagonal_Validator(player, columnNumber, row) {
       `ID_C${columnNumber - 3}R${row + 3}`
     );
 
-  // If there are 3 more cells for validation, check if they contain a players coin...
+  // if there are 3 more cells for validation, check if they contain a players coin...
   if (
     basis != null &&
     second_minus != null &&
@@ -145,7 +135,11 @@ function Diagonal_Validator(player, columnNumber, row) {
  !     Column Win-Validation 
             ================= */
 function validator__column(player){
+
+//? === validate if there are 4 coins vertical ===
+
 //console.log(`Entered column win validation for player ${player}.`)
+
 let playerPlacements, arrayToValidate;
 
 // get correct placements array
@@ -188,6 +182,9 @@ for(let columnNumber = 1; columnNumber <= Game.gameboard_size_x; columnNumber++)
 !     Row Win-Validation 
             =============== */
 function Row_Validator(player,  placedRow) {
+
+  //? === validate if there are 4 coins horizonal ===
+
   //console.log(`Entered row validator for player ${player}, clicked column ${clickedColumn} and placed row ${placedRow}.`)
   let playerPlacements;
   // get correct placements array

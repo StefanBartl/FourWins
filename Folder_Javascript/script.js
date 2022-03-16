@@ -1,4 +1,4 @@
-//#region Table of Content
+//#region     table of content
 /*
 !                  Four-Wins-Online Main-Javascript-File
 ?                                      powered by
@@ -8,43 +8,27 @@
 ?                  ________________________________                                                                                                                                                                                                  
 !                                     Table of content              
 
- ?                    1) General  Settings & Page Set-Up      
- .                          - Game Object
- .                          - Game settings                                                                                                                      
- ?                    2) Main Game functions  
- .                          - Game preparations
- .                          - Play Game 
- ?                    3) Placements   
- .                          - Prepare placements
- .                          - Make placement
- .                          - End of placement
-.                           - Finish played round   
- ?                    4) Final Information & Comments                                                                                                                           
- ?                    5) Credits                                                            
-*/
-//#endregion
+ ?                    1) general settings & page set-up      
+ .                                  - Game object
+ .                                  - Game settings                                                                                                                      
+ ?                    2) main game functions  
+ .                                  - Game preparations
+ .                                  - Play game 
+ ?                    3) placements   
+ .                                  - Prepare placements
+ .                                  - Placement animation
+ .                                  - Placement end
+.                                   - P1 & P2 placement finish  
+?                      4) cbnus jobs & ideas for future
 
-//#region Open Jobs
-/*
-?                  to-do
-todo    emmet 
-todo    name save
-?                  finish
-todo    test all functions! all game variants! draw! New Headline if youre looking at func! 
-todo    write comments and prrof existed ones, infoboxes for description if needed, update headlines, console.log the arguments and as much as make sense!
-todo    finalize formatation. last update table of contents.
-todo    make sure all important is commented. write final informations / comment if make sense.
-todo    save default script files with the updatet script layout for later projects. also the index with the all new toggle slider and make a generic library for js & css !
-todo    cleanout functions an minimize code as much as it make sense. do the guidelines.
-todo    turn off console.logs
-todo    fix top cell transparent in topCellsCanvas class
-todo    take a look at the bonus jobs - maybe you have enough passion to do one :-)
-!                  Session progress
-?          
+?                  Javascript - what a wonderful language!
+
 */
 //#endregion
 
 //#region 1) general settings & set-up pages
+
+//? === game object for storing all important game properties ===
 
 const Game = {
   // Game Object for storing important values in variables. Collected access via Game.[variable]
@@ -81,9 +65,9 @@ clicked_TopCell_ID: "",
   state: "startingScreen",
 };
 
-//#region Game settings
+//#region game settings
 
-//?  Set attribute-marker for smartphones/small devices
+//? === set attribute-marker for smartphones/small devices ===
 // at start...
 if (window.innerWidth < 767.98){
   settings_span.setAttribute("data-device", "smart");
@@ -91,35 +75,16 @@ if (window.innerWidth < 767.98){
   // console.log("Small Device");
 };
 
-//Reset Gameboard size values and than create new gameboard
+//? === reset gameboard size values and than create new gameboard ===
 document.getElementById("settings_gameboard_sizeX").value = 7;
 document.getElementById("settings_gameboard_sizeY").value = 6;
 Create_Gameboard(document.getElementById("settings_gameboard_sizeX").value, document.getElementById("settings_gameboard_sizeY").value);
 
 Set_Page_Language();
 
-//#region Audio
+//#region audio
 
-// assign variables to the audio files 
-
-// Confirm Audio Sample
-const warning_audio = new Audio(
-  "Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav"
-); 
-
- // Loose against CPU Audio Sample
-const lost_audio = new Audio("Folder_Audio/freesound_com/loose.wav");
-
- // Winning Cheer Audio Sample
-const win_audio = new Audio(
-  "Folder_Audio/freesound_com/klankbeeld__choir-sing-a-final-01.wav"
-);
-
- //Placement Audio Sample
-const placing_audio = new Audio(
-  "Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav"
-);
-
+//? === set sound ===
 Game.Sound = localStorage.Sound || false;
 Correct_Sound_Setting();
 
@@ -127,15 +92,34 @@ sound_checkbox.addEventListener("click", () => {
   if (sound_checkbox.checked === true) {
     localStorage.Sound = true;
     Game.Sound = true;
-    starting_audio.muted = false;
   } else {
     localStorage.Sound = false;
     Game.Sound = false;
-    starting_audio.muted = true;
   }
 });
 
-// only preload audio (to have it ready if needed) if sound is on
+//? === assign variables for audio files === 
+
+// confirm audio sample
+const warning_audio = new Audio(
+  "Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav"
+); 
+
+ // loose against CPU audio sample
+const lost_audio = new Audio("Folder_Audio/freesound_com/loose.wav");
+
+ // winning cheer audio sample
+const win_audio = new Audio(
+  "Folder_Audio/freesound_com/klankbeeld__choir-sing-a-final-01.wav"
+);
+
+ // placement audio sample
+const placing_audio = new Audio(
+  "Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav"
+);
+
+//? === preload audio if sound is on ===
+
 if(Game.Sound === true){
 warning_audio.load();
 lost_audio.load();
@@ -145,9 +129,10 @@ placing_audio.load();
 
 //#endregion
 
-//#region Set Left Player Colour
+//#region set coin colour
 
-// Make sure, after clicking the Colour choose checkbox and than refresh the page, the correct colour is setted
+// ? === set coin colour ===
+
 Game.player_Colour_Left = localStorage.Player_Colour_Left || "yellow";
 if (Game.player_Colour_Left === "red") {
   toggle_colour_button.classList.add("toggle__colour");
@@ -159,21 +144,25 @@ if (Game.player_Colour_Left === "red") {
 
 //#endregion
 
-//#region Set correct Names
-//                                   Set Names of Players to stored names if they are some
+//#region set correct names
+
+//? === set player to stored names ===
+
 if (localStorage.Player_One_Name)
   player_1_name.value = localStorage.Player_One_Name;
 if (localStorage.Player_Two_Name)
   player_2_name.value = localStorage.Player_Two_Name;
 
-//                                   User storing names in localStorage
-// Save names from input in local storage
+//? === store player names ===
+
+// save names from input in local storage
 Push_to_LocalStorage(
   "player1_name_svg",
   "input__player1_name",
   "Player_One_Name",
   "click"
 );
+
 Push_to_LocalStorage(
   "player2_name_svg",
   "input__player2_name",
@@ -181,7 +170,7 @@ Push_to_LocalStorage(
   "click"
 );
 
-// Hover animations for circles after Name-Inputs
+// hover animations for circles after name-inputs
 Swap_Two_Classes_by_Events(
   "player1_name_svg",
   "mouseenter",
@@ -189,6 +178,7 @@ Swap_Two_Classes_by_Events(
   "Class_Buttons_Add_Hover_Animations_1",
   "Class_Buttons_Remove_Hover_Animations_1"
 );
+
 Swap_Two_Classes_by_Events(
   "player2_name_svg",
   "mouseenter",
@@ -264,12 +254,14 @@ player_2_svg.addEventListener("click", () => {
 
 //#endregion
 
-//#region Settings-Menu Setup
+//#region settings-menu setup
 
-// Get up-tp-date stats for the Settings-Menu
+//? === update stats ===
+
 Stats();
 
-// set and proof to fire menu animation
+//? ===  proof firing animations ===
+
 Game.animations = localStorage.animations || "true";
 if(Game.animations === "true"){
   settings_span.classList.add("colourAnimation");
@@ -280,7 +272,8 @@ if(Game.animations === "true"){
   aniToggle_checkbox.checked = false;
 };
 
-// ...and at resizing window...
+//? === set display device state ===
+
 window.addEventListener("resize", ()=>{
       // width under ~770px change to small device
     if (window.innerWidth < 767.98){
@@ -294,11 +287,11 @@ window.addEventListener("resize", ()=>{
     };
 });
 
-// on desktop attach the menu animation
+//? === if [data-device: desktop] attach the menu animation ===
 if(settings_menu.getAttribute("data-device") === "default"){
 
 settings_span.addEventListener("mouseenter", () => {
-  //If the settíngs icon is clicked and there isnt the showing class attached, remove the Hide Class if attached, then trigger show animatiom
+  // if the menu is hovered and there is the show class attached, remove multiple classes,  then trigger show animation
   if (!settings_span.classList.contains("Class_Show_Settings")) {
     settings_span.classList.remove("Class_Hide_Settings");
     settings_span.classList.remove("colourAnimation");
@@ -307,23 +300,23 @@ settings_span.addEventListener("mouseenter", () => {
 });
 
 main_wrapper.addEventListener("mouseenter", () => {
-  //If the settíngs menu is leaved to the main wrapper and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
+  // if the  menu is leaved to the main wrapper and there is the showing class attached, remove multiple classes, then trigger hide animatiom
   if (settings_span.classList.contains("Class_Show_Settings")) {
     settings_span.classList.remove("Class_Show_Settings");
     settings_span.classList.add("Class_Hide_Settings");
   };
-  // If menu animation is not setted of, attach animation class after small delay to make sure the triggered hide animation is fired
+
+  // if menu animation is not setted of, attach animation class after small delay to make sure the triggered hide animation is fired
   if(Game.animations === "true"){
   setTimeout(()=>{
     settings_span.classList.remove("Class_Hide_Settings");
     settings_span.classList.add("colourAnimation");
   }, 10);
   };
-
 });
 
 document.querySelector("header").addEventListener("mousemove", () => {
-  //If the settíngs menu is leaved to the header and there is the showing class attached, remove the showing Class is attached, then trigger hide animatiom
+  // if the menu is leaved to the header and there is the showing class attached, remove multiple classes, then trigger hide animatiom
   if (settings_span.classList.contains("Class_Show_Settings")) {
     settings_span.classList.remove("Class_Show_Settings");
     settings_span.classList.add("Class_Hide_Settings");
@@ -340,9 +333,13 @@ document.querySelector("header").addEventListener("mousemove", () => {
 
 //#endregion
 
-//#region Settings Menu Event-Listeners
+//#region settings-menu event-listeners
+
+//? === game informations window  === 
 
 info_h.addEventListener("click", () => {
+  //console.log("Information window clicked");
+
   if (Game.Language === "de") {
     New_Window({
       ID: "ID_Info_Window",
@@ -407,15 +404,22 @@ und die Einstellungen trotzdem erhalten bleiben. Wollen Sie diese Einstellungen 
   }
 });
 
+//? === create a new gameboard button === 
+
 document.getElementById("settings_gameboard_button").addEventListener("click", ()=>{
+    //console.log("Create new gameboard clicked");
+
   const sizeX = document.getElementById("settings_gameboard_sizeX").value;
   const sizeY = document.getElementById("settings_gameboard_sizeY").value;
   Create_Gameboard(sizeX, sizeY);
   Game.user_changed_gameboard = true;
 });
 
+//? === toggle the coin colour === 
+
 document.getElementById("container__toggleColour").addEventListener("click", () => {
   //console.log("Colour toggle clicked");
+
   if (
     localStorage.Player_Colour_Left === "yellow" ||
     localStorage.Player_Colour_Left === undefined
@@ -435,12 +439,12 @@ document.getElementById("container__toggleColour").addEventListener("click", () 
     // console.log("Colour toggle changed colour for future coins to yellow.")
   }
 
-  // Changing colour of existing coins
+  // changing colour of existing coins
   if (Game.state == "InGame") {
     const cellsArray = document.getElementsByClassName("cells");
     //Loops trough cellsArray
     for (let cell of cellsArray) {
-      // If one cell have tht Class with a red or yellow Coin Background attached, change it to the other colored background (PNG)
+      // if one cell have tht Class with a red or yellow Coin Background attached, change it to the other colored background (PNG)
       if (cell.classList.contains("placedCoin__1")) {
         cell.classList.remove("placedCoin__1");
         cell.classList.add("placedCoin__2");
@@ -453,9 +457,12 @@ document.getElementById("container__toggleColour").addEventListener("click", () 
   }
 });
 
+//? === change the game language (en/ger) === 
+
 language_menu.addEventListener("change", () => {
-  // Save language in Local Storage and Game Object
-  // Important maybe for later: With more languages, if/else needed!
+    //console.log("Set language clicked");
+
+  // save language in local storage and game object
   let languageCode;
   language_menu.value === "Deutsch"
     ? (languageCode = "de")
@@ -464,14 +471,14 @@ language_menu.addEventListener("change", () => {
   localStorage.LanguageIsSetttedByUser = true;
   Game.Language = languageCode;
   Game.LanguageIsSetttedByUser = true;
-  // Make sure that a manually setted setted language is not overwritten by the default detected default browser language
+  // make sure that a manually setted setted language is not overwritten by the default detected default browser language
   Translate_StartScreen(languageCode, true);
 
-  // If exist yet, translate actual Turning Div
+  // if exist yet, translate actual turning div
   if (document.getElementById("h__turnDiv")) {
+          
+    // deutsch
     if (Game.Language === "de") {
-      // Deutsch
-
       if (Game.playerIsOnTurn === "left") {
         document.getElementById(
           "h__turnDiv"
@@ -487,10 +494,10 @@ language_menu.addEventListener("change", () => {
         document.getElementById(
           "h__turnDiv"
         ).innerText = `${Game.Player_Two_Name} denkt nach...`;
-      }
+      };
     } else {
-      // English
 
+      // english
       if (Game.playerIsOnTurn === "left") {
         document.getElementById(
           "h__turnDiv"
@@ -506,12 +513,16 @@ language_menu.addEventListener("change", () => {
         document.getElementById(
           "h__turnDiv"
         ).innerText = `${Game.Player_Two_Name}"s is thinking...`;
-      }
-    }
-  }
+      };
+    };
+  };
 });
 
+//? === toogle all animations === 
+
 aniToggle_checkbox.addEventListener("click", ()=>{
+    //console.log("Toggle animations clicked");
+
       if(localStorage.animations === "true" || localStorage.animations === undefined){
           localStorage.animations = "false" 
           Game.animations = "false";
@@ -526,33 +537,53 @@ aniToggle_checkbox.addEventListener("click", ()=>{
              document.getElementById("h__turnDiv").style.visibility = "visible";
 }});
 
+//? === reset stats against cpu easy === 
+
 stats_reset_easy.addEventListener("click", () => {
+  //console.log("Reset stats easy clicked");
+
   localStorage.CPU_Easy_Wins = 0;
   localStorage.CPU_Easy_CPUWins = 0;
   localStorage.CPU_Easy_Draws = 0;
   Stats();
 });
 
+//? === reset stats against cpu normal === 
+
 stats_reset_normal.addEventListener("click", () => {
+    //console.log("Reset stats normal clicked");
+
   localStorage.CPU_Normal_Wins = 0;
   localStorage.CPU_Normal_CPUWins = 0;
   localStorage.CPU_Normal_Draws = 0;
   Stats();
 });
 
+//? === link to contact page === 
+
 contact_h.addEventListener("click", () => {
+    //console.log("Contacts clicked");
+
   window.open("https://stefanbartl.github.io/StefanBartl_Portfolio/");
 });
 
+//? === link to credits page === 
+
 credits_h.addEventListener("click", () => {
+   //console.log("Credits clicked");
+
   window.open("https://github.com/StefanBartl/FourWins/blob/main/README.md");
 });
 
+//? === delete all data from local storage === 
+
 delete_all.addEventListener("click", () => {
-  // Play warning sound
+    //console.log("Delete all clicked");
+
+  // play warning sound
   if(Game.Sound === true)  warning_audio.play();
 
-  // Create Confirm Window
+  // create confirm window
   if (Game.Language === "de") {
     const confirm =  New_Window({ID: "newWindow__delete", Name: "Notification", Text: `${
       localStorage.getItem("Player_One_Name") || "Spieler"
@@ -563,8 +594,8 @@ delete_all.addEventListener("click", () => {
       localStorage.getItem("Player_One_Name") || "Player"
     }, do you really want do delete the saved language, saved Player names and the stats from your local Storage? The data is stored in your Browser and cannot be restored again after deleting it.`, 
     Confirm: true}); 
-  }
-    // If user clicked OK after notification, delete local storage
+  };
+    // if user clicked OK after notification, delete local storage
     document.getElementById("newWindow__delete_OK_Button").addEventListener("click", ()=>{
       localStorage.clear();
       //console.log("Local Storage deleted");
@@ -589,7 +620,9 @@ delete_all.addEventListener("click", () => {
 !          ===  Preparings  ===
           ================  */
 function Game_Preparations() {
-  // function to do all the preparations to start the game
+
+  //? === do all the preparations to start the game ===
+  
   // console.log("Entered Game Preparations");
 
   Game.state = "Preparations";
@@ -669,6 +702,9 @@ function Game_Preparations() {
 !         ===  Play  ===
           ===========  */
 function PlayGame() {
+
+  //? === detect placing of a coin ===
+
   // console.log("Entered Play Game Function.");
 
   Game.state = "InGame";
@@ -722,18 +758,21 @@ function PlayGame() {
 !         ===  Prepare placement  ===
           =====================  */
 function Prepare_Placement() {
+
+//? === gather coin placement informations to trigger the placement ===
+
   // console.log("Entered Function for preparing new Placement.");
 
-  // Get all Top-Cells
+  // get all top-cells
   const topCellsArray = document.getElementsByClassName("topCells");
 
-  // Get the played top cell for getting the right column
+  // get the played top cell for getting the right column
   topCell = document.getElementById(`${Game.clicked_TopCell_ID}`);
 
-  // Make sure, placement only is allowed if the animation from the placement before is finished
+  // make sure, placement only is allowed if the animation from the placement before is finished
   if (topCell.firstChild) return;
 
-  // Increase round counter
+  // increase round counter
   Game.roundCounter++;
 
   Game.coin_placement_row =  parseInt(Game.rowCounter[`C${Game.clicked_column}`] ) ;
@@ -747,18 +786,11 @@ function Prepare_Placement() {
           ================  */
 function Placement_Animation() {
   
-  /*                 console.log(
-    "Make placement on coin. The placement id is:",
-    Game.coin_placement_id,
-    "in row:",
-    Game.coin_placement_row,
-    "and column:",
-    Game.clicked_column
-  );
-*/
+//? === fire the placement animation ===
 
-  //? create the correct coin, note correct position and append it to the DOM
-  
+  /*console.log(`Make placement on coin. The placement id is: ${Game.coin_placement_id} in row: ${Game.coin_placement_row} and column: ${Game.clicked_column}.`);*/
+
+  //? create the correct coin, note correct position and append it to the DOM  
   const coin = document.createElement("div");
 
   // if left player is on turn
@@ -844,6 +876,9 @@ if(settings_menu.getAttribute("data-device") === "smart") animation__length *= 0
 !         ===  End placement  ===
           ===================  */
 function Placement_End() {
+
+  //? === place coin on his destination ===
+
  // console.log("Entered End of Placement");
 
     //  first remove the coin from the top-cell to get rid of the animated coin, if animation is on
@@ -888,7 +923,9 @@ function Placement_End() {
 !         ===  After placement I  ===
           =====================  */
 function Player_1_Placement_Finish() {
-  //  invoke winning-validation for player 1 and if true invoke game-end function
+
+  // ? === invoke winning-validation for player 1 and if true invoke game-end function ===
+  
   const valid_row = Row_Validator(1,  Game.coin_placement_row);
   const valid_column = validator__column(
     1,
@@ -953,37 +990,11 @@ function Player_2_Placement_Finish() {
 };
 //#endregion
 
-//#region 4) final informations and comments
-
+//#region 4) bonus jobs & ideas for future
 /*
-?                     Bonus Jobs to-do:
-
--) Make the Coin Images a variable _> User could choice between coin appearance 
--) Implement Classic and Personal style!
--) Save /Load Game function via saving cell-states in localStorage!
--) Write a CPU Heavy Algorhytmus!
--) Make it possible to switch from Game Mode to the Starting Screen to change Settings, Names etc...
--) Design a Starting Screen Animation to make it more interesting to play!  
--) Think about a other Design for the Page and the Gameboard!
-                                                                                                                                                                                                                                                                                */
-//#endregion
-
-//#region 5) credits
-/*
-    
-====================================================================================================================
-                                                                                                                    
-                                       Credits & Special Thanks to:                                                 
-                                                                                                                    
-    Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    
-                                      https://www.theodinproject.com/                                               
-                                                                                                                    
-                   Greetings to the many, many programmers who take the time to put there knowledge online!         
-        Of course also big thanks to all photographers and graphic designers who make their works available.        
-                                                                                                                    
-                                  Javascript - what a wonderful language.                                              
-                                                                                                                    
-                                                                                                                    
-====================================================================================================================                                                                                                                                                               */
-
+? make the coin images a variable so a user could choice between coin appearance 
+? save /load game function f.e. saving cell-states in local storage
+? improve CPU Normal algorhytmus f.e. with randomizing upwards/vertical placements by getting multiple values
+? write a CPU Heavy algorhytmus
+? design a starting screen animation to make it more interesting to play if landing on the page                                                                                                                                                                                                                                                                              */
 //#endregion
