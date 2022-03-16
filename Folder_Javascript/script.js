@@ -36,17 +36,14 @@ const Game = {
   gameboard_size_x: 7,
   gameboard_size_y: 6,
   user_changed_gameboard: false,
-  actualGameboardPlayer1: {
-
-  },
-  actualGameboardPlayer2: {
-  },
+  actualGameboardPlayer1: {},
+  actualGameboardPlayer2: {},
   player1_coins: [],
   player2_coins: [],
- all_coins: [],
-rowCounter: [],
-clicked_column: undefined,
-clicked_TopCell_ID: "",
+  all_coins: [],
+  rowCounter: [],
+  clicked_column: undefined,
+  clicked_TopCell_ID: "",
   // Setting variable to know who is on turn
   playerIsOnTurn: "right",
   // Setting a counter for the played rounds
@@ -69,16 +66,19 @@ clicked_TopCell_ID: "",
 
 //? === set attribute-marker for smartphones/small devices ===
 // at start...
-if (window.innerWidth < 767.98){
+if (window.innerWidth < 767.98) {
   settings_span.setAttribute("data-device", "smart");
   settings_menu.setAttribute("data-device", "smart");
   // console.log("Small Device");
-};
+}
 
 //? === reset gameboard size values and than create new gameboard ===
 document.getElementById("settings_gameboard_sizeX").value = 7;
 document.getElementById("settings_gameboard_sizeY").value = 6;
-Create_Gameboard(document.getElementById("settings_gameboard_sizeX").value, document.getElementById("settings_gameboard_sizeY").value);
+Create_Gameboard(
+  document.getElementById("settings_gameboard_sizeX").value,
+  document.getElementById("settings_gameboard_sizeY").value
+);
 
 Set_Page_Language();
 
@@ -98,34 +98,34 @@ sound_checkbox.addEventListener("click", () => {
   }
 });
 
-//? === assign variables for audio files === 
+//? === assign variables for audio files ===
 
 // confirm audio sample
 const warning_audio = new Audio(
   "Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav"
-); 
+);
 
- // loose against CPU audio sample
+// loose against CPU audio sample
 const lost_audio = new Audio("Folder_Audio/freesound_com/loose.wav");
 
- // winning cheer audio sample
+// winning cheer audio sample
 const win_audio = new Audio(
   "Folder_Audio/freesound_com/klankbeeld__choir-sing-a-final-01.wav"
 );
 
- // placement audio sample
+// placement audio sample
 const placing_audio = new Audio(
   "Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav"
 );
 
 //? === preload audio if sound is on ===
 
-if(Game.Sound === true){
-warning_audio.load();
-lost_audio.load();
-win_audio.load();
-placing_audio.load();
-};
+if (Game.Sound === true) {
+  warning_audio.load();
+  lost_audio.load();
+  win_audio.load();
+  placing_audio.load();
+}
 
 //#endregion
 
@@ -198,13 +198,16 @@ choose_ki.addEventListener("change", () => {
   }
   // If it is a game against CPU, set Player Two Name to CPU Level
   else if (Game.Language === "de" && choose_ki.value === "CPU Easy")
-    document.getElementById("input__player2_name").value = "Einfacher CPU Gegner";
+    document.getElementById("input__player2_name").value =
+      "Einfacher CPU Gegner";
   else if (Game.Language !== "de" && choose_ki.value === "CPU Easy")
     document.getElementById("input__player2_name").value = "Easy CPU Opponent";
   else if (Game.Language === "de" && choose_ki.value === "CPU Normal")
-    document.getElementById("input__player2_name").value = "Normaler CPU Gegner";
+    document.getElementById("input__player2_name").value =
+      "Normaler CPU Gegner";
   else if (Game.Language !== "de" && choose_ki.value === "CPU Normal")
-    document.getElementById("input__player2_name").value = "Normal CPU Opponent";
+    document.getElementById("input__player2_name").value =
+      "Normal CPU Opponent";
 });
 /* =======================================
          Showing Name is saved Event-Listeners 
@@ -219,14 +222,14 @@ player_1_svg.addEventListener("click", () => {
   // Push it to DOM
   left_sidebar.appendChild(notificationL);
   // Smooth showing if animation is on
-  if(Game.animations === "true"){
-  notificationL.classList.add("Class_Smooth_In");
-  // Smooth removing after 3 seconds
-  setTimeout(() => {
-    notificationL.classList.remove("Class_Smooth_In");
-    notificationL.classList.add("Class_Smooth_Out");
-  }, 3000);
-};
+  if (Game.animations === "true") {
+    notificationL.classList.add("Class_Smooth_In");
+    // Smooth removing after 3 seconds
+    setTimeout(() => {
+      notificationL.classList.remove("Class_Smooth_In");
+      notificationL.classList.add("Class_Smooth_Out");
+    }, 3000);
+  }
   // Remove it from DOM
   setTimeout(() => {
     notificationL.remove();
@@ -240,13 +243,13 @@ player_2_svg.addEventListener("click", () => {
   notification.style.width = "100%";
   notification.id = "saveNameP2";
   right_sidebar.appendChild(notification);
-  if(Game.animations === "true"){
-  notification.classList.add("Class_Smooth_In");
-  setTimeout(() => {
-    notification.classList.remove("Class_Smooth_In");
-    notification.classList.add("Class_Smooth_Out");
-  }, 3000);
-  };
+  if (Game.animations === "true") {
+    notification.classList.add("Class_Smooth_In");
+    setTimeout(() => {
+      notification.classList.remove("Class_Smooth_In");
+      notification.classList.add("Class_Smooth_Out");
+    }, 3000);
+  }
   setTimeout(() => {
     notification.remove();
   }, 4000);
@@ -263,79 +266,78 @@ Stats();
 //? ===  proof firing animations ===
 
 Game.animations = localStorage.animations || "true";
-if(Game.animations === "true"){
+if (Game.animations === "true") {
   settings_span.classList.add("colourAnimation");
   start_button.classList.add("colourAnimation");
   document.getElementById("headline").classList.add("colouredTextAnimation");
   aniToggle_checkbox.checked = true;
 } else {
   aniToggle_checkbox.checked = false;
-};
+}
 
 //? === set display device state ===
 
-window.addEventListener("resize", ()=>{
-      // width under ~770px change to small device
-    if (window.innerWidth < 767.98){
-      settings_span.setAttribute("data-device", "smart");
-      settings_menu.setAttribute("data-device", "smart");
-     //  console.log("Small Device");
-    } else {
-      settings_span.setAttribute("data-device", "default");
-      settings_menu.setAttribute("data-device", "default");
-     //  console.log("Default Device");
-    };
+window.addEventListener("resize", () => {
+  // width under ~770px change to small device
+  if (window.innerWidth < 767.98) {
+    settings_span.setAttribute("data-device", "smart");
+    settings_menu.setAttribute("data-device", "smart");
+    //  console.log("Small Device");
+  } else {
+    settings_span.setAttribute("data-device", "default");
+    settings_menu.setAttribute("data-device", "default");
+    //  console.log("Default Device");
+  }
 });
 
 //? === if [data-device: desktop] attach the menu animation ===
-if(settings_menu.getAttribute("data-device") === "default"){
+if (settings_menu.getAttribute("data-device") === "default") {
+  settings_span.addEventListener("mouseenter", () => {
+    // if the menu is hovered and there is the show class attached, remove multiple classes,  then trigger show animation
+    if (!settings_span.classList.contains("Class_Show_Settings")) {
+      settings_span.classList.remove("Class_Hide_Settings");
+      settings_span.classList.remove("colourAnimation");
+      settings_span.classList.add("Class_Show_Settings");
+    }
+  });
 
-settings_span.addEventListener("mouseenter", () => {
-  // if the menu is hovered and there is the show class attached, remove multiple classes,  then trigger show animation
-  if (!settings_span.classList.contains("Class_Show_Settings")) {
-    settings_span.classList.remove("Class_Hide_Settings");
-    settings_span.classList.remove("colourAnimation");
-    settings_span.classList.add("Class_Show_Settings");
-  };
-});
+  main_wrapper.addEventListener("mouseenter", () => {
+    // if the  menu is leaved to the main wrapper and there is the showing class attached, remove multiple classes, then trigger hide animatiom
+    if (settings_span.classList.contains("Class_Show_Settings")) {
+      settings_span.classList.remove("Class_Show_Settings");
+      settings_span.classList.add("Class_Hide_Settings");
+    }
 
-main_wrapper.addEventListener("mouseenter", () => {
-  // if the  menu is leaved to the main wrapper and there is the showing class attached, remove multiple classes, then trigger hide animatiom
-  if (settings_span.classList.contains("Class_Show_Settings")) {
-    settings_span.classList.remove("Class_Show_Settings");
-    settings_span.classList.add("Class_Hide_Settings");
-  };
-
-  // if menu animation is not setted of, attach animation class after small delay to make sure the triggered hide animation is fired
-  if(Game.animations === "true"){
-  setTimeout(()=>{
-    settings_span.classList.remove("Class_Hide_Settings");
-    settings_span.classList.add("colourAnimation");
-  }, 10);
-  };
-});
-
-document.querySelector("header").addEventListener("mousemove", () => {
-  // if the menu is leaved to the header and there is the showing class attached, remove multiple classes, then trigger hide animatiom
-  if (settings_span.classList.contains("Class_Show_Settings")) {
-    settings_span.classList.remove("Class_Show_Settings");
-    settings_span.classList.add("Class_Hide_Settings");
-
-    if(Game.animations === "true"){
-      setTimeout(()=>{
+    // if menu animation is not setted of, attach animation class after small delay to make sure the triggered hide animation is fired
+    if (Game.animations === "true") {
+      setTimeout(() => {
         settings_span.classList.remove("Class_Hide_Settings");
         settings_span.classList.add("colourAnimation");
       }, 10);
-      };
-  };
-});
-};
+    }
+  });
+
+  document.querySelector("header").addEventListener("mousemove", () => {
+    // if the menu is leaved to the header and there is the showing class attached, remove multiple classes, then trigger hide animatiom
+    if (settings_span.classList.contains("Class_Show_Settings")) {
+      settings_span.classList.remove("Class_Show_Settings");
+      settings_span.classList.add("Class_Hide_Settings");
+
+      if (Game.animations === "true") {
+        setTimeout(() => {
+          settings_span.classList.remove("Class_Hide_Settings");
+          settings_span.classList.add("colourAnimation");
+        }, 10);
+      }
+    }
+  });
+}
 
 //#endregion
 
 //#region settings-menu event-listeners
 
-//? === game informations window  === 
+//? === game informations window  ===
 
 info_h.addEventListener("click", () => {
   //console.log("Information window clicked");
@@ -404,63 +406,67 @@ und die Einstellungen trotzdem erhalten bleiben. Wollen Sie diese Einstellungen 
   }
 });
 
-//? === create a new gameboard button === 
+//? === create a new gameboard button ===
 
-document.getElementById("settings_gameboard_button").addEventListener("click", ()=>{
+document
+  .getElementById("settings_gameboard_button")
+  .addEventListener("click", () => {
     //console.log("Create new gameboard clicked");
 
-  const sizeX = document.getElementById("settings_gameboard_sizeX").value;
-  const sizeY = document.getElementById("settings_gameboard_sizeY").value;
-  Create_Gameboard(sizeX, sizeY);
-  Game.user_changed_gameboard = true;
-});
+    const sizeX = document.getElementById("settings_gameboard_sizeX").value;
+    const sizeY = document.getElementById("settings_gameboard_sizeY").value;
+    Create_Gameboard(sizeX, sizeY);
+    Game.user_changed_gameboard = true;
+  });
 
-//? === toggle the coin colour === 
+//? === toggle the coin colour ===
 
-document.getElementById("container__toggleColour").addEventListener("click", () => {
-  //console.log("Colour toggle clicked");
+document
+  .getElementById("container__toggleColour")
+  .addEventListener("click", () => {
+    //console.log("Colour toggle clicked");
 
-  if (
-    localStorage.Player_Colour_Left === "yellow" ||
-    localStorage.Player_Colour_Left === undefined
-  ) {
-    //console.log("Set colour toggle to red.");
-    localStorage.Player_Colour_Left = "red";
-    Game.player_Colour_Left = "red";
-    toggle_colour_button.classList.add("toggle__colour");
-    toggle_colour_slider.style.backgroundColor = "red";
-    // console.log("Colour toggle changed colour for future coins to red.")
-  } else if (localStorage.Player_Colour_Left === "red") {
-    // console.log("Set colour toggle to yellow.")
-    localStorage.Player_Colour_Left = "yellow";
-    Game.player_Colour_Left = "yellow";
-    toggle_colour_button.classList.remove("toggle__colour");
-    toggle_colour_slider.style.backgroundColor = "yellow";
-    // console.log("Colour toggle changed colour for future coins to yellow.")
-  }
-
-  // changing colour of existing coins
-  if (Game.state == "InGame") {
-    const cellsArray = document.getElementsByClassName("cells");
-    //Loops trough cellsArray
-    for (let cell of cellsArray) {
-      // if one cell have tht Class with a red or yellow Coin Background attached, change it to the other colored background (PNG)
-      if (cell.classList.contains("placedCoin__1")) {
-        cell.classList.remove("placedCoin__1");
-        cell.classList.add("placedCoin__2");
-      } else if (cell.classList.contains("placedCoin__2")) {
-        cell.classList.remove("placedCoin__2");
-        cell.classList.add("placedCoin__1");
-      }
-      // console.log("Existing coins changed colour.");
+    if (
+      localStorage.Player_Colour_Left === "yellow" ||
+      localStorage.Player_Colour_Left === undefined
+    ) {
+      //console.log("Set colour toggle to red.");
+      localStorage.Player_Colour_Left = "red";
+      Game.player_Colour_Left = "red";
+      toggle_colour_button.classList.add("toggle__colour");
+      toggle_colour_slider.style.backgroundColor = "red";
+      // console.log("Colour toggle changed colour for future coins to red.")
+    } else if (localStorage.Player_Colour_Left === "red") {
+      // console.log("Set colour toggle to yellow.")
+      localStorage.Player_Colour_Left = "yellow";
+      Game.player_Colour_Left = "yellow";
+      toggle_colour_button.classList.remove("toggle__colour");
+      toggle_colour_slider.style.backgroundColor = "yellow";
+      // console.log("Colour toggle changed colour for future coins to yellow.")
     }
-  }
-});
 
-//? === change the game language (en/ger) === 
+    // changing colour of existing coins
+    if (Game.state == "InGame") {
+      const cellsArray = document.getElementsByClassName("cells");
+      //Loops trough cellsArray
+      for (let cell of cellsArray) {
+        // if one cell have tht Class with a red or yellow Coin Background attached, change it to the other colored background (PNG)
+        if (cell.classList.contains("placedCoin__1")) {
+          cell.classList.remove("placedCoin__1");
+          cell.classList.add("placedCoin__2");
+        } else if (cell.classList.contains("placedCoin__2")) {
+          cell.classList.remove("placedCoin__2");
+          cell.classList.add("placedCoin__1");
+        }
+        // console.log("Existing coins changed colour.");
+      }
+    }
+  });
+
+//? === change the game language (en/ger) ===
 
 language_menu.addEventListener("change", () => {
-    //console.log("Set language clicked");
+  //console.log("Set language clicked");
 
   // save language in local storage and game object
   let languageCode;
@@ -476,7 +482,6 @@ language_menu.addEventListener("change", () => {
 
   // if exist yet, translate actual turning div
   if (document.getElementById("h__turnDiv")) {
-          
     // deutsch
     if (Game.Language === "de") {
       if (Game.playerIsOnTurn === "left") {
@@ -494,9 +499,8 @@ language_menu.addEventListener("change", () => {
         document.getElementById(
           "h__turnDiv"
         ).innerText = `${Game.Player_Two_Name} denkt nach...`;
-      };
+      }
     } else {
-
       // english
       if (Game.playerIsOnTurn === "left") {
         document.getElementById(
@@ -513,31 +517,37 @@ language_menu.addEventListener("change", () => {
         document.getElementById(
           "h__turnDiv"
         ).innerText = `${Game.Player_Two_Name}"s is thinking...`;
-      };
-    };
-  };
+      }
+    }
+  }
 });
 
-//? === toogle all animations === 
+//? === toogle all animations ===
 
-aniToggle_checkbox.addEventListener("click", ()=>{
-    //console.log("Toggle animations clicked");
+aniToggle_checkbox.addEventListener("click", () => {
+  //console.log("Toggle animations clicked");
 
-      if(localStorage.animations === "true" || localStorage.animations === undefined){
-          localStorage.animations = "false" 
-          Game.animations = "false";
-          start_button.classList.remove("colourAnimation");
-          document.getElementById("headline").classList.remove("colouredTextAnimation");
-          document.getElementById("h__turnDiv").style.visibility = "hidden";
-        } else {
-             localStorage.animations = "true";
-             Game.animations = "true";
-             start_button.classList.add("colourAnimation");
-             document.getElementById("headline").classList.add("colouredTextAnimation");
-             document.getElementById("h__turnDiv").style.visibility = "visible";
-}});
+  if (
+    localStorage.animations === "true" ||
+    localStorage.animations === undefined
+  ) {
+    localStorage.animations = "false";
+    Game.animations = "false";
+    start_button.classList.remove("colourAnimation");
+    document
+      .getElementById("headline")
+      .classList.remove("colouredTextAnimation");
+    document.getElementById("h__turnDiv").style.visibility = "hidden";
+  } else {
+    localStorage.animations = "true";
+    Game.animations = "true";
+    start_button.classList.add("colourAnimation");
+    document.getElementById("headline").classList.add("colouredTextAnimation");
+    document.getElementById("h__turnDiv").style.visibility = "visible";
+  }
+});
 
-//? === reset stats against cpu easy === 
+//? === reset stats against cpu easy ===
 
 stats_reset_easy.addEventListener("click", () => {
   //console.log("Reset stats easy clicked");
@@ -548,10 +558,10 @@ stats_reset_easy.addEventListener("click", () => {
   Stats();
 });
 
-//? === reset stats against cpu normal === 
+//? === reset stats against cpu normal ===
 
 stats_reset_normal.addEventListener("click", () => {
-    //console.log("Reset stats normal clicked");
+  //console.log("Reset stats normal clicked");
 
   localStorage.CPU_Normal_Wins = 0;
   localStorage.CPU_Normal_CPUWins = 0;
@@ -559,54 +569,64 @@ stats_reset_normal.addEventListener("click", () => {
   Stats();
 });
 
-//? === link to contact page === 
+//? === link to contact page ===
 
 contact_h.addEventListener("click", () => {
-    //console.log("Contacts clicked");
+  //console.log("Contacts clicked");
 
   window.open("https://stefanbartl.github.io/StefanBartl_Portfolio/");
 });
 
-//? === link to credits page === 
+//? === link to credits page ===
 
 credits_h.addEventListener("click", () => {
-   //console.log("Credits clicked");
+  //console.log("Credits clicked");
 
   window.open("https://github.com/StefanBartl/FourWins/blob/main/README.md");
 });
 
-//? === delete all data from local storage === 
+//? === delete all data from local storage ===
 
 delete_all.addEventListener("click", () => {
-    //console.log("Delete all clicked");
+  //console.log("Delete all clicked");
 
   // play warning sound
-  if(Game.Sound === true)  warning_audio.play();
+  if (Game.Sound === true) warning_audio.play();
 
   // create confirm window
   if (Game.Language === "de") {
-    const confirm =  New_Window({ID: "newWindow__delete", Name: "Notification", Text: `${
-      localStorage.getItem("Player_One_Name") || "Spieler"
-    }, willst du wirklich die gespeicherte Sprache, die Spieler Namen und die Statistiken von deinem local-Storage löschen? Diese Daten sind nur in deinem Browser gespeichert und können nach einer Löschung nicht wiederhergestellt werden.`, 
-    Confirm: true}); 
+    const confirm = New_Window({
+      ID: "newWindow__delete",
+      Name: "Notification",
+      Text: `${
+        localStorage.getItem("Player_One_Name") || "Spieler"
+      }, willst du wirklich die gespeicherte Sprache, die Spieler Namen und die Statistiken von deinem local-Storage löschen? Diese Daten sind nur in deinem Browser gespeichert und können nach einer Löschung nicht wiederhergestellt werden.`,
+      Confirm: true,
+    });
   } else {
-    const confirm =  New_Window({ID: "newWindow__delete", Name: "Notification", Text: `${
-      localStorage.getItem("Player_One_Name") || "Player"
-    }, do you really want do delete the saved language, saved Player names and the stats from your local Storage? The data is stored in your Browser and cannot be restored again after deleting it.`, 
-    Confirm: true}); 
-  };
-    // if user clicked OK after notification, delete local storage
-    document.getElementById("newWindow__delete_OK_Button").addEventListener("click", ()=>{
+    const confirm = New_Window({
+      ID: "newWindow__delete",
+      Name: "Notification",
+      Text: `${
+        localStorage.getItem("Player_One_Name") || "Player"
+      }, do you really want do delete the saved language, saved Player names and the stats from your local Storage? The data is stored in your Browser and cannot be restored again after deleting it.`,
+      Confirm: true,
+    });
+  }
+  // if user clicked OK after notification, delete local storage
+  document
+    .getElementById("newWindow__delete_OK_Button")
+    .addEventListener("click", () => {
       localStorage.clear();
       //console.log("Local Storage deleted");
     });
 
-    //Reset name inputs
-    player_1_name.value = player_1_name.placeholder;
-    Game.player_1_name = player_1_name.placeholder;
-    player_2_name.value = player_2_name.placeholder;
-    Game.player_2_name = player_2_name.placeholder;
-});  
+  //Reset name inputs
+  player_1_name.value = player_1_name.placeholder;
+  Game.player_1_name = player_1_name.placeholder;
+  player_2_name.value = player_2_name.placeholder;
+  Game.player_2_name = player_2_name.placeholder;
+});
 
 //#endregion
 
@@ -616,20 +636,21 @@ delete_all.addEventListener("click", () => {
 
 //#region 2) main game
 
-     /*  ================  
+/*  ================  
 !          ===  Preparings  ===
           ================  */
 function Game_Preparations() {
-
   //? === do all the preparations to start the game ===
-  
+
   // console.log("Entered Game Preparations");
 
   Game.state = "Preparations";
 
   // disable gameboard-size changing during game
-  document.getElementById("settings_span__gameboard").setAttribute("data-ingame",  "yes");
-  
+  document
+    .getElementById("settings_span__gameboard")
+    .setAttribute("data-ingame", "yes");
+
   // make sure at game start are valid name variables available
   if (player_1_name.value === "")
     player_1_name.value = player_1_name.placeholder;
@@ -650,14 +671,14 @@ function Game_Preparations() {
   if (Game.Game_against_CPU === true) {
     if (choose_ki.value === "CPU Easy") {
       Game.CPU_Level = "Easy";
-    } 
+    }
     if (choose_ki.value === "CPU Normal") {
       Game.CPU_Level = "Normal";
-    } 
+    }
     if (choose_ki.value === "CPU Hard") {
       Game.CPU_Level = "Hard";
-    } 
-  };
+    }
+  }
 
   // create important objects
   for (let i = 1; i <= Game.gameboard_size_x; i++) {
@@ -669,7 +690,7 @@ function Game_Preparations() {
     Game.actualGameboardPlayer2[`C${i}`] = [];
     // create row counter for easy calculation of the correct row for  placement
     Game.rowCounter[`C${i}`] = `${Game.gameboard_size_y}`;
-  };
+  }
 
   // console.log("Game against CPU:", Game.Game_against_ki, "CPU Level:", Game.CPU_Level);
   // DOM-manipulations to get to the "Game-Screen"
@@ -698,28 +719,29 @@ function Game_Preparations() {
 
   // console.log("Finished Game preparations.");
 }
-     /*  ===========  
+/*  ===========  
 !         ===  Play  ===
           ===========  */
 function PlayGame() {
-
   //? === detect placing of a coin ===
 
   // console.log("Entered Play Game Function.");
 
   Game.state = "InGame";
-  document.getElementById("wrapper__gameboard").setAttribute("data-inGame", "yes");
+  document
+    .getElementById("wrapper__gameboard")
+    .setAttribute("data-inGame", "yes");
 
   // detection of the correct top-cells  to put the event listeners on them so the players can make there placements
   // get all top-cells
   const topCellsArray = document.getElementsByClassName("topCells");
   for (let topCell of topCellsArray) {
     let topCellColumn = parseInt(topCell.getAttribute("data-column"));
-    
+
     //?  Event-Listener for the Choosing-Animation
     topCell.addEventListener("mouseover", () => {
       Add_Choosing_Ani(topCellColumn);
-     // console.log(`Triggered choosing animation in top cell ${topCellColumn}`);
+      // console.log(`Triggered choosing animation in top cell ${topCellColumn}`);
     });
     topCell.addEventListener("mouseleave", () => {
       Remove_Choosing_Ani(topCellColumn);
@@ -727,39 +749,37 @@ function PlayGame() {
 
     //?  Event-Listener for actions if a Top Cell is clicked
     topCell.addEventListener("click", () => {
-      
       // play placement sound if on:
       if (Game.Sound === true) {
         placing_audio.play();
-      };
-      
+      }
+
       // get the id & column of the played top-cell:
       Game.clicked_TopCell_ID = topCell.id;
 
       let clicked_column = parseInt(topCell.getAttribute("data-column"));
       // get the correct column of the clicked top-cell:
-      Game.clicked_column  = clicked_column;
+      Game.clicked_column = clicked_column;
 
       for (let topCell of topCellsArray) {
-      topCell.style = "pointer-events:none";
-      };
+        topCell.style = "pointer-events:none";
+      }
 
       // start placement function
       Prepare_Placement();
     });
-  };
+  }
   // console.log("Leaving Play Game Function.");
-};
+}
 //#endregion
 
 //#region 3) placements
 
-     /*  =====================  
+/*  =====================  
 !         ===  Prepare placement  ===
           =====================  */
 function Prepare_Placement() {
-
-//? === gather coin placement informations to trigger the placement ===
+  //? === gather coin placement informations to trigger the placement ===
 
   // console.log("Entered Function for preparing new Placement.");
 
@@ -775,44 +795,44 @@ function Prepare_Placement() {
   // increase round counter
   Game.roundCounter++;
 
-  Game.coin_placement_row =  parseInt(Game.rowCounter[`C${Game.clicked_column}`] ) ;
-  Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row}` ;
+  Game.coin_placement_row = parseInt(
+    Game.rowCounter[`C${Game.clicked_column}`]
+  );
+  Game.coin_placement_id = `ID_C${Game.clicked_column}R${Game.coin_placement_row}`;
 
   Game.animations === "true" ? Placement_Animation() : Placement_End();
-};
+}
 
-     /*  ================  
+/*  ================  
 !         ===  Animation  ===
           ================  */
 function Placement_Animation() {
-  
-//? === fire the placement animation ===
+  //? === fire the placement animation ===
 
   /*console.log(`Make placement on coin. The placement id is: ${Game.coin_placement_id} in row: ${Game.coin_placement_row} and column: ${Game.clicked_column}.`);*/
 
-  //? create the correct coin, note correct position and append it to the DOM  
+  //? create the correct coin, note correct position and append it to the DOM
   const coin = document.createElement("div");
 
   // if left player is on turn
   if (Game.playerIsOnTurn === "left" && Game.player_Colour_Left === "yellow") {
     coin.classList.add("coin__yellow");
-    Game.actualGameboardPlayer1[`C${Game.clicked_column}`].push(Game.coin_placement_row );
-   Game.player1_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
-   Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
-  };
+    Game.actualGameboardPlayer1[`C${Game.clicked_column}`].push(
+      Game.coin_placement_row
+    );
+    Game.player1_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
+    Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
+  }
 
-  if (
-    Game.playerIsOnTurn === "left" &&
-    Game.player_Colour_Left === "red"
-  ) {
+  if (Game.playerIsOnTurn === "left" && Game.player_Colour_Left === "red") {
     coin.classList.add("coin__red");
     Game.actualGameboardPlayer1[`C${Game.clicked_column}`].push(
       Game.coin_placement_row
     );
     Game.player1_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
-  };
-  
+  }
+
   //if player right is on turn
   if (Game.playerIsOnTurn === "right" && Game.player_Colour_Left === "yellow") {
     coin.classList.add("coin__red");
@@ -821,32 +841,31 @@ function Placement_Animation() {
     );
     Game.player2_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
-  }; 
+  }
 
-  if (
-    Game.playerIsOnTurn === "right" &&
-    Game.player_Colour_Left === "red"
-  ) {
+  if (Game.playerIsOnTurn === "right" && Game.player_Colour_Left === "red") {
     coin.classList.add("coin__yellow");
     Game.actualGameboardPlayer2[`C${Game.clicked_column}`].push(
       Game.coin_placement_row
     );
     Game.player2_coins[`C${Game.clicked_column}`].push(Game.coin_placement_row);
     Game.all_coins.push(`C${Game.clicked_column}R${Game.coin_placement_row}`);
-  };
+  }
 
   // get the played top cell for getting the right column and append the coin
   topCell = document.getElementById(`${Game.clicked_TopCell_ID}`);
   topCell.appendChild(coin);
 
   // trigger the correct animation (animated coin route-length) for the placement row in all gameboard sizes
-  let gameboard__height = document.getElementById("wrapper__gameboard").clientHeight;
-  let cell__height = gameboard__height / (Game.gameboard_size_x + 1) * 10.5;
-  let animation__length =  cell__height *  Game.coin_placement_row;
+  let gameboard__height =
+    document.getElementById("wrapper__gameboard").clientHeight;
+  let cell__height = (gameboard__height / (Game.gameboard_size_x + 1)) * 10.5;
+  let animation__length = cell__height * Game.coin_placement_row;
 
-// consider small devices
-if(settings_menu.getAttribute("data-device") === "smart") animation__length *= 0.6;
-// animate coin
+  // consider small devices
+  if (settings_menu.getAttribute("data-device") === "smart")
+    animation__length *= 0.6;
+  // animate coin
   coin.animate(
     [
       // keyframes
@@ -862,32 +881,31 @@ if(settings_menu.getAttribute("data-device") === "smart") animation__length *= 0
 
   // ? after placing coin animation, validate possible win and next turn
   // remove the coin with the animation after the animation time ended and place the coin on correct position
-  setTimeout(
-    () => {
-      Placement_End();
-    }, 
-    1000
-  ); 
-  
-  // console.log("Placement done.");
-};
+  setTimeout(() => {
+    Placement_End();
+  }, 1000);
 
-     /*  ===================  
+  // console.log("Placement done.");
+}
+
+/*  ===================  
 !         ===  End placement  ===
           ===================  */
 function Placement_End() {
-
   //? === place coin on his destination ===
 
- // console.log("Entered End of Placement");
+  // console.log("Entered End of Placement");
 
-    //  first remove the coin from the top-cell to get rid of the animated coin, if animation is on
-  if(Game.animations === "true")  document.getElementById(`${Game.clicked_TopCell_ID}`).firstChild.remove();
+  //  first remove the coin from the top-cell to get rid of the animated coin, if animation is on
+  if (Game.animations === "true")
+    document.getElementById(`${Game.clicked_TopCell_ID}`).firstChild.remove();
 
   // get the destination of the coin
-  coin_destination = document.getElementById(`ID_C${Game.clicked_column}R${Game.coin_placement_row}`);
-  
-// set general properties
+  coin_destination = document.getElementById(
+    `ID_C${Game.clicked_column}R${Game.coin_placement_row}`
+  );
+
+  // set general properties
   coin_destination.style.opacity = "1";
   coin_destination.setAttribute("data-isPlayed", "yes");
 
@@ -900,7 +918,7 @@ function Placement_End() {
     } else {
       coin_destination.classList.add("placedCoin__2");
       coin_destination.setAttribute("data-isPlayedFrom", "player_2");
-    };
+    }
   } else {
     if (Game.player_Colour_Left === "red") {
       coin_destination.classList.add("placedCoin__1");
@@ -908,25 +926,24 @@ function Placement_End() {
     } else {
       coin_destination.classList.add("placedCoin__2");
       coin_destination.setAttribute("data-isPlayedFrom", "player_2");
-    };
-  };
+    }
+  }
   // decrease row counter so next placement can calculate correct row position
   Game.rowCounter[`C${Game.clicked_column}`]--;
 
-  // invoke 
+  // invoke
   Game.playerIsOnTurn === "left"
     ? Player_1_Placement_Finish()
     : Player_2_Placement_Finish();
-};
+}
 
-     /*  =====================  
+/*  =====================  
 !         ===  After placement I  ===
           =====================  */
 function Player_1_Placement_Finish() {
-
   // ? === invoke winning-validation for player 1 and if true invoke game-end function ===
-  
-  const valid_row = Row_Validator(1,  Game.coin_placement_row);
+
+  const valid_row = Row_Validator(1, Game.coin_placement_row);
   const valid_column = validator__column(
     1,
     Game.clicked_column,
@@ -937,15 +954,16 @@ function Player_1_Placement_Finish() {
     Game.clicked_column,
     Game.coin_placement_row
   );
-  if (valid_row === true || valid_column === true || valid_diagonal === true) return;
+  if (valid_row === true || valid_column === true || valid_diagonal === true)
+    return;
 
-  // if there are no more cells to  play invoke draw 
-  if (Game.roundCounter === (Game.gameboard_size_x * Game.gameboard_size_y)) {
+  // if there are no more cells to  play invoke draw
+  if (Game.roundCounter === Game.gameboard_size_x * Game.gameboard_size_y) {
     Game_End_Screen(3);
     return;
-  };
+  }
 
-// if no win or draw proof if column is full and unlock the top-cells
+  // if no win or draw proof if column is full and unlock the top-cells
   if (Game.Game_against_CPU === false) Unlock_TopCells();
 
   Column_Locking_Validation(false);
@@ -960,22 +978,31 @@ function Player_1_Placement_Finish() {
   } else if (Game.CPU_Level === "Normal") {
     CPU_Normal();
     Lock_TopCells();
-  } else if  (Game.CPU_Level === "Hard" || Game.CPU_Level === "Schwer")  {
+  } else if (Game.CPU_Level === "Hard" || Game.CPU_Level === "Schwer") {
     CPU_Hard();
     Lock_TopCells();
-  };
-};
+  }
+}
 
-     /*  =====================  
+/*  =====================  
 !         ===  After placement II  ===
           =====================  */
 function Player_2_Placement_Finish() {
-  const valid_row = Row_Validator(2,  Game.coin_placement_row);
-  const valid_column = validator__column(2,  Game.clicked_column, Game.coin_placement_row);
-  const valid_diagonal = Diagonal_Validator(2, Game.clicked_column, Game.coin_placement_row);
-  if (valid_row === true || valid_column === true || valid_diagonal === true) return;
+  const valid_row = Row_Validator(2, Game.coin_placement_row);
+  const valid_column = validator__column(
+    2,
+    Game.clicked_column,
+    Game.coin_placement_row
+  );
+  const valid_diagonal = Diagonal_Validator(
+    2,
+    Game.clicked_column,
+    Game.coin_placement_row
+  );
+  if (valid_row === true || valid_column === true || valid_diagonal === true)
+    return;
 
-  if (Game.roundCounter === (Game.gameboard_size_x * Game.gameboard_size_y)) {
+  if (Game.roundCounter === Game.gameboard_size_x * Game.gameboard_size_y) {
     Game_End_Screen(3);
     return;
   }
@@ -983,11 +1010,11 @@ function Player_2_Placement_Finish() {
   if (Game.Game_against_CPU === false) {
     Column_Locking_Validation(false);
     Unlock_TopCells();
-  };
+  }
 
   Turning_PlayerIsOnTurn();
   Unlock_TopCells();
-};
+}
 //#endregion
 
 //#region 4) bonus jobs & ideas for future

@@ -10,49 +10,25 @@
 
 ?                                     1) general                                                                                                
 ?                                     2) layout                                                                                                                                      
-?                                     3) gameboard                                                                                                                                 
-?                                     4) settings-menu           
-?                                     5) game screen
-?                                     6) game-end screen                                                                                                                                                                         
-?                                     7) typography                                                                                                                                        
+?                                     3) gameboard      
+?                                     4) typography                                                                                                                           
+?                                     5) settings-menu           
+?                                     6) game screen
+?                                     7) game-end screen                                                                                                                                                                                                                                                                                                             
 ?                                     8) inputs, buttons, dropdowns, etc...                                                                                                         
 ?                                     9) animations & transitions                                                                                                                       
 ?                                    10) helpers                                   
-?                                    11) media queries                                                                                                                                   
-?                                    12) final information & comments                                                                                                                    
-?                                    13) credits                                                                                                                                                                                                                                                                                                                                                                                                              */
-/*#endregion*/
+?                                    11) media queries
 
-/* #region jobs to-do */
-/*
+?                             CSS - what a wonderful language!
 
-!                           to-do 
-
-todo    css-code minimizing f.e. bind repetative classes to one class!
-todo    INGAME section?
-
-todo    font working on all browser correctly?
-todo    find a final, real good styling!
-
-?                               finish
-todo    css-guideline
-todo    table of content update
-todo    take a look at the bonus jobs - maybe you have enough passion to do one :-)
-todo    Find id"s mitz gemeinsamen properties und füge sie zu Klassen hinzu - wenn es Sinn macht!
-todo    final formatation (especially script & library sections/functions), comments:
-todo    make sure all important is commented !
-todo    write a final Comment !
-todo    save default script file with the new layout for later projects. also the index with the all new toggle slider and make a new "global" library for js & css !
-
-!                         session progress                                                
-? -)                                                                                                                                                                                             
 */
-/* #endregion */
+/*#endregion*/
 
 /* #region 1) general */
 
 :root {
-     /*  ==================  
+  /*  ==================  
 ?        ===  Colour-Palette  ===
           ==================  */
 
@@ -81,19 +57,27 @@ todo    save default script file with the new layout for later projects. also th
   overflow-y: auto;
 }
 
-/* #region Resets */
+/* #region resets */
 
 /* box-sizing */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
-} 
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+}
 
 /* margins */
 body,
-h1, h2, h3, h4, h5, h6,
-figure, picture {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure,
+picture {
   margin: 0;
 }
 
@@ -110,7 +94,7 @@ picture {
   display: block;
 }
 
-/* make form elements easier to work with */ 
+/* make form elements easier to work with */
 input,
 button,
 textarea,
@@ -119,7 +103,7 @@ select {
 }
 
 /* remove animations for people who turned them off*/
-@media (prefers-reduced-motion: reduce){
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
@@ -133,12 +117,19 @@ select {
 
 /*#region fonts */
 
-/* Page: Sans-serif,   font-family: "Anton", sans-serif; */
-@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+/* https://fonts.google.com/knowledge/using_type/using_web_fonts */
 
+/* Page: Sans-serif,   font-family: "Anton", sans-serif; */
+@font-face {
+  font-family: "Anton", "sans-serif";
+  src: url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+}
 
 /* Headlines: Handwriting, font-family: "Comforter Brush", cursive; */
-@import url("https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap");
+@font-face {
+  font-family: "Comforter Brush", "cursive";
+  src: url("https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap");
+}
 
 /* #endregion */
 
@@ -146,26 +137,31 @@ select {
 
 /* #region 2) layout */
 
-     /*  =================  
+/*  =================  
 ?        ===  Basis Layout  ===
           =================  */
 
-body {
-  background-color: var(--base-colour);
-  font-family: "Titillium Web", sans-serif;
-  color: white;
+body,
+header,
+.sidebars,
+#wrapper__choosingCPU,
+.naming__span {
   display: flex;
   flex-direction: column;
+}
+
+body {
+  background-color: var(--base-colour);
+  font-family: "Anton", sans-serif;
+  color: white;
   font-family: "Anton", sans-serif;
 }
 
 header {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   border-bottom: solid 1vh var(--base-border);
-  border-radius: 1em;
+  border-radius: 1rem;
   min-height: 20vh;
 }
 
@@ -175,63 +171,53 @@ header {
   grid-template-areas: "leftSide gameboard rightSide";
 }
 
-     /*  ==============  
+/*  ==============  
 ?        ===  Sidebars  ===
           ==============  */
 
 .sidebars {
   grid-area: sidebar;
-  display: flex;
-  flex-direction: column;
-  margin-top: 20%;
+  margin-top: 5vh;
   min-width: 100%;
-  gap: 1em;
+  gap: 1rem;
 }
 
 #wrapper__leftSidebar {
   grid-area: leftSide;
-  display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
 #wrapper__choosingCPU {
-min-width: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 1em;
-padding-bottom: 2em;
-
+  min-width: 100%;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 2rem;
 }
 
 #wrapper__rightSidebar {
-  grid-area: rightSide; 
-  display: flex;
-  flex-direction: column;
+  grid-area: rightSide;
   align-items: center;
   z-index: 1;
 }
 
 .naming__span {
-  display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 2em;
+  padding-bottom: 2rem;
 }
 
 .name_svgs {
-  width: 1.5em;
-  height: 1.5em;
-  margin-inline: 1em;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 1rem;
   filter: invert(1);
 }
 
-#choosing_cpu_headline{
+#choosing_cpu_headline {
   font-size: large;
- }
+}
 
-     /*  ================  
+/*  ================  
 ?        ===  Gameboard  ===
           ================  */
 
@@ -241,25 +227,25 @@ padding-bottom: 2em;
   background-color: var(--gameboard);
   border: solid 1rem var(--gameboard);
   border-top: dashed 0.1rem var(--gameboard);
-  border-radius: 2em;
+  border-radius: 2rem;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-top: none;
 }
 
-.gameboard[data-ingame = "yes"] {
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(40vw, 60%);
+.gameboard[data-ingame="yes"] {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(40vw, 60%);
 }
 
-.gameboard[data-ingame = "gameend"] {
-    margin-block: 2rem;
+.gameboard[data-ingame="gameend"] {
+  margin-block: 2rem;
 }
 
-.gameboard[data-ingame = "yes"][data-device = "smart"]{
+.gameboard[data-ingame="yes"][data-device="smart"] {
   top: 23%;
   min-width: 100vw;
 }
@@ -270,7 +256,6 @@ padding-bottom: 2em;
 
 .columns {
   width: 100%;
-  /*height: max-content;*/
 }
 
 .topCells {
@@ -281,14 +266,14 @@ padding-bottom: 2em;
   cursor: pointer;
 }
 
-    /* If column is full lock the top-cell,...*/
+/* If column is full lock the top-cell,...*/
 .topCells[data-columnfull="yes"] {
   border-top: solid 2px var(--gameboard);
   pointer-events: none;
 }
 
-#ID_C1R0{
-    border-left: none;
+#ID_C1R0 {
+  border-left: none;
 }
 
 .cells {
@@ -299,7 +284,7 @@ padding-bottom: 2em;
   opacity: 0.7;
 }
 
-     /*  ==========================  
+/*  ==========================  
 ?        ===  Active player notification  ===
           ==========================  */
 
@@ -322,21 +307,21 @@ padding-bottom: 2em;
   font-size: 3rem;
 }
 
-     /*  ============  
+/*  ============  
 ?        ===  Coins  ===
           ============  */
 
-.coin__red, 
+.coin__red,
 .coin__yellow,
 .placedCoin__1,
-.placedCoin__2{
+.placedCoin__2 {
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .coin__red,
-.coin__yellow{
+.coin__yellow {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -359,52 +344,52 @@ padding-bottom: 2em;
   background-image: url("../Folder_Graphics/Coins/red.png");
 }
 
-
 #h__turnDiv {
   width: 10rem;
   border: dashed 0.3rem var(--base-border);
   padding: 1rem;
 }
 
-/* #region typography*/
+/* #endregion */
 
-#headline{
+/* #region 4) typography*/
+
+#headline {
   font-size: 5rem;
   text-shadow: 1rem 1rem 1rem black;
   text-decoration-line: underline;
   text-decoration-style: double;
 }
 
-#p__headline{
-margin-top: -1rem;
+#p__headline {
+  margin-top: -1rem;
 }
 
-.sidebars > h2, h3 {
+.sidebars > h2,
+h3 {
   text-shadow: 0 0 1rem black;
 }
 
-.sidebars h2{
-  margin-top: 1em;
+.sidebars h2 {
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   font-size: xx-large;
 }
 
-#choosing_cpu_headline{
+#choosing_cpu_headline {
   font-size: xx-large;
 }
 
 /* #endregion */
 
-/* #endregion */
+/* #region 5) settings menu */
 
-/* #region 4) settings menu */
-
-     /*  ======================  
+/*  ======================  
 ?        ===  Settings-Menu (SM) ===
           ======================  */
 
-#section__settings_menu[data-device = "default"] {
+#section__settings_menu[data-device="default"] {
   position: absolute;
   top: 5vh;
   right: 0;
@@ -412,12 +397,13 @@ margin-top: -1rem;
   width: clamp(270px, 20%, 25vw);
 }
 
-#settings_span[data-device = "default"]  {
+#settings_span[data-device="default"] {
   position: relative;
   top: 0;
   right: -98%;
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem;
   height: 90vh;
   max-width: 100%;
   z-index: 1;
@@ -426,50 +412,27 @@ margin-top: -1rem;
   background-color: var(--base-border);
   border-top-left-radius: 10%;
   border-bottom-left-radius: 10%;
-  box-shadow: 0em 0em 2em white;
+  box-shadow: 0rem 0rem 2rem white;
   color: var(--main-black);
   text-align: center;
   font-size: large;
 }
 
-#settings_span >div, h2, h3 {
+#settings_span > div,
+h2,
+h3 {
   min-width: 100%;
 }
 
-#settings_span h2{
+#settings_span h2 {
   color: red;
 }
 
-     /*  ================  
+/*  ================  
 ?        ===  SM Content  ===
           ================  */
 
-#settings_span__gameboard{
-  display: flex;
-  flex-direction: column;
-}
-
-#settings_span__gameboard h3{
-  height: 2em;
-}
-
-#container_settings_gameboard_sizing {
-  display: flex;
-  justify-items:center;
-  align-items:center;
-  gap: 1rem;
-  margin-inline: 1em;
-}
-
-#container_settings_gameboard_sizing input {
-    width: 80%; 
-}
-
-#container_settings_gameboard_sizing button {
-  width: 80%;
-  height: 2em;;
-}
-
+#settings_span__gameboard,
 #span_settings_mechanics,
 #container__sound,
 #div__aniToggle {
@@ -479,13 +442,34 @@ margin-top: -1rem;
   justify-content: center;
 }
 
-#container_colour,
-#container__language,
-#container__sound{
-  margin-bottom: .5em;
+#settings_span__gameboard h3 {
+  height: 2rem;
 }
 
-#container_colour{
+#container_settings_gameboard_sizing {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 1rem;
+  margin-inline: 1rem;
+}
+
+#container_settings_gameboard_sizing input {
+  width: 80%;
+}
+
+#container_settings_gameboard_sizing button {
+  width: 80%;
+  height: 2rem;
+}
+
+#container_colour,
+#container__language,
+#container__sound {
+  margin-bottom: 0.5rem;
+}
+
+#container_colour {
   min-width: 100%;
   display: flex;
   flex-direction: column;
@@ -493,22 +477,22 @@ margin-top: -1rem;
 
 /* section game mechanics */
 #container__toggleColour {
-  height: 1em;
+  height: 1rem;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-#colour_slider{
+#colour_slider {
   background-color: yellow;
-  height: 100%;                 
+  height: 100%;
   width: 50%;
 }
 
 #button__toggle {
   cursor: pointer;
   background-color: white;
-  box-shadow: 0 0 .5rem black;
+  box-shadow: 0 0 0.5rem black;
   width: 1rem;
   aspect-ratio: 1/1;
   margin-block: 1px;
@@ -523,30 +507,30 @@ margin-top: -1rem;
 .toggle__colour {
   transform: translateX(2.8rem);
 }
- 
+
 #select__language {
   cursor: pointer;
   width: 80%;
-  height: 1.5em;
+  height: 1.5rem;
   border: none;
-  margin-bottom: 1em; 
+  margin-bottom: 1rem;
 }
 
 /* section stats */
-#container__stats{
+#container__stats {
   display: grid;
-  grid: 2em auto/ 1fr 1fr ;
-  grid-template-areas: 
+  grid: 2rem auto/ 1fr 1fr;
+  grid-template-areas:
     "h h h"
     "e . n";
-  min-width: 100%;  
+  min-width: 100%;
 }
 
 #h__stats {
   grid-area: h;
 }
 
-#h__stats_First_Wrapper{
+#h__stats_First_Wrapper {
   grid-area: e;
 }
 #h__stats_Second_Wrapper {
@@ -571,17 +555,22 @@ details[open] p {
 /* section bottom */
 #container__contacts,
 #container__credits,
-#container__delete{
-  margin-block: .5em;
+#container__delete {
+  margin-block: 0.5rem;
 }
 
-     /*  ===================  
+/*  ===================  
 ?        ===  SM-typography  ===
           ===================  */
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Comforter Brush", cursive;
-  margin-bottom:  .2em;
+  margin-bottom: 0.2rem;
 }
 
 #info_h,
@@ -591,7 +580,7 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 
-     /*  ===============  
+/*  ===============  
 ?        ===  SM-hover  ===
           ===============  */
 
@@ -603,32 +592,27 @@ h1, h2, h3, h4, h5, h6 {
   color: red;
 }
 
-#reset_easy:hover,
-#reset__normal:hover{
-  color: white;             
-}
-
-#settings_span__gameboard[data-ingame="yes"]  {
+#settings_span__gameboard[data-ingame="yes"] {
   pointer-events: none;
   color: black;
   background-color: lightgrey;
-  opacity: .3;
+  opacity: 0.3;
 }
 
 /* #endregion */
 
-/* #region 5) game-screen*/
+/* #region 6) game screen*/
 
-     /*  =================  
-?        ===  Win counters  ===
-          =================  */
+/*  =======================  
+?        ===  Win counters & tallys  ===
+          =======================  */
 
 #div__wonGames_P1 {
   position: absolute;
   top: 0;
   left: 3rem;
   display: flex;
-  margin: 2em;
+  margin: 2rem;
   flex-wrap: wrap;
   align-items: center;
   flex-direction: column;
@@ -641,7 +625,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   right: 3rem;
   display: flex;
-  margin: 2em;
+  margin: 2rem;
   align-items: center;
   flex-direction: column;
   justify-content: end;
@@ -650,70 +634,70 @@ h1, h2, h3, h4, h5, h6 {
 
 #div__drawGames {
   position: absolute;
-  margin-top: 2em;
+  margin-top: 2rem;
   top: 0;
   right: 50%;
   transform: translateX(+50%);
   display: flex;
   align-items: center;
-  flex-direction: column; 
+  flex-direction: column;
   font-size: large;
 }
-#div__wonGames_P1[data-device = "smart"] {
+#div__wonGames_P1[data-device="smart"] {
   position: absolute;
   top: 0;
   left: 0;
   font-size: small;
 }
 
-#div__wonGames_P2[data-device = "smart"]  {
+#div__wonGames_P2[data-device="smart"] {
   position: absolute;
   top: 0;
   right: 0;
   font-size: small;
 }
 
-#div__drawGames[data-device = "smart"]  {
+#div__drawGames[data-device="smart"] {
   position: absolute;
   font-size: small;
 }
 
-.img__tallys{
+.img__tallys {
   filter: invert(1);
-  height: 2em;
+  height: 2rem;
 }
 
-            /* #endregion*/
-            
- /*#region 6) game-end screen */
+/* #endregion*/
 
-#section__main[data-gameend = "yes"],
-#section__main[data-canvasend = "yes"]{
+/*#region 7) game-end screen */
+
+#section__main[data-gameend="yes"],
+#section__main[data-canvasend="yes"] {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  gap: 1em;
+  gap: 1rem;
   font-size: x-large;
   align-items: center;
   text-align: center;
 }
 
-#section__main[data-gameend = "yes"] > *,
-#section__main[data-canvasend = "yes"] > *{
+#section__main[data-gameend="yes"] > *,
+#section__main[data-canvasend="yes"] > * {
   flex: 1;
 }
 
-#wrapper__gameboard[data-gameend = "yes"],
-#wrapper__gameboard[data-canvasend = "yes"]{
+#wrapper__gameboard[data-gameend="yes"],
+#wrapper__gameboard[data-canvasend="yes"] {
   flex-grow: 3;
   aspect-ratio: 1/1;
 }
 
-#h__gameEnd{
-    margin-top: 3%;
+#h__gameEnd {
+  margin-top: 3%;
 }
 
-     /*  ===================  
+/*  ===================  
 ?        ===  firework canvas  ===
           =================== */
 
@@ -726,16 +710,16 @@ h1, h2, h3, h4, h5, h6 {
   z-index: -1;
 }
 
-
-.topCellsCanvas{
- background-color: black; 
+/* is attached to top-cells if the firework canvas is fired to give them a better look on the black background */
+.topCellsCanvas {
+  background-color: black;
 }
 
 /* #endregion */
-         
+
 /* #region 8) inputs, buttons, dropdowns, etc...  */
 
-     /*  =============  
+/*  =============  
 ?        ===  buttons  ===
           =============  */
 
@@ -749,42 +733,32 @@ button {
 button:hover {
   background-color: var(--prime-darkgrey);
   color: var(--base-border);
-  box-shadow: inset 0 0 1.5rem white;
 }
 
-#button__start{
+#button__start {
   width: 10rem;
   height: 2rem;
-  margin-top: 1rem; 
-  font-size: x-large;  
-}
-
-#reset_easy {
-  min-width: 50%;
-}
-
-#reset__normal {
-  min-width: 50%;
-}
-
-#button__delete {
-  border-radius: 10%;
+  margin-top: 1rem;
+  font-size: x-large;
 }
 
 #button__newGame,
-#button__startingScreen{
+#button__startingScreen {
   min-width: 12.5vw;
   min-height: 7.5vh;
   margin: 1rem;
 }
 
+#reset__easy:hover,
+#reset__normal:hover {
+  color: white;
+}
 
-
-     /*  ===============  
+/*  ===============  
 ?        ===  inputs  ===
           ===============  */
 
-input[type=text] {
+input[type="text"] {
   width: 19ch;
   max-width: 80%;
   height: 2rem;
@@ -793,38 +767,38 @@ input[type=text] {
   border: none;
 }
 
-input[type=number] {
-    background-color: lightgrey;
-    border: none;
-    text-align: center;
+input[type="number"] {
+  background-color: lightgrey;
+  border: none;
+  text-align: center;
 }
 
-input[type=checkbox]{
-  height: 2rem; 
+input[type="checkbox"] {
+  height: 2rem;
   aspect-ratio: 1/1;
 }
 
-input:hover, input:focus, input:active {
-  color: var(--base-colour);
-  border: solid 2px var(--base-colour);
+input:hover,
+input:focus,
+input:active {
+  color: white;
+  background-color: var(--prime-darkgrey);
 }
-
 
 /* get away with the default red borders on input */
 input {
-    box-shadow:none;
-    border: 0;
-    outline:none;
+  box-shadow: none;
+  border: 0;
+  outline: none;
 }
 
 input:focus:invalid {
-    box-shadow:none;
-    border: 2px solid red !important;
-    outline:none;
+  box-shadow: none;
+  border: 1px solid white !important;
+  outline: none;
 }
 
-
-     /*  ================  
+/*  ================  
 ?        ===  select  ===
           ================  */
 
@@ -841,7 +815,7 @@ select {
 select:hover {
   background-color: var(--prime-darkgrey);
   color: var(--base-border);
-  box-shadow: inset 0 0 1rem white;
+  border: solid 1px var(--prime-darkgrey);
 }
 
 /* left sidebar start game content */
@@ -850,23 +824,22 @@ select:hover {
   min-height: 1rem;
 }
 
-#wrapper__choosingCPU h3{
+#wrapper__choosingCPU h3 {
   display: flex;
   justify-content: center;
   font-size: x-large;
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
-     /*  ===============  
+/*  ===============  
 ?        ===  summarys  ===
           ===============  */
 
 .summary__details {
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
-.summary__details
-:hover {
+.summary__details :hover {
   cursor: pointer;
 }
 
@@ -881,9 +854,9 @@ select:hover {
 
 /* #region 9) animations & transitions */
 
-/*#region  choosing coin animations */
+/*#region choosing coin animations */
 
-     /*  ==================  
+/*  ==================  
 ?        === Choosing Coin  ===
           ==================  */
 
@@ -930,25 +903,24 @@ select:hover {
 
 /*#region save name animations */
 
-     /*  ===============  
+/*  ===============  
 ?        ===  save name  ===
           ===============  */
 
-  #saveNameP1{
-    position: absolute;
-    top: 10%;
-    left: 10%;
-  }
+#saveNameP1 {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
 
-  #saveNameP2{
-    position: absolute;
-    top: 10%;
-    left: 10%;
-  }
-
+#saveNameP2 {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
 
 .Class_Smooth_In {
-  animation: SmoothInAnimation .3s ease-in;
+  animation: SmoothInAnimation 0.3s ease-in;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
@@ -963,23 +935,23 @@ select:hover {
 }
 
 .Class_Smooth_Out {
-  animation: SmoothOutAnimation .3s ease-out;
+  animation: SmoothOutAnimation 0.3s ease-out;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
-  
-  @keyframes SmoothOutAnimation {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(0);
-    }
+
+@keyframes SmoothOutAnimation {
+  from {
+    transform: scale(1);
   }
+  to {
+    transform: scale(0);
+  }
+}
 
 .Class_Buttons_Add_Hover_Animations_1 {
   cursor: pointer;
-  animation: Button_1_Add_Animation .1s;
+  animation: Button_1_Add_Animation 0.1s;
   animation-fill-mode: forwards;
 }
 
@@ -996,7 +968,7 @@ select:hover {
 }
 
 .Class_Buttons_Remove_Hover_Animations_1 {
-  animation: Button_1_Remove_Animation .5s;
+  animation: Button_1_Remove_Animation 0.5s;
   animation-fill-mode: forwards;
 }
 @keyframes Button_1_Remove_Animation {
@@ -1013,7 +985,7 @@ select:hover {
 
 .Class_Buttons_Add_Hover_Animations_2 {
   cursor: pointer;
-  animation: Button_2_Add_Animation .1s;
+  animation: Button_2_Add_Animation 0.1s;
   animation-fill-mode: forwards;
 }
 
@@ -1030,7 +1002,7 @@ select:hover {
 }
 
 .Class_Buttons_Remove_Hover_Animations_2 {
-  animation: Button_2_Remove_Animation .5s;
+  animation: Button_2_Remove_Animation 0.5s;
   animation-fill-mode: forwards;
 }
 @keyframes Button_2_Remove_Animation {
@@ -1048,33 +1020,33 @@ select:hover {
 
 /*#region settings menu animations */
 
-     /*  ====================  
+/*  ====================  
 ?        ===  coloured element  ===
           ====================  */
-.colourAnimation{
+.colourAnimation {
   animation: colouredBoxAnimation infinite alternate-reverse 10s;
 }
 
 @keyframes colouredBoxAnimation {
-  from{
+  from {
     box-shadow: 1rem 10rem white;
   }
-  25%{
-    box-shadow: 1rem 0em 10rem red;
+  25% {
+    box-shadow: 1rem 0rem 10rem red;
   }
 
-  50%{
-    box-shadow: 1rem 0em 10rem green;
+  50% {
+    box-shadow: 1rem 0rem 10rem green;
   }
-  75%{
-    box-shadow: 1rem 0em 10rem blue;
+  75% {
+    box-shadow: 1rem 0rem 10rem blue;
   }
   to {
-    box-shadow: 1rem 0em 10rem orangered;
+    box-shadow: 1rem 0rem 10rem orangered;
   }
 }
 
-     /*  ==================  
+/*  ==================  
 ?        ===  settings-menu  ===
           ==================  */
 
@@ -1087,11 +1059,11 @@ select:hover {
 @keyframes Show_Settings_Animation {
   from {
     right: -98%;
-    box-shadow: 0em 0em 2em white;
+    box-shadow: 0rem 0rem 2rem white;
   }
   to {
     right: 0;
-    box-shadow: 0em 0em 2em black;
+    box-shadow: 0rem 0rem 2rem black;
   }
 }
 
@@ -1103,11 +1075,11 @@ select:hover {
 @keyframes Hide_Settings_Animation {
   from {
     right: 0vw;
-    box-shadow: 0em 0em 2em black;
+    box-shadow: 0rem 0rem 2rem black;
   }
   to {
     right: -98%;
-    box-shadow: 0em 0em 2em white;
+    box-shadow: 0rem 0rem 2rem white;
   }
 }
 
@@ -1115,7 +1087,7 @@ select:hover {
 
 /*#region game-end animations*/
 
-.animation__GameEnd{
+.animation__GameEnd {
   animation: End_Animation 2s ease-in;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
@@ -1133,28 +1105,24 @@ select:hover {
 
 /*#region coloured text animtion */
 
-.colouredTextAnimation{
+.colouredTextAnimation {
   animation: headlineAnimation 30s infinite alternate-reverse;
 }
 
 @keyframes headlineAnimation {
-  from{
+  from {
     color: white;
   }
-  25% {
-    color: var(--prime-darkgrey)
+  33% {
+    color: red;
   }
-  50% {
-    color: orange;
-  }
-  75% {
-    color: var(--gameboard);
+  66% {
+    color: yellow;
   }
   to {
-    color:  white;
+    color: white;
   }
 }
-
 
 /*#endregion*/
 
@@ -1170,7 +1138,7 @@ select:hover {
   pointer-events: none;
 }
 
-     /*  ==================  
+/*  ==================  
 ?        ===  New windows  ===
           ==================  */
 
@@ -1248,20 +1216,20 @@ select:hover {
     text-align: center;
   }
 
-  header  h1 {
-      font-size: xx-large;
+  header h1 {
+    font-size: xx-large;
   }
 
- header p{
-      font-size: large;
- }
+  header p {
+    font-size: large;
+  }
 
   #section__main {
     display: flex;
     flex-direction: column;
   }
 
-  .sidebars{
+  .sidebars {
     margin-top: 0;
     border: none;
     align-items: center;
@@ -1281,11 +1249,11 @@ select:hover {
     left: 35%;
   }
 
-  #wrapper__choosingCPU{
+  #wrapper__choosingCPU {
     border: none;
   }
 
-  #div__turnPlayers{
+  #div__turnPlayers {
     z-index: -1;
   }
 
@@ -1301,51 +1269,41 @@ select:hover {
     margin-bottom: 5%;
   }
 
-#settings_span{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;;
-  margin-top: 2em;
-  max-width: 100%;
-  justify-content: center;
-  overflow: auto;
-  background-color: var(--base-border);
-  box-shadow: 0em 0em 2em white;
-  color: var(--main-black);
-  text-align: center;
-  font-size: large;
-}
-
-#span_settings_mechanics,
-#settings_span__gameboard{
-  min-width: 100%;
-}
-
-#wrapper__gameboard[data-ingame="yes"] {
-  max-width: 100%;
-  aspect-ratio: 1/1;
-  
-}
-
-input:hover,
-button:hover,
-select:hover {
-  background-color:var(--base-border);
-  color: black;
-  box-shadow: none;
-}
-
-/*#endregion*/
-
-  /* Gaḿe End Screen */
-               /* Move Gameboard at the End of the Game Animation */
-
-  /*
-  .topCellsCanvas {
-    display: none;
+  #settings_span {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+    max-width: 100%;
+    justify-content: center;
+    overflow: auto;
+    background-color: var(--base-border);
+    box-shadow: 0rem 0rem 2rem white;
+    color: var(--main-black);
+    text-align: center;
+    font-size: large;
   }
-*/ 
-  
+
+  #span_settings_mechanics,
+  #settings_span__gameboard {
+    min-width: 100%;
+  }
+
+  #wrapper__gameboard[data-ingame="yes"] {
+    max-width: 100%;
+    aspect-ratio: 1/1;
+  }
+
+  input:hover,
+  button:hover,
+  select:hover {
+    background-color: var(--base-border);
+    color: black;
+    box-shadow: none;
+  }
+
+  /* mobile game end screen */
+
   #button__newGame {
     min-width: 40%;
   }
@@ -1378,35 +1336,8 @@ select:hover {
     display: flex;
     align-items: flex-end;
   }
+
+  /*#endregion*/
 }
 
 /* #endregion*/
-
-/* #region 12) final informations & comment */
-
-/*
-?                         CSS Bonus Jobs
-todo
-todo
-todo
-*/
-
-
-
-/* #endregion */
-
-/* #region 13) credits */
-/*
-                                                                                                  
- !                                              Credits & Special Thanks to:                                                 
-                                                                                                  
-Special thanks to the "Odin Project"-Team who did a great job in giving advice for learning Web-Development.    
-?                                             https://www.theodinproject.com/                                               
-                                                                                                  
-                  Greetings to the many, many programmers who take the time to put there knowledge online!         
-            Of course also big thanks to all photographers and graphic designers who make their works available.        
-                                                                                                  
-?                                             CSS - what a wonderful language.                                              
-*/
-
-/* #endregion */

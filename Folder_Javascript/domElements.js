@@ -48,11 +48,15 @@ const thinking_div = document.getElementById("div__thinking");
 
 //#region 3) settings-menu
 const settings_menu = document.getElementById("section__settings_menu");
-const settings_menu_headline = document.getElementById("settings_menu__headline");
+const settings_menu_headline = document.getElementById(
+  "settings_menu__headline"
+);
 const settings_span = document.getElementById("settings_span");
 const info_h = document.getElementById("info_h");
 const gameboard_h = document.getElementById("settings_gameboard_h");
-const gameboard_size_button = document.getElementById("settings_gameboard_button");
+const gameboard_size_button = document.getElementById(
+  "settings_gameboard_button"
+);
 const colour = document.getElementById("container__toggleColour");
 const toggle_colour_button = document.getElementById("button__toggle");
 const toggle_colour_slider = document.getElementById("colour_slider");
