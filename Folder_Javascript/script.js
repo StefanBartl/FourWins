@@ -574,7 +574,7 @@ stats_reset_normal.addEventListener("click", () => {
 contact_h.addEventListener("click", () => {
   //console.log("Contacts clicked");
 
-  window.open("https://stefanbartl.github.io/StefanBartl_Portfolio/");
+  window.open("https://stefanbartl.github.io/Portfolio/");
 });
 
 //? === link to credits page ===
