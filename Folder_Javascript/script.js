@@ -537,13 +537,13 @@ aniToggle_checkbox.addEventListener("click", () => {
     document
       .getElementById("headline")
       .classList.remove("colouredTextAnimation");
-    document.getElementById("h__turnDiv").style.visibility = "hidden";
+    document.getElementById("div__turnPlayers").style.visibility = "hidden";
   } else {
     localStorage.animations = "true";
     Game.animations = "true";
     start_button.classList.add("colourAnimation");
     document.getElementById("headline").classList.add("colouredTextAnimation");
-    document.getElementById("h__turnDiv").style.visibility = "visible";
+    document.getElementById("div__turnPlayers").style.visibility = "visible";
   }
 });
 

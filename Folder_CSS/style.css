@@ -1029,20 +1029,20 @@ select:hover {
 
 @keyframes colouredBoxAnimation {
   from {
-    box-shadow: 1rem 10rem white;
+    box-shadow: 0rem 0rem 1rem white;
   }
   25% {
-    box-shadow: 1rem 0rem 10rem red;
+    box-shadow: 0rem 0rem 1rem red;
   }
 
   50% {
-    box-shadow: 1rem 0rem 10rem green;
+    box-shadow: 0rem 0rem 1rem green;
   }
   75% {
-    box-shadow: 1rem 0rem 10rem blue;
+    box-shadow: 0rem 0rem 1rem blue;
   }
   to {
-    box-shadow: 1rem 0rem 10rem orangered;
+    box-shadow: 0rem 0rem 1rem orangered;
   }
 }
 

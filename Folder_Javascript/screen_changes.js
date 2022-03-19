@@ -30,6 +30,7 @@ function Game_Screen() {
   //? === show the game-screen ===
 
   //console.log("Entering Game-Screen.");
+
   Game.state = "InGame";
   document.getElementById("section__main").setAttribute("data-ingame", "yes");
   document
@@ -39,10 +40,6 @@ function Game_Screen() {
   document.getElementById("section__main").setAttribute("data-canvasend", "no");
 
   if (Game.state === "Game End") {
-    document
-      .getElementById("div__turnPlayers")
-      .classList.remove("Class_Invisible");
-
     // disable gameboard-size changing
     document
       .getElementById("settings_span__gameboard")
@@ -113,6 +110,10 @@ function Game_Screen() {
         "Nur zu Spielbeginn erlaubt!")
     : (document.getElementById("settings_gameboard_h").innerText =
         "Only allowed at Start-Screen!");
+  if (document.getElementById("h_tunrDiv"))
+    document
+      .getElementById("h__turnDiv")
+      .classList.remove("Class_Invisible");
 }
 
 /*  =====================  

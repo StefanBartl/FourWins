@@ -253,7 +253,7 @@ function Turning_PlayerIsOnTurn() {
   }
 
   // hide if animations are off (its important to attach it anyway and hide it if user want it to, otherwise the user couldnt show it anymore if he / she click animaton on)
-  document.getElementById("h__turnDiv").style.visibility = "hidden";
+  if(Game.animations === "false") document.getElementById("dic__turnPlayers").style.visibility = "hidden";
 }
 
 /* =====================
