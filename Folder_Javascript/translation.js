@@ -83,7 +83,7 @@ function Deutsch() {
 
   head_title.innerText = "+++ 4-Gewinnt +++";
   headline.innerText = "Online 4-Gewinnt";
-  p__headline.innerText = "Spiele gegen deine Freunde oder gegen die CPU!";
+  p__headline.innerText = "Spiele gegen deine Freunde oder gegen die CPU";
   player_1_headline.innerText = "Wähle einen Namen";
   player_1_name.placeholder = "Spieler 1";
   player_1_name.title = "Name Spieler 1";
@@ -138,7 +138,7 @@ function English() {
 
   head_title.innerText = "+++ 4-Wins +++";
   headline.innerText = "Four Wins";
-  p__headline.innerText = "Play against friends or CPU!";
+  p__headline.innerText = "Play against friends or CPU";
   player_1_headline.innerText = "Choose Name";
   player_1_name.placeholder = "Player 1";
   player_1_name.title = "Player 1 Name";
