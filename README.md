@@ -1,4 +1,6 @@
-# Project titel here
+# Four Wins
+This project was my first personal project - idea and all code come from myself without any hints. But it was highly influenced by the "Tic-Tac-Toe"  or "Rock-Paper-Scissor" Exercises by "The Odin Project".
+
 # === Special credits to ===
 
 The Odin Project - the place where i used to learn Web Development: 
@@ -59,11 +61,15 @@ Also a big and heartfelt thank you to all my friends and family for the support 
 
 ​	Loving Science, Tech & Peace !
 
-============================================================================================================================
+=======================================================================================
 
 #  #README.md/Deutsch
 
+# Vier gewinnt
+
 =============================================
+
+Dies war mein erstes eigenes Projekt - die Idee sowie der ganze Code stammt von mir, ohne Anleitung oder Tipps. Das Projekt ist stark von den "Tic-Tac-Toe" oder "Stein-Schere-Papier" Aufgaben im "The Odin Project" inspiriert.
 
 # === Besondere Anerkennung geht an ===
 
