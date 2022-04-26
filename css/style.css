@@ -4,7 +4,7 @@
 ?                                    powered by
 !                                     Stefan Bartl
 !                      (WKDSteVIE / WKDMinerva)
-?                                          2021                                                                                                                                                                        
+?                                      March, 2022                                                                                                                                                                       
 ?                  ________________________________                                                                                                                                                                                                  
 !                                   table of content
 
@@ -329,19 +329,19 @@ header {
 }
 
 .coin__yellow {
-  background-image: url("../Folder_Graphics/Coins/yellow.png");
+  background-image: url("../graphics/Coins/yellow.png");
 }
 
 .coin__red {
-  background-image: url("../Folder_Graphics/Coins/red.png");
+  background-image: url("../graphics/Coins/red.png");
 }
 
 .placedCoin__1 {
-  background-image: url("../Folder_Graphics/Coins/yellow.png");
+  background-image: url("../graphics/Coins/yellow.png");
 }
 
 .placedCoin__2 {
-  background-image: url("../Folder_Graphics/Coins/red.png");
+  background-image: url("../graphics/Coins/red.png");
 }
 
 #h__turnDiv {
@@ -859,7 +859,7 @@ select:hover {
           ==================  */
 
 .Class_ChoosingAnimation_Coin_1 {
-  background-image: url("../Folder_Graphics/Coins/yellow.png");
+  background-image: url("../graphics/Coins/yellow.png");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: top;
@@ -879,7 +879,7 @@ select:hover {
 }
 
 .Class_ChoosingAnimation_Coin_2 {
-  background-image: url("../Folder_Graphics/Coins/red.png");
+  background-image: url("../graphics/Coins/red.png");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: top;

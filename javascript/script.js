@@ -4,7 +4,8 @@
 ?                                      powered by
 !                                      Stefan Bartl
 !                        (WKDSteVIE / WKDMinerva)
-?                                            2021             
+?                                      March, 2022                                                                                                                                                                       
+             
 ?                  ________________________________                                                                                                                                                                                                  
 !                                     Table of content              
 
@@ -102,20 +103,20 @@ sound_checkbox.addEventListener("click", () => {
 
 // confirm audio sample
 const warning_audio = new Audio(
-  "Folder_Audio/freesound_com/OneHits/chord-alert-notification.wav"
+  "audio/freesound_com/OneHits/chord-alert-notification.wav"
 );
 
 // loose against CPU audio sample
-const lost_audio = new Audio("Folder_Audio/freesound_com/loose.wav");
+const lost_audio = new Audio("audio/freesound_com/loose.wav");
 
 // winning cheer audio sample
 const win_audio = new Audio(
-  "Folder_Audio/freesound_com/klankbeeld__choir-sing-a-final-01.wav"
+  "audio/freesound_com/klankbeeld__choir-sing-a-final-01.wav"
 );
 
 // placement audio sample
 const placing_audio = new Audio(
-  "Folder_Audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav"
+  "audio/freesound_com/OneHits/garuda1982__plop-sound-effect.wav"
 );
 
 //? === preload audio if sound is on ===
@@ -1019,6 +1020,7 @@ function Player_2_Placement_Finish() {
 
 //#region 4) bonus jobs & ideas for future
 /*
+? Easier (more visible) translation button
 ? make the coin images a variable so a user could choice between coin appearance 
 ? save /load game function f.e. saving cell-states in local storage
 ? improve CPU Normal algorhytmus f.e. with randomizing upwards/vertical placements by getting multiple values
